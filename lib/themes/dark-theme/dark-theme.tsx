@@ -14,7 +14,7 @@ export const DarkTheme = {
   colors: {
     ...colorTokens,
     ...getComponentColorTokens(),
-    ...getSemanticColorTokens()
+    ...getSemanticColorTokens(),
   },
   animation,
   breakpoints,
@@ -26,6 +26,6 @@ export const DarkTheme = {
   sizing,
   typography: getTypography(),
   zIndex: {
-    modal: 2e3
-  }
+    modal: 2e3,
+  },
 };

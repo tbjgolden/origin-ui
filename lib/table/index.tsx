@@ -1,6 +1,6 @@
 export {
   default as SortableHeadCell,
-  SortableHeadCellFactory
+  SortableHeadCellFactory,
 } from "./sortable-head-cell";
 export { default as Table } from "./table";
 export { default as Filter } from "./filter";
@@ -17,5 +17,5 @@ export {
   StyledRow,
   StyledCell,
   StyledAction,
-  StyledSortableLabel
+  StyledSortableLabel,
 } from "./styled-components";

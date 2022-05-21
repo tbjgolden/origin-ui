@@ -17,19 +17,14 @@ const defaultProps = {
   minDate: null,
   month: null,
   adapter: dateFnsAdapter,
-  onDayClick: () => {
-  },
-  onDayFocus: () => {
-  },
-  onDayBlur: () => {
-  },
-  onDayMouseOver: () => {
-  },
-  onDayMouseLeave: () => {
-  },
+  onDayClick: () => {},
+  onDayFocus: () => {},
+  onDayBlur: () => {},
+  onDayMouseOver: () => {},
+  onDayMouseLeave: () => {},
   overrides: {},
   peekNextMonth: false,
-  value: null
+  value: null,
 };
 const CALENDAR_MAX_ROWS = 6;
 export default class CalendarMonth extends React.Component {
@@ -41,15 +36,53 @@ export default class CalendarMonth extends React.Component {
     this.isWeekInMonth = (startOfWeek) => {
       const date = this.getDateProp();
       const endOfWeek = this.dateHelpers.addDays(startOfWeek, 6);
-      return this.dateHelpers.isSameMonth(startOfWeek, date) || this.dateHelpers.isSameMonth(endOfWeek, date);
+      return (
+        this.dateHelpers.isSameMonth(startOfWeek, date) ||
+        this.dateHelpers.isSameMonth(endOfWeek, date)
+      );
     };
     this.renderWeeks = () => {
       const weeks = [];
-      let currentWeekStart = this.dateHelpers.getStartOfWeek(this.dateHelpers.getStartOfMonth(this.getDateProp()), this.props.locale);
+      let currentWeekStart = this.dateHelpers.getStartOfWeek(
+        this.dateHelpers.getStartOfMonth(this.getDateProp()),
+        this.props.locale
+      );
       let i = 0;
       let isWithinMonth = true;
-      while (isWithinMonth || this.props.fixedHeight && this.props.peekNextMonth && i < CALENDAR_MAX_ROWS) {
-        weeks.push(<Week adapter={this.props.adapter} date={currentWeekStart} dateLabel={this.props.dateLabel} density={this.props.density} excludeDates={this.props.excludeDates} filterDate={this.props.filterDate} highlightedDate={this.props.highlightedDate} includeDates={this.props.includeDates} focusedCalendar={this.props.focusedCalendar} range={this.props.range} key={i} locale={this.props.locale} minDate={this.props.minDate} maxDate={this.props.maxDate} month={this.dateHelpers.getMonth(this.getDateProp())} onDayBlur={this.props.onDayBlur} onDayFocus={this.props.onDayFocus} onDayClick={this.props.onDayClick} onDayMouseOver={this.props.onDayMouseOver} onDayMouseLeave={this.props.onDayMouseLeave} onChange={this.props.onChange} overrides={this.props.overrides} peekNextMonth={this.props.peekNextMonth} value={this.props.value} hasLockedBehavior={this.props.hasLockedBehavior} selectedInput={this.props.selectedInput} />);
+      while (
+        isWithinMonth ||
+        (this.props.fixedHeight && this.props.peekNextMonth && i < CALENDAR_MAX_ROWS)
+      ) {
+        weeks.push(
+          <Week
+            adapter={this.props.adapter}
+            date={currentWeekStart}
+            dateLabel={this.props.dateLabel}
+            density={this.props.density}
+            excludeDates={this.props.excludeDates}
+            filterDate={this.props.filterDate}
+            highlightedDate={this.props.highlightedDate}
+            includeDates={this.props.includeDates}
+            focusedCalendar={this.props.focusedCalendar}
+            range={this.props.range}
+            key={i}
+            locale={this.props.locale}
+            minDate={this.props.minDate}
+            maxDate={this.props.maxDate}
+            month={this.dateHelpers.getMonth(this.getDateProp())}
+            onDayBlur={this.props.onDayBlur}
+            onDayFocus={this.props.onDayFocus}
+            onDayClick={this.props.onDayClick}
+            onDayMouseOver={this.props.onDayMouseOver}
+            onDayMouseLeave={this.props.onDayMouseLeave}
+            onChange={this.props.onChange}
+            overrides={this.props.overrides}
+            peekNextMonth={this.props.peekNextMonth}
+            value={this.props.value}
+            hasLockedBehavior={this.props.hasLockedBehavior}
+            selectedInput={this.props.selectedInput}
+          />
+        );
         i++;
         currentWeekStart = this.dateHelpers.addWeeks(currentWeekStart, 1);
         isWithinMonth = this.isWeekInMonth(currentWeekStart);

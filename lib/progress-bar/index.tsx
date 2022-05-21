@@ -12,5 +12,5 @@ export {
   StyledProgressBarRoundedSvg,
   StyledProgressBarRoundedTrackBackground,
   StyledProgressBarRoundedTrackForeground,
-  StyledProgressBarRoundedText
+  StyledProgressBarRoundedText,
 } from "./styled-components";

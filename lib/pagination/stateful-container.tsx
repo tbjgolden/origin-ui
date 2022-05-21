@@ -2,22 +2,20 @@ import * as React from "react";
 import { STATE_CHANGE_TYPE } from "./constants";
 import { clamp } from "./utils";
 const initialState = {
-  currentPage: 1
+  currentPage: 1,
 };
 export default class PaginationStatefulContainer extends React.Component {
   constructor() {
     super(...arguments);
     this.state = this.props.initialState || initialState;
-    this.onPageChange = ({
-      nextPage
-    }) => {
+    this.onPageChange = ({ nextPage }) => {
       const { numPages, onPageChange } = this.props;
       const { currentPage } = this.state;
       const clamped = clamp(nextPage, 1, numPages);
       if (clamped !== currentPage) {
         onPageChange && onPageChange({ nextPage: clamped, prevPage: currentPage });
         this.internalSetState(STATE_CHANGE_TYPE.changePage, {
-          currentPage: clamped
+          currentPage: clamped,
         });
       }
     };
@@ -35,7 +33,7 @@ export default class PaginationStatefulContainer extends React.Component {
     const { children } = this.props;
     return children({
       currentPage,
-      onPageChange: this.onPageChange
+      onPageChange: this.onPageChange,
     });
   }
 }
@@ -43,5 +41,5 @@ PaginationStatefulContainer.defaultProps = {
   initialState,
   stateReducer: (changeType, changes) => {
     return changes;
-  }
+  },
 };

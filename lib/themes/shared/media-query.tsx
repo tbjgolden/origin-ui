@@ -3,6 +3,6 @@ import breakpoints from "./breakpoints";
 const mediaQuery = {
   small: getMediaQuery(breakpoints.small),
   medium: getMediaQuery(breakpoints.medium),
-  large: getMediaQuery(breakpoints.large)
+  large: getMediaQuery(breakpoints.large),
 };
 export default mediaQuery;

@@ -14,14 +14,14 @@ export default class StatefulPhoneInputContainer extends React.Component {
     this.onTextChange = (event) => {
       this.props.onTextChange(event);
       this.internalSetState(STATE_CHANGE_TYPE.textChange, {
-        text: event.target.value
+        text: event.target.value,
       });
     };
     this.onCountryChange = (event) => {
       this.props.onCountryChange(event);
       if (event.option && event.option.id) {
         this.internalSetState(STATE_CHANGE_TYPE.countryChange, {
-          country: COUNTRIES[event.option.id]
+          country: COUNTRIES[event.option.id],
         });
       }
     };
@@ -48,17 +48,17 @@ export default class StatefulPhoneInputContainer extends React.Component {
       country: this.state.country,
       text: this.state.text,
       onTextChange: this.onTextChange,
-      onCountryChange: this.onCountryChange
+      onCountryChange: this.onCountryChange,
     });
   }
 }
 StatefulPhoneInputContainer.defaultProps = {
   initialState: {
     text: defaultProps.text,
-    country: defaultProps.country
+    country: defaultProps.country,
   },
   onTextChange: defaultProps.onTextChange,
   onCountryChange: defaultProps.onTextChange,
   stateReducer: defaultStateReducer,
-  overrides: {}
+  overrides: {},
 };

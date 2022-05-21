@@ -4,6 +4,6 @@ export function toPopperPlacement(placement) {
 export function parsePopperOffset(offset) {
   return {
     top: Math.floor(offset.top || 0),
-    left: Math.floor(offset.left || 0)
+    left: Math.floor(offset.left || 0),
   };
 }

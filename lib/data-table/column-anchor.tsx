@@ -7,18 +7,26 @@ function AnchorFilter(props) {
 }
 function AnchorCell(props) {
   const [css] = useStyletron();
-  return <div className={css({
-    display: "-webkit-box",
-    WebkitLineClamp: 1,
-    WebkitBoxOrient: "vertical",
-    overflow: "hidden"
-  })}><StyledLink $as={props.elementAs} href={props.value.href}>{props.value.content}</StyledLink></div>;
+  return (
+    <div
+      className={css({
+        display: "-webkit-box",
+        WebkitLineClamp: 1,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      })}
+    >
+      <StyledLink $as={props.elementAs} href={props.value.href}>
+        {props.value.content}
+      </StyledLink>
+    </div>
+  );
 }
 function AnchorColumn(options) {
   return Column({
     kind: COLUMNS.ANCHOR,
-    buildFilter: function(params) {
-      return function(data) {
+    buildFilter: function (params) {
+      return function (data) {
         return true;
       };
     },
@@ -33,10 +41,10 @@ function AnchorColumn(options) {
     },
     renderFilter: AnchorFilter,
     sortable: options.sortable === void 0 ? true : options.sortable,
-    sortFn: function(a, b) {
+    sortFn: function (a, b) {
       return a.content.localeCompare(b.content);
     },
-    title: options.title
+    title: options.title,
   });
 }
 export default AnchorColumn;

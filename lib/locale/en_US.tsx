@@ -22,6 +22,6 @@ const en_US = {
   drawer,
   pagination,
   select,
-  toast
+  toast,
 };
 export default en_US;

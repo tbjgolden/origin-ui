@@ -16,5 +16,5 @@ export {
   StyledTableEmptyMessage,
   StyledSortAscIcon,
   StyledSortDescIcon,
-  StyledSortNoneIcon
+  StyledSortNoneIcon,
 } from "./styled-components";

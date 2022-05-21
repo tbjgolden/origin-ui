@@ -10,7 +10,7 @@ import {
   StyledDrawerContainer,
   StyledDrawerBody,
   StyledClose,
-  Hidden
+  Hidden,
 } from "./styled-components";
 import { CloseIcon } from "./close-icon";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
@@ -23,7 +23,7 @@ class Drawer extends React.Component {
     this.state = {
       isVisible: false,
       mounted: false,
-      isFocusVisible: false
+      isFocusVisible: false,
     };
     this.handleFocus = (event) => {
       if (isFocusVisible(event)) {
@@ -55,7 +55,7 @@ class Drawer extends React.Component {
     };
     this.animateOutComplete = () => {
       this.setState({
-        isVisible: false
+        isVisible: false,
       });
     };
   }
@@ -68,7 +68,10 @@ class Drawer extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     const { isOpen } = this.props;
-    if (isOpen !== prevProps.isOpen || isOpen && this.state.mounted && !prevState.mounted) {
+    if (
+      isOpen !== prevProps.isOpen ||
+      (isOpen && this.state.mounted && !prevState.mounted)
+    ) {
       if (isOpen) {
         this.didOpen();
       } else {
@@ -126,7 +129,7 @@ class Drawer extends React.Component {
   triggerClose(source) {
     if (this.props.onClose && source) {
       this.props.onClose({
-        closeSource: source
+        closeSource: source,
       });
     }
   }
@@ -140,7 +143,7 @@ class Drawer extends React.Component {
       $closeable: !!closeable,
       $anchor: anchor,
       $isFocusVisible: this.state.isFocusVisible,
-      $showBackdrop: showBackdrop
+      $showBackdrop: showBackdrop,
     };
   }
   getChildren() {
@@ -160,29 +163,78 @@ class Drawer extends React.Component {
       DrawerContainer: DrawerContainerOverride,
       DrawerBody: DrawerBodyOverride,
       Backdrop: BackdropOverride,
-      Close: CloseOverride
+      Close: CloseOverride,
     } = overrides;
     const [Root, rootProps] = getOverrides(RootOverride, StyledRoot);
     const [Backdrop, backdropProps] = getOverrides(BackdropOverride, StyledBackdrop);
-    const [DrawerContainer, drawerContainerProps] = getOverrides(DrawerContainerOverride, StyledDrawerContainer);
-    const [DrawerBody, drawerBodyProps] = getOverrides(DrawerBodyOverride, StyledDrawerBody);
+    const [DrawerContainer, drawerContainerProps] = getOverrides(
+      DrawerContainerOverride,
+      StyledDrawerContainer
+    );
+    const [DrawerBody, drawerBodyProps] = getOverrides(
+      DrawerBodyOverride,
+      StyledDrawerBody
+    );
     const [Close, closeProps] = getOverrides(CloseOverride, StyledClose);
     const sharedProps = this.getSharedProps();
-    return <LocaleContext.Consumer>{(locale) => {
-      return <FocusLock crossFrame={false} returnFocus autoFocus={autoFocus} noFocusGuards={true}><Root data-baseweb="drawer" ref={this.getRef("Root")} {...sharedProps} {...rootProps}>
-        <Backdrop onClick={this.onBackdropClick} {...sharedProps} {...backdropProps} />
-        <DrawerContainer {...sharedProps} {...drawerContainerProps}>
-          <DrawerBody {...sharedProps} {...drawerBodyProps}>{renderedContent}</DrawerBody>
-          {closeable ? <Close aria-label={locale.drawer.close} onClick={this.onCloseClick} {...sharedProps} {...closeProps} onFocus={forkFocus(closeProps, this.handleFocus)} onBlur={forkBlur(closeProps, this.handleBlur)}><CloseIcon title={locale.drawer.close} /></Close> : null}
-        </DrawerContainer>
-      </Root></FocusLock>;
-    }}</LocaleContext.Consumer>;
+    return (
+      <LocaleContext.Consumer>
+        {(locale) => {
+          return (
+            <FocusLock
+              crossFrame={false}
+              returnFocus
+              autoFocus={autoFocus}
+              noFocusGuards={true}
+            >
+              <Root
+                data-baseweb="drawer"
+                ref={this.getRef("Root")}
+                {...sharedProps}
+                {...rootProps}
+              >
+                <Backdrop
+                  onClick={this.onBackdropClick}
+                  {...sharedProps}
+                  {...backdropProps}
+                />
+                <DrawerContainer {...sharedProps} {...drawerContainerProps}>
+                  <DrawerBody {...sharedProps} {...drawerBodyProps}>
+                    {renderedContent}
+                  </DrawerBody>
+                  {closeable ? (
+                    <Close
+                      aria-label={locale.drawer.close}
+                      onClick={this.onCloseClick}
+                      {...sharedProps}
+                      {...closeProps}
+                      onFocus={forkFocus(closeProps, this.handleFocus)}
+                      onBlur={forkBlur(closeProps, this.handleBlur)}
+                    >
+                      <CloseIcon title={locale.drawer.close} />
+                    </Close>
+                  ) : null}
+                </DrawerContainer>
+              </Root>
+            </FocusLock>
+          );
+        }}
+      </LocaleContext.Consumer>
+    );
   }
   render() {
-    const mountedAndOpen = this.state.mounted && (this.props.isOpen || this.state.isVisible);
-    const renderedContent = mountedAndOpen || this.props.renderAll ? this.getChildren() : null;
+    const mountedAndOpen =
+      this.state.mounted && (this.props.isOpen || this.state.isVisible);
+    const renderedContent =
+      mountedAndOpen || this.props.renderAll ? this.getChildren() : null;
     if (renderedContent) {
-      return mountedAndOpen ? <Layer onEscape={this.onEscape} mountNode={this.props.mountNode}>{this.renderDrawer(renderedContent)}</Layer> : <Hidden>{renderedContent}</Hidden>;
+      return mountedAndOpen ? (
+        <Layer onEscape={this.onEscape} mountNode={this.props.mountNode}>
+          {this.renderDrawer(renderedContent)}
+        </Layer>
+      ) : (
+        <Hidden>{renderedContent}</Hidden>
+      );
     }
     return null;
   }
@@ -196,6 +248,6 @@ Drawer.defaultProps = {
   anchor: ANCHOR.right,
   showBackdrop: true,
   autoFocus: true,
-  renderAll: false
+  renderAll: false,
 };
 export default Drawer;

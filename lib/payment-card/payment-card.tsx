@@ -25,7 +25,7 @@ const CardTypeToComponent = {
   unionpay: UnionPayIcon,
   maestro: MaestroIcon,
   elo: EloIcon,
-  generic: GenericIcon
+  generic: GenericIcon,
 };
 class PaymentCard extends React.Component {
   constructor() {
@@ -48,7 +48,10 @@ class PaymentCard extends React.Component {
       ...restProps
     } = this.props;
     const { IconWrapper: IconWrapperOverride, ...restOverrides } = overrides;
-    const [IconWrapper, iconWrapperProps] = getOverrides(IconWrapperOverride, StyledIconWrapper);
+    const [IconWrapper, iconWrapperProps] = getOverrides(
+      IconWrapperOverride,
+      StyledIconWrapper
+    );
     const validatedValue = valid.number(value);
     let gaps = [];
     let type;
@@ -61,26 +64,49 @@ class PaymentCard extends React.Component {
         [SIZE.mini]: theme.sizing.scale600,
         [SIZE.compact]: theme.sizing.scale800,
         [SIZE.default]: theme.sizing.scale900,
-        [SIZE.large]: theme.sizing.scale1000
+        [SIZE.large]: theme.sizing.scale1000,
       };
       return () => {
-        return <IconWrapper $size={size} {...iconWrapperProps}>{React.createElement(CardTypeToComponent[type || "generic"] || GenericIcon, {
-          size: iconSize[size]
-        })}</IconWrapper>;
+        return (
+          <IconWrapper $size={size} {...iconWrapperProps}>
+            {React.createElement(CardTypeToComponent[type || "generic"] || GenericIcon, {
+              size: iconSize[size],
+            })}
+          </IconWrapper>
+        );
       };
     };
-    return <ThemeContext.Consumer>{(theme) => {
-      return <Input size={size} aria-label={ariaLabel} data-baseweb="payment-card-input" inputMode="numeric" overrides={Object.freeze({
-        ...restOverrides,
-        Before: getBeforeComponent(theme)
-      })} onChange={(e) => {
-        const [position, value2] = getCaretPosition(e.target.value, this.props.value ? String(this.props.value) : "", e.target.selectionStart);
-        this.caretPosition = position;
-        this.inRef = e.target;
-        e.target.value = value2;
-        onChange && onChange(e);
-      }} value={addGaps(gaps, String(value) || "")} {...restProps} />;
-    }}</ThemeContext.Consumer>;
+    return (
+      <ThemeContext.Consumer>
+        {(theme) => {
+          return (
+            <Input
+              size={size}
+              aria-label={ariaLabel}
+              data-baseweb="payment-card-input"
+              inputMode="numeric"
+              overrides={Object.freeze({
+                ...restOverrides,
+                Before: getBeforeComponent(theme),
+              })}
+              onChange={(e) => {
+                const [position, value2] = getCaretPosition(
+                  e.target.value,
+                  this.props.value ? String(this.props.value) : "",
+                  e.target.selectionStart
+                );
+                this.caretPosition = position;
+                this.inRef = e.target;
+                e.target.value = value2;
+                onChange && onChange(e);
+              }}
+              value={addGaps(gaps, String(value) || "")}
+              {...restProps}
+            />
+          );
+        }}
+      </ThemeContext.Consumer>
+    );
   }
 }
 PaymentCard.defaultProps = {
@@ -89,14 +115,12 @@ PaymentCard.defaultProps = {
   disabled: false,
   name: "",
   error: false,
-  onBlur: () => {
-  },
-  onFocus: () => {
-  },
+  onBlur: () => {},
+  onFocus: () => {},
   overrides: {},
   required: false,
   size: "default",
   startEnhancer: null,
-  endEnhancer: null
+  endEnhancer: null,
 };
 export default PaymentCard;

@@ -6,7 +6,7 @@ import {
   Root as StyledRoot,
   Body as StyledBody,
   CloseIconSvg as StyledCloseIcon,
-  InnerContainer as StyledInnerContainer
+  InnerContainer as StyledInnerContainer,
 } from "./styled-components";
 import Toast from "./toast";
 let toasterRef = null;
@@ -15,7 +15,7 @@ export class ToasterContainer extends React.Component {
     super(props);
     this.state = {
       isMounted: false,
-      toasts: []
+      toasts: [],
     };
     this.dismissHandlers = {};
     this.toastId = 0;
@@ -25,9 +25,13 @@ export class ToasterContainer extends React.Component {
       return { autoFocus, autoHideDuration, closeable, ...props2, key };
     };
     this.show = (props2 = {}) => {
-      if (this.state.toasts.map((t) => {
-        return t.key;
-      }).includes(props2.key)) {
+      if (
+        this.state.toasts
+          .map((t) => {
+            return t.key;
+          })
+          .includes(props2.key)
+      ) {
         this.update(props2.key, props2);
         return props2.key;
       }
@@ -45,17 +49,19 @@ export class ToasterContainer extends React.Component {
               ...toast,
               ...this.getToastProps({
                 autoHideDuration: toast.autoHideDuration,
-                ...props2
+                ...props2,
               }),
               key,
-              ...this.props.resetAutoHideTimerOnUpdate ? { __updated: (Number.parseInt(toast.__updated) || 0) + 1 } : {}
+              ...(this.props.resetAutoHideTimerOnUpdate
+                ? { __updated: (Number.parseInt(toast.__updated) || 0) + 1 }
+                : {}),
             };
             return updatedToastProps;
           }
           return toast;
         });
         return {
-          toasts: updatedToasts
+          toasts: updatedToasts,
         };
       });
     };
@@ -78,7 +84,7 @@ export class ToasterContainer extends React.Component {
         return {
           toasts: toasts.filter((t) => {
             return !(t.key === key);
-          })
+          }),
         };
       });
     };
@@ -93,27 +99,39 @@ export class ToasterContainer extends React.Component {
       const {
         ToastBody: BodyOverride,
         ToastCloseIcon: CloseIconOverride,
-        ToastInnerContainer: InnerContainerOverride
+        ToastInnerContainer: InnerContainerOverride,
       } = this.props.overrides;
-      const globalToastOverrides = mergeOverrides({
-        Body: StyledBody,
-        CloseIcon: StyledCloseIcon,
-        InnerContainer: StyledInnerContainer
-      }, {
-        Body: BodyOverride || {},
-        CloseIcon: CloseIconOverride || {},
-        InnerContainer: InnerContainerOverride || {}
-      });
+      const globalToastOverrides = mergeOverrides(
+        {
+          Body: StyledBody,
+          CloseIcon: StyledCloseIcon,
+          InnerContainer: StyledInnerContainer,
+        },
+        {
+          Body: BodyOverride || {},
+          CloseIcon: CloseIconOverride || {},
+          InnerContainer: InnerContainerOverride || {},
+        }
+      );
       const toastOverrides = mergeOverrides(globalToastOverrides, toastProps.overrides);
-      return <Toast {...restProps} overrides={toastOverrides} key={key} onClose={this.getOnCloseHandler(key, onClose)}>{({ dismiss }) => {
-        this.dismissHandlers[key] = dismiss;
-        return children;
-      }}</Toast>;
+      return (
+        <Toast
+          {...restProps}
+          overrides={toastOverrides}
+          key={key}
+          onClose={this.getOnCloseHandler(key, onClose)}
+        >
+          {({ dismiss }) => {
+            this.dismissHandlers[key] = dismiss;
+            return children;
+          }}
+        </Toast>
+      );
     };
     this.getSharedProps = () => {
       const { placement } = this.props;
       return {
-        $placement: placement
+        $placement: placement,
       };
     };
     toasterRef = this;
@@ -130,11 +148,21 @@ export class ToasterContainer extends React.Component {
     for (let i = toastsLength - 1; i >= 0; i--) {
       toastsToRender.push(this.renderToast(this.state.toasts[i]));
     }
-    const root = <Root data-baseweb="toaster" {...sharedProps} {...rootProps}>{toastsToRender}</Root>;
-    return this.state.isMounted ? <>
-      {this.props.usePortal && __BROWSER__ && document.body ? ReactDOM.createPortal(root, document.body) : root}
-      {this.props.children}
-    </> : <>{this.props.children}</>;
+    const root = (
+      <Root data-baseweb="toaster" {...sharedProps} {...rootProps}>
+        {toastsToRender}
+      </Root>
+    );
+    return this.state.isMounted ? (
+      <>
+        {this.props.usePortal && __BROWSER__ && document.body
+          ? ReactDOM.createPortal(root, document.body)
+          : root}
+        {this.props.children}
+      </>
+    ) : (
+      <>{this.props.children}</>
+    );
   }
 }
 ToasterContainer.defaultProps = {
@@ -145,33 +173,35 @@ ToasterContainer.defaultProps = {
   overrides: {},
   placement: PLACEMENT.top,
   resetAutoHideTimerOnUpdate: true,
-  usePortal: true
+  usePortal: true,
 };
 const toaster = {
-  getRef: function() {
+  getRef: function () {
     return toasterRef;
   },
-  show: function(children, props = {}) {
+  show: function (children, props = {}) {
     const toasterInstance = this.getRef();
     if (toasterInstance) {
       return toasterInstance.show({ ...props, children });
     } else if (__DEV__) {
-      throw new Error("Please make sure to add the ToasterContainer to your application, and it is mounted, before adding toasts! You can find more information here: https://baseweb.design/components/toast");
+      throw new Error(
+        "Please make sure to add the ToasterContainer to your application, and it is mounted, before adding toasts! You can find more information here: https://baseweb.design/components/toast"
+      );
     }
   },
-  info: function(children, props = {}) {
+  info: function (children, props = {}) {
     return this.show(children, { ...props, kind: KIND.info });
   },
-  positive: function(children, props = {}) {
+  positive: function (children, props = {}) {
     return this.show(children, { ...props, kind: KIND.positive });
   },
-  warning: function(children, props = {}) {
+  warning: function (children, props = {}) {
     return this.show(children, { ...props, kind: KIND.warning });
   },
-  negative: function(children, props = {}) {
+  negative: function (children, props = {}) {
     return this.show(children, { ...props, kind: KIND.negative });
   },
-  update: function(key, props) {
+  update: function (key, props) {
     const toasterInstance = this.getRef();
     if (toasterInstance) {
       toasterInstance.update(key, props);
@@ -179,13 +209,13 @@ const toaster = {
       console.error("No ToasterContainer is mounted yet.");
     }
   },
-  clear: function(key) {
+  clear: function (key) {
     const toasterInstance = this.getRef();
     if (toasterInstance) {
       toasterInstance.clear(key);
     } else if (__DEV__) {
       console.error("No ToasterContainer is mounted yet.");
     }
-  }
+  },
 };
 export default toaster;

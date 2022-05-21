@@ -4,7 +4,7 @@ export const StyledRoot = styled("div", ({ $theme }) => {
     display: "flex",
     alignItems: "center",
     color: $theme.colors.backgroundInversePrimary,
-    ...$theme.typography.font350
+    ...$theme.typography.font350,
   };
 });
 export const StyledMaxLabel = styled("span", ({ $theme }) => {
@@ -12,7 +12,7 @@ export const StyledMaxLabel = styled("span", ({ $theme }) => {
   const marginEndDir = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     [marginStartDir]: $theme.sizing.scale300,
-    [marginEndDir]: $theme.sizing.scale600
+    [marginEndDir]: $theme.sizing.scale600,
   };
 });
 export const StyledDropdownContainer = styled("div", ({ $theme, $isFocusVisible }) => {
@@ -22,6 +22,6 @@ export const StyledDropdownContainer = styled("div", ({ $theme, $isFocusVisible 
     position: "relative",
     outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
     [marginStartDir]: $theme.sizing.scale600,
-    [marginEndDir]: $theme.sizing.scale300
+    [marginEndDir]: $theme.sizing.scale300,
   };
 });

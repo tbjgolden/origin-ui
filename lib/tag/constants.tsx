@@ -1,12 +1,12 @@
 export const SIZE = {
   small: "small",
   medium: "medium",
-  large: "large"
+  large: "large",
 };
 export const VARIANT = Object.freeze({
   solid: "solid",
   light: "light",
-  outlined: "outlined"
+  outlined: "outlined",
 });
 export const KIND = {
   custom: "custom",
@@ -23,5 +23,5 @@ export const KIND = {
   yellow: "yellow",
   orange: "orange",
   purple: "purple",
-  brown: "brown"
+  brown: "brown",
 };

@@ -5,5 +5,5 @@ export {
   StyledContentMessage,
   StyledContentSeparator,
   StyledErrorMessage,
-  StyledHiddenInput
+  StyledHiddenInput,
 } from "./styled-components";

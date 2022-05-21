@@ -25,7 +25,7 @@ class TimezonePicker extends React.Component {
           timezones.push({
             id: zoneName,
             label,
-            offset: offsetMinutes === 0 ? 0 : offsetMinutes * -1
+            offset: offsetMinutes === 0 ? 0 : offsetMinutes * -1,
           });
         } catch {
           console.error(`failed to format zone name ${zoneName}`);
@@ -33,13 +33,10 @@ class TimezonePicker extends React.Component {
       }
       return timezones.sort((a, b) => {
         const offsetDelta = b.offset - a.offset;
-        if (offsetDelta !== 0)
-          return offsetDelta;
+        if (offsetDelta !== 0) return offsetDelta;
         if (typeof a.label === "string" && typeof b.label === "string") {
-          if (a.label < b.label)
-            return -1;
-          if (a.label > b.label)
-            return 1;
+          if (a.label < b.label) return -1;
+          if (a.label > b.label) return 1;
         }
         return 0;
       });
@@ -77,9 +74,12 @@ class TimezonePicker extends React.Component {
   render() {
     const { overrides = {} } = this.props;
     const [OverriddenSelect, selectProps] = getOverrides(overrides.Select, Select);
-    selectProps.overrides = mergeOverrides({
-      Dropdown: { style: { maxHeight: "360px" } }
-    }, selectProps.overrides);
+    selectProps.overrides = mergeOverrides(
+      {
+        Dropdown: { style: { maxHeight: "360px" } },
+      },
+      selectProps.overrides
+    );
     let options = this.state.timezones;
     if (this.props.mapLabels) {
       options = options.map((option) => {
@@ -87,17 +87,38 @@ class TimezonePicker extends React.Component {
         return option;
       });
     }
-    return <LocaleContext.Consumer>{(locale) => {
-      return <OverriddenSelect aria-label={locale.datepicker.timezonePickerAriaLabel} options={options} clearable={false} disabled={this.props.disabled} error={this.props.error} positive={this.props.positive} size={this.props.size} onChange={(params) => {
-        if (params.type === "clear") {
-          this.setState({ value: "" });
-          this.props.onChange && this.props.onChange(null);
-        } else {
-          this.setState({ value: params.option.id });
-          this.props.onChange && this.props.onChange(params.option);
-        }
-      }} value={this.props.value || this.state.value ? [{ id: this.props.value || this.state.value }] : null} {...selectProps} />;
-    }}</LocaleContext.Consumer>;
+    return (
+      <LocaleContext.Consumer>
+        {(locale) => {
+          return (
+            <OverriddenSelect
+              aria-label={locale.datepicker.timezonePickerAriaLabel}
+              options={options}
+              clearable={false}
+              disabled={this.props.disabled}
+              error={this.props.error}
+              positive={this.props.positive}
+              size={this.props.size}
+              onChange={(params) => {
+                if (params.type === "clear") {
+                  this.setState({ value: "" });
+                  this.props.onChange && this.props.onChange(null);
+                } else {
+                  this.setState({ value: params.option.id });
+                  this.props.onChange && this.props.onChange(params.option);
+                }
+              }}
+              value={
+                this.props.value || this.state.value
+                  ? [{ id: this.props.value || this.state.value }]
+                  : null
+              }
+              {...selectProps}
+            />
+          );
+        }}
+      </LocaleContext.Consumer>
+    );
   }
 }
 export default TimezonePicker;

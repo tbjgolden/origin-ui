@@ -8,14 +8,14 @@ class StatefulPanelContainer extends React.Component {
     super(...arguments);
     this.state = {
       expanded: false,
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.onChange = () => {
       if (typeof this.props.onChange === "function") {
         this.props.onChange({ expanded: !this.state.expanded });
       }
       this.internalSetState(STATE_CHANGE_TYPE.expand, {
-        expanded: !this.state.expanded
+        expanded: !this.state.expanded,
       });
     };
   }
@@ -30,14 +30,13 @@ class StatefulPanelContainer extends React.Component {
     return this.props.children({
       ...restProps,
       ...this.state,
-      onChange: this.onChange
+      onChange: this.onChange,
     });
   }
 }
 StatefulPanelContainer.defaultProps = {
   initialState: { expanded: false },
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulPanelContainer;

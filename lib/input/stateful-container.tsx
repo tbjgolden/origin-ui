@@ -8,7 +8,7 @@ class StatefulContainer extends React.Component {
     super(...arguments);
     this.state = {
       value: "",
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.onChange = (e) => {
       const nextState = { value: e.target.value };
@@ -26,16 +26,14 @@ class StatefulContainer extends React.Component {
     return children({
       ...restProps,
       ...this.state,
-      onChange
+      onChange,
     });
   }
 }
 StatefulContainer.defaultProps = {
   initialState: {},
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  },
-  onClear: () => {
-  }
+  onChange: () => {},
+  onClear: () => {},
 };
 export default StatefulContainer;

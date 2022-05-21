@@ -1,4 +1,4 @@
 const locale = {
-  ariaLabel: "Breadcrumbs navigation"
+  ariaLabel: "Breadcrumbs navigation",
 };
 export default locale;

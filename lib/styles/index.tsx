@@ -6,7 +6,7 @@ export {
   styled,
   withStyle,
   useStyletron,
-  withWrapper
+  withWrapper,
 } from "./styled";
 export { hexToRgb, expandBorderStyles } from "./util";
 export { default as ThemeProvider } from "./theme-provider";

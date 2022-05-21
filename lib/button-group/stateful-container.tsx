@@ -11,7 +11,9 @@ export default class StatefulContainer extends React.Component {
     super(props);
     this.changeState = (nextState) => {
       if (this.props.stateReducer) {
-        this.setState(this.props.stateReducer(STATE_CHANGE_TYPE.change, nextState, this.state));
+        this.setState(
+          this.props.stateReducer(STATE_CHANGE_TYPE.change, nextState, this.state)
+        );
       } else {
         this.setState(nextState);
       }
@@ -31,7 +33,7 @@ export default class StatefulContainer extends React.Component {
           this.changeState({
             selected: this.state.selected.filter((value) => {
               return value !== index;
-            })
+            }),
           });
         }
       }
@@ -42,7 +44,7 @@ export default class StatefulContainer extends React.Component {
     const { initialState = {} } = props;
     const { selected = [] } = initialState;
     this.state = {
-      selected: isSelectedDefined(selected) ? [selected].flat() : []
+      selected: isSelectedDefined(selected) ? [selected].flat() : [],
     };
   }
   render() {
@@ -50,11 +52,11 @@ export default class StatefulContainer extends React.Component {
     return this.props.children({
       ...props,
       onClick: this.onClick,
-      selected: this.state.selected
+      selected: this.state.selected,
     });
   }
 }
 StatefulContainer.defaultProps = {
   initialState: { selected: [] },
-  stateReducer: defaultStateReducer
+  stateReducer: defaultStateReducer,
 };

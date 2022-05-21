@@ -11,12 +11,12 @@ const defaultProps = {
   matchPos: "any",
   matchProp: "any",
   trimFilter: true,
-  valueKey: "value"
+  valueKey: "value",
 };
 const filterOptions = (options, filterValue, excludeOptions, newProps) => {
   const props = {
     ...defaultProps,
-    ...newProps
+    ...newProps,
   };
   if (props.ignoreCase) {
     filterValue = filterValue.toLowerCase();
@@ -28,14 +28,14 @@ const filterOptions = (options, filterValue, excludeOptions, newProps) => {
     acc.add(option[props.valueKey]);
     return acc;
   }, /* @__PURE__ */ new Set());
-  const re = new RegExp(`${props.matchPos === "start" ? "^" : ""}${escapeRegExp(filterValue)}`, props.ignoreCase ? "i" : "");
+  const re = new RegExp(
+    `${props.matchPos === "start" ? "^" : ""}${escapeRegExp(filterValue)}`,
+    props.ignoreCase ? "i" : ""
+  );
   return options.filter((option) => {
-    if (excludeValues.has(option[props.valueKey]))
-      return false;
-    if (props.filterOption)
-      return props.filterOption.call(void 0, option, filterValue);
-    if (!filterValue)
-      return true;
+    if (excludeValues.has(option[props.valueKey])) return false;
+    if (props.filterOption) return props.filterOption.call(void 0, option, filterValue);
+    if (!filterValue) return true;
     const value = option[props.valueKey];
     const label = option[props.labelKey];
     const hasValue = isValid(value);
@@ -45,7 +45,10 @@ const filterOptions = (options, filterValue, excludeOptions, newProps) => {
     }
     const valueTest = hasValue ? String(value) : null;
     const labelTest = hasLabel ? String(label) : null;
-    return valueTest && props.matchProp !== "label" && re.test(valueTest) || labelTest && props.matchProp !== "value" && re.test(labelTest);
+    return (
+      (valueTest && props.matchProp !== "label" && re.test(valueTest)) ||
+      (labelTest && props.matchProp !== "value" && re.test(labelTest))
+    );
   });
 };
 export default filterOptions;

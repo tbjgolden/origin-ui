@@ -17,26 +17,20 @@ class StatefulSelectContainer extends React.Component {
     };
   }
   render() {
-    const {
-      children,
-      initialState,
-      stateReducer,
-      ...restProps
-    } = this.props;
+    const { children, initialState, stateReducer, ...restProps } = this.props;
     return children({
       ...restProps,
       ...this.state,
-      onChange: this.onChange
+      onChange: this.onChange,
     });
   }
 }
 StatefulSelectContainer.defaultProps = {
   initialState: {
-    value: []
+    value: [],
   },
-  onChange: () => {
-  },
+  onChange: () => {},
   overrides: {},
-  stateReducer: defaultStateReducer
+  stateReducer: defaultStateReducer,
 };
 export default StatefulSelectContainer;

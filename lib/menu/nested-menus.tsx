@@ -1,18 +1,14 @@
 import * as React from "react";
 export const NestedMenuContext = React.createContext({
-  addMenuToNesting: () => {
-  },
-  removeMenuFromNesting: () => {
-  },
-  getParentMenu: () => {
-  },
-  getChildMenu: () => {
-  },
+  addMenuToNesting: () => {},
+  removeMenuFromNesting: () => {},
+  getParentMenu: () => {},
+  getChildMenu: () => {},
   nestedMenuHoverIndex: -1,
   isNestedMenuVisible: () => {
     return false;
   },
-  mountRef: { current: null }
+  mountRef: { current: null },
 });
 function isSame(a, b) {
   if (!a || !b) {
@@ -35,7 +31,11 @@ export default class NestedMenus extends React.Component {
       if (__BROWSER__) {
         clearTimeout(this.mouseLeaveTimeoueId);
         const index = this.state.menus.findIndex((m) => {
-          return m.current && event.currentTarget instanceof Node && m.current.contains(event.currentTarget);
+          return (
+            m.current &&
+            event.currentTarget instanceof Node &&
+            m.current.contains(event.currentTarget)
+          );
         });
         this.setState({ nestedMenuHoverIndex: index });
       }
@@ -84,17 +84,23 @@ export default class NestedMenus extends React.Component {
     };
   }
   render() {
-    return <NestedMenuContext.Provider value={{
-      addMenuToNesting: this.addMenuToNesting,
-      removeMenuFromNesting: this.removeMenuFromNesting,
-      getParentMenu: this.getParentMenu,
-      getChildMenu: this.getChildMenu,
-      isNestedMenuVisible: this.isNestedMenuVisible,
-      nestedMenuHoverIndex: this.state.nestedMenuHoverIndex,
-      mountRef: this.mountRef
-    }}><React.Fragment>
-      {this.props.children}
-      <span ref={this.mountRef} />
-    </React.Fragment></NestedMenuContext.Provider>;
+    return (
+      <NestedMenuContext.Provider
+        value={{
+          addMenuToNesting: this.addMenuToNesting,
+          removeMenuFromNesting: this.removeMenuFromNesting,
+          getParentMenu: this.getParentMenu,
+          getChildMenu: this.getChildMenu,
+          isNestedMenuVisible: this.isNestedMenuVisible,
+          nestedMenuHoverIndex: this.state.nestedMenuHoverIndex,
+          mountRef: this.mountRef,
+        }}
+      >
+        <React.Fragment>
+          {this.props.children}
+          <span ref={this.mountRef} />
+        </React.Fragment>
+      </NestedMenuContext.Provider>
+    );
   }
 }

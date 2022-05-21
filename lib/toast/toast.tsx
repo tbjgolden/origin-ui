@@ -4,7 +4,7 @@ import DeleteIcon from "../icon/delete";
 import {
   Body as StyledBody,
   CloseIconSvg as StyledCloseIcon,
-  InnerContainer as StyledInnerContainer
+  InnerContainer as StyledInnerContainer,
 } from "./styled-components";
 import { KIND, TYPE } from "./constants";
 import { LocaleContext } from "../locale";
@@ -15,7 +15,7 @@ class Toast extends React.Component {
     this.state = {
       isVisible: false,
       isRendered: true,
-      isFocusVisible: false
+      isFocusVisible: false,
     };
     this.handleFocus = (event) => {
       if (isFocusVisible(event)) {
@@ -32,8 +32,7 @@ class Toast extends React.Component {
         this.setState({ isVisible: true });
       }, 0);
     };
-    this.animateOut = (callback = () => {
-    }) => {
+    this.animateOut = (callback = () => {}) => {
       this.setState({ isVisible: false });
       this.animateOutCompleteTimer = setTimeout(() => {
         this.setState({ isRendered: false });
@@ -47,15 +46,13 @@ class Toast extends React.Component {
       }
     };
     this.onFocus = (e) => {
-      if (!this.state.isVisible)
-        return;
+      if (!this.state.isVisible) return;
       clearTimeout(this.autoHideTimeout);
       clearTimeout(this.animateOutCompleteTimer);
       typeof this.props.onFocus === "function" && this.props.onFocus(e);
     };
     this.onMouseEnter = (e) => {
-      if (!this.state.isVisible)
-        return;
+      if (!this.state.isVisible) return;
       clearTimeout(this.autoHideTimeout);
       clearTimeout(this.animateOutCompleteTimer);
       typeof this.props.onMouseEnter === "function" && this.props.onMouseEnter(e);
@@ -74,14 +71,24 @@ class Toast extends React.Component {
   componentDidMount() {
     this.animateIn();
     this.startTimeout();
-    if (__BROWSER__ && this.props.autoFocus && this.closeRef && this.closeRef.current && this.closeRef.current.focus && typeof this.closeRef.current.focus === "function") {
+    if (
+      __BROWSER__ &&
+      this.props.autoFocus &&
+      this.closeRef &&
+      this.closeRef.current &&
+      this.closeRef.current.focus &&
+      typeof this.closeRef.current.focus === "function"
+    ) {
       this.previouslyFocusedElement = document.activeElement;
       this.closeRef.current.focus();
       this.setState({ isFocusVisible: true });
     }
   }
   componentDidUpdate(prevProps) {
-    if (this.props.autoHideDuration !== prevProps.autoHideDuration || this.props.__updated !== prevProps.__updated) {
+    if (
+      this.props.autoHideDuration !== prevProps.autoHideDuration ||
+      this.props.__updated !== prevProps.__updated
+    ) {
       this.startTimeout();
     }
   }
@@ -100,7 +107,7 @@ class Toast extends React.Component {
     for (const timerId of [
       this.autoHideTimeout,
       this.animateInTimer,
-      this.animateOutCompleteTimer
+      this.animateOutCompleteTimer,
     ]) {
       if (timerId) {
         clearTimeout(timerId);
@@ -115,7 +122,7 @@ class Toast extends React.Component {
       $type: notificationType,
       $closeable: closeable,
       $isRendered: isRendered,
-      $isVisible: isVisible
+      $isVisible: isVisible,
     };
   }
   render() {
@@ -124,26 +131,66 @@ class Toast extends React.Component {
     const {
       Body: BodyOverride,
       CloseIcon: CloseIconOverride,
-      InnerContainer: InnerContainerOverride
+      InnerContainer: InnerContainerOverride,
     } = this.props.overrides;
     const [Body, bodyProps] = getOverrides(BodyOverride, StyledBody);
-    const [InnerContainer, innerContainerProps] = getOverrides(InnerContainerOverride, StyledInnerContainer);
+    const [InnerContainer, innerContainerProps] = getOverrides(
+      InnerContainerOverride,
+      StyledInnerContainer
+    );
     const [CloseIcon, closeIconProps] = getOverrides(CloseIconOverride, StyledCloseIcon);
-    const closeIconOverrides = mergeOverrides({ Svg: { component: CloseIcon } }, { Svg: CloseIconOverride });
+    const closeIconOverrides = mergeOverrides(
+      { Svg: { component: CloseIcon } },
+      { Svg: CloseIconOverride }
+    );
     const sharedProps = this.getSharedProps();
     if (!isRendered) {
       return null;
     }
-    return <LocaleContext.Consumer>{(locale) => {
-      return <Body role="alert" data-baseweb={this.props["data-baseweb"] || "toast"} {...sharedProps} {...bodyProps} onBlur={this.onBlur} onFocus={this.onFocus} onMouseEnter={this.onMouseEnter} onMouseLeave={this.onMouseLeave}>
-        <InnerContainer {...sharedProps} {...innerContainerProps}>{typeof children === "function" ? children({ dismiss: this.dismiss }) : children}</InnerContainer>
-        {closeable ? <DeleteIcon ref={this.closeRef} role="button" tabIndex={0} $isFocusVisible={this.state.isFocusVisible} onClick={this.dismiss} onKeyPress={(event) => {
-          if (event.key === "Enter") {
-            this.dismiss();
-          }
-        }} title={locale.toast.close} {...sharedProps} {...closeIconProps} onFocus={forkFocus(closeIconProps, this.handleFocus)} onBlur={forkBlur(closeIconProps, this.handleBlur)} overrides={closeIconOverrides} /> : null}
-      </Body>;
-    }}</LocaleContext.Consumer>;
+    return (
+      <LocaleContext.Consumer>
+        {(locale) => {
+          return (
+            <Body
+              role="alert"
+              data-baseweb={this.props["data-baseweb"] || "toast"}
+              {...sharedProps}
+              {...bodyProps}
+              onBlur={this.onBlur}
+              onFocus={this.onFocus}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+            >
+              <InnerContainer {...sharedProps} {...innerContainerProps}>
+                {typeof children === "function"
+                  ? children({ dismiss: this.dismiss })
+                  : children}
+              </InnerContainer>
+              {closeable ? (
+                <DeleteIcon
+                  ref={this.closeRef}
+                  role="button"
+                  tabIndex={0}
+                  $isFocusVisible={this.state.isFocusVisible}
+                  onClick={this.dismiss}
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter") {
+                      this.dismiss();
+                    }
+                  }}
+                  title={locale.toast.close}
+                  {...sharedProps}
+                  {...closeIconProps}
+                  onFocus={forkFocus(closeIconProps, this.handleFocus)}
+                  onBlur={forkBlur(closeIconProps, this.handleBlur)}
+                  overrides={closeIconOverrides}
+                />
+              ) : null}
+            </Body>
+          );
+        }}
+      </LocaleContext.Consumer>
+    );
   }
 }
 Toast.defaultProps = {
@@ -152,16 +199,11 @@ Toast.defaultProps = {
   closeable: true,
   kind: KIND.info,
   notificationType: TYPE.toast,
-  onClose: () => {
-  },
-  onBlur: () => {
-  },
-  onFocus: () => {
-  },
-  onMouseEnter: () => {
-  },
-  onMouseLeave: () => {
-  },
-  overrides: {}
+  onClose: () => {},
+  onBlur: () => {},
+  onFocus: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  overrides: {},
 };
 export default Toast;

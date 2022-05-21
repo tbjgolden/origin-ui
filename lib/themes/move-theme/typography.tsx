@@ -1,7 +1,9 @@
 export const fontTokens = {
-  primaryFontFamily: 'UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif'
+  primaryFontFamily:
+    'UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif',
 };
-const secondaryFontFamily = 'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
+const secondaryFontFamily =
+  'UberMove, UberMoveText, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
 const monoFontFamily = 'UberMoveMono, "Lucida Console", Monaco, monospace';
 export const typography = {
   font1450: { fontFamily: secondaryFontFamily },
@@ -29,5 +31,5 @@ export const typography = {
   MonoDisplayXSmall: { fontFamily: monoFontFamily },
   MonoDisplaySmall: { fontFamily: monoFontFamily },
   MonoDisplayMedium: { fontFamily: monoFontFamily },
-  MonoDisplayLarge: { fontFamily: monoFontFamily }
+  MonoDisplayLarge: { fontFamily: monoFontFamily },
 };

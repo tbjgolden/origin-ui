@@ -83,6 +83,6 @@ const colors = {
   brown400: "#99644C",
   brown500: "#744C3A",
   brown600: "#5C3C2E",
-  brown700: "#3D281E"
+  brown700: "#3D281E",
 };
 export default colors;

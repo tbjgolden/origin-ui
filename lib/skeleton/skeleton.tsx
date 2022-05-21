@@ -7,15 +7,41 @@ class Skeleton extends React.Component {
     const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
     const [Row, rowProps] = getOverrides(overrides.Row, StyledRow);
     if (typeof this.props.rows === "number") {
-      return <Root $height={this.props.height} $width={this.props.width} $animation={this.props.animation} $rows={this.props.rows} testid="loader" {...rootProps}>{new Array(this.props.rows).fill().map((item, index) => {
-        return <Row $animation={this.props.animation} key={index} $isLastRow={index === this.props.rows - 1} {...rowProps} />;
-      })}</Root>;
+      return (
+        <Root
+          $height={this.props.height}
+          $width={this.props.width}
+          $animation={this.props.animation}
+          $rows={this.props.rows}
+          testid="loader"
+          {...rootProps}
+        >
+          {new Array(this.props.rows).fill().map((item, index) => {
+            return (
+              <Row
+                $animation={this.props.animation}
+                key={index}
+                $isLastRow={index === this.props.rows - 1}
+                {...rowProps}
+              />
+            );
+          })}
+        </Root>
+      );
     }
-    return <Root $height={this.props.height} $width={this.props.width} $animation={this.props.animation} testid="loader" {...rootProps} />;
+    return (
+      <Root
+        $height={this.props.height}
+        $width={this.props.width}
+        $animation={this.props.animation}
+        testid="loader"
+        {...rootProps}
+      />
+    );
   }
 }
 Skeleton.defaultProps = {
   rows: 0,
-  animation: false
+  animation: false,
 };
 export default Skeleton;

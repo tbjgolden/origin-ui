@@ -8,7 +8,7 @@ import {
   Root as StyledRoot,
   Dialog as StyledDialog,
   DialogContainer as StyledDialogContainer,
-  Close as StyledClose
+  Close as StyledClose,
 } from "./styled-components";
 import { CloseIcon } from "./close-icon";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
@@ -22,7 +22,7 @@ class Modal extends React.Component {
     this.state = {
       isVisible: false,
       mounted: false,
-      isFocusVisible: false
+      isFocusVisible: false,
     };
     this.handleFocus = (event) => {
       if (isFocusVisible(event)) {
@@ -41,7 +41,11 @@ class Modal extends React.Component {
       this.triggerClose(CLOSE_SOURCE.escape);
     };
     this.onDocumentClick = (e) => {
-      if (e.target && e.target instanceof HTMLElement && e.target.contains(this.dialogContainerRef.current)) {
+      if (
+        e.target &&
+        e.target instanceof HTMLElement &&
+        e.target.contains(this.dialogContainerRef.current)
+      ) {
         this.onBackdropClick();
       }
     };
@@ -56,14 +60,16 @@ class Modal extends React.Component {
     };
     this.animateOutComplete = () => {
       this.setState({
-        isVisible: false
+        isVisible: false,
       });
     };
   }
   componentDidMount() {
     this.setState({ mounted: true });
     if (__DEV__ && this.props.closable) {
-      console.warn("The property `closable` is not supported on the Modal. Did you mean `closeable`?");
+      console.warn(
+        "The property `closable` is not supported on the Modal. Did you mean `closeable`?"
+      );
     }
   }
   componentWillUnmount() {
@@ -72,7 +78,10 @@ class Modal extends React.Component {
   }
   componentDidUpdate(prevProps, prevState) {
     const { isOpen } = this.props;
-    if (isOpen !== prevProps.isOpen || isOpen && this.state.mounted && !prevState.mounted) {
+    if (
+      isOpen !== prevProps.isOpen ||
+      (isOpen && this.state.mounted && !prevState.mounted)
+    ) {
       if (isOpen) {
         this.didOpen();
       } else {
@@ -121,7 +130,7 @@ class Modal extends React.Component {
   triggerClose(source) {
     if (this.props.onClose && source) {
       this.props.onClose({
-        closeSource: source
+        closeSource: source,
       });
     }
   }
@@ -134,7 +143,7 @@ class Modal extends React.Component {
       $size: size,
       $role: role,
       $closeable: !!closeable,
-      $isFocusVisible: this.state.isFocusVisible
+      $isFocusVisible: this.state.isFocusVisible,
     };
   }
   getMountNode() {
@@ -155,26 +164,73 @@ class Modal extends React.Component {
       role,
       autoFocus,
       focusLock,
-      returnFocus
+      returnFocus,
     } = this.props;
     const {
       Root: RootOverride,
       Dialog: DialogOverride,
       DialogContainer: DialogContainerOverride,
-      Close: CloseOverride
+      Close: CloseOverride,
     } = overrides;
     const [Root, rootProps] = getOverrides(RootOverride, StyledRoot);
-    const [DialogContainer, dialogContainerProps] = getOverrides(DialogContainerOverride, StyledDialogContainer);
+    const [DialogContainer, dialogContainerProps] = getOverrides(
+      DialogContainerOverride,
+      StyledDialogContainer
+    );
     const [Dialog, dialogProps] = getOverrides(DialogOverride, StyledDialog);
     const [Close, closeProps] = getOverrides(CloseOverride, StyledClose);
     const sharedProps = this.getSharedProps();
     const children = this.getChildren();
-    return <LocaleContext.Consumer>{(locale) => {
-      return <FocusLock disabled={!focusLock} crossFrame={false} returnFocus={returnFocus} autoFocus={autoFocus}><Root data-baseweb="modal" ref={this.rootRef} {...sharedProps} {...rootProps}><DialogContainer ref={this.dialogContainerRef} {...sharedProps} {...dialogContainerProps}><Dialog tabIndex={-1} aria-modal aria-label="dialog" role={role} {...sharedProps} {...dialogProps}>
-        {children}
-        {closeable ? <Close aria-label={locale.modal.close} onClick={this.onCloseClick} {...sharedProps} {...closeProps} onFocus={forkFocus(closeProps, this.handleFocus)} onBlur={forkBlur(closeProps, this.handleBlur)}><CloseIcon /></Close> : null}
-      </Dialog></DialogContainer></Root></FocusLock>;
-    }}</LocaleContext.Consumer>;
+    return (
+      <LocaleContext.Consumer>
+        {(locale) => {
+          return (
+            <FocusLock
+              disabled={!focusLock}
+              crossFrame={false}
+              returnFocus={returnFocus}
+              autoFocus={autoFocus}
+            >
+              <Root
+                data-baseweb="modal"
+                ref={this.rootRef}
+                {...sharedProps}
+                {...rootProps}
+              >
+                <DialogContainer
+                  ref={this.dialogContainerRef}
+                  {...sharedProps}
+                  {...dialogContainerProps}
+                >
+                  <Dialog
+                    tabIndex={-1}
+                    aria-modal
+                    aria-label="dialog"
+                    role={role}
+                    {...sharedProps}
+                    {...dialogProps}
+                  >
+                    {children}
+                    {closeable ? (
+                      <Close
+                        aria-label={locale.modal.close}
+                        onClick={this.onCloseClick}
+                        {...sharedProps}
+                        {...closeProps}
+                        onFocus={forkFocus(closeProps, this.handleFocus)}
+                        onBlur={forkBlur(closeProps, this.handleBlur)}
+                      >
+                        <CloseIcon />
+                      </Close>
+                    ) : null}
+                  </Dialog>
+                </DialogContainer>
+              </Root>
+            </FocusLock>
+          );
+        }}
+      </LocaleContext.Consumer>
+    );
   }
   render() {
     if (!this.state.mounted) {
@@ -183,7 +239,15 @@ class Modal extends React.Component {
     if (!this.props.isOpen && !this.state.isVisible) {
       return null;
     }
-    return <Layer onEscape={this.onEscape} onDocumentClick={this.onDocumentClick} mountNode={this.props.mountNode}>{this.renderModal()}</Layer>;
+    return (
+      <Layer
+        onEscape={this.onEscape}
+        onDocumentClick={this.onDocumentClick}
+        mountNode={this.props.mountNode}
+      >
+        {this.renderModal()}
+      </Layer>
+    );
   }
 }
 Modal.defaultProps = {
@@ -196,6 +260,6 @@ Modal.defaultProps = {
   isOpen: false,
   overrides: {},
   role: ROLE.dialog,
-  size: SIZE.default
+  size: SIZE.default,
 };
 export default Modal;

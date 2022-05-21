@@ -12,9 +12,9 @@ export const StyledFlag = styled(Flag, ({ $size = SIZE.default, $theme: { sizing
     [SIZE.mini]: sizing.scale700,
     [SIZE.compact]: sizing.scale800,
     [SIZE.default]: sizing.scale900,
-    [SIZE.large]: sizing.scale1000
+    [SIZE.large]: sizing.scale1000,
   };
   return {
-    width: sizeToWidth[$size]
+    width: sizeToWidth[$size],
   };
 });

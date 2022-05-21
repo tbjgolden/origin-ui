@@ -43,7 +43,7 @@ class TabComponent extends React.Component {
     return {
       $disabled: disabled,
       $active: active,
-      $orientation
+      $orientation,
     };
   }
   render() {
@@ -51,18 +51,32 @@ class TabComponent extends React.Component {
     const sharedProps = this.getSharedProps();
     const { Tab: TabOverride } = overrides;
     const [Tab, tabProps] = getOverrides(TabOverride, StyledTab);
-    return <Tab $isFocusVisible={this.state.isFocusVisible} tabIndex={disabled ? -1 : 0} role="tab" id={id} aria-selected={active} aria-disabled={disabled || null} {...sharedProps} {...tabProps} onFocus={forkFocus(tabProps, this.handleFocus)} onBlur={forkBlur(tabProps, this.handleBlur)} onClick={this.onClick} onKeyDown={this.onKeyDown}>{children}</Tab>;
+    return (
+      <Tab
+        $isFocusVisible={this.state.isFocusVisible}
+        tabIndex={disabled ? -1 : 0}
+        role="tab"
+        id={id}
+        aria-selected={active}
+        aria-disabled={disabled || null}
+        {...sharedProps}
+        {...tabProps}
+        onFocus={forkFocus(tabProps, this.handleFocus)}
+        onBlur={forkBlur(tabProps, this.handleBlur)}
+        onClick={this.onClick}
+        onKeyDown={this.onKeyDown}
+      >
+        {children}
+      </Tab>
+    );
   }
 }
 TabComponent.defaultProps = {
   disabled: false,
   expanded: false,
-  onSelect: () => {
-  },
-  onClick: () => {
-  },
-  onKeyDown: () => {
-  },
-  title: ""
+  onSelect: () => {},
+  onClick: () => {},
+  onKeyDown: () => {},
+  title: "",
 };
 export default TabComponent;

@@ -5,29 +5,29 @@ export const StyledInputWrapper = styled("div", (props) => {
   const { $separateRangeInputs } = props;
   return {
     width: "100%",
-    ...$separateRangeInputs ? { display: "flex", justifyContent: "center" } : {}
+    ...($separateRangeInputs ? { display: "flex", justifyContent: "center" } : {}),
   };
 });
 export const StyledInputLabel = styled("div", ({ $theme }) => {
   return {
     ...$theme.typography.LabelMedium,
-    marginBottom: $theme.sizing.scale300
+    marginBottom: $theme.sizing.scale300,
   };
 });
 export const StyledStartDate = styled("div", ({ $theme }) => {
   return {
     width: "100%",
-    marginRight: $theme.sizing.scale300
+    marginRight: $theme.sizing.scale300,
   };
 });
 export const StyledEndDate = styled("div", ({ $theme }) => {
   return {
-    width: "100%"
+    width: "100%",
   };
 });
 export const StyledRoot = styled("div", (props) => {
   const {
-    $theme: { typography, colors, borders }
+    $theme: { typography, colors, borders },
   } = props;
   return {
     ...typography.font200,
@@ -38,26 +38,26 @@ export const StyledRoot = styled("div", (props) => {
     borderTopRightRadius: borders.surfaceBorderRadius,
     borderBottomRightRadius: borders.surfaceBorderRadius,
     borderBottomLeftRadius: borders.surfaceBorderRadius,
-    display: "inline-block"
+    display: "inline-block",
   };
 });
 export const StyledMonthContainer = styled("div", (props) => {
   const { $orientation } = props;
   return {
     display: "flex",
-    flexDirection: $orientation === ORIENTATION.vertical ? "column" : "row"
+    flexDirection: $orientation === ORIENTATION.vertical ? "column" : "row",
   };
 });
 export const StyledCalendarContainer = styled("div", (props) => {
   const {
     $theme: { sizing },
-    $density
+    $density,
   } = props;
   return {
     paddingTop: sizing.scale300,
     paddingBottom: $density === DENSITY.high ? sizing.scale400 : sizing.scale300,
     paddingLeft: sizing.scale500,
-    paddingRight: sizing.scale500
+    paddingRight: sizing.scale500,
   };
 });
 export const StyledSelectorContainer = styled("div", ({ $theme }) => {
@@ -66,16 +66,16 @@ export const StyledSelectorContainer = styled("div", ({ $theme }) => {
     marginBottom: $theme.sizing.scale600,
     paddingLeft: $theme.sizing.scale600,
     paddingRight: $theme.sizing.scale600,
-    textAlign
+    textAlign,
   };
 });
 export const StyledCalendarHeader = styled("div", (props) => {
   const {
     $theme: { typography, borders, colors, sizing },
-    $density
+    $density,
   } = props;
   return {
-    ...$density === DENSITY.high ? typography.LabelMedium : typography.LabelLarge,
+    ...($density === DENSITY.high ? typography.LabelMedium : typography.LabelLarge),
     color: colors.calendarHeaderForeground,
     display: "flex",
     justifyContent: "space-between",
@@ -89,24 +89,27 @@ export const StyledCalendarHeader = styled("div", (props) => {
     borderTopRightRadius: borders.surfaceBorderRadius,
     borderBottomRightRadius: 0,
     borderBottomLeftRadius: 0,
-    minHeight: $density === DENSITY.high ? `calc(${sizing.scale800} + ${sizing.scale0})` : sizing.scale950
+    minHeight:
+      $density === DENSITY.high
+        ? `calc(${sizing.scale800} + ${sizing.scale0})`
+        : sizing.scale950,
   };
 });
 export const StyledMonthHeader = styled("div", (props) => {
   return {
     color: props.$theme.colors.calendarHeaderForeground,
     backgroundColor: props.$theme.colors.calendarHeaderBackground,
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 });
 export const StyledMonthYearSelectButton = styled("button", (props) => {
   const {
     $theme: { typography, colors },
     $isFocusVisible,
-    $density
+    $density,
   } = props;
   return {
-    ...$density === DENSITY.high ? typography.LabelMedium : typography.LabelLarge,
+    ...($density === DENSITY.high ? typography.LabelMedium : typography.LabelLarge),
     alignItems: "center",
     backgroundColor: "transparent",
     borderLeftWidth: 0,
@@ -118,8 +121,8 @@ export const StyledMonthYearSelectButton = styled("button", (props) => {
     display: "flex",
     outline: "none",
     ":focus": {
-      boxShadow: $isFocusVisible ? `0 0 0 3px ${colors.accent}` : "none"
-    }
+      boxShadow: $isFocusVisible ? `0 0 0 3px ${colors.accent}` : "none",
+    },
   };
 });
 export const StyledMonthYearSelectIconContainer = styled("span", (props) => {
@@ -127,14 +130,16 @@ export const StyledMonthYearSelectIconContainer = styled("span", (props) => {
   return {
     alignItems: "center",
     display: "flex",
-    [marginDirection]: props.$theme.sizing.scale500
+    [marginDirection]: props.$theme.sizing.scale500,
   };
 });
 function getArrowBtnStyle({ $theme, $disabled, $isFocusVisible }) {
   return {
     boxSizing: "border-box",
     display: "flex",
-    color: $disabled ? $theme.colors.calendarHeaderForegroundDisabled : $theme.colors.calendarHeaderForeground,
+    color: $disabled
+      ? $theme.colors.calendarHeaderForegroundDisabled
+      : $theme.colors.calendarHeaderForeground,
     cursor: $disabled ? "default" : "pointer",
     backgroundColor: "transparent",
     borderLeftWidth: 0,
@@ -148,26 +153,28 @@ function getArrowBtnStyle({ $theme, $disabled, $isFocusVisible }) {
     marginBottom: 0,
     marginTop: 0,
     outline: "none",
-    ":focus": $disabled ? {} : {
-      boxShadow: $isFocusVisible ? `0 0 0 3px ${$theme.colors.accent}` : "none"
-    }
+    ":focus": $disabled
+      ? {}
+      : {
+          boxShadow: $isFocusVisible ? `0 0 0 3px ${$theme.colors.accent}` : "none",
+        },
   };
 }
 export const StyledPrevButton = styled("button", getArrowBtnStyle);
 export const StyledNextButton = styled("button", getArrowBtnStyle);
 export const StyledMonth = styled("div", (props) => {
   return {
-    display: "inline-block"
+    display: "inline-block",
   };
 });
 export const StyledWeek = styled("div", (props) => {
   const {
-    $theme: { sizing }
+    $theme: { sizing },
   } = props;
   return {
     whiteSpace: "nowrap",
     display: "flex",
-    marginBottom: sizing.scale0
+    marginBottom: sizing.scale0,
   };
 });
 function generateDayStyles(defaultCode, defaultStyle) {
@@ -176,19 +183,19 @@ function generateDayStyles(defaultCode, defaultStyle) {
   return {
     [defaultCode]: defaultStyle,
     [codeForSM]: defaultStyle,
-    [codeForEM]: defaultStyle
+    [codeForEM]: defaultStyle,
   };
 }
 function getDayStyles(code, { colors }) {
   const undefinedDayStyle = {
     ":before": { content: null },
-    ":after": { content: null }
+    ":after": { content: null },
   };
   let defaultDayStyle = undefinedDayStyle;
   const disabledDateStyle = {
     color: colors.calendarForegroundDisabled,
     ":before": { content: null },
-    ":after": { content: null }
+    ":after": { content: null },
   };
   const outsideMonthDateStyle = {
     color: colors.calendarForegroundDisabled,
@@ -197,7 +204,7 @@ function getDayStyles(code, { colors }) {
       borderBottomStyle: "none",
       borderLeftStyle: "none",
       borderRightStyle: "none",
-      backgroundColor: "transparent"
+      backgroundColor: "transparent",
     },
     ":after": {
       borderTopLeftRadius: "0%",
@@ -207,88 +214,120 @@ function getDayStyles(code, { colors }) {
       borderTopColor: "transparent",
       borderBottomColor: "transparent",
       borderRightColor: "transparent",
-      borderLeftColor: "transparent"
-    }
+      borderLeftColor: "transparent",
+    },
   };
   const highlightedStyle = {
-    ":before": { content: null }
+    ":before": { content: null },
   };
   const CODE_DISABLED_INDEX = 1;
   if (code && code[CODE_DISABLED_INDEX] === "1") {
     defaultDayStyle = disabledDateStyle;
   }
-  const dayStateStyle = Object.assign({}, generateDayStyles("001000000000000", {
-    color: colors.calendarDayForegroundPseudoSelected
-  }), generateDayStyles("000100000000000", {
-    color: colors.calendarDayForegroundSelected
-  }), generateDayStyles("001100000000000", {
-    color: colors.calendarDayForegroundSelectedHighlighted
-  }), {
-    "010000000000000": {
-      color: colors.calendarForegroundDisabled,
-      ":after": { content: null }
-    }
-  }, {
-    "011000000000000": {
-      color: colors.calendarForegroundDisabled,
-      ":after": { content: null }
-    }
-  }, generateDayStyles("000000000000001", outsideMonthDateStyle), generateDayStyles("101000000000000", highlightedStyle), generateDayStyles("101010000000000", highlightedStyle), generateDayStyles("100100000000000", {
-    color: colors.calendarDayForegroundSelected
-  }), generateDayStyles("101100000000000", {
-    color: colors.calendarDayForegroundSelectedHighlighted,
-    ":before": { content: null }
-  }), generateDayStyles("100111100000000", {
-    color: colors.calendarDayForegroundSelected,
-    ":before": { content: null }
-  }), generateDayStyles("101111100000000", {
-    color: colors.calendarDayForegroundSelectedHighlighted,
-    ":before": { content: null }
-  }), generateDayStyles("100111000000000", {
-    color: colors.calendarDayForegroundSelected
-  }), generateDayStyles("100110100000000", {
-    color: colors.calendarDayForegroundSelected,
-    ":before": { left: null, right: "50%" }
-  }), generateDayStyles("100100001010000", {
-    color: colors.calendarDayForegroundSelected
-  }), generateDayStyles("100100001001000", {
-    color: colors.calendarDayForegroundSelected,
-    ":before": { left: null, right: "50%" }
-  }), generateDayStyles("101000001010000", {
-    ":before": { left: null, right: "50%" }
-  }), { "101000001001000": {} }, { "101000001001100": {} }, { "101000001001010": {} }, generateDayStyles("100010010000000", {
-    color: colors.calendarDayForegroundPseudoSelected,
-    ":before": { left: "0", width: "100%" },
-    ":after": { content: null }
-  }), {
-    "101000001100000": {
+  const dayStateStyle = Object.assign(
+    {},
+    generateDayStyles("001000000000000", {
+      color: colors.calendarDayForegroundPseudoSelected,
+    }),
+    generateDayStyles("000100000000000", {
+      color: colors.calendarDayForegroundSelected,
+    }),
+    generateDayStyles("001100000000000", {
+      color: colors.calendarDayForegroundSelectedHighlighted,
+    }),
+    {
+      "010000000000000": {
+        color: colors.calendarForegroundDisabled,
+        ":after": { content: null },
+      },
+    },
+    {
+      "011000000000000": {
+        color: colors.calendarForegroundDisabled,
+        ":after": { content: null },
+      },
+    },
+    generateDayStyles("000000000000001", outsideMonthDateStyle),
+    generateDayStyles("101000000000000", highlightedStyle),
+    generateDayStyles("101010000000000", highlightedStyle),
+    generateDayStyles("100100000000000", {
+      color: colors.calendarDayForegroundSelected,
+    }),
+    generateDayStyles("101100000000000", {
+      color: colors.calendarDayForegroundSelectedHighlighted,
+      ":before": { content: null },
+    }),
+    generateDayStyles("100111100000000", {
+      color: colors.calendarDayForegroundSelected,
+      ":before": { content: null },
+    }),
+    generateDayStyles("101111100000000", {
+      color: colors.calendarDayForegroundSelectedHighlighted,
+      ":before": { content: null },
+    }),
+    generateDayStyles("100111000000000", {
+      color: colors.calendarDayForegroundSelected,
+    }),
+    generateDayStyles("100110100000000", {
+      color: colors.calendarDayForegroundSelected,
+      ":before": { left: null, right: "50%" },
+    }),
+    generateDayStyles("100100001010000", {
+      color: colors.calendarDayForegroundSelected,
+    }),
+    generateDayStyles("100100001001000", {
+      color: colors.calendarDayForegroundSelected,
+      ":before": { left: null, right: "50%" },
+    }),
+    generateDayStyles("101000001010000", {
+      ":before": { left: null, right: "50%" },
+    }),
+    { "101000001001000": {} },
+    { "101000001001100": {} },
+    { "101000001001010": {} },
+    generateDayStyles("100010010000000", {
+      color: colors.calendarDayForegroundPseudoSelected,
+      ":before": { left: "0", width: "100%" },
+      ":after": { content: null },
+    }),
+    {
+      "101000001100000": {
+        color: colors.calendarDayForegroundPseudoSelected,
+        ":before": {
+          left: "0",
+          width: "100%",
+        },
+        ":after": {
+          content: null,
+        },
+      },
+    },
+    generateDayStyles("100000001100000", {
       color: colors.calendarDayForegroundPseudoSelected,
       ":before": {
         left: "0",
-        width: "100%"
+        width: "100%",
       },
       ":after": {
-        content: null
-      }
-    }
-  }, generateDayStyles("100000001100000", {
-    color: colors.calendarDayForegroundPseudoSelected,
-    ":before": {
-      left: "0",
-      width: "100%"
-    },
-    ":after": {
-      content: null
-    }
-  }), generateDayStyles("101111000000000", {
-    color: colors.calendarDayForegroundSelectedHighlighted
-  }), generateDayStyles("101110100000000", {
-    color: colors.calendarDayForegroundSelectedHighlighted,
-    ":before": { left: null, right: "50%" }
-  }), generateDayStyles("101010010000000", {
-    color: colors.calendarDayForegroundPseudoSelectedHighlighted,
-    ":before": { left: "0", width: "100%" }
-  }), generateDayStyles("100000000000001", outsideMonthDateStyle), generateDayStyles("100000001010001", outsideMonthDateStyle), generateDayStyles("100000001001001", outsideMonthDateStyle), generateDayStyles("100010000000001", outsideMonthDateStyle));
+        content: null,
+      },
+    }),
+    generateDayStyles("101111000000000", {
+      color: colors.calendarDayForegroundSelectedHighlighted,
+    }),
+    generateDayStyles("101110100000000", {
+      color: colors.calendarDayForegroundSelectedHighlighted,
+      ":before": { left: null, right: "50%" },
+    }),
+    generateDayStyles("101010010000000", {
+      color: colors.calendarDayForegroundPseudoSelectedHighlighted,
+      ":before": { left: "0", width: "100%" },
+    }),
+    generateDayStyles("100000000000001", outsideMonthDateStyle),
+    generateDayStyles("100000001010001", outsideMonthDateStyle),
+    generateDayStyles("100000001001001", outsideMonthDateStyle),
+    generateDayStyles("100010000000001", outsideMonthDateStyle)
+  );
   return dayStateStyle[code] || defaultDayStyle;
 }
 export const StyledDay = styled("div", (props) => {
@@ -307,7 +346,7 @@ export const StyledDay = styled("div", (props) => {
     $hasLockedBehavior,
     $selectedInput,
     $value,
-    $theme: { colors, typography, sizing }
+    $theme: { colors, typography, sizing },
   } = props;
   const code = getDayStateCode(props);
   let height;
@@ -317,13 +356,19 @@ export const StyledDay = styled("div", (props) => {
     height = $density === DENSITY.high ? "40px" : "48px";
   }
   const [startDate, endDate] = Array.isArray($value) ? $value : [$value, null];
-  const oppositeInputIsPopulated = $selectedInput === INPUT_ROLE.startDate ? endDate !== null && typeof endDate !== "undefined" : startDate !== null && typeof startDate !== "undefined";
-  const shouldHighlightRange = $range && !($hasLockedBehavior && !oppositeInputIsPopulated);
+  const oppositeInputIsPopulated =
+    $selectedInput === INPUT_ROLE.startDate
+      ? endDate !== null && typeof endDate !== "undefined"
+      : startDate !== null && typeof startDate !== "undefined";
+  const shouldHighlightRange =
+    $range && !($hasLockedBehavior && !oppositeInputIsPopulated);
   return {
-    ...$density === DENSITY.high ? typography.ParagraphSmall : typography.ParagraphMedium,
+    ...($density === DENSITY.high
+      ? typography.ParagraphSmall
+      : typography.ParagraphMedium),
     boxSizing: "border-box",
     position: "relative",
-    cursor: $disabled || !$peekNextMonth && $outsideMonth ? "default" : "pointer",
+    cursor: $disabled || (!$peekNextMonth && $outsideMonth) ? "default" : "pointer",
     color: colors.calendarForeground,
     display: "inline-block",
     width: $density === DENSITY.high ? "42px" : "50px",
@@ -347,8 +392,15 @@ export const StyledDay = styled("div", (props) => {
       content: '""',
       boxSizing: "border-box",
       display: "inline-block",
-      boxShadow: $isFocusVisible && (!$outsideMonth || $peekNextMonth) ? `0 0 0 3px ${colors.accent}` : "none",
-      backgroundColor: $selected ? colors.calendarDayBackgroundSelectedHighlighted : $pseudoSelected && $isHighlighted ? colors.calendarDayBackgroundPseudoSelectedHighlighted : colors.calendarBackground,
+      boxShadow:
+        $isFocusVisible && (!$outsideMonth || $peekNextMonth)
+          ? `0 0 0 3px ${colors.accent}`
+          : "none",
+      backgroundColor: $selected
+        ? colors.calendarDayBackgroundSelectedHighlighted
+        : $pseudoSelected && $isHighlighted
+        ? colors.calendarDayBackgroundPseudoSelectedHighlighted
+        : colors.calendarBackground,
       height: $hasDateLabel ? "100%" : $density === DENSITY.high ? "42px" : "50px",
       width: "100%",
       position: "absolute",
@@ -373,57 +425,61 @@ export const StyledDay = styled("div", (props) => {
       borderBottomLeftRadius: $hasDateLabel ? sizing.scale800 : "100%",
       borderBottomRightRadius: $hasDateLabel ? sizing.scale800 : "100%",
       ...getDayStyles(code, props.$theme)[":after"],
-      ...$outsideMonthWithinRange ? { content: null } : {}
+      ...($outsideMonthWithinRange ? { content: null } : {}),
     },
-    ...shouldHighlightRange ? {
-      ":before": {
-        zIndex: -1,
-        content: '""',
-        boxSizing: "border-box",
-        display: "inline-block",
-        backgroundColor: colors.mono300,
-        position: "absolute",
-        height: "100%",
-        width: "50%",
-        top: 0,
-        left: "50%",
-        borderTopWidth: "2px",
-        borderBottomWidth: "2px",
-        borderLeftWidth: "0",
-        borderRightWidth: "0",
-        borderTopStyle: "solid",
-        borderBottomStyle: "solid",
-        borderLeftStyle: "solid",
-        borderRightStyle: "solid",
-        borderTopColor: "transparent",
-        borderBottomColor: "transparent",
-        borderLeftColor: "transparent",
-        borderRightColor: "transparent",
-        ...getDayStyles(code, props.$theme)[":before"],
-        ...$outsideMonthWithinRange ? {
-          backgroundColor: colors.mono300,
-          left: "0",
-          width: "100%",
-          content: '""'
-        } : {}
-      }
-    } : {}
+    ...(shouldHighlightRange
+      ? {
+          ":before": {
+            zIndex: -1,
+            content: '""',
+            boxSizing: "border-box",
+            display: "inline-block",
+            backgroundColor: colors.mono300,
+            position: "absolute",
+            height: "100%",
+            width: "50%",
+            top: 0,
+            left: "50%",
+            borderTopWidth: "2px",
+            borderBottomWidth: "2px",
+            borderLeftWidth: "0",
+            borderRightWidth: "0",
+            borderTopStyle: "solid",
+            borderBottomStyle: "solid",
+            borderLeftStyle: "solid",
+            borderRightStyle: "solid",
+            borderTopColor: "transparent",
+            borderBottomColor: "transparent",
+            borderLeftColor: "transparent",
+            borderRightColor: "transparent",
+            ...getDayStyles(code, props.$theme)[":before"],
+            ...($outsideMonthWithinRange
+              ? {
+                  backgroundColor: colors.mono300,
+                  left: "0",
+                  width: "100%",
+                  content: '""',
+                }
+              : {}),
+          },
+        }
+      : {}),
   };
 });
 export const StyledDayLabel = styled("div", (props) => {
   const {
     $theme: { typography, colors },
-    $selected
+    $selected,
   } = props;
   return {
     ...typography.ParagraphXSmall,
-    color: $selected ? colors.contentInverseTertiary : colors.contentTertiary
+    color: $selected ? colors.contentInverseTertiary : colors.contentTertiary,
   };
 });
 export const StyledWeekdayHeader = styled("div", (props) => {
   const {
     $theme: { typography, colors, sizing },
-    $density
+    $density,
   } = props;
   return {
     ...typography.LabelMedium,
@@ -444,6 +500,6 @@ export const StyledWeekdayHeader = styled("div", (props) => {
     marginBottom: 0,
     marginLeft: 0,
     marginRight: 0,
-    backgroundColor: "transparent"
+    backgroundColor: "transparent",
   };
 });

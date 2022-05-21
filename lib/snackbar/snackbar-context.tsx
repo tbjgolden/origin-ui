@@ -12,7 +12,7 @@ function fallbackHandler() {
 }
 export const SnackbarContext = React.createContext({
   enqueue: fallbackHandler,
-  dequeue: fallbackHandler
+  dequeue: fallbackHandler,
 });
 export function useSnackbar() {
   const context = React.useContext(SnackbarContext);
@@ -29,7 +29,7 @@ export default function SnackbarProvider({
   children,
   overrides = {},
   placement,
-  defaultDuration = DURATION.short
+  defaultDuration = DURATION.short,
 }) {
   const [css] = useStyletron();
   const [snackbars, setSnackbars] = React.useState([]);
@@ -105,34 +105,78 @@ export default function SnackbarProvider({
   }, [snackbars.length, animating]);
   const translateHeight = React.useMemo(() => {
     const value = containerHeight * 2 + 24;
-    if (!placement || placement === PLACEMENT.top || placement === PLACEMENT.topLeft || placement === PLACEMENT.topRight) {
+    if (
+      !placement ||
+      placement === PLACEMENT.top ||
+      placement === PLACEMENT.topLeft ||
+      placement === PLACEMENT.topRight
+    ) {
       return -1 * value;
     }
     return value;
   }, [placement, containerHeight]);
-  const { PlacementContainer: PlacementContainerOverrides, ...snackbarOverrides } = overrides;
-  const [PlacementContainer, placementContainerProps] = getOverrides(PlacementContainerOverrides, StyledPlacementContainer);
-  return <SnackbarContext.Provider value={{ enqueue, dequeue: exit }}>
-    <div className={css({
-      boxSizing: "border-box",
-      position: "absolute",
-      top: "-10000px",
-      left: "-10000px"
-    })} ref={containerRef}>{snackbars[0] && <SnackbarElement {...snackbars[0].elementProps} overrides={{
-      ...snackbarOverrides,
-      ...snackbars[0].elementProps.overrides
-    }} focus={false} />}</div>
-    {snackbars.length > 0 && containerHeight !== 0 && <Layer><PlacementContainer $animating={animating} $placement={placement} $translateHeight={translateHeight} {...placementContainerProps}><div role="alert" onMouseEnter={handleMouseEnter} onMouseLeave={() => {
-      return handleMouseLeave(snackbars[0].duration);
-    }} className={css({ display: "inline", pointerEvents: "all" })}><SnackbarElement {...snackbars[0].elementProps} actionOnClick={(event) => {
-      if (snackbars[0].elementProps.actionOnClick) {
-        snackbars[0].elementProps.actionOnClick(event);
-      }
-      handleActionClick();
-    }} overrides={{
-      ...snackbarOverrides,
-      ...snackbars[0].elementProps.overrides
-    }} /></div></PlacementContainer></Layer>}
-    {children}
-  </SnackbarContext.Provider>;
+  const { PlacementContainer: PlacementContainerOverrides, ...snackbarOverrides } =
+    overrides;
+  const [PlacementContainer, placementContainerProps] = getOverrides(
+    PlacementContainerOverrides,
+    StyledPlacementContainer
+  );
+  return (
+    <SnackbarContext.Provider value={{ enqueue, dequeue: exit }}>
+      <div
+        className={css({
+          boxSizing: "border-box",
+          position: "absolute",
+          top: "-10000px",
+          left: "-10000px",
+        })}
+        ref={containerRef}
+      >
+        {snackbars[0] && (
+          <SnackbarElement
+            {...snackbars[0].elementProps}
+            overrides={{
+              ...snackbarOverrides,
+              ...snackbars[0].elementProps.overrides,
+            }}
+            focus={false}
+          />
+        )}
+      </div>
+      {snackbars.length > 0 && containerHeight !== 0 && (
+        <Layer>
+          <PlacementContainer
+            $animating={animating}
+            $placement={placement}
+            $translateHeight={translateHeight}
+            {...placementContainerProps}
+          >
+            <div
+              role="alert"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={() => {
+                return handleMouseLeave(snackbars[0].duration);
+              }}
+              className={css({ display: "inline", pointerEvents: "all" })}
+            >
+              <SnackbarElement
+                {...snackbars[0].elementProps}
+                actionOnClick={(event) => {
+                  if (snackbars[0].elementProps.actionOnClick) {
+                    snackbars[0].elementProps.actionOnClick(event);
+                  }
+                  handleActionClick();
+                }}
+                overrides={{
+                  ...snackbarOverrides,
+                  ...snackbars[0].elementProps.overrides,
+                }}
+              />
+            </div>
+          </PlacementContainer>
+        </Layer>
+      )}
+      {children}
+    </SnackbarContext.Provider>
+  );
 }

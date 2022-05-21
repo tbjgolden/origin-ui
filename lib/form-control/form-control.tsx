@@ -6,7 +6,7 @@ import {
   LabelEndEnhancer as StyledLabelEndEnhancer,
   LabelContainer as StyledLabelContainer,
   Caption as StyledCaption,
-  ControlContainer as StyledControlContainer
+  ControlContainer as StyledControlContainer,
 } from "./styled-components";
 function chooseRenderedHint(caption, error, positive, sharedProps) {
   if (!!error && typeof error !== "boolean") {
@@ -28,7 +28,7 @@ export default class FormControl extends React.Component {
         LabelEndEnhancer: LabelEndEnhancerOverride,
         LabelContainer: LabelContainerOverride,
         Caption: CaptionOverride,
-        ControlContainer: ControlContainerOverride
+        ControlContainer: ControlContainerOverride,
       },
       label,
       caption,
@@ -37,22 +37,26 @@ export default class FormControl extends React.Component {
       positive,
       htmlFor,
       children,
-      counter
+      counter,
     } = this.props;
     const onlyChildProps = React.Children.only(children).props;
     const sharedProps = {
       $disabled: !!disabled,
       $error: !!error,
-      $positive: !!positive
+      $positive: !!positive,
     };
     const Label = getOverride(LabelOverride) || StyledLabel;
-    const LabelEndEnhancer = getOverride(LabelEndEnhancerOverride) || StyledLabelEndEnhancer;
+    const LabelEndEnhancer =
+      getOverride(LabelEndEnhancerOverride) || StyledLabelEndEnhancer;
     const LabelContainer = getOverride(LabelContainerOverride) || StyledLabelContainer;
     const Caption = getOverride(CaptionOverride) || StyledCaption;
-    const ControlContainer = getOverride(ControlContainerOverride) || StyledControlContainer;
+    const ControlContainer =
+      getOverride(ControlContainerOverride) || StyledControlContainer;
     const hint = chooseRenderedHint(caption, error, positive, sharedProps);
     if (__DEV__ && error && positive) {
-      console.warn(`[FormControl] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`);
+      console.warn(
+        `[FormControl] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
+      );
     }
     let labelEndEnhancer = this.props.labelEndEnhancer;
     if (counter) {
@@ -71,49 +75,90 @@ export default class FormControl extends React.Component {
       if (length == null) {
         length = 0;
         if (__DEV__) {
-          console.warn(`[FromControl] \`length\` must either be explicitly set via \`counter\` object property, or \`value\` string property on the child component.`);
+          console.warn(
+            `[FromControl] \`length\` must either be explicitly set via \`counter\` object property, or \`value\` string property on the child component.`
+          );
         }
       }
       sharedProps.$length = length;
       if (maxLength == null) {
-        if (!labelEndEnhancer)
-          labelEndEnhancer = `${length}`;
+        if (!labelEndEnhancer) labelEndEnhancer = `${length}`;
       } else {
         sharedProps.$maxLength = length;
-        if (!labelEndEnhancer)
-          labelEndEnhancer = `${length}/${maxLength}`;
-        if (length > maxLength && counterError == null)
-          counterError = true;
+        if (!labelEndEnhancer) labelEndEnhancer = `${length}/${maxLength}`;
+        if (length > maxLength && counterError == null) counterError = true;
       }
       if (counterError) {
         sharedProps.$error = true;
         sharedProps.$counterError = true;
       }
     }
-    return <React.Fragment>
-      {label && <LabelContainer {...sharedProps} {...getOverrideProps(LabelContainerOverride)}>
-        <Label data-baseweb="form-control-label" htmlFor={htmlFor || onlyChildProps.id} {...sharedProps} {...getOverrideProps(LabelOverride)}>{typeof label === "function" ? label(sharedProps) : label}</Label>
-        {!!labelEndEnhancer && <LabelEndEnhancer {...sharedProps} {...getOverrideProps(LabelEndEnhancerOverride)}>{typeof labelEndEnhancer === "function" ? labelEndEnhancer(sharedProps) : labelEndEnhancer}</LabelEndEnhancer>}
-      </LabelContainer>}
-      <UIDConsumer>{(captionId) => {
-        return <ControlContainer data-baseweb="form-control-container" {...sharedProps} {...getOverrideProps(ControlContainerOverride)}>
-          {React.Children.map(children, (child, index) => {
-            if (!child)
-              return;
-            const key = child.key || String(index);
-            return React.cloneElement(child, {
-              key,
-              "aria-errormessage": error ? captionId : null,
-              "aria-describedby": caption || positive ? captionId : null,
-              disabled: onlyChildProps.disabled || disabled,
-              error: typeof onlyChildProps.error !== "undefined" ? onlyChildProps.error : sharedProps.$error,
-              positive: typeof onlyChildProps.positive !== "undefined" ? onlyChildProps.positive : sharedProps.$positive
-            });
-          })}
-          {(!!caption || !!error || positive) && <Caption data-baseweb="form-control-caption" id={captionId} {...sharedProps} {...getOverrideProps(CaptionOverride)}>{hint}</Caption>}
-        </ControlContainer>;
-      }}</UIDConsumer>
-    </React.Fragment>;
+    return (
+      <React.Fragment>
+        {label && (
+          <LabelContainer {...sharedProps} {...getOverrideProps(LabelContainerOverride)}>
+            <Label
+              data-baseweb="form-control-label"
+              htmlFor={htmlFor || onlyChildProps.id}
+              {...sharedProps}
+              {...getOverrideProps(LabelOverride)}
+            >
+              {typeof label === "function" ? label(sharedProps) : label}
+            </Label>
+            {!!labelEndEnhancer && (
+              <LabelEndEnhancer
+                {...sharedProps}
+                {...getOverrideProps(LabelEndEnhancerOverride)}
+              >
+                {typeof labelEndEnhancer === "function"
+                  ? labelEndEnhancer(sharedProps)
+                  : labelEndEnhancer}
+              </LabelEndEnhancer>
+            )}
+          </LabelContainer>
+        )}
+        <UIDConsumer>
+          {(captionId) => {
+            return (
+              <ControlContainer
+                data-baseweb="form-control-container"
+                {...sharedProps}
+                {...getOverrideProps(ControlContainerOverride)}
+              >
+                {React.Children.map(children, (child, index) => {
+                  if (!child) return;
+                  const key = child.key || String(index);
+                  return React.cloneElement(child, {
+                    key,
+                    "aria-errormessage": error ? captionId : null,
+                    "aria-describedby": caption || positive ? captionId : null,
+                    disabled: onlyChildProps.disabled || disabled,
+                    error:
+                      typeof onlyChildProps.error !== "undefined"
+                        ? onlyChildProps.error
+                        : sharedProps.$error,
+                    positive:
+                      typeof onlyChildProps.positive !== "undefined"
+                        ? onlyChildProps.positive
+                        : sharedProps.$positive,
+                  });
+                })}
+                {(!!caption || !!error || positive) && (
+                  <Caption
+                    data-baseweb="form-control-caption"
+                    id={captionId}
+                    {...sharedProps}
+                    {...getOverrideProps(CaptionOverride)}
+                  >
+                    {hint}
+                  </Caption>
+                )}
+              </ControlContainer>
+            );
+          }}
+        </UIDConsumer>
+      </React.Fragment>
+    );
   }
 }
 FormControl.defaultProps = {
@@ -121,5 +166,5 @@ FormControl.defaultProps = {
   label: null,
   caption: null,
   disabled: false,
-  counter: false
+  counter: false,
 };

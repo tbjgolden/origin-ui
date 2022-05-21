@@ -3,9 +3,13 @@ import StatefulContainer from "./stateful-container";
 import Popover from "./popover";
 function StatefulPopover(props) {
   const { children, ...restProps } = props;
-  return <StatefulContainer {...restProps}>{(popoverProps) => {
-    return <Popover {...popoverProps}>{children}</Popover>;
-  }}</StatefulContainer>;
+  return (
+    <StatefulContainer {...restProps}>
+      {(popoverProps) => {
+        return <Popover {...popoverProps}>{children}</Popover>;
+      }}
+    </StatefulContainer>
+  );
 }
 StatefulPopover.defaultProps = {
   accessibilityType: ACCESSIBILITY_TYPE.menu,
@@ -21,6 +25,6 @@ StatefulPopover.defaultProps = {
   stateReducer: (_, nextState) => {
     return nextState;
   },
-  popoverMargin: POPOVER_MARGIN
+  popoverMargin: POPOVER_MARGIN,
 };
 export default StatefulPopover;

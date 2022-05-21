@@ -2,6 +2,6 @@ import colorTokens from "./color-tokens";
 import { defaultFontTokens } from "../shared/typography";
 const primitives = {
   ...colorTokens,
-  ...defaultFontTokens
+  ...defaultFontTokens,
 };
 export default primitives;

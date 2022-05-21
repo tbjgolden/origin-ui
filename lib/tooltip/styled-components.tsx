@@ -2,7 +2,7 @@ import { styled } from "../styles";
 import {
   getBodyStyles,
   getArrowStyles,
-  getInnerStyles
+  getInnerStyles,
 } from "../popover/styled-components";
 import { getEndPosition } from "../popover/utils";
 export const Body = styled("div", (props) => {
@@ -16,7 +16,7 @@ export const Body = styled("div", (props) => {
     boxShadow: props.$theme.lighting.shadow400,
     color: props.$theme.colors.tooltipText,
     transitionProperty: "opacity",
-    transform: getEndPosition(props.$popoverOffset)
+    transform: getEndPosition(props.$popoverOffset),
   };
 });
 export const Inner = styled("div", (props) => {
@@ -32,12 +32,12 @@ export const Inner = styled("div", (props) => {
     paddingLeft: props.$theme.sizing.scale600,
     paddingRight: props.$theme.sizing.scale600,
     ...props.$theme.typography.font150,
-    color: props.$theme.colors.tooltipText
+    color: props.$theme.colors.tooltipText,
   };
 });
 export const Arrow = styled("div", (props) => {
   return {
     ...getArrowStyles(props),
-    backgroundColor: props.$theme.colors.tooltipBackground
+    backgroundColor: props.$theme.colors.tooltipBackground,
   };
 });

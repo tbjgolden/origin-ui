@@ -8,19 +8,18 @@ class StatefulListContainer extends React.Component {
     super(...arguments);
     this.state = {
       items: [],
-      ...this.props.initialState
+      ...this.props.initialState,
     };
-    this.onChange = ({
-      oldIndex,
-      newIndex,
-      targetRect
-    }) => {
-      const newItemsState = newIndex === -1 ? arrayRemove(this.state.items, oldIndex) : arrayMove(this.state.items, oldIndex, newIndex);
+    this.onChange = ({ oldIndex, newIndex, targetRect }) => {
+      const newItemsState =
+        newIndex === -1
+          ? arrayRemove(this.state.items, oldIndex)
+          : arrayMove(this.state.items, oldIndex, newIndex);
       this.props.onChange({
         newState: newItemsState,
         oldIndex,
         newIndex,
-        targetRect
+        targetRect,
       });
       this.internalSetState("change", { items: newItemsState });
     };
@@ -36,14 +35,13 @@ class StatefulListContainer extends React.Component {
     return this.props.children({
       ...restProps,
       items: this.state.items,
-      onChange: this.onChange
+      onChange: this.onChange,
     });
   }
 }
 StatefulListContainer.defaultProps = {
   initialState: { items: [] },
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulListContainer;

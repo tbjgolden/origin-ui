@@ -8,5 +8,5 @@ export {
   PINHEAD_SIZES_SHAPES,
   BADGE_ENHANCER_SIZES,
   LABEL_ENHANCER_POSITIONS,
-  KIND
+  KIND,
 } from "./constants";

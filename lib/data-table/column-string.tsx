@@ -7,19 +7,29 @@ function StringFilter(props) {
 }
 function StringCell(props) {
   const [css] = useStyletron();
-  return <div className={css({
-    display: "-webkit-box",
-    WebkitLineClamp: props.lineClamp || 1,
-    WebkitBoxOrient: "vertical",
-    overflow: "hidden"
-  })}>{props.textQuery ? <HighlightCellText text={props.value} query={props.textQuery} /> : props.value}</div>;
+  return (
+    <div
+      className={css({
+        display: "-webkit-box",
+        WebkitLineClamp: props.lineClamp || 1,
+        WebkitBoxOrient: "vertical",
+        overflow: "hidden",
+      })}
+    >
+      {props.textQuery ? (
+        <HighlightCellText text={props.value} query={props.textQuery} />
+      ) : (
+        props.value
+      )}
+    </div>
+  );
 }
 function StringColumn(options) {
   return Column({
     kind: COLUMNS.STRING,
     cellBlockAlign: options.cellBlockAlign,
-    buildFilter: function(params) {
-      return function(data) {
+    buildFilter: function (params) {
+      return function (data) {
         return true;
       };
     },
@@ -33,13 +43,13 @@ function StringColumn(options) {
     },
     renderFilter: StringFilter,
     sortable: options.sortable === void 0 ? true : options.sortable,
-    sortFn: function(a, b) {
+    sortFn: function (a, b) {
       return a.localeCompare(b);
     },
-    textQueryFilter: function(textQuery, data) {
+    textQueryFilter: function (textQuery, data) {
       return data.toLowerCase().includes(textQuery.toLowerCase());
     },
-    title: options.title
+    title: options.title,
   });
 }
 export default StringColumn;

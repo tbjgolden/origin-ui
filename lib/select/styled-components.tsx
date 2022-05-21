@@ -8,7 +8,7 @@ function getFont(size = SIZE.default, typography) {
     [SIZE.mini]: typography.font100,
     [SIZE.compact]: typography.font200,
     [SIZE.default]: typography.font300,
-    [SIZE.large]: typography.font400
+    [SIZE.large]: typography.font400,
   }[size];
 }
 function getControlPadding(props) {
@@ -18,42 +18,66 @@ function getControlPadding(props) {
     $size = SIZE.default,
     $type,
     $multi,
-    $isEmpty
+    $isEmpty,
   } = props;
   const isSearch = $type === TYPE.search;
-  const paddingLeft = isSearch ? `calc(${sizing.scale1000} - ${sizing.scale0})` : sizing.scale400;
+  const paddingLeft = isSearch
+    ? `calc(${sizing.scale1000} - ${sizing.scale0})`
+    : sizing.scale400;
   const paddingStartDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   const paddingEndDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     [SIZE.mini]: {
       paddingTop: $multi && !$isEmpty ? 0 : sizing.scale100,
       paddingBottom: $multi && !$isEmpty ? 0 : sizing.scale100,
-      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0"
+      [paddingStartDir]:
+        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: "0",
     },
     [SIZE.compact]: {
-      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale100} - ${sizing.scale0})` : sizing.scale200,
-      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale100} - ${sizing.scale0})` : sizing.scale200,
-      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0"
+      paddingTop:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale100} - ${sizing.scale0})`
+          : sizing.scale200,
+      paddingBottom:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale100} - ${sizing.scale0})`
+          : sizing.scale200,
+      [paddingStartDir]:
+        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: "0",
     },
     [SIZE.default]: {
-      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale400} - ${sizing.scale0})` : sizing.scale400,
-      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale400} - ${sizing.scale0})` : sizing.scale400,
-      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} + ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0
+      paddingTop:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale400} - ${sizing.scale0})`
+          : sizing.scale400,
+      paddingBottom:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale400} - ${sizing.scale0})`
+          : sizing.scale400,
+      [paddingStartDir]:
+        $multi && !$isEmpty ? `calc(${paddingLeft} + ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: 0,
     },
     [SIZE.large]: {
-      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale600} - ${sizing.scale0})` : sizing.scale550,
-      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale600} - ${sizing.scale0})` : sizing.scale550,
-      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0
-    }
+      paddingTop:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale600} - ${sizing.scale0})`
+          : sizing.scale550,
+      paddingBottom:
+        $multi && !$isEmpty
+          ? `calc(${sizing.scale600} - ${sizing.scale0})`
+          : sizing.scale550,
+      [paddingStartDir]:
+        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: 0,
+    },
   }[$size];
 }
 export const StyledDropdownContainer = styled("div", (props) => {
   return {
-    width: `${String(props.$width)}px`
+    width: `${String(props.$width)}px`,
   };
 });
 export const StyledDropdown = StyledList;
@@ -63,22 +87,29 @@ export const StyledOptionContent = styled("div", (props) => {
   return {
     cursor: $disabled ? "not-allowed" : "pointer",
     color: $selected && !$isHighlighted ? $theme.colors.menuFontSelected : null,
-    fontWeight: $selected ? "bold" : "normal"
+    fontWeight: $selected ? "bold" : "normal",
   };
 });
 export const StyledRoot = styled("div", (props) => {
   const {
     $theme: { typography },
-    $size
+    $size,
   } = props;
   return {
     ...getFont($size, typography),
     boxSizing: "border-box",
     position: "relative",
-    width: "100%"
+    width: "100%",
   };
 });
-function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $positive, $error, colors) {
+function getControlContainerColors(
+  $disabled,
+  $isFocused,
+  $isPseudoFocused,
+  $positive,
+  $error,
+  colors
+) {
   if ($disabled) {
     return {
       color: colors.inputTextDisabled,
@@ -86,7 +117,7 @@ function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $pos
       borderRightColor: colors.inputFillDisabled,
       borderTopColor: colors.inputFillDisabled,
       borderBottomColor: colors.inputFillDisabled,
-      backgroundColor: colors.inputFillDisabled
+      backgroundColor: colors.inputFillDisabled,
     };
   }
   if ($isFocused || $isPseudoFocused) {
@@ -96,7 +127,7 @@ function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $pos
       borderRightColor: colors.borderSelected,
       borderTopColor: colors.borderSelected,
       borderBottomColor: colors.borderSelected,
-      backgroundColor: colors.inputFillActive
+      backgroundColor: colors.inputFillActive,
     };
   }
   if ($error) {
@@ -106,7 +137,7 @@ function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $pos
       borderRightColor: colors.inputBorderError,
       borderTopColor: colors.inputBorderError,
       borderBottomColor: colors.inputBorderError,
-      backgroundColor: colors.inputFillError
+      backgroundColor: colors.inputFillError,
     };
   }
   if ($positive) {
@@ -116,7 +147,7 @@ function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $pos
       borderRightColor: colors.inputBorderPositive,
       borderTopColor: colors.inputBorderPositive,
       borderBottomColor: colors.inputBorderPositive,
-      backgroundColor: colors.inputFillPositive
+      backgroundColor: colors.inputFillPositive,
     };
   }
   return {
@@ -125,7 +156,7 @@ function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $pos
     borderRightColor: colors.inputBorder,
     borderTopColor: colors.inputBorder,
     borderBottomColor: colors.inputBorder,
-    backgroundColor: colors.inputFill
+    backgroundColor: colors.inputFill,
   };
 }
 export const StyledControlContainer = styled("div", (props) => {
@@ -137,7 +168,7 @@ export const StyledControlContainer = styled("div", (props) => {
     $isPseudoFocused,
     $type,
     $searchable,
-    $theme: { borders, colors, animation }
+    $theme: { borders, colors, animation },
   } = props;
   return {
     borderTopLeftRadius: borders.inputBorderRadius,
@@ -149,7 +180,11 @@ export const StyledControlContainer = styled("div", (props) => {
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    cursor: $disabled ? "not-allowed" : $searchable || $type === TYPE.search ? "text" : "pointer",
+    cursor: $disabled
+      ? "not-allowed"
+      : $searchable || $type === TYPE.search
+      ? "text"
+      : "pointer",
     borderLeftWidth: "2px",
     borderRightWidth: "2px",
     borderTopWidth: "2px",
@@ -161,7 +196,14 @@ export const StyledControlContainer = styled("div", (props) => {
     transitionProperty: "border, box-shadow, background-color",
     transitionDuration: animation.timing200,
     transitionTimingFunction: animation.easeOutCurve,
-    ...getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $positive, $error, colors)
+    ...getControlContainerColors(
+      $disabled,
+      $isFocused,
+      $isPseudoFocused,
+      $positive,
+      $error,
+      colors
+    ),
   };
 });
 export const StyledValueContainer = styled("div", (props) => {
@@ -176,20 +218,20 @@ export const StyledValueContainer = styled("div", (props) => {
     alignItems: "center",
     flexWrap: props.$multi ? "wrap" : "nowrap",
     overflow: "hidden",
-    ...padding
+    ...padding,
   };
 });
 export const StyledPlaceholder = styled("div", (props) => {
   const {
     $disabled,
-    $theme: { colors }
+    $theme: { colors },
   } = props;
   return {
     color: $disabled ? colors.inputPlaceholderDisabled : colors.inputPlaceholder,
     maxWidth: "100%",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 });
 export const StyledSingleValue = styled("div", (props) => {
@@ -197,7 +239,7 @@ export const StyledSingleValue = styled("div", (props) => {
     $searchable,
     $size,
     $theme,
-    $theme: { typography }
+    $theme: { typography },
   } = props;
   const font = getFont($size, typography);
   const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
@@ -207,7 +249,7 @@ export const StyledSingleValue = styled("div", (props) => {
     [marginDir]: $theme.sizing.scale0,
     height: "100%",
     maxWidth: "100%",
-    ...ellipsisText
+    ...ellipsisText,
   };
 });
 export const StyledInputContainer = styled("div", (props) => {
@@ -215,7 +257,7 @@ export const StyledInputContainer = styled("div", (props) => {
     $size,
     $searchable,
     $theme: { typography, sizing },
-    $isEmpty
+    $isEmpty,
   } = props;
   const font = getFont($size, typography);
   return {
@@ -239,7 +281,7 @@ export const StyledInputContainer = styled("div", (props) => {
     paddingLeft: 0,
     paddingRight: 0,
     height: String(!$searchable ? font.lineHeight : "auto"),
-    maxHeight: String(font.lineHeight)
+    maxHeight: String(font.lineHeight),
   };
 });
 export const StyledInput = styled("input", (props) => {
@@ -247,7 +289,7 @@ export const StyledInput = styled("input", (props) => {
     $theme: { colors, typography },
     $size,
     $searchable,
-    $width
+    $width,
   } = props;
   return {
     ...getFont($size, typography),
@@ -270,22 +312,25 @@ export const StyledInput = styled("input", (props) => {
     paddingTop: "0",
     paddingBottom: "0",
     paddingLeft: "0",
-    paddingRight: "0"
+    paddingRight: "0",
   };
 });
-export const StyledInputSizer = styled("div", ({ $size, $theme, $theme: { typography } }) => {
-  const dir = $theme.direction === "rtl" ? "right" : "left";
-  return {
-    ...getFont($size, typography),
-    position: "absolute",
-    top: 0,
-    [dir]: 0,
-    visibility: "hidden",
-    height: 0,
-    overflow: "scroll",
-    whiteSpace: "pre"
-  };
-});
+export const StyledInputSizer = styled(
+  "div",
+  ({ $size, $theme, $theme: { typography } }) => {
+    const dir = $theme.direction === "rtl" ? "right" : "left";
+    return {
+      ...getFont($size, typography),
+      position: "absolute",
+      top: 0,
+      [dir]: 0,
+      visibility: "hidden",
+      height: 0,
+      overflow: "scroll",
+      whiteSpace: "pre",
+    };
+  }
+);
 export const StyledIconsContainer = styled("div", ({ $theme, $theme: { sizing } }) => {
   const paddingDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
@@ -295,7 +340,7 @@ export const StyledIconsContainer = styled("div", ({ $theme, $theme: { sizing } 
     flexShrink: 0,
     alignItems: "center",
     alignSelf: "stretch",
-    [paddingDir]: sizing.scale500
+    [paddingDir]: sizing.scale500,
   };
 });
 function getSvgStyles({ $theme }) {
@@ -304,7 +349,7 @@ function getSvgStyles({ $theme }) {
     fill: "currentColor",
     color: "currentColor",
     height: $theme.sizing.scale600,
-    width: $theme.sizing.scale600
+    width: $theme.sizing.scale600,
   };
 }
 export const StyledSelectArrow = styled("svg", (props) => {
@@ -314,7 +359,7 @@ export const StyledSelectArrow = styled("svg", (props) => {
     [SIZE.mini]: 16,
     [SIZE.compact]: 16,
     [SIZE.default]: 20,
-    [SIZE.large]: 24
+    [SIZE.large]: 24,
   };
   let size = sizes[SIZE.default];
   if ($size) {
@@ -325,7 +370,7 @@ export const StyledSelectArrow = styled("svg", (props) => {
     color: $disabled ? colors.inputTextDisabled : colors.contentPrimary,
     cursor: $disabled ? "not-allowed" : "pointer",
     height: `${size}px`,
-    width: `${size}px`
+    width: `${size}px`,
   };
 });
 export const StyledClearIcon = styled("svg", (props) => {
@@ -335,7 +380,7 @@ export const StyledClearIcon = styled("svg", (props) => {
     [SIZE.mini]: 15,
     [SIZE.compact]: 15,
     [SIZE.default]: 18,
-    [SIZE.large]: 22
+    [SIZE.large]: 22,
   };
   let size = sizes[SIZE.default];
   if ($size) {
@@ -346,7 +391,7 @@ export const StyledClearIcon = styled("svg", (props) => {
     color: colors.contentPrimary,
     cursor: "pointer",
     height: `${size}px`,
-    width: `${size}px`
+    width: `${size}px`,
   };
 });
 export const StyledLoadingIndicator = withStyle(Spinner, ({ $theme }) => {
@@ -359,7 +404,7 @@ export const StyledLoadingIndicator = withStyle(Spinner, ({ $theme }) => {
     borderBottomColor: $theme.colors.borderOpaque,
     borderLeftColor: $theme.colors.borderOpaque,
     width: "16px",
-    height: "16px"
+    height: "16px",
   };
 });
 export const StyledSearchIconContainer = styled("div", (props) => {
@@ -375,6 +420,6 @@ export const StyledSearchIconContainer = styled("div", (props) => {
     [dir]: sizing.scale500,
     display: "flex",
     alignItems: "center",
-    height: "100%"
+    height: "100%",
   };
 });

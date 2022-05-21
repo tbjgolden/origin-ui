@@ -21,21 +21,19 @@ class StatefulSliderContainer extends React.Component {
       this.setState(newState);
     };
     this.state = {
-      value: props.initialState && Array.isArray(props.initialState.value) ? props.initialState.value : [Math.round((props.max - props.min) / 2) + props.min]
+      value:
+        props.initialState && Array.isArray(props.initialState.value)
+          ? props.initialState.value
+          : [Math.round((props.max - props.min) / 2) + props.min],
     };
   }
   render() {
-    const {
-      children,
-      initialState,
-      stateReducer,
-      ...restProps
-    } = this.props;
+    const { children, initialState, stateReducer, ...restProps } = this.props;
     return children({
       ...restProps,
       ...this.state,
       onChange: this.onChange,
-      onFinalChange: this.onFinalChange
+      onFinalChange: this.onFinalChange,
     });
   }
 }
@@ -45,9 +43,7 @@ StatefulSliderContainer.defaultProps = {
   max: 100,
   step: 1,
   marks: false,
-  onChange: () => {
-  },
-  onFinalChange: () => {
-  }
+  onChange: () => {},
+  onFinalChange: () => {},
 };
 export default StatefulSliderContainer;

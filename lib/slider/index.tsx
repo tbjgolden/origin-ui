@@ -10,5 +10,5 @@ export {
   Tick as StyledTick,
   TickBar as StyledTickBar,
   ThumbValue as StyledThumbValue,
-  Mark as StyledMark
+  Mark as StyledMark,
 } from "./styled-components";

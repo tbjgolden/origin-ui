@@ -23,34 +23,54 @@ class StatelessRadioGroup extends React.Component {
   }
   render() {
     const { overrides = {} } = this.props;
-    const [RadioGroupRoot, radioGroupRootProps] = getOverrides(overrides.RadioGroupRoot, StyledRadioGroupRoot);
-    return <RadioGroupRoot id={this.props.id} role="radiogroup" aria-describedby={this.props["aria-describedby"]} aria-errormessage={this.props["aria-errormessage"]} aria-invalid={this.props.error || null} aria-label={this.props["aria-label"]} aria-labelledby={this.props["aria-labelledby"]} $align={this.props.align} $disabled={this.props.disabled} $error={this.props.error} $required={this.props.required} {...radioGroupRootProps}>{React.Children.map(this.props.children, (child, index) => {
-      if (!React.isValidElement(child)) {
-        return null;
-      }
-      const checked = this.props.value === child.props.value;
-      return React.cloneElement(child, {
-        align: this.props.align,
-        autoFocus: this.props.autoFocus,
-        checked,
-        disabled: this.props.disabled || child.props.disabled,
-        error: this.props.error,
-        isFocused: this.state.focusedRadioIndex === index,
-        isFocusVisible: this.state.isFocusVisible,
-        tabIndex: index === 0 && !this.props.value || checked ? "0" : "-1",
-        labelPlacement: this.props.labelPlacement,
-        name: this.props.name,
-        onBlur: (e) => {
-          return this.handleBlur(e, index);
-        },
-        onFocus: (e) => {
-          return this.handleFocus(e, index);
-        },
-        onChange: this.props.onChange,
-        onMouseEnter: this.props.onMouseEnter,
-        onMouseLeave: this.props.onMouseLeave
-      });
-    })}</RadioGroupRoot>;
+    const [RadioGroupRoot, radioGroupRootProps] = getOverrides(
+      overrides.RadioGroupRoot,
+      StyledRadioGroupRoot
+    );
+    return (
+      <RadioGroupRoot
+        id={this.props.id}
+        role="radiogroup"
+        aria-describedby={this.props["aria-describedby"]}
+        aria-errormessage={this.props["aria-errormessage"]}
+        aria-invalid={this.props.error || null}
+        aria-label={this.props["aria-label"]}
+        aria-labelledby={this.props["aria-labelledby"]}
+        $align={this.props.align}
+        $disabled={this.props.disabled}
+        $error={this.props.error}
+        $required={this.props.required}
+        {...radioGroupRootProps}
+      >
+        {React.Children.map(this.props.children, (child, index) => {
+          if (!React.isValidElement(child)) {
+            return null;
+          }
+          const checked = this.props.value === child.props.value;
+          return React.cloneElement(child, {
+            align: this.props.align,
+            autoFocus: this.props.autoFocus,
+            checked,
+            disabled: this.props.disabled || child.props.disabled,
+            error: this.props.error,
+            isFocused: this.state.focusedRadioIndex === index,
+            isFocusVisible: this.state.isFocusVisible,
+            tabIndex: (index === 0 && !this.props.value) || checked ? "0" : "-1",
+            labelPlacement: this.props.labelPlacement,
+            name: this.props.name,
+            onBlur: (e) => {
+              return this.handleBlur(e, index);
+            },
+            onFocus: (e) => {
+              return this.handleFocus(e, index);
+            },
+            onChange: this.props.onChange,
+            onMouseEnter: this.props.onMouseEnter,
+            onMouseLeave: this.props.onMouseLeave,
+          });
+        })}
+      </RadioGroupRoot>
+    );
   }
 }
 StatelessRadioGroup.defaultProps = {
@@ -62,16 +82,11 @@ StatelessRadioGroup.defaultProps = {
   align: "vertical",
   error: false,
   required: false,
-  onChange: () => {
-  },
-  onMouseEnter: () => {
-  },
-  onMouseLeave: () => {
-  },
-  onFocus: () => {
-  },
-  onBlur: () => {
-  },
-  overrides: {}
+  onChange: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
+  overrides: {},
 };
 export default StatelessRadioGroup;

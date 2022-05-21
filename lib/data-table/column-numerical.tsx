@@ -51,18 +51,24 @@ const Histogram = React.memo(function Histogram2({
   upper,
   isRange,
   exclude,
-  precision
+  precision,
 }) {
   const [css, theme] = useStyletron();
   const { bins, xScale, yScale } = React.useMemo(() => {
     const bins2 = bin().thresholds(Math.min(data.length, MAX_BIN_COUNT))(data);
-    const xScale2 = scaleLinear().domain([bins2[0].x0, bins2[bins2.length - 1].x1]).range([0, HISTOGRAM_SIZE.width]).clamp(true);
-    const yScale2 = scaleLinear().domain([
-      0,
-      maxFunc(bins2, (d) => {
-        return d.length;
-      })
-    ]).nice().range([HISTOGRAM_SIZE.height, 0]);
+    const xScale2 = scaleLinear()
+      .domain([bins2[0].x0, bins2[bins2.length - 1].x1])
+      .range([0, HISTOGRAM_SIZE.width])
+      .clamp(true);
+    const yScale2 = scaleLinear()
+      .domain([
+        0,
+        maxFunc(bins2, (d) => {
+          return d.length;
+        }),
+      ])
+      .nice()
+      .range([HISTOGRAM_SIZE.height, 0]);
     return { bins: bins2, xScale: xScale2, yScale: yScale2 };
   }, [data]);
   const singleIndexNearest = React.useMemo(() => {
@@ -71,45 +77,64 @@ const Histogram = React.memo(function Histogram2({
     }
     return bisect.center(bins, lower);
   }, [isRange, data, lower, upper]);
-  return <div className={css({
-    display: "flex",
-    marginTop: theme.sizing.scale600,
-    marginLeft: theme.sizing.scale200,
-    marginRight: 0,
-    marginBottom: theme.sizing.scale400,
-    justifyContent: "space-between",
-    overflow: "visible"
-  })}><svg {...HISTOGRAM_SIZE}>{bins.map((d, index) => {
-    const x = xScale(d.x0) + 1;
-    const y = yScale(d.length);
-    const width = Math.max(0, xScale(d.x1) - xScale(d.x0) - 1);
-    const height = yScale(0) - yScale(d.length);
-    let included;
-    if (singleIndexNearest != null) {
-      included = index === singleIndexNearest;
-    } else {
-      const withinLower = d.x1 > lower;
-      const withinUpper = d.x0 <= upper;
-      included = withinLower && withinUpper;
-    }
-    if (exclude) {
-      included = !included;
-    }
-    return <rect key={`bar-${index}`} fill={included ? theme.colors.primary : theme.colors.mono400} x={x} y={y} width={width} height={height} />;
-  })}</svg></div>;
+  return (
+    <div
+      className={css({
+        display: "flex",
+        marginTop: theme.sizing.scale600,
+        marginLeft: theme.sizing.scale200,
+        marginRight: 0,
+        marginBottom: theme.sizing.scale400,
+        justifyContent: "space-between",
+        overflow: "visible",
+      })}
+    >
+      <svg {...HISTOGRAM_SIZE}>
+        {bins.map((d, index) => {
+          const x = xScale(d.x0) + 1;
+          const y = yScale(d.length);
+          const width = Math.max(0, xScale(d.x1) - xScale(d.x0) - 1);
+          const height = yScale(0) - yScale(d.length);
+          let included;
+          if (singleIndexNearest != null) {
+            included = index === singleIndexNearest;
+          } else {
+            const withinLower = d.x1 > lower;
+            const withinUpper = d.x0 <= upper;
+            included = withinLower && withinUpper;
+          }
+          if (exclude) {
+            included = !included;
+          }
+          return (
+            <rect
+              key={`bar-${index}`}
+              fill={included ? theme.colors.primary : theme.colors.mono400}
+              x={x}
+              y={y}
+              width={width}
+              height={height}
+            />
+          );
+        })}
+      </svg>
+    </div>
+  );
 });
 function NumericalFilter(props) {
   const [css, theme] = useStyletron();
   const locale = React.useContext(LocaleContext);
   const precision = props.options.precision;
   const initialState = React.useMemo(() => {
-    return props.filterParams || {
-      exclude: false,
-      excludeKind: "range",
-      comparatorIndex: 0,
-      lowerValue: null,
-      upperValue: null
-    };
+    return (
+      props.filterParams || {
+        exclude: false,
+        excludeKind: "range",
+        comparatorIndex: 0,
+        lowerValue: null,
+        upperValue: null,
+      }
+    );
   }, [props.filterParams]);
   const [exclude, setExclude] = React.useState(initialState.exclude);
   const [comparatorIndex, setComparatorIndex] = React.useState(() => {
@@ -148,139 +173,210 @@ function NumericalFilter(props) {
   const sliderScale = React.useMemo(() => {
     return scaleLinear().domain([min, max]).rangeRound([1, MAX_BIN_COUNT]).clamp(true);
   }, [min, max]);
-  let sliderValue = isRange ? [sliderScale(inputValueLower), sliderScale(inputValueUpper)] : [sliderScale(inputValueLower)];
+  let sliderValue = isRange
+    ? [sliderScale(inputValueLower), sliderScale(inputValueUpper)]
+    : [sliderScale(inputValueLower)];
   if (isRange && sliderValue[0] > sliderValue[1]) {
     sliderValue = [sliderValue[1], sliderValue[0]];
   }
-  return <FilterShell exclude={exclude} onExcludeChange={() => {
-    return setExclude(!exclude);
-  }} excludeKind={excludeKind} onApply={() => {
-    if (isRange) {
-      const lowerValue = Number.parseFloat(inputValueLower);
-      const upperValue = Number.parseFloat(inputValueUpper);
-      props.setFilter({
-        description: `\u2265 ${lowerValue} and \u2264 ${upperValue}`,
-        exclude,
-        lowerValue,
-        upperValue,
-        excludeKind
-      });
-    } else {
-      const value = Number.parseFloat(inputValueLower);
-      props.setFilter({
-        description: `= ${value}`,
-        exclude,
-        lowerValue: inputValueLower,
-        upperValue: inputValueLower,
-        excludeKind
-      });
-    }
-    props.close();
-  }}>
-    <ButtonGroup size={SIZE.mini} mode={MODE.radio} selected={comparatorIndex} onClick={(_, index) => {
-      return setComparatorIndex(index);
-    }} overrides={{
-      Root: {
-        style: ({ $theme }) => {
-          return { marginBottom: $theme.sizing.scale300 };
+  return (
+    <FilterShell
+      exclude={exclude}
+      onExcludeChange={() => {
+        return setExclude(!exclude);
+      }}
+      excludeKind={excludeKind}
+      onApply={() => {
+        if (isRange) {
+          const lowerValue = Number.parseFloat(inputValueLower);
+          const upperValue = Number.parseFloat(inputValueUpper);
+          props.setFilter({
+            description: `\u2265 ${lowerValue} and \u2264 ${upperValue}`,
+            exclude,
+            lowerValue,
+            upperValue,
+            excludeKind,
+          });
+        } else {
+          const value = Number.parseFloat(inputValueLower);
+          props.setFilter({
+            description: `= ${value}`,
+            exclude,
+            lowerValue: inputValueLower,
+            upperValue: inputValueLower,
+            excludeKind,
+          });
         }
-      }
-    }}>
-      <Button type="button" overrides={{ BaseButton: { style: { width: "100%" } } }} aria-label={locale.datatable.numericalFilterRange}>{locale.datatable.numericalFilterRange}</Button>
-      <Button type="button" overrides={{ BaseButton: { style: { width: "100%" } } }} aria-label={locale.datatable.numericalFilterSingleValue}>{locale.datatable.numericalFilterSingleValue}</Button>
-    </ButtonGroup>
-    <Histogram data={props.data} lower={inputValueLower} upper={inputValueUpper} isRange={isRange} exclude={exclude} precision={props.options.precision} />
-    <div className={css({ display: "flex", justifyContent: "space-between" })}><Slider key={isRange.toString()} min={1} max={MAX_BIN_COUNT} value={sliderValue} onChange={({ value }) => {
-      if (!value) {
-        return;
-      }
-      if (isRange) {
-        const [lowerValue, upperValue] = value;
-        setLower(sliderScale.invert(lowerValue));
-        setUpper(sliderScale.invert(upperValue));
-      } else {
-        const [singleValue] = value;
-        setSingle(sliderScale.invert(singleValue));
-      }
-    }} overrides={{
-      InnerThumb: function InnerThumb({ $value, $thumbIndex }) {
-        return <React.Fragment>{$value[$thumbIndex]}</React.Fragment>;
-      },
-      TickBar: ({ $min, $max }) => {
-        return null;
-      },
-      ThumbValue: () => {
-        return null;
-      },
-      Root: {
-        style: () => {
-          return {
-            width: "calc(100% + 14px)",
-            margin: "0 -7px"
-          };
-        }
-      },
-      InnerTrack: {
-        style: ({ $theme }) => {
-          if (!isRange) {
-            return {
-              background: theme.colors.mono400
-            };
-          }
-        }
-      },
-      Thumb: {
-        style: () => {
-          return {
-            height: "18px",
-            width: "18px",
-            fontSize: "0px"
-          };
-        }
-      }
-    }} /></div>
-    <div className={css({
-      display: "flex",
-      marginTop: theme.sizing.scale400,
-      gap: "30%",
-      justifyContent: "space-between"
-    })}>
-      <Input min={min} max={max} size={INPUT_SIZE.mini} overrides={{ Root: { style: { width: "100%" } } }} value={inputValueLower} onChange={(event) => {
-        if (validateInput(event.target.value)) {
-          isRange ? setLower(event.target.value) : setSingle(event.target.value);
-        }
-      }} onFocus={() => {
-        return setFocus(true);
-      }} onBlur={() => {
-        return setFocus(false);
-      }} />
-      {isRange && <Input min={min} max={max} size={INPUT_SIZE.mini} overrides={{
-        Input: { style: { textAlign: "right" } },
-        Root: { style: { width: "100%" } }
-      }} value={inputValueUpper} onChange={(event) => {
-        if (validateInput(event.target.value)) {
-          setUpper(event.target.value);
-        }
-      }} onFocus={() => {
-        return setFocus(true);
-      }} onBlur={() => {
-        return setFocus(false);
-      }} />}
-    </div>
-  </FilterShell>;
+        props.close();
+      }}
+    >
+      <ButtonGroup
+        size={SIZE.mini}
+        mode={MODE.radio}
+        selected={comparatorIndex}
+        onClick={(_, index) => {
+          return setComparatorIndex(index);
+        }}
+        overrides={{
+          Root: {
+            style: ({ $theme }) => {
+              return { marginBottom: $theme.sizing.scale300 };
+            },
+          },
+        }}
+      >
+        <Button
+          type="button"
+          overrides={{ BaseButton: { style: { width: "100%" } } }}
+          aria-label={locale.datatable.numericalFilterRange}
+        >
+          {locale.datatable.numericalFilterRange}
+        </Button>
+        <Button
+          type="button"
+          overrides={{ BaseButton: { style: { width: "100%" } } }}
+          aria-label={locale.datatable.numericalFilterSingleValue}
+        >
+          {locale.datatable.numericalFilterSingleValue}
+        </Button>
+      </ButtonGroup>
+      <Histogram
+        data={props.data}
+        lower={inputValueLower}
+        upper={inputValueUpper}
+        isRange={isRange}
+        exclude={exclude}
+        precision={props.options.precision}
+      />
+      <div className={css({ display: "flex", justifyContent: "space-between" })}>
+        <Slider
+          key={isRange.toString()}
+          min={1}
+          max={MAX_BIN_COUNT}
+          value={sliderValue}
+          onChange={({ value }) => {
+            if (!value) {
+              return;
+            }
+            if (isRange) {
+              const [lowerValue, upperValue] = value;
+              setLower(sliderScale.invert(lowerValue));
+              setUpper(sliderScale.invert(upperValue));
+            } else {
+              const [singleValue] = value;
+              setSingle(sliderScale.invert(singleValue));
+            }
+          }}
+          overrides={{
+            InnerThumb: function InnerThumb({ $value, $thumbIndex }) {
+              return <React.Fragment>{$value[$thumbIndex]}</React.Fragment>;
+            },
+            TickBar: ({ $min, $max }) => {
+              return null;
+            },
+            ThumbValue: () => {
+              return null;
+            },
+            Root: {
+              style: () => {
+                return {
+                  width: "calc(100% + 14px)",
+                  margin: "0 -7px",
+                };
+              },
+            },
+            InnerTrack: {
+              style: ({ $theme }) => {
+                if (!isRange) {
+                  return {
+                    background: theme.colors.mono400,
+                  };
+                }
+              },
+            },
+            Thumb: {
+              style: () => {
+                return {
+                  height: "18px",
+                  width: "18px",
+                  fontSize: "0px",
+                };
+              },
+            },
+          }}
+        />
+      </div>
+      <div
+        className={css({
+          display: "flex",
+          marginTop: theme.sizing.scale400,
+          gap: "30%",
+          justifyContent: "space-between",
+        })}
+      >
+        <Input
+          min={min}
+          max={max}
+          size={INPUT_SIZE.mini}
+          overrides={{ Root: { style: { width: "100%" } } }}
+          value={inputValueLower}
+          onChange={(event) => {
+            if (validateInput(event.target.value)) {
+              isRange ? setLower(event.target.value) : setSingle(event.target.value);
+            }
+          }}
+          onFocus={() => {
+            return setFocus(true);
+          }}
+          onBlur={() => {
+            return setFocus(false);
+          }}
+        />
+        {isRange && (
+          <Input
+            min={min}
+            max={max}
+            size={INPUT_SIZE.mini}
+            overrides={{
+              Input: { style: { textAlign: "right" } },
+              Root: { style: { width: "100%" } },
+            }}
+            value={inputValueUpper}
+            onChange={(event) => {
+              if (validateInput(event.target.value)) {
+                setUpper(event.target.value);
+              }
+            }}
+            onFocus={() => {
+              return setFocus(true);
+            }}
+            onBlur={() => {
+              return setFocus(false);
+            }}
+          />
+        )}
+      </div>
+    </FilterShell>
+  );
 }
 function NumericalCell(props) {
   const [css, theme] = useStyletron();
-  return <div className={css({
-    ...theme.typography.MonoParagraphXSmall,
-    display: "flex",
-    justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
-    color: props.highlight(props.value) ? theme.colors.contentNegative : null,
-    width: "100%"
-  })}>{format(props.value, {
-    format: props.format,
-    precision: props.precision
-  })}</div>;
+  return (
+    <div
+      className={css({
+        ...theme.typography.MonoParagraphXSmall,
+        display: "flex",
+        justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
+        color: props.highlight(props.value) ? theme.colors.contentNegative : null,
+        width: "100%",
+      })}
+    >
+      {format(props.value, {
+        format: props.format,
+        precision: props.precision,
+      })}
+    </div>
+  );
 }
 const defaultOptions = {
   title: "",
@@ -290,25 +386,31 @@ const defaultOptions = {
   highlight: (n) => {
     return false;
   },
-  precision: 0
+  precision: 0,
 };
 function NumericalColumn(options) {
   const normalizedOptions = {
     ...defaultOptions,
-    ...options
+    ...options,
   };
-  if (normalizedOptions.format !== NUMERICAL_FORMATS.DEFAULT && (options.precision === null || options.precision === void 0)) {
+  if (
+    normalizedOptions.format !== NUMERICAL_FORMATS.DEFAULT &&
+    (options.precision === null || options.precision === void 0)
+  ) {
     normalizedOptions.precision = 2;
   }
-  if (normalizedOptions.format === NUMERICAL_FORMATS.ACCOUNTING && (options.highlight === null || options.highlight === void 0)) {
+  if (
+    normalizedOptions.format === NUMERICAL_FORMATS.ACCOUNTING &&
+    (options.highlight === null || options.highlight === void 0)
+  ) {
     normalizedOptions.highlight = (n) => {
       return n < 0;
     };
   }
   return Column({
     kind: COLUMNS.NUMERICAL,
-    buildFilter: function(params) {
-      return function(data) {
+    buildFilter: function (params) {
+      return function (data) {
         const value = roundToFixed(data, normalizedOptions.precision);
         const included = value >= params.lowerValue && value <= params.upperValue;
         return params.exclude ? !included : included;
@@ -321,16 +423,23 @@ function NumericalColumn(options) {
     maxWidth: options.maxWidth,
     minWidth: options.minWidth,
     renderCell: function RenderNumericalCell(props) {
-      return <NumericalCell {...props} format={normalizedOptions.format} highlight={normalizedOptions.highlight} precision={normalizedOptions.precision} />;
+      return (
+        <NumericalCell
+          {...props}
+          format={normalizedOptions.format}
+          highlight={normalizedOptions.highlight}
+          precision={normalizedOptions.precision}
+        />
+      );
     },
     renderFilter: function RenderNumericalFilter(props) {
       return <NumericalFilter {...props} options={normalizedOptions} />;
     },
     sortable: normalizedOptions.sortable,
-    sortFn: function(a, b) {
+    sortFn: function (a, b) {
       return a - b;
     },
-    title: normalizedOptions.title
+    title: normalizedOptions.title,
   });
 }
 export default NumericalColumn;

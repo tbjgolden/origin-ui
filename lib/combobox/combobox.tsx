@@ -8,7 +8,7 @@ import {
   StyledRoot,
   StyledInputContainer,
   StyledListBox,
-  StyledListItem
+  StyledListItem,
 } from "./styled-components";
 const ENTER = 13;
 const ESCAPE = 27;
@@ -33,7 +33,7 @@ function Combobox(props) {
     positive = false,
     inputRef: forwardInputRef,
     size = SIZE.default,
-    value
+    value,
   } = props;
   const [selectionIndex, setSelectionIndex] = React.useState(-1);
   const [tempValue, setTempValue] = React.useState(value);
@@ -64,7 +64,12 @@ function Combobox(props) {
   }, [options, selectionIndex]);
   React.useEffect(() => {
     if (isOpen && selectedOptionRef.current && listboxRef.current) {
-      scrollItemIntoView(selectedOptionRef.current, listboxRef.current, selectionIndex === 0, selectionIndex === options.length - 1);
+      scrollItemIntoView(
+        selectedOptionRef.current,
+        listboxRef.current,
+        selectionIndex === 0,
+        selectionIndex === options.length - 1
+      );
     }
   }, [isOpen, selectedOptionRef.current, listboxRef.current]);
   const listboxWidth = React.useMemo(() => {
@@ -113,7 +118,7 @@ function Combobox(props) {
             closeListbox: () => {
               return setIsOpen(false);
             },
-            value
+            value,
           });
         }
       }
@@ -128,18 +133,20 @@ function Combobox(props) {
     if (!isOpen && options.length > 0) {
       handleOpen();
     }
-    if (onFocus)
-      onFocus(event);
+    if (onFocus) onFocus(event);
   }
   function handleBlur(event) {
-    if (listboxRef.current && event.relatedTarget && listboxRef.current.contains(event.relatedTarget)) {
+    if (
+      listboxRef.current &&
+      event.relatedTarget &&
+      listboxRef.current.contains(event.relatedTarget)
+    ) {
       return;
     }
     setIsOpen(false);
     setSelectionIndex(-1);
     setTempValue(value);
-    if (onBlur)
-      onBlur(event);
+    if (onBlur) onBlur(event);
   }
   function handleInputClick() {
     if (inputRef.current) {
@@ -179,17 +186,94 @@ function Combobox(props) {
     }
   }
   const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
-  const [InputContainer, inputContainerProps] = getOverrides(overrides.InputContainer, StyledInputContainer);
+  const [InputContainer, inputContainerProps] = getOverrides(
+    overrides.InputContainer,
+    StyledInputContainer
+  );
   const [ListBox, listBoxProps] = getOverrides(overrides.ListBox, StyledListBox);
   const [ListItem, listItemProps] = getOverrides(overrides.ListItem, StyledListItem);
-  const [OverriddenInput, { overrides: inputOverrides = {}, ...restInputProps }] = getOverrides(overrides.Input, Input);
-  const [OverriddenPopover, { overrides: popoverOverrides = {}, ...restPopoverProps }] = getOverrides(overrides.Popover, Popover);
-  return <Root ref={rootRef} {...rootProps}><OverriddenPopover autoFocus={false} isOpen={isOpen} overrides={popoverOverrides} placement={PLACEMENT.bottomLeft} onClick={handleInputClick} content={<ListBox tabIndex="-1" id={listboxId} ref={listboxRef} role="listbox" aria-label={listBoxLabel} $width={listboxWidth} {...listBoxProps}>{options.map((option, index) => {
-    const isSelected = selectionIndex === index;
-    const ReplacementNode = mapOptionToNode;
-    return <ListItem aria-selected={isSelected} id={isSelected ? activeDescendantId : null} key={index} onClick={() => {
-      return handleOptionClick(index);
-    }} ref={isSelected ? selectedOptionRef : null} role="option" $isSelected={isSelected} $size={size} {...listItemProps}>{ReplacementNode ? <ReplacementNode isSelected={isSelected} option={option} /> : mapOptionToString(option)}</ListItem>;
-  })}</ListBox>} {...restPopoverProps}><InputContainer aria-expanded={isOpen} aria-haspopup="listbox" aria-owns={listboxId} role="combobox" {...inputContainerProps}><OverriddenInput inputRef={handleInputRef} aria-activedescendant={isOpen && selectionIndex >= 0 ? activeDescendantId : void 0} aria-autocomplete="list" disabled={disabled} error={error} name={name} id={id} onBlur={handleBlur} onChange={handleInputChange} onFocus={handleFocus} onKeyDown={handleKeyDown} overrides={inputOverrides} positive={positive} size={size} value={tempValue ? tempValue : value} {...isOpen ? { "aria-controls": listboxId } : {}} {...restInputProps} /></InputContainer></OverriddenPopover></Root>;
+  const [OverriddenInput, { overrides: inputOverrides = {}, ...restInputProps }] =
+    getOverrides(overrides.Input, Input);
+  const [OverriddenPopover, { overrides: popoverOverrides = {}, ...restPopoverProps }] =
+    getOverrides(overrides.Popover, Popover);
+  return (
+    <Root ref={rootRef} {...rootProps}>
+      <OverriddenPopover
+        autoFocus={false}
+        isOpen={isOpen}
+        overrides={popoverOverrides}
+        placement={PLACEMENT.bottomLeft}
+        onClick={handleInputClick}
+        content={
+          <ListBox
+            tabIndex="-1"
+            id={listboxId}
+            ref={listboxRef}
+            role="listbox"
+            aria-label={listBoxLabel}
+            $width={listboxWidth}
+            {...listBoxProps}
+          >
+            {options.map((option, index) => {
+              const isSelected = selectionIndex === index;
+              const ReplacementNode = mapOptionToNode;
+              return (
+                <ListItem
+                  aria-selected={isSelected}
+                  id={isSelected ? activeDescendantId : null}
+                  key={index}
+                  onClick={() => {
+                    return handleOptionClick(index);
+                  }}
+                  ref={isSelected ? selectedOptionRef : null}
+                  role="option"
+                  $isSelected={isSelected}
+                  $size={size}
+                  {...listItemProps}
+                >
+                  {ReplacementNode ? (
+                    <ReplacementNode isSelected={isSelected} option={option} />
+                  ) : (
+                    mapOptionToString(option)
+                  )}
+                </ListItem>
+              );
+            })}
+          </ListBox>
+        }
+        {...restPopoverProps}
+      >
+        <InputContainer
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-owns={listboxId}
+          role="combobox"
+          {...inputContainerProps}
+        >
+          <OverriddenInput
+            inputRef={handleInputRef}
+            aria-activedescendant={
+              isOpen && selectionIndex >= 0 ? activeDescendantId : void 0
+            }
+            aria-autocomplete="list"
+            disabled={disabled}
+            error={error}
+            name={name}
+            id={id}
+            onBlur={handleBlur}
+            onChange={handleInputChange}
+            onFocus={handleFocus}
+            onKeyDown={handleKeyDown}
+            overrides={inputOverrides}
+            positive={positive}
+            size={size}
+            value={tempValue ? tempValue : value}
+            {...(isOpen ? { "aria-controls": listboxId } : {})}
+            {...restInputProps}
+          />
+        </InputContainer>
+      </OverriddenPopover>
+    </Root>
+  );
 }
 export default Combobox;

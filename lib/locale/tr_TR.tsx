@@ -1,10 +1,10 @@
 export default {
   accordion: {
     collapse: "Daralt",
-    expand: "Geni\u015Flet"
+    expand: "Geni\u015Flet",
   },
   breadcrumbs: {
-    ariaLabel: "Navigasyon"
+    ariaLabel: "Navigasyon",
   },
   datepicker: {
     ariaLabel: "Bir tarih se\xE7in.",
@@ -19,9 +19,11 @@ export default {
     pastSixMonths: "Son 6 Ay",
     pastYear: "Ge\xE7en Y\u0131l",
     pastTwoYears: "Son 2 Y\u0131l",
-    screenReaderMessageInput: "Takvimle etkile\u015Fim kurmak ve bir tarih se\xE7mek i\xE7in a\u015Fa\u011F\u0131 ok tu\u015Funa bas\u0131n. Takvimi kapatmak i\xE7in ka\xE7\u0131\u015F (ESC) d\xFC\u011Fmesine bas\u0131n.",
+    screenReaderMessageInput:
+      "Takvimle etkile\u015Fim kurmak ve bir tarih se\xE7mek i\xE7in a\u015Fa\u011F\u0131 ok tu\u015Funa bas\u0131n. Takvimi kapatmak i\xE7in ka\xE7\u0131\u015F (ESC) d\xFC\u011Fmesine bas\u0131n.",
     selectedDate: "Se\xE7ilen tarih ${date}.",
-    selectedDateRange: "Se\xE7ilen tarih aral\u0131\u011F\u0131 ${startDate} ile ${endDate} aras\u0131ndad\u0131r.",
+    selectedDateRange:
+      "Se\xE7ilen tarih aral\u0131\u011F\u0131 ${startDate} ile ${endDate} aras\u0131ndad\u0131r.",
     selectSecondDatePrompt: "\u0130kinci tarihi se\xE7in.",
     quickSelectLabel: "Bir tarih aral\u0131\u011F\u0131 se\xE7in",
     quickSelectAriaLabel: "Bir tarih aral\u0131\u011F\u0131 se\xE7in",
@@ -36,10 +38,11 @@ export default {
     dateNotAvailableLabel: "Kullan\u0131labilir de\u011Fil.",
     dateAvailableLabel: "Kullan\u0131labilir.",
     selectedLabel: "Se\xE7ildi.",
-    chooseLabel: "Se\xE7"
+    chooseLabel: "Se\xE7",
   },
   datatable: {
-    emptyState: "Tan\u0131mlanan filtre kriterleriyle e\u015Fle\u015Fen sat\u0131r yok. Daha fazla veri g\xF6r\xFCnt\xFClemek i\xE7in l\xFCtfen bir veya daha fazla filtreyi kald\u0131r\u0131n.",
+    emptyState:
+      "Tan\u0131mlanan filtre kriterleriyle e\u015Fle\u015Fen sat\u0131r yok. Daha fazla veri g\xF6r\xFCnt\xFClemek i\xE7in l\xFCtfen bir veya daha fazla filtreyi kald\u0131r\u0131n.",
     loadingState: "Sat\u0131r y\xFCkleniyor.",
     searchAriaLabel: "Metne g\xF6re ara",
     filterAdd: "Filtre Ekle",
@@ -71,39 +74,40 @@ export default {
     booleanFilterTrue: "do\u011Fru",
     booleanFilterFalse: "yanl\u0131\u015F",
     booleanColumnTrueShort: "D",
-    booleanColumnFalseShort: "Y"
+    booleanColumnFalseShort: "Y",
   },
   buttongroup: {
-    ariaLabel: "buton grup"
+    ariaLabel: "buton grup",
   },
   fileuploader: {
     dropFilesToUpload: "Dosyalar\u0131 y\xFCklemek i\xE7in buraya b\u0131rak\u0131n...",
     or: "",
     browseFiles: "Dosyalara g\xF6z at\u0131n",
     retry: "Y\xFCklemeyi Yeniden Dene",
-    cancel: "\u0130ptal"
+    cancel: "\u0130ptal",
   },
   menu: {
     noResultsMsg: "Sonu\xE7 yok",
-    parentMenuItemAriaLabel: "\u015Eu anda i\xE7 i\xE7e bir liste kutusu a\xE7an bir \xF6\u011Fedesiniz. Bu \xF6\u011Feye girmek i\xE7in sa\u011F ok ve geri d\xF6nmek i\xE7in sol ok tu\u015Funa bas\u0131n."
+    parentMenuItemAriaLabel:
+      "\u015Eu anda i\xE7 i\xE7e bir liste kutusu a\xE7an bir \xF6\u011Fedesiniz. Bu \xF6\u011Feye girmek i\xE7in sa\u011F ok ve geri d\xF6nmek i\xE7in sol ok tu\u015Funa bas\u0131n.",
   },
   modal: {
-    close: "Kapat"
+    close: "Kapat",
   },
   drawer: {
-    close: "Kapat"
+    close: "Kapat",
   },
   pagination: {
     prev: "\xD6nceki",
     next: "Sonraki",
-    preposition: "n\u0131n"
+    preposition: "n\u0131n",
   },
   select: {
     noResultsMsg: "Sonu\xE7 bulunamad\u0131",
     placeholder: "Se\xE7...",
-    create: "Olu\u015Ftur"
+    create: "Olu\u015Ftur",
   },
   toast: {
-    close: "Kapat"
-  }
+    close: "Kapat",
+  },
 };

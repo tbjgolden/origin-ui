@@ -6,6 +6,6 @@ export { default as darkThemePrimitives } from "./dark-theme/primitives";
 export { default as lightThemePrimitives } from "./light-theme/primitives";
 export {
   default as createLightTheme,
-  default as createTheme
+  default as createTheme,
 } from "./light-theme/create-light-theme";
 export { DarkTheme, DarkTheme as darkThemeOverrides } from "./dark-theme/dark-theme";

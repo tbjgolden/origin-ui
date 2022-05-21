@@ -18,31 +18,51 @@ function FilterShell(props) {
     default:
       excludeText = locale.datatable.filterExclude;
   }
-  return <form className={css({
-    backgroundColor: theme.colors.backgroundPrimary,
-    paddingTop: theme.sizing.scale600,
-    paddingRight: theme.sizing.scale600,
-    paddingBottom: theme.sizing.scale600,
-    paddingLeft: theme.sizing.scale600,
-    width: FILTER_SHELL_WIDTH
-  })} onSubmit={(event) => {
-    event.preventDefault();
-    props.onApply();
-  }}>
-    {props.children}
-    <div className={css({
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "space-between",
-      alignItems: "flex-end",
-      marginTop: theme.sizing.scale600,
-      gap: theme.sizing.scale200
-    })}>
-      <div className={css({
-        alignSelf: "flex-start"
-      })}><Checkbox checked={props.exclude} onChange={props.onExcludeChange} checkmarkType={STYLE_TYPE.toggle_round} labelPlacement="right">{excludeText}</Checkbox></div>
-      <Button size={BUTTON_SIZE.compact} type="submit">{locale.datatable.filterApply}</Button>
-    </div>
-  </form>;
+  return (
+    <form
+      className={css({
+        backgroundColor: theme.colors.backgroundPrimary,
+        paddingTop: theme.sizing.scale600,
+        paddingRight: theme.sizing.scale600,
+        paddingBottom: theme.sizing.scale600,
+        paddingLeft: theme.sizing.scale600,
+        width: FILTER_SHELL_WIDTH,
+      })}
+      onSubmit={(event) => {
+        event.preventDefault();
+        props.onApply();
+      }}
+    >
+      {props.children}
+      <div
+        className={css({
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
+          marginTop: theme.sizing.scale600,
+          gap: theme.sizing.scale200,
+        })}
+      >
+        <div
+          className={css({
+            alignSelf: "flex-start",
+          })}
+        >
+          <Checkbox
+            checked={props.exclude}
+            onChange={props.onExcludeChange}
+            checkmarkType={STYLE_TYPE.toggle_round}
+            labelPlacement="right"
+          >
+            {excludeText}
+          </Checkbox>
+        </div>
+        <Button size={BUTTON_SIZE.compact} type="submit">
+          {locale.datatable.filterApply}
+        </Button>
+      </div>
+    </form>
+  );
 }
 export default FilterShell;

@@ -5,7 +5,7 @@ import {
   Button,
   SHAPE as BUTTON_SHAPES,
   SIZE as BUTTON_SIZES,
-  KIND as BUTTON_KINDS
+  KIND as BUTTON_KINDS,
 } from "../button";
 import { useStyletron } from "../styles";
 import { Tooltip, PLACEMENT } from "../tooltip";
@@ -25,41 +25,83 @@ function CellPlacement({ columnIndex, rowIndex, data, style }) {
     return null;
   }
   let backgroundColor = theme.colors.backgroundPrimary;
-  if (Boolean(rowIndex % 2) && columnIndex === data.columnHighlightIndex || rowIndex === data.rowHighlightIndex) {
+  if (
+    (Boolean(rowIndex % 2) && columnIndex === data.columnHighlightIndex) ||
+    rowIndex === data.rowHighlightIndex
+  ) {
     backgroundColor = theme.colors.backgroundTertiary;
   } else if (rowIndex % 2 || columnIndex === data.columnHighlightIndex) {
     backgroundColor = theme.colors.backgroundSecondary;
   }
   const Cell = data.columns[columnIndex].renderCell;
   const value = data.columns[columnIndex].mapDataToValue(data.rows[rowIndex - 1].data);
-  return <div className={css({
-    ...theme.borders.border200,
-    backgroundColor,
-    borderTop: "none",
-    borderBottom: "none",
-    borderLeft: "none",
-    borderRight: columnIndex === data.columns.length - 1 ? "none" : null,
-    boxSizing: "border-box"
-  })} style={style} onMouseEnter={() => {
-    return data.onRowMouseEnter(rowIndex, data.rows[rowIndex - 1]);
-  }}><Cell value={value} onSelect={data.isSelectable && columnIndex === 0 ? () => {
-    return data.onSelectOne(data.rows[rowIndex - 1]);
-  } : void 0} isSelected={data.isRowSelected(data.rows[rowIndex - 1].id)} textQuery={data.textQuery} x={columnIndex} y={rowIndex - 1} /></div>;
+  return (
+    <div
+      className={css({
+        ...theme.borders.border200,
+        backgroundColor,
+        borderTop: "none",
+        borderBottom: "none",
+        borderLeft: "none",
+        borderRight: columnIndex === data.columns.length - 1 ? "none" : null,
+        boxSizing: "border-box",
+      })}
+      style={style}
+      onMouseEnter={() => {
+        return data.onRowMouseEnter(rowIndex, data.rows[rowIndex - 1]);
+      }}
+    >
+      <Cell
+        value={value}
+        onSelect={
+          data.isSelectable && columnIndex === 0
+            ? () => {
+                return data.onSelectOne(data.rows[rowIndex - 1]);
+              }
+            : void 0
+        }
+        isSelected={data.isRowSelected(data.rows[rowIndex - 1].id)}
+        textQuery={data.textQuery}
+        x={columnIndex}
+        y={rowIndex - 1}
+      />
+    </div>
+  );
 }
 function compareCellPlacement(prevProps, nextProps) {
   if (prevProps.rowIndex === 0) {
     return true;
   }
-  if (prevProps.data.columns !== nextProps.data.columns || prevProps.data.rows !== nextProps.data.rows || prevProps.style !== nextProps.style) {
+  if (
+    prevProps.data.columns !== nextProps.data.columns ||
+    prevProps.data.rows !== nextProps.data.rows ||
+    prevProps.style !== nextProps.style
+  ) {
     return false;
   }
-  if (prevProps.data.isSelectable === nextProps.data.isSelectable && prevProps.data.columnHighlightIndex === nextProps.data.columnHighlightIndex && prevProps.data.rowHighlightIndex === nextProps.data.rowHighlightIndex && prevProps.data.textQuery === nextProps.data.textQuery && prevProps.data.isRowSelected === nextProps.data.isRowSelected) {
+  if (
+    prevProps.data.isSelectable === nextProps.data.isSelectable &&
+    prevProps.data.columnHighlightIndex === nextProps.data.columnHighlightIndex &&
+    prevProps.data.rowHighlightIndex === nextProps.data.rowHighlightIndex &&
+    prevProps.data.textQuery === nextProps.data.textQuery &&
+    prevProps.data.isRowSelected === nextProps.data.isRowSelected
+  ) {
     return true;
   }
-  if (prevProps.rowIndex !== prevProps.data.rowHighlightIndex && prevProps.rowIndex !== nextProps.data.rowHighlightIndex && prevProps.data.columnHighlightIndex === nextProps.data.columnHighlightIndex && prevProps.data.isRowSelected === nextProps.data.isRowSelected) {
+  if (
+    prevProps.rowIndex !== prevProps.data.rowHighlightIndex &&
+    prevProps.rowIndex !== nextProps.data.rowHighlightIndex &&
+    prevProps.data.columnHighlightIndex === nextProps.data.columnHighlightIndex &&
+    prevProps.data.isRowSelected === nextProps.data.isRowSelected
+  ) {
     return true;
   }
-  if (prevProps.columnIndex !== prevProps.data.columnHighlightIndex && prevProps.columnIndex !== nextProps.data.columnHighlightIndex && prevProps.data.rowHighlightIndex === nextProps.data.rowHighlightIndex && prevProps.data.isRowSelected === nextProps.data.isRowSelected) {
+  if (
+    prevProps.columnIndex !== prevProps.data.columnHighlightIndex &&
+    prevProps.columnIndex !== nextProps.data.columnHighlightIndex &&
+    prevProps.data.rowHighlightIndex === nextProps.data.rowHighlightIndex &&
+    prevProps.data.isRowSelected === nextProps.data.isRowSelected
+  ) {
     return true;
   }
   return false;
@@ -78,18 +120,12 @@ const HeaderContext = React.createContext({
   isSelectedAll: false,
   isSelectedIndeterminate: false,
   measuredWidths: [],
-  onMouseEnter: () => {
-  },
-  onMouseLeave: () => {
-  },
-  onResize: () => {
-  },
-  onSelectMany: () => {
-  },
-  onSelectNone: () => {
-  },
-  onSort: () => {
-  },
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  onResize: () => {},
+  onSelectMany: () => {},
+  onSelectNone: () => {},
+  onSort: () => {},
   resizableColumnWidths: false,
   rowActions: [],
   rowHeight: 0,
@@ -99,7 +135,7 @@ const HeaderContext = React.createContext({
   sortIndex: -1,
   sortDirection: null,
   tableHeight: 0,
-  widths: []
+  widths: [],
 });
 HeaderContext.displayName = "HeaderContext";
 function Header(props) {
@@ -167,97 +203,189 @@ function Header(props) {
     props.index,
     endResizePos,
     startResizePos,
-    headerCellRef.current
+    headerCellRef.current,
   ]);
-  return <React.Fragment>
-    <HeaderCell ref={headerCellRef} index={props.index} sortable={props.isSortable} isHovered={!isResizing && props.hoverIndex === props.index} isSelectable={props.isSelectable && props.index === 0} isSelectedAll={props.isSelectedAll} isSelectedIndeterminate={props.isSelectedIndeterminate} onMouseEnter={() => {
-      if (!isResizing) {
-        props.onMouseEnter(props.index);
-      }
-    }} onMouseLeave={() => {
-      if (!isResizing) {
-        props.onMouseLeave();
-      }
-    }} onSelectAll={props.onSelectMany} onSelectNone={props.onSelectNone} onSort={props.onSort} sortDirection={props.sortIndex === props.index ? props.sortDirection : null} title={props.columnTitle} />
-    {props.resizableColumnWidths && <div className={css({
-      position: "relative",
-      display: "flex",
-      alignItems: "center"
-    })}><div role="presentation" onMouseDown={(event) => {
-      props.onResizeIndexChange(props.index);
-      const x = getPositionX(event.target);
-      setStartResizePos(x);
-      setEndResizePos(x);
-    }} className={css({
-      backgroundColor: isResizingThisColumn ? theme.colors.contentPrimary : null,
-      cursor: "ew-resize",
-      position: "absolute",
-      height: "100%",
-      width: "3px",
-      ":hover": {
-        backgroundColor: theme.colors.contentPrimary
-      }
-    })} style={{
-      right: `${(RULER_OFFSET + endResizePos - startResizePos) * -1}px`
-    }}>{isResizingThisColumn && <div className={css({
-      backgroundColor: theme.colors.contentPrimary,
-      position: "absolute",
-      height: `${props.tableHeight}px`,
-      right: "1px",
-      width: "1px"
-    })} />}</div></div>}
-  </React.Fragment>;
+  return (
+    <React.Fragment>
+      <HeaderCell
+        ref={headerCellRef}
+        index={props.index}
+        sortable={props.isSortable}
+        isHovered={!isResizing && props.hoverIndex === props.index}
+        isSelectable={props.isSelectable && props.index === 0}
+        isSelectedAll={props.isSelectedAll}
+        isSelectedIndeterminate={props.isSelectedIndeterminate}
+        onMouseEnter={() => {
+          if (!isResizing) {
+            props.onMouseEnter(props.index);
+          }
+        }}
+        onMouseLeave={() => {
+          if (!isResizing) {
+            props.onMouseLeave();
+          }
+        }}
+        onSelectAll={props.onSelectMany}
+        onSelectNone={props.onSelectNone}
+        onSort={props.onSort}
+        sortDirection={props.sortIndex === props.index ? props.sortDirection : null}
+        title={props.columnTitle}
+      />
+      {props.resizableColumnWidths && (
+        <div
+          className={css({
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+          })}
+        >
+          <div
+            role="presentation"
+            onMouseDown={(event) => {
+              props.onResizeIndexChange(props.index);
+              const x = getPositionX(event.target);
+              setStartResizePos(x);
+              setEndResizePos(x);
+            }}
+            className={css({
+              backgroundColor: isResizingThisColumn ? theme.colors.contentPrimary : null,
+              cursor: "ew-resize",
+              position: "absolute",
+              height: "100%",
+              width: "3px",
+              ":hover": {
+                backgroundColor: theme.colors.contentPrimary,
+              },
+            })}
+            style={{
+              right: `${(RULER_OFFSET + endResizePos - startResizePos) * -1}px`,
+            }}
+          >
+            {isResizingThisColumn && (
+              <div
+                className={css({
+                  backgroundColor: theme.colors.contentPrimary,
+                  position: "absolute",
+                  height: `${props.tableHeight}px`,
+                  right: "1px",
+                  width: "1px",
+                })}
+              />
+            )}
+          </div>
+        </div>
+      )}
+    </React.Fragment>
+  );
 }
 function Headers() {
   const [css, theme] = useStyletron();
   const locale = React.useContext(LocaleContext);
   const ctx = React.useContext(HeaderContext);
   const [resizeIndex, setResizeIndex] = React.useState(-1);
-  return <div className={css({
-    position: "sticky",
-    top: 0,
-    left: 0,
-    width: `${sum(ctx.widths)}px`,
-    height: `${HEADER_ROW_HEIGHT}px`,
-    display: "flex",
-    zIndex: 2
-  })}>{ctx.columns.map((column, columnIndex) => {
-    const activeFilter = ctx.filters ? ctx.filters.get(column.title) : null;
-    return <React.Fragment key={columnIndex}><Tooltip key={columnIndex} placement={PLACEMENT.bottomLeft} isOpen={ctx.columnHighlightIndex === columnIndex && Boolean(activeFilter)} content={() => {
-      return <div>
-        <p className={css({
-          ...theme.typography.font100,
-          color: theme.colors.contentInversePrimary
-        })}>
-          {locale.datatable.filterAppliedTo}
-          {" "}
-          {column.title}
-        </p>
-        {activeFilter && <p className={css({
-          ...theme.typography.font150,
-          color: theme.colors.contentInversePrimary
-        })}>{activeFilter.description}</p>}
-      </div>;
-    }}><div className={css({
-      ...theme.borders.border200,
-      backgroundColor: theme.colors.backgroundPrimary,
-      borderTop: "none",
-      borderLeft: "none",
-      borderRight: columnIndex === ctx.columns.length - 1 ? "none" : null,
-      boxSizing: "border-box",
-      display: "flex"
-    })} style={{ width: ctx.widths[columnIndex] }}><Header columnTitle={column.title} hoverIndex={ctx.columnHighlightIndex} index={columnIndex} isSortable={column.sortable} isSelectable={ctx.isSelectable} isSelectedAll={ctx.isSelectedAll} isSelectedIndeterminate={ctx.isSelectedIndeterminate} onMouseEnter={ctx.onMouseEnter} onMouseLeave={ctx.onMouseLeave} onResize={ctx.onResize} onResizeIndexChange={setResizeIndex} onSelectMany={ctx.onSelectMany} onSelectNone={ctx.onSelectNone} onSort={() => {
-      return ctx.onSort(columnIndex);
-    }} resizableColumnWidths={ctx.resizableColumnWidths} resizeIndex={resizeIndex} resizeMinWidth={ctx.measuredWidths[columnIndex]} resizeMaxWidth={column.maxWidth || Number.POSITIVE_INFINITY} sortIndex={ctx.sortIndex} sortDirection={ctx.sortDirection} tableHeight={ctx.tableHeight} /></div></Tooltip></React.Fragment>;
-  })}</div>;
+  return (
+    <div
+      className={css({
+        position: "sticky",
+        top: 0,
+        left: 0,
+        width: `${sum(ctx.widths)}px`,
+        height: `${HEADER_ROW_HEIGHT}px`,
+        display: "flex",
+        zIndex: 2,
+      })}
+    >
+      {ctx.columns.map((column, columnIndex) => {
+        const activeFilter = ctx.filters ? ctx.filters.get(column.title) : null;
+        return (
+          <React.Fragment key={columnIndex}>
+            <Tooltip
+              key={columnIndex}
+              placement={PLACEMENT.bottomLeft}
+              isOpen={ctx.columnHighlightIndex === columnIndex && Boolean(activeFilter)}
+              content={() => {
+                return (
+                  <div>
+                    <p
+                      className={css({
+                        ...theme.typography.font100,
+                        color: theme.colors.contentInversePrimary,
+                      })}
+                    >
+                      {locale.datatable.filterAppliedTo} {column.title}
+                    </p>
+                    {activeFilter && (
+                      <p
+                        className={css({
+                          ...theme.typography.font150,
+                          color: theme.colors.contentInversePrimary,
+                        })}
+                      >
+                        {activeFilter.description}
+                      </p>
+                    )}
+                  </div>
+                );
+              }}
+            >
+              <div
+                className={css({
+                  ...theme.borders.border200,
+                  backgroundColor: theme.colors.backgroundPrimary,
+                  borderTop: "none",
+                  borderLeft: "none",
+                  borderRight: columnIndex === ctx.columns.length - 1 ? "none" : null,
+                  boxSizing: "border-box",
+                  display: "flex",
+                })}
+                style={{ width: ctx.widths[columnIndex] }}
+              >
+                <Header
+                  columnTitle={column.title}
+                  hoverIndex={ctx.columnHighlightIndex}
+                  index={columnIndex}
+                  isSortable={column.sortable}
+                  isSelectable={ctx.isSelectable}
+                  isSelectedAll={ctx.isSelectedAll}
+                  isSelectedIndeterminate={ctx.isSelectedIndeterminate}
+                  onMouseEnter={ctx.onMouseEnter}
+                  onMouseLeave={ctx.onMouseLeave}
+                  onResize={ctx.onResize}
+                  onResizeIndexChange={setResizeIndex}
+                  onSelectMany={ctx.onSelectMany}
+                  onSelectNone={ctx.onSelectNone}
+                  onSort={() => {
+                    return ctx.onSort(columnIndex);
+                  }}
+                  resizableColumnWidths={ctx.resizableColumnWidths}
+                  resizeIndex={resizeIndex}
+                  resizeMinWidth={ctx.measuredWidths[columnIndex]}
+                  resizeMaxWidth={column.maxWidth || Number.POSITIVE_INFINITY}
+                  sortIndex={ctx.sortIndex}
+                  sortDirection={ctx.sortDirection}
+                  tableHeight={ctx.tableHeight}
+                />
+              </div>
+            </Tooltip>
+          </React.Fragment>
+        );
+      })}
+    </div>
+  );
 }
 function LoadingOrEmptyMessage(props) {
   const [css, theme] = useStyletron();
-  return <p className={css({
-    ...theme.typography.ParagraphSmall,
-    color: theme.colors.contentPrimary,
-    marginLeft: theme.sizing.scale500
-  })}>{typeof props.children === "function" ? props.children() : String(props.children)}</p>;
+  return (
+    <p
+      className={css({
+        ...theme.typography.ParagraphSmall,
+        color: theme.colors.contentPrimary,
+        marginLeft: theme.sizing.scale500,
+      })}
+    >
+      {typeof props.children === "function" ? props.children() : String(props.children)}
+    </p>
+  );
 }
 const InnerTableElement = React.forwardRef((props, ref) => {
   const [, theme] = useStyletron();
@@ -275,47 +403,78 @@ const InnerTableElement = React.forwardRef((props, ref) => {
     viewState = EMPTY;
   }
   const highlightedRow = ctx.rows[ctx.rowHighlightIndex - 1];
-  return <div ref={ref} data-baseweb="data-table" style={props.style}>
-    <Headers />
-    {viewState === LOADING && <LoadingOrEmptyMessage>{ctx.loadingMessage}</LoadingOrEmptyMessage>}
-    {viewState === EMPTY && <LoadingOrEmptyMessage>{ctx.emptyMessage}</LoadingOrEmptyMessage>}
-    {viewState === RENDERING && props.children}
-    {ctx.rowActions && ctx.rowActions.length > 0 && ctx.rowHighlightIndex > 0 && Boolean(highlightedRow) && !ctx.isScrollingX && <div style={{
-      alignItems: "center",
-      backgroundColor: theme.colors.backgroundTertiary,
-      display: "flex",
-      height: `${ctx.rowHeight}px`,
-      padding: "0 16px",
-      paddingLeft: theme.sizing.scale300,
-      paddingRight: theme.sizing.scale300,
-      position: "absolute",
-      right: theme.direction !== "rtl" ? 0 - ctx.scrollLeft : "initial",
-      left: theme.direction === "rtl" ? 0 : "initial",
-      top: (ctx.rowHighlightIndex - 1) * ctx.rowHeight + HEADER_ROW_HEIGHT
-    }}>{(typeof ctx.rowActions === "function" ? ctx.rowActions(highlightedRow) : ctx.rowActions).map((rowAction) => {
-      if (rowAction.renderButton) {
-        const RowActionButton = rowAction.renderButton;
-        return <RowActionButton />;
-      }
-      const RowActionIcon = rowAction.renderIcon;
-      return <Button alt={rowAction.label} key={rowAction.label} onClick={(event) => {
-        return rowAction.onClick({
-          event,
-          row: ctx.rows[ctx.rowHighlightIndex - 1]
-        });
-      }} size={BUTTON_SIZES.compact} kind={BUTTON_KINDS.tertiary} shape={BUTTON_SHAPES.round} overrides={{
-        BaseButton: {
-          style: {
-            marginLeft: theme.sizing.scale300,
-            paddingTop: theme.sizing.scale100,
-            paddingRight: theme.sizing.scale100,
-            paddingBottom: theme.sizing.scale100,
-            paddingLeft: theme.sizing.scale100
-          }
-        }
-      }}><RowActionIcon size={24} /></Button>;
-    })}</div>}
-  </div>;
+  return (
+    <div ref={ref} data-baseweb="data-table" style={props.style}>
+      <Headers />
+      {viewState === LOADING && (
+        <LoadingOrEmptyMessage>{ctx.loadingMessage}</LoadingOrEmptyMessage>
+      )}
+      {viewState === EMPTY && (
+        <LoadingOrEmptyMessage>{ctx.emptyMessage}</LoadingOrEmptyMessage>
+      )}
+      {viewState === RENDERING && props.children}
+      {ctx.rowActions &&
+        ctx.rowActions.length > 0 &&
+        ctx.rowHighlightIndex > 0 &&
+        Boolean(highlightedRow) &&
+        !ctx.isScrollingX && (
+          <div
+            style={{
+              alignItems: "center",
+              backgroundColor: theme.colors.backgroundTertiary,
+              display: "flex",
+              height: `${ctx.rowHeight}px`,
+              padding: "0 16px",
+              paddingLeft: theme.sizing.scale300,
+              paddingRight: theme.sizing.scale300,
+              position: "absolute",
+              right: theme.direction !== "rtl" ? 0 - ctx.scrollLeft : "initial",
+              left: theme.direction === "rtl" ? 0 : "initial",
+              top: (ctx.rowHighlightIndex - 1) * ctx.rowHeight + HEADER_ROW_HEIGHT,
+            }}
+          >
+            {(typeof ctx.rowActions === "function"
+              ? ctx.rowActions(highlightedRow)
+              : ctx.rowActions
+            ).map((rowAction) => {
+              if (rowAction.renderButton) {
+                const RowActionButton = rowAction.renderButton;
+                return <RowActionButton />;
+              }
+              const RowActionIcon = rowAction.renderIcon;
+              return (
+                <Button
+                  alt={rowAction.label}
+                  key={rowAction.label}
+                  onClick={(event) => {
+                    return rowAction.onClick({
+                      event,
+                      row: ctx.rows[ctx.rowHighlightIndex - 1],
+                    });
+                  }}
+                  size={BUTTON_SIZES.compact}
+                  kind={BUTTON_KINDS.tertiary}
+                  shape={BUTTON_SHAPES.round}
+                  overrides={{
+                    BaseButton: {
+                      style: {
+                        marginLeft: theme.sizing.scale300,
+                        paddingTop: theme.sizing.scale100,
+                        paddingRight: theme.sizing.scale100,
+                        paddingBottom: theme.sizing.scale100,
+                        paddingLeft: theme.sizing.scale100,
+                      },
+                    },
+                  }}
+                >
+                  <RowActionIcon size={24} />
+                </Button>
+              );
+            })}
+          </div>
+        )}
+    </div>
+  );
 });
 InnerTableElement.displayName = "InnerTableElement";
 function MeasureScrollbarWidth(props) {
@@ -328,11 +487,18 @@ function MeasureScrollbarWidth(props) {
       props.onWidthChange(width);
     }
   }, [outerRef.current, innerRef.current]);
-  return <div className={css({
-    height: 0,
-    visibility: "hidden",
-    overflow: "scroll"
-  })} ref={outerRef}><div ref={innerRef} /></div>;
+  return (
+    <div
+      className={css({
+        height: 0,
+        visibility: "hidden",
+        overflow: "scroll",
+      })}
+      ref={outerRef}
+    >
+      <div ref={innerRef} />
+    </div>
+  );
 }
 export function DataTable({
   batchActions,
@@ -356,23 +522,30 @@ export function DataTable({
   sortIndex,
   sortDirection,
   textQuery = "",
-  controlRef
+  controlRef,
 }) {
   const [, theme] = useStyletron();
   const locale = React.useContext(LocaleContext);
-  const rowHeightAtIndex = React.useCallback((index) => {
-    if (index === 0) {
-      return HEADER_ROW_HEIGHT;
-    }
-    return rowHeight;
-  }, [rowHeight]);
+  const rowHeightAtIndex = React.useCallback(
+    (index) => {
+      if (index === 0) {
+        return HEADER_ROW_HEIGHT;
+      }
+      return rowHeight;
+    },
+    [rowHeight]
+  );
   const [gridRef, setGridRef] = React.useState(null);
-  const [measuredWidths, setMeasuredWidths] = React.useState(columns.map(() => {
-    return 0;
-  }));
-  const [resizeDeltas, setResizeDeltas] = React.useState(columns.map(() => {
-    return 0;
-  }));
+  const [measuredWidths, setMeasuredWidths] = React.useState(
+    columns.map(() => {
+      return 0;
+    })
+  );
+  const [resizeDeltas, setResizeDeltas] = React.useState(
+    columns.map(() => {
+      return 0;
+    })
+  );
   React.useEffect(() => {
     setMeasuredWidths((prev) => {
       return columns.map((v, index) => {
@@ -385,22 +558,31 @@ export function DataTable({
       });
     });
   }, [columns]);
-  const resetAfterColumnIndex = React.useCallback((columnIndex) => {
-    if (gridRef) {
-      gridRef.resetAfterColumnIndex(columnIndex, true);
-    }
-  }, [gridRef]);
-  const handleWidthsChange = React.useCallback((nextWidths) => {
-    setMeasuredWidths(nextWidths);
-    resetAfterColumnIndex(0);
-  }, [setMeasuredWidths, resetAfterColumnIndex]);
-  const handleColumnResize = React.useCallback((columnIndex, delta) => {
-    setResizeDeltas((prev) => {
-      prev[columnIndex] = Math.max(prev[columnIndex] + delta, 0);
-      return [...prev];
-    });
-    resetAfterColumnIndex(columnIndex);
-  }, [setResizeDeltas, resetAfterColumnIndex]);
+  const resetAfterColumnIndex = React.useCallback(
+    (columnIndex) => {
+      if (gridRef) {
+        gridRef.resetAfterColumnIndex(columnIndex, true);
+      }
+    },
+    [gridRef]
+  );
+  const handleWidthsChange = React.useCallback(
+    (nextWidths) => {
+      setMeasuredWidths(nextWidths);
+      resetAfterColumnIndex(0);
+    },
+    [setMeasuredWidths, resetAfterColumnIndex]
+  );
+  const handleColumnResize = React.useCallback(
+    (columnIndex, delta) => {
+      setResizeDeltas((prev) => {
+        prev[columnIndex] = Math.max(prev[columnIndex] + delta, 0);
+        return [...prev];
+      });
+      resetAfterColumnIndex(columnIndex);
+    },
+    [setResizeDeltas, resetAfterColumnIndex]
+  );
   const [scrollLeft, setScrollLeft] = React.useState(0);
   const [isScrollingX, setIsScrollingX] = React.useState(false);
   const [recentlyScrolledX, setRecentlyScrolledX] = React.useState(false);
@@ -417,12 +599,15 @@ export function DataTable({
       };
     }
   }, [recentlyScrolledX]);
-  const handleScroll = React.useCallback((params) => {
-    setScrollLeft(params.scrollLeft);
-    if (params.scrollLeft !== scrollLeft) {
-      setRecentlyScrolledX(true);
-    }
-  }, [scrollLeft, setScrollLeft, setRecentlyScrolledX]);
+  const handleScroll = React.useCallback(
+    (params) => {
+      setScrollLeft(params.scrollLeft);
+      if (params.scrollLeft !== scrollLeft) {
+        setRecentlyScrolledX(true);
+      }
+    },
+    [scrollLeft, setScrollLeft, setRecentlyScrolledX]
+  );
   const sortedIndices = React.useMemo(() => {
     const toSort = allRows.map((r, i) => {
       return [r, i];
@@ -448,10 +633,12 @@ export function DataTable({
     });
   }, [sortIndex, sortDirection, columns, allRows]);
   const filteredIndices = React.useMemo(() => {
-    const set = new Set(allRows.map((_, idx) => {
-      return idx;
-    }));
-    for (const [title, filter] of [...filters || /* @__PURE__ */ new Set()].map((f) => {
+    const set = new Set(
+      allRows.map((_, idx) => {
+        return idx;
+      })
+    );
+    for (const [title, filter] of [...(filters || /* @__PURE__ */ new Set())].map((f) => {
       return f;
     })) {
       const columnIndex = columns.findIndex((c) => {
@@ -492,23 +679,29 @@ export function DataTable({
     return set;
   }, [filters, textQuery, columns, allRows]);
   const rows = React.useMemo(() => {
-    const result = sortedIndices.filter((idx) => {
-      return filteredIndices.has(idx);
-    }).map((idx) => {
-      return allRows[idx];
-    });
+    const result = sortedIndices
+      .filter((idx) => {
+        return filteredIndices.has(idx);
+      })
+      .map((idx) => {
+        return allRows[idx];
+      });
     if (onIncludedRowsChange) {
       onIncludedRowsChange(result);
     }
     return result;
   }, [sortedIndices, filteredIndices, onIncludedRowsChange, allRows]);
-  React.useImperativeHandle(controlRef, () => {
-    return {
-      getRows: () => {
-        return rows;
-      }
-    };
-  }, [rows]);
+  React.useImperativeHandle(
+    controlRef,
+    () => {
+      return {
+        getRows: () => {
+          return rows;
+        },
+      };
+    },
+    [rows]
+  );
   const [browserScrollbarWidth, setBrowserScrollbarWidth] = React.useState(0);
   const normalizedWidths = React.useMemo(() => {
     const resizedWidths = measuredWidths.map((w, i) => {
@@ -527,9 +720,12 @@ export function DataTable({
       }
       const scrollbarWidth = isContentTallerThanContainer ? browserScrollbarWidth : 0;
       const remainder = gridProps.width - sum(resizedWidths) - scrollbarWidth;
-      const padding = Math.floor(remainder / columns.filter((c) => {
-        return c ? c.fillWidth : true;
-      }).length);
+      const padding = Math.floor(
+        remainder /
+          columns.filter((c) => {
+            return c ? c.fillWidth : true;
+          }).length
+      );
       if (padding > 0) {
         const result = [];
         for (let i = 0; i < resizedWidths.length - 1; i++) {
@@ -551,7 +747,7 @@ export function DataTable({
     resizeDeltas,
     browserScrollbarWidth,
     rows.length,
-    columns
+    columns,
   ]);
   const isSelectable = batchActions ? batchActions.length > 0 : false;
   const isSelectedAll = React.useMemo(() => {
@@ -566,12 +762,15 @@ export function DataTable({
     }
     return selectedRowIds.size > 0 && selectedRowIds.size < rows.length;
   }, [selectedRowIds, rows.length]);
-  const isRowSelected = React.useCallback((id) => {
-    if (selectedRowIds) {
-      return selectedRowIds.has(id);
-    }
-    return false;
-  }, [selectedRowIds]);
+  const isRowSelected = React.useCallback(
+    (id) => {
+      if (selectedRowIds) {
+        return selectedRowIds.has(id);
+      }
+      return false;
+    },
+    [selectedRowIds]
+  );
   const handleSelectMany = React.useCallback(() => {
     if (onSelectMany) {
       onSelectMany(rows);
@@ -582,16 +781,22 @@ export function DataTable({
       onSelectNone();
     }
   }, [onSelectNone]);
-  const handleSelectOne = React.useCallback((row) => {
-    if (onSelectOne) {
-      onSelectOne(row);
-    }
-  }, [onSelectOne]);
-  const handleSort = React.useCallback((columnIndex) => {
-    if (onSort) {
-      onSort(columnIndex);
-    }
-  }, [onSort]);
+  const handleSelectOne = React.useCallback(
+    (row) => {
+      if (onSelectOne) {
+        onSelectOne(row);
+      }
+    },
+    [onSelectOne]
+  );
+  const handleSort = React.useCallback(
+    (columnIndex) => {
+      if (onSort) {
+        onSort(columnIndex);
+      }
+    },
+    [onSort]
+  );
   const [columnHighlightIndex, setColumnHighlightIndex] = React.useState(-1);
   const [rowHighlightIndex, setRowHighlightIndex] = React.useState(-1);
   function handleRowHighlightIndexChange(nextIndex) {
@@ -605,12 +810,15 @@ export function DataTable({
       }
     }
   }
-  const handleRowMouseEnter = React.useCallback((nextIndex) => {
-    setColumnHighlightIndex(-1);
-    if (nextIndex !== rowHighlightIndex) {
-      handleRowHighlightIndexChange(nextIndex);
-    }
-  }, [rowHighlightIndex]);
+  const handleRowMouseEnter = React.useCallback(
+    (nextIndex) => {
+      setColumnHighlightIndex(-1);
+      if (nextIndex !== rowHighlightIndex) {
+        handleRowHighlightIndexChange(nextIndex);
+      }
+    },
+    [rowHighlightIndex]
+  );
   function handleColumnHeaderMouseEnter(columnIndex) {
     setColumnHighlightIndex(columnIndex);
     handleRowHighlightIndexChange(-1);
@@ -633,7 +841,7 @@ export function DataTable({
       onSelectOne: handleSelectOne,
       columns,
       rows,
-      textQuery
+      textQuery,
     };
   }, [
     handleRowMouseEnter,
@@ -644,48 +852,83 @@ export function DataTable({
     rows,
     columns,
     handleSelectOne,
-    textQuery
+    textQuery,
   ]);
-  return <React.Fragment>
-    <MeasureColumnWidths columns={columns} rows={rows} widths={measuredWidths} isSelectable={isSelectable} onWidthsChange={handleWidthsChange} />
-    <MeasureScrollbarWidth onWidthChange={(w) => {
-      return setBrowserScrollbarWidth(w);
-    }} />
-    <AutoSizer>{({ height, width }) => {
-      return <HeaderContext.Provider value={{
-        columns,
-        columnHighlightIndex,
-        emptyMessage: emptyMessage || locale.datatable.emptyState,
-        filters,
-        loading: Boolean(loading),
-        loadingMessage: loadingMessage || locale.datatable.loadingState,
-        isScrollingX,
-        isSelectable,
-        isSelectedAll,
-        isSelectedIndeterminate,
-        measuredWidths,
-        onMouseEnter: handleColumnHeaderMouseEnter,
-        onMouseLeave: handleColumnHeaderMouseLeave,
-        onResize: handleColumnResize,
-        onSelectMany: handleSelectMany,
-        onSelectNone: handleSelectNone,
-        onSort: handleSort,
-        resizableColumnWidths,
-        rowActions,
-        rowHeight,
-        rowHighlightIndex,
-        rows,
-        scrollLeft,
-        sortDirection: sortDirection || null,
-        sortIndex: typeof sortIndex === "number" ? sortIndex : -1,
-        tableHeight: height,
-        widths: normalizedWidths
-      }}><VariableSizeGrid ref={setGridRef} overscanRowCount={10} overscanColumnCount={5} innerElementType={InnerTableElement} columnCount={columns.length} columnWidth={(columnIndex) => {
-        return normalizedWidths[columnIndex];
-      }} height={height - 2} rowCount={rows.length + 1} rowHeight={rowHeightAtIndex} width={width - 2} itemData={itemData} onScroll={handleScroll} style={{
-        ...theme.borders.border200,
-        borderColor: theme.colors.borderOpaque
-      }} direction={theme.direction === "rtl" ? "rtl" : "ltr"}>{CellPlacementMemo}</VariableSizeGrid></HeaderContext.Provider>;
-    }}</AutoSizer>
-  </React.Fragment>;
+  return (
+    <React.Fragment>
+      <MeasureColumnWidths
+        columns={columns}
+        rows={rows}
+        widths={measuredWidths}
+        isSelectable={isSelectable}
+        onWidthsChange={handleWidthsChange}
+      />
+      <MeasureScrollbarWidth
+        onWidthChange={(w) => {
+          return setBrowserScrollbarWidth(w);
+        }}
+      />
+      <AutoSizer>
+        {({ height, width }) => {
+          return (
+            <HeaderContext.Provider
+              value={{
+                columns,
+                columnHighlightIndex,
+                emptyMessage: emptyMessage || locale.datatable.emptyState,
+                filters,
+                loading: Boolean(loading),
+                loadingMessage: loadingMessage || locale.datatable.loadingState,
+                isScrollingX,
+                isSelectable,
+                isSelectedAll,
+                isSelectedIndeterminate,
+                measuredWidths,
+                onMouseEnter: handleColumnHeaderMouseEnter,
+                onMouseLeave: handleColumnHeaderMouseLeave,
+                onResize: handleColumnResize,
+                onSelectMany: handleSelectMany,
+                onSelectNone: handleSelectNone,
+                onSort: handleSort,
+                resizableColumnWidths,
+                rowActions,
+                rowHeight,
+                rowHighlightIndex,
+                rows,
+                scrollLeft,
+                sortDirection: sortDirection || null,
+                sortIndex: typeof sortIndex === "number" ? sortIndex : -1,
+                tableHeight: height,
+                widths: normalizedWidths,
+              }}
+            >
+              <VariableSizeGrid
+                ref={setGridRef}
+                overscanRowCount={10}
+                overscanColumnCount={5}
+                innerElementType={InnerTableElement}
+                columnCount={columns.length}
+                columnWidth={(columnIndex) => {
+                  return normalizedWidths[columnIndex];
+                }}
+                height={height - 2}
+                rowCount={rows.length + 1}
+                rowHeight={rowHeightAtIndex}
+                width={width - 2}
+                itemData={itemData}
+                onScroll={handleScroll}
+                style={{
+                  ...theme.borders.border200,
+                  borderColor: theme.colors.borderOpaque,
+                }}
+                direction={theme.direction === "rtl" ? "rtl" : "ltr"}
+              >
+                {CellPlacementMemo}
+              </VariableSizeGrid>
+            </HeaderContext.Provider>
+          );
+        }}
+      </AutoSizer>
+    </React.Fragment>
+  );
 }

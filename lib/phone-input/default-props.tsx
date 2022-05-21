@@ -1,7 +1,7 @@
 import {
   SIZE,
   DEFAULT_MAX_DROPDOWN_HEIGHT,
-  DEFAULT_MAX_DROPDOWN_WIDTH
+  DEFAULT_MAX_DROPDOWN_WIDTH,
 } from "./constants";
 const defaultProps = {
   "aria-label": "Please enter a phone number without the country dial code.",
@@ -16,14 +16,12 @@ const defaultProps = {
   maxDropdownHeight: DEFAULT_MAX_DROPDOWN_HEIGHT,
   maxDropdownWidth: DEFAULT_MAX_DROPDOWN_WIDTH,
   name: null,
-  onCountryChange: () => {
-  },
-  onTextChange: () => {
-  },
+  onCountryChange: () => {},
+  onTextChange: () => {},
   overrides: {},
   positive: false,
   required: false,
   size: SIZE.default,
-  text: ""
+  text: "",
 };
 export default defaultProps;

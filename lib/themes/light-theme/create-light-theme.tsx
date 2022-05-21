@@ -14,7 +14,7 @@ export default function createLightTheme(primitives = {}, overrides) {
   const { primaryFontFamily, ...customColorTokens } = primitives;
   const colorTokens = {
     ...defaultColorTokens,
-    ...customColorTokens
+    ...customColorTokens,
   };
   const theme = {
     animation,
@@ -23,17 +23,19 @@ export default function createLightTheme(primitives = {}, overrides) {
     colors: {
       ...colorTokens,
       ...getComponentColorTokens(colorTokens),
-      ...getSemanticColorTokens(colorTokens)
+      ...getSemanticColorTokens(colorTokens),
     },
     direction: "auto",
     grid,
     lighting,
     mediaQuery,
     sizing,
-    typography: primaryFontFamily ? getTypography({ primaryFontFamily }) : getTypography(),
+    typography: primaryFontFamily
+      ? getTypography({ primaryFontFamily })
+      : getTypography(),
     zIndex: {
-      modal: 2e3
-    }
+      modal: 2e3,
+    },
   };
   return deepMerge(theme, overrides);
 }

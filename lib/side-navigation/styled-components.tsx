@@ -1,7 +1,7 @@
 import { styled, hexToRgb, withWrapper } from "../styles";
 export const StyledRoot = styled("nav", (props) => {
   const {
-    $theme: { colors, typography }
+    $theme: { colors, typography },
   } = props;
   return {
     ...typography.font300,
@@ -14,7 +14,7 @@ export const StyledRoot = styled("nav", (props) => {
     paddingTop: 0,
     paddingBottom: 0,
     paddingLeft: 0,
-    paddingRight: 0
+    paddingRight: 0,
   };
 });
 export const StyledNavItemContainer = styled("li", {});
@@ -22,14 +22,16 @@ export const StyledNavLink = styled("a", ({ $theme, $isFocusVisible }) => ({
   color: "inherit",
   outline: "none",
   textDecoration: "none",
-  ":focus > div": $isFocusVisible ? {
-    outline: `3px solid ${$theme.colors.accent}`,
-    outlineOffset: "-3px",
-    borderLeftColor: "transparent",
-    borderTopColor: "transparent",
-    borderRightColor: "transparent",
-    borderBottomColor: "transparent"
-  } : { outline: "none" }
+  ":focus > div": $isFocusVisible
+    ? {
+        outline: `3px solid ${$theme.colors.accent}`,
+        outlineOffset: "-3px",
+        borderLeftColor: "transparent",
+        borderTopColor: "transparent",
+        borderRightColor: "transparent",
+        borderBottomColor: "transparent",
+      }
+    : { outline: "none" },
 }));
 export const StyledNavItemElement = styled("div", (props) => {
   const {
@@ -38,12 +40,15 @@ export const StyledNavItemElement = styled("div", (props) => {
     $level,
     $disabled,
     $theme,
-    $theme: { colors, sizing }
+    $theme: { colors, sizing },
   } = props;
   const bgImgGradient = hexToRgb(colors.backgroundPrimary, "0.92") || "";
-  const borderWidthDir = $theme.direction === "rtl" ? "borderRightWidth" : "borderLeftWidth";
-  const borderStyleDir = $theme.direction === "rtl" ? "borderRightStyle" : "borderLeftStyle";
-  const borderColorDir = $theme.direction === "rtl" ? "borderRightColor" : "borderLeftColor";
+  const borderWidthDir =
+    $theme.direction === "rtl" ? "borderRightWidth" : "borderLeftWidth";
+  const borderStyleDir =
+    $theme.direction === "rtl" ? "borderRightStyle" : "borderLeftStyle";
+  const borderColorDir =
+    $theme.direction === "rtl" ? "borderRightColor" : "borderLeftColor";
   const paddingPrefixDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   const paddingSuffixDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   let cursor = $selectable ? "pointer" : "default";
@@ -56,7 +61,9 @@ export const StyledNavItemElement = styled("div", (props) => {
   }
   return {
     backgroundColor: $active ? colors.backgroundInversePrimary : "transparent",
-    backgroundImage: $active ? `linear-gradient(0deg, ${bgImgGradient}, ${bgImgGradient})` : null,
+    backgroundImage: $active
+      ? `linear-gradient(0deg, ${bgImgGradient}, ${bgImgGradient})`
+      : null,
     boxSizing: "border-box",
     [borderWidthDir]: "4px",
     [borderStyleDir]: "solid",
@@ -68,16 +75,20 @@ export const StyledNavItemElement = styled("div", (props) => {
     [paddingPrefixDir]: `calc(${sizing.scale800} * ${$level})`,
     [paddingSuffixDir]: sizing.scale500,
     ":hover": {
-      color: hoverColor
+      color: hoverColor,
     },
     ":focus": {
-      color: $selectable ? colors.primary : null
-    }
+      color: $selectable ? colors.primary : null,
+    },
   };
 });
-export const StyledNavItem = withWrapper(StyledNavItemElement, (Styled) => function StyledNav({ item, ...restProps }) {
-  return <Styled {...restProps} />;
-});
+export const StyledNavItem = withWrapper(
+  StyledNavItemElement,
+  (Styled) =>
+    function StyledNav({ item, ...restProps }) {
+      return <Styled {...restProps} />;
+    }
+);
 export const StyledSubNavContainer = styled("ul", {
   listStyleType: "none",
   marginTop: 0,
@@ -87,5 +98,5 @@ export const StyledSubNavContainer = styled("ul", {
   paddingTop: 0,
   paddingBottom: 0,
   paddingLeft: 0,
-  paddingRight: 0
+  paddingRight: 0,
 });

@@ -25,12 +25,18 @@ export function StatefulTabs(props) {
     onChange,
     ...restProps
   } = props;
-  const [state, dispatch] = React.useReducer(stateReducer, getInitialState(children, initialState));
+  const [state, dispatch] = React.useReducer(
+    stateReducer,
+    getInitialState(children, initialState)
+  );
   const handleChange = React.useCallback((params) => {
     const { activeKey } = params;
     dispatch({ type: STATE_CHANGE_TYPE.change, payload: activeKey });
-    if (typeof onChange === "function")
-      onChange(params);
+    if (typeof onChange === "function") onChange(params);
   }, []);
-  return <Tabs {...restProps} activeKey={state.activeKey} onChange={handleChange}>{children}</Tabs>;
+  return (
+    <Tabs {...restProps} activeKey={state.activeKey} onChange={handleChange}>
+      {children}
+    </Tabs>
+  );
 }

@@ -19,7 +19,7 @@ const TreeLabel = ({
     $isExpanded: !!isExpanded,
     $isSelected: !!isSelected,
     $isFocusVisible: !!isFocusVisible,
-    $hasChildren: !!hasChildren
+    $hasChildren: !!hasChildren,
   };
   const {
     IconContainer: IconContainerOverride,
@@ -27,7 +27,7 @@ const TreeLabel = ({
     CollapseIcon: CollapseIconOverride,
     LeafIconContainer: LeafIconContainerOverride,
     LeafIcon: LeafIconOverride,
-    TreeItemContent: TreeItemContentOverride
+    TreeItemContent: TreeItemContentOverride,
   } = overrides;
   const IconContainer = getOverride(IconContainerOverride) || StyledIconContainer;
   const [Left, LeftProps] = getOverrides(ExpandIconOverride, ChevronLeft);
@@ -36,12 +36,39 @@ const TreeLabel = ({
   const LeafIconContainer = getOverride(LeafIconContainerOverride) || StyledIconContainer;
   const LeafIcon = getOverride(LeafIconOverride) || BlankIcon;
   const TreeItemContent = getOverride(TreeItemContentOverride) || StyledItemContent;
-  return <TreeItemContent {...sharedProps} {...props}>
-    {hasChildren && <IconContainer {...sharedProps} {...getOverrideProps(IconContainerOverride)}>{!isExpanded ? <ThemeContext.Consumer>{(theme) => {
-      return theme.direction === "rtl" ? <Left size={16} {...sharedProps} {...LeftProps} /> : <Right size={16} {...sharedProps} {...RightProps} />;
-    }}</ThemeContext.Consumer> : <CollapseIcon size={16} {...sharedProps} {...getOverrideProps(CollapseIconOverride)} />}</IconContainer>}
-    {!hasChildren && LeafIcon && <LeafIconContainer {...sharedProps} {...getOverrideProps(LeafIconContainerOverride)}><LeafIcon size={16} {...sharedProps} {...getOverrideProps(LeafIconOverride)} /></LeafIconContainer>}
-    {typeof label === "function" ? label(node) : label}
-  </TreeItemContent>;
+  return (
+    <TreeItemContent {...sharedProps} {...props}>
+      {hasChildren && (
+        <IconContainer {...sharedProps} {...getOverrideProps(IconContainerOverride)}>
+          {!isExpanded ? (
+            <ThemeContext.Consumer>
+              {(theme) => {
+                return theme.direction === "rtl" ? (
+                  <Left size={16} {...sharedProps} {...LeftProps} />
+                ) : (
+                  <Right size={16} {...sharedProps} {...RightProps} />
+                );
+              }}
+            </ThemeContext.Consumer>
+          ) : (
+            <CollapseIcon
+              size={16}
+              {...sharedProps}
+              {...getOverrideProps(CollapseIconOverride)}
+            />
+          )}
+        </IconContainer>
+      )}
+      {!hasChildren && LeafIcon && (
+        <LeafIconContainer
+          {...sharedProps}
+          {...getOverrideProps(LeafIconContainerOverride)}
+        >
+          <LeafIcon size={16} {...sharedProps} {...getOverrideProps(LeafIconOverride)} />
+        </LeafIconContainer>
+      )}
+      {typeof label === "function" ? label(node) : label}
+    </TreeItemContent>
+  );
 };
 export default TreeLabel;

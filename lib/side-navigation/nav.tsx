@@ -4,7 +4,7 @@ import NavItem from "./nav-item";
 import {
   StyledRoot,
   StyledNavItemContainer,
-  StyledSubNavContainer
+  StyledSubNavContainer,
 } from "./styled-components";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 export default class SideNav extends React.Component {
@@ -26,11 +26,18 @@ export default class SideNav extends React.Component {
     };
   }
   render() {
-    const { activeItemId, activePredicate, items, onChange, overrides, mapItem } = this.props;
+    const { activeItemId, activePredicate, items, onChange, overrides, mapItem } =
+      this.props;
     const navLevel = 1;
     const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
-    const [NavItemContainer, itemContainerProps] = getOverrides(overrides.NavItemContainer, StyledNavItemContainer);
-    const [SubNavContainer, subNavContainerProps] = getOverrides(overrides.SubNavContainer, StyledSubNavContainer);
+    const [NavItemContainer, itemContainerProps] = getOverrides(
+      overrides.NavItemContainer,
+      StyledNavItemContainer
+    );
+    const [SubNavContainer, subNavContainerProps] = getOverrides(
+      overrides.SubNavContainer,
+      StyledSubNavContainer
+    );
     const renderNavItem = (item, level, index, mapItem2) => {
       if (typeof mapItem2 === "function") {
         const recMapItem = (item2) => {
@@ -43,21 +50,52 @@ export default class SideNav extends React.Component {
         item = recMapItem(item);
       }
       const sharedProps = {
-        $active: activePredicate ? activePredicate(item, activeItemId) : this.activePredicate(item),
+        $active: activePredicate
+          ? activePredicate(item, activeItemId)
+          : this.activePredicate(item),
         $level: level,
         $selectable: !!item.itemId,
-        $disabled: item.disabled || false
+        $disabled: item.disabled || false,
       };
-      return <NavItemContainer key={`${index}-level${level}-${typeof item.title === "string" ? item.title : item.itemId || ""}`} {...sharedProps} {...itemContainerProps} onFocus={forkFocus(itemContainerProps, this.handleFocus)} onBlur={forkBlur(itemContainerProps, this.handleBlur)}><>
-        <NavItem $isFocusVisible={this.state.isFocusVisible} item={item} itemMemoizationComparator={this.props.itemMemoizationComparator} onSelect={onChange} overrides={overrides} {...sharedProps} />
-        {item.subNav ? <SubNavContainer role="list" {...sharedProps} {...subNavContainerProps}>{item.subNav.map((subitem, idx) => {
-          return renderNavItem(subitem, level + 1, index);
-        })}</SubNavContainer> : null}
-      </></NavItemContainer>;
+      return (
+        <NavItemContainer
+          key={`${index}-level${level}-${
+            typeof item.title === "string" ? item.title : item.itemId || ""
+          }`}
+          {...sharedProps}
+          {...itemContainerProps}
+          onFocus={forkFocus(itemContainerProps, this.handleFocus)}
+          onBlur={forkBlur(itemContainerProps, this.handleBlur)}
+        >
+          <>
+            <NavItem
+              $isFocusVisible={this.state.isFocusVisible}
+              item={item}
+              itemMemoizationComparator={this.props.itemMemoizationComparator}
+              onSelect={onChange}
+              overrides={overrides}
+              {...sharedProps}
+            />
+            {item.subNav ? (
+              <SubNavContainer role="list" {...sharedProps} {...subNavContainerProps}>
+                {item.subNav.map((subitem, idx) => {
+                  return renderNavItem(subitem, level + 1, index);
+                })}
+              </SubNavContainer>
+            ) : null}
+          </>
+        </NavItemContainer>
+      );
     };
-    return <Root role="navigation" data-baseweb="side-navigation" {...rootProps}><SubNavContainer role="list">{items.map((item, index) => {
-      return renderNavItem(item, navLevel, index, mapItem);
-    })}</SubNavContainer></Root>;
+    return (
+      <Root role="navigation" data-baseweb="side-navigation" {...rootProps}>
+        <SubNavContainer role="list">
+          {items.map((item, index) => {
+            return renderNavItem(item, navLevel, index, mapItem);
+          })}
+        </SubNavContainer>
+      </Root>
+    );
   }
 }
 SideNav.defaultProps = {
@@ -65,5 +103,5 @@ SideNav.defaultProps = {
   activePredicate: null,
   items: [],
   overrides: {},
-  mapItem: null
+  mapItem: null,
 };

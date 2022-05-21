@@ -7,11 +7,11 @@ export {
   TRIGGER_TYPE,
   STATE_CHANGE_TYPE,
   ANIMATE_IN_TIME,
-  ANIMATE_OUT_TIME
+  ANIMATE_OUT_TIME,
 } from "./constants";
 export {
   Arrow as StyledArrow,
   Body as StyledBody,
   Inner as StyledInner,
-  Padding as StyledPadding
+  Padding as StyledPadding,
 } from "./styled-components";

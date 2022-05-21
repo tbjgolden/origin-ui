@@ -60,6 +60,6 @@ const lightColorTokens = {
   mono900: colors.gray700,
   mono1000: colors.black,
   ratingInactiveFill: colors.gray100,
-  ratingStroke: colors.gray300
+  ratingStroke: colors.gray300,
 };
 export default lightColorTokens;

@@ -13,6 +13,6 @@ const lighting = {
   shallowAbove: "0px -4px 16px rgba(0, 0, 0, 0.12)",
   shallowBelow: "0px 4px 16px rgba(0, 0, 0, 0.12)",
   deepAbove: "0px -16px 48px rgba(0, 0, 0, 0.22)",
-  deepBelow: "0px 16px 48px rgba(0, 0, 0, 0.22)"
+  deepBelow: "0px 16px 48px rgba(0, 0, 0, 0.22)",
 };
 export default lighting;

@@ -2,7 +2,7 @@ import { styled } from "../styles";
 import {
   BADGE_ENHANCER_STYLES,
   FLOATING_MARKER_ANCHOR_POSITIONS,
-  LABEL_SIZES
+  LABEL_SIZES,
 } from "./constants";
 export const getAnchorTransform = (anchor, anchorSize) => {
   return {
@@ -10,20 +10,23 @@ export const getAnchorTransform = (anchor, anchorSize) => {
     [FLOATING_MARKER_ANCHOR_POSITIONS.topLeft]: `translate(${anchorSize}px, ${anchorSize}px)`,
     [FLOATING_MARKER_ANCHOR_POSITIONS.topRight]: `translate(-100%, ${anchorSize}px)`,
     [FLOATING_MARKER_ANCHOR_POSITIONS.bottomLeft]: `translate(${anchorSize}px, -100%)`,
-    [FLOATING_MARKER_ANCHOR_POSITIONS.bottomRight]: `translate(-100%, -100%)`
+    [FLOATING_MARKER_ANCHOR_POSITIONS.bottomRight]: `translate(-100%, -100%)`,
   }[anchor];
 };
-export const StyledDragShadowContainer = styled("div", ({ $theme, $height, $width, $dragging }) => {
-  return {
-    width: `${$width}px`,
-    height: `${$height}px`,
-    opacity: $dragging ? 1 : 0,
-    visibility: $dragging ? "visible" : "hidden",
-    transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-    position: "relative",
-    boxShadow: $theme.lighting.shadow600
-  };
-});
+export const StyledDragShadowContainer = styled(
+  "div",
+  ({ $theme, $height, $width, $dragging }) => {
+    return {
+      width: `${$width}px`,
+      height: `${$height}px`,
+      opacity: $dragging ? 1 : 0,
+      visibility: $dragging ? "visible" : "hidden",
+      transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
+      position: "relative",
+      boxShadow: $theme.lighting.shadow600,
+    };
+  }
+);
 export const StyledDragShadow = styled("div", ({ $theme, $background, $width }) => {
   return {
     backgroundColor: $background,
@@ -31,7 +34,7 @@ export const StyledDragShadow = styled("div", ({ $theme, $background, $width }) 
     width: `${$width}px`,
     height: "4px",
     position: "absolute",
-    bottom: 0
+    bottom: 0,
   };
 });
 export const StyledNeedle = styled("div", ({ $theme, $background, $height }) => {
@@ -39,152 +42,170 @@ export const StyledNeedle = styled("div", ({ $theme, $background, $height }) => 
     backgroundColor: $background,
     width: "4px",
     height: `${$height}px`,
-    boxShadow: $theme.lighting.shadow600
+    boxShadow: $theme.lighting.shadow600,
   };
 });
 export const StyledFloatingMarkerRoot = styled("div", ({ $size }) => {
   return {
     position: "relative",
     height: `${$size}px`,
-    width: `${$size}px`
+    width: `${$size}px`,
   };
 });
-export const StyledFloatingMarkerPinHeadContainer = styled("div", ({ $theme, $anchor, $anchorSize }) => {
-  return {
-    position: "absolute",
-    transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-    transform: getAnchorTransform($anchor, $anchorSize)
-  };
-});
+export const StyledFloatingMarkerPinHeadContainer = styled(
+  "div",
+  ({ $theme, $anchor, $anchorSize }) => {
+    return {
+      position: "absolute",
+      transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
+      transform: getAnchorTransform($anchor, $anchorSize),
+    };
+  }
+);
 export const StyledFloatingMarkerAnchorContainer = styled("div", () => {
   return {
-    position: "absolute"
+    position: "absolute",
   };
 });
 export const StyledFixedMarkerRoot = styled("div", () => {
   return {
     display: "flex",
     alignItems: "center",
-    flexDirection: "column"
+    flexDirection: "column",
   };
 });
-export const StyledFixedMarkerDragContainer = styled("div", ({ $theme, $translateAmount, $performTranslate }) => {
-  return {
-    transform: `translateY(${$performTranslate ? `${$translateAmount}px` : "0px"})`,
-    transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column"
-  };
-});
-export const StyledOuterXXSmallAnchor = styled("div", ({ $theme, $round, $background, $size }) => {
-  return {
-    backgroundColor: $background,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: `${$size}px`,
-    width: `${$size}px`,
-    borderRadius: $round ? "50%" : 0,
-    boxShadow: $theme.lighting.shadow600
-  };
-});
+export const StyledFixedMarkerDragContainer = styled(
+  "div",
+  ({ $theme, $translateAmount, $performTranslate }) => {
+    return {
+      transform: `translateY(${$performTranslate ? `${$translateAmount}px` : "0px"})`,
+      transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "column",
+    };
+  }
+);
+export const StyledOuterXXSmallAnchor = styled(
+  "div",
+  ({ $theme, $round, $background, $size }) => {
+    return {
+      backgroundColor: $background,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: `${$size}px`,
+      width: `${$size}px`,
+      borderRadius: $round ? "50%" : 0,
+      boxShadow: $theme.lighting.shadow600,
+    };
+  }
+);
 export const StyledInnerXXSmallAnchor = styled("div", ({ $round, $color, $size }) => {
   return {
     backgroundColor: $color,
     height: `${$size}px`,
     width: `${$size}px`,
-    borderRadius: $round ? "50%" : 0
-  };
-});
-export const StyledOuterXSmallAnchor = styled("div", ({ $theme, $round, $background, $size }) => {
-  return {
-    backgroundColor: $background,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    height: `${$size}px`,
-    width: `${$size}px`,
     borderRadius: $round ? "50%" : 0,
-    boxShadow: $theme.lighting.shadow600
   };
 });
+export const StyledOuterXSmallAnchor = styled(
+  "div",
+  ({ $theme, $round, $background, $size }) => {
+    return {
+      backgroundColor: $background,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      height: `${$size}px`,
+      width: `${$size}px`,
+      borderRadius: $round ? "50%" : 0,
+      boxShadow: $theme.lighting.shadow600,
+    };
+  }
+);
 export const StyledInnerXSmallAnchor = styled("div", ({ $round, $color, $size }) => {
   return {
     backgroundColor: $color,
     height: `${$size}px`,
     width: `${$size}px`,
-    borderRadius: $round ? "50%" : 0
+    borderRadius: $round ? "50%" : 0,
   };
 });
-export const StyledPinHead = styled("div", ({ $theme, $height, $background, $gridTemplateColumns, $type, $forceCircle }) => {
-  const sharedStyles = {
-    fixed: {
-      padding: "0px 12px",
-      borderRadius: `${$height}px`
-    },
-    floating: {
-      padding: "0px 8px"
-    }
-  };
-  return {
-    backgroundColor: $background,
-    height: `${$height}px`,
-    display: "grid",
-    gridTemplateColumns: $gridTemplateColumns,
-    gap: "8px",
-    boxShadow: $theme.lighting.shadow600,
-    whiteSpace: "nowrap",
-    ...sharedStyles[$type],
-    ...$forceCircle && {
-      width: `${$height}px`,
+export const StyledPinHead = styled(
+  "div",
+  ({ $theme, $height, $background, $gridTemplateColumns, $type, $forceCircle }) => {
+    const sharedStyles = {
+      fixed: {
+        padding: "0px 12px",
+        borderRadius: `${$height}px`,
+      },
+      floating: {
+        padding: "0px 8px",
+      },
+    };
+    return {
+      backgroundColor: $background,
+      height: `${$height}px`,
+      display: "grid",
+      gridTemplateColumns: $gridTemplateColumns,
+      gap: "8px",
+      boxShadow: $theme.lighting.shadow600,
+      whiteSpace: "nowrap",
+      ...sharedStyles[$type],
+      ...($forceCircle && {
+        width: `${$height}px`,
+        display: "flex",
+        justifyContent: "center",
+        boxSizing: "border-box",
+      }),
+    };
+  }
+);
+export const StyledStrokedLabelContainer = styled(
+  "div",
+  ({ $position, $theme, $labelOffset }) => {
+    const staticLabelOffset = 4;
+    const positions = {
+      top: {
+        left: `calc(50% + ${staticLabelOffset}px)`,
+        bottom: "100%",
+        alignItems: "flex-end",
+        justifyContent: "center",
+        textAlign: "center",
+      },
+      bottom: {
+        left: "50%",
+        top: `calc(100% + ${staticLabelOffset}px + ${$labelOffset}px)`,
+        alignItems: "flex-start",
+        justifyContent: "center",
+        textAlign: "center",
+      },
+      right: {
+        left: `calc(100% + ${staticLabelOffset}px)`,
+        top: "50%",
+        alignItems: "center",
+        justifyContent: "flex-start",
+      },
+      left: {
+        right: `calc(100% + ${staticLabelOffset}px)`,
+        top: "50%",
+        alignItems: "center",
+        justifyContent: "flex-end",
+        textAlign: "right",
+      },
+      none: {},
+    };
+    return {
+      position: "absolute",
+      width: "0px",
+      height: "0px",
+      pointerEvents: "none",
       display: "flex",
-      justifyContent: "center",
-      boxSizing: "border-box"
-    }
-  };
-});
-export const StyledStrokedLabelContainer = styled("div", ({ $position, $theme, $labelOffset }) => {
-  const staticLabelOffset = 4;
-  const positions = {
-    top: {
-      left: `calc(50% + ${staticLabelOffset}px)`,
-      bottom: "100%",
-      alignItems: "flex-end",
-      justifyContent: "center",
-      textAlign: "center"
-    },
-    bottom: {
-      left: "50%",
-      top: `calc(100% + ${staticLabelOffset}px + ${$labelOffset}px)`,
-      alignItems: "flex-start",
-      justifyContent: "center",
-      textAlign: "center"
-    },
-    right: {
-      left: `calc(100% + ${staticLabelOffset}px)`,
-      top: "50%",
-      alignItems: "center",
-      justifyContent: "flex-start"
-    },
-    left: {
-      right: `calc(100% + ${staticLabelOffset}px)`,
-      top: "50%",
-      alignItems: "center",
-      justifyContent: "flex-end",
-      textAlign: "right"
-    },
-    none: {}
-  };
-  return {
-    position: "absolute",
-    width: "0px",
-    height: "0px",
-    pointerEvents: "none",
-    display: "flex",
-    ...positions[$position]
-  };
-});
+      ...positions[$position],
+    };
+  }
+);
 export const StyledStrokedLabel = styled("div", ({ $theme, $size }) => {
   const strokeWidth = 1.5;
   const strokeColor = $theme.colors.backgroundPrimary;
@@ -204,7 +225,7 @@ export const StyledStrokedLabel = styled("div", ({ $theme, $size }) => {
     textShadow,
     pointerEvents: "auto",
     width: "max-content",
-    maxWidth: "200px"
+    maxWidth: "200px",
   };
 });
 export const StyledBadgeEnhancerRoot = styled("div", ({ $theme, $size, $position }) => {
@@ -218,12 +239,12 @@ export const StyledBadgeEnhancerRoot = styled("div", ({ $theme, $size, $position
     right: 0,
     transform: `translate(calc(100% + ${x}px), ${y}px)`,
     transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-    ...BADGE_ENHANCER_STYLES[$size]
+    ...BADGE_ENHANCER_STYLES[$size],
   };
 });
 export const RelativeContainer = styled("div", () => {
   return {
-    position: "relative"
+    position: "relative",
   };
 });
 export const StyledContentItem = styled("div", ({ $theme, $color, $height, $size }) => {
@@ -234,6 +255,6 @@ export const StyledContentItem = styled("div", ({ $theme, $color, $height, $size
     textAlign: "center",
     lineHeight: `${$height}px`,
     height: `${$height}px`,
-    color: $color
+    color: $color,
   };
 });

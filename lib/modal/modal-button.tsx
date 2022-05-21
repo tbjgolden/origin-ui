@@ -7,14 +7,16 @@ const overrides = {
       const marginInlineEnd = $theme.direction !== "rtl" ? "marginRight" : "marginLeft";
       return {
         ":not(:last-child)": {
-          [marginInlineEnd]: $theme.sizing.scale500
-        }
+          [marginInlineEnd]: $theme.sizing.scale500,
+        },
       };
-    }
-  }
+    },
+  },
 };
 const ModalButton = React.forwardRef((props, ref) => {
-  return <Button ref={ref} {...props} overrides={mergeOverrides(overrides, props.overrides)} />;
+  return (
+    <Button ref={ref} {...props} overrides={mergeOverrides(overrides, props.overrides)} />
+  );
 });
 ModalButton.displayName = "ModalButton";
 export default ModalButton;

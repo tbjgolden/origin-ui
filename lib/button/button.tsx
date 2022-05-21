@@ -2,7 +2,7 @@ import * as React from "react";
 import {
   BaseButton as StyledBaseButton,
   LoadingSpinner as StyledLoadingSpinner,
-  LoadingSpinnerContainer as StyledLoadingSpinnerContainer
+  LoadingSpinnerContainer as StyledLoadingSpinnerContainer,
 } from "./styled-components";
 import { getSharedProps } from "./utils";
 import ButtonInternals from "./button-internals";
@@ -46,20 +46,55 @@ class Button extends React.Component {
       forwardedRef,
       ...restProps
     } = this.props;
-    const [BaseButton, baseButtonProps] = getOverrides(overrides.BaseButton || overrides.Root, StyledBaseButton);
-    const [LoadingSpinner, loadingSpinnerProps] = getOverrides(overrides.LoadingSpinner, StyledLoadingSpinner);
-    const [LoadingSpinnerContainer, loadingSpinnerContainerProps] = getOverrides(overrides.LoadingSpinnerContainer, StyledLoadingSpinnerContainer);
+    const [BaseButton, baseButtonProps] = getOverrides(
+      overrides.BaseButton || overrides.Root,
+      StyledBaseButton
+    );
+    const [LoadingSpinner, loadingSpinnerProps] = getOverrides(
+      overrides.LoadingSpinner,
+      StyledLoadingSpinner
+    );
+    const [LoadingSpinnerContainer, loadingSpinnerContainerProps] = getOverrides(
+      overrides.LoadingSpinnerContainer,
+      StyledLoadingSpinnerContainer
+    );
     const sharedProps = {
       ...getSharedProps(this.props),
-      $isFocusVisible: this.state.isFocusVisible
+      $isFocusVisible: this.state.isFocusVisible,
     };
-    return <BaseButton ref={forwardedRef} data-baseweb="button" {...isLoading ? {
-      ["aria-label"]: `loading ${typeof this.props.children === "string" ? this.props.children : ""}`,
-      ["aria-busy"]: "true"
-    } : {}} {...sharedProps} {...restProps} {...baseButtonProps} onClick={this.internalOnClick} onFocus={forkFocus({ ...restProps, ...baseButtonProps }, this.handleFocus)} onBlur={forkBlur({ ...restProps, ...baseButtonProps }, this.handleBlur)}>{isLoading ? <React.Fragment>
-      <div style={{ opacity: 0, display: "flex", height: "0px" }}><ButtonInternals {...this.props} /></div>
-      <LoadingSpinnerContainer {...sharedProps} {...loadingSpinnerContainerProps}><LoadingSpinner {...sharedProps} {...loadingSpinnerProps} /></LoadingSpinnerContainer>
-    </React.Fragment> : <ButtonInternals {...this.props} />}</BaseButton>;
+    return (
+      <BaseButton
+        ref={forwardedRef}
+        data-baseweb="button"
+        {...(isLoading
+          ? {
+              ["aria-label"]: `loading ${
+                typeof this.props.children === "string" ? this.props.children : ""
+              }`,
+              ["aria-busy"]: "true",
+            }
+          : {})}
+        {...sharedProps}
+        {...restProps}
+        {...baseButtonProps}
+        onClick={this.internalOnClick}
+        onFocus={forkFocus({ ...restProps, ...baseButtonProps }, this.handleFocus)}
+        onBlur={forkBlur({ ...restProps, ...baseButtonProps }, this.handleBlur)}
+      >
+        {isLoading ? (
+          <React.Fragment>
+            <div style={{ opacity: 0, display: "flex", height: "0px" }}>
+              <ButtonInternals {...this.props} />
+            </div>
+            <LoadingSpinnerContainer {...sharedProps} {...loadingSpinnerContainerProps}>
+              <LoadingSpinner {...sharedProps} {...loadingSpinnerProps} />
+            </LoadingSpinnerContainer>
+          </React.Fragment>
+        ) : (
+          <ButtonInternals {...this.props} />
+        )}
+      </BaseButton>
+    );
   }
 }
 Button.defaultProps = defaultProps;

@@ -19,8 +19,8 @@ export const StyledList = styled("ul", ({ $theme, $isFocusVisible }) => {
     boxShadow: $theme.lighting.shadow600,
     overflow: "auto",
     ":focus": {
-      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none"
-    }
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+    },
   };
 });
 function getFontColor(props) {
@@ -47,7 +47,9 @@ function getBackgroundColor(props) {
 export const StyledEmptyState = styled("li", (props) => {
   const { $theme, $size } = props;
   return {
-    ...$size === OPTION_LIST_SIZE.compact ? $theme.typography.font100 : $theme.typography.font200,
+    ...($size === OPTION_LIST_SIZE.compact
+      ? $theme.typography.font100
+      : $theme.typography.font200),
     position: "relative",
     display: "block",
     color: $theme.colors.menuFontDisabled,
@@ -58,7 +60,7 @@ export const StyledEmptyState = styled("li", (props) => {
     paddingTop: $theme.sizing.scale800,
     paddingBottom: $theme.sizing.scale800,
     paddingRight: $theme.sizing.scale800,
-    paddingLeft: $theme.sizing.scale800
+    paddingLeft: $theme.sizing.scale800,
   };
 });
 export const StyledOptgroupHeader = styled("li", (props) => {
@@ -70,19 +72,21 @@ export const StyledOptgroupHeader = styled("li", (props) => {
     paddingTop: paddingY,
     paddingBottom: paddingY,
     paddingRight: paddingX,
-    paddingLeft: paddingX
+    paddingLeft: paddingX,
   };
 });
 export const StyledListItemAnchor = styled("a", (props) => {
   return {
     display: "block",
-    color: getFontColor(props)
+    color: getFontColor(props),
   };
 });
 export const StyledListItemElement = styled("li", (props) => {
   const { $disabled, $theme, $size } = props;
   return {
-    ...$size === OPTION_LIST_SIZE.compact ? $theme.typography.font100 : $theme.typography.font200,
+    ...($size === OPTION_LIST_SIZE.compact
+      ? $theme.typography.font100
+      : $theme.typography.font200),
     position: "relative",
     display: "block",
     color: getFontColor(props),
@@ -92,13 +96,25 @@ export const StyledListItemElement = styled("li", (props) => {
     transitionDuration: $theme.animation.timing200,
     transitionTimingFunction: $theme.animation.easeOutCurve,
     marginBottom: 0,
-    paddingTop: $size === OPTION_LIST_SIZE.compact ? $theme.sizing.scale100 : $theme.sizing.scale300,
-    paddingBottom: $size === OPTION_LIST_SIZE.compact ? $theme.sizing.scale100 : $theme.sizing.scale300,
-    paddingRight: $size === OPTION_LIST_SIZE.compact ? $theme.sizing.scale900 : $theme.sizing.scale600,
-    paddingLeft: $size === OPTION_LIST_SIZE.compact ? $theme.sizing.scale900 : $theme.sizing.scale600,
+    paddingTop:
+      $size === OPTION_LIST_SIZE.compact
+        ? $theme.sizing.scale100
+        : $theme.sizing.scale300,
+    paddingBottom:
+      $size === OPTION_LIST_SIZE.compact
+        ? $theme.sizing.scale100
+        : $theme.sizing.scale300,
+    paddingRight:
+      $size === OPTION_LIST_SIZE.compact
+        ? $theme.sizing.scale900
+        : $theme.sizing.scale600,
+    paddingLeft:
+      $size === OPTION_LIST_SIZE.compact
+        ? $theme.sizing.scale900
+        : $theme.sizing.scale600,
     ":focus": {
-      outline: "none"
-    }
+      outline: "none",
+    },
   };
 });
 export const StyledListItem = withWrapper(StyledListItemElement, (Styled) => {
@@ -120,8 +136,8 @@ export const StyledListItemProfile = styled("li", ({ $theme }) => {
     transitionDuration: $theme.animation.timing200,
     transitionTimingFunction: $theme.animation.easeOutCurve,
     ":hover": {
-      backgroundColor: $theme.colors.menuFillHover
-    }
+      backgroundColor: $theme.colors.menuFillHover,
+    },
   };
 });
 export const StyledProfileImgContainer = styled("div", {
@@ -129,7 +145,7 @@ export const StyledProfileImgContainer = styled("div", {
   height: "60px",
   display: "flex",
   justifyContent: "center",
-  alignItems: "center"
+  alignItems: "center",
 });
 export const StyledProfileImg = styled("img", {
   width: "100%",
@@ -137,16 +153,21 @@ export const StyledProfileImg = styled("img", {
   borderTopLeftRadius: "50%",
   borderTopRightRadius: "50%",
   borderBottomRightRadius: "50%",
-  borderBottomLeftRadius: "50%"
+  borderBottomLeftRadius: "50%",
 });
-export const StyledProfileLabelsContainer = styled("div", ({ $theme: { direction, sizing } }) => {
-  return {
-    alignSelf: direction === "rtl" ? "flex-end" : "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    ...direction === "rtl" ? { marginRight: sizing.scale600 } : { marginLeft: sizing.scale600 }
-  };
-});
+export const StyledProfileLabelsContainer = styled(
+  "div",
+  ({ $theme: { direction, sizing } }) => {
+    return {
+      alignSelf: direction === "rtl" ? "flex-end" : "flex-start",
+      display: "flex",
+      flexDirection: "column",
+      ...(direction === "rtl"
+        ? { marginRight: sizing.scale600 }
+        : { marginLeft: sizing.scale600 }),
+    };
+  }
+);
 export const StyledProfileTitle = styled("h6", ({ $theme }) => {
   return {
     ...$theme.typography.font350,
@@ -154,7 +175,7 @@ export const StyledProfileTitle = styled("h6", ({ $theme }) => {
     marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
   };
 });
 export const StyledProfileSubtitle = styled("p", ({ $theme }) => {
@@ -164,7 +185,7 @@ export const StyledProfileSubtitle = styled("p", ({ $theme }) => {
     marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
   };
 });
 export const StyledProfileBody = styled("p", ({ $theme }) => {
@@ -174,6 +195,6 @@ export const StyledProfileBody = styled("p", ({ $theme }) => {
     marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
   };
 });

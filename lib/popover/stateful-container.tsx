@@ -4,7 +4,7 @@ import {
   PLACEMENT,
   STATE_CHANGE_TYPE,
   TRIGGER_TYPE,
-  POPOVER_MARGIN
+  POPOVER_MARGIN,
 } from "./constants";
 const defaultStateReducer = (type, nextState) => {
   return nextState;
@@ -14,7 +14,7 @@ class StatefulContainer extends React.Component {
     super(...arguments);
     this.state = {
       isOpen: false,
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.onBlur = (e) => {
       if (this.props.onBlur) {
@@ -72,7 +72,7 @@ class StatefulContainer extends React.Component {
   }
   open() {
     this.internalSetState(STATE_CHANGE_TYPE.open, {
-      isOpen: true
+      isOpen: true,
     });
     if (this.props.onOpen) {
       this.props.onOpen();
@@ -80,7 +80,7 @@ class StatefulContainer extends React.Component {
   }
   close() {
     this.internalSetState(STATE_CHANGE_TYPE.close, {
-      isOpen: false
+      isOpen: false,
     });
     if (this.props.onClose) {
       this.props.onClose();
@@ -121,7 +121,7 @@ class StatefulContainer extends React.Component {
       showArrow,
       triggerType,
       popoverMargin,
-      focusOptions
+      focusOptions,
     } = this.props;
     const popoverProps = {
       accessibilityType,
@@ -147,7 +147,7 @@ class StatefulContainer extends React.Component {
       showArrow,
       triggerType,
       popoverMargin,
-      focusOptions
+      focusOptions,
     };
     if (dismissOnClickOutside) {
       popoverProps.onClickOutside = this.onClickOutside;
@@ -179,6 +179,6 @@ StatefulContainer.defaultProps = {
   dismissOnClickOutside: true,
   dismissOnEsc: true,
   stateReducer: defaultStateReducer,
-  popoverMargin: POPOVER_MARGIN
+  popoverMargin: POPOVER_MARGIN,
 };
 export default StatefulContainer;

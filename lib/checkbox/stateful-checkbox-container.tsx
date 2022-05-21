@@ -40,7 +40,7 @@ class StatefulCheckboxContainer extends React.Component {
     };
     const { initialState } = this.props;
     this.state = {
-      ...initialState
+      ...initialState,
     };
   }
   render() {
@@ -61,25 +61,20 @@ class StatefulCheckboxContainer extends React.Component {
       onMouseEnter,
       onMouseLeave,
       onFocus,
-      onBlur
+      onBlur,
     });
   }
 }
 StatefulCheckboxContainer.defaultProps = {
   initialState: {
     checked: false,
-    isIndeterminate: false
+    isIndeterminate: false,
   },
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  },
-  onMouseEnter: () => {
-  },
-  onMouseLeave: () => {
-  },
-  onFocus: () => {
-  },
-  onBlur: () => {
-  }
+  onChange: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
 };
 export default StatefulCheckboxContainer;

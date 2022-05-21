@@ -56,4 +56,5 @@ export const subMonths = createDirtySetter(defaultDateHelpers.subMonths);
 export const subYears = createDirtySetter(defaultDateHelpers.subYears);
 export const isBefore = createDirtyCompare(defaultDateHelpers.isBefore);
 export const isAfter = createDirtyCompare(defaultDateHelpers.isAfter);
-export const format = (date, format2, locale) => defaultDateHelpers.format(date, format2, locale);
+export const format = (date, format2, locale) =>
+  defaultDateHelpers.format(date, format2, locale);

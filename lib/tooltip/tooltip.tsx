@@ -5,19 +5,29 @@ import baseDefaultProps from "./default-props";
 import {
   Arrow as StyledArrow,
   Body as StyledBody,
-  Inner as StyledInner
+  Inner as StyledInner,
 } from "./styled-components";
 class Tooltip extends React.Component {
   render() {
-    const overrides = mergeOverrides({
-      Arrow: StyledArrow,
-      Body: StyledBody,
-      Inner: StyledInner
-    }, this.props.overrides);
-    return <Popover autoFocus={false} data-baseweb="tooltip" {...this.props} overrides={overrides} />;
+    const overrides = mergeOverrides(
+      {
+        Arrow: StyledArrow,
+        Body: StyledBody,
+        Inner: StyledInner,
+      },
+      this.props.overrides
+    );
+    return (
+      <Popover
+        autoFocus={false}
+        data-baseweb="tooltip"
+        {...this.props}
+        overrides={overrides}
+      />
+    );
   }
 }
 Tooltip.defaultProps = {
-  ...baseDefaultProps
+  ...baseDefaultProps,
 };
 export default Tooltip;

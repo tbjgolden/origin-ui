@@ -8,6 +8,6 @@ export function getSharedProps(props, state) {
     $positive: positive,
     $adjoined: adjoined,
     $size: size,
-    $required: required
+    $required: required,
   };
 }

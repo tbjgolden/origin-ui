@@ -18,7 +18,7 @@ import {
   StyledInputContainer,
   StyledIconsContainer,
   StyledSearchIconContainer,
-  StyledLoadingIndicator
+  StyledLoadingIndicator,
 } from "./styled-components";
 import { expandValue, normalizeOptions } from "./utils";
 function Noop() {
@@ -43,8 +43,7 @@ export function isInteractive(rootTarget, rootElement) {
       if (role === "button" || role === "link") {
         return true;
       }
-      if (target.tagName)
-        target = target.parentElement;
+      if (target.tagName) target = target.parentElement;
     }
   }
   return false;
@@ -60,29 +59,27 @@ class Select extends React.Component {
       inputValue: "",
       isFocused: false,
       isOpen: this.props.startOpen,
-      isPseudoFocused: false
+      isPseudoFocused: false,
     };
     this.isItMounted = false;
     this.handleTouchOutside = (event) => {
-      if (containsNode(this.dropdown.current, event.target))
-        return;
+      if (containsNode(this.dropdown.current, event.target)) return;
       if (!containsNode(this.anchor.current, event.target)) {
         this.closeMenu();
       }
     };
     this.handleTouchMove = () => {
-      return this.dragging = true;
+      return (this.dragging = true);
     };
     this.handleTouchStart = () => {
-      return this.dragging = false;
+      return (this.dragging = false);
     };
     this.handleTouchEnd = (event) => {
-      if (this.dragging)
-        return;
+      if (this.dragging) return;
       this.handleClick(event);
     };
     this.handleClick = (event) => {
-      if (this.props.disabled || !isClick(event) && !isLeftClick(event)) {
+      if (this.props.disabled || (!isClick(event) && !isLeftClick(event))) {
         return;
       }
       if (event.target === this.input) {
@@ -94,7 +91,7 @@ class Select extends React.Component {
           this.setState({
             isOpen: true,
             isFocused: true,
-            isPseudoFocused: false
+            isPseudoFocused: false,
           });
         }
         return;
@@ -113,12 +110,11 @@ class Select extends React.Component {
       }
       if (this.state.isFocused) {
         this.focus();
-        if (this.input)
-          this.input.value = "";
+        if (this.input) this.input.value = "";
         this.setState((prev) => {
           return {
             isOpen: !this.focusAfterClear && !prev.isOpen,
-            isPseudoFocused: false
+            isPseudoFocused: false,
           };
         });
         this.focusAfterClear = false;
@@ -129,22 +125,23 @@ class Select extends React.Component {
       }
     };
     this.handleInputFocus = (event) => {
-      if (this.props.disabled)
-        return;
-      if (this.props.onFocus)
-        this.props.onFocus(event);
+      if (this.props.disabled) return;
+      if (this.props.onFocus) this.props.onFocus(event);
       let toOpen = this.state.isOpen || this.openAfterFocus;
       toOpen = !this.focusAfterClear && toOpen;
       this.setState({
         isFocused: true,
-        isOpen: !!toOpen
+        isOpen: !!toOpen,
       });
       this.focusAfterClear = false;
       this.openAfterFocus = false;
     };
     this.handleBlur = (event) => {
       if (event.relatedTarget) {
-        if (containsNode(this.anchor.current, event.relatedTarget) || containsNode(this.dropdown.current, event.relatedTarget)) {
+        if (
+          containsNode(this.anchor.current, event.relatedTarget) ||
+          containsNode(this.dropdown.current, event.relatedTarget)
+        ) {
           return;
         }
       } else if (containsNode(this.anchor.current, event.target)) {
@@ -158,7 +155,7 @@ class Select extends React.Component {
           isFocused: false,
           isOpen: false,
           isPseudoFocused: false,
-          inputValue: this.props.onBlurResetsInput ? "" : this.state.inputValue
+          inputValue: this.props.onBlurResetsInput ? "" : this.state.inputValue,
         });
       }
     };
@@ -167,8 +164,7 @@ class Select extends React.Component {
         this.justSelected = false;
         return;
       }
-      if (containsNode(this.dropdown.current, event.target))
-        return;
+      if (containsNode(this.dropdown.current, event.target)) return;
       const isFocused = this.state.isFocused || this.state.isPseudoFocused;
       if (isFocused && !containsNode(this.anchor.current, event.target)) {
         this.handleBlur(event);
@@ -179,15 +175,14 @@ class Select extends React.Component {
       this.setState({
         inputValue: newInputValue,
         isOpen: true,
-        isPseudoFocused: false
+        isPseudoFocused: false,
       });
       if (this.props.onInputChange) {
         this.props.onInputChange(event);
       }
     };
     this.handleKeyDown = (event) => {
-      if (this.props.disabled)
-        return;
+      if (this.props.disabled) return;
       switch (event.keyCode) {
         case 8:
           if (!this.state.inputValue && this.props.backspaceRemoves) {
@@ -201,12 +196,19 @@ class Select extends React.Component {
               isPseudoFocused: false,
               isFocused: false,
               isOpen: false,
-              inputValue: !this.props.onCloseResetsInput || !this.props.onBlurResetsInput ? prevState.inputValue : ""
+              inputValue:
+                !this.props.onCloseResetsInput || !this.props.onBlurResetsInput
+                  ? prevState.inputValue
+                  : "",
             };
           });
           break;
         case 27:
-          if (!this.state.isOpen && this.props.clearable && this.props.escapeClearsValue) {
+          if (
+            !this.state.isOpen &&
+            this.props.clearable &&
+            this.props.escapeClearsValue
+          ) {
             this.clearValue(event);
             this.setState({ isFocused: false, isPseudoFocused: false });
           }
@@ -270,10 +272,10 @@ class Select extends React.Component {
           break;
       }
     };
-    this.getOptionLabel = (locale, {
-      option
-    }) => {
-      return option.isCreatable ? `${locale.select.create} \u201C${option[this.props.labelKey]}\u201D` : option[this.props.labelKey];
+    this.getOptionLabel = (locale, { option }) => {
+      return option.isCreatable
+        ? `${locale.select.create} \u201C${option[this.props.labelKey]}\u201D`
+        : option[this.props.labelKey];
     };
     this.getValueLabel = ({ option }) => {
       return option[this.props.labelKey];
@@ -303,29 +305,37 @@ class Select extends React.Component {
       this.justSelected = true;
       const updatedValue = this.props.onSelectResetsInput ? "" : this.state.inputValue;
       if (this.props.multi) {
-        this.setState({
-          inputValue: updatedValue,
-          isOpen: !this.props.closeOnSelect
-        }, () => {
-          const valueArray = this.props.value;
-          if (valueArray.some((i) => {
-            return i[this.props.valueKey] === item[this.props.valueKey];
-          })) {
-            this.removeValue(item);
-          } else {
-            this.addValue(item);
+        this.setState(
+          {
+            inputValue: updatedValue,
+            isOpen: !this.props.closeOnSelect,
+          },
+          () => {
+            const valueArray = this.props.value;
+            if (
+              valueArray.some((i) => {
+                return i[this.props.valueKey] === item[this.props.valueKey];
+              })
+            ) {
+              this.removeValue(item);
+            } else {
+              this.addValue(item);
+            }
           }
-        });
+        );
       } else {
         this.focus();
-        this.setState({
-          inputValue: updatedValue,
-          isOpen: !this.props.closeOnSelect,
-          isFocused: true,
-          isPseudoFocused: false
-        }, () => {
-          this.setValue([item], item, STATE_CHANGE_TYPE.select);
-        });
+        this.setState(
+          {
+            inputValue: updatedValue,
+            isOpen: !this.props.closeOnSelect,
+            isFocused: true,
+            isPseudoFocused: false,
+          },
+          () => {
+            this.setValue([item], item, STATE_CHANGE_TYPE.select);
+          }
+        );
       }
     };
     this.addValue = (item) => {
@@ -344,31 +354,32 @@ class Select extends React.Component {
         const remainingInput = labelForInput.slice(0, -1);
         this.setState({
           inputValue: remainingInput,
-          isOpen: true
+          isOpen: true,
         });
       }
     };
     this.popValue = () => {
       const valueArray = [...this.props.value];
       const valueLength = valueArray.length;
-      if (!valueLength)
-        return;
-      if (valueArray[valueLength - 1].clearableValue === false)
-        return;
+      if (!valueLength) return;
+      if (valueArray[valueLength - 1].clearableValue === false) return;
       const item = valueArray.pop();
       this.setValue(valueArray, item, STATE_CHANGE_TYPE.remove);
       return item;
     };
     this.removeValue = (item) => {
       const valueArray = [...this.props.value];
-      this.setValue(valueArray.filter((i) => {
-        return i[this.props.valueKey] !== item[this.props.valueKey];
-      }), item, STATE_CHANGE_TYPE.remove);
+      this.setValue(
+        valueArray.filter((i) => {
+          return i[this.props.valueKey] !== item[this.props.valueKey];
+        }),
+        item,
+        STATE_CHANGE_TYPE.remove
+      );
       this.focus();
     };
     this.clearValue = (event) => {
-      if (isClick(event) && !isLeftClick(event))
-        return;
+      if (isClick(event) && !isLeftClick(event)) return;
       if (this.props.value) {
         const resetValue = this.props.value.filter((item) => {
           return item.clearableValue === false;
@@ -377,13 +388,16 @@ class Select extends React.Component {
       }
       this.setState({
         inputValue: "",
-        isOpen: false
+        isOpen: false,
       });
       this.focus();
       this.focusAfterClear = true;
     };
     this.shouldShowPlaceholder = () => {
-      return !(this.state.inputValue || this.props.value && this.props.value.length > 0);
+      return !(
+        this.state.inputValue ||
+        (this.props.value && this.props.value.length > 0)
+      );
     };
     this.shouldShowValue = () => {
       return !this.state.inputValue;
@@ -403,7 +417,7 @@ class Select extends React.Component {
         setInputFocus: this.handleSetInputFocus.bind(this),
         setInputBlur: this.handleSetInputBlur.bind(this),
         focus: this.handleSetInputFocus.bind(this),
-        blur: this.handleSetInputBlur.bind(this)
+        blur: this.handleSetInputBlur.bind(this),
       };
     }
   }
@@ -431,18 +445,17 @@ class Select extends React.Component {
     this.isItMounted = false;
   }
   focus() {
-    if (!this.input)
-      return;
+    if (!this.input) return;
     this.input.focus();
   }
   handleDropdownOpen(nextOpenState) {
     this.setState({
-      isOpen: nextOpenState
+      isOpen: nextOpenState,
     });
   }
   handleSetInputValue(newInputValue) {
     this.setState({
-      inputValue: newInputValue
+      inputValue: newInputValue,
     });
   }
   handleSetInputFocus() {
@@ -456,19 +469,18 @@ class Select extends React.Component {
       this.setState({
         inputValue: "",
         isOpen: false,
-        isPseudoFocused: this.state.isFocused && !this.props.multi
+        isPseudoFocused: this.state.isFocused && !this.props.multi,
       });
     } else {
       this.setState({
         isOpen: false,
-        isPseudoFocused: this.state.isFocused && !this.props.multi
+        isPseudoFocused: this.state.isFocused && !this.props.multi,
       });
     }
   }
   getValueArray(value) {
     if (!Array.isArray(value)) {
-      if (value === null || value === void 0)
-        return [];
+      if (value === null || value === void 0) return [];
       value = [value];
     }
     return value.map((value2) => {
@@ -480,26 +492,36 @@ class Select extends React.Component {
       this.props.onChange({
         value,
         option,
-        type
+        type,
       });
     }
   }
   renderLoading() {
-    if (!this.props.isLoading)
-      return;
+    if (!this.props.isLoading) return;
     const { overrides = {} } = this.props;
-    const [LoadingIndicator, loadingIndicatorProps] = getOverrides(overrides.LoadingIndicator, StyledLoadingIndicator);
-    return <LoadingIndicator role="status" {...loadingIndicatorProps}><span style={{
-      position: "absolute",
-      width: "1px",
-      height: "1px",
-      padding: 0,
-      margin: "-1px",
-      overflow: "hidden",
-      clip: "rect(0,0,0,0)",
-      whiteSpace: "nowrap",
-      border: 0
-    }}>Loading</span></LoadingIndicator>;
+    const [LoadingIndicator, loadingIndicatorProps] = getOverrides(
+      overrides.LoadingIndicator,
+      StyledLoadingIndicator
+    );
+    return (
+      <LoadingIndicator role="status" {...loadingIndicatorProps}>
+        <span
+          style={{
+            position: "absolute",
+            width: "1px",
+            height: "1px",
+            padding: 0,
+            margin: "-1px",
+            overflow: "hidden",
+            clip: "rect(0,0,0,0)",
+            whiteSpace: "nowrap",
+            border: 0,
+          }}
+        >
+          Loading
+        </span>
+      </LoadingIndicator>
+    );
   }
   renderValue(valueArray, isOpen, locale) {
     const { overrides = {} } = this.props;
@@ -512,38 +534,128 @@ class Select extends React.Component {
     if (this.props.multi) {
       return valueArray.map((value, i) => {
         const disabled = sharedProps.$disabled || value.clearableValue === false;
-        return <Value value={value} key={`value-${i}-${value[this.props.valueKey]}`} removeValue={() => {
-          return this.removeValue(value);
-        }} disabled={disabled} overrides={{ Tag: overrides.Tag, MultiValue: overrides.MultiValue }} {...sharedProps} $disabled={disabled}>{renderLabel({ option: value, index: i })}</Value>;
+        return (
+          <Value
+            value={value}
+            key={`value-${i}-${value[this.props.valueKey]}`}
+            removeValue={() => {
+              return this.removeValue(value);
+            }}
+            disabled={disabled}
+            overrides={{ Tag: overrides.Tag, MultiValue: overrides.MultiValue }}
+            {...sharedProps}
+            $disabled={disabled}
+          >
+            {renderLabel({ option: value, index: i })}
+          </Value>
+        );
       });
     } else if (this.shouldShowValue()) {
-      return <Value value={valueArray[0][this.props.valueKey]} disabled={this.props.disabled} overrides={{ SingleValue: overrides.SingleValue }} {...sharedProps}>{renderLabel({ option: valueArray[0] })}</Value>;
+      return (
+        <Value
+          value={valueArray[0][this.props.valueKey]}
+          disabled={this.props.disabled}
+          overrides={{ SingleValue: overrides.SingleValue }}
+          {...sharedProps}
+        >
+          {renderLabel({ option: valueArray[0] })}
+        </Value>
+      );
     }
   }
   renderInput(listboxId) {
     const { overrides = {} } = this.props;
-    const [InputContainer, inputContainerProps] = getOverrides(overrides.InputContainer, StyledInputContainer);
+    const [InputContainer, inputContainerProps] = getOverrides(
+      overrides.InputContainer,
+      StyledInputContainer
+    );
     const sharedProps = this.getSharedProps();
     const isOpen = this.state.isOpen;
-    const selected = this.getValueArray(this.props.value).map((v) => {
-      return v[this.props.labelKey];
-    }).join(", ");
+    const selected = this.getValueArray(this.props.value)
+      .map((v) => {
+        return v[this.props.labelKey];
+      })
+      .join(", ");
     const selectedLabel = selected.length > 0 ? `Selected ${selected}. ` : "";
     const label = `${selectedLabel}${this.props["aria-label"] || ""}`;
     if (!this.props.searchable) {
-      return <InputContainer role="listbox" aria-activedescendant={this.state.activeDescendant} aria-expanded={isOpen} aria-describedby={this.props["aria-describedby"]} aria-errormessage={this.props["aria-errormessage"]} aria-disabled={this.props.disabled} aria-label={label} aria-labelledby={this.props["aria-labelledby"]} aria-owns={this.state.isOpen ? listboxId : null} aria-required={this.props.required || null} onFocus={this.handleInputFocus} tabIndex={0} {...sharedProps} {...inputContainerProps}><input aria-hidden id={this.props.id || null} ref={this.handleInputRef} style={{
-        opacity: 0,
-        width: 0,
-        overflow: "hidden",
-        border: "none",
-        padding: 0
-      }} tabIndex={-1} {...overrides.Input ? overrides.Input.props ? overrides.Input.props : {} : {}} /></InputContainer>;
+      return (
+        <InputContainer
+          role="listbox"
+          aria-activedescendant={this.state.activeDescendant}
+          aria-expanded={isOpen}
+          aria-describedby={this.props["aria-describedby"]}
+          aria-errormessage={this.props["aria-errormessage"]}
+          aria-disabled={this.props.disabled}
+          aria-label={label}
+          aria-labelledby={this.props["aria-labelledby"]}
+          aria-owns={this.state.isOpen ? listboxId : null}
+          aria-required={this.props.required || null}
+          onFocus={this.handleInputFocus}
+          tabIndex={0}
+          {...sharedProps}
+          {...inputContainerProps}
+        >
+          <input
+            aria-hidden
+            id={this.props.id || null}
+            ref={this.handleInputRef}
+            style={{
+              opacity: 0,
+              width: 0,
+              overflow: "hidden",
+              border: "none",
+              padding: 0,
+            }}
+            tabIndex={-1}
+            {...(overrides.Input
+              ? overrides.Input.props
+                ? overrides.Input.props
+                : {}
+              : {})}
+          />
+        </InputContainer>
+      );
     }
-    return <InputContainer {...sharedProps} {...inputContainerProps}><AutosizeInput aria-activedescendant={this.state.activeDescendant} aria-autocomplete="list" aria-controls={this.state.isOpen ? listboxId : null} aria-describedby={this.props["aria-describedby"]} aria-errormessage={this.props["aria-errormessage"]} aria-disabled={this.props.disabled || null} aria-expanded={isOpen} aria-haspopup="listbox" aria-label={label} aria-labelledby={this.props["aria-labelledby"]} aria-required={this.props.required || null} disabled={this.props.disabled || null} id={this.props.id || null} inputRef={this.handleInputRef} onChange={this.handleInputChange} onFocus={this.handleInputFocus} overrides={{ Input: overrides.Input }} required={this.props.required && this.props.value.length === 0 || null} role="combobox" value={this.state.inputValue} tabIndex={0} {...sharedProps} /></InputContainer>;
+    return (
+      <InputContainer {...sharedProps} {...inputContainerProps}>
+        <AutosizeInput
+          aria-activedescendant={this.state.activeDescendant}
+          aria-autocomplete="list"
+          aria-controls={this.state.isOpen ? listboxId : null}
+          aria-describedby={this.props["aria-describedby"]}
+          aria-errormessage={this.props["aria-errormessage"]}
+          aria-disabled={this.props.disabled || null}
+          aria-expanded={isOpen}
+          aria-haspopup="listbox"
+          aria-label={label}
+          aria-labelledby={this.props["aria-labelledby"]}
+          aria-required={this.props.required || null}
+          disabled={this.props.disabled || null}
+          id={this.props.id || null}
+          inputRef={this.handleInputRef}
+          onChange={this.handleInputChange}
+          onFocus={this.handleInputFocus}
+          overrides={{ Input: overrides.Input }}
+          required={(this.props.required && this.props.value.length === 0) || null}
+          role="combobox"
+          value={this.state.inputValue}
+          tabIndex={0}
+          {...sharedProps}
+        />
+      </InputContainer>
+    );
   }
   renderClear() {
-    const isValueEntered = Boolean(this.props.value && this.props.value.length > 0 || this.state.inputValue);
-    if (!this.props.clearable || this.props.disabled || this.props.isLoading || !isValueEntered) {
+    const isValueEntered = Boolean(
+      (this.props.value && this.props.value.length > 0) || this.state.inputValue
+    );
+    if (
+      !this.props.clearable ||
+      this.props.disabled ||
+      this.props.isLoading ||
+      !isValueEntered
+    ) {
       return;
     }
     const { $size, ...sharedProps } = this.getSharedProps();
@@ -554,9 +666,19 @@ class Select extends React.Component {
       [SIZE.mini]: 15,
       [SIZE.compact]: 15,
       [SIZE.default]: 18,
-      [SIZE.large]: 22
+      [SIZE.large]: 22,
     };
-    return <ClearIcon title={ariaLabel} aria-label={ariaLabel} onClick={this.clearValue} role="button" size={sizes[this.props.size] || sizes[SIZE.default]} {...sharedProps} {...clearIconProps} />;
+    return (
+      <ClearIcon
+        title={ariaLabel}
+        aria-label={ariaLabel}
+        onClick={this.clearValue}
+        role="button"
+        size={sizes[this.props.size] || sizes[SIZE.default]}
+        {...sharedProps}
+        {...clearIconProps}
+      />
+    );
   }
   renderArrow() {
     if (this.props.type !== TYPE.select) {
@@ -564,53 +686,86 @@ class Select extends React.Component {
     }
     const { $size, ...sharedProps } = this.getSharedProps();
     const { overrides = {} } = this.props;
-    const [SelectArrow, selectArrowProps] = getOverrides(overrides.SelectArrow, TriangleDownIcon);
-    selectArrowProps.overrides = mergeOverrides({
-      Svg: {
-        style: ({ $theme, $disabled }) => {
-          return {
-            color: $disabled ? $theme.colors.inputTextDisabled : $theme.colors.contentPrimary
-          };
-        }
-      }
-    }, selectArrowProps.overrides);
+    const [SelectArrow, selectArrowProps] = getOverrides(
+      overrides.SelectArrow,
+      TriangleDownIcon
+    );
+    selectArrowProps.overrides = mergeOverrides(
+      {
+        Svg: {
+          style: ({ $theme, $disabled }) => {
+            return {
+              color: $disabled
+                ? $theme.colors.inputTextDisabled
+                : $theme.colors.contentPrimary,
+            };
+          },
+        },
+      },
+      selectArrowProps.overrides
+    );
     const sizes = {
       [SIZE.mini]: 16,
       [SIZE.compact]: 16,
       [SIZE.default]: 20,
-      [SIZE.large]: 24
+      [SIZE.large]: 24,
     };
-    return <SelectArrow size={sizes[this.props.size] || sizes[SIZE.default]} title="open" {...sharedProps} {...selectArrowProps} />;
+    return (
+      <SelectArrow
+        size={sizes[this.props.size] || sizes[SIZE.default]}
+        title="open"
+        {...sharedProps}
+        {...selectArrowProps}
+      />
+    );
   }
   renderSearch() {
     if (this.props.type !== TYPE.search) {
       return null;
     }
     const { overrides = {} } = this.props;
-    const [SearchIconContainer, searchIconContainerProps] = getOverrides(overrides.SearchIconContainer, StyledSearchIconContainer);
-    const [SearchIcon, searchIconProps] = getOverrides(overrides.SearchIcon, SearchIconComponent);
+    const [SearchIconContainer, searchIconContainerProps] = getOverrides(
+      overrides.SearchIconContainer,
+      StyledSearchIconContainer
+    );
+    const [SearchIcon, searchIconProps] = getOverrides(
+      overrides.SearchIcon,
+      SearchIconComponent
+    );
     const sharedProps = this.getSharedProps();
-    return <SearchIconContainer {...sharedProps} {...searchIconContainerProps}><SearchIcon size={16} title="search" {...sharedProps} {...searchIconProps} /></SearchIconContainer>;
+    return (
+      <SearchIconContainer {...sharedProps} {...searchIconContainerProps}>
+        <SearchIcon size={16} title="search" {...sharedProps} {...searchIconProps} />
+      </SearchIconContainer>
+    );
   }
   filterOptions(excludeOptions) {
     const filterValue = this.state.inputValue.trim();
     if (this.props.filterOptions) {
       this.options = this.props.filterOptions(this.options, filterValue, excludeOptions, {
         valueKey: this.props.valueKey,
-        labelKey: this.props.labelKey
+        labelKey: this.props.labelKey,
       });
     }
-    const filterDoesNotMatchOption = this.props.ignoreCase ? (opt) => {
-      return opt[this.props.labelKey].toLowerCase() !== filterValue.toLowerCase().trim();
-    } : (opt) => {
-      return opt[this.props.labelKey] !== filterValue.trim();
-    };
-    if (filterValue && this.props.creatable && this.options.concat(this.props.value).every(filterDoesNotMatchOption)) {
+    const filterDoesNotMatchOption = this.props.ignoreCase
+      ? (opt) => {
+          return (
+            opt[this.props.labelKey].toLowerCase() !== filterValue.toLowerCase().trim()
+          );
+        }
+      : (opt) => {
+          return opt[this.props.labelKey] !== filterValue.trim();
+        };
+    if (
+      filterValue &&
+      this.props.creatable &&
+      this.options.concat(this.props.value).every(filterDoesNotMatchOption)
+    ) {
       this.options.push({
         id: filterValue,
         [this.props.labelKey]: filterValue,
         [this.props.valueKey]: filterValue,
-        isCreatable: true
+        isCreatable: true,
       });
     }
     return this.options;
@@ -628,7 +783,7 @@ class Select extends React.Component {
       size,
       searchable,
       type,
-      value
+      value,
     } = this.props;
     const { isOpen, isFocused, isPseudoFocused } = this.state;
     return {
@@ -646,7 +801,7 @@ class Select extends React.Component {
       $searchable: searchable,
       $size: size,
       $type: type,
-      $isEmpty: this.getValueArray(value).length === 0
+      $isEmpty: this.getValueArray(value).length === 0,
     };
   }
   render() {
@@ -657,73 +812,138 @@ class Select extends React.Component {
       multi,
       noResultsMsg,
       value,
-      filterOutSelected
+      filterOutSelected,
     } = this.props;
     if (__DEV__ && value && !Array.isArray(value)) {
-      console.warn("The Select component expects an array as the value prop. For more information, please visit the docs at https://baseweb.design/components/select/");
+      console.warn(
+        "The Select component expects an array as the value prop. For more information, please visit the docs at https://baseweb.design/components/select/"
+      );
     }
     const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
-    const [ControlContainer, controlContainerProps] = getOverrides(overrides.ControlContainer, StyledControlContainer);
-    const [ValueContainer, valueContainerProps] = getOverrides(overrides.ValueContainer, StyledValueContainer);
-    const [IconsContainer, iconsContainerProps] = getOverrides(overrides.IconsContainer, StyledIconsContainer);
+    const [ControlContainer, controlContainerProps] = getOverrides(
+      overrides.ControlContainer,
+      StyledControlContainer
+    );
+    const [ValueContainer, valueContainerProps] = getOverrides(
+      overrides.ValueContainer,
+      StyledValueContainer
+    );
+    const [IconsContainer, iconsContainerProps] = getOverrides(
+      overrides.IconsContainer,
+      StyledIconsContainer
+    );
     const [PopoverOverride, popoverProps] = getOverrides(overrides.Popover, Popover);
-    const [Placeholder, placeholderProps] = getOverrides(overrides.Placeholder, StyledPlaceholder);
+    const [Placeholder, placeholderProps] = getOverrides(
+      overrides.Placeholder,
+      StyledPlaceholder
+    );
     const sharedProps = this.getSharedProps();
     const valueArray = this.getValueArray(value);
     const options = this.filterOptions(multi && filterOutSelected ? valueArray : null);
     const isOpen = this.state.isOpen;
     sharedProps.$isOpen = isOpen;
     if (__DEV__ && this.props.error && this.props.positive) {
-      console.warn(`[Select] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`);
+      console.warn(
+        `[Select] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
+      );
     }
-    return <UIDConsumer>{(listboxId) => {
-      return <LocaleContext.Consumer>{(locale) => {
-        return <PopoverOverride innerRef={(ref) => {
-          if (!ref)
-            return;
-          this.anchor = ref.anchorRef;
-        }} autoFocus={false} focusLock={false} mountNode={this.props.mountNode} onEsc={() => {
-          return this.closeMenu();
-        }} isOpen={isOpen} popoverMargin={0} content={() => {
-          const dropdownProps = {
-            error: this.props.error,
-            positive: this.props.positive,
-            getOptionLabel: this.props.getOptionLabel || this.getOptionLabel.bind(this, locale),
-            id: listboxId,
-            isLoading: this.props.isLoading,
-            labelKey: this.props.labelKey,
-            maxDropdownHeight: this.props.maxDropdownHeight,
-            multi,
-            noResultsMsg,
-            onActiveDescendantChange: this.handleActiveDescendantChange,
-            onItemSelect: this.selectValue,
-            options,
-            overrides,
-            required: this.props.required,
-            searchable: this.props.searchable,
-            size: this.props.size,
-            type,
-            value: valueArray,
-            valueKey: this.props.valueKey,
-            width: this.anchor.current ? this.anchor.current.clientWidth : null,
-            keyboardControlNode: this.anchor
-          };
-          return <SelectDropdown innerRef={this.dropdown} {...dropdownProps} />;
-        }} placement={PLACEMENT.bottom} {...popoverProps}><Root onBlur={this.handleBlur} data-baseweb="select" {...sharedProps} {...rootProps}><ControlContainer onKeyDown={this.handleKeyDown} onClick={this.handleClick} onTouchEnd={this.handleTouchEnd} onTouchMove={this.handleTouchMove} onTouchStart={this.handleTouchStart} {...sharedProps} {...controlContainerProps}>
-          {type === TYPE.search ? this.renderSearch() : null}
-          <ValueContainer {...sharedProps} {...valueContainerProps}>
-            {this.renderValue(valueArray, isOpen, locale)}
-            {this.renderInput(listboxId)}
-            {this.shouldShowPlaceholder() ? <Placeholder {...sharedProps} {...placeholderProps}>{typeof this.props.placeholder !== "undefined" ? this.props.placeholder : locale.select.placeholder}</Placeholder> : null}
-          </ValueContainer>
-          <IconsContainer {...sharedProps} {...iconsContainerProps}>
-            {this.renderLoading()}
-            {this.renderClear()}
-            {type === TYPE.select ? this.renderArrow() : null}
-          </IconsContainer>
-        </ControlContainer></Root></PopoverOverride>;
-      }}</LocaleContext.Consumer>;
-    }}</UIDConsumer>;
+    return (
+      <UIDConsumer>
+        {(listboxId) => {
+          return (
+            <LocaleContext.Consumer>
+              {(locale) => {
+                return (
+                  <PopoverOverride
+                    innerRef={(ref) => {
+                      if (!ref) return;
+                      this.anchor = ref.anchorRef;
+                    }}
+                    autoFocus={false}
+                    focusLock={false}
+                    mountNode={this.props.mountNode}
+                    onEsc={() => {
+                      return this.closeMenu();
+                    }}
+                    isOpen={isOpen}
+                    popoverMargin={0}
+                    content={() => {
+                      const dropdownProps = {
+                        error: this.props.error,
+                        positive: this.props.positive,
+                        getOptionLabel:
+                          this.props.getOptionLabel ||
+                          this.getOptionLabel.bind(this, locale),
+                        id: listboxId,
+                        isLoading: this.props.isLoading,
+                        labelKey: this.props.labelKey,
+                        maxDropdownHeight: this.props.maxDropdownHeight,
+                        multi,
+                        noResultsMsg,
+                        onActiveDescendantChange: this.handleActiveDescendantChange,
+                        onItemSelect: this.selectValue,
+                        options,
+                        overrides,
+                        required: this.props.required,
+                        searchable: this.props.searchable,
+                        size: this.props.size,
+                        type,
+                        value: valueArray,
+                        valueKey: this.props.valueKey,
+                        width: this.anchor.current
+                          ? this.anchor.current.clientWidth
+                          : null,
+                        keyboardControlNode: this.anchor,
+                      };
+                      return (
+                        <SelectDropdown innerRef={this.dropdown} {...dropdownProps} />
+                      );
+                    }}
+                    placement={PLACEMENT.bottom}
+                    {...popoverProps}
+                  >
+                    <Root
+                      onBlur={this.handleBlur}
+                      data-baseweb="select"
+                      {...sharedProps}
+                      {...rootProps}
+                    >
+                      <ControlContainer
+                        onKeyDown={this.handleKeyDown}
+                        onClick={this.handleClick}
+                        onTouchEnd={this.handleTouchEnd}
+                        onTouchMove={this.handleTouchMove}
+                        onTouchStart={this.handleTouchStart}
+                        {...sharedProps}
+                        {...controlContainerProps}
+                      >
+                        {type === TYPE.search ? this.renderSearch() : null}
+                        <ValueContainer {...sharedProps} {...valueContainerProps}>
+                          {this.renderValue(valueArray, isOpen, locale)}
+                          {this.renderInput(listboxId)}
+                          {this.shouldShowPlaceholder() ? (
+                            <Placeholder {...sharedProps} {...placeholderProps}>
+                              {typeof this.props.placeholder !== "undefined"
+                                ? this.props.placeholder
+                                : locale.select.placeholder}
+                            </Placeholder>
+                          ) : null}
+                        </ValueContainer>
+                        <IconsContainer {...sharedProps} {...iconsContainerProps}>
+                          {this.renderLoading()}
+                          {this.renderClear()}
+                          {type === TYPE.select ? this.renderArrow() : null}
+                        </IconsContainer>
+                      </ControlContainer>
+                    </Root>
+                  </PopoverOverride>
+                );
+              }}
+            </LocaleContext.Consumer>
+          );
+        }}
+      </UIDConsumer>
+    );
   }
 }
 Select.defaultProps = defaultProps;

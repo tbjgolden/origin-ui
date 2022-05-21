@@ -23,7 +23,7 @@ export {
   StyledDropdownContainer,
   StyledDropdown,
   StyledDropdownListItem,
-  StyledOptionContent
+  StyledOptionContent,
 } from "./styled-components";
 export { default as filterOptions } from "./utils/default-filter-options";
 export { SIZE, TYPE, STATE_CHANGE_TYPE } from "./constants";

@@ -27,10 +27,18 @@ export function HighlightCellText(props) {
   if (!props.query) {
     return props.text;
   }
-  return <React.Fragment>{splitByQuery(props.text, props.query).map((el, i) => {
-    if (matchesQuery(el, props.query)) {
-      return <span className={css({ ...theme.typography.font150 })} key={i}>{el}</span>;
-    }
-    return el;
-  })}</React.Fragment>;
+  return (
+    <React.Fragment>
+      {splitByQuery(props.text, props.query).map((el, i) => {
+        if (matchesQuery(el, props.query)) {
+          return (
+            <span className={css({ ...theme.typography.font150 })} key={i}>
+              {el}
+            </span>
+          );
+        }
+        return el;
+      })}
+    </React.Fragment>
+  );
 }

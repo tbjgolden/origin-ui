@@ -7,6 +7,6 @@ class StatefulContainer extends React.Component {
   }
 }
 StatefulContainer.defaultProps = {
-  ...baseDefaultProps
+  ...baseDefaultProps,
 };
 export default StatefulContainer;

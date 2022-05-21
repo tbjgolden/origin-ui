@@ -8,7 +8,7 @@ const Container = styled("div", ({ $zIndex }) => {
     top: 0,
     left: 0,
     right: 0,
-    zIndex: $zIndex || null
+    zIndex: $zIndex || null,
   };
 });
 class LayerComponent extends React.Component {
@@ -38,7 +38,9 @@ class LayerComponent extends React.Component {
     }
     const hasLayersManager = layersManagerHost !== void 0;
     if (__DEV__ && !hasLayersManager) {
-      console.warn("`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information");
+      console.warn(
+        "`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information"
+      );
     }
     const host = hasLayersManager ? layersManagerHost : document.body;
     if (host) {
@@ -90,7 +92,11 @@ class LayerComponent extends React.Component {
   render() {
     const { container } = this.state;
     const { children, mountNode, zIndex } = this.props;
-    const childrenToRender = zIndex ? <Container $zIndex={zIndex}>{children}</Container> : children;
+    const childrenToRender = zIndex ? (
+      <Container $zIndex={zIndex}>{children}</Container>
+    ) : (
+      children
+    );
     if (__BROWSER__) {
       if (mountNode) {
         return ReactDOM.createPortal(childrenToRender, mountNode);
@@ -104,7 +110,11 @@ class LayerComponent extends React.Component {
 }
 LayerComponent.contextType = LayersContext;
 export default function Layer(props) {
-  return <Consumer>{({ host, zIndex }) => {
-    return <LayerComponent {...props} host={host} zIndex={zIndex} />;
-  }}</Consumer>;
+  return (
+    <Consumer>
+      {({ host, zIndex }) => {
+        return <LayerComponent {...props} host={host} zIndex={zIndex} />;
+      }}
+    </Consumer>
+  );
 }

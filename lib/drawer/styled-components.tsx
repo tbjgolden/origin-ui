@@ -5,7 +5,7 @@ function getSizeStyles($size, $anchor) {
     maxWidth: "100%",
     maxHeight: "100%",
     width: SIZE_DIMENSION.default,
-    height: SIZE_DIMENSION.full
+    height: SIZE_DIMENSION.full,
   };
   if ($anchor === ANCHOR.left || $anchor === ANCHOR.right) {
     styles.height = SIZE_DIMENSION.full;
@@ -34,7 +34,7 @@ function getAnchorStyles(props) {
         transform: $isVisible ? "translateX(0)" : `translateX(${sizeStyles.width})`,
         right: $isVisible ? 0 : `-${sizeStyles.width}`,
         top: 0,
-        ...sizeStyles
+        ...sizeStyles,
       };
     }
     case left: {
@@ -42,7 +42,7 @@ function getAnchorStyles(props) {
         transform: $isVisible ? "translateX(0)" : `translateX(-${sizeStyles.width})`,
         left: $isVisible ? 0 : `-${sizeStyles.width}`,
         top: 0,
-        ...sizeStyles
+        ...sizeStyles,
       };
     }
     case bottom: {
@@ -50,7 +50,7 @@ function getAnchorStyles(props) {
         transform: $isVisible ? "translateY(0)" : `translateY(${sizeStyles.height})`,
         left: 0,
         bottom: $isVisible ? "0" : `-${sizeStyles.height}`,
-        ...sizeStyles
+        ...sizeStyles,
       };
     }
     case top: {
@@ -58,7 +58,7 @@ function getAnchorStyles(props) {
         transform: $isVisible ? "translateY(0)" : `translateY(-${sizeStyles.height})`,
         left: 0,
         top: $isVisible ? "0" : `-${sizeStyles.height}`,
-        ...sizeStyles
+        ...sizeStyles,
       };
     }
     default: {
@@ -73,7 +73,7 @@ export const StyledRoot = styled("div", (props) => {
     right: 0,
     bottom: 0,
     top: 0,
-    left: 0
+    left: 0,
   };
 });
 export const StyledBackdrop = styled("div", (props) => {
@@ -88,11 +88,13 @@ export const StyledBackdrop = styled("div", (props) => {
     WebkitTapHighlightColor: "transparent",
     touchAction: "none",
     opacity: $isVisible && $isOpen && $showBackdrop ? 1 : 0,
-    ...$animating ? {
-      transitionProperty: "opacity",
-      transitionDuration: $theme.animation.timing400,
-      transitionTimingFunction: $theme.animation.easeOutCurve
-    } : null
+    ...($animating
+      ? {
+          transitionProperty: "opacity",
+          transitionDuration: $theme.animation.timing400,
+          transitionTimingFunction: $theme.animation.easeOutCurve,
+        }
+      : null),
   };
 });
 export const StyledDrawerContainer = styled("div", (props) => {
@@ -109,7 +111,7 @@ export const StyledDrawerContainer = styled("div", (props) => {
     transitionDuration: $animating ? $theme.animation.timing400 : null,
     transitionTimingFunction: $animating ? $theme.animation.easeOutCurve : null,
     display: "flex",
-    position: "fixed"
+    position: "fixed",
   };
 });
 export const StyledDrawerBody = styled("div", (props) => {
@@ -122,7 +124,7 @@ export const StyledDrawerBody = styled("div", (props) => {
     marginLeft: $theme.sizing.scale900,
     marginRight: $theme.sizing.scale900,
     overflow: "auto",
-    width: "100%"
+    width: "100%",
   };
 });
 export const StyledClose = styled("button", (props) => {
@@ -151,10 +153,10 @@ export const StyledClose = styled("button", (props) => {
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     ":hover": {
-      fill: $theme.colors.primary600
+      fill: $theme.colors.primary600,
     },
     ":focus": {
-      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none"
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
     },
     position: "absolute",
     top: $theme.sizing.scale500,
@@ -164,9 +166,9 @@ export const StyledClose = styled("button", (props) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer"
+    cursor: "pointer",
   };
 });
 export const Hidden = styled("div", {
-  display: "none"
+  display: "none",
 });

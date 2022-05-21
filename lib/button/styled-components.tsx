@@ -1,71 +1,74 @@
 import { styled } from "../styles";
 import { KIND, SIZE, SHAPE } from "./constants";
-export const BaseButton = styled("button", ({
-  $theme,
-  $size,
-  $colors,
-  $kind,
-  $shape,
-  $isLoading,
-  $isSelected,
-  $disabled,
-  $isFocusVisible
-}) => {
-  return {
-    display: "inline-flex",
-    flexDirection: $isLoading ? "column" : "row",
-    alignItems: "center",
-    justifyContent: "center",
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderLeftStyle: "none",
-    borderTopStyle: "none",
-    borderRightStyle: "none",
-    borderBottomStyle: "none",
-    outline: "none",
-    boxShadow: $isFocusVisible ? `inset 0 0 0 3px ${$theme.colors.accent}` : "none",
-    textDecoration: "none",
-    WebkitAppearance: "none",
-    transitionProperty: "background",
-    transitionDuration: $theme.animation.timing200,
-    transitionTimingFunction: $theme.animation.linearCurve,
-    cursor: "pointer",
-    ":disabled": {
-      cursor: "not-allowed",
-      ...getDisabledStyles({ $theme, $kind, $disabled, $isSelected })
-    },
-    marginLeft: 0,
-    marginTop: 0,
-    marginRight: 0,
-    marginBottom: 0,
-    ...getFontStyles({ $theme, $size }),
-    ...getBorderRadiiStyles({ $theme, $size, $shape }),
-    ...getPaddingStyles({ $theme, $size, $shape }),
-    ...getColorStyles({
-      $theme,
-      $colors,
-      $kind,
-      $isLoading,
-      $isSelected,
-      $disabled
-    }),
-    ...getShapeStyles({ $shape, $size })
-  };
-});
+export const BaseButton = styled(
+  "button",
+  ({
+    $theme,
+    $size,
+    $colors,
+    $kind,
+    $shape,
+    $isLoading,
+    $isSelected,
+    $disabled,
+    $isFocusVisible,
+  }) => {
+    return {
+      display: "inline-flex",
+      flexDirection: $isLoading ? "column" : "row",
+      alignItems: "center",
+      justifyContent: "center",
+      borderLeftWidth: 0,
+      borderTopWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 0,
+      borderLeftStyle: "none",
+      borderTopStyle: "none",
+      borderRightStyle: "none",
+      borderBottomStyle: "none",
+      outline: "none",
+      boxShadow: $isFocusVisible ? `inset 0 0 0 3px ${$theme.colors.accent}` : "none",
+      textDecoration: "none",
+      WebkitAppearance: "none",
+      transitionProperty: "background",
+      transitionDuration: $theme.animation.timing200,
+      transitionTimingFunction: $theme.animation.linearCurve,
+      cursor: "pointer",
+      ":disabled": {
+        cursor: "not-allowed",
+        ...getDisabledStyles({ $theme, $kind, $disabled, $isSelected }),
+      },
+      marginLeft: 0,
+      marginTop: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      ...getFontStyles({ $theme, $size }),
+      ...getBorderRadiiStyles({ $theme, $size, $shape }),
+      ...getPaddingStyles({ $theme, $size, $shape }),
+      ...getColorStyles({
+        $theme,
+        $colors,
+        $kind,
+        $isLoading,
+        $isSelected,
+        $disabled,
+      }),
+      ...getShapeStyles({ $shape, $size }),
+    };
+  }
+);
 export const EndEnhancer = styled("div", ({ $theme }) => {
   const marginDirection = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     display: "flex",
-    [marginDirection]: $theme.sizing.scale500
+    [marginDirection]: $theme.sizing.scale500,
   };
 });
 export const StartEnhancer = styled("div", ({ $theme }) => {
   const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     display: "flex",
-    [marginDirection]: $theme.sizing.scale500
+    [marginDirection]: $theme.sizing.scale500,
   };
 });
 export const LoadingSpinnerContainer = styled("div", ({ $theme, $size }) => {
@@ -80,14 +83,14 @@ export const LoadingSpinnerContainer = styled("div", ({ $theme, $size }) => {
     lineHeight: 0,
     position: "static",
     marginBottom: margins,
-    marginTop: margins
+    marginTop: margins,
   };
 });
 export const LoadingSpinner = styled("span", ({ $theme, $kind, $disabled, $size }) => {
   const { foreground, background } = getLoadingSpinnerColors({
     $theme,
     $kind,
-    $disabled
+    $disabled,
   });
   let dimension = $theme.sizing.scale550;
   if ($size === SIZE.mini || $size === SIZE.compact) {
@@ -122,39 +125,39 @@ export const LoadingSpinner = styled("span", ({ $theme, $kind, $disabled, $size 
     animationIterationCount: "infinite",
     animationName: {
       to: {
-        transform: "rotate(360deg)"
+        transform: "rotate(360deg)",
       },
       from: {
-        transform: "rotate(0deg)"
-      }
-    }
+        transform: "rotate(0deg)",
+      },
+    },
   };
 });
 function getLoadingSpinnerColors({ $theme, $kind, $disabled }) {
   if ($disabled) {
     return {
       foreground: $theme.colors.buttonDisabledSpinnerForeground,
-      background: $theme.colors.buttonDisabledSpinnerBackground
+      background: $theme.colors.buttonDisabledSpinnerBackground,
     };
   }
   switch ($kind) {
     case KIND.secondary: {
       return {
         foreground: $theme.colors.buttonSecondarySpinnerForeground,
-        background: $theme.colors.buttonSecondarySpinnerBackground
+        background: $theme.colors.buttonSecondarySpinnerBackground,
       };
     }
     case KIND.tertiary: {
       return {
         foreground: $theme.colors.buttonTertiarySpinnerForeground,
-        background: $theme.colors.buttonTertiarySpinnerBackground
+        background: $theme.colors.buttonTertiarySpinnerBackground,
       };
     }
     case KIND.primary:
     default: {
       return {
         foreground: $theme.colors.buttonPrimarySpinnerForeground,
-        background: $theme.colors.buttonPrimarySpinnerBackground
+        background: $theme.colors.buttonPrimarySpinnerBackground,
       };
     }
   }
@@ -176,7 +179,7 @@ function getBorderRadiiStyles({ $theme, $size, $shape }) {
     borderTopRightRadius: value,
     borderBottomRightRadius: value,
     borderTopLeftRadius: value,
-    borderBottomLeftRadius: value
+    borderBottomLeftRadius: value,
   };
 }
 function getFontStyles({ $theme, $size }) {
@@ -196,71 +199,66 @@ function getDisabledStyles({ $theme, $kind, $isSelected, $disabled }) {
     if ($kind === KIND.primary || $kind === KIND.secondary) {
       return {
         color: $theme.colors.buttonDisabledActiveText,
-        backgroundColor: $theme.colors.buttonDisabledActiveFill
+        backgroundColor: $theme.colors.buttonDisabledActiveFill,
       };
     } else if ($kind === KIND.tertiary) {
       return {
         backgroundColor: $theme.colors.buttonTertiaryDisabledActiveFill,
-        color: $theme.colors.buttonTertiaryDisabledActiveText
+        color: $theme.colors.buttonTertiaryDisabledActiveText,
       };
     }
   }
   return {
-    backgroundColor: $kind === KIND.tertiary ? "transparent" : $theme.colors.buttonDisabledFill,
-    color: $theme.colors.buttonDisabledText
+    backgroundColor:
+      $kind === KIND.tertiary ? "transparent" : $theme.colors.buttonDisabledFill,
+    color: $theme.colors.buttonDisabledText,
   };
 }
 function getPaddingStyles({ $theme, $size, $shape }) {
-  const iconShape = $shape === SHAPE.square || $shape === SHAPE.circle || $shape === SHAPE.round;
+  const iconShape =
+    $shape === SHAPE.square || $shape === SHAPE.circle || $shape === SHAPE.round;
   switch ($size) {
     case SIZE.mini:
       return {
         paddingTop: $theme.sizing.scale200,
         paddingBottom: $theme.sizing.scale200,
         paddingLeft: iconShape ? $theme.sizing.scale200 : $theme.sizing.scale300,
-        paddingRight: iconShape ? $theme.sizing.scale200 : $theme.sizing.scale300
+        paddingRight: iconShape ? $theme.sizing.scale200 : $theme.sizing.scale300,
       };
     case SIZE.compact:
       return {
         paddingTop: $theme.sizing.scale400,
         paddingBottom: $theme.sizing.scale400,
         paddingLeft: iconShape ? $theme.sizing.scale400 : $theme.sizing.scale500,
-        paddingRight: iconShape ? $theme.sizing.scale400 : $theme.sizing.scale500
+        paddingRight: iconShape ? $theme.sizing.scale400 : $theme.sizing.scale500,
       };
     case SIZE.large:
       return {
         paddingTop: $theme.sizing.scale600,
         paddingBottom: $theme.sizing.scale600,
         paddingLeft: iconShape ? $theme.sizing.scale600 : $theme.sizing.scale700,
-        paddingRight: iconShape ? $theme.sizing.scale600 : $theme.sizing.scale700
+        paddingRight: iconShape ? $theme.sizing.scale600 : $theme.sizing.scale700,
       };
     default:
       return {
         paddingTop: $theme.sizing.scale550,
         paddingBottom: $theme.sizing.scale550,
         paddingLeft: iconShape ? $theme.sizing.scale550 : $theme.sizing.scale600,
-        paddingRight: iconShape ? $theme.sizing.scale550 : $theme.sizing.scale600
+        paddingRight: iconShape ? $theme.sizing.scale550 : $theme.sizing.scale600,
       };
   }
 }
-function getColorStyles({
-  $theme,
-  $colors,
-  $isLoading,
-  $isSelected,
-  $kind,
-  $disabled
-}) {
+function getColorStyles({ $theme, $colors, $isLoading, $isSelected, $kind, $disabled }) {
   if ($colors) {
     return {
       color: $colors.color,
       backgroundColor: $colors.backgroundColor,
       ":hover": {
-        boxShadow: "inset 999px 999px 0px rgba(0, 0, 0, 0.04)"
+        boxShadow: "inset 999px 999px 0px rgba(0, 0, 0, 0.04)",
       },
       ":active": {
-        boxShadow: "inset 999px 999px 0px rgba(0, 0, 0, 0.08)"
-      }
+        boxShadow: "inset 999px 999px 0px rgba(0, 0, 0, 0.08)",
+      },
     };
   }
   if ($disabled) {
@@ -271,52 +269,58 @@ function getColorStyles({
       if ($isSelected) {
         return {
           color: $theme.colors.buttonPrimarySelectedText,
-          backgroundColor: $theme.colors.buttonPrimarySelectedFill
+          backgroundColor: $theme.colors.buttonPrimarySelectedFill,
         };
       }
       return {
         color: $theme.colors.buttonPrimaryText,
         backgroundColor: $theme.colors.buttonPrimaryFill,
         ":hover": {
-          backgroundColor: $isLoading ? $theme.colors.buttonPrimaryActive : $theme.colors.buttonPrimaryHover
+          backgroundColor: $isLoading
+            ? $theme.colors.buttonPrimaryActive
+            : $theme.colors.buttonPrimaryHover,
         },
         ":active": {
-          backgroundColor: $theme.colors.buttonPrimaryActive
-        }
+          backgroundColor: $theme.colors.buttonPrimaryActive,
+        },
       };
     case KIND.secondary:
       if ($isSelected) {
         return {
           color: $theme.colors.buttonPrimaryText,
-          backgroundColor: $theme.colors.buttonPrimaryFill
+          backgroundColor: $theme.colors.buttonPrimaryFill,
         };
       }
       return {
         color: $theme.colors.buttonSecondaryText,
         backgroundColor: $theme.colors.buttonSecondaryFill,
         ":hover": {
-          backgroundColor: $isLoading ? $theme.colors.buttonSecondaryActive : $theme.colors.buttonSecondaryHover
+          backgroundColor: $isLoading
+            ? $theme.colors.buttonSecondaryActive
+            : $theme.colors.buttonSecondaryHover,
         },
         ":active": {
-          backgroundColor: $theme.colors.buttonSecondaryActive
-        }
+          backgroundColor: $theme.colors.buttonSecondaryActive,
+        },
       };
     case KIND.tertiary:
       if ($isSelected) {
         return {
           color: $theme.colors.buttonTertiarySelectedText,
-          backgroundColor: $theme.colors.buttonTertiarySelectedFill
+          backgroundColor: $theme.colors.buttonTertiarySelectedFill,
         };
       }
       return {
         color: $theme.colors.buttonTertiaryText,
         backgroundColor: $theme.colors.buttonTertiaryFill,
         ":hover": {
-          backgroundColor: $isLoading ? $theme.colors.buttonTertiaryActive : $theme.colors.buttonTertiaryHover
+          backgroundColor: $isLoading
+            ? $theme.colors.buttonTertiaryActive
+            : $theme.colors.buttonTertiaryHover,
         },
         ":active": {
-          backgroundColor: $theme.colors.buttonTertiaryActive
-        }
+          backgroundColor: $theme.colors.buttonTertiaryActive,
+        },
       };
     default:
       return Object.freeze({});
@@ -350,7 +354,7 @@ function getShapeStyles({ $shape, $size }) {
       paddingTop: 0,
       paddingBottom: 0,
       paddingLeft: 0,
-      paddingRight: 0
+      paddingRight: 0,
     };
   } else {
     return {};

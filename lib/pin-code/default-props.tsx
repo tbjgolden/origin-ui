@@ -9,8 +9,7 @@ const defaultProps = {
   error: false,
   id: null,
   name: null,
-  onChange: () => {
-  },
+  onChange: () => {},
   overrides: {},
   placeholder: "\u25CB",
   positive: false,
@@ -18,6 +17,6 @@ const defaultProps = {
   size: SIZE.default,
   manageFocus: true,
   values: ["", "", "", ""],
-  mask: false
+  mask: false,
 };
 export default defaultProps;

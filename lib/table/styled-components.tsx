@@ -10,24 +10,32 @@ const StyledTableElement = styled("div", ({ $theme }) => {
     display: "flex",
     flexDirection: "column",
     height: "100%",
-    overflowX: "auto"
+    overflowX: "auto",
   };
 });
-export const StyledTable = withWrapper(StyledTableElement, (StyledComponent) => function StyledTable2(props) {
-  return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
-});
+export const StyledTable = withWrapper(
+  StyledTableElement,
+  (StyledComponent) =>
+    function StyledTable2(props) {
+      return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
+    }
+);
 const StyledHeadElement = styled("div", ({ $theme, $width }) => {
   return {
     backgroundColor: $theme.colors.tableHeadBackgroundColor,
     boxShadow: $theme.lighting.shadow400,
     display: "flex",
     flexGrow: 0,
-    width: $width ? $width : "100%"
+    width: $width ? $width : "100%",
   };
 });
-export const StyledHead = withWrapper(StyledHeadElement, (StyledComponent) => function StyledHead2(props) {
-  return <StyledComponent role="row" {...props} />;
-});
+export const StyledHead = withWrapper(
+  StyledHeadElement,
+  (StyledComponent) =>
+    function StyledHead2(props) {
+      return <StyledComponent role="row" {...props} />;
+    }
+);
 const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
   const borderDir = $theme.direction === "rtl" ? "borderLeft" : "borderRight";
   return {
@@ -46,13 +54,17 @@ const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
     cursor: $cursor ? $cursor : "inherit",
     width: "100%",
     ":last-of-type": {
-      [borderDir]: "none"
-    }
+      [borderDir]: "none",
+    },
   };
 });
-export const StyledHeadCell = withWrapper(StyledHeadCellElement, (StyledComponent) => function StyledHeadCell2(props) {
-  return <StyledComponent role="columnheader" {...props} />;
-});
+export const StyledHeadCell = withWrapper(
+  StyledHeadCellElement,
+  (StyledComponent) =>
+    function StyledHeadCell2(props) {
+      return <StyledComponent role="columnheader" {...props} />;
+    }
+);
 export const StyledSortableLabel = styled("button", ({ $theme }) => {
   return {
     ...$theme.typography.font250,
@@ -66,11 +78,11 @@ export const StyledSortableLabel = styled("button", ({ $theme }) => {
     display: "flex",
     padding: 0,
     ":hover:enabled": {
-      cursor: "pointer"
+      cursor: "pointer",
     },
     ":disabled": {
-      color: $theme.colors.mono500
-    }
+      color: $theme.colors.mono500,
+    },
   };
 });
 const StyledBodyElement = styled("div", ({ $width }) => {
@@ -78,19 +90,27 @@ const StyledBodyElement = styled("div", ({ $width }) => {
     width: $width ? $width : "100%",
     overflowX: "hidden",
     overflowY: "overlay",
-    flex: 1
+    flex: 1,
   };
 });
-export const StyledBody = withWrapper(StyledBodyElement, (StyledComponent) => function StyledBody2(props) {
-  return <StyledComponent role="rowgroup" {...props} />;
-});
+export const StyledBody = withWrapper(
+  StyledBodyElement,
+  (StyledComponent) =>
+    function StyledBody2(props) {
+      return <StyledComponent role="rowgroup" {...props} />;
+    }
+);
 const StyledRowElement = styled("div", {
   display: "flex",
-  alignItems: "center"
+  alignItems: "center",
 });
-export const StyledRow = withWrapper(StyledRowElement, (StyledComponent) => function StyledRow2(props) {
-  return <StyledComponent role="row" {...props} />;
-});
+export const StyledRow = withWrapper(
+  StyledRowElement,
+  (StyledComponent) =>
+    function StyledRow2(props) {
+      return <StyledComponent role="row" {...props} />;
+    }
+);
 const StyledCellElement = styled("div", ({ $theme, $striped }) => {
   return {
     ...$theme.typography.font200,
@@ -101,12 +121,16 @@ const StyledCellElement = styled("div", ({ $theme, $striped }) => {
     paddingTop: $theme.sizing.scale300,
     paddingRight: $theme.sizing.scale600,
     paddingBottom: $theme.sizing.scale300,
-    paddingLeft: $theme.sizing.scale600
+    paddingLeft: $theme.sizing.scale600,
   };
 });
-export const StyledCell = withWrapper(StyledCellElement, (StyledComponent) => function StyledCell2(props) {
-  return <StyledComponent role="gridcell" {...props} />;
-});
+export const StyledCell = withWrapper(
+  StyledCellElement,
+  (StyledComponent) =>
+    function StyledCell2(props) {
+      return <StyledComponent role="gridcell" {...props} />;
+    }
+);
 export const StyledFilterButton = styled("button", (props) => {
   function getIconColor() {
     if (props.$disabled) {
@@ -136,8 +160,8 @@ export const StyledFilterButton = styled("button", (props) => {
     paddingBottom: "none",
     paddingLeft: "none",
     ":hover": {
-      color: getIconHoverColor()
-    }
+      color: getIconHoverColor(),
+    },
   };
 });
 export const StyledFilterContent = styled("div", ({ $theme }) => ({
@@ -148,7 +172,7 @@ export const StyledFilterContent = styled("div", ({ $theme }) => ({
   maxHeight: "196px",
   paddingRight: $theme.sizing.scale600,
   paddingLeft: $theme.sizing.scale600,
-  overflow: "auto"
+  overflow: "auto",
 }));
 export const StyledFilterHeading = styled("div", ({ $theme }) => ({
   ...$theme.typography.font250,
@@ -156,7 +180,7 @@ export const StyledFilterHeading = styled("div", ({ $theme }) => ({
   paddingTop: $theme.sizing.scale500,
   paddingRight: $theme.sizing.scale600,
   paddingBottom: $theme.sizing.scale500,
-  paddingLeft: $theme.sizing.scale600
+  paddingLeft: $theme.sizing.scale600,
 }));
 export const StyledFilterFooter = styled("div", ({ $theme }) => ({
   backgroundColor: $theme.colors.tableFilterFooterBackground,
@@ -166,7 +190,7 @@ export const StyledFilterFooter = styled("div", ({ $theme }) => ({
   paddingLeft: $theme.sizing.scale100,
   display: "flex",
   justifyContent: "space-between",
-  minWidth: "216px"
+  minWidth: "216px",
 }));
 export const StyledAction = styled("button", ({ $theme }) => {
   return {
@@ -183,7 +207,7 @@ export const StyledAction = styled("button", ({ $theme }) => {
     marginRight: $theme.sizing.scale100,
     marginLeft: $theme.sizing.scale100,
     ":hover:enabled": {
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+    },
   };
 });

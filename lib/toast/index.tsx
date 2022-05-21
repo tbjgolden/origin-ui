@@ -4,5 +4,5 @@ export { KIND, PLACEMENT, TYPE } from "./constants";
 export {
   Root as StyledRoot,
   Body as StyledBody,
-  CloseIconSvg as StyledCloseIcon
+  CloseIconSvg as StyledCloseIcon,
 } from "./styled-components";

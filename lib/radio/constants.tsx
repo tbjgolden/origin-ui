@@ -1,7 +1,7 @@
 export const STATE_TYPE = {
-  change: "CHANGE"
+  change: "CHANGE",
 };
 export const ALIGN = {
   vertical: "vertical",
-  horizontal: "horizontal"
+  horizontal: "horizontal",
 };

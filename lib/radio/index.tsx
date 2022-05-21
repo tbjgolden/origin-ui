@@ -8,7 +8,7 @@ export {
   Description as StyledDescription,
   RadioMarkInner as StyledRadioMarkInner,
   RadioMarkOuter as StyledRadioMarkOuter,
-  RadioGroupRoot as StyledRadioGroupRoot
+  RadioGroupRoot as StyledRadioGroupRoot,
 } from "./styled-components";
 export { default as Radio } from "./radio";
 export { ALIGN } from "./constants";

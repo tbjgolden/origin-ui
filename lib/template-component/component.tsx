@@ -5,7 +5,7 @@ class Component extends React.Component {
   getSharedProps() {
     const { prop } = this.props;
     return {
-      $prop: Boolean(prop)
+      $prop: Boolean(prop),
     };
   }
   render() {
@@ -13,12 +13,20 @@ class Component extends React.Component {
     const { Root: RootOverride } = overrides;
     const Root = getOverride(RootOverride) || StyledRoot;
     const sharedProps = this.getSharedProps();
-    return <Root data-baseweb="component" onClick={this.props.onClick} {...sharedProps} {...getOverrideProps(RootOverride)}>{children}</Root>;
+    return (
+      <Root
+        data-baseweb="component"
+        onClick={this.props.onClick}
+        {...sharedProps}
+        {...getOverrideProps(RootOverride)}
+      >
+        {children}
+      </Root>
+    );
   }
 }
 Component.defaultProps = {
   prop: true,
-  onClick: () => {
-  }
+  onClick: () => {},
 };
 export default Component;

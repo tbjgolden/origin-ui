@@ -20,7 +20,7 @@ export const Track = styled("div", (props) => {
     paddingLeft: sizing.scale600,
     display: "flex",
     cursor,
-    backgroundColor: $theme.colors.sliderTrackFill
+    backgroundColor: $theme.colors.sliderTrackFill,
   };
 });
 Track.displayName = "StyledTrack";
@@ -35,22 +35,25 @@ export const InnerTrack = styled("div", (props) => {
     borderBottomLeftRadius: borderRadius,
     background: getTrackBackground({
       values: $value,
-      colors: $value.length === 1 ? [
-        $disabled ? colors.borderOpaque : colors.primary,
-        $disabled ? colors.backgroundSecondary : colors.borderOpaque
-      ] : [
-        $disabled ? colors.backgroundSecondary : colors.borderOpaque,
-        $disabled ? colors.borderOpaque : colors.primary,
-        $disabled ? colors.backgroundSecondary : colors.borderOpaque
-      ],
+      colors:
+        $value.length === 1
+          ? [
+              $disabled ? colors.borderOpaque : colors.primary,
+              $disabled ? colors.backgroundSecondary : colors.borderOpaque,
+            ]
+          : [
+              $disabled ? colors.backgroundSecondary : colors.borderOpaque,
+              $disabled ? colors.borderOpaque : colors.primary,
+              $disabled ? colors.backgroundSecondary : colors.borderOpaque,
+            ],
       min: $min || 0,
       max: $max || 0,
-      rtl: direction === "rtl"
+      rtl: direction === "rtl",
     }),
     height: "2px",
     width: "100%",
     alignSelf: "center",
-    cursor: $disabled ? "not-allowed" : "inherit"
+    cursor: $disabled ? "not-allowed" : "inherit",
   };
 });
 InnerTrack.displayName = "StyledInnerTrack";
@@ -59,14 +62,14 @@ export const Mark = styled("div", (props) => {
     width: "4px",
     height: "2px",
     backgroundColor: props.$theme.colors.backgroundPrimary,
-    marginLeft: "16px"
+    marginLeft: "16px",
   };
 });
 Mark.displayName = "StyledMark";
 export const Tick = styled("div", (props) => {
   return {
     ...props.$theme.typography.font200,
-    color: props.$theme.colors.contentPrimary
+    color: props.$theme.colors.contentPrimary,
   };
 });
 Tick.displayName = "StyledTick";
@@ -79,7 +82,7 @@ export const TickBar = styled("div", (props) => {
     alignItems: "center",
     paddingRight: sizing.scale600,
     paddingLeft: sizing.scale600,
-    paddingBottom: sizing.scale400
+    paddingBottom: sizing.scale400,
   };
 });
 TickBar.displayName = "StyledTickBar";
@@ -101,10 +104,14 @@ export const Thumb = styled("div", (props) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: $disabled ? $theme.colors.sliderHandleFillDisabled : $theme.colors.sliderHandleFill,
+    backgroundColor: $disabled
+      ? $theme.colors.sliderHandleFillDisabled
+      : $theme.colors.sliderHandleFill,
     outline: "none",
-    boxShadow: props.$isFocusVisible ? `0 0 0 3px ${$theme.colors.accent}` : "0 1px 4px rgba(0, 0, 0, 0.12)",
-    cursor: $disabled ? "not-allowed" : "inherit"
+    boxShadow: props.$isFocusVisible
+      ? `0 0 0 3px ${$theme.colors.accent}`
+      : "0 1px 4px rgba(0, 0, 0, 0.12)",
+    cursor: $disabled ? "not-allowed" : "inherit",
   };
 });
 Thumb.displayName = "StyledThumb";
@@ -115,7 +122,9 @@ export const InnerThumb = styled("div", (props) => {
     top: "-16px",
     width: "4px",
     height: "20px",
-    backgroundColor: $disabled ? $theme.colors.sliderHandleFillDisabled : $theme.colors.sliderHandleInnerFill
+    backgroundColor: $disabled
+      ? $theme.colors.sliderHandleFillDisabled
+      : $theme.colors.sliderHandleInnerFill,
   };
 });
 InnerThumb.displayName = "StyledInnerThumb";
@@ -125,7 +134,9 @@ export const ThumbValue = styled("div", (props) => {
     position: "absolute",
     top: `-${$theme.sizing.scale1400}`,
     ...$theme.typography.font200,
-    backgroundColor: $disabled ? $theme.colors.sliderHandleFillDisabled : $theme.colors.sliderHandleInnerFill,
+    backgroundColor: $disabled
+      ? $theme.colors.sliderHandleFillDisabled
+      : $theme.colors.sliderHandleInnerFill,
     color: $theme.colors.contentInversePrimary,
     paddingLeft: $theme.sizing.scale600,
     paddingRight: $theme.sizing.scale600,
@@ -135,7 +146,7 @@ export const ThumbValue = styled("div", (props) => {
     borderBottomRightRadius: "48px",
     borderTopLeftRadius: "48px",
     borderTopRightRadius: "48px",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 });
 ThumbValue.displayName = "StyledThumbValue";

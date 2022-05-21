@@ -6,26 +6,26 @@ export const Root = styled("ul", {
   marginTop: 0,
   paddingLeft: 0,
   paddingRight: 0,
-  width: "100%"
+  width: "100%",
 });
 export const PanelContainer = styled("li", (props) => {
   const {
     $expanded,
-    $theme: { colors }
+    $theme: { colors },
   } = props;
   return {
     listStyleType: "none",
     width: "100%",
     borderBottomWidth: "1px",
     borderBottomStyle: "solid",
-    borderBottomColor: $expanded ? colors.mono500 : colors.mono400
+    borderBottomColor: $expanded ? colors.mono500 : colors.mono400,
   };
 });
 export const Header = styled("div", (props) => {
   const {
     $disabled,
     $isFocusVisible,
-    $theme: { colors, sizing, typography }
+    $theme: { colors, sizing, typography },
   } = props;
   return {
     ...typography.font350,
@@ -46,8 +46,8 @@ export const Header = styled("div", (props) => {
     outlineOffset: "-3px",
     justifyContent: "space-between",
     ":hover": {
-      color: colors.primary
-    }
+      color: colors.primary,
+    },
   };
 });
 export const ToggleIcon = styled("svg", (props) => {
@@ -56,7 +56,7 @@ export const ToggleIcon = styled("svg", (props) => {
     ...getSvgStyles(props),
     flexShrink: 0,
     color: $color || $theme.colors.contentPrimary,
-    cursor: $disabled ? "not-allowed" : "pointer"
+    cursor: $disabled ? "not-allowed" : "pointer",
   };
 });
 export const ToggleIconGroup = styled("g", (props) => {
@@ -66,13 +66,13 @@ export const ToggleIconGroup = styled("g", (props) => {
     transformOrigin: "center",
     transitionProperty: "transform",
     transitionDuration: $theme.animation.timing500,
-    transitionTimingFunction: $theme.animation.easeOutQuinticCurve
+    transitionTimingFunction: $theme.animation.easeOutQuinticCurve,
   };
 });
 export const Content = styled("div", (props) => {
   const {
     $theme: { animation, colors, sizing, typography },
-    $expanded
+    $expanded,
   } = props;
   return {
     ...typography.font200,
@@ -93,19 +93,19 @@ export const Content = styled("div", (props) => {
     transitionProperty: "opacity,visibility",
     transitionDuration: animation.timing500,
     transitionDelay: animation.timing200,
-    transitionTimingFunction: animation.easeOutQuinticCurve
+    transitionTimingFunction: animation.easeOutQuinticCurve,
   };
 });
 export const ContentAnimationContainer = styled("div", (props) => {
   const {
     $height,
-    $theme: { animation }
+    $theme: { animation },
   } = props;
   return {
     height: `${$height}`,
     overflow: "hidden",
     transitionProperty: "height",
     transitionDuration: animation.timing500,
-    transitionTimingFunction: animation.easeOutQuinticCurve
+    transitionTimingFunction: animation.easeOutQuinticCurve,
   };
 });

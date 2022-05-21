@@ -20,7 +20,10 @@ class TimePicker extends React.Component {
         }
         return;
       }
-      const seconds = typeof params.value[0].id === "string" ? Number.parseInt(params.value[0].id, 10) : params.value[0].id || 0;
+      const seconds =
+        typeof params.value[0].id === "string"
+          ? Number.parseInt(params.value[0].id, 10)
+          : params.value[0].id || 0;
       this.handleChange(seconds);
     };
     this.secondsToLabel = (seconds, format) => {
@@ -63,10 +66,11 @@ class TimePicker extends React.Component {
           if (!meridiem) {
             hoursMinutes = [
               { hours: twelveHours, minutes },
-              { hours: twelveHours + 12, minutes }
+              { hours: twelveHours + 12, minutes },
             ];
           } else {
-            const twentyFourHours = meridiem.toLowerCase()[0] === "a" ? twelveHours : twelveHours + 12;
+            const twentyFourHours =
+              meridiem.toLowerCase()[0] === "a" ? twelveHours : twelveHours + 12;
             hoursMinutes = [{ hours: twentyFourHours, minutes }];
           }
           break;
@@ -91,18 +95,34 @@ class TimePicker extends React.Component {
       let { minTime: min, maxTime: max, ignoreMinMaxDateComponent } = this.props;
       const dayStart = this.setTime(this.props.value, 0, 0, 0);
       const dayEnd = this.setTime(this.props.value, 24, 0, 0);
-      min = !min || this.props.adapter.isBefore(min, dayStart) && !ignoreMinMaxDateComponent ? dayStart : this.setTime(this.props.value, this.props.adapter.getHours(min), this.props.adapter.getMinutes(min), this.props.adapter.getSeconds(min));
-      if (!max || this.props.adapter.isAfter(max, dayEnd) && !ignoreMinMaxDateComponent) {
+      min =
+        !min || (this.props.adapter.isBefore(min, dayStart) && !ignoreMinMaxDateComponent)
+          ? dayStart
+          : this.setTime(
+              this.props.value,
+              this.props.adapter.getHours(min),
+              this.props.adapter.getMinutes(min),
+              this.props.adapter.getSeconds(min)
+            );
+      if (
+        !max ||
+        (this.props.adapter.isAfter(max, dayEnd) && !ignoreMinMaxDateComponent)
+      ) {
         max = dayEnd;
       } else {
-        max = this.setTime(this.props.value, this.props.adapter.getHours(max), this.props.adapter.getMinutes(max), this.props.adapter.getSeconds(max) + 1);
+        max = this.setTime(
+          this.props.value,
+          this.props.adapter.getHours(max),
+          this.props.adapter.getMinutes(max),
+          this.props.adapter.getSeconds(max) + 1
+        );
       }
       const minDate = this.props.adapter.toJsDate(min);
       const maxDate = this.props.adapter.toJsDate(max);
       const midnightDate = this.props.adapter.toJsDate(dayStart);
       return {
         start: (minDate - midnightDate) / 1e3,
-        end: (maxDate - midnightDate) / 1e3
+        end: (maxDate - midnightDate) / 1e3,
       };
     };
     this.buildSteps = () => {
@@ -110,13 +130,17 @@ class TimePicker extends React.Component {
       const timeWindow = this.getTimeWindowInSeconds(step);
       let stepCount = (timeWindow.end - timeWindow.start) / step;
       if (__DEV__ && stepCount > 500) {
-        console.warn(`Provided step value (${step}) results in ${stepCount} steps. Performance may suffer when more than 500 elements are rendered.`);
+        console.warn(
+          `Provided step value (${step}) results in ${stepCount} steps. Performance may suffer when more than 500 elements are rendered.`
+        );
       }
       if (!Number.isInteger(stepCount)) {
         const previousStepCount = stepCount;
         stepCount = Math.round(stepCount);
         if (__DEV__) {
-          console.warn(`Provided step value (${step}) does not spread evenly across a day. Rounding from ${previousStepCount} total steps to ${stepCount}.`);
+          console.warn(
+            `Provided step value (${step}) does not spread evenly across a day. Rounding from ${previousStepCount} total steps to ${stepCount}.`
+          );
         }
       }
       const options = [];
@@ -136,7 +160,7 @@ class TimePicker extends React.Component {
       const secs = this.dateHelpers.dateToSeconds(value);
       return {
         id: secs,
-        label: this.secondsToLabel(secs, format || "12")
+        label: this.secondsToLabel(secs, format || "12"),
       };
     };
     this.dateHelpers = new DateHelpers(props.adapter);
@@ -146,7 +170,7 @@ class TimePicker extends React.Component {
     if (this.props.value && this.props.adapter.isValid(this.props.value)) {
       this.setState({
         steps,
-        value: this.buildSelectedOption(this.props.value, this.props.format)
+        value: this.buildSelectedOption(this.props.value, this.props.format),
       });
     } else {
       const seconds = this.dateHelpers.dateToSeconds(this.props.adapter.date());
@@ -158,12 +182,14 @@ class TimePicker extends React.Component {
       }
       this.setState({
         steps,
-        value: this.props.nullable ? void 0 : {
-          id: closestStep,
-          label: this.secondsToLabel(closestStep, this.props.format)
-        }
+        value: this.props.nullable
+          ? void 0
+          : {
+              id: closestStep,
+              label: this.secondsToLabel(closestStep, this.props.format),
+            },
       });
-      if (this.props.value || !this.props.nullable && !this.props.value) {
+      if (this.props.value || (!this.props.nullable && !this.props.value)) {
         this.handleChange(closestStep);
       }
     }
@@ -188,17 +214,47 @@ class TimePicker extends React.Component {
   render() {
     const { format, overrides = {}, adapter } = this.props;
     const [OverriddenSelect, selectProps] = getOverrides(overrides.Select, Select);
-    selectProps.overrides = mergeOverrides({ Dropdown: { style: { maxHeight: "126px" } } }, selectProps.overrides);
-    const value = this.props.value && adapter.isValid(this.props.value) ? this.buildSelectedOption(this.props.value, this.props.format) : this.state.value;
-    return <LocaleContext.Consumer>{(locale) => {
-      const ariaLabel = format === "12" ? locale.datepicker.timePickerAriaLabel12Hour : locale.datepicker.timePickerAriaLabel24Hour;
-      return <OverriddenSelect aria-label={ariaLabel} disabled={this.props.disabled} error={this.props.error} positive={this.props.positive} size={this.props.size} placeholder={this.props.placeholder || "HH:mm"} options={this.state.steps.map((n) => {
-        return {
-          id: n,
-          label: this.secondsToLabel(n, this.props.format)
-        };
-      })} filterOptions={this.props.creatable ? this.creatableFilterOptions : void 0} onChange={this.onChange} value={value ? [value] : value} clearable={false} backspaceRemoves={false} valueKey="label" {...selectProps} />;
-    }}</LocaleContext.Consumer>;
+    selectProps.overrides = mergeOverrides(
+      { Dropdown: { style: { maxHeight: "126px" } } },
+      selectProps.overrides
+    );
+    const value =
+      this.props.value && adapter.isValid(this.props.value)
+        ? this.buildSelectedOption(this.props.value, this.props.format)
+        : this.state.value;
+    return (
+      <LocaleContext.Consumer>
+        {(locale) => {
+          const ariaLabel =
+            format === "12"
+              ? locale.datepicker.timePickerAriaLabel12Hour
+              : locale.datepicker.timePickerAriaLabel24Hour;
+          return (
+            <OverriddenSelect
+              aria-label={ariaLabel}
+              disabled={this.props.disabled}
+              error={this.props.error}
+              positive={this.props.positive}
+              size={this.props.size}
+              placeholder={this.props.placeholder || "HH:mm"}
+              options={this.state.steps.map((n) => {
+                return {
+                  id: n,
+                  label: this.secondsToLabel(n, this.props.format),
+                };
+              })}
+              filterOptions={this.props.creatable ? this.creatableFilterOptions : void 0}
+              onChange={this.onChange}
+              value={value ? [value] : value}
+              clearable={false}
+              backspaceRemoves={false}
+              valueKey="label"
+              {...selectProps}
+            />
+          );
+        }}
+      </LocaleContext.Consumer>
+    );
   }
 }
 TimePicker.defaultProps = {
@@ -206,6 +262,6 @@ TimePicker.defaultProps = {
   step: 900,
   creatable: false,
   adapter: dateFnsAdapter,
-  ignoreMinMaxDateComponent: false
+  ignoreMinMaxDateComponent: false,
 };
 export default TimePicker;

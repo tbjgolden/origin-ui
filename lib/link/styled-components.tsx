@@ -17,21 +17,25 @@ export const Link = styled("a", ({ $theme, $isAnimateUnderline, $isFocusVisible 
     willChange: "background-size",
     backgroundSize: direction === "rtl" ? "100% 100%, 100% 100%" : "0% 100%, 100% 100%",
     backgroundRepeat: "no-repeat",
-    backgroundImage: $isAnimateUnderline ? direction === "rtl" ? underlineRTL : underlineLTR : "none",
+    backgroundImage: $isAnimateUnderline
+      ? direction === "rtl"
+        ? underlineRTL
+        : underlineLTR
+      : "none",
     ":hover": {
       color: colors.linkHover,
-      backgroundSize: direction === "rtl" ? "0% 100%, 100% 100%" : "100% 100%, 100% 100%"
+      backgroundSize: direction === "rtl" ? "0% 100%, 100% 100%" : "100% 100%, 100% 100%",
     },
     ":focus": {
       outline: $isFocusVisible ? `3px solid ${colors.accent}` : "none",
       outlineOffset: "1px",
-      textDecoration: "none"
+      textDecoration: "none",
     },
     ":visited": {
-      color: colors.linkVisited
+      color: colors.linkVisited,
     },
     ":active": {
-      color: colors.linkActive
-    }
+      color: colors.linkActive,
+    },
   };
 });

@@ -14,7 +14,7 @@ export const LightTheme = {
   colors: {
     ...colorTokens,
     ...getComponentColorTokens(),
-    ...getSemanticColorTokens()
+    ...getSemanticColorTokens(),
   },
   animation,
   breakpoints,
@@ -26,6 +26,6 @@ export const LightTheme = {
   sizing,
   typography: getTypography(),
   zIndex: {
-    modal: 2e3
-  }
+    modal: 2e3,
+  },
 };

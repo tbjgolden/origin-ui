@@ -4,12 +4,16 @@ const defaultStateReducer = (type, nextState) => {
   return nextState;
 };
 function StatefulList(props) {
-  return <StatefulListContainer {...props}>{(componentProps) => {
-    return <List {...componentProps} />;
-  }}</StatefulListContainer>;
+  return (
+    <StatefulListContainer {...props}>
+      {(componentProps) => {
+        return <List {...componentProps} />;
+      }}
+    </StatefulListContainer>
+  );
 }
 StatefulList.defaultProps = {
   initialState: { items: [] },
-  stateReducer: defaultStateReducer
+  stateReducer: defaultStateReducer,
 };
 export default StatefulList;

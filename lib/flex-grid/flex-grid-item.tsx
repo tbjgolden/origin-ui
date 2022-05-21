@@ -8,22 +8,32 @@ export const flexGridItemMediaQueryStyle = ({
   flexGridColumnGap,
   flexGridRowGap,
   flexGridItemIndex: itemIndex,
-  flexGridItemCount: itemCount
+  flexGridItemCount: itemCount,
 }) => {
   const colGap = $theme.sizing[flexGridColumnGap] || flexGridColumnGap || "0px";
   const colGapQuantity = Number.parseFloat(colGap);
   const colGapUnit = colGap.match(/[A-Za-z]+/)[0];
   const rowGap = $theme.sizing[flexGridRowGap] || flexGridRowGap || "0px";
   const rowGapQuantity = Number.parseFloat(rowGap);
-  const widthCalc = `(100% - ${(colCount - 1) * colGapQuantity}${colGapUnit}) / ${colCount}`;
+  const widthCalc = `(100% - ${
+    (colCount - 1) * colGapQuantity
+  }${colGapUnit}) / ${colCount}`;
   const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return Object.freeze({
     width: `calc(${widthCalc} - .5px)`,
     [marginDirection]: colGapQuantity && ((itemIndex + 1) % colCount !== 0 ? colGap : 0),
-    marginBottom: rowGapQuantity && (Math.trunc(itemIndex / colCount) !== Math.trunc((itemCount - 1) / colCount) ? rowGap : 0),
-    ...itemIndex === itemCount - 1 && (itemIndex + 1) % colCount !== 0 ? {
-      [marginDirection]: `calc(${colCount - itemIndex % colCount - 1} * (${colGap} + ${widthCalc}))`
-    } : {}
+    marginBottom:
+      rowGapQuantity &&
+      (Math.trunc(itemIndex / colCount) !== Math.trunc((itemCount - 1) / colCount)
+        ? rowGap
+        : 0),
+    ...(itemIndex === itemCount - 1 && (itemIndex + 1) % colCount !== 0
+      ? {
+          [marginDirection]: `calc(${
+            colCount - (itemIndex % colCount) - 1
+          } * (${colGap} + ${widthCalc}))`,
+        }
+      : {}),
   });
 };
 export const getResponsiveValue = (responsive, i) => {
@@ -41,13 +51,15 @@ export const flexGridItemStyle = ({
   $flexGridRowGap,
   $flexGridItemIndex,
   $flexGridItemCount,
-  $theme
+  $theme,
 }) => {
   const baseFlexGridItemStyle = { flexGrow: 1 };
   const mediaQueries = getMediaQueries($theme.breakpoints);
-  const maxResponsiveLength = Math.max(...[$flexGridColumnCount, $flexGridColumnGap, $flexGridRowGap].map((r) => {
-    return Array.isArray(r) ? r.length : 0;
-  }));
+  const maxResponsiveLength = Math.max(
+    ...[$flexGridColumnCount, $flexGridColumnGap, $flexGridRowGap].map((r) => {
+      return Array.isArray(r) ? r.length : 0;
+    })
+  );
   if (maxResponsiveLength < 2) {
     return {
       ...baseFlexGridItemStyle,
@@ -57,15 +69,15 @@ export const flexGridItemStyle = ({
         flexGridColumnGap: getResponsiveValue($flexGridColumnGap, 0) || 0,
         flexGridRowGap: getResponsiveValue($flexGridRowGap, 0) || 0,
         flexGridItemIndex: $flexGridItemIndex || 0,
-        flexGridItemCount: $flexGridItemCount || 1
-      })
+        flexGridItemCount: $flexGridItemCount || 1,
+      }),
     };
   }
   return [...new Array(maxResponsiveLength).keys()].reduce((acc, i) => {
     const [flexGridColumnCountValue, flexGridColumnGapValue, flexGridRowGapValue] = [
       $flexGridColumnCount,
       $flexGridColumnGap,
-      $flexGridRowGap
+      $flexGridRowGap,
     ].map((r) => {
       return getResponsiveValue(r, i);
     });
@@ -77,7 +89,7 @@ export const flexGridItemStyle = ({
         flexGridColumnGap: flexGridColumnGapValue || 0,
         flexGridRowGap: flexGridRowGapValue || 0,
         flexGridItemIndex: $flexGridItemIndex || 0,
-        flexGridItemCount: $flexGridItemCount || 1
+        flexGridItemCount: $flexGridItemCount || 1,
       });
     }
     return acc;
@@ -97,11 +109,28 @@ const FlexGridItem = ({
 }) => {
   const flexGridItemOverrides = {
     Block: {
-      style: flexGridItemStyle
-    }
+      style: flexGridItemStyle,
+    },
   };
-  const blockOverrides = overrides ? mergeOverrides(flexGridItemOverrides, overrides) : flexGridItemOverrides;
-  return <Block ref={forwardedRef} as={as} overrides={blockOverrides} $flexGridColumnCount={flexGridColumnCount} $flexGridColumnGap={flexGridColumnGap} $flexGridRowGap={flexGridRowGap} $flexGridItemIndex={flexGridItemIndex} $flexGridItemCount={flexGridItemCount} data-baseweb="flex-grid-item" {...restProps}>{children}</Block>;
+  const blockOverrides = overrides
+    ? mergeOverrides(flexGridItemOverrides, overrides)
+    : flexGridItemOverrides;
+  return (
+    <Block
+      ref={forwardedRef}
+      as={as}
+      overrides={blockOverrides}
+      $flexGridColumnCount={flexGridColumnCount}
+      $flexGridColumnGap={flexGridColumnGap}
+      $flexGridRowGap={flexGridRowGap}
+      $flexGridItemIndex={flexGridItemIndex}
+      $flexGridItemCount={flexGridItemCount}
+      data-baseweb="flex-grid-item"
+      {...restProps}
+    >
+      {children}
+    </Block>
+  );
 };
 const FlexGridItemComponent = React.forwardRef((props, ref) => {
   return <FlexGridItem {...props} forwardedRef={ref} />;

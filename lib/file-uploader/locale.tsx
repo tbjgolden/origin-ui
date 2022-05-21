@@ -3,6 +3,6 @@ const locale = {
   or: "",
   browseFiles: "Browse files",
   retry: "Retry Upload",
-  cancel: "Cancel"
+  cancel: "Cancel",
 };
 export default locale;

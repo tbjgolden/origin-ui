@@ -11,6 +11,6 @@ const baseDefaultProps = {
   popoverMargin: 0,
   showArrow: false,
   triggerType: TRIGGER_TYPE.hover,
-  renderAll: false
+  renderAll: false,
 };
 export default baseDefaultProps;

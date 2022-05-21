@@ -11,6 +11,6 @@ const baseDefaultProps = {
   placement: PLACEMENT.auto,
   showArrow: false,
   triggerType: TRIGGER_TYPE.click,
-  renderAll: false
+  renderAll: false,
 };
 export default baseDefaultProps;

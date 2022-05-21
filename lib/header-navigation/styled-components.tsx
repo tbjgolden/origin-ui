@@ -5,7 +5,7 @@ export const Root = styled("nav", (props) => {
   const {
     sizing: { scale500 },
     typography: { font300 },
-    colors: { borderOpaque }
+    colors: { borderOpaque },
   } = $theme;
   return {
     ...font300,
@@ -15,32 +15,32 @@ export const Root = styled("nav", (props) => {
     borderBottomWidth: "1px",
     borderBottomStyle: "solid",
     borderBottomColor: `${borderOpaque}`,
-    backgroundColor: $theme.colors.backgroundPrimary
+    backgroundColor: $theme.colors.backgroundPrimary,
   };
 });
 export const NavigationItem = styled("li", (props) => {
   const { $theme } = props;
   const {
-    sizing: { scale800 }
+    sizing: { scale800 },
   } = $theme;
   return {
     alignSelf: "center",
-    paddingLeft: scale800
+    paddingLeft: scale800,
   };
 });
 export const NavigationList = styled("ul", (props) => {
   const { $align, $theme } = props;
   const aligned = $align === ALIGN.right || $align === ALIGN.left;
   const {
-    sizing: { scale800 }
+    sizing: { scale800 },
   } = $theme;
   return {
     display: "flex",
     ":first-child": {
-      padding: 0
+      padding: 0,
     },
     ":last-child": {
-      padding: 0
+      padding: 0,
     },
     flexGrow: aligned ? 0 : 1,
     flexShrink: aligned ? 0 : 1,
@@ -53,6 +53,6 @@ export const NavigationList = styled("ul", (props) => {
     marginBottom: 0,
     marginTop: 0,
     marginLeft: 0,
-    marginRight: 0
+    marginRight: 0,
   };
 });

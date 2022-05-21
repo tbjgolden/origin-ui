@@ -1,6 +1,6 @@
 const locale = {
   prev: "Prev",
   next: "Next",
-  preposition: "of"
+  preposition: "of",
 };
 export default locale;

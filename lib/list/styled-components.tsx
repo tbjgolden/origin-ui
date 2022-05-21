@@ -12,7 +12,7 @@ export const StyledRoot = styled("li", ({ $theme, $shape }) => {
     borderTopRightRadius: $shape === SHAPE.ROUND ? $theme.borders.radius400 : 0,
     borderBottomLeftRadius: $shape === SHAPE.ROUND ? $theme.borders.radius400 : 0,
     borderBottomRightRadius: $shape === SHAPE.ROUND ? $theme.borders.radius400 : 0,
-    overflow: "hidden"
+    overflow: "hidden",
   };
 });
 export const StyledContent = styled("div", ({ $mLeft, $sublist, $theme }) => {
@@ -26,42 +26,50 @@ export const StyledContent = styled("div", ({ $mLeft, $sublist, $theme }) => {
     flexGrow: 1,
     minHeight: $sublist ? "initial" : $theme.sizing.scale1600,
     justifyContent: "space-between",
-    ...$theme.direction === "rtl" ? {
-      paddingLeft: $theme.sizing.scale600,
-      marginRight: $mLeft ? $theme.sizing.scale600 : null
-    } : {
-      paddingRight: $theme.sizing.scale600,
-      marginLeft: $mLeft ? $theme.sizing.scale600 : null
-    }
+    ...($theme.direction === "rtl"
+      ? {
+          paddingLeft: $theme.sizing.scale600,
+          marginRight: $mLeft ? $theme.sizing.scale600 : null,
+        }
+      : {
+          paddingRight: $theme.sizing.scale600,
+          marginLeft: $mLeft ? $theme.sizing.scale600 : null,
+        }),
   };
 });
 export const StyledEndEnhancerContainer = styled("div", {
   alignItems: "center",
-  display: "flex"
+  display: "flex",
 });
-export const StyledArtworkContainer = styled("div", ({ $artworkSize, $sublist, $theme }) => {
-  const sizeValue = typeof $artworkSize === "number" ? $artworkSize : artworkSizeToValue($artworkSize, Boolean($sublist));
-  if (sizeValue > 36) {
+export const StyledArtworkContainer = styled(
+  "div",
+  ({ $artworkSize, $sublist, $theme }) => {
+    const sizeValue =
+      typeof $artworkSize === "number"
+        ? $artworkSize
+        : artworkSizeToValue($artworkSize, Boolean($sublist));
+    if (sizeValue > 36) {
+      return {
+        alignItems: "center",
+        display: "flex",
+        paddingLeft: $theme.sizing.scale600,
+        paddingRight: $theme.sizing.scale600,
+      };
+    }
     return {
       alignItems: "center",
       display: "flex",
-      paddingLeft: $theme.sizing.scale600,
-      paddingRight: $theme.sizing.scale600
+      justifyContent: "center",
+      width: $theme.sizing.scale1600,
     };
   }
-  return {
-    alignItems: "center",
-    display: "flex",
-    justifyContent: "center",
-    width: $theme.sizing.scale1600
-  };
-});
+);
 export const StyledLabelContent = styled("p", ({ $theme }) => {
   return {
     ...$theme.typography.LabelMedium,
     color: $theme.colors.contentPrimary,
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: 0,
   };
 });
 export const StyledLabelDescription = styled("p", ({ $theme }) => {
@@ -69,7 +77,7 @@ export const StyledLabelDescription = styled("p", ({ $theme }) => {
     ...$theme.typography.ParagraphSmall,
     color: $theme.colors.contentPrimary,
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: 0,
   };
 });
 export const StyledLabelSublistContent = styled("p", ({ $theme }) => {
@@ -77,7 +85,7 @@ export const StyledLabelSublistContent = styled("p", ({ $theme }) => {
     ...$theme.typography.LabelMedium,
     color: $theme.colors.contentPrimary,
     marginTop: $theme.sizing.scale500,
-    marginBottom: $theme.sizing.scale500
+    marginBottom: $theme.sizing.scale500,
   };
 });
 export const StyledHeadingRoot = styled("div", ({ $theme }) => {
@@ -87,7 +95,7 @@ export const StyledHeadingRoot = styled("div", ({ $theme }) => {
     width: "100%",
     backgroundColor: $theme.colors.backgroundPrimary,
     overflow: "hidden",
-    minHeight: $theme.sizing.scale1600
+    minHeight: $theme.sizing.scale1600,
   };
 });
 export const StyledHeadingContent = styled("div", ({ $theme }) => {
@@ -97,19 +105,21 @@ export const StyledHeadingContent = styled("div", ({ $theme }) => {
     minWidth: 0,
     paddingTop: $theme.sizing.scale600,
     paddingBottom: $theme.sizing.scale300,
-    ...$theme.direction === "rtl" ? {
-      paddingLeft: $theme.sizing.scale600,
-      marginRight: $theme.sizing.scale600
-    } : {
-      paddingRight: $theme.sizing.scale600,
-      marginLeft: $theme.sizing.scale600
-    }
+    ...($theme.direction === "rtl"
+      ? {
+          paddingLeft: $theme.sizing.scale600,
+          marginRight: $theme.sizing.scale600,
+        }
+      : {
+          paddingRight: $theme.sizing.scale600,
+          marginLeft: $theme.sizing.scale600,
+        }),
   };
 });
 export const StyledHeadingContentRow = styled("div", {
   display: "flex",
   justifyContent: "space-between",
-  width: "100%"
+  width: "100%",
 });
 export const StyledHeadingMainHeading = styled("p", ({ $maxLines = 1, $theme }) => {
   return {
@@ -121,7 +131,7 @@ export const StyledHeadingMainHeading = styled("p", ({ $maxLines = 1, $theme }) 
     display: "-webkit-box",
     "-webkit-line-clamp": $maxLines,
     "-webkit-box-orient": "vertical",
-    overflow: "hidden"
+    overflow: "hidden",
   };
 });
 export const StyledHeadingSubHeading = styled("p", ({ $maxLines = 1, $theme }) => {
@@ -134,7 +144,7 @@ export const StyledHeadingSubHeading = styled("p", ({ $maxLines = 1, $theme }) =
     display: "-webkit-box",
     "-webkit-line-clamp": $maxLines,
     "-webkit-box-orient": "vertical",
-    overflow: "hidden"
+    overflow: "hidden",
   };
 });
 export const StyledHeadingEndEnhancerContainer = styled("div", ({ $isText, $theme }) => {
@@ -144,7 +154,7 @@ export const StyledHeadingEndEnhancerContainer = styled("div", ({ $isText, $them
     alignItems: $isText ? "flex-end" : "center",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   };
 });
 export const StyledHeadingEndEnhancerDescriptionContainer = styled("p", ({ $theme }) => {
@@ -156,6 +166,6 @@ export const StyledHeadingEndEnhancerDescriptionContainer = styled("p", ({ $them
     alignItems: "flex-start",
     whiteSpace: "nowrap",
     overflow: "hidden",
-    textOverflow: "ellipsis"
+    textOverflow: "ellipsis",
   };
 });

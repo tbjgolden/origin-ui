@@ -8,6 +8,6 @@ export {
   Item as StyledItem,
   DragHandle as StyledDragHandle,
   CloseHandle as StyledCloseHandle,
-  Label as StyledLabel
+  Label as StyledLabel,
 } from "./styled-components";
 export { arrayMove, arrayRemove } from "react-movable";

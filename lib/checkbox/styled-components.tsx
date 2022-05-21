@@ -1,6 +1,7 @@
 import { styled } from "../styles";
 function getBorderColor(props) {
-  const { $disabled, $checked, $error, $isIndeterminate, $theme, $isFocusVisible } = props;
+  const { $disabled, $checked, $error, $isIndeterminate, $theme, $isFocusVisible } =
+    props;
   const { colors } = $theme;
   if ($disabled) {
     return colors.tickFillDisabled;
@@ -40,11 +41,12 @@ function getLabelPadding(props) {
     paddingDirection = "Left";
   }
   return {
-    [`padding${paddingDirection}`]: scale300
+    [`padding${paddingDirection}`]: scale300,
   };
 }
 function getBackgroundColor(props) {
-  const { $disabled, $checked, $isIndeterminate, $error, $isHovered, $isActive, $theme } = props;
+  const { $disabled, $checked, $isIndeterminate, $error, $isHovered, $isActive, $theme } =
+    props;
   const { colors } = $theme;
   if ($disabled) {
     return $checked || $isIndeterminate ? colors.tickFillDisabled : colors.tickFill;
@@ -90,17 +92,24 @@ function getLabelColor(props) {
 export const Root = styled("label", (props) => {
   const { $disabled, $labelPlacement } = props;
   return {
-    flexDirection: $labelPlacement === "top" || $labelPlacement === "bottom" ? "column" : "row",
+    flexDirection:
+      $labelPlacement === "top" || $labelPlacement === "bottom" ? "column" : "row",
     display: "flex",
-    alignItems: $labelPlacement === "top" || $labelPlacement === "bottom" ? "center" : "flex-start",
+    alignItems:
+      $labelPlacement === "top" || $labelPlacement === "bottom" ? "center" : "flex-start",
     cursor: $disabled ? "not-allowed" : "pointer",
-    userSelect: "none"
+    userSelect: "none",
   };
 });
 export const Checkmark = styled("span", (props) => {
-  const { $checked, $disabled, $error, $isIndeterminate, $theme, $isFocusVisible } = props;
+  const { $checked, $disabled, $error, $isIndeterminate, $theme, $isFocusVisible } =
+    props;
   const { sizing, animation } = $theme;
-  const tickColor = $disabled ? $theme.colors.tickMarkFillDisabled : $error ? $theme.colors.tickMarkFillError : $theme.colors.tickMarkFill;
+  const tickColor = $disabled
+    ? $theme.colors.tickMarkFillDisabled
+    : $error
+    ? $theme.colors.tickMarkFillError
+    : $theme.colors.tickMarkFill;
   const indeterminate = encodeURIComponent(`
     <svg width="14" height="4" viewBox="0 0 14 4" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14 0.5H0V3.5H14V0.5Z" fill="${tickColor}"/>
@@ -142,7 +151,11 @@ export const Checkmark = styled("span", (props) => {
     outline: $isFocusVisible && $checked ? `3px solid ${$theme.colors.accent}` : "none",
     display: "inline-block",
     verticalAlign: "middle",
-    backgroundImage: $isIndeterminate ? `url('data:image/svg+xml,${indeterminate}');` : $checked ? `url('data:image/svg+xml,${check}');` : null,
+    backgroundImage: $isIndeterminate
+      ? `url('data:image/svg+xml,${indeterminate}');`
+      : $checked
+      ? `url('data:image/svg+xml,${check}');`
+      : null,
     backgroundColor: getBackgroundColor(props),
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -150,7 +163,7 @@ export const Checkmark = styled("span", (props) => {
     marginTop: $theme.sizing.scale0,
     marginBottom: $theme.sizing.scale0,
     marginLeft: $theme.sizing.scale0,
-    marginRight: $theme.sizing.scale0
+    marginRight: $theme.sizing.scale0,
   };
 });
 export const Label = styled("div", (props) => {
@@ -161,7 +174,7 @@ export const Label = styled("div", (props) => {
     ...getLabelPadding(props),
     color: getLabelColor(props),
     ...typography.LabelMedium,
-    lineHeight: "24px"
+    lineHeight: "24px",
   };
 });
 export const Input = styled("input", {
@@ -171,7 +184,7 @@ export const Input = styled("input", {
   overflow: "hidden",
   margin: 0,
   padding: 0,
-  position: "absolute"
+  position: "absolute",
 });
 export const Toggle = styled("div", (props) => {
   let backgroundColor = props.$theme.colors.toggleFill;
@@ -188,12 +201,18 @@ export const Toggle = styled("div", (props) => {
     borderTopRightRadius: "50%",
     borderBottomRightRadius: "50%",
     borderBottomLeftRadius: "50%",
-    boxShadow: props.$isFocusVisible ? `0 0 0 3px ${props.$theme.colors.accent}` : props.$isHovered && !props.$disabled ? props.$theme.lighting.shadow500 : props.$theme.lighting.shadow400,
+    boxShadow: props.$isFocusVisible
+      ? `0 0 0 3px ${props.$theme.colors.accent}`
+      : props.$isHovered && !props.$disabled
+      ? props.$theme.lighting.shadow500
+      : props.$theme.lighting.shadow400,
     outline: "none",
     height: props.$theme.sizing.scale700,
     width: props.$theme.sizing.scale700,
-    transform: props.$checked ? `translateX(${props.$theme.direction === "rtl" ? "-100%" : "100%"})` : null,
-    transition: `transform ${props.$theme.animation.timing200}`
+    transform: props.$checked
+      ? `translateX(${props.$theme.direction === "rtl" ? "-100%" : "100%"})`
+      : null,
+    transition: `transform ${props.$theme.animation.timing200}`,
   };
 });
 export const ToggleTrack = styled("div", (props) => {
@@ -216,6 +235,6 @@ export const ToggleTrack = styled("div", (props) => {
     marginBottom: props.$theme.sizing.scale100,
     marginLeft: props.$theme.sizing.scale200,
     marginRight: props.$theme.sizing.scale100,
-    width: props.$theme.sizing.scale1000
+    width: props.$theme.sizing.scale1000,
   };
 });

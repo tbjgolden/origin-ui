@@ -12,27 +12,27 @@ export const StyledRoot = styled("div", ({ $theme }) => {
     color: $theme.colors.contentInversePrimary,
     display: "inline-block",
     maxWidth: "540px",
-    minWidth: "320px"
+    minWidth: "320px",
   };
 });
 export const StyledContent = styled("div", {
   alignItems: "center",
   display: "inline-flex",
-  width: "100%"
+  width: "100%",
 });
 export const StyledStartEnhancerContainer = styled("span", ({ $theme }) => {
   const paddingDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   return {
     alignItems: "center",
     display: "flex",
-    [paddingDir]: $theme.sizing.scale600
+    [paddingDir]: $theme.sizing.scale600,
   };
 });
 export const StyledSpinner = withStyle(Spinner, ({ $height, $width }) => {
   return {
     boxSizing: "border-box",
     height: `${$height}px`,
-    width: `${$width}px`
+    width: `${$width}px`,
   };
 });
 export const StyledMessage = styled("p", ({ $theme, $hasSuffix }) => {
@@ -47,17 +47,17 @@ export const StyledMessage = styled("p", ({ $theme, $hasSuffix }) => {
     marginBottom: $theme.sizing.scale600,
     overflow: "hidden",
     [prefixPadding]: $theme.sizing.scale600,
-    [suffixPadding]: $hasSuffix ? $theme.sizing.scale300 : $theme.sizing.scale600
+    [suffixPadding]: $hasSuffix ? $theme.sizing.scale300 : $theme.sizing.scale600,
   };
 });
 export const StyledWrapActionButtonContainer = styled("div", {
   display: "flex",
-  justifyContent: "flex-end"
+  justifyContent: "flex-end",
 });
 export const StyledActionButtonContainer = styled("div", ({ $theme }) => {
   const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
-    [marginDir]: "auto"
+    [marginDir]: "auto",
   };
 });
 function placementRules(placement) {
@@ -66,63 +66,66 @@ function placementRules(placement) {
       return {
         alignItems: "flex-start",
         justifyContent: "flex-start",
-        top: 0
+        top: 0,
       };
     case PLACEMENT.topRight:
       return {
         alignItems: "flex-end",
         justifyContent: "flex-start",
-        top: 0
+        top: 0,
       };
     case PLACEMENT.bottom:
       return {
         alignItems: "center",
         justifyContent: "flex-end",
-        bottom: 0
+        bottom: 0,
       };
     case PLACEMENT.bottomLeft:
       return {
         alignItems: "flex-start",
         justifyContent: "flex-end",
-        bottom: 0
+        bottom: 0,
       };
     case PLACEMENT.bottomRight:
       return {
         alignItems: "flex-end",
         justifyContent: "flex-end",
-        bottom: 0
+        bottom: 0,
       };
     case PLACEMENT.top:
     default:
       return {
         alignItems: "center",
         justifyContent: "flex-start",
-        top: 0
+        top: 0,
       };
   }
 }
-export const StyledPlacementContainer = styled("div", ({ $animating, $placement, $translateHeight, $theme }) => {
-  return {
-    ...placementRules($placement),
-    display: "flex",
-    flexDirection: "column",
-    pointerEvents: "none",
-    position: "fixed",
-    transform: $animating ? `translateY(${$translateHeight}px)` : null,
-    transitionProperty: "all",
-    transitionTimingFunction: $theme.animation.easeOutQuinticCurve,
-    transitionDuration: $theme.animation.timing1000,
-    right: 0,
-    left: 0,
-    marginTop: $theme.sizing.scale300,
-    marginRight: $theme.sizing.scale300,
-    marginBottom: $theme.sizing.scale300,
-    marginLeft: $theme.sizing.scale300,
-    [$theme.mediaQuery.medium]: {
-      marginTop: $theme.sizing.scale600,
-      marginRight: $theme.sizing.scale600,
-      marginBottom: $theme.sizing.scale600,
-      marginLeft: $theme.sizing.scale600
-    }
-  };
-});
+export const StyledPlacementContainer = styled(
+  "div",
+  ({ $animating, $placement, $translateHeight, $theme }) => {
+    return {
+      ...placementRules($placement),
+      display: "flex",
+      flexDirection: "column",
+      pointerEvents: "none",
+      position: "fixed",
+      transform: $animating ? `translateY(${$translateHeight}px)` : null,
+      transitionProperty: "all",
+      transitionTimingFunction: $theme.animation.easeOutQuinticCurve,
+      transitionDuration: $theme.animation.timing1000,
+      right: 0,
+      left: 0,
+      marginTop: $theme.sizing.scale300,
+      marginRight: $theme.sizing.scale300,
+      marginBottom: $theme.sizing.scale300,
+      marginLeft: $theme.sizing.scale300,
+      [$theme.mediaQuery.medium]: {
+        marginTop: $theme.sizing.scale600,
+        marginRight: $theme.sizing.scale600,
+        marginBottom: $theme.sizing.scale600,
+        marginLeft: $theme.sizing.scale600,
+      },
+    };
+  }
+);

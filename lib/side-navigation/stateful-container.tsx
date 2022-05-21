@@ -8,7 +8,7 @@ class StatefulContainer extends React.Component {
     super(...arguments);
     this.state = {
       activeItemId: "",
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.onChange = (params) => {
       const { onChange } = this.props;
@@ -22,7 +22,9 @@ class StatefulContainer extends React.Component {
       if (type === STATE_CHANGE_TYPE.change) {
         nextState = { activeItemId: item.itemId };
       }
-      const newState = this.props.stateReducer ? this.props.stateReducer(type, nextState, this.state) : nextState;
+      const newState = this.props.stateReducer
+        ? this.props.stateReducer(type, nextState, this.state)
+        : nextState;
       this.setState(newState);
     };
   }
@@ -32,14 +34,13 @@ class StatefulContainer extends React.Component {
     return children({
       ...restProps,
       ...this.state,
-      onChange
+      onChange,
     });
   }
 }
 StatefulContainer.defaultProps = {
   initialState: {},
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulContainer;

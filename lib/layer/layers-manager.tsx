@@ -6,7 +6,9 @@ const StyledAppContainer = styled("div", {});
 const StyledLayersContainer = styled("div", {});
 function defaultEventHandlerFn() {
   if (__DEV__) {
-    console.warn("`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information");
+    console.warn(
+      "`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information"
+    );
   }
 }
 export const LayersContext = React.createContext({
@@ -15,7 +17,7 @@ export const LayersContext = React.createContext({
   addDocClickHandler: defaultEventHandlerFn,
   removeDocClickHandler: defaultEventHandlerFn,
   host: void 0,
-  zIndex: void 0
+  zIndex: void 0,
 });
 export const Provider = LayersContext.Provider;
 export const Consumer = LayersContext.Consumer;
@@ -25,14 +27,16 @@ export default class LayersManager extends React.Component {
     this.host = React.createRef();
     this.containerRef = React.createRef();
     this.onDocumentClick = (event) => {
-      const docClickHandler = this.state.docClickHandlers[this.state.docClickHandlers.length - 1];
+      const docClickHandler =
+        this.state.docClickHandlers[this.state.docClickHandlers.length - 1];
       if (docClickHandler) {
         docClickHandler(event);
       }
     };
     this.onKeyUp = (event) => {
       if (event.key === "Escape") {
-        const escapeKeyHandler = this.state.escapeKeyHandlers[this.state.escapeKeyHandlers.length - 1];
+        const escapeKeyHandler =
+          this.state.escapeKeyHandlers[this.state.escapeKeyHandlers.length - 1];
         if (escapeKeyHandler) {
           escapeKeyHandler();
         }
@@ -48,7 +52,7 @@ export default class LayersManager extends React.Component {
         return {
           escapeKeyHandlers: prev.escapeKeyHandlers.filter((handler) => {
             return handler !== escapeKeyHandler;
-          })
+          }),
         };
       });
     };
@@ -62,7 +66,7 @@ export default class LayersManager extends React.Component {
         return {
           docClickHandlers: prev.docClickHandlers.filter((handler) => {
             return handler !== docClickHandler;
-          })
+          }),
         };
       });
     };
@@ -84,23 +88,41 @@ export default class LayersManager extends React.Component {
   }
   render() {
     const { overrides = {} } = this.props;
-    const [AppContainer, appContainerProps] = getOverrides(overrides.AppContainer, StyledAppContainer);
-    const [LayersContainer, layersContainerProps] = getOverrides(overrides.LayersContainer, StyledLayersContainer);
-    return <Consumer>{({ host }) => {
-      if (__DEV__ && host !== void 0) {
-        console.warn("There is a LayersManager already exists in your application. It is not recommended to have more than one LayersManager in an application.");
-      }
-      return <Provider value={{
-        host: host || this.host.current,
-        zIndex: this.props.zIndex,
-        addEscapeHandler: this.onAddEscapeHandler,
-        removeEscapeHandler: this.onRemoveEscapeHandler,
-        addDocClickHandler: this.onAddDocClickHandler,
-        removeDocClickHandler: this.onRemoveDocClickHandler
-      }}>
-        <AppContainer {...appContainerProps} ref={this.containerRef}>{this.props.children}</AppContainer>
-        <LayersContainer {...layersContainerProps} ref={this.host} />
-      </Provider>;
-    }}</Consumer>;
+    const [AppContainer, appContainerProps] = getOverrides(
+      overrides.AppContainer,
+      StyledAppContainer
+    );
+    const [LayersContainer, layersContainerProps] = getOverrides(
+      overrides.LayersContainer,
+      StyledLayersContainer
+    );
+    return (
+      <Consumer>
+        {({ host }) => {
+          if (__DEV__ && host !== void 0) {
+            console.warn(
+              "There is a LayersManager already exists in your application. It is not recommended to have more than one LayersManager in an application."
+            );
+          }
+          return (
+            <Provider
+              value={{
+                host: host || this.host.current,
+                zIndex: this.props.zIndex,
+                addEscapeHandler: this.onAddEscapeHandler,
+                removeEscapeHandler: this.onRemoveEscapeHandler,
+                addDocClickHandler: this.onAddDocClickHandler,
+                removeDocClickHandler: this.onRemoveDocClickHandler,
+              }}
+            >
+              <AppContainer {...appContainerProps} ref={this.containerRef}>
+                {this.props.children}
+              </AppContainer>
+              <LayersContainer {...layersContainerProps} ref={this.host} />
+            </Provider>
+          );
+        }}
+      </Consumer>
+    );
   }
 }

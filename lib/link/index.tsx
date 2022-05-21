@@ -18,8 +18,21 @@ function LinkFocus(props) {
 }
 export const StyledLink = withWrapper(Link, (Styled) => {
   return function StyledLink2({ animateUnderline, ...restProps }) {
-    return <LinkFocus>{(focusProps) => {
-      return <Styled data-baseweb="link" $isAnimateUnderline={animateUnderline} $isFocusVisible={focusProps.focusVisible} onFocus={forkFocus(restProps, focusProps.handleFocus)} onBlur={forkBlur(restProps, focusProps.handleBlur)} {...restProps} />;
-    }}</LinkFocus>;
+    return (
+      <LinkFocus>
+        {(focusProps) => {
+          return (
+            <Styled
+              data-baseweb="link"
+              $isAnimateUnderline={animateUnderline}
+              $isFocusVisible={focusProps.focusVisible}
+              onFocus={forkFocus(restProps, focusProps.handleFocus)}
+              onBlur={forkBlur(restProps, focusProps.handleBlur)}
+              {...restProps}
+            />
+          );
+        }}
+      </LinkFocus>
+    );
   };
 });

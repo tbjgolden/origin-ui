@@ -2,13 +2,13 @@ export const NEEDLE_SIZES = Object.freeze({
   none: "none",
   short: "short",
   medium: "medium",
-  tall: "tall"
+  tall: "tall",
 });
 export const NEEDLE_HEIGHTS = Object.freeze({
   [NEEDLE_SIZES.none]: 0,
   [NEEDLE_SIZES.short]: 4,
   [NEEDLE_SIZES.medium]: 12,
-  [NEEDLE_SIZES.tall]: 20
+  [NEEDLE_SIZES.tall]: 20,
 });
 export const PINHEAD_SIZES_SHAPES = Object.freeze({
   xxSmallCircle: "xx-small-circle",
@@ -17,15 +17,15 @@ export const PINHEAD_SIZES_SHAPES = Object.freeze({
   xSmallSquare: "x-small-square",
   small: "small",
   medium: "medium",
-  large: "large"
+  large: "large",
 });
 export const xSmallPinheadDimension = {
   height: 16,
-  icon: 4
+  icon: 4,
 };
 export const xxSmallPinheadDimension = {
   height: 8,
-  icon: 4
+  icon: 4,
 };
 export const PINHEAD_DIMENSIONS = Object.freeze({
   [PINHEAD_SIZES_SHAPES.xxSmallSquare]: xxSmallPinheadDimension,
@@ -34,29 +34,29 @@ export const PINHEAD_DIMENSIONS = Object.freeze({
   [PINHEAD_SIZES_SHAPES.xSmallCircle]: xSmallPinheadDimension,
   [PINHEAD_SIZES_SHAPES.small]: { height: 24, icon: 16 },
   [PINHEAD_SIZES_SHAPES.medium]: { height: 36, icon: 16 },
-  [PINHEAD_SIZES_SHAPES.large]: { height: 48, icon: 24 }
+  [PINHEAD_SIZES_SHAPES.large]: { height: 48, icon: 24 },
 });
 export const PINHEAD_TYPES = Object.freeze({
   floating: "floating",
-  fixed: "fixed"
+  fixed: "fixed",
 });
 export const FLOATING_MARKER_SIZES = Object.freeze({
   small: "small",
   medium: "medium",
-  large: "large"
+  large: "large",
 });
 export const FLOATING_MARKER_ANCHOR_POSITIONS = Object.freeze({
   none: "none",
   topLeft: "top-left",
   topRight: "top-right",
   bottomRight: "bottom-right",
-  bottomLeft: "bottom-left"
+  bottomLeft: "bottom-left",
 });
 export const FLOATING_MARKER_ANCHOR_TYPES = Object.freeze({
   circle: "circle",
   square: "square",
   xxSmallCircle: "xx-small-circle",
-  xxSmallSquare: "xx-small-square"
+  xxSmallSquare: "xx-small-square",
 });
 export const dragShadowHeight = 4;
 export const dragShadowMarginTop = 6;
@@ -70,31 +70,31 @@ export const LABEL_SIZES = {
   [PINHEAD_SIZES_SHAPES.xSmallSquare]: labelSmall,
   [PINHEAD_SIZES_SHAPES.small]: labelSmall,
   [PINHEAD_SIZES_SHAPES.medium]: "LabelMedium",
-  [PINHEAD_SIZES_SHAPES.large]: "LabelLarge"
+  [PINHEAD_SIZES_SHAPES.large]: "LabelLarge",
 };
 export const LABEL_ENHANCER_POSITIONS = Object.freeze({
   none: "none",
   top: "top",
   left: "left",
   right: "right",
-  bottom: "bottom"
+  bottom: "bottom",
 });
 export const BADGE_ENHANCER_SIZES = Object.freeze({
   none: "none",
   xSmall: "x-small",
   small: "small",
   mediumText: "medium-text",
-  mediumIcon: "medium-icon"
+  mediumIcon: "medium-icon",
 });
 const xSmallPinheadBadge = {
   [BADGE_ENHANCER_SIZES.none]: null,
   [BADGE_ENHANCER_SIZES.xSmall]: {
     x: -5,
-    y: -3
+    y: -3,
   },
   [BADGE_ENHANCER_SIZES.small]: null,
   [BADGE_ENHANCER_SIZES.mediumText]: null,
-  [BADGE_ENHANCER_SIZES.mediumIcon]: null
+  [BADGE_ENHANCER_SIZES.mediumIcon]: null,
 };
 export const BADGE_ENHANCER_POSITIONS = {
   [PINHEAD_SIZES_SHAPES.xxSmallSquare]: null,
@@ -105,57 +105,57 @@ export const BADGE_ENHANCER_POSITIONS = {
     [BADGE_ENHANCER_SIZES.none]: null,
     [BADGE_ENHANCER_SIZES.xSmall]: {
       x: -7,
-      y: -1
+      y: -1,
     },
     [BADGE_ENHANCER_SIZES.small]: {
       x: -8,
-      y: -8
+      y: -8,
     },
     [BADGE_ENHANCER_SIZES.mediumText]: null,
-    [BADGE_ENHANCER_SIZES.mediumIcon]: null
+    [BADGE_ENHANCER_SIZES.mediumIcon]: null,
   },
   [PINHEAD_SIZES_SHAPES.medium]: {
     [BADGE_ENHANCER_SIZES.none]: null,
     [BADGE_ENHANCER_SIZES.xSmall]: {
       x: -9,
-      y: 1
+      y: 1,
     },
     [BADGE_ENHANCER_SIZES.small]: {
       x: -10,
-      y: -4
+      y: -4,
     },
     [BADGE_ENHANCER_SIZES.mediumText]: {
       x: -12,
-      y: -8
+      y: -8,
     },
     [BADGE_ENHANCER_SIZES.mediumIcon]: {
       x: -12,
-      y: -8
-    }
+      y: -8,
+    },
   },
   [PINHEAD_SIZES_SHAPES.large]: {
     [BADGE_ENHANCER_SIZES.none]: null,
     [BADGE_ENHANCER_SIZES.xSmall]: {
       x: -11,
-      y: 3
+      y: 3,
     },
     [BADGE_ENHANCER_SIZES.small]: null,
     [BADGE_ENHANCER_SIZES.mediumText]: {
       x: -14,
-      y: -6
+      y: -6,
     },
     [BADGE_ENHANCER_SIZES.mediumIcon]: {
       x: -14,
-      y: -6
-    }
-  }
+      y: -6,
+    },
+  },
 };
 export const BADGE_ENHANCER_STYLES = {
   [BADGE_ENHANCER_SIZES.none]: {},
   [BADGE_ENHANCER_SIZES.xSmall]: {
     height: "8px",
     width: "8px",
-    borderRadius: "50%"
+    borderRadius: "50%",
   },
   [BADGE_ENHANCER_SIZES.small]: {
     height: "16px",
@@ -164,7 +164,7 @@ export const BADGE_ENHANCER_STYLES = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "10px"
+    fontSize: "10px",
   },
   [BADGE_ENHANCER_SIZES.mediumText]: {
     borderRadius: "10px",
@@ -172,7 +172,7 @@ export const BADGE_ENHANCER_STYLES = {
     padding: "0px 8px",
     display: "flex",
     alignItems: "center",
-    boxSizing: "border-box"
+    boxSizing: "border-box",
   },
   [BADGE_ENHANCER_SIZES.mediumIcon]: {
     height: "20px",
@@ -181,18 +181,18 @@ export const BADGE_ENHANCER_STYLES = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxSizing: "border-box"
-  }
+    boxSizing: "border-box",
+  },
 };
 export const BADGE_ENHANCER_CONTENT_SIZE = {
   [BADGE_ENHANCER_SIZES.none]: 0,
   [BADGE_ENHANCER_SIZES.xSmall]: 0,
   [BADGE_ENHANCER_SIZES.small]: 10,
   [BADGE_ENHANCER_SIZES.mediumText]: 12,
-  [BADGE_ENHANCER_SIZES.mediumIcon]: 12
+  [BADGE_ENHANCER_SIZES.mediumIcon]: 12,
 };
 export const KIND = Object.freeze({
   default: "default",
   accent: "accent",
-  negative: "negative"
+  negative: "negative",
 });

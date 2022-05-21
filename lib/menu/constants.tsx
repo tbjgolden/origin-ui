@@ -7,7 +7,7 @@ export const STATE_CHANGE_TYPES = {
   focus: "focus",
   reset: "reset",
   character: "character",
-  enter: "enter"
+  enter: "enter",
 };
 export const KEY_STRINGS = {
   ArrowUp: "ArrowUp",
@@ -19,9 +19,9 @@ export const KEY_STRINGS = {
   Escape: "Escape",
   Backspace: "Backspace",
   Home: "Home",
-  End: "End"
+  End: "End",
 };
 export const OPTION_LIST_SIZE = {
   default: "default",
-  compact: "compact"
+  compact: "compact",
 };

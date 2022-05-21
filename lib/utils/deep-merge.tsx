@@ -9,7 +9,10 @@ export default function deepMerge(target, ...sources) {
       if (typeof obj[key] !== void 0) {
         value = obj[key];
         if (isCloneable(value)) {
-          target[key] = deepMerge(target[key] || Array.isArray(value) && [] || {}, value);
+          target[key] = deepMerge(
+            target[key] || (Array.isArray(value) && []) || {},
+            value
+          );
         } else {
           target[key] = value;
         }

@@ -4,10 +4,18 @@ import { KIND, PLACEMENT, TYPE } from "./constants";
 function getBackgroundColor(kind, type, theme) {
   const isInline = type === TYPE.inline;
   return {
-    [KIND.info]: isInline ? theme.colors.notificationInfoBackground : theme.colors.toastInfoBackground,
-    [KIND.positive]: isInline ? theme.colors.notificationPositiveBackground : theme.colors.toastPositiveBackground,
-    [KIND.warning]: isInline ? theme.colors.notificationWarningBackground : theme.colors.toastWarningBackground,
-    [KIND.negative]: isInline ? theme.colors.notificationNegativeBackground : theme.colors.toastNegativeBackground
+    [KIND.info]: isInline
+      ? theme.colors.notificationInfoBackground
+      : theme.colors.toastInfoBackground,
+    [KIND.positive]: isInline
+      ? theme.colors.notificationPositiveBackground
+      : theme.colors.toastPositiveBackground,
+    [KIND.warning]: isInline
+      ? theme.colors.notificationWarningBackground
+      : theme.colors.toastWarningBackground,
+    [KIND.negative]: isInline
+      ? theme.colors.notificationNegativeBackground
+      : theme.colors.toastNegativeBackground,
   }[kind];
 }
 function getFontColor(kind, type, theme) {
@@ -17,14 +25,14 @@ function getFontColor(kind, type, theme) {
       [KIND.info]: theme.colors.notificationInfoText,
       [KIND.positive]: theme.colors.notificationPositiveText,
       [KIND.warning]: theme.colors.notificationWarningText,
-      [KIND.negative]: theme.colors.notificationNegativeText
+      [KIND.negative]: theme.colors.notificationNegativeText,
     }[kind];
   }
   return {
     [KIND.info]: theme.colors.toastInfoText,
     [KIND.positive]: theme.colors.toastPositiveText,
     [KIND.warning]: theme.colors.toastWarningText,
-    [KIND.negative]: theme.colors.toastNegativeText
+    [KIND.negative]: theme.colors.toastNegativeText,
   }[kind];
 }
 export function getPlacement(placement) {
@@ -33,38 +41,38 @@ export function getPlacement(placement) {
       top: 0,
       alignItems: "flex-start",
       justifyContent: "flex-start",
-      flexDirection: "column"
+      flexDirection: "column",
     },
     [PLACEMENT.top]: {
       top: 0,
       alignItems: "center",
       justifyContent: "flex-start",
-      flexDirection: "column"
+      flexDirection: "column",
     },
     [PLACEMENT.topRight]: {
       top: 0,
       alignItems: "flex-end",
       justifyContent: "flex-start",
-      flexDirection: "column"
+      flexDirection: "column",
     },
     [PLACEMENT.bottomRight]: {
       bottom: 0,
       alignItems: "flex-end",
       justifyContent: "flex-end",
-      flexDirection: "column-reverse"
+      flexDirection: "column-reverse",
     },
     [PLACEMENT.bottom]: {
       bottom: 0,
       alignItems: "center",
       justifyContent: "flex-end",
-      flexDirection: "column-reverse"
+      flexDirection: "column-reverse",
     },
     [PLACEMENT.bottomLeft]: {
       bottom: 0,
       alignItems: "flex-start",
       justifyContent: "flex-end",
-      flexDirection: "column-reverse"
-    }
+      flexDirection: "column-reverse",
+    },
   }[placement];
 }
 export const Root = styled("div", ({ $placement, $theme }) => {
@@ -78,7 +86,7 @@ export const Root = styled("div", ({ $placement, $theme }) => {
     marginBottom: $theme.sizing.scale300,
     marginLeft: $theme.sizing.scale600,
     marginRight: $theme.sizing.scale600,
-    ...getPlacement($placement)
+    ...getPlacement($placement),
   };
 });
 export const InnerContainer = styled("div", ({}) => {
@@ -109,24 +117,23 @@ export const Body = styled("div", ({ $isVisible, $kind, $type, $theme }) => {
     transitionDuration: $theme.animation.timing200,
     transitionTimingFunction: $theme.animation.easeInOutCurve,
     display: "flex",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   };
 });
-export const CloseIconSvg = styled < {
-  ...SharedStylePropsArgT,
-  $size: number | string,
-  $color: string
-} > ("svg", ({
-  $theme,
-  $size,
-  $color,
-  $isFocusVisible
-}) => {
-  return {
-    ...getSvgStyles({ $theme, $size, $color }),
-    cursor: "pointer",
-    width: $size || "16px",
-    flexShrink: 0,
-    outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none"
-  };
-});
+export const CloseIconSvg =
+  styled <
+  {
+    ...SharedStylePropsArgT,
+    $size: number | string,
+    $color: string,
+  } >
+  ("svg",
+  ({ $theme, $size, $color, $isFocusVisible }) => {
+    return {
+      ...getSvgStyles({ $theme, $size, $color }),
+      cursor: "pointer",
+      width: $size || "16px",
+      flexShrink: 0,
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+    };
+  });

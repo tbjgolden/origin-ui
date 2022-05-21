@@ -11,20 +11,20 @@ export const PLACEMENT = {
   bottomLeft: "bottomLeft",
   leftBottom: "leftBottom",
   left: "left",
-  leftTop: "leftTop"
+  leftTop: "leftTop",
 };
 export const TRIGGER_TYPE = {
   click: "click",
-  hover: "hover"
+  hover: "hover",
 };
 export const STATE_CHANGE_TYPE = {
   open: "open",
-  close: "close"
+  close: "close",
 };
 export const ACCESSIBILITY_TYPE = {
   none: "none",
   menu: "menu",
-  tooltip: "tooltip"
+  tooltip: "tooltip",
 };
 export const POPOVER_MARGIN = 8;
 export const ARROW_SIZE = 6;

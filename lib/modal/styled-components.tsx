@@ -3,7 +3,7 @@ import { SIZE, SIZE_WIDTHS } from "./constants";
 function getSizeStyles($size) {
   const styles = {
     maxWidth: "100%",
-    width: null
+    width: null,
   };
   if (typeof $size === "number") {
     styles.width = `${$size}px`;
@@ -26,7 +26,7 @@ export const Root = styled("div", (props) => {
     bottom: 0,
     top: 0,
     left: 0,
-    pointerEvents: $isOpen ? "auto" : "none"
+    pointerEvents: $isOpen ? "auto" : "none",
   };
 });
 export const DialogContainer = styled("div", (props) => {
@@ -34,7 +34,7 @@ export const DialogContainer = styled("div", (props) => {
   const animationRules = {
     transitionProperty: "opacity",
     transitionDuration: $theme.animation.timing400,
-    transitionTimingFunction: $theme.animation.easeOutCurve
+    transitionTimingFunction: $theme.animation.easeOutCurve,
   };
   return {
     display: "flex",
@@ -47,7 +47,7 @@ export const DialogContainer = styled("div", (props) => {
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     WebkitTapHighlightColor: "transparent",
     opacity: $isVisible && $isOpen ? 1 : 0,
-    ...$animate ? animationRules : null
+    ...($animate ? animationRules : null),
   };
 });
 export const Dialog = styled("div", (props) => {
@@ -66,16 +66,18 @@ export const Dialog = styled("div", (props) => {
     ...getSizeStyles($size),
     opacity: $isVisible && $isOpen ? 1 : 0,
     transform: $isVisible ? "translateY(0)" : "translateY(20px)",
-    ...$animate ? {
-      transitionProperty: "opacity, transform",
-      transitionDuration: $theme.animation.timing400,
-      transitionTimingFunction: $theme.animation.easeOutCurve
-    } : null,
+    ...($animate
+      ? {
+          transitionProperty: "opacity, transform",
+          transitionDuration: $theme.animation.timing400,
+          transitionTimingFunction: $theme.animation.easeOutCurve,
+        }
+      : null),
     userSelect: "text",
     pointerEvents: $isOpen ? "all" : "none",
     ":focus": {
-      outline: "none"
-    }
+      outline: "none",
+    },
   };
 });
 export const Close = styled("button", (props) => {
@@ -104,10 +106,10 @@ export const Close = styled("button", (props) => {
     borderTopColor: "transparent",
     borderBottomColor: "transparent",
     ":hover": {
-      color: $theme.colors.modalCloseColorHover
+      color: $theme.colors.modalCloseColorHover,
     },
     ":focus": {
-      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none"
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
     },
     position: "absolute",
     top: $theme.sizing.scale500,
@@ -117,7 +119,7 @@ export const Close = styled("button", (props) => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    cursor: "pointer"
+    cursor: "pointer",
   };
 });
 export const ModalHeader = styled("div", ({ $theme }) => {
@@ -129,7 +131,7 @@ export const ModalHeader = styled("div", ({ $theme }) => {
     marginTop: $theme.sizing.scale900,
     marginBottom: $theme.sizing.scale600,
     [marginStartDir]: $theme.sizing.scale800,
-    [marginEndDir]: $theme.sizing.scale900
+    [marginEndDir]: $theme.sizing.scale900,
   };
 });
 export const ModalBody = styled("div", ({ $theme }) => {
@@ -139,7 +141,7 @@ export const ModalBody = styled("div", ({ $theme }) => {
     marginTop: $theme.sizing.scale600,
     marginLeft: $theme.sizing.scale800,
     marginRight: $theme.sizing.scale800,
-    marginBottom: $theme.sizing.scale700
+    marginBottom: $theme.sizing.scale700,
   };
 });
 export const ModalFooter = styled("div", ({ $theme }) => {
@@ -150,6 +152,6 @@ export const ModalFooter = styled("div", ({ $theme }) => {
     marginRight: $theme.sizing.scale800,
     paddingTop: $theme.sizing.scale500,
     paddingBottom: $theme.sizing.scale500,
-    textAlign: $theme.direction === "rtl" ? "left" : "right"
+    textAlign: $theme.direction === "rtl" ? "left" : "right",
   };
 });

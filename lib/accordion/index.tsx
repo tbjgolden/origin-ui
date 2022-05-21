@@ -11,5 +11,5 @@ export {
   Content as StyledContent,
   ContentAnimationContainer as StyledContentAnimationContainer,
   ToggleIcon as StyledToggleIcon,
-  ToggleIconGroup as StyledToggleIconGroup
+  ToggleIconGroup as StyledToggleIconGroup,
 } from "./styled-components";

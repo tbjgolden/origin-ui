@@ -2,22 +2,48 @@ import * as React from "react";
 import InputMask from "react-input-mask";
 import Input from "./input";
 import { Input as StyledInput } from "./styled-components";
-const MaskOverride = React.forwardRef(({
-  startEnhancer,
-  endEnhancer,
-  error,
-  positive,
-  onChange,
-  onFocus,
-  onBlur,
-  value,
-  disabled,
-  ...restProps
-}, ref) => {
-  return <InputMask onChange={onChange} onFocus={onFocus} onBlur={onBlur} value={value} disabled={disabled} {...restProps}>{(props) => {
-    return <StyledInput ref={ref} onChange={onChange} onFocus={onFocus} onBlur={onBlur} value={value} disabled={disabled} {...props} />;
-  }}</InputMask>;
-});
+const MaskOverride = React.forwardRef(
+  (
+    {
+      startEnhancer,
+      endEnhancer,
+      error,
+      positive,
+      onChange,
+      onFocus,
+      onBlur,
+      value,
+      disabled,
+      ...restProps
+    },
+    ref
+  ) => {
+    return (
+      <InputMask
+        onChange={onChange}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        value={value}
+        disabled={disabled}
+        {...restProps}
+      >
+        {(props) => {
+          return (
+            <StyledInput
+              ref={ref}
+              onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              value={value}
+              disabled={disabled}
+              {...props}
+            />
+          );
+        }}
+      </InputMask>
+    );
+  }
+);
 MaskOverride.displayName = "MaskOverride";
 export default function MaskedInput({
   mask,
@@ -39,19 +65,19 @@ export default function MaskedInput({
     propsOverride = {
       ...propsOverride,
       mask: propsOverride.mask || mask,
-      maskChar: propsOverride.maskChar || maskChar
+      maskChar: propsOverride.maskChar || maskChar,
     };
   }
   const nextOverrides = {
     Input: {
       component: componentOverride,
       props: propsOverride,
-      style: styleOverride
+      style: styleOverride,
     },
-    ...restOverrides
+    ...restOverrides,
   };
   return <Input {...restProps} overrides={nextOverrides} />;
 }
 MaskedInput.defaultProps = {
-  maskChar: " "
+  maskChar: " ",
 };

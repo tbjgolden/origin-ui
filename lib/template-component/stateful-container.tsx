@@ -7,7 +7,7 @@ class StatefulContainer extends React.Component {
     super(...arguments);
     this.state = {
       prop: true,
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.onClick = (...args) => {
       if (typeof this.props.onClick === "function") {
@@ -31,12 +31,12 @@ class StatefulContainer extends React.Component {
     return this.props.children({
       ...restProps,
       ...this.state,
-      onClick: this.onClick
+      onClick: this.onClick,
     });
   }
 }
 StatefulContainer.defaultProps = {
   initialState: { prop: true },
-  stateReducer: defaultStateReducer
+  stateReducer: defaultStateReducer,
 };
 export default StatefulContainer;

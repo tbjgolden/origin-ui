@@ -4,7 +4,7 @@ export {
   StyledTreeItemList,
   StyledTreeItem,
   StyledItemContent,
-  StyledIconContainer
+  StyledIconContainer,
 } from "./styled-components";
 export { default as TreeLabel } from "./tree-label";
 export { default as TreeLabelInteractable } from "./tree-label-interactable";

@@ -9,6 +9,6 @@ export {
   InputEnhancer as StyledStartEnhancer,
   InputEnhancer as StyledEndEnhancer,
   InputContainer as StyledInputContainer,
-  Input as StyledInput
+  Input as StyledInput,
 } from "./styled-components";
 export { STATE_CHANGE_TYPE, ADJOINED, SIZE, CUSTOM_INPUT_TYPE } from "./constants";

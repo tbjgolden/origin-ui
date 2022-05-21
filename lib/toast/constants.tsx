@@ -2,11 +2,11 @@ export const KIND = Object.freeze({
   info: "info",
   positive: "positive",
   warning: "warning",
-  negative: "negative"
+  negative: "negative",
 });
 export const TYPE = Object.freeze({
   inline: "inline",
-  toast: "toast"
+  toast: "toast",
 });
 export const PLACEMENT = Object.freeze({
   topLeft: "topLeft",
@@ -14,5 +14,5 @@ export const PLACEMENT = Object.freeze({
   topRight: "topRight",
   bottomRight: "bottomRight",
   bottom: "bottom",
-  bottomLeft: "bottomLeft"
+  bottomLeft: "bottomLeft",
 });

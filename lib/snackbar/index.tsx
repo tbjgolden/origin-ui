@@ -9,5 +9,5 @@ export {
   StyledMessage,
   StyledWrapActionButtonContainer,
   StyledActionButtonContainer,
-  StyledPlacementContainer
+  StyledPlacementContainer,
 } from "./styled-components";

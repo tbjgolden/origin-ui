@@ -6,7 +6,7 @@ import {
   Label as StyledLabel,
   Root as StyledRoot,
   Toggle as StyledToggle,
-  ToggleTrack as StyledToggleTrack
+  ToggleTrack as StyledToggleTrack,
 } from "./styled-components";
 import { STYLE_TYPE } from "./constants";
 import { isFocusVisible } from "../utils/focusVisible";
@@ -20,7 +20,7 @@ class StatelessCheckbox extends React.Component {
       isFocused: this.props.autoFocus || false,
       isFocusVisible: false,
       isHovered: false,
-      isActive: false
+      isActive: false,
     };
     this.onMouseEnter = (e) => {
       this.setState({ isHovered: true });
@@ -74,7 +74,7 @@ class StatelessCheckbox extends React.Component {
       checked,
       children,
       required,
-      title
+      title,
     } = this.props;
     const {
       Root: RootOverride,
@@ -82,7 +82,7 @@ class StatelessCheckbox extends React.Component {
       Label: LabelOverride,
       Input: InputOverride,
       Toggle: ToggleOverride,
-      ToggleTrack: ToggleTrackOverride
+      ToggleTrack: ToggleTrackOverride,
     } = overrides;
     const Root = getOverride(RootOverride) || StyledRoot;
     const Checkmark = getOverride(CheckmarkOverride) || StyledCheckmark;
@@ -93,13 +93,13 @@ class StatelessCheckbox extends React.Component {
     const inputEvents = {
       onChange,
       onFocus: this.onFocus,
-      onBlur: this.onBlur
+      onBlur: this.onBlur,
     };
     const mouseEvents = {
       onMouseEnter: this.onMouseEnter,
       onMouseLeave: this.onMouseLeave,
       onMouseDown: this.onMouseDown,
-      onMouseUp: this.onMouseUp
+      onMouseUp: this.onMouseUp,
     };
     const sharedProps = {
       $isFocused: this.state.isFocused,
@@ -111,17 +111,66 @@ class StatelessCheckbox extends React.Component {
       $isIndeterminate: isIndeterminate,
       $required: required,
       $disabled: disabled,
-      $value: value
+      $value: value,
     };
-    const labelComp = children && <Label $labelPlacement={labelPlacement} {...sharedProps} {...getOverrideProps(LabelOverride)}>{this.props.containsInteractiveElement ? <div onClick={(e) => {
-      return e.preventDefault();
-    }}>{children}</div> : children}</Label>;
-    return <Root data-baseweb="checkbox" title={title || null} $labelPlacement={labelPlacement} {...sharedProps} {...mouseEvents} {...getOverrideProps(RootOverride)}>
-      {(labelPlacement === "top" || labelPlacement === "left") && labelComp}
-      {this.props.checkmarkType === STYLE_TYPE.toggle ? <ToggleTrack {...sharedProps} {...getOverrideProps(ToggleTrackOverride)}><Toggle {...sharedProps} {...getOverrideProps(ToggleOverride)} /></ToggleTrack> : <Checkmark {...sharedProps} {...getOverrideProps(CheckmarkOverride)} />}
-      <Input value={value} name={name} checked={checked} required={required} aria-label={this.props["aria-label"] || this.props.ariaLabel} aria-checked={isIndeterminate ? "mixed" : checked} aria-describedby={this.props["aria-describedby"]} aria-errormessage={this.props["aria-errormessage"]} aria-invalid={error || null} aria-required={required || null} disabled={disabled} type={type} ref={inputRef} onClick={stopPropagation} {...sharedProps} {...inputEvents} {...getOverrideProps(InputOverride)} />
-      {(labelPlacement === "bottom" || labelPlacement === "right") && labelComp}
-    </Root>;
+    const labelComp = children && (
+      <Label
+        $labelPlacement={labelPlacement}
+        {...sharedProps}
+        {...getOverrideProps(LabelOverride)}
+      >
+        {this.props.containsInteractiveElement ? (
+          <div
+            onClick={(e) => {
+              return e.preventDefault();
+            }}
+          >
+            {children}
+          </div>
+        ) : (
+          children
+        )}
+      </Label>
+    );
+    return (
+      <Root
+        data-baseweb="checkbox"
+        title={title || null}
+        $labelPlacement={labelPlacement}
+        {...sharedProps}
+        {...mouseEvents}
+        {...getOverrideProps(RootOverride)}
+      >
+        {(labelPlacement === "top" || labelPlacement === "left") && labelComp}
+        {this.props.checkmarkType === STYLE_TYPE.toggle ? (
+          <ToggleTrack {...sharedProps} {...getOverrideProps(ToggleTrackOverride)}>
+            <Toggle {...sharedProps} {...getOverrideProps(ToggleOverride)} />
+          </ToggleTrack>
+        ) : (
+          <Checkmark {...sharedProps} {...getOverrideProps(CheckmarkOverride)} />
+        )}
+        <Input
+          value={value}
+          name={name}
+          checked={checked}
+          required={required}
+          aria-label={this.props["aria-label"] || this.props.ariaLabel}
+          aria-checked={isIndeterminate ? "mixed" : checked}
+          aria-describedby={this.props["aria-describedby"]}
+          aria-errormessage={this.props["aria-errormessage"]}
+          aria-invalid={error || null}
+          aria-required={required || null}
+          disabled={disabled}
+          type={type}
+          ref={inputRef}
+          onClick={stopPropagation}
+          {...sharedProps}
+          {...inputEvents}
+          {...getOverrideProps(InputOverride)}
+        />
+        {(labelPlacement === "bottom" || labelPlacement === "right") && labelComp}
+      </Root>
+    );
   }
 }
 StatelessCheckbox.defaultProps = {
@@ -135,19 +184,12 @@ StatelessCheckbox.defaultProps = {
   error: false,
   type: "checkbox",
   checkmarkType: STYLE_TYPE.default,
-  onChange: () => {
-  },
-  onMouseEnter: () => {
-  },
-  onMouseLeave: () => {
-  },
-  onMouseDown: () => {
-  },
-  onMouseUp: () => {
-  },
-  onFocus: () => {
-  },
-  onBlur: () => {
-  }
+  onChange: () => {},
+  onMouseEnter: () => {},
+  onMouseLeave: () => {},
+  onMouseDown: () => {},
+  onMouseUp: () => {},
+  onFocus: () => {},
+  onBlur: () => {},
 };
 export default StatelessCheckbox;

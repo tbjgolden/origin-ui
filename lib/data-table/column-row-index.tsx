@@ -6,11 +6,17 @@ function RowIndexFilter() {
 }
 function RowIndexCell(props) {
   const [css, theme] = useStyletron();
-  return <div className={css({
-    display: "flex",
-    justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
-    width: "100%"
-  })}>{props.y + 1}</div>;
+  return (
+    <div
+      className={css({
+        display: "flex",
+        justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
+        width: "100%",
+      })}
+    >
+      {props.y + 1}
+    </div>
+  );
 }
 function RowIndexColumn() {
   return Column({
@@ -32,7 +38,7 @@ function RowIndexColumn() {
     sortFn: () => {
       return 0;
     },
-    title: ""
+    title: "",
   });
 }
 export default RowIndexColumn;

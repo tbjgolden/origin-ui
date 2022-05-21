@@ -6,5 +6,5 @@ export const defaultProps = {
   kind: KIND.primary,
   overrides: {},
   shape: SHAPE.default,
-  size: SIZE.default
+  size: SIZE.default,
 };

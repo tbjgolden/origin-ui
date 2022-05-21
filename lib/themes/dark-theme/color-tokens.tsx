@@ -60,6 +60,6 @@ export const darkColorTokens = {
   mono900: "#111111",
   mono1000: colors.black,
   ratingInactiveFill: colors.gray500,
-  ratingStroke: colors.gray700
+  ratingStroke: colors.gray700,
 };
 export default darkColorTokens;

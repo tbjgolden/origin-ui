@@ -4,12 +4,12 @@ function getBarHeight(size) {
   return {
     [SIZE.small]: "2px",
     [SIZE.medium]: "4px",
-    [SIZE.large]: "8px"
+    [SIZE.large]: "8px",
   }[size];
 }
 export const StyledRoot = styled("div", (props) => {
   return {
-    width: "100%"
+    width: "100%",
   };
 });
 export const StyledBarContainer = styled("div", (props) => {
@@ -20,7 +20,7 @@ export const StyledBarContainer = styled("div", (props) => {
     marginLeft: sizing.scale500,
     marginRight: sizing.scale500,
     marginTop: sizing.scale500,
-    marginBottom: sizing.scale500
+    marginBottom: sizing.scale500,
   };
 });
 export const StyledBar = styled("div", (props) => {
@@ -36,12 +36,14 @@ export const StyledBar = styled("div", (props) => {
     height: getBarHeight($size),
     flex: 1,
     overflow: "hidden",
-    ...$steps < 2 ? {} : {
-      marginLeft: sizing.scale300,
-      ":first-child": {
-        marginLeft: "0"
-      }
-    }
+    ...($steps < 2
+      ? {}
+      : {
+          marginLeft: sizing.scale300,
+          ":first-child": {
+            marginLeft: "0",
+          },
+        }),
   };
 });
 export const StyledBarProgress = styled("div", (props) => {
@@ -52,21 +54,21 @@ export const StyledBarProgress = styled("div", (props) => {
     $steps,
     $index,
     $maxValue,
-    $minValue = 0
+    $minValue = 0,
   } = props;
   const maxValue = $maxValue ? $maxValue : $successValue;
   const { colors, sizing, borders } = $theme;
-  const width = `${100 - ($value - $minValue) * 100 / (maxValue - $minValue)}%`;
+  const width = `${100 - (($value - $minValue) * 100) / (maxValue - $minValue)}%`;
   const stepStates = {
     default: "default",
     awaits: "awaits",
     inProgress: "inProgress",
-    completed: "completed"
+    completed: "completed",
   };
   let stepState = stepStates.default;
   if ($steps > 1) {
     const stepValue = (maxValue - $minValue) / $steps;
-    const currentValue = ($value - $minValue) / (maxValue - $minValue) * 100;
+    const currentValue = (($value - $minValue) / (maxValue - $minValue)) * 100;
     const completedSteps = Math.floor(currentValue / stepValue);
     if ($index < completedSteps) {
       stepState = stepStates.completed;
@@ -78,29 +80,34 @@ export const StyledBarProgress = styled("div", (props) => {
   }
   const borderRadius = borders.useRoundedCorners ? sizing.scale0 : 0;
   const animationStyles = {
-    transform: `translateX(-${width})`
+    transform: `translateX(-${width})`,
   };
-  const stepAnimationStyles = stepState === stepStates.inProgress ? {
-    animationDuration: "2.1s",
-    animationIterationCount: "infinite",
-    animationTimingFunction: $theme.animation.linearCurve,
-    animationName: {
-      "0%": {
-        transform: "translateX(-102%)",
-        opacity: 1
-      },
-      "50%": {
-        transform: "translateX(0%)",
-        opacity: 1
-      },
-      "100%": {
-        transform: "translateX(0%)",
-        opacity: 0
-      }
-    }
-  } : stepState === stepStates.completed ? {
-    transform: "translateX(0%)"
-  } : { transform: "translateX(-102%)" };
+  const stepAnimationStyles =
+    stepState === stepStates.inProgress
+      ? {
+          animationDuration: "2.1s",
+          animationIterationCount: "infinite",
+          animationTimingFunction: $theme.animation.linearCurve,
+          animationName: {
+            "0%": {
+              transform: "translateX(-102%)",
+              opacity: 1,
+            },
+            "50%": {
+              transform: "translateX(0%)",
+              opacity: 1,
+            },
+            "100%": {
+              transform: "translateX(0%)",
+              opacity: 0,
+            },
+          },
+        }
+      : stepState === stepStates.completed
+      ? {
+          transform: "translateX(0%)",
+        }
+      : { transform: "translateX(-102%)" };
   return {
     borderTopLeftRadius: borderRadius,
     borderTopRightRadius: borderRadius,
@@ -111,7 +118,7 @@ export const StyledBarProgress = styled("div", (props) => {
     width: "100%",
     transform: "translateX(-102%)",
     transition: "transform 0.5s",
-    ...$steps > 1 ? stepAnimationStyles : animationStyles
+    ...($steps > 1 ? stepAnimationStyles : animationStyles),
   };
 });
 export const StyledInfiniteBar = styled("div", (props) => {
@@ -131,52 +138,58 @@ export const StyledInfiniteBar = styled("div", (props) => {
     backgroundSize: "300% auto",
     backgroundRepeat: "no-repeat",
     backgroundPositionX: $isLeft ? "-50%" : "150%",
-    backgroundImage: `linear-gradient(${$isLeft ? "90" : "270"}deg, transparent 0%, ${colors.accent} 25%, ${colors.accent} 75%, transparent 100%)`,
-    animationName: $isLeft ? {
-      "0%": {
-        backgroundPositionX: "-50%"
-      },
-      "33%": {
-        backgroundPositionX: "50%"
-      },
-      "66%": {
-        backgroundPositionX: "50%"
-      },
-      "100%": {
-        backgroundPositionX: "150%"
-      }
-    } : {
-      "0%": {
-        backgroundPositionX: "150%"
-      },
-      "33%": {
-        backgroundPositionX: "50%"
-      },
-      "66%": {
-        backgroundPositionX: "50%"
-      },
-      "100%": {
-        backgroundPositionX: "-50%"
-      }
-    }
+    backgroundImage: `linear-gradient(${$isLeft ? "90" : "270"}deg, transparent 0%, ${
+      colors.accent
+    } 25%, ${colors.accent} 75%, transparent 100%)`,
+    animationName: $isLeft
+      ? {
+          "0%": {
+            backgroundPositionX: "-50%",
+          },
+          "33%": {
+            backgroundPositionX: "50%",
+          },
+          "66%": {
+            backgroundPositionX: "50%",
+          },
+          "100%": {
+            backgroundPositionX: "150%",
+          },
+        }
+      : {
+          "0%": {
+            backgroundPositionX: "150%",
+          },
+          "33%": {
+            backgroundPositionX: "50%",
+          },
+          "66%": {
+            backgroundPositionX: "50%",
+          },
+          "100%": {
+            backgroundPositionX: "-50%",
+          },
+        },
   };
   return {
-    ...$isLeft ? {
-      borderTopLeftRadius: borderRadius,
-      borderBottomLeftRadius: borderRadius
-    } : {
-      borderTopRightRadius: borderRadius,
-      borderBottomRightRadius: borderRadius
-    },
+    ...($isLeft
+      ? {
+          borderTopLeftRadius: borderRadius,
+          borderBottomLeftRadius: borderRadius,
+        }
+      : {
+          borderTopRightRadius: borderRadius,
+          borderBottomRightRadius: borderRadius,
+        }),
     height,
-    ...animationStyles
+    ...animationStyles,
   };
 });
 export const StyledLabel = styled("div", (props) => {
   return {
     textAlign: "center",
     ...props.$theme.typography.font150,
-    color: props.$theme.colors.contentTertiary
+    color: props.$theme.colors.contentTertiary,
   };
 });
 const PROGRESS_BAR_ROUNDED_SIZES = {
@@ -185,22 +198,22 @@ const PROGRESS_BAR_ROUNDED_SIZES = {
     width: 95,
     height: 48,
     strokeWidth: 8,
-    typography: "LabelLarge"
+    typography: "LabelLarge",
   },
   [SIZE.medium]: {
     d: "M39 2H60.5833C69.0977 2 76 9.16344 76 18C76 26.8366 69.0977 34 60.5833 34H17.4167C8.90228 34 2 26.8366 2 18C2 9.16344 8.90228 2 17.4167 2H39.0195",
     width: 78,
     height: 36,
     strokeWidth: 4,
-    typography: "LabelMedium"
+    typography: "LabelMedium",
   },
   [SIZE.small]: {
     d: "M32 1H51.6271C57.9082 1 63 6.37258 63 13C63 19.6274 57.9082 25 51.6271 25H12.3729C6.09181 25 1 19.6274 1 13C1 6.37258 6.09181 1 12.3729 1H32.0195",
     width: 64,
     height: 26,
     strokeWidth: 2,
-    typography: "LabelSmall"
-  }
+    typography: "LabelSmall",
+  },
 };
 export const StyledProgressBarRoundedRoot = styled("div", ({ $size, $inline }) => {
   return {
@@ -209,7 +222,7 @@ export const StyledProgressBarRoundedRoot = styled("div", ({ $size, $inline }) =
     position: "relative",
     display: $inline ? "inline-flex" : "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   };
 });
 const _StyledProgressBarRoundedSvg = styled("svg", ({ $size }) => {
@@ -217,42 +230,62 @@ const _StyledProgressBarRoundedSvg = styled("svg", ({ $size }) => {
     width: PROGRESS_BAR_ROUNDED_SIZES[$size].width + "px",
     height: PROGRESS_BAR_ROUNDED_SIZES[$size].height + "px",
     position: "absolute",
-    fill: "none"
+    fill: "none",
   };
 });
-export const StyledProgressBarRoundedSvg = withWrapper(_StyledProgressBarRoundedSvg, (Styled) => {
-  return function StyledProgressBarRoundedSvg2(props) {
-    return <Styled viewBox={`0 0 ${PROGRESS_BAR_ROUNDED_SIZES[props.$size].width} ${PROGRESS_BAR_ROUNDED_SIZES[props.$size].height}`} xmlns="http://www.w3.org/2000/svg" {...props} />;
-  };
-});
+export const StyledProgressBarRoundedSvg = withWrapper(
+  _StyledProgressBarRoundedSvg,
+  (Styled) => {
+    return function StyledProgressBarRoundedSvg2(props) {
+      return (
+        <Styled
+          viewBox={`0 0 ${PROGRESS_BAR_ROUNDED_SIZES[props.$size].width} ${
+            PROGRESS_BAR_ROUNDED_SIZES[props.$size].height
+          }`}
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        />
+      );
+    };
+  }
+);
 const _StyledProgressBarRoundedTrackBackground = styled("path", ({ $theme, $size }) => {
   return {
     stroke: $theme.colors.backgroundTertiary,
-    strokeWidth: PROGRESS_BAR_ROUNDED_SIZES[$size].strokeWidth + "px"
-  };
-});
-export const StyledProgressBarRoundedTrackBackground = withWrapper(_StyledProgressBarRoundedTrackBackground, (Styled) => {
-  return function StyledProgressBarRoundedSvg2(props) {
-    return <Styled d={PROGRESS_BAR_ROUNDED_SIZES[props.$size].d} {...props} />;
-  };
-});
-const _StyledProgressBarRoundedTrackForeground = styled("path", ({ $theme, $size, $visible, $pathLength, $pathProgress }) => {
-  return {
-    visibility: $visible ? "visible" : "hidden",
-    stroke: $theme.colors.borderAccent,
     strokeWidth: PROGRESS_BAR_ROUNDED_SIZES[$size].strokeWidth + "px",
-    strokeDasharray: $pathLength,
-    strokeDashoffset: $pathLength * (1 - $pathProgress) + ""
   };
 });
-export const StyledProgressBarRoundedTrackForeground = withWrapper(_StyledProgressBarRoundedTrackForeground, (Styled) => {
-  return function StyledProgressBarRoundedSvg2(props) {
-    return <Styled d={PROGRESS_BAR_ROUNDED_SIZES[props.$size].d} {...props} />;
-  };
-});
+export const StyledProgressBarRoundedTrackBackground = withWrapper(
+  _StyledProgressBarRoundedTrackBackground,
+  (Styled) => {
+    return function StyledProgressBarRoundedSvg2(props) {
+      return <Styled d={PROGRESS_BAR_ROUNDED_SIZES[props.$size].d} {...props} />;
+    };
+  }
+);
+const _StyledProgressBarRoundedTrackForeground = styled(
+  "path",
+  ({ $theme, $size, $visible, $pathLength, $pathProgress }) => {
+    return {
+      visibility: $visible ? "visible" : "hidden",
+      stroke: $theme.colors.borderAccent,
+      strokeWidth: PROGRESS_BAR_ROUNDED_SIZES[$size].strokeWidth + "px",
+      strokeDasharray: $pathLength,
+      strokeDashoffset: $pathLength * (1 - $pathProgress) + "",
+    };
+  }
+);
+export const StyledProgressBarRoundedTrackForeground = withWrapper(
+  _StyledProgressBarRoundedTrackForeground,
+  (Styled) => {
+    return function StyledProgressBarRoundedSvg2(props) {
+      return <Styled d={PROGRESS_BAR_ROUNDED_SIZES[props.$size].d} {...props} />;
+    };
+  }
+);
 export const StyledProgressBarRoundedText = styled("div", ({ $theme, $size }) => {
   return {
     color: $theme.colors.contentPrimary,
-    ...$theme.typography[PROGRESS_BAR_ROUNDED_SIZES[$size].typography]
+    ...$theme.typography[PROGRESS_BAR_ROUNDED_SIZES[$size].typography],
   };
 });

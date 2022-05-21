@@ -5,5 +5,5 @@ export {
   StartEnhancer as StyledStartEnhancer,
   EndEnhancer as StyledEndEnhancer,
   LoadingSpinner as StyledLoadingSpinner,
-  LoadingSpinnerContainer as StyledLoadingSpinnerContainer
+  LoadingSpinnerContainer as StyledLoadingSpinnerContainer,
 } from "./styled-components";

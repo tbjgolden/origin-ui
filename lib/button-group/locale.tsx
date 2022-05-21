@@ -1,4 +1,4 @@
 const locale = {
-  ariaLabel: "button group"
+  ariaLabel: "button group",
 };
 export default locale;

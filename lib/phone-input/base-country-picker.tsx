@@ -5,7 +5,7 @@ import {
   StyledCountrySelectDropdownListItem as DefaultListItem,
   StyledCountrySelectDropdownFlagColumn as DefaultFlagColumn,
   StyledCountrySelectDropdownNameColumn as DefaultNameColumn,
-  StyledCountrySelectDropdownDialcodeColumn as DefaultDialcodeColumn
+  StyledCountrySelectDropdownDialcodeColumn as DefaultDialcodeColumn,
 } from "./styled-components";
 import { SingleSelect as DefaultSelect } from "../select";
 import { PLACEMENT } from "../popover";
@@ -21,11 +21,15 @@ CountryPicker.defaultProps = {
   size: defaultProps.size,
   error: defaultProps.error,
   positive: defaultProps.positive,
-  required: defaultProps.required
+  required: defaultProps.required,
 };
 const DropdownListItem = React.forwardRef((props, ref) => {
   const { children, ...rest } = props;
-  return <DefaultListItem ref={ref} {...rest}>{props.children}</DefaultListItem>;
+  return (
+    <DefaultListItem ref={ref} {...rest}>
+      {props.children}
+    </DefaultListItem>
+  );
 });
 DropdownListItem.displayName = "DropdownListItem";
 function DropdownOptionContent(props) {
@@ -44,7 +48,7 @@ export default function CountryPicker(props) {
     overrides,
     positive,
     required,
-    size
+    size,
   } = props;
   const [resetScrollIndex, setResetScrollIndex] = useState(false);
   const sharedProps = {
@@ -52,7 +56,7 @@ export default function CountryPicker(props) {
     $error: error,
     $positive: positive,
     $required: required,
-    $size: size
+    $size: size,
   };
   const options = Object.values(props.countries);
   const scrollIndex = options.findIndex((opt) => {
@@ -60,49 +64,49 @@ export default function CountryPicker(props) {
   });
   const baseSelectOverrides = {
     Root: {
-      component: StyledRoot
+      component: StyledRoot,
     },
     Input: {
       style: {
-        width: 0
+        width: 0,
       },
       props: {
         autoComplete: "chrome-off",
-        "aria-label": "Select country"
-      }
+        "aria-label": "Select country",
+      },
     },
     IconsContainer: {
       style: {
-        paddingRight: "0"
-      }
+        paddingRight: "0",
+      },
     },
     SingleValue: {
       style: {
         display: "flex",
-        alignItems: "center"
-      }
+        alignItems: "center",
+      },
     },
     StatefulMenu: {
       props: {
         stateReducer: (type, nextState) => {
           const next = {
             ...nextState,
-            highlightedIndex: resetScrollIndex ? 0 : nextState.highlightedIndex
+            highlightedIndex: resetScrollIndex ? 0 : nextState.highlightedIndex,
           };
           setResetScrollIndex(false);
           return next;
         },
         initialState: {
           isFocused: true,
-          highlightedIndex: scrollIndex
-        }
-      }
+          highlightedIndex: scrollIndex,
+        },
+      },
     },
     DropdownContainer: {
       style: {
         width: maxDropdownWidth,
-        maxWidth: "calc(100vw - 10px)"
-      }
+        maxWidth: "calc(100vw - 10px)",
+      },
     },
     Dropdown: {
       props: {
@@ -114,54 +118,103 @@ export default function CountryPicker(props) {
           CountrySelectDropdownListItem: overrides.CountrySelectDropdownListItem,
           CountrySelectDropdownFlagColumn: overrides.CountrySelectDropdownFlagColumn,
           CountrySelectDropdownNameColumn: overrides.CountrySelectDropdownNameColumn,
-          CountrySelectDropdownDialcodeColumn: overrides.CountrySelectDropdownDialcodeColumn,
-          FlagContainer: overrides.FlagContainer
-        }
-      }
+          CountrySelectDropdownDialcodeColumn:
+            overrides.CountrySelectDropdownDialcodeColumn,
+          FlagContainer: overrides.FlagContainer,
+        },
+      },
     },
     DropdownListItem: {
-      component: DropdownListItem
+      component: DropdownListItem,
     },
     OptionContent: {
-      component: DropdownOptionContent
+      component: DropdownOptionContent,
     },
     Popover: {
       props: {
         focusLock: false,
-        placement: PLACEMENT.bottomLeft
-      }
-    }
+        placement: PLACEMENT.bottomLeft,
+      },
+    },
   };
   const [Select, selectProps] = getOverrides(overrides.CountrySelect, DefaultSelect);
   const selectOverrides = mergeOverrides(baseSelectOverrides, {
     Dropdown: overrides.CountrySelectDropdown || {},
-    DropdownListItem: overrides.CountrySelectDropdownListItem || {}
+    DropdownListItem: overrides.CountrySelectDropdownListItem || {},
   });
   selectProps.overrides = mergeOverrides(selectOverrides, selectProps.overrides);
-  const [FlagColumn, flagColumnProps] = getOverrides(overrides.CountrySelectDropdownFlagColumn, DefaultFlagColumn);
-  const [FlagContainer, flagContainerProps] = getOverrides(overrides.FlagContainer, StyledFlagContainer);
-  const [NameColumn, nameColumnProps] = getOverrides(overrides.CountrySelectDropdownNameColumn, DefaultNameColumn);
-  const [Dialcode, dialcodeProps] = getOverrides(overrides.CountrySelectDropdownDialcodeColumn, DefaultDialcodeColumn);
-  return <Select clearable={false} disabled={disabled} getOptionLabel={({ option, optionState }) => {
-    const iso = option.id;
-    return <>
-      <FlagColumn {...flagColumnProps}><FlagContainer $iso={iso} data-iso={iso} {...flagContainerProps}>{iso2FlagEmoji(iso)}</FlagContainer></FlagColumn>
-      <NameColumn {...nameColumnProps}>{mapIsoToLabel ? mapIsoToLabel(iso) : option.label}</NameColumn>
-      <Dialcode {...dialcodeProps}>{option.dialCode}</Dialcode>
-    </>;
-  }} getValueLabel={(value) => {
-    const iso = value.option.id;
-    return <FlagContainer $iso={iso} data-iso={iso} {...sharedProps} {...flagContainerProps}>{iso2FlagEmoji(iso)}</FlagContainer>;
-  }} error={error} maxDropdownHeight={maxDropdownHeight} onChange={(event) => {
-    if (typeof onCountryChange === "function") {
-      onCountryChange(event);
-    } else if (__DEV__) {
-      console.warn("CountryPicker component is controlled (or stateless) and requires an `onCountryChange` handler to be passed in that handles the `country` prop value update.");
-    }
-    if (inputRef && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }} options={options} positive={positive} required={required} size={size} value={[country]} onInputChange={() => {
-    setResetScrollIndex(true);
-  }} {...selectProps} />;
+  const [FlagColumn, flagColumnProps] = getOverrides(
+    overrides.CountrySelectDropdownFlagColumn,
+    DefaultFlagColumn
+  );
+  const [FlagContainer, flagContainerProps] = getOverrides(
+    overrides.FlagContainer,
+    StyledFlagContainer
+  );
+  const [NameColumn, nameColumnProps] = getOverrides(
+    overrides.CountrySelectDropdownNameColumn,
+    DefaultNameColumn
+  );
+  const [Dialcode, dialcodeProps] = getOverrides(
+    overrides.CountrySelectDropdownDialcodeColumn,
+    DefaultDialcodeColumn
+  );
+  return (
+    <Select
+      clearable={false}
+      disabled={disabled}
+      getOptionLabel={({ option, optionState }) => {
+        const iso = option.id;
+        return (
+          <>
+            <FlagColumn {...flagColumnProps}>
+              <FlagContainer $iso={iso} data-iso={iso} {...flagContainerProps}>
+                {iso2FlagEmoji(iso)}
+              </FlagContainer>
+            </FlagColumn>
+            <NameColumn {...nameColumnProps}>
+              {mapIsoToLabel ? mapIsoToLabel(iso) : option.label}
+            </NameColumn>
+            <Dialcode {...dialcodeProps}>{option.dialCode}</Dialcode>
+          </>
+        );
+      }}
+      getValueLabel={(value) => {
+        const iso = value.option.id;
+        return (
+          <FlagContainer
+            $iso={iso}
+            data-iso={iso}
+            {...sharedProps}
+            {...flagContainerProps}
+          >
+            {iso2FlagEmoji(iso)}
+          </FlagContainer>
+        );
+      }}
+      error={error}
+      maxDropdownHeight={maxDropdownHeight}
+      onChange={(event) => {
+        if (typeof onCountryChange === "function") {
+          onCountryChange(event);
+        } else if (__DEV__) {
+          console.warn(
+            "CountryPicker component is controlled (or stateless) and requires an `onCountryChange` handler to be passed in that handles the `country` prop value update."
+          );
+        }
+        if (inputRef && inputRef.current) {
+          inputRef.current.focus();
+        }
+      }}
+      options={options}
+      positive={positive}
+      required={required}
+      size={size}
+      value={[country]}
+      onInputChange={() => {
+        setResetScrollIndex(true);
+      }}
+      {...selectProps}
+    />
+  );
 }

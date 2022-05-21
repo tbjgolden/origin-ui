@@ -12,9 +12,23 @@ export default function Cell({
   order,
   skip,
   span,
-  overrides = {}
+  overrides = {},
 }) {
   const [StyledCell, overrideProps] = getOverrides(overrides.Cell, DefaultStyledCell);
   const gridContext = React.useContext(GridContext);
-  return <StyledCell $align={align} $gridColumns={gridColumns || gridContext.gridColumns} $gridGaps={gridGaps || gridContext.gridGaps} $gridGutters={gridGutters || gridContext.gridGutters} $gridUnit={gridUnit || gridContext.gridUnit} $order={order} $skip={skip} $span={span} {...overrideProps}>{children}</StyledCell>;
+  return (
+    <StyledCell
+      $align={align}
+      $gridColumns={gridColumns || gridContext.gridColumns}
+      $gridGaps={gridGaps || gridContext.gridGaps}
+      $gridGutters={gridGutters || gridContext.gridGutters}
+      $gridUnit={gridUnit || gridContext.gridUnit}
+      $order={order}
+      $skip={skip}
+      $span={span}
+      {...overrideProps}
+    >
+      {children}
+    </StyledCell>
+  );
 }

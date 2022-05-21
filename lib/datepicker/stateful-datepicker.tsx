@@ -3,9 +3,13 @@ import StatefulContainer from "./stateful-container";
 import Datepicker from "./datepicker";
 class StatefulComponent extends React.Component {
   render() {
-    return <StatefulContainer {...this.props}>{(extendedProps) => {
-      return <Datepicker {...extendedProps} onChange={extendedProps.onChange} />;
-    }}</StatefulContainer>;
+    return (
+      <StatefulContainer {...this.props}>
+        {(extendedProps) => {
+          return <Datepicker {...extendedProps} onChange={extendedProps.onChange} />;
+        }}
+      </StatefulContainer>
+    );
   }
 }
 StatefulComponent.defaultProps = {
@@ -13,7 +17,6 @@ StatefulComponent.defaultProps = {
   stateReducer: (type, nextState) => {
     return nextState;
   },
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulComponent;

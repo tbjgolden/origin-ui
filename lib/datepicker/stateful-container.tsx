@@ -35,7 +35,7 @@ class StatefulContainer extends React.Component {
     return this.props.children({
       ...restProps,
       value: this.state.value,
-      onChange: this.onChange
+      onChange: this.onChange,
     });
   }
 }
@@ -44,7 +44,6 @@ StatefulContainer.defaultProps = {
   stateReducer: (type, nextState) => {
     return nextState;
   },
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulContainer;

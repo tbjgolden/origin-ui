@@ -4,5 +4,5 @@ import { typography as moveTypography, fontTokens as moveFontTokens } from "./ty
 import getTypography from "../shared/typography";
 export const LightThemeMove = deepMerge({}, LightTheme, {
   name: "light-theme-with-move",
-  typography: deepMerge(getTypography(moveFontTokens), moveTypography)
+  typography: deepMerge(getTypography(moveFontTokens), moveTypography),
 });

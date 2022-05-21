@@ -10,7 +10,11 @@ export default class StatefulPinCodeContainer extends React.Component {
     this.state = this.props.initialState;
     this.handleChange = ({ values, event }) => {
       this.props.onChange({ values, event });
-      const nextState = this.props.stateReducer(STATE_CHANGE_TYPE.change, { values }, this.state);
+      const nextState = this.props.stateReducer(
+        STATE_CHANGE_TYPE.change,
+        { values },
+        this.state
+      );
       this.setState(nextState);
     };
   }
@@ -34,12 +38,12 @@ export default class StatefulPinCodeContainer extends React.Component {
       manageFocus: this.props.manageFocus,
       values: this.state.values,
       onChange: this.handleChange,
-      mask: this.props.mask
+      mask: this.props.mask,
     });
   }
 }
 StatefulPinCodeContainer.defaultProps = {
   initialState: { values: defaultProps.values },
   stateReducer,
-  onChange: defaultProps.onChange
+  onChange: defaultProps.onChange,
 };

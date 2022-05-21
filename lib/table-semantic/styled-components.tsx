@@ -12,19 +12,24 @@ function sizeToCellPadding($theme, $size) {
   return $theme.sizing.scale600;
 }
 export const StyledRoot = styled("div", ({ $theme, $divider }) => {
-  const borderStyles = $divider === DIVIDER.grid || $divider === DIVIDER.vertical ? expandBorderStyles($theme.borders.border300) : {};
+  const borderStyles =
+    $divider === DIVIDER.grid || $divider === DIVIDER.vertical
+      ? expandBorderStyles($theme.borders.border300)
+      : {};
   return {
     ...borderStyles,
-    ...$divider === DIVIDER.horizontal ? {
-      borderBottomWidth: $theme.borders.border300.borderWidth,
-      borderBottomStyle: $theme.borders.border300.borderStyle,
-      borderBottomColor: $theme.borders.border300.borderColor
-    } : {},
+    ...($divider === DIVIDER.horizontal
+      ? {
+          borderBottomWidth: $theme.borders.border300.borderWidth,
+          borderBottomStyle: $theme.borders.border300.borderStyle,
+          borderBottomColor: $theme.borders.border300.borderColor,
+        }
+      : {}),
     position: "relative",
     overflow: "auto",
     WebkitOverflowScrolling: "touch",
     backgroundColor: $theme.colors.tableBackground,
-    transform: "scale(1)"
+    transform: "scale(1)",
   };
 });
 export const StyledTable = styled("table", ({ $theme, $width }) => {
@@ -32,7 +37,7 @@ export const StyledTable = styled("table", ({ $theme, $width }) => {
     borderSpacing: "0",
     boxSizing: "border-box",
     minWidth: "100%",
-    width: $width || null
+    width: $width || null,
   };
 });
 export const StyledTableHead = styled("thead", ({ $theme }) => {
@@ -41,50 +46,64 @@ export const StyledTableHead = styled("thead", ({ $theme }) => {
 export const StyledTableHeadRow = styled("tr", ({ $theme }) => {
   return {};
 });
-export const StyledTableHeadCell = styled("th", ({ $theme, $size, $divider, $isNumeric }) => {
-  const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
-  const borderVertical = $divider === DIVIDER.grid || $divider === DIVIDER.vertical;
-  const padding = sizeToCellPadding($theme, $size);
-  return {
-    ...$theme.typography.font350,
-    position: "sticky",
-    top: 0,
-    paddingTop: padding,
-    paddingRight: padding,
-    paddingBottom: padding,
-    paddingLeft: padding,
-    backgroundColor: $theme.colors.tableHeadBackgroundColor,
-    color: $theme.colors.contentPrimary,
-    textAlign: $theme.direction === "rtl" || $isNumeric ? "right" : "left",
-    verticalAlign: "top",
-    whiteSpace: "nowrap",
-    zIndex: 1,
-    ...$divider === DIVIDER.clean ? {} : {
-      borderBottomColor: $theme.borders.border300.borderColor,
-      borderBottomStyle: $theme.borders.border300.borderStyle,
-      borderBottomWidth: $theme.borders.border300.borderWidth
-    },
-    ":not(:last-child)": {
-      [`border${borderDir}Color`]: borderVertical ? $theme.borders.border300.borderColor : null,
-      [`border${borderDir}Style`]: borderVertical ? $theme.borders.border300.borderStyle : null,
-      [`border${borderDir}Width`]: borderVertical ? $theme.borders.border300.borderWidth : null
-    }
-  };
-});
-export const StyledTableHeadCellSortable = withStyle(StyledTableHeadCell, ({ $theme, $isFocusVisible }) => {
-  return {
-    cursor: "pointer",
-    paddingRight: $theme.sizing.scale1000,
-    outline: "none",
-    ":focus": {
-      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
-      outlineOffset: "-3px"
-    },
-    ":hover": {
-      backgroundColor: $theme.colors.tableStripedBackground
-    }
-  };
-});
+export const StyledTableHeadCell = styled(
+  "th",
+  ({ $theme, $size, $divider, $isNumeric }) => {
+    const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
+    const borderVertical = $divider === DIVIDER.grid || $divider === DIVIDER.vertical;
+    const padding = sizeToCellPadding($theme, $size);
+    return {
+      ...$theme.typography.font350,
+      position: "sticky",
+      top: 0,
+      paddingTop: padding,
+      paddingRight: padding,
+      paddingBottom: padding,
+      paddingLeft: padding,
+      backgroundColor: $theme.colors.tableHeadBackgroundColor,
+      color: $theme.colors.contentPrimary,
+      textAlign: $theme.direction === "rtl" || $isNumeric ? "right" : "left",
+      verticalAlign: "top",
+      whiteSpace: "nowrap",
+      zIndex: 1,
+      ...($divider === DIVIDER.clean
+        ? {}
+        : {
+            borderBottomColor: $theme.borders.border300.borderColor,
+            borderBottomStyle: $theme.borders.border300.borderStyle,
+            borderBottomWidth: $theme.borders.border300.borderWidth,
+          }),
+      ":not(:last-child)": {
+        [`border${borderDir}Color`]: borderVertical
+          ? $theme.borders.border300.borderColor
+          : null,
+        [`border${borderDir}Style`]: borderVertical
+          ? $theme.borders.border300.borderStyle
+          : null,
+        [`border${borderDir}Width`]: borderVertical
+          ? $theme.borders.border300.borderWidth
+          : null,
+      },
+    };
+  }
+);
+export const StyledTableHeadCellSortable = withStyle(
+  StyledTableHeadCell,
+  ({ $theme, $isFocusVisible }) => {
+    return {
+      cursor: "pointer",
+      paddingRight: $theme.sizing.scale1000,
+      outline: "none",
+      ":focus": {
+        outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+        outlineOffset: "-3px",
+      },
+      ":hover": {
+        backgroundColor: $theme.colors.tableStripedBackground,
+      },
+    };
+  }
+);
 export const StyledSortIconContainer = styled("span", ({ $theme }) => {
   return {
     display: "flex",
@@ -92,7 +111,7 @@ export const StyledSortIconContainer = styled("span", ({ $theme }) => {
     position: "absolute",
     top: "50%",
     right: $theme.sizing.scale500,
-    transform: "translateY(-50%)"
+    transform: "translateY(-50%)",
   };
 });
 export const StyledSortAscIcon = styled(ChevronUp, ({ $theme }) => {
@@ -100,7 +119,7 @@ export const StyledSortAscIcon = styled(ChevronUp, ({ $theme }) => {
     position: "absolute",
     top: "50%",
     right: $theme.sizing.scale500,
-    transform: "translateY(-50%)"
+    transform: "translateY(-50%)",
   };
 });
 export const StyledSortDescIcon = styled(ChevronDown, ({ $theme }) => {
@@ -108,7 +127,7 @@ export const StyledSortDescIcon = styled(ChevronDown, ({ $theme }) => {
     position: "absolute",
     top: "50%",
     right: $theme.sizing.scale500,
-    transform: "translateY(-50%)"
+    transform: "translateY(-50%)",
   };
 });
 export const StyledSortNoneIcon = styled(Blank, ({ $theme }) => {
@@ -116,7 +135,7 @@ export const StyledSortNoneIcon = styled(Blank, ({ $theme }) => {
     position: "absolute",
     top: "50%",
     right: $theme.sizing.scale500,
-    transform: "translateY(-50%)"
+    transform: "translateY(-50%)",
   };
 });
 export const StyledTableBody = styled("tbody", ({ $theme }) => {
@@ -125,39 +144,52 @@ export const StyledTableBody = styled("tbody", ({ $theme }) => {
 export const StyledTableBodyRow = styled("tr", ({ $theme }) => {
   return {
     ":hover": {
-      backgroundColor: $theme.colors.tableStripedBackground
-    }
+      backgroundColor: $theme.colors.tableStripedBackground,
+    },
   };
 });
-export const StyledTableBodyCell = styled("td", ({ $theme, $size, $divider, $isNumeric, $isLastRow, $isSortable }) => {
-  const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
-  const borderVertical = $divider === DIVIDER.vertical || $divider === DIVIDER.grid;
-  const borderHorizontal = $divider === void 0 || $divider === DIVIDER.horizontal || $divider === DIVIDER.grid;
-  const padding = sizeToCellPadding($theme, $size);
-  return {
-    ...$theme.typography.font200,
-    paddingTop: padding,
-    paddingRight: !$isSortable ? padding : $theme.sizing.scale1000,
-    paddingBottom: padding,
-    paddingLeft: padding,
-    color: $theme.colors.contentPrimary,
-    textAlign: $isNumeric ? "right" : null,
-    verticalAlign: "top",
-    borderBottomColor: !$isLastRow && borderHorizontal ? $theme.borders.border300.borderColor : null,
-    borderBottomStyle: !$isLastRow && borderHorizontal ? $theme.borders.border300.borderStyle : null,
-    borderBottomWidth: !$isLastRow && borderHorizontal ? $theme.borders.border300.borderWidth : null,
-    ":not(:last-child)": {
-      [`border${borderDir}Color`]: borderVertical ? $theme.borders.border300.borderColor : null,
-      [`border${borderDir}Style`]: borderVertical ? $theme.borders.border300.borderStyle : null,
-      [`border${borderDir}Width`]: borderVertical ? $theme.borders.border300.borderWidth : null
-    }
-  };
-});
+export const StyledTableBodyCell = styled(
+  "td",
+  ({ $theme, $size, $divider, $isNumeric, $isLastRow, $isSortable }) => {
+    const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
+    const borderVertical = $divider === DIVIDER.vertical || $divider === DIVIDER.grid;
+    const borderHorizontal =
+      $divider === void 0 || $divider === DIVIDER.horizontal || $divider === DIVIDER.grid;
+    const padding = sizeToCellPadding($theme, $size);
+    return {
+      ...$theme.typography.font200,
+      paddingTop: padding,
+      paddingRight: !$isSortable ? padding : $theme.sizing.scale1000,
+      paddingBottom: padding,
+      paddingLeft: padding,
+      color: $theme.colors.contentPrimary,
+      textAlign: $isNumeric ? "right" : null,
+      verticalAlign: "top",
+      borderBottomColor:
+        !$isLastRow && borderHorizontal ? $theme.borders.border300.borderColor : null,
+      borderBottomStyle:
+        !$isLastRow && borderHorizontal ? $theme.borders.border300.borderStyle : null,
+      borderBottomWidth:
+        !$isLastRow && borderHorizontal ? $theme.borders.border300.borderWidth : null,
+      ":not(:last-child)": {
+        [`border${borderDir}Color`]: borderVertical
+          ? $theme.borders.border300.borderColor
+          : null,
+        [`border${borderDir}Style`]: borderVertical
+          ? $theme.borders.border300.borderStyle
+          : null,
+        [`border${borderDir}Width`]: borderVertical
+          ? $theme.borders.border300.borderWidth
+          : null,
+      },
+    };
+  }
+);
 export const StyledTableLoadingMessage = styled("div", ({ $theme }) => {
   return {
     ...$theme.typography.ParagraphSmall,
     color: $theme.colors.contentPrimary,
-    padding: $theme.sizing.scale600
+    padding: $theme.sizing.scale600,
   };
 });
 export const StyledTableEmptyMessage = StyledTableLoadingMessage;

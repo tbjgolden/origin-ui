@@ -7,6 +7,6 @@ export {
   Label as StyledLabel,
   Input as StyledInput,
   Toggle as StyledToggle,
-  ToggleTrack as StyledToggleTrack
+  ToggleTrack as StyledToggleTrack,
 } from "./styled-components";
 export { STATE_TYPE, STYLE_TYPE, LABEL_PLACEMENT } from "./constants";

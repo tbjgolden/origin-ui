@@ -19,7 +19,7 @@ export default (foundation = colorTokens) => {
     borderSelected: foundation.primaryA,
     borderInverseOpaque: colors.gray400,
     borderInverseTransparent: hexToRgba(foundation.primaryB, "0.2"),
-    borderInverseSelected: foundation.primaryB
+    borderInverseSelected: foundation.primaryB,
   };
   const coreExtensions = {
     backgroundStateDisabled: colors.gray800,
@@ -56,10 +56,10 @@ export default (foundation = colorTokens) => {
     rewardsTier2: colors.yellow400,
     rewardsTier3: colors.platinum400,
     rewardsTier4: colors.gray200,
-    membership: colors.yellow600
+    membership: colors.yellow600,
   };
   return {
     ...core,
-    ...coreExtensions
+    ...coreExtensions,
   };
 };

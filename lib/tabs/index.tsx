@@ -6,5 +6,5 @@ export {
   Root as StyledRoot,
   Tab as StyledTab,
   TabBar as StyledTabBar,
-  TabContent as StyledTabContent
+  TabContent as StyledTabContent,
 } from "./styled-components";

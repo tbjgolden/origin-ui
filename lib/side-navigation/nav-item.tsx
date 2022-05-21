@@ -22,18 +22,32 @@ class NavItem extends React.Component {
     const [NavItem2, itemProps] = getOverrides(overrides.NavItem, StyledNavItem);
     const [NavLink, linkProps] = getOverrides(overrides.NavLink, StyledNavLink);
     const tabIndex = {
-      tabIndex: item.disabled ? -1 : void 0
+      tabIndex: item.disabled ? -1 : void 0,
     };
-    return <NavLink $as={item.disabled ? "span" : "a"} href={item.disabled ? null : item.itemId} {...tabIndex} {...sharedProps} {...linkProps} {...item.itemId && !item.disabled ? {
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown
-    } : {}}><NavItem2 item={item} {...sharedProps} {...itemProps}>{item.title}</NavItem2></NavLink>;
+    return (
+      <NavLink
+        $as={item.disabled ? "span" : "a"}
+        href={item.disabled ? null : item.itemId}
+        {...tabIndex}
+        {...sharedProps}
+        {...linkProps}
+        {...(item.itemId && !item.disabled
+          ? {
+              onClick: this.handleClick,
+              onKeyDown: this.handleKeyDown,
+            }
+          : {})}
+      >
+        <NavItem2 item={item} {...sharedProps} {...itemProps}>
+          {item.title}
+        </NavItem2>
+      </NavLink>
+    );
   }
 }
 NavItem.defaultProps = {
   overrides: {},
-  onSelect: () => {
-  }
+  onSelect: () => {},
 };
 function compare(prevProps, nextProps) {
   if (nextProps.itemMemoizationComparator) {

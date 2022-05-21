@@ -284,6 +284,6 @@ export default (themePrimitives = colorTokens) => {
     spinnerTrackFill: themePrimitives.mono100,
     progressbarTrackFill: themePrimitives.mono100,
     tooltipBackground: themePrimitives.mono200,
-    tooltipText: themePrimitives.mono1000
+    tooltipText: themePrimitives.mono1000,
   };
 };

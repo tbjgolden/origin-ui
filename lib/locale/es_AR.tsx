@@ -1,10 +1,10 @@
 export default {
   accordion: {
     collapse: "Colapsar",
-    expand: "Expandir"
+    expand: "Expandir",
   },
   breadcrumbs: {
-    ariaLabel: "Navegaci\xF3n"
+    ariaLabel: "Navegaci\xF3n",
   },
   datepicker: {
     ariaLabel: "Selecciona una fecha.",
@@ -19,9 +19,11 @@ export default {
     pastSixMonths: "\xDAltimos 6 meses",
     pastYear: "A\xF1o pasado",
     pastTwoYears: "\xDAltimos 2 a\xF1os",
-    screenReaderMessageInput: "Presione la tecla de flecha hacia abajo para interactuar con el calendario y seleccione una fecha. Presione el bot\xF3n de escape para cerrar el calendario.",
+    screenReaderMessageInput:
+      "Presione la tecla de flecha hacia abajo para interactuar con el calendario y seleccione una fecha. Presione el bot\xF3n de escape para cerrar el calendario.",
     selectedDate: "La fecha seleccionada es ${date}.",
-    selectedDateRange: "El rango de fecha seleccionado es desde ${startDate} hasta ${endDate}.",
+    selectedDateRange:
+      "El rango de fecha seleccionado es desde ${startDate} hasta ${endDate}.",
     selectSecondDatePrompt: "Selecciona la segunda fecha.",
     quickSelectLabel: "Selecciona un rango de fechas.",
     quickSelectAriaLabel: "Selecciona un rango de fechas.",
@@ -36,10 +38,11 @@ export default {
     dateNotAvailableLabel: "No disponible.",
     dateAvailableLabel: "Est\xE1 disponible.",
     selectedLabel: "Seleccionada.",
-    chooseLabel: "Elegir"
+    chooseLabel: "Elegir",
   },
   datatable: {
-    emptyState: "Ninguna fila coincide con los criterios de filtro definidos. Elimine uno o m\xE1s filtros para ver m\xE1s datos.",
+    emptyState:
+      "Ninguna fila coincide con los criterios de filtro definidos. Elimine uno o m\xE1s filtros para ver m\xE1s datos.",
     loadingState: "Cargando filas.",
     searchAriaLabel: "Buscar por texto",
     filterAdd: "A\xF1adir filtro",
@@ -69,39 +72,40 @@ export default {
     booleanFilterTrue: "verdadero",
     booleanFilterFalse: "falso",
     booleanColumnTrueShort: "V",
-    booleanColumnFalseShort: "F"
+    booleanColumnFalseShort: "F",
   },
   buttongroup: {
-    ariaLabel: "grupo de botones"
+    ariaLabel: "grupo de botones",
   },
   fileuploader: {
     dropFilesToUpload: "Arrastra archivos aqu\xED para subir...",
     or: "",
     browseFiles: "Buscar archivos",
     retry: "Reintentar",
-    cancel: "Cancelar"
+    cancel: "Cancelar",
   },
   menu: {
     noResultsMsg: "Sin resultados",
-    parentMenuItemAriaLabel: "Actualmente se encuentra en un elemento que abre un cuadro de lista anidado. Presione la flecha derecha para ingresar a ese elemento y la flecha izquierda para regresar."
+    parentMenuItemAriaLabel:
+      "Actualmente se encuentra en un elemento que abre un cuadro de lista anidado. Presione la flecha derecha para ingresar a ese elemento y la flecha izquierda para regresar.",
   },
   modal: {
-    close: "Cerrar"
+    close: "Cerrar",
   },
   drawer: {
-    close: "Cerrar"
+    close: "Cerrar",
   },
   pagination: {
     prev: "Anterior",
     next: "Siguiente",
-    preposition: "de"
+    preposition: "de",
   },
   select: {
     noResultsMsg: "Sin resultados",
     placeholder: "Seleccionar...",
-    create: "Crear"
+    create: "Crear",
   },
   toast: {
-    close: "Cerrar"
-  }
+    close: "Cerrar",
+  },
 };

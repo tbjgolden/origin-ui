@@ -4,7 +4,7 @@ function applyErrorDetails(message) {
 ${message instanceof Error ? "${message}" : "Error: "}${message}`;
 }
 let error = console.error;
-console.error = function(message) {
+console.error = function (message) {
   error.apply(console, arguments);
   throw new Error(applyErrorDetails(message));
 };
@@ -14,7 +14,7 @@ function applyWarningDetails(message) {
 Warning: ${message}`;
 }
 let warn = console.warn;
-console.warn = function(message) {
+console.warn = function (message) {
   warn.apply(console, arguments);
   throw new Error(applyWarningDetails(message));
 };

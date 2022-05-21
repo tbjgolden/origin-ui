@@ -1,5 +1,6 @@
 const locale = {
-  emptyState: "No rows match the filter criteria defined. Please remove one or more filters to view more data.",
+  emptyState:
+    "No rows match the filter criteria defined. Please remove one or more filters to view more data.",
   loadingState: "Loading rows.",
   searchAriaLabel: "Search by text",
   filterAdd: "Add Filter",
@@ -31,6 +32,6 @@ const locale = {
   booleanFilterTrue: "true",
   booleanFilterFalse: "false",
   booleanColumnTrueShort: "T",
-  booleanColumnFalseShort: "F"
+  booleanColumnFalseShort: "F",
 };
 export default locale;

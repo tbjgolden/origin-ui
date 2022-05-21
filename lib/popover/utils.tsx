@@ -3,7 +3,7 @@ const OPPOSITE_POSITIONS = {
   top: "bottom",
   bottom: "top",
   right: "left",
-  left: "right"
+  left: "right",
 };
 export function getOppositePosition(position) {
   return OPPOSITE_POSITIONS[position];
@@ -15,14 +15,21 @@ export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 export function fromPopperPlacement(placement) {
-  const popoverPlacement = placement.replace(/(top|bottom)-start$/, "$1Left").replace(/(top|bottom)-end$/, "$1Right").replace(/(left|right)-start$/, "$1Top").replace(/(left|right)-end$/, "$1Bottom");
+  const popoverPlacement = placement
+    .replace(/(top|bottom)-start$/, "$1Left")
+    .replace(/(top|bottom)-end$/, "$1Right")
+    .replace(/(left|right)-start$/, "$1Top")
+    .replace(/(left|right)-end$/, "$1Bottom");
   return PLACEMENT[popoverPlacement] || null;
 }
 export function splitPlacement(placement) {
   const matches = placement.match(/^([a-z]+)([A-Z][a-z]+)?/) || [];
-  return matches.slice(1, 3).filter(Boolean).map((s) => {
-    return s.toLowerCase();
-  });
+  return matches
+    .slice(1, 3)
+    .filter(Boolean)
+    .map((s) => {
+      return s.toLowerCase();
+    });
 }
 export function getPopoverMarginStyles(arrowSize, placement, popoverMargin) {
   const [position] = splitPlacement(placement);
@@ -32,7 +39,7 @@ export function getPopoverMarginStyles(arrowSize, placement, popoverMargin) {
   }
   const property = `margin${capitalize(opposite)}`;
   return {
-    [property]: `${arrowSize + popoverMargin}px`
+    [property]: `${arrowSize + popoverMargin}px`,
   };
 }
 export function getStartPosition(offset, placement, arrowSize, popoverMargin) {
@@ -58,6 +65,6 @@ export function getArrowPositionStyles(offsets, placement) {
   const alignmentProperty = isVerticalPosition(position) ? "left" : "top";
   return {
     [alignmentProperty]: `${offsets[alignmentProperty]}px`,
-    [oppositePosition]: `-${ARROW_SIZE - 2}px`
+    [oppositePosition]: `-${ARROW_SIZE - 2}px`,
   };
 }

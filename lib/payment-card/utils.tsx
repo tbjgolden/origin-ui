@@ -1,10 +1,18 @@
 import * as valid from "card-validator";
-export const addGaps = (gaps, value) => gaps.reduce((prev, gap, index) => `${prev.slice(0, gap + index)} ${prev.slice(gap + index)}`.trim(), `${value}`);
+export const addGaps = (gaps, value) =>
+  gaps.reduce(
+    (prev, gap, index) =>
+      `${prev.slice(0, gap + index)} ${prev.slice(gap + index)}`.trim(),
+    `${value}`
+  );
 export const sanitizeNumber = (input) => {
   const number = input.replace(/[^0-9]/gi, "");
   const validatedValue = valid.number(number);
   if (validatedValue.card && Array.isArray(validatedValue.card.lengths)) {
-    return number.slice(0, validatedValue.card.lengths[validatedValue.card.lengths.length - 1]);
+    return number.slice(
+      0,
+      validatedValue.card.lengths[validatedValue.card.lengths.length - 1]
+    );
   }
   return number.slice(0, 19);
 };
@@ -23,7 +31,8 @@ export const getCaretPosition = (value, prevValue, position) => {
     const gaps = prevValidatedValue.card.gaps;
     const valueWithGaps = addGaps(gaps, prevValue);
     if (prevValue === cleanValue && valueWithGaps.length > value.length) {
-      const newValue = valueWithGaps.slice(0, position - 1) + valueWithGaps.slice(position);
+      const newValue =
+        valueWithGaps.slice(0, position - 1) + valueWithGaps.slice(position);
       return [position - 1, sanitizeNumber(newValue)];
     }
   }

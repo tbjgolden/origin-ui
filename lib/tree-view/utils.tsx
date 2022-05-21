@@ -34,7 +34,12 @@ export const getPrevId = (nodes, nodeId, parentId, getId) => {
 };
 export const getFirstChildId = (nodes, nodeId, getId) => {
   for (const node of nodes) {
-    if (getId(node) === nodeId && node.isExpanded && node.children && node.children.length > 0) {
+    if (
+      getId(node) === nodeId &&
+      node.isExpanded &&
+      node.children &&
+      node.children.length > 0
+    ) {
       return getId(node.children[0]);
     }
     if (node.isExpanded && node.children && node.children.length > 0) {
@@ -58,7 +63,12 @@ export const getNextId = (nodes, nodeId, closestOmmer, getId) => {
       }
     }
     if (nodes[i].isExpanded && nodes[i].children && nodes[i].children.length > 0) {
-      const foundId = getNextId(nodes[i].children, nodeId, nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer, getId);
+      const foundId = getNextId(
+        nodes[i].children,
+        nodeId,
+        nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer,
+        getId
+      );
       if (foundId) {
         return foundId;
       }
@@ -93,9 +103,13 @@ export const getExpandableSiblings = (nodes, nodeId, getId) => {
   }
   return [];
 };
-export const toggleIsExpanded = (arr, toggledNode, getId = (node) => {
-  return node.id ? node.id : "";
-}) => {
+export const toggleIsExpanded = (
+  arr,
+  toggledNode,
+  getId = (node) => {
+    return node.id ? node.id : "";
+  }
+) => {
   return arr.map((node) => {
     const newNode = { ...node };
     if (getId(newNode) === getId(toggledNode)) {
@@ -109,18 +123,29 @@ export const toggleIsExpanded = (arr, toggledNode, getId = (node) => {
 };
 export const getCharMatchId = (nodes, nodeId, chars, closestOmmer, getId) => {
   let foundid = matchString(nodes, nodeId, chars, closestOmmer, getId, true);
-  if (foundid)
-    return foundid;
+  if (foundid) return foundid;
   foundid = matchString(nodes, nodeId, chars, closestOmmer, getId, false);
   return foundid;
 };
 export const matchString = (nodes, nodeId, chars, closestOmmer, getId, matchPrefix) => {
   for (let i = 0; i < nodes.length; i++) {
-    if (nodes[i].label && typeof nodes[i].label === "string" && (matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) === 0 || !matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) > 0)) {
+    if (
+      nodes[i].label &&
+      typeof nodes[i].label === "string" &&
+      ((matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) === 0) ||
+        (!matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) > 0))
+    ) {
       return getId(nodes[i]);
     }
     if (nodes[i].isExpanded && nodes[i].children && nodes[i].children.length > 0) {
-      const foundId = matchString(nodes[i].children, nodeId, chars, nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer, getId, matchPrefix);
+      const foundId = matchString(
+        nodes[i].children,
+        nodeId,
+        chars,
+        nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer,
+        getId,
+        matchPrefix
+      );
       if (foundId) {
         return foundId;
       }
@@ -130,7 +155,9 @@ export const matchString = (nodes, nodeId, chars, closestOmmer, getId, matchPref
 };
 export const defaultGetId = (node) => {
   if (!node.id) {
-    throw new Error("There needs to be an unique node.id. You can implement a custom mapping with getId.");
+    throw new Error(
+      "There needs to be an unique node.id. You can implement a custom mapping with getId."
+    );
   }
   return node.id;
 };

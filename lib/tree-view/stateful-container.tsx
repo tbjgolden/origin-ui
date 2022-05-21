@@ -18,33 +18,38 @@ export default class StatefulContainer extends React.Component {
     super(props);
     this.onToggle = (node) => {
       const { onToggle, singleExpanded } = this.props;
-      this.setState((prevState) => {
-        const shouldExpand = !node.isExpanded;
-        if (singleExpanded && shouldExpand) {
-          const siblings = findSiblings(node, prevState.data);
-          if (siblings != null) {
-            for (const sibling of siblings) {
-              if (sibling !== node) {
-                sibling.isExpanded = false;
+      this.setState(
+        (prevState) => {
+          const shouldExpand = !node.isExpanded;
+          if (singleExpanded && shouldExpand) {
+            const siblings = findSiblings(node, prevState.data);
+            if (siblings != null) {
+              for (const sibling of siblings) {
+                if (sibling !== node) {
+                  sibling.isExpanded = false;
+                }
               }
             }
           }
+          node.isExpanded = shouldExpand;
+          return { data: prevState.data };
+        },
+        () => {
+          onToggle && onToggle(node);
         }
-        node.isExpanded = shouldExpand;
-        return { data: prevState.data };
-      }, () => {
-        onToggle && onToggle(node);
-      });
+      );
     };
     this.state = { data: this.props.data };
   }
   render() {
     const { children, ...restProps } = this.props;
     const { onToggle } = this;
-    return children(Object.freeze({
-      ...restProps,
-      ...this.state,
-      onToggle
-    }));
+    return children(
+      Object.freeze({
+        ...restProps,
+        ...this.state,
+        onToggle,
+      })
+    );
   }
 }

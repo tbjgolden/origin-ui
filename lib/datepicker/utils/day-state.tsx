@@ -14,7 +14,17 @@ export default function getDayStateCode(props) {
     $hasRangeOnRight = false,
     $startOfMonth = false,
     $endOfMonth = false,
-    $outsideMonth = false
+    $outsideMonth = false,
   } = props;
-  return `${+$range}${+$disabled}${+($isHighlighted || $isHovered)}${+$selected}${+$hasRangeSelected}${+$startDate}${+$endDate}${+$pseudoSelected}${+$hasRangeHighlighted}${+$pseudoHighlighted}${+($hasRangeHighlighted && !$pseudoHighlighted && $hasRangeOnRight)}${+($hasRangeHighlighted && !$pseudoHighlighted && !$hasRangeOnRight)}${+$startOfMonth}${+$endOfMonth}${+$outsideMonth}`;
+  return `${+$range}${+$disabled}${+(
+    $isHighlighted || $isHovered
+  )}${+$selected}${+$hasRangeSelected}${+$startDate}${+$endDate}${+$pseudoSelected}${+$hasRangeHighlighted}${+$pseudoHighlighted}${+(
+    $hasRangeHighlighted &&
+    !$pseudoHighlighted &&
+    $hasRangeOnRight
+  )}${+(
+    $hasRangeHighlighted &&
+    !$pseudoHighlighted &&
+    !$hasRangeOnRight
+  )}${+$startOfMonth}${+$endOfMonth}${+$outsideMonth}`;
 }

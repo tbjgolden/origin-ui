@@ -11,7 +11,8 @@ const locale = {
   pastSixMonths: "Past 6 Months",
   pastYear: "Past Year",
   pastTwoYears: "Past 2 Years",
-  screenReaderMessageInput: "Press the down arrow key to interact with the calendar and select a date. Press the escape button to close the calendar.",
+  screenReaderMessageInput:
+    "Press the down arrow key to interact with the calendar and select a date. Press the escape button to close the calendar.",
   selectedDate: "Selected date is ${date}.",
   selectedDateRange: "Selected date range is from ${startDate} to ${endDate}.",
   selectSecondDatePrompt: "Select the second date.",
@@ -28,6 +29,6 @@ const locale = {
   dateNotAvailableLabel: "Not available.",
   dateAvailableLabel: "It's available.",
   selectedLabel: "Selected.",
-  chooseLabel: "Choose"
+  chooseLabel: "Choose",
 };
 export default locale;

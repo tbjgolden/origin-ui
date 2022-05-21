@@ -7,74 +7,80 @@ export const StyledProgressSteps = styled("ol", ({ $theme }) => {
     paddingTop: $theme.sizing.scale300,
     paddingRight: $theme.sizing.scale100,
     paddingLeft: $theme.sizing.scale100,
-    paddingBottom: $theme.sizing.scale300
+    paddingBottom: $theme.sizing.scale300,
   };
 });
 export const StyledStep = styled("li", ({ $theme }) => {
   return {
     listStyleType: "none",
     position: "relative",
-    overflow: "visible"
+    overflow: "visible",
   };
 });
-export const StyledIconContainer = styled("div", ({ $theme, $isActive, $isCompleted, $disabled }) => {
-  const currentColor = $theme.colors.backgroundPrimary;
-  let size = $theme.sizing.scale500;
-  let marginLeft = "26px";
-  let marginRight = "26px";
-  const font = $theme.typography.LabelMedium;
-  const titlePad = $theme.sizing.scale800;
-  if ($isActive) {
-    size = $theme.sizing.scale700;
-    marginLeft = $theme.sizing.scale750;
-    marginRight = $theme.sizing.scale750;
+export const StyledIconContainer = styled(
+  "div",
+  ({ $theme, $isActive, $isCompleted, $disabled }) => {
+    const currentColor = $theme.colors.backgroundPrimary;
+    let size = $theme.sizing.scale500;
+    let marginLeft = "26px";
+    let marginRight = "26px";
+    const font = $theme.typography.LabelMedium;
+    const titlePad = $theme.sizing.scale800;
+    if ($isActive) {
+      size = $theme.sizing.scale700;
+      marginLeft = $theme.sizing.scale750;
+      marginRight = $theme.sizing.scale750;
+    }
+    const marginTop = `calc(${titlePad} + (${font.lineHeight} - ${size}) / 2)`;
+    if ($theme.direction === "rtl") {
+      [marginLeft, marginRight] = [marginRight, marginLeft];
+    }
+    return {
+      marginRight,
+      marginLeft,
+      marginTop,
+      width: size,
+      height: size,
+      lineHeight: size,
+      backgroundColor: currentColor,
+      float: $theme.direction === "rtl" ? "right" : "left",
+      textAlign: "center",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
   }
-  const marginTop = `calc(${titlePad} + (${font.lineHeight} - ${size}) / 2)`;
-  if ($theme.direction === "rtl") {
-    [marginLeft, marginRight] = [marginRight, marginLeft];
+);
+export const StyledIcon = styled(
+  "div",
+  ({ $theme, $isActive, $isCompleted, $disabled }) => {
+    let currentColor = $theme.colors.mono400;
+    let size = $theme.sizing.scale300;
+    if ($isCompleted) {
+      currentColor = $theme.colors.primary;
+    } else if ($isActive) {
+      currentColor = $theme.colors.progressStepsActiveFill;
+    }
+    if ($isActive) {
+      size = $theme.sizing.scale600;
+    }
+    return {
+      width: size,
+      height: size,
+      lineHeight: size,
+      borderTopLeftRadius: size,
+      borderTopRightRadius: size,
+      borderBottomRightRadius: size,
+      borderBottomLeftRadius: size,
+      backgroundColor: currentColor,
+      float: $theme.direction === "rtl" ? "right" : "left",
+      textAlign: "center",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+    };
   }
-  return {
-    marginRight,
-    marginLeft,
-    marginTop,
-    width: size,
-    height: size,
-    lineHeight: size,
-    backgroundColor: currentColor,
-    float: $theme.direction === "rtl" ? "right" : "left",
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  };
-});
-export const StyledIcon = styled("div", ({ $theme, $isActive, $isCompleted, $disabled }) => {
-  let currentColor = $theme.colors.mono400;
-  let size = $theme.sizing.scale300;
-  if ($isCompleted) {
-    currentColor = $theme.colors.primary;
-  } else if ($isActive) {
-    currentColor = $theme.colors.progressStepsActiveFill;
-  }
-  if ($isActive) {
-    size = $theme.sizing.scale600;
-  }
-  return {
-    width: size,
-    height: size,
-    lineHeight: size,
-    borderTopLeftRadius: size,
-    borderTopRightRadius: size,
-    borderBottomRightRadius: size,
-    borderBottomLeftRadius: size,
-    backgroundColor: currentColor,
-    float: $theme.direction === "rtl" ? "right" : "left",
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center"
-  };
-});
+);
 export const StyledInnerIcon = styled("div", ({ $theme }) => {
   return {
     width: $theme.sizing.scale300,
@@ -85,13 +91,13 @@ export const StyledInnerIcon = styled("div", ({ $theme }) => {
     borderBottomRightRadius: $theme.sizing.scale300,
     borderBottomLeftRadius: $theme.sizing.scale300,
     backgroundColor: $theme.colors.progressStepsActiveText,
-    textAlign: "center"
+    textAlign: "center",
   };
 });
 export const StyledContent = styled("div", ({ $theme }) => {
   const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
-    [marginDir]: $theme.sizing.scale1600
+    [marginDir]: $theme.sizing.scale1600,
   };
 });
 export const StyledContentTitle = styled("div", ({ $theme, $isActive, $isCompleted }) => {
@@ -106,7 +112,7 @@ export const StyledContentTitle = styled("div", ({ $theme, $isActive, $isComplet
     ...font,
     color,
     paddingTop: $theme.sizing.scale800,
-    paddingBottom: $theme.sizing.scale800
+    paddingBottom: $theme.sizing.scale800,
   };
 });
 export const StyledContentTail = styled("div", ({ $theme, $isCompleted, $isActive }) => {
@@ -130,77 +136,83 @@ export const StyledContentTail = styled("div", ({ $theme, $isCompleted, $isActiv
     width: $theme.sizing.scale0,
     marginTop: `calc(${titlePad} + (${font.lineHeight} + ${size}) / 2)`,
     display: "inline-block",
-    backgroundColor: currentColor
+    backgroundColor: currentColor,
   };
 });
 export const StyledContentDescription = styled("div", ({ $theme }) => {
   return {
-    marginBottom: $theme.sizing.scale700
+    marginBottom: $theme.sizing.scale700,
   };
 });
 export const StyledNumberStep = styled("li", ({ $theme }) => {
   return {
     listStyleType: "none",
     position: "relative",
-    overflow: "visible"
+    overflow: "visible",
   };
 });
-export const StyledNumberIcon = styled("div", ({ $theme, $isActive, $isCompleted, $disabled }) => {
-  let backgroundColor = $theme.colors.mono400;
-  let color = $theme.colors.contentStateDisabled;
-  const size = $theme.sizing.scale950;
-  const font = $theme.typography.ParagraphMedium;
-  const marginLeft = $theme.sizing.scale550;
-  const marginRight = $theme.sizing.scale550;
-  const titlePad = $theme.sizing.scale800;
-  const titleFont = $theme.typography.LabelMedium;
-  if ($isCompleted) {
-    color = $theme.colors.progressStepsCompletedText;
-    backgroundColor = $theme.colors.progressStepsCompletedFill;
-  } else if ($isActive) {
-    color = $theme.colors.progressStepsActiveText;
-    backgroundColor = $theme.colors.progressStepsActiveFill;
+export const StyledNumberIcon = styled(
+  "div",
+  ({ $theme, $isActive, $isCompleted, $disabled }) => {
+    let backgroundColor = $theme.colors.mono400;
+    let color = $theme.colors.contentStateDisabled;
+    const size = $theme.sizing.scale950;
+    const font = $theme.typography.ParagraphMedium;
+    const marginLeft = $theme.sizing.scale550;
+    const marginRight = $theme.sizing.scale550;
+    const titlePad = $theme.sizing.scale800;
+    const titleFont = $theme.typography.LabelMedium;
+    if ($isCompleted) {
+      color = $theme.colors.progressStepsCompletedText;
+      backgroundColor = $theme.colors.progressStepsCompletedFill;
+    } else if ($isActive) {
+      color = $theme.colors.progressStepsActiveText;
+      backgroundColor = $theme.colors.progressStepsActiveFill;
+    }
+    const marginTop = `calc(${titlePad} + (${titleFont.lineHeight} - ${size}) / 2)`;
+    return {
+      marginLeft,
+      marginRight,
+      marginTop,
+      width: size,
+      height: size,
+      borderTopLeftRadius: size,
+      borderTopRightRadius: size,
+      borderBottomRightRadius: size,
+      borderBottomLeftRadius: size,
+      backgroundColor,
+      color,
+      float: $theme.direction === "rtl" ? "right" : "left",
+      textAlign: "center",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      ...font,
+    };
   }
-  const marginTop = `calc(${titlePad} + (${titleFont.lineHeight} - ${size}) / 2)`;
-  return {
-    marginLeft,
-    marginRight,
-    marginTop,
-    width: size,
-    height: size,
-    borderTopLeftRadius: size,
-    borderTopRightRadius: size,
-    borderBottomRightRadius: size,
-    borderBottomLeftRadius: size,
-    backgroundColor,
-    color,
-    float: $theme.direction === "rtl" ? "right" : "left",
-    textAlign: "center",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    ...font
-  };
-});
-export const StyledNumberContentTail = styled("div", ({ $theme, $isActive, $isCompleted, $disabled }) => {
-  let currentColor = $theme.colors.mono300;
-  const size = $theme.sizing.scale950;
-  const titleFont = $theme.typography.LabelMedium;
-  const titlePad = $theme.sizing.scale800;
-  if ($isCompleted) {
-    currentColor = $theme.colors.primary;
+);
+export const StyledNumberContentTail = styled(
+  "div",
+  ({ $theme, $isActive, $isCompleted, $disabled }) => {
+    let currentColor = $theme.colors.mono300;
+    const size = $theme.sizing.scale950;
+    const titleFont = $theme.typography.LabelMedium;
+    const titlePad = $theme.sizing.scale800;
+    if ($isCompleted) {
+      currentColor = $theme.colors.primary;
+    }
+    const marginTop = `calc(${titlePad} + ${size} + (${titleFont.lineHeight} - ${size}) / 2)`;
+    const dir = $theme.direction === "rtl" ? "right" : "left";
+    return {
+      position: "absolute",
+      [dir]: "31px",
+      top: 0,
+      height: `calc(100% - ${$theme.sizing.scale500})`,
+      paddingBottom: 0,
+      marginTop,
+      width: $theme.sizing.scale0,
+      backgroundColor: currentColor,
+      display: "inline-block",
+    };
   }
-  const marginTop = `calc(${titlePad} + ${size} + (${titleFont.lineHeight} - ${size}) / 2)`;
-  const dir = $theme.direction === "rtl" ? "right" : "left";
-  return {
-    position: "absolute",
-    [dir]: "31px",
-    top: 0,
-    height: `calc(100% - ${$theme.sizing.scale500})`,
-    paddingBottom: 0,
-    marginTop,
-    width: $theme.sizing.scale0,
-    backgroundColor: currentColor,
-    display: "inline-block"
-  };
-});
+);

@@ -4,6 +4,6 @@ const grid = {
   margins: [16, 36, 64],
   gaps: 0,
   unit: "px",
-  maxWidth: 1280
+  maxWidth: 1280,
 };
 export default grid;

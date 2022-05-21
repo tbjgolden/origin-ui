@@ -1,105 +1,146 @@
 import { styled } from "../styles";
 import { getMediaQueries } from "../helpers/responsive-helpers";
 import { BEHAVIOR } from "./constants";
-export const StyledGridWrapper = styled("div", ({
-  $theme,
-  $behavior = BEHAVIOR.fixed,
-  $gridMargins = $theme.grid.margins,
-  $gridMaxWidth = $theme.grid.maxWidth,
-  $gridUnit = $theme.grid.unit
-}) => {
-  return {
-    margin: "auto",
-    maxWidth: $behavior === BEHAVIOR.fixed ? `${$gridMaxWidth + 2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) - 1}${$gridUnit}` : null
-  };
-});
-export const StyledGrid = styled("div", ({
-  $theme,
-  $align = null,
-  $behavior = BEHAVIOR.fixed,
-  $gridGutters = $theme.grid.gutters,
-  $gridMargins = $theme.grid.margins,
-  $gridMaxWidth = $theme.grid.maxWidth,
-  $gridUnit = $theme.grid.unit
-}) => {
-  const mediaQueries = getMediaQueries($theme.breakpoints);
-  const gridStyles = mediaQueries.reduce((acc, cur, idx) => {
+export const StyledGridWrapper = styled(
+  "div",
+  ({
+    $theme,
+    $behavior = BEHAVIOR.fixed,
+    $gridMargins = $theme.grid.margins,
+    $gridMaxWidth = $theme.grid.maxWidth,
+    $gridUnit = $theme.grid.unit,
+  }) => {
     return {
-      ...acc,
-      [cur]: {
-        paddingLeft: `${getResponsiveNumber($gridMargins, idx)}${$gridUnit}`,
-        paddingRight: `${getResponsiveNumber($gridMargins, idx)}${$gridUnit}`,
-        marginLeft: `-${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
-        marginRight: `-${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
-        alignItems: getResponsiveValue($align, idx)
-      }
+      margin: "auto",
+      maxWidth:
+        $behavior === BEHAVIOR.fixed
+          ? `${
+              $gridMaxWidth +
+              2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) -
+              1
+            }${$gridUnit}`
+          : null,
     };
-  }, {
-    paddingLeft: `${getResponsiveNumber($gridMargins, 0)}${$gridUnit}`,
-    paddingRight: `${getResponsiveNumber($gridMargins, 0)}${$gridUnit}`,
-    marginLeft: `-${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
-    marginRight: `-${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
-    alignItems: getResponsiveValue($align, 0)
-  });
-  return {
-    boxSizing: "border-box",
-    display: "flex",
-    flexWrap: "wrap",
-    maxWidth: $behavior === BEHAVIOR.fixed ? `${$gridMaxWidth + 2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) - 1}${$gridUnit}` : null,
-    ...gridStyles
-  };
-});
-export const StyledCell = styled("div", ({
-  $theme,
-  $align = null,
-  $order = null,
-  $gridColumns = $theme.grid.columns,
-  $gridGaps = $theme.grid.gaps,
-  $gridGutters = $theme.grid.gutters,
-  $gridUnit = $theme.grid.unit,
-  $skip = [0, 0, 0],
-  $span = [1, 1, 1]
-}) => {
-  const mediaQueries = getMediaQueries($theme.breakpoints);
-  const cellStyles = mediaQueries.reduce((acc, cur, idx) => {
-    if (getResponsiveNumber($span, idx) === 0) {
-      return {
-        ...acc,
-        [cur]: {
-          width: "0",
-          paddingLeft: "0",
-          paddingRight: "0",
-          marginLeft: "0",
-          marginRight: "0",
-          display: "none"
+  }
+);
+export const StyledGrid = styled(
+  "div",
+  ({
+    $theme,
+    $align = null,
+    $behavior = BEHAVIOR.fixed,
+    $gridGutters = $theme.grid.gutters,
+    $gridMargins = $theme.grid.margins,
+    $gridMaxWidth = $theme.grid.maxWidth,
+    $gridUnit = $theme.grid.unit,
+  }) => {
+    const mediaQueries = getMediaQueries($theme.breakpoints);
+    const gridStyles = mediaQueries.reduce(
+      (acc, cur, idx) => {
+        return {
+          ...acc,
+          [cur]: {
+            paddingLeft: `${getResponsiveNumber($gridMargins, idx)}${$gridUnit}`,
+            paddingRight: `${getResponsiveNumber($gridMargins, idx)}${$gridUnit}`,
+            marginLeft: `-${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
+            marginRight: `-${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
+            alignItems: getResponsiveValue($align, idx),
+          },
+        };
+      },
+      {
+        paddingLeft: `${getResponsiveNumber($gridMargins, 0)}${$gridUnit}`,
+        paddingRight: `${getResponsiveNumber($gridMargins, 0)}${$gridUnit}`,
+        marginLeft: `-${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
+        marginRight: `-${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
+        alignItems: getResponsiveValue($align, 0),
+      }
+    );
+    return {
+      boxSizing: "border-box",
+      display: "flex",
+      flexWrap: "wrap",
+      maxWidth:
+        $behavior === BEHAVIOR.fixed
+          ? `${
+              $gridMaxWidth +
+              2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) -
+              1
+            }${$gridUnit}`
+          : null,
+      ...gridStyles,
+    };
+  }
+);
+export const StyledCell = styled(
+  "div",
+  ({
+    $theme,
+    $align = null,
+    $order = null,
+    $gridColumns = $theme.grid.columns,
+    $gridGaps = $theme.grid.gaps,
+    $gridGutters = $theme.grid.gutters,
+    $gridUnit = $theme.grid.unit,
+    $skip = [0, 0, 0],
+    $span = [1, 1, 1],
+  }) => {
+    const mediaQueries = getMediaQueries($theme.breakpoints);
+    const cellStyles = mediaQueries.reduce(
+      (acc, cur, idx) => {
+        if (getResponsiveNumber($span, idx) === 0) {
+          return {
+            ...acc,
+            [cur]: {
+              width: "0",
+              paddingLeft: "0",
+              paddingRight: "0",
+              marginLeft: "0",
+              marginRight: "0",
+              display: "none",
+            },
+          };
         }
-      };
-    }
-    return {
-      ...acc,
-      [cur]: {
-        display: "block",
-        width: `calc(${100 / getResponsiveNumber($gridColumns, idx) * Math.min(getResponsiveNumber($span, idx), getResponsiveNumber($gridColumns, idx))}% - ${getResponsiveNumber($gridGutters, idx)}${$gridUnit})`,
-        marginLeft: `calc(${100 / getResponsiveNumber($gridColumns, idx) * Math.min(getResponsiveNumber($skip, idx), getResponsiveNumber($gridColumns, idx) - 1)}% + ${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit})`,
-        marginRight: `${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
-        marginBottom: `${getResponsiveNumber($gridGaps, idx)}${$gridUnit}`,
-        alignSelf: getResponsiveValue($align, idx),
-        order: getResponsiveNumber($order, idx)
+        return {
+          ...acc,
+          [cur]: {
+            display: "block",
+            width: `calc(${
+              (100 / getResponsiveNumber($gridColumns, idx)) *
+              Math.min(
+                getResponsiveNumber($span, idx),
+                getResponsiveNumber($gridColumns, idx)
+              )
+            }% - ${getResponsiveNumber($gridGutters, idx)}${$gridUnit})`,
+            marginLeft: `calc(${
+              (100 / getResponsiveNumber($gridColumns, idx)) *
+              Math.min(
+                getResponsiveNumber($skip, idx),
+                getResponsiveNumber($gridColumns, idx) - 1
+              )
+            }% + ${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit})`,
+            marginRight: `${getResponsiveNumber($gridGutters, idx) / 2}${$gridUnit}`,
+            marginBottom: `${getResponsiveNumber($gridGaps, idx)}${$gridUnit}`,
+            alignSelf: getResponsiveValue($align, idx),
+            order: getResponsiveNumber($order, idx),
+          },
+        };
+      },
+      {
+        width: "100%",
+        marginLeft: `${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
+        marginRight: `${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
+        marginBottom: `${getResponsiveNumber($gridGaps, 0)}${$gridUnit}`,
+        alignSelf: getResponsiveValue($align, 0),
+        order: getResponsiveNumber($order, 0),
       }
+    );
+    return {
+      boxSizing: "border-box",
+      ...cellStyles,
     };
-  }, {
-    width: "100%",
-    marginLeft: `${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
-    marginRight: `${getResponsiveNumber($gridGutters, 0) / 2}${$gridUnit}`,
-    marginBottom: `${getResponsiveNumber($gridGaps, 0)}${$gridUnit}`,
-    alignSelf: getResponsiveValue($align, 0),
-    order: getResponsiveNumber($order, 0)
-  });
-  return {
-    boxSizing: "border-box",
-    ...cellStyles
-  };
-});
+  }
+);
 function getResponsiveNumber(responsive, i) {
   const res = getResponsiveValue(responsive, i);
   return typeof res === "number" ? res : 0;

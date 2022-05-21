@@ -22,7 +22,7 @@ class StatefulRadioGroupContainer extends React.Component {
     };
     const { initialState } = this.props;
     this.state = {
-      ...initialState
+      ...initialState,
     };
   }
   render() {
@@ -38,16 +38,15 @@ class StatefulRadioGroupContainer extends React.Component {
     return children({
       ...restProps,
       value: this.state.value,
-      onChange
+      onChange,
     });
   }
 }
 StatefulRadioGroupContainer.defaultProps = {
   initialState: {
-    value: ""
+    value: "",
   },
   stateReducer: defaultStateReducer,
-  onChange: () => {
-  }
+  onChange: () => {},
 };
 export default StatefulRadioGroupContainer;

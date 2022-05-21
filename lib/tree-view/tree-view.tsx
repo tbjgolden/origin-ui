@@ -9,7 +9,7 @@ import {
   getEndId,
   getExpandableSiblings,
   defaultGetId,
-  getCharMatchId
+  getCharMatchId,
 } from "./utils";
 import { isFocusVisible } from "../utils/focusVisible";
 import { getOverride, getOverrideProps } from "../helpers/overrides";
@@ -20,7 +20,7 @@ export default function TreeView(props) {
     onToggle,
     overrides = {},
     renderAll,
-    getId = defaultGetId
+    getId = defaultGetId,
   } = props;
   const { Root: RootOverride } = overrides;
   const Root = getOverride(RootOverride) || StyledTreeItemList;
@@ -31,13 +31,11 @@ export default function TreeView(props) {
   const timeOutRef = React.useRef(null);
   const treeItemRefs = {};
   const focusTreeItem = (id) => {
-    if (!id)
-      return;
+    if (!id) return;
     setSelectedNodeId(id);
     const refs = treeItemRefs[id];
     const node = refs && refs.current;
-    if (node)
-      node.focus();
+    if (node) node.focus();
   };
   const onKeyDown = (e, node) => {
     const elementId = e.target.dataset.nodeid;
@@ -97,7 +95,9 @@ export default function TreeView(props) {
         timeOutRef.current = setTimeout(() => {
           setTypeAheadChars("");
         }, 500);
-        focusTreeItem(getCharMatchId(data, selectedNodeId, typeAheadChars + e.key, null, getId));
+        focusTreeItem(
+          getCharMatchId(data, selectedNodeId, typeAheadChars + e.key, null, getId)
+        );
         break;
     }
   };
@@ -114,14 +114,35 @@ export default function TreeView(props) {
       setFocusVisible(false);
     }
   };
-  return <Root role="tree" {...getOverrideProps(RootOverride)}>{data.map((node) => {
-    return <TreeNode indentGuides={indentGuides} key={getId(node)} node={node} getId={getId} onToggle={(node2) => {
-      onToggle && onToggle(node2);
-      focusTreeItem(getId(node2));
-    }} overrides={overrides} renderAll={renderAll} selectedNodeId={selectedNodeId} onKeyDown={onKeyDown} onFocus={onFocus} onBlur={onBlur} addRef={(id, ref) => {
-      treeItemRefs[id] = ref;
-    }} removeRef={(id) => {
-      delete treeItemRefs[id];
-    }} isFocusVisible={focusVisible} />;
-  })}</Root>;
+  return (
+    <Root role="tree" {...getOverrideProps(RootOverride)}>
+      {data.map((node) => {
+        return (
+          <TreeNode
+            indentGuides={indentGuides}
+            key={getId(node)}
+            node={node}
+            getId={getId}
+            onToggle={(node2) => {
+              onToggle && onToggle(node2);
+              focusTreeItem(getId(node2));
+            }}
+            overrides={overrides}
+            renderAll={renderAll}
+            selectedNodeId={selectedNodeId}
+            onKeyDown={onKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            addRef={(id, ref) => {
+              treeItemRefs[id] = ref;
+            }}
+            removeRef={(id) => {
+              delete treeItemRefs[id];
+            }}
+            isFocusVisible={focusVisible}
+          />
+        );
+      })}
+    </Root>
+  );
 }

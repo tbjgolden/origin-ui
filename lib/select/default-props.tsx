@@ -24,15 +24,11 @@ const defaultProps = {
   labelKey: "label",
   maxDropdownHeight: "900px",
   multi: false,
-  onBlur: () => {
-  },
+  onBlur: () => {},
   onBlurResetsInput: true,
-  onChange: () => {
-  },
-  onFocus: () => {
-  },
-  onInputChange: () => {
-  },
+  onChange: () => {},
+  onFocus: () => {},
+  onInputChange: () => {},
   onCloseResetsInput: true,
   onSelectResetsInput: true,
   onOpen: null,
@@ -46,6 +42,6 @@ const defaultProps = {
   size: SIZE.default,
   type: TYPE.select,
   value: [],
-  valueKey: "id"
+  valueKey: "id",
 };
 export default defaultProps;

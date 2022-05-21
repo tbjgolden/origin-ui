@@ -4,7 +4,7 @@ export const Root = styled("div", (props) => {
   const { $orientation } = props;
   return {
     display: "flex",
-    flexDirection: $orientation === ORIENTATION.vertical ? "row" : "column"
+    flexDirection: $orientation === ORIENTATION.vertical ? "row" : "column",
   };
 });
 export const Tab = styled("div", (props) => {
@@ -13,7 +13,7 @@ export const Tab = styled("div", (props) => {
     $active,
     $orientation,
     $isFocusVisible,
-    $theme: { colors, sizing, typography }
+    $theme: { colors, sizing, typography },
   } = props;
   let style = {
     ...typography.font200,
@@ -28,18 +28,21 @@ export const Tab = styled("div", (props) => {
     marginRight: sizing.scale200,
     outline: $isFocusVisible ? `3px solid ${colors.accent}` : "none",
     outlineOffset: "-3px",
-    borderBottom: $orientation === ORIENTATION.horizontal && $active && !$isFocusVisible ? `2px solid ${colors.primary}` : "2px solid transparent",
-    display: "inline-block"
+    borderBottom:
+      $orientation === ORIENTATION.horizontal && $active && !$isFocusVisible
+        ? `2px solid ${colors.primary}`
+        : "2px solid transparent",
+    display: "inline-block",
   };
   if (!$disabled && !$active) {
     style = {
       ...style,
       ":focus": {
-        color: colors.primary
+        color: colors.primary,
       },
       ":hover": {
-        color: colors.primary
-      }
+        color: colors.primary,
+      },
     };
   }
   return style;
@@ -47,20 +50,20 @@ export const Tab = styled("div", (props) => {
 export const TabBar = styled("div", (props) => {
   const {
     $orientation,
-    $theme: { colors, sizing }
+    $theme: { colors, sizing },
   } = props;
   return {
     display: "flex",
     flexDirection: $orientation === ORIENTATION.vertical ? "column" : "row",
     paddingLeft: sizing.scale400,
     paddingRight: sizing.scale400,
-    backgroundColor: colors.tabBarFill
+    backgroundColor: colors.tabBarFill,
   };
 });
 export const TabContent = styled("div", (props) => {
   const {
     $active,
-    $theme: { sizing, typography }
+    $theme: { sizing, typography },
   } = props;
   return {
     ...typography.font300,
@@ -68,6 +71,6 @@ export const TabContent = styled("div", (props) => {
     paddingLeft: sizing.scale800,
     paddingRight: sizing.scale800,
     paddingTop: sizing.scale500,
-    paddingBottom: sizing.scale500
+    paddingBottom: sizing.scale500,
   };
 });

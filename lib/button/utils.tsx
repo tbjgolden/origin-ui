@@ -5,7 +5,7 @@ export function getSharedProps({
   isSelected,
   kind,
   shape,
-  size
+  size,
 }) {
   return {
     $colors: colors,
@@ -14,6 +14,6 @@ export function getSharedProps({
     $isSelected: isSelected,
     $kind: kind,
     $shape: shape,
-    $size: size
+    $size: size,
   };
 }

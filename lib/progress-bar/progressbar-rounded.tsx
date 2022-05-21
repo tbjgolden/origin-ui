@@ -5,7 +5,7 @@ import {
   StyledProgressBarRoundedSvg,
   StyledProgressBarRoundedTrackBackground,
   StyledProgressBarRoundedTrackForeground,
-  StyledProgressBarRoundedText
+  StyledProgressBarRoundedText,
 } from "./styled-components";
 import { useOverrides } from "../helpers/overrides";
 const defaults = {
@@ -13,7 +13,7 @@ const defaults = {
   Svg: StyledProgressBarRoundedSvg,
   TrackBackground: StyledProgressBarRoundedTrackBackground,
   TrackForeground: StyledProgressBarRoundedTrackForeground,
-  Text: StyledProgressBarRoundedText
+  Text: StyledProgressBarRoundedText,
 };
 function roundTo(n, digits) {
   if (digits === void 0) {
@@ -37,7 +37,7 @@ function ProgressBarRounded({
     Svg: [Svg, svgProps],
     TrackBackground: [TrackBackground, trackBackgroundProps],
     TrackForeground: [TrackForeground, trackForegroundProps],
-    Text: [Text, textProps]
+    Text: [Text, textProps],
   } = useOverrides(defaults, overrides);
   const [pathLength, setPathLength] = React.useState(0);
   const pathRef = React.useRef();
@@ -63,7 +63,11 @@ function ProgressBarRounded({
         animationTimeStarted = now;
       }
       const animationTimeElapsed = now - animationTimeStarted;
-      let currentPathProgress = Math.min((progress - pathProgress) * (animationTimeElapsed / animationDuration) + pathProgress, 1);
+      let currentPathProgress = Math.min(
+        (progress - pathProgress) * (animationTimeElapsed / animationDuration) +
+          pathProgress,
+        1
+      );
       currentPathProgress = Math.max(currentPathProgress, 0);
       setPathProgress(currentPathProgress);
       if (animationTimeElapsed <= animationDuration) {
@@ -72,15 +76,34 @@ function ProgressBarRounded({
     }
     loop();
   }, [progress]);
-  return <Root data-baseweb="progressbar-rounded" role="progressbar" aria-valuenow={progress} aria-valuemin={0} aria-valuemax={1} $size={size} $inline={inline} {...restProps} {...rootProps}>
-    <Svg $size={size} {...restProps} {...svgProps}>
-      <TrackBackground $size={size} {...trackBackgroundProps} />
-      <TrackForeground ref={pathRef} $size={size} $visible={!!pathRef.current} $pathLength={pathLength} $pathProgress={pathProgress} {...trackForegroundProps} />
-    </Svg>
-    <Text $size={size} {...textProps}>
-      {roundTo(Math.min(progress * 100, 100))}
-      {"%"}
-    </Text>
-  </Root>;
+  return (
+    <Root
+      data-baseweb="progressbar-rounded"
+      role="progressbar"
+      aria-valuenow={progress}
+      aria-valuemin={0}
+      aria-valuemax={1}
+      $size={size}
+      $inline={inline}
+      {...restProps}
+      {...rootProps}
+    >
+      <Svg $size={size} {...restProps} {...svgProps}>
+        <TrackBackground $size={size} {...trackBackgroundProps} />
+        <TrackForeground
+          ref={pathRef}
+          $size={size}
+          $visible={!!pathRef.current}
+          $pathLength={pathLength}
+          $pathProgress={pathProgress}
+          {...trackForegroundProps}
+        />
+      </Svg>
+      <Text $size={size} {...textProps}>
+        {roundTo(Math.min(progress * 100, 100))}
+        {"%"}
+      </Text>
+    </Root>
+  );
 }
 export default ProgressBarRounded;

@@ -20,6 +20,6 @@ const sizing = {
   scale1600: "64px",
   scale2400: "96px",
   scale3200: "128px",
-  scale4800: "192px"
+  scale4800: "192px",
 };
 export default sizing;

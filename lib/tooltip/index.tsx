@@ -5,10 +5,10 @@ export {
   ACCESSIBILITY_TYPE,
   PLACEMENT,
   TRIGGER_TYPE,
-  STATE_CHANGE_TYPE
+  STATE_CHANGE_TYPE,
 } from "./constants";
 export {
   Arrow as StyledArrow,
   Body as StyledBody,
-  Inner as StyledInner
+  Inner as StyledInner,
 } from "./styled-components";

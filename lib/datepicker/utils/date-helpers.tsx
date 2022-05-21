@@ -12,8 +12,8 @@ class DateHelpers {
             slashDate: "YYYY/MM/DD",
             weekday: "dddd",
             weekdaymin: "dd",
-            quarter: "[Q]Q"
-          }
+            quarter: "[Q]Q",
+          },
         },
         DateFnsUtils: {
           formats: {
@@ -23,8 +23,8 @@ class DateHelpers {
             weekdaymin: "EEEEEE",
             slashDate: "yyyy/MM/dd",
             fullOrdinalWeek: "EEEE, MMMM do yyyy",
-            quarter: "QQQ"
-          }
+            quarter: "QQQ",
+          },
         },
         LuxonUtils: {
           formats: {
@@ -34,24 +34,32 @@ class DateHelpers {
             weekdaymin: "EEEEE",
             slashDate: "yyyy/MM/dd",
             fullOrdinalWeek: "EEEE, MMMM dd yyyy",
-            quarter: "Qq"
-          }
-        }
+            quarter: "Qq",
+          },
+        },
       };
       const defaultGetOptions = (instance) => {
         return {
           formats: instance.formats,
-          locale: instance.locale
+          locale: instance.locale,
         };
       };
       const updateOptions = updateOptionsBase || defaultGetOptions;
       const UtilsClass = adapter2.constructor;
       const className = adapter2.constructor.name;
-      const { getOptions = defaultGetOptions, formats } = adapterMap[className] || adapterMap.DateFnsUtils;
+      const { getOptions = defaultGetOptions, formats } =
+        adapterMap[className] || adapterMap.DateFnsUtils;
       const options = getOptions(adapter2);
-      return new UtilsClass(Object.assign({}, updateOptions(Object.assign({}, options, {
-        formats: Object.assign({}, options.formats, formats)
-      }))));
+      return new UtilsClass(
+        Object.assign(
+          {},
+          updateOptions(
+            Object.assign({}, options, {
+              formats: Object.assign({}, options.formats, formats),
+            })
+          )
+        )
+      );
     };
     this.format = (date, format, locale) => {
       const adapter2 = locale ? this.getAdapterWithNewLocale(locale) : this.adapter;
@@ -93,14 +101,20 @@ class DateHelpers {
     };
     this.getMonthInLocale = (monthNumber, locale) => {
       const localeAdapter = this.getAdapterWithNewLocale(locale);
-      return localeAdapter.format(localeAdapter.setMonth(localeAdapter.date(), monthNumber), "month");
+      return localeAdapter.format(
+        localeAdapter.setMonth(localeAdapter.date(), monthNumber),
+        "month"
+      );
     };
     this.getWeekdayInLocale = (date, locale) => {
       return this.getAdapterWithNewLocale(locale).format(date, "weekday");
     };
     this.getQuarterInLocale = (quarterNumber, locale) => {
       const localeAdapter = this.getAdapterWithNewLocale(locale);
-      return localeAdapter.format(localeAdapter.setMonth(localeAdapter.date(), quarterNumber * 3), "quarter");
+      return localeAdapter.format(
+        localeAdapter.setMonth(localeAdapter.date(), quarterNumber * 3),
+        "quarter"
+      );
     };
     this.getEndOfWeek = (date) => {
       return this.adapter.endOfWeek(date);
@@ -202,28 +216,43 @@ class DateHelpers {
     };
     this.monthDisabledBefore = (day, { minDate, includeDates } = {}) => {
       const previousMonth = this.subMonths(day, 1);
-      return !!minDate && this.differenceInCalendarMonths(minDate, previousMonth) > 0 || !!includeDates && includeDates.every((includeDate) => {
-        return this.differenceInCalendarMonths(includeDate, previousMonth) > 0;
-      }) || false;
+      return (
+        (!!minDate && this.differenceInCalendarMonths(minDate, previousMonth) > 0) ||
+        (!!includeDates &&
+          includeDates.every((includeDate) => {
+            return this.differenceInCalendarMonths(includeDate, previousMonth) > 0;
+          })) ||
+        false
+      );
     };
     this.monthDisabledAfter = (day, { maxDate, includeDates } = {}) => {
       const nextMonth = this.adapter.addMonths(day, 1);
-      return !!maxDate && this.differenceInCalendarMonths(nextMonth, maxDate) > 0 || !!includeDates && includeDates.every((includeDate) => {
-        return this.differenceInCalendarMonths(nextMonth, includeDate) > 0;
-      }) || false;
+      return (
+        (!!maxDate && this.differenceInCalendarMonths(nextMonth, maxDate) > 0) ||
+        (!!includeDates &&
+          includeDates.every((includeDate) => {
+            return this.differenceInCalendarMonths(nextMonth, includeDate) > 0;
+          })) ||
+        false
+      );
     };
     this.setDate = (date, dayNumber) => {
       const startOfMonthNoTime = this.adapter.startOfMonth(date);
-      const startOfMonthHoursAndMinutes = this.adapter.mergeDateAndTime(startOfMonthNoTime, date);
-      const startOfMonth = this.adapter.setSeconds(startOfMonthHoursAndMinutes, this.adapter.getSeconds(date));
+      const startOfMonthHoursAndMinutes = this.adapter.mergeDateAndTime(
+        startOfMonthNoTime,
+        date
+      );
+      const startOfMonth = this.adapter.setSeconds(
+        startOfMonthHoursAndMinutes,
+        this.adapter.getSeconds(date)
+      );
       return this.adapter.addDays(startOfMonth, dayNumber - 1);
     };
     this.getDate = (date) => {
       return Number(this.adapter.format(date, "dayOfMonthNumber"));
     };
     this.applyDateToTime = (time, date) => {
-      if (!time)
-        return date;
+      if (!time) return date;
       const yearNumber = this.adapter.getYear(date);
       const monthNumber = this.adapter.getMonth(date);
       const dayNumber = this.getDate(date);
@@ -232,16 +261,26 @@ class DateHelpers {
       return this.setDate(monthDate, dayNumber);
     };
     this.applyTimeToDate = (date, time) => {
-      if (!date)
-        return time;
+      if (!date) return time;
       return this.adapter.setSeconds(this.adapter.mergeDateAndTime(date, time), 0);
     };
-    this.isDayDisabled = (day, { minDate, maxDate, excludeDates, includeDates, filterDate } = {}) => {
-      return this.isOutOfBounds(day, { minDate, maxDate }) || excludeDates && excludeDates.some((excludeDate) => {
-        return this.adapter.isSameDay(day, excludeDate);
-      }) || includeDates && !includeDates.some((includeDate) => {
-        return this.adapter.isSameDay(day, includeDate);
-      }) || filterDate && !filterDate(day) || false;
+    this.isDayDisabled = (
+      day,
+      { minDate, maxDate, excludeDates, includeDates, filterDate } = {}
+    ) => {
+      return (
+        this.isOutOfBounds(day, { minDate, maxDate }) ||
+        (excludeDates &&
+          excludeDates.some((excludeDate) => {
+            return this.adapter.isSameDay(day, excludeDate);
+          })) ||
+        (includeDates &&
+          !includeDates.some((includeDate) => {
+            return this.adapter.isSameDay(day, includeDate);
+          })) ||
+        (filterDate && !filterDate(day)) ||
+        false
+      );
     };
     this.isOnOrAfterDay = (fromDate, toDate) => {
       if (this.adapter.isSameDay(fromDate, toDate)) {
@@ -256,7 +295,10 @@ class DateHelpers {
       return this.adapter.isBefore(fromDate, toDate);
     };
     this.isOutOfBounds = (day, { minDate, maxDate } = {}) => {
-      return !!minDate && !this.isOnOrAfterDay(day, minDate) || !!maxDate && !this.isOnOrBeforeDay(day, maxDate);
+      return (
+        (!!minDate && !this.isOnOrAfterDay(day, minDate)) ||
+        (!!maxDate && !this.isOnOrBeforeDay(day, maxDate))
+      );
     };
     this.parseString = (string, formatString, locale) => {
       const adapter2 = locale ? this.getAdapterWithNewLocale(locale) : this.adapter;
@@ -267,7 +309,9 @@ class DateHelpers {
       return adapter2.parse(string, adapter2.formats[format]);
     };
     this.setMilliseconds = (date, milliseconds) => {
-      return this.adapter.date(this.adapter.getSeconds(this.adapter.startOfDay(date)) * 1e3 + milliseconds);
+      return this.adapter.date(
+        this.adapter.getSeconds(this.adapter.startOfDay(date)) * 1e3 + milliseconds
+      );
     };
     this.set = (date, values) => {
       let updatedDate = date;

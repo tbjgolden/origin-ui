@@ -15,6 +15,6 @@ const animation = {
   easeInQuinticCurve: "cubic-bezier(0.755, 0.05, 0.855, 0.06)",
   easeOutQuinticCurve: "cubic-bezier(0.23, 1, 0.32, 1)",
   easeInOutQuinticCurve: "cubic-bezier(0.86, 0, 0.07, 1)",
-  linearCurve: "cubic-bezier(0, 0, 1, 1)"
+  linearCurve: "cubic-bezier(0, 0, 1, 1)",
 };
 export default animation;

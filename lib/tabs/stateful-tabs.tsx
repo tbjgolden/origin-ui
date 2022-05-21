@@ -5,7 +5,7 @@ export default class StatefulTabs extends React.Component {
   constructor() {
     super(...arguments);
     this.state = {
-      activeKey: this.getInitialKey()
+      activeKey: this.getInitialKey(),
     };
     this.onTabChange = (newState) => {
       this.internalSetState(STATE_CHANGE_TYPE.change, newState);
@@ -19,21 +19,24 @@ export default class StatefulTabs extends React.Component {
   }
   getInitialKey() {
     const { initialState, children } = this.props;
-    return initialState && initialState.activeKey ? initialState.activeKey : React.Children.map(children, (child, index) => {
-      return child.key || String(index);
-    })[0];
+    return initialState && initialState.activeKey
+      ? initialState.activeKey
+      : React.Children.map(children, (child, index) => {
+          return child.key || String(index);
+        })[0];
   }
   render() {
     const { initialState, stateReducer, ...restProps } = this.props;
-    return <Tabs {...restProps} activeKey={this.state.activeKey} onChange={this.onTabChange} />;
+    return (
+      <Tabs {...restProps} activeKey={this.state.activeKey} onChange={this.onTabChange} />
+    );
   }
 }
 StatefulTabs.defaultProps = {
   disabled: false,
-  onChange: () => {
-  },
+  onChange: () => {},
   overrides: {},
   stateReducer: (type, newState) => {
     return newState;
-  }
+  },
 };

@@ -7,5 +7,5 @@ export {
   Thumbnail as StyledThumbnail,
   Title as StyledTitle,
   Root as StyledRoot,
-  Root as StyledWrapper
+  Root as StyledWrapper,
 } from "./styled-components";

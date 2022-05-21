@@ -7,7 +7,7 @@ export default class Accordion extends React.Component {
     super(...arguments);
     this.state = {
       expanded: [],
-      ...this.props.initialState
+      ...this.props.initialState,
     };
     this.itemRefs = [];
   }
@@ -28,8 +28,7 @@ export default class Accordion extends React.Component {
     }
     const newState = { expanded: activeKeys };
     this.internalSetState(STATE_CHANGE_TYPE.expand, newState);
-    if (typeof onChange === "function")
-      onChange(...args);
+    if (typeof onChange === "function") onChange(...args);
   }
   internalSetState(type, changes) {
     const { stateReducer, onChange } = this.props;
@@ -81,8 +80,7 @@ export default class Accordion extends React.Component {
     const { expanded } = this.state;
     const { accordion, disabled, children, renderAll, overrides } = this.props;
     return React.Children.map(children, (child, index) => {
-      if (!child)
-        return;
+      if (!child) return;
       const itemRef = React.createRef();
       this.itemRefs.push(itemRef);
       const key = child.key || String(index);
@@ -98,7 +96,7 @@ export default class Accordion extends React.Component {
         disabled: child.props.disabled || disabled,
         onChange: (...args) => {
           return this.onPanelChange(key, child.props.onChange, ...args);
-        }
+        },
       };
       return React.cloneElement(child, props);
     });
@@ -107,20 +105,29 @@ export default class Accordion extends React.Component {
     const { overrides = {} } = this.props;
     const { Root: RootOverride } = overrides;
     const [Root, rootProps] = getOverrides(RootOverride, StyledRoot);
-    return <Root data-baseweb="accordion" $disabled={this.props.disabled} $isFocusVisible={false} onKeyDown={this.handleKeyDown.bind(this)} {...rootProps}>{this.getItems()}</Root>;
+    return (
+      <Root
+        data-baseweb="accordion"
+        $disabled={this.props.disabled}
+        $isFocusVisible={false}
+        onKeyDown={this.handleKeyDown.bind(this)}
+        {...rootProps}
+      >
+        {this.getItems()}
+      </Root>
+    );
   }
 }
 Accordion.defaultProps = {
   accordion: true,
   disabled: false,
   initialState: {
-    expanded: []
+    expanded: [],
   },
-  onChange: () => {
-  },
+  onChange: () => {},
   overrides: {},
   renderAll: false,
   stateReducer: (type, newState) => {
     return newState;
-  }
+  },
 };

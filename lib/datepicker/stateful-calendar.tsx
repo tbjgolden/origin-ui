@@ -3,9 +3,13 @@ import StatefulContainer from "./stateful-container";
 import Calendar from "./calendar";
 class StatefulComponent extends React.Component {
   render() {
-    return <StatefulContainer {...this.props}>{(extendedProps) => {
-      return <Calendar {...extendedProps} onChange={extendedProps.onChange} />;
-    }}</StatefulContainer>;
+    return (
+      <StatefulContainer {...this.props}>
+        {(extendedProps) => {
+          return <Calendar {...extendedProps} onChange={extendedProps.onChange} />;
+        }}
+      </StatefulContainer>
+    );
   }
 }
 StatefulComponent.defaultProps = {
@@ -13,7 +17,6 @@ StatefulComponent.defaultProps = {
   stateReducer: (type, nextState) => {
     return nextState;
   },
-  onSelect: () => {
-  }
+  onSelect: () => {},
 };
 export default StatefulComponent;

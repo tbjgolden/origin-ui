@@ -15,7 +15,7 @@ const inputTypesWhitelist = {
   week: true,
   time: true,
   datetime: true,
-  "datetime-local": true
+  "datetime-local": true,
 };
 function focusTriggersKeyboardModality(node) {
   const { type, tagName } = node;
@@ -61,8 +61,7 @@ export function teardown(doc) {
 export function isFocusVisible(event) {
   try {
     return event.target.matches(":focus-visible");
-  } catch {
-  }
+  } catch {}
   return hadKeyboardEvent || focusTriggersKeyboardModality(event.target);
 }
 export function handleBlurVisible() {

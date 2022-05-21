@@ -1,6 +1,6 @@
 const locale = {
   noResultsMsg: "No results found",
   placeholder: "Select...",
-  create: "Create"
+  create: "Create",
 };
 export default locale;

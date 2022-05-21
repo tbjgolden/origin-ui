@@ -1,9 +1,5 @@
 import { styled } from "../styles";
-export function getSvgStyles({
-  $theme,
-  $size,
-  $color
-}) {
+export function getSvgStyles({ $theme, $size, $color }) {
   let size = $theme.sizing.scale600;
   if ($size) {
     if ($theme.sizing[$size]) {
@@ -23,7 +19,7 @@ export function getSvgStyles({
     fill: color,
     color,
     height: size,
-    width: size
+    width: size,
   };
 }
 export const Svg = styled("svg", getSvgStyles);

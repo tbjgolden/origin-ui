@@ -15,5 +15,5 @@ export {
   StyledProfileLabelsContainer,
   StyledProfileTitle,
   StyledProfileSubtitle,
-  StyledProfileBody
+  StyledProfileBody,
 } from "./styled-components";
