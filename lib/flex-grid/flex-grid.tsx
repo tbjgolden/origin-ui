@@ -3,15 +3,17 @@ import { Block } from "../block";
 import { flattenFragments } from "../helpers/react-helpers";
 import { getOverrides } from "../helpers/overrides";
 export const BaseFlexGrid = React.forwardRef(
-  ({ display, flexWrap, ...restProps }, ref) => (
-    <Block
-      display={display || "flex"}
-      flexWrap={flexWrap || flexWrap === false ? flexWrap : true}
-      data-baseweb="flex-grid"
-      {...restProps}
-      ref={ref}
-    />
-  )
+  ({ display, flexWrap, ...restProps }, ref) => {
+    return (
+      <Block
+        display={display || "flex"}
+        flexWrap={flexWrap || flexWrap === false ? flexWrap : true}
+        data-baseweb="flex-grid"
+        {...restProps}
+        ref={ref}
+      />
+    );
+  }
 );
 BaseFlexGrid.displayName = "BaseFlexGrid";
 const FlexGrid = ({
@@ -44,8 +46,8 @@ const FlexGrid = ({
     </FlexGrid2>
   );
 };
-const FlexGridComponent = React.forwardRef((props, ref) => (
-  <FlexGrid {...props} forwardedRef={ref} />
-));
+const FlexGridComponent = React.forwardRef((props, ref) => {
+  return <FlexGrid {...props} forwardedRef={ref} />;
+});
 FlexGridComponent.displayName = "FlexGrid";
 export default FlexGridComponent;

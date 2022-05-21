@@ -10,7 +10,7 @@ async function main() {
     const src = `https://www.iana.org/time-zones/repository/tzdata-latest.tar.gz`;
     await exec(`curl -L ${src} | gzip -dc | tar -xf - --directory ${tmpDir}`);
     const zoneTabPath = path.join(tmpDir, "zone1970.tab");
-    const content = await fs.promises.readFile(zoneTabPath, "utf-8");
+    const content = await fs.promises.readFile(zoneTabPath, "utf8");
     const lines = content.split("\n");
     const zones = [];
     for (const line of lines) {
@@ -23,10 +23,12 @@ async function main() {
       }
     }
     const file = [];
-    file.push(`
+    file.push(
+      `
 // @flow
-`);
-    file.push("export const zones = [");
+`,
+      "export const zones = ["
+    );
     for (const zone of zones) {
       file.push(`  '${zone}',`);
     }

@@ -30,9 +30,15 @@ module.exports = {
   rules: {
     "arrow-body-style": ["warn", "always"],
     "no-array-constructor": "off",
-    "no-console": "warn",
+    "no-console": [
+      "warn",
+      {
+        allow: ["warn", "error"],
+      },
+    ],
     "@typescript-eslint/no-unused-vars": [
-      "error",
+      // TEMP
+      "warn",
       {
         vars: "all",
         args: "after-used",
@@ -46,18 +52,18 @@ module.exports = {
     "@typescript-eslint/no-array-constructor": ["error"],
     "@typescript-eslint/no-explicit-any": ["warn"],
     "unicorn/filename-case": [
-      "error",
+      "warn",
       {
         cases: {
-          camelCase: true,
-          pascalCase: true,
+          kebabCase: true,
         },
         ignore: ["-env\\.d\\.ts$"],
       },
     ],
     "unicorn/no-null": "off",
     "unicorn/prevent-abbreviations": [
-      "error",
+      // TEMP
+      "warn",
       {
         extendDefaultReplacements: false,
         replacements: {
@@ -73,6 +79,33 @@ module.exports = {
     ],
     "unicorn/prefer-switch": ["error", { minimumCases: 5 }],
     "unicorn/no-new-array": "off",
+
+    // TEMP
+    "unicorn/consistent-destructuring": "warn",
+    "unicorn/no-this-assignment": "warn",
+    "unicorn/prefer-module": "warn",
+    "unicorn/import-style": "warn",
+    "unicorn/consistent-function-scoping": "warn",
+    "unicorn/no-useless-switch-case": "warn",
+    "unicorn/no-array-reduce": "warn",
+    "unicorn/no-array-push-push": "warn",
+    "unicorn/prefer-spread": "warn",
+    "unicorn/no-array-callback-reference": "warn",
+    "unicorn/no-array-for-each": "warn",
+    "unicorn/prefer-modern-dom-apis": "warn",
+    "unicorn/prefer-dom-node-append": "warn",
+    "unicorn/prefer-code-point": "warn",
+    "unicorn/prefer-array-some": "warn",
+    //
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/no-empty-function": "warn",
+    "@typescript-eslint/no-var-requires": "warn",
+    "@typescript-eslint/no-this-alias": "warn",
+    //
+    "prefer-rest-params": "warn",
+    "prefer-const": "warn",
+    "no-empty": "warn",
+    "no-empty-pattern": "warn",
   },
   overrides: [
     {
@@ -80,6 +113,20 @@ module.exports = {
       rules: {
         "unicorn/prefer-module": "off",
         "@typescript-eslint/no-var-requires": "off",
+      },
+    },
+    {
+      files: [".scripts/**/*.ts"],
+      rules: {
+        "unicorn/filename-case": [
+          "error",
+          {
+            cases: {
+              camelCase: true,
+              pascalCase: true,
+            },
+          },
+        ],
       },
     },
   ],

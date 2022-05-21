@@ -3,8 +3,6 @@ import { StyledFn, StyletronComponent } from "styletron-react";
 import { SHAPE, SIZE, KIND } from "../button";
 import { Override } from "../overrides";
 
-export { SHAPE, SIZE };
-
 export interface MODE {
   checkbox: "checkbox";
   radio: "radio";
@@ -62,3 +60,5 @@ export class StatefulContainer extends React.Component<StatefulButtonGroupProps,
 
 export const MODE: MODE;
 export const STATE_CHANGE_TYPE: STATE_CHANGE_TYPE;
+
+export { SHAPE, SIZE } from "../button";

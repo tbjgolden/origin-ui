@@ -1,6 +1,6 @@
 import { styled, withStyle } from "../styles";
 import { TYPE, SIZE } from "./constants";
-import { StyledList, StyledListItem } from "../menu";
+
 import { Spinner } from "../spinner";
 import { ellipsisText } from "../styles/util";
 function getFont(size = SIZE.default, typography) {
@@ -80,8 +80,7 @@ export const StyledDropdownContainer = styled("div", (props) => {
     width: `${String(props.$width)}px`,
   };
 });
-export const StyledDropdown = StyledList;
-export const StyledDropdownListItem = StyledListItem;
+
 export const StyledOptionContent = styled("div", (props) => {
   const { $isHighlighted, $selected, $disabled, $theme } = props;
   return {
@@ -423,3 +422,8 @@ export const StyledSearchIconContainer = styled("div", (props) => {
     height: "100%",
   };
 });
+
+export {
+  StyledList as StyledDropdown,
+  StyledListItem as StyledDropdownListItem,
+} from "../menu";

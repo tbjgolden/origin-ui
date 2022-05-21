@@ -89,7 +89,7 @@ export interface ToastOverrides {
 }
 export interface ToastProps {
   autoHideDuration?: number;
-  autoFocus?: Boolean;
+  autoFocus?: boolean;
   children?: ((args: { dismiss: () => void }) => React.ReactNode) | React.ReactNode;
   closeable?: boolean;
   kind?: KIND[keyof KIND];

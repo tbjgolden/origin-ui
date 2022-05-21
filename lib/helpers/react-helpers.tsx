@@ -1,7 +1,7 @@
 import * as React from "react";
 import { isFragment } from "react-is";
-export const flattenFragments = (children, ChildWrapper, depth = 0) =>
-  React.Children.toArray(children).reduce((acc, child, i) => {
+export const flattenFragments = (children, ChildWrapper, depth = 0) => {
+  return React.Children.toArray(children).reduce((acc, child, i) => {
     if (isFragment(child)) {
       acc.push(...flattenFragments(child.props.children, ChildWrapper, depth + 1));
     } else if (React.isValidElement(child)) {
@@ -13,3 +13,4 @@ export const flattenFragments = (children, ChildWrapper, depth = 0) =>
     }
     return acc;
   }, []);
+};

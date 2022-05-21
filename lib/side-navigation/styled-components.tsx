@@ -18,21 +18,23 @@ export const StyledRoot = styled("nav", (props) => {
   };
 });
 export const StyledNavItemContainer = styled("li", {});
-export const StyledNavLink = styled("a", ({ $theme, $isFocusVisible }) => ({
-  color: "inherit",
-  outline: "none",
-  textDecoration: "none",
-  ":focus > div": $isFocusVisible
-    ? {
-        outline: `3px solid ${$theme.colors.accent}`,
-        outlineOffset: "-3px",
-        borderLeftColor: "transparent",
-        borderTopColor: "transparent",
-        borderRightColor: "transparent",
-        borderBottomColor: "transparent",
-      }
-    : { outline: "none" },
-}));
+export const StyledNavLink = styled("a", ({ $theme, $isFocusVisible }) => {
+  return {
+    color: "inherit",
+    outline: "none",
+    textDecoration: "none",
+    ":focus > div": $isFocusVisible
+      ? {
+          outline: `3px solid ${$theme.colors.accent}`,
+          outlineOffset: "-3px",
+          borderLeftColor: "transparent",
+          borderTopColor: "transparent",
+          borderRightColor: "transparent",
+          borderBottomColor: "transparent",
+        }
+      : { outline: "none" },
+  };
+});
 export const StyledNavItemElement = styled("div", (props) => {
   const {
     $active,
@@ -82,13 +84,11 @@ export const StyledNavItemElement = styled("div", (props) => {
     },
   };
 });
-export const StyledNavItem = withWrapper(
-  StyledNavItemElement,
-  (Styled) =>
-    function StyledNav({ item, ...restProps }) {
-      return <Styled {...restProps} />;
-    }
-);
+export const StyledNavItem = withWrapper(StyledNavItemElement, (Styled) => {
+  return function StyledNav({ item, ...restProps }) {
+    return <Styled {...restProps} />;
+  };
+});
 export const StyledSubNavContainer = styled("ul", {
   listStyleType: "none",
   marginTop: 0,

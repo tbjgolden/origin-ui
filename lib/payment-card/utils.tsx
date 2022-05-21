@@ -1,12 +1,11 @@
 import * as valid from "card-validator";
-export const addGaps = (gaps, value) =>
-  gaps.reduce(
-    (prev, gap, index) =>
-      `${prev.slice(0, gap + index)} ${prev.slice(gap + index)}`.trim(),
-    `${value}`
-  );
+export const addGaps = (gaps, value) => {
+  return gaps.reduce((prev, gap, index) => {
+    return `${prev.slice(0, gap + index)} ${prev.slice(gap + index)}`.trim();
+  }, `${value}`);
+};
 export const sanitizeNumber = (input) => {
-  const number = input.replace(/[^0-9]/gi, "");
+  const number = input.replace(/\D/gi, "");
   const validatedValue = valid.number(number);
   if (validatedValue.card && Array.isArray(validatedValue.card.lengths)) {
     return number.slice(

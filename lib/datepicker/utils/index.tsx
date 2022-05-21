@@ -26,10 +26,14 @@ export const getEffectiveMaxDate = defaultDateHelpers.getEffectiveMaxDate;
 export const applyTimeToDate = defaultDateHelpers.applyTimeToDate;
 export const applyDateToTime = defaultDateHelpers.applyDateToTime;
 const createDirtySetter = (setter) => {
-  return (dirtyDate, number) => setter(wrapDate(dirtyDate), number);
+  return (dirtyDate, number) => {
+    return setter(wrapDate(dirtyDate), number);
+  };
 };
 const createDirtyGetter = (getter) => {
-  return (dirtyDate) => getter(wrapDate(dirtyDate));
+  return (dirtyDate) => {
+    return getter(wrapDate(dirtyDate));
+  };
 };
 const createDirtyCompare = (compare) => {
   return (fromDirty, toDirty) => {
@@ -56,5 +60,6 @@ export const subMonths = createDirtySetter(defaultDateHelpers.subMonths);
 export const subYears = createDirtySetter(defaultDateHelpers.subYears);
 export const isBefore = createDirtyCompare(defaultDateHelpers.isBefore);
 export const isAfter = createDirtyCompare(defaultDateHelpers.isAfter);
-export const format = (date, format2, locale) =>
-  defaultDateHelpers.format(date, format2, locale);
+export const format = (date, format2, locale) => {
+  return defaultDateHelpers.format(date, format2, locale);
+};

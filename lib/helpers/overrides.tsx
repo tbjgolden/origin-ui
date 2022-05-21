@@ -12,16 +12,14 @@ export function getOverride(override) {
 }
 export function getOverrideProps(override) {
   if (override && typeof override === "object") {
-    if (typeof override.props === "object") {
-      return {
-        ...override.props,
-        $style: override.style,
-      };
-    } else {
-      return {
-        $style: override.style,
-      };
-    }
+    return typeof override.props === "object"
+      ? {
+          ...override.props,
+          $style: override.style,
+        }
+      : {
+          $style: override.style,
+        };
   }
   return {};
 }

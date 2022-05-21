@@ -4,9 +4,7 @@ import { Override } from "../overrides";
 
 type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
-import { SIZE, InputProps, InputOverrides, STATE_CHANGE_TYPE } from "../input";
-
-export { SIZE };
+import { InputProps, InputOverrides, STATE_CHANGE_TYPE } from "../input";
 
 export type PinCodeOverrides = InputOverrides & {
   Root?: Override<any>;
@@ -48,3 +46,5 @@ export type StatefulPinCodeProps = Partial<PinCodeProps> &
 export const StatefulPinCode: React.FC<StatefulPinCodeProps>;
 export const StatefulContainer: React.FC<StatefulContainerProps>;
 export class PinCode extends React.Component<PinCodeProps> {}
+
+export { SIZE } from "../input";

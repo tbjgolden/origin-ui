@@ -5,7 +5,7 @@ export default function deepMerge(target, ...sources) {
   let value;
   for (let i = 0; i < len; i++) {
     obj = sources[i] || {};
-    for (let key in obj) {
+    for (const key in obj) {
       if (typeof obj[key] !== void 0) {
         value = obj[key];
         if (isCloneable(value)) {
@@ -22,5 +22,5 @@ export default function deepMerge(target, ...sources) {
   return target;
 }
 function isCloneable(obj) {
-  return Array.isArray(obj) || {}.toString.call(obj) == "[object Object]";
+  return Array.isArray(obj) || Object.prototype.toString.call(obj) == "[object Object]";
 }

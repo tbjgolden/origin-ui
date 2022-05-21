@@ -27,27 +27,27 @@ function reactify(svgString) {
     .trim();
 }
 function cleanOldIcons() {
-  const allJsFiles = fs
-    .readdirSync(path.resolve(__dirname))
-    .filter((f) => f.endsWith(".js"));
-  allJsFiles.forEach((f) => {
+  const allJsFiles = fs.readdirSync(path.resolve(__dirname)).filter((f) => {
+    return f.endsWith(".js");
+  });
+  for (const f of allJsFiles) {
     if (
-      fs
-        .readFileSync(path.resolve(__dirname, f), "utf8")
-        .match(/^\/\/ BASEUI-GENERATED-REACT-ICON/m)
+      /^\/\/ BASEUI-GENERATED-REACT-ICON/m.test(
+        fs.readFileSync(path.resolve(__dirname, f), "utf8")
+      )
     ) {
       fs.unlinkSync(path.resolve(__dirname, f));
     }
-  });
+  }
 }
 async function generateNewIcons() {
   const iconTemplate = fs.readFileSync(
     path.resolve(__dirname, "./icon-template.txt"),
     "utf8"
   );
-  const svgs = fs
-    .readdirSync(path.resolve(__dirname, "./svg"))
-    .filter((f) => f.endsWith(".svg"));
+  const svgs = fs.readdirSync(path.resolve(__dirname, "./svg")).filter((f) => {
+    return f.endsWith(".svg");
+  });
   const prettierOptions = (await prettier.resolveConfig(__dirname)) || {};
   const iconExports = [];
   svgs.forEach(async (svgFilename) => {
@@ -64,7 +64,7 @@ async function generateNewIcons() {
     if (viewboxRegex && viewboxRegex[1]) {
       viewBox = viewboxRegex[1];
     }
-    let result = iconTemplate
+    const result = iconTemplate
       .replace("%%ICON_PATH%%", reactify(svgFileContents))
       .replace(new RegExp("%%ICON_NAME%%", "g"), componentName)
       .replace(new RegExp("%%SVG_TITLE%%", "g"), title)
@@ -89,7 +89,7 @@ LICENSE file in the root directory of this source tree.
 ${iconExports.join("\n")}
 `
   );
-  console.log(`Wrote ${svgs.length} icon(s)`);
+  console.warn(`Wrote ${svgs.length} icon(s)`);
 }
 cleanOldIcons();
 generateNewIcons();

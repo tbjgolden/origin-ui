@@ -13,13 +13,11 @@ const StyledTableElement = styled("div", ({ $theme }) => {
     overflowX: "auto",
   };
 });
-export const StyledTable = withWrapper(
-  StyledTableElement,
-  (StyledComponent) =>
-    function StyledTable2(props) {
-      return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
-    }
-);
+export const StyledTable = withWrapper(StyledTableElement, (StyledComponent) => {
+  return function StyledTable2(props) {
+    return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
+  };
+});
 const StyledHeadElement = styled("div", ({ $theme, $width }) => {
   return {
     backgroundColor: $theme.colors.tableHeadBackgroundColor,
@@ -29,13 +27,11 @@ const StyledHeadElement = styled("div", ({ $theme, $width }) => {
     width: $width ? $width : "100%",
   };
 });
-export const StyledHead = withWrapper(
-  StyledHeadElement,
-  (StyledComponent) =>
-    function StyledHead2(props) {
-      return <StyledComponent role="row" {...props} />;
-    }
-);
+export const StyledHead = withWrapper(StyledHeadElement, (StyledComponent) => {
+  return function StyledHead2(props) {
+    return <StyledComponent role="row" {...props} />;
+  };
+});
 const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
   const borderDir = $theme.direction === "rtl" ? "borderLeft" : "borderRight";
   return {
@@ -58,13 +54,11 @@ const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
     },
   };
 });
-export const StyledHeadCell = withWrapper(
-  StyledHeadCellElement,
-  (StyledComponent) =>
-    function StyledHeadCell2(props) {
-      return <StyledComponent role="columnheader" {...props} />;
-    }
-);
+export const StyledHeadCell = withWrapper(StyledHeadCellElement, (StyledComponent) => {
+  return function StyledHeadCell2(props) {
+    return <StyledComponent role="columnheader" {...props} />;
+  };
+});
 export const StyledSortableLabel = styled("button", ({ $theme }) => {
   return {
     ...$theme.typography.font250,
@@ -93,24 +87,20 @@ const StyledBodyElement = styled("div", ({ $width }) => {
     flex: 1,
   };
 });
-export const StyledBody = withWrapper(
-  StyledBodyElement,
-  (StyledComponent) =>
-    function StyledBody2(props) {
-      return <StyledComponent role="rowgroup" {...props} />;
-    }
-);
+export const StyledBody = withWrapper(StyledBodyElement, (StyledComponent) => {
+  return function StyledBody2(props) {
+    return <StyledComponent role="rowgroup" {...props} />;
+  };
+});
 const StyledRowElement = styled("div", {
   display: "flex",
   alignItems: "center",
 });
-export const StyledRow = withWrapper(
-  StyledRowElement,
-  (StyledComponent) =>
-    function StyledRow2(props) {
-      return <StyledComponent role="row" {...props} />;
-    }
-);
+export const StyledRow = withWrapper(StyledRowElement, (StyledComponent) => {
+  return function StyledRow2(props) {
+    return <StyledComponent role="row" {...props} />;
+  };
+});
 const StyledCellElement = styled("div", ({ $theme, $striped }) => {
   return {
     ...$theme.typography.font200,
@@ -124,13 +114,11 @@ const StyledCellElement = styled("div", ({ $theme, $striped }) => {
     paddingLeft: $theme.sizing.scale600,
   };
 });
-export const StyledCell = withWrapper(
-  StyledCellElement,
-  (StyledComponent) =>
-    function StyledCell2(props) {
-      return <StyledComponent role="gridcell" {...props} />;
-    }
-);
+export const StyledCell = withWrapper(StyledCellElement, (StyledComponent) => {
+  return function StyledCell2(props) {
+    return <StyledComponent role="gridcell" {...props} />;
+  };
+});
 export const StyledFilterButton = styled("button", (props) => {
   function getIconColor() {
     if (props.$disabled) {
@@ -164,34 +152,40 @@ export const StyledFilterButton = styled("button", (props) => {
     },
   };
 });
-export const StyledFilterContent = styled("div", ({ $theme }) => ({
-  ...expandBorderStyles($theme.borders.border300),
-  backgroundColor: $theme.colors.tableFilterBackground,
-  borderRightStyle: "none",
-  borderLeftStyle: "none",
-  maxHeight: "196px",
-  paddingRight: $theme.sizing.scale600,
-  paddingLeft: $theme.sizing.scale600,
-  overflow: "auto",
-}));
-export const StyledFilterHeading = styled("div", ({ $theme }) => ({
-  ...$theme.typography.font250,
-  color: $theme.colors.tableFilterHeading,
-  paddingTop: $theme.sizing.scale500,
-  paddingRight: $theme.sizing.scale600,
-  paddingBottom: $theme.sizing.scale500,
-  paddingLeft: $theme.sizing.scale600,
-}));
-export const StyledFilterFooter = styled("div", ({ $theme }) => ({
-  backgroundColor: $theme.colors.tableFilterFooterBackground,
-  paddingTop: $theme.sizing.scale300,
-  paddingRight: $theme.sizing.scale100,
-  paddingBottom: $theme.sizing.scale300,
-  paddingLeft: $theme.sizing.scale100,
-  display: "flex",
-  justifyContent: "space-between",
-  minWidth: "216px",
-}));
+export const StyledFilterContent = styled("div", ({ $theme }) => {
+  return {
+    ...expandBorderStyles($theme.borders.border300),
+    backgroundColor: $theme.colors.tableFilterBackground,
+    borderRightStyle: "none",
+    borderLeftStyle: "none",
+    maxHeight: "196px",
+    paddingRight: $theme.sizing.scale600,
+    paddingLeft: $theme.sizing.scale600,
+    overflow: "auto",
+  };
+});
+export const StyledFilterHeading = styled("div", ({ $theme }) => {
+  return {
+    ...$theme.typography.font250,
+    color: $theme.colors.tableFilterHeading,
+    paddingTop: $theme.sizing.scale500,
+    paddingRight: $theme.sizing.scale600,
+    paddingBottom: $theme.sizing.scale500,
+    paddingLeft: $theme.sizing.scale600,
+  };
+});
+export const StyledFilterFooter = styled("div", ({ $theme }) => {
+  return {
+    backgroundColor: $theme.colors.tableFilterFooterBackground,
+    paddingTop: $theme.sizing.scale300,
+    paddingRight: $theme.sizing.scale100,
+    paddingBottom: $theme.sizing.scale300,
+    paddingLeft: $theme.sizing.scale100,
+    display: "flex",
+    justifyContent: "space-between",
+    minWidth: "216px",
+  };
+});
 export const StyledAction = styled("button", ({ $theme }) => {
   return {
     backgroundColor: "transparent",

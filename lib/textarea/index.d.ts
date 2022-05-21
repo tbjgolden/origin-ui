@@ -1,12 +1,6 @@
 import * as React from "react";
 import { StyletronComponent } from "styletron-react";
-import {
-  BaseInputProps,
-  StatefulContainer,
-  STATE_CHANGE_TYPE,
-  SIZE as INPUT_SIZE,
-  StatefulContainerProps,
-} from "../input";
+import { BaseInputProps, SIZE as INPUT_SIZE, StatefulContainerProps } from "../input";
 
 export interface TextareaProps extends BaseInputProps<HTMLTextAreaElement> {
   rows?: number;
@@ -32,11 +26,10 @@ export type StatefulTextareaProps = TextareaProps &
 
 export const StatefulTextarea: React.FC<StatefulTextareaProps>;
 
-export { StatefulContainer };
-
 export const StyledTextareaContainer: StyletronComponent<any>;
 export const StyledTextarea: StyletronComponent<any>;
 
 export const ADJOINED: ADJOINED;
 export const SIZE: SIZE;
-export { STATE_CHANGE_TYPE };
+
+export { StatefulContainer, STATE_CHANGE_TYPE } from "../input";

@@ -9,8 +9,6 @@ export interface STATE_CHANGE_TYPE {
   countryChange: "countryChange";
 }
 
-export { SIZE };
-
 export interface COUNTRIES {
   AF: { label: "Afghanistan (‫افغانستان‬‎)"; id: "AF"; dialCode: "+93" };
   AL: { label: "Albania (Shqipëri)"; id: "AL"; dialCode: "+355" };
@@ -444,3 +442,5 @@ export const DEFAULT_MAX_DROPDOWN_WIDTH: "400px";
 export const DEFAULT_MAX_DROPDOWN_HEIGHT: "400px";
 export const STATE_CHANGE_TYPE: STATE_CHANGE_TYPE;
 export const COUNTRIES: COUNTRIES;
+
+export { SIZE } from "../input";

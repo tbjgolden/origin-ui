@@ -104,19 +104,15 @@ class TimePicker extends React.Component {
               this.props.adapter.getMinutes(min),
               this.props.adapter.getSeconds(min)
             );
-      if (
-        !max ||
-        (this.props.adapter.isAfter(max, dayEnd) && !ignoreMinMaxDateComponent)
-      ) {
-        max = dayEnd;
-      } else {
-        max = this.setTime(
-          this.props.value,
-          this.props.adapter.getHours(max),
-          this.props.adapter.getMinutes(max),
-          this.props.adapter.getSeconds(max) + 1
-        );
-      }
+      max =
+        !max || (this.props.adapter.isAfter(max, dayEnd) && !ignoreMinMaxDateComponent)
+          ? dayEnd
+          : this.setTime(
+              this.props.value,
+              this.props.adapter.getHours(max),
+              this.props.adapter.getMinutes(max),
+              this.props.adapter.getSeconds(max) + 1
+            );
       const minDate = this.props.adapter.toJsDate(min);
       const maxDate = this.props.adapter.toJsDate(max);
       const midnightDate = this.props.adapter.toJsDate(dayStart);

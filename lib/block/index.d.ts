@@ -214,7 +214,7 @@ export interface BlockOverrides {
 
 export interface BlockProps {
   children?: React.ReactNode;
-  className?: String;
+  className?: string;
   as?: React.ElementType;
   $style?: $StyleProp<BlockProps>;
   overrides?: BlockOverrides;
@@ -278,7 +278,7 @@ export interface BlockProps {
   gridTemplateColumns?: Responsive<string>;
   /** available values: https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-rows */
   gridTemplateRows?: Responsive<string>;
-  id?: String;
+  id?: string;
   /** available values: https://developer.mozilla.org/en-US/docs/Web/CSS/justify-content */
   justifyContent?: Responsive<JustifyContent>;
   /** available values: https://developer.mozilla.org/en-US/docs/Web/CSS/justify-items */

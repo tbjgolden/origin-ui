@@ -10,9 +10,9 @@ import { KIND, VARIANT, SIZE } from "./constants";
 import { getTextFromChildren } from "./utils";
 import DeleteIcon from "../icon/delete";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
-const ModifiedViewBoxDeleteIcon = (props) => (
-  <DeleteIcon viewBox="5 5 13.186 13.186" {...props} />
-);
+const ModifiedViewBoxDeleteIcon = (props) => {
+  return <DeleteIcon viewBox="5 5 13.186 13.186" {...props} />;
+};
 const Tag = React.forwardRef((props, ref) => {
   const {
     children,

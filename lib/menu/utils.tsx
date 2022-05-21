@@ -20,14 +20,11 @@ export function scrollItemIntoView(
           : parentRect.height);
     }
   } else if (childRect.top < parentRect.top) {
-    if (isFirst) {
-      parent.scrollTop = 0;
-    } else {
-      parent.scrollTop =
-        child.offsetTop -
+    parent.scrollTop = isFirst
+      ? 0
+      : child.offsetTop -
         (scrollAlignInView === "center"
           ? Math.round((parentRect.height - childRect.height) / 2)
           : 0);
-    }
   }
 }

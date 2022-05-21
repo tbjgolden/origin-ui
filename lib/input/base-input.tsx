@@ -293,7 +293,7 @@ const _BaseInput = class extends React.Component {
     );
   }
 };
-let BaseInput = _BaseInput;
+const BaseInput = _BaseInput;
 BaseInput.defaultProps = {
   "aria-activedescendant": null,
   "aria-autocomplete": null,

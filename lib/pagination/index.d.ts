@@ -4,8 +4,6 @@ import { Override } from "../overrides";
 import { Locale } from "../locale";
 import { SIZE } from "../input";
 
-export { SIZE };
-
 export interface STATE_CHANGE_TYPE {
   change: "change";
 }
@@ -91,3 +89,5 @@ export const StyledRoot: StyletronComponent<any>;
 export const StyledMaxLabel: StyletronComponent<any>;
 export const StyledDropdownContainer: StyletronComponent<any>;
 export const STATE_CHANGE_TYPE: STATE_CHANGE_TYPE;
+
+export { SIZE } from "../input";

@@ -99,7 +99,9 @@ class EmoticonRating extends React.Component {
         onBlur={(e) => {
           if (!e.currentTarget.contains(e.relatedTarget)) this.updatePreview(void 0);
         }}
-        onMouseLeave={() => this.updatePreview(void 0)}
+        onMouseLeave={() => {
+          return this.updatePreview(void 0);
+        }}
         {...rootProps}
       >
         {this.renderRatingContents()}

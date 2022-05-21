@@ -1,5 +1,5 @@
 const ISO_REGEX = /^[a-z]{2}$/i;
-const OFFSET = 127397;
+const OFFSET = 127_397;
 export function iso2FlagEmoji(iso) {
   if (!ISO_REGEX.test(iso)) {
     const type = typeof iso;
@@ -12,6 +12,8 @@ export function iso2FlagEmoji(iso) {
     }
     return;
   }
-  const chars = Array.from(iso.toUpperCase()).map((char) => char.charCodeAt(0) + OFFSET);
+  const chars = [...iso.toUpperCase()].map((char) => {
+    return char.charCodeAt(0) + OFFSET;
+  });
   return String.fromCodePoint(...chars);
 }
