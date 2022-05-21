@@ -1,7 +1,7 @@
 import React from "react";
 
-import * as flags from "./flags/index";
-import { styled } from "../styles/index";
+import * as flags from "./flags";
+import { styled } from "../styles";
 import { SIZE } from "./constants";
 import type { CountryIsoT, SizeT } from "./types";
 

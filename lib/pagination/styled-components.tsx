@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 
 export const StyledRoot = styled<{}>("div", ({ $theme }) => {
   return {

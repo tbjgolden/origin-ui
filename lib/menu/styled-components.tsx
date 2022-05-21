@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, withWrapper } from "../styles/index";
+import { styled, withWrapper } from "../styles";
 import { OPTION_LIST_SIZE } from "./constants";
 
 type StyledPropsT = {

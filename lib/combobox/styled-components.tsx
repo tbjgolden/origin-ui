@@ -1,7 +1,5 @@
-
-
-import { SIZE } from "../input/index";
-import { styled } from "../styles/index";
+import { SIZE } from "../input";
+import { styled } from "../styles";
 import type { FontT } from "../themes/types";
 
 export const StyledRoot = styled("div", {});
@@ -24,9 +22,8 @@ export const StyledListBox = styled<{ $width: string }>("ul", ({ $theme, $width 
 function buildStylesForSize(
   size,
   theme
-):
-  | { ...FontT, height: string, paddingLeft?: string }
-  | { ...FontT, height: string, paddingRight?: string } {
+): FontT &
+  ({ height: string; paddingLeft?: string } | { height: string; paddingRight?: string }) {
   const paddingDir: string = theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   switch (size) {
     case SIZE.mini:
@@ -58,8 +55,8 @@ function buildStylesForSize(
 }
 
 export const StyledListItem = styled<{
-  $isSelected: boolean,
-  $size: $Keys<typeof SIZE>,
+  $isSelected: boolean;
+  $size: $Keys<typeof SIZE>;
 }>("li", ({ $isSelected, $theme, $size }) => {
   return {
     ...buildStylesForSize($size, $theme),

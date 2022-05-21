@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import Column from "./column";
 import { COLUMNS } from "./constants";

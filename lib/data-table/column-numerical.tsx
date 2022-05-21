@@ -1,43 +1,35 @@
-
-
 import * as React from "react";
 
-import { Button, SIZE } from "../button/index";
-import { ButtonGroup, MODE } from "../button-group/index";
-import { Input, SIZE as INPUT_SIZE } from "../input/index";
-import { useStyletron } from "../styles/index";
+import { Button, SIZE } from "../button";
+import { ButtonGroup, MODE } from "../button-group";
+import { Input, SIZE as INPUT_SIZE } from "../input";
+import { useStyletron } from "../styles";
 
 import Column from "./column";
-import {
-  COLUMNS,
-  NUMERICAL_FORMATS,
-  MAX_BIN_COUNT,
-  HISTOGRAM_SIZE,
-} from "./constants";
+import { COLUMNS, NUMERICAL_FORMATS, MAX_BIN_COUNT, HISTOGRAM_SIZE } from "./constants";
 import FilterShell, { type ExcludeKind } from "./filter-shell";
 import type { ColumnT, SharedColumnOptionsT } from "./types";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { bin, max as maxFunc, extent, scaleLinear, median, bisector } from "d3";
-import { Slider } from "../slider/index";
+import { Slider } from "../slider";
 
 type NumericalFormats =
   | typeof NUMERICAL_FORMATS.DEFAULT
   | typeof NUMERICAL_FORMATS.ACCOUNTING
   | typeof NUMERICAL_FORMATS.PERCENTAGE;
 
-type OptionsT = {
-  ...SharedColumnOptionsT<number>,
-  format?: NumericalFormats | ((value: number) => string),
-  highlight?: (number) => boolean,
-  precision?: number,
+type OptionsT = SharedColumnOptionsT<number> & {
+  format?: NumericalFormats | ((value: number) => string);
+  highlight?: (number) => boolean;
+  precision?: number;
 };
 
 type FilterParametersT = {
-  lowerValue: number,
-  upperValue: number,
-  description: string,
-  exclude: boolean,
-  excludeKind: ExcludeKind,
+  lowerValue: number;
+  upperValue: number;
+  description: string;
+  exclude: boolean;
+  excludeKind: ExcludeKind;
 };
 
 type NumericalColumnT = ColumnT<number, FilterParametersT>;
@@ -75,10 +67,12 @@ function format(value: number, options) {
 }
 
 function validateInput(input) {
-  return Boolean(parseFloat(input)) || input === "" || input === "-";
+  return Boolean(Number.parseFloat(input)) || input === "" || input === "-";
 }
 
-const bisect = bisector((d) => d.x0);
+const bisect = bisector((d) => {
+  return d.x0;
+});
 
 const Histogram = React.memo(function Histogram({
   data,
@@ -99,7 +93,12 @@ const Histogram = React.memo(function Histogram({
       .clamp(true);
 
     const yScale = scaleLinear()
-      .domain([0, maxFunc(bins, (d) => d.length)])
+      .domain([
+        0,
+        maxFunc(bins, (d) => {
+          return d.length;
+        }),
+      ])
       .nice()
       .range([HISTOGRAM_SIZE.height, 0]);
     return { bins, xScale, yScale };
@@ -196,20 +195,22 @@ function NumericalFilter(props) {
   });
 
   // We use the d3 function to get the extent as it's a little more robust to null, -Infinity, etc.
-  const [min, max] = React.useMemo(() => extent(props.data), [props.data]);
+  const [min, max] = React.useMemo(() => {
+    return extent(props.data);
+  }, [props.data]);
 
-  const [lv, setLower] = React.useState<number>(() =>
-    roundToFixed(initialState.lowerValue || min, precision)
-  );
-  const [uv, setUpper] = React.useState<number>(() =>
-    roundToFixed(initialState.upperValue || max, precision)
-  );
+  const [lv, setLower] = React.useState<number>(() => {
+    return roundToFixed(initialState.lowerValue || min, precision);
+  });
+  const [uv, setUpper] = React.useState<number>(() => {
+    return roundToFixed(initialState.upperValue || max, precision);
+  });
 
   // We keep a separate value for the single select, to give a user the ability to toggle between
   // the range and single values without losing their previous input.
-  const [sv, setSingle] = React.useState<number>(() =>
-    roundToFixed(initialState.lowerValue || median(props.data), precision)
-  );
+  const [sv, setSingle] = React.useState<number>(() => {
+    return roundToFixed(initialState.lowerValue || median(props.data), precision);
+  });
 
   // This is the only conditional which we want to use to determine
   // if we are in range or single value mode.
@@ -230,22 +231,22 @@ function NumericalFilter(props) {
     // we validate then format to the given precision
     let l = isRange ? lv : sv;
     l = validateInput(l) ? l : min;
-    let h = validateInput(uv) ? uv : max;
+    const h = validateInput(uv) ? uv : max;
 
     return [roundToFixed(l, precision), roundToFixed(h, precision)];
   }, [isRange, focused, sv, lv, uv, precision]);
 
   // We have our slider values range from 1 to the bin size, so we have a scale which
   // takes in the data driven range and maps it to values the scale can always handle
-  const sliderScale = React.useMemo(
-    () =>
+  const sliderScale = React.useMemo(() => {
+    return (
       scaleLinear()
         .domain([min, max])
         .rangeRound([1, MAX_BIN_COUNT])
         // We clamp the values within our min and max even if a user enters a huge number
-        .clamp(true),
-    [min, max]
-  );
+        .clamp(true)
+    );
+  }, [min, max]);
 
   let sliderValue = isRange
     ? [sliderScale(inputValueLower), sliderScale(inputValueUpper)]
@@ -259,12 +260,14 @@ function NumericalFilter(props) {
   return (
     <FilterShell
       exclude={exclude}
-      onExcludeChange={() => setExclude(!exclude)}
+      onExcludeChange={() => {
+        return setExclude(!exclude);
+      }}
       excludeKind={excludeKind}
       onApply={() => {
         if (isRange) {
-          const lowerValue = parseFloat(inputValueLower);
-          const upperValue = parseFloat(inputValueUpper);
+          const lowerValue = Number.parseFloat(inputValueLower);
+          const upperValue = Number.parseFloat(inputValueUpper);
           props.setFilter({
             description: `≥ ${lowerValue} and ≤ ${upperValue}`,
             exclude: exclude,
@@ -273,7 +276,7 @@ function NumericalFilter(props) {
             excludeKind,
           });
         } else {
-          const value = parseFloat(inputValueLower);
+          const value = Number.parseFloat(inputValueLower);
           props.setFilter({
             description: `= ${value}`,
             exclude: exclude,
@@ -290,10 +293,14 @@ function NumericalFilter(props) {
         size={SIZE.mini}
         mode={MODE.radio}
         selected={comparatorIndex}
-        onClick={(_, index) => setComparatorIndex(index)}
+        onClick={(_, index) => {
+          return setComparatorIndex(index);
+        }}
         overrides={{
           Root: {
-            style: ({ $theme }) => ({ marginBottom: $theme.sizing.scale300 }),
+            style: ({ $theme }) => {
+              return { marginBottom: $theme.sizing.scale300 };
+            },
           },
         }}
       >
@@ -349,14 +356,20 @@ function NumericalFilter(props) {
             InnerThumb: function InnerThumb({ $value, $thumbIndex }) {
               return <React.Fragment>{$value[$thumbIndex]}</React.Fragment>;
             },
-            TickBar: ({ $min, $max }) => null, // we don't want the ticks
-            ThumbValue: () => null,
+            TickBar: ({ $min, $max }) => {
+              return null;
+            }, // we don't want the ticks
+            ThumbValue: () => {
+              return null;
+            },
             Root: {
-              style: () => ({
-                // Aligns the center of the slider handles with the histogram bars
-                width: "calc(100% + 14px)",
-                margin: "0 -7px",
-              }),
+              style: () => {
+                return {
+                  // Aligns the center of the slider handles with the histogram bars
+                  width: "calc(100% + 14px)",
+                  margin: "0 -7px",
+                };
+              },
             },
             InnerTrack: {
               style: ({ $theme }) => {
@@ -370,12 +383,14 @@ function NumericalFilter(props) {
               },
             },
             Thumb: {
-              style: () => ({
-                // Slider handles are small enough to visually be centered within each histogram bar
-                height: "18px",
-                width: "18px",
-                fontSize: "0px",
-              }),
+              style: () => {
+                return {
+                  // Slider handles are small enough to visually be centered within each histogram bar
+                  height: "18px",
+                  width: "18px",
+                  fontSize: "0px",
+                };
+              },
             },
           }}
         />
@@ -404,8 +419,12 @@ function NumericalFilter(props) {
                   setSingle(event.target.value);
             }
           }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onFocus={() => {
+            return setFocus(true);
+          }}
+          onBlur={() => {
+            return setFocus(false);
+          }}
         />
         {isRange && (
           <Input
@@ -423,8 +442,12 @@ function NumericalFilter(props) {
                 setUpper(event.target.value);
               }
             }}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={() => {
+              return setFocus(true);
+            }}
+            onBlur={() => {
+              return setFocus(false);
+            }}
           />
         )}
       </div>
@@ -457,7 +480,9 @@ const defaultOptions = {
   sortable: true,
   filterable: true,
   format: NUMERICAL_FORMATS.DEFAULT,
-  highlight: ((n) => false: (number) => boolean),
+  highlight: (n: number) => {
+    return false;
+  },
   precision: 0,
 };
 
@@ -478,7 +503,9 @@ function NumericalColumn(options: OptionsT): NumericalColumnT {
     normalizedOptions.format === NUMERICAL_FORMATS.ACCOUNTING &&
     (options.highlight === null || options.highlight === undefined)
   ) {
-    normalizedOptions.highlight = (n: number) => (n < 0: boolean);
+    normalizedOptions.highlight = (n: number) => {
+      return n < 0;
+    };
   }
 
   return Column({

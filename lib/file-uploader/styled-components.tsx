@@ -1,6 +1,4 @@
-
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { StylePropsT } from "./types";
 
 export const StyledFileDragAndDrop = styled<StylePropsT>("div", (props) => {
@@ -8,7 +6,7 @@ export const StyledFileDragAndDrop = styled<StylePropsT>("div", (props) => {
     ? props.$theme.colors.borderAccent
     : props.$theme.colors.fileUploaderBorderColorDefault;
   const borderStyle = props.$afterFileDrop ? "none" : "dashed";
-  return ({
+  return {
     alignItems: "center",
     backgroundColor: props.$isDragActive
       ? props.$theme.colors.backgroundLightAccent
@@ -40,13 +38,13 @@ export const StyledFileDragAndDrop = styled<StylePropsT>("div", (props) => {
       : props.$theme.sizing.scale900,
     paddingLeft: props.$theme.sizing.scale800,
     width: "100%",
-  }: {});
+  };
 });
 
 export const StyledContentMessage = styled<StylePropsT>(
   "div",
-  ({ $theme, $afterFileDrop, $isDragActive }) =>
-    ({
+  ({ $theme, $afterFileDrop, $isDragActive }) => {
+    return {
       ...($afterFileDrop ? $theme.typography.LabelMedium : $theme.typography.LabelSmall),
       color: $afterFileDrop
         ? $theme.colors.contentPrimary
@@ -55,25 +53,26 @@ export const StyledContentMessage = styled<StylePropsT>(
         : null,
       marginTop: $afterFileDrop ? $theme.sizing.scale100 : null,
       marginBottom: $afterFileDrop ? $theme.sizing.scale100 : null,
-    }: {})
+    };
+  }
 );
 
 export const StyledContentSeparator = StyledContentMessage;
 
-export const StyledErrorMessage = styled<StylePropsT>(
-  "div",
-  (props) =>
-    ({
-      ...props.$theme.typography.LabelMedium,
-      color: props.$theme.colors.negative,
-      marginTop: props.$afterFileDrop ? props.$theme.sizing.scale100 : null,
-      marginBottom: props.$afterFileDrop ? props.$theme.sizing.scale100 : null,
-    }: {})
-);
+export const StyledErrorMessage = styled<StylePropsT>("div", (props) => {
+  return {
+    ...props.$theme.typography.LabelMedium,
+    color: props.$theme.colors.negative,
+    marginTop: props.$afterFileDrop ? props.$theme.sizing.scale100 : null,
+    marginBottom: props.$afterFileDrop ? props.$theme.sizing.scale100 : null,
+  };
+});
 
-export const StyledRoot = styled<StylePropsT>("div", (props) => ({
-  ...props.$theme.typography.font300,
-  color: props.$theme.colors.fileUploaderMessageColor,
-}));
+export const StyledRoot = styled<StylePropsT>("div", (props) => {
+  return {
+    ...props.$theme.typography.font300,
+    color: props.$theme.colors.fileUploaderMessageColor,
+  };
+});
 
 export const StyledHiddenInput = styled("input", {});

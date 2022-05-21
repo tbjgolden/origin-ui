@@ -1,6 +1,6 @@
 import React, { Children } from "react";
 
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { ThemeContext } from "../styles/theme-provider";
 import ChevronRight from "../icon/chevron-right";
 import ChevronLeft from "../icon/chevron-left";

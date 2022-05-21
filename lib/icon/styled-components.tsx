@@ -1,6 +1,4 @@
-
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { ThemeT } from "../styles/types";
 import type { StyledComponentArgsT } from "./types";
 
@@ -8,15 +6,14 @@ export function getSvgStyles({
   $theme,
   $size,
   $color,
-}: {
-  ...StyledComponentArgsT,
-  $theme: ThemeT,
+}: StyledComponentArgsT & {
+  $theme: ThemeT;
 }): {
-  display: string,
-  fill: string,
-  color: string,
-  height: string,
-  width: string,
+  display: string;
+  fill: string;
+  color: string;
+  height: string;
+  width: string;
 } {
   let size = $theme.sizing.scale600;
   if ($size) {
@@ -31,11 +28,7 @@ export function getSvgStyles({
 
   let color = "currentColor";
   if ($color) {
-    if ($theme.colors[$color]) {
-      color = $theme.colors[$color];
-    } else {
-      color = $color;
-    }
+    color = $theme.colors[$color] ? $theme.colors[$color] : $color;
   }
 
   return {

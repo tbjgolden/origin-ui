@@ -1,5 +1,5 @@
-import { Spinner } from "../spinner/index";
-import { styled, withStyle } from "../styles/index";
+import { Spinner } from "../spinner";
+import { styled, withStyle } from "../styles";
 
 import { PLACEMENT } from "./constants";
 import type { PlacementT } from "./types";

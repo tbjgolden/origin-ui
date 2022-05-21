@@ -14,7 +14,6 @@ import { getOverrides } from "../helpers/overrides";
 // Types
 import type { OptionProfilePropsT } from "./types";
 
-// flowlint-next-line unclear-type:off
 function OptionProfile(props: OptionProfilePropsT, ref: React.ElementRef<any>) {
   const {
     item,

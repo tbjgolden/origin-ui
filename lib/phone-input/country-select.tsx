@@ -6,7 +6,7 @@
 import React from "react";
 import { StyledDialCode, StyledCountrySelectContainer } from "./styled-components";
 import BaseCountryPicker from "./base-country-picker";
-import { SingleSelect as DefaultSelect } from "../select/index";
+import { SingleSelect as DefaultSelect } from "../select";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import defaultProps from "./default-props";
 

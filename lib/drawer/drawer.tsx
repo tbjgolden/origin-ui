@@ -1,12 +1,11 @@
-
 /* global document */
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import FocusLock from "react-focus-lock";
 
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
-import { Layer } from "../layer/index";
+import { Layer } from "../layer";
 import { SIZE, CLOSE_SOURCE, ANCHOR } from "./constants";
 import {
   StyledRoot,
@@ -112,9 +111,7 @@ class Drawer extends React.Component<DrawerPropsT, DrawerStateT> {
     if (mountNode) {
       return mountNode;
     }
-    // Flow thinks body could be null (cast through any)
-    // flowlint-next-line unclear-type:off
-    return ((document.body: any): HTMLBodyElement);
+    return document.body;
   }
 
   onEscape = () => {
@@ -295,15 +292,13 @@ class Drawer extends React.Component<DrawerPropsT, DrawerStateT> {
       mountedAndOpen || this.props.renderAll ? this.getChildren() : null;
 
     if (renderedContent) {
-      if (mountedAndOpen) {
-        return (
-          <Layer onEscape={this.onEscape} mountNode={this.props.mountNode}>
-            {this.renderDrawer(renderedContent)}
-          </Layer>
-        );
-      } else {
-        return <Hidden>{renderedContent}</Hidden>;
-      }
+      return mountedAndOpen ? (
+        <Layer onEscape={this.onEscape} mountNode={this.props.mountNode}>
+          {this.renderDrawer(renderedContent)}
+        </Layer>
+      ) : (
+        <Hidden>{renderedContent}</Hidden>
+      );
     }
     return null;
   }

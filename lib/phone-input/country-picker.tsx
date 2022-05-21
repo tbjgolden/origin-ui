@@ -1,7 +1,7 @@
 import React from "react";
 import BaseCountryPicker from "./base-country-picker";
 import { SIZE } from "./constants";
-import { SingleSelect as DefaultSelect } from "../select/index";
+import { SingleSelect as DefaultSelect } from "../select";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import defaultProps from "./default-props";
 import type { CountrySelectPropsT } from "./types";

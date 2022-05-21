@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { StyledRootPropsT, StyledRatingItemPropsT } from "./types";
 import {
   starSVG,

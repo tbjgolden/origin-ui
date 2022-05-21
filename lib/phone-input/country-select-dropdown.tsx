@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import { List, AutoSizer } from "react-virtualized";
 import defaultProps from "./default-props";
@@ -11,7 +9,7 @@ import {
   StyledCountrySelectDropdownNameColumn as DefaultNameColumn,
   StyledCountrySelectDropdownDialcodeColumn as DefaultDialcodeColumn,
 } from "./styled-components";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { StyledEmptyState } from "../menu/styled-components";
 import { getOverrides } from "../helpers/overrides";
 import { iso2FlagEmoji } from "./utils";
@@ -24,11 +22,7 @@ CountrySelectDropdown.defaultProps = {
   overrides: {},
 };
 
-function CountrySelectDropdown(
-  props: CountrySelectDropdownPropsT & {
-    $forwardedRef: ReactRefT<HTMLElement> | ((null | HTMLElement) => mixed),
-  }
-) {
+function CountrySelectDropdown(props) {
   const {
     $country: country,
     $forwardedRef: forwardedRef,
@@ -68,21 +62,25 @@ function CountrySelectDropdown(
   );
 
   // Handle no results, likely from filtering
-  if (!props.children.length) {
+  if (props.children.length === 0) {
     return (
       <LocaleContext.Consumer>
-        {(locale: LocaleT) => (
-          <EmptyState {...emptyStateProps}>
-            {noResultsMsg || locale.menu.noResultsMsg}
-          </EmptyState>
-        )}
+        {(locale: LocaleT) => {
+          return (
+            <EmptyState {...emptyStateProps}>
+              {noResultsMsg || locale.menu.noResultsMsg}
+            </EmptyState>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }
 
   const children = React.Children.toArray(props.children);
   const scrollIndex = Math.min(
-    children.findIndex((opt) => opt.props.item.id === country.id) + 5,
+    children.findIndex((opt) => {
+      return opt.props.item.id === country.id;
+    }) + 5,
     children.length - 1
   );
   return (
@@ -133,6 +131,8 @@ function CountrySelectDropdown(
 const CountrySelectDropdownFwd = React.forwardRef<
   CountrySelectDropdownPropsT,
   HTMLElement
->((props, ref) => <CountrySelectDropdown {...props} $forwardedRef={ref} />);
+>((props, ref) => {
+  return <CountrySelectDropdown {...props} $forwardedRef={ref} />;
+});
 CountrySelectDropdownFwd.displayName = "CountrySelectDropdownFwd";
 export default CountrySelectDropdownFwd;

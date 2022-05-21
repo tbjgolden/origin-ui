@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
@@ -50,11 +48,11 @@ class TimePicker<T = Date> extends React.Component<
     } else {
       const seconds = this.dateHelpers.dateToSeconds(this.props.adapter.date());
       let closestStep = NOON;
-      steps.forEach((step) => {
+      for (const step of steps) {
         if (Math.abs(step - seconds) < Math.abs(closestStep - seconds)) {
           closestStep = step;
         }
-      });
+      }
       this.setState({
         steps: steps,
         value: this.props.nullable
@@ -98,14 +96,16 @@ class TimePicker<T = Date> extends React.Component<
     }
     const seconds: number =
       typeof params.value[0].id === "string"
-        ? parseInt(params.value[0].id, 10)
+        ? Number.parseInt(params.value[0].id, 10)
         : params.value[0].id || 0;
     this.handleChange(seconds);
   };
 
   secondsToLabel = (seconds: number, format?: "12" | "24") => {
     let [hours, minutes] = this.dateHelpers.secondsToHourMinute(seconds);
-    const zeroPrefix = (n) => (n < 10 ? `0${n}` : n);
+    const zeroPrefix = (n) => {
+      return n < 10 ? `0${n}` : n;
+    };
 
     if (format === "12") {
       const isAfterNoon = seconds >= NOON;
@@ -132,9 +132,9 @@ class TimePicker<T = Date> extends React.Component<
     format = "12"
   ) => {
     // leading zero is optional, AM/PM is optional
-    const twelveHourRegex = /^(1[0-2]|0?[1-9]):([0-5][0-9]) ?([AaPp][Mm]?)?$/;
+    const twelveHourRegex = /^(1[0-2]|0?[1-9]):([0-5]\d) ?([APap][Mm]?)?$/;
     // leading zero is optional
-    const twentyFourHourRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):([0-5][0-9])$/;
+    const twentyFourHourRegex = /^(\d|0\d|1\d|2[0-3]):([0-5]\d)$/;
     const regex = format === "12" ? twelveHourRegex : twentyFourHourRegex;
     const match = str.match(regex);
     if (!match) {
@@ -181,30 +181,26 @@ class TimePicker<T = Date> extends React.Component<
     this.props.onChange && this.props.onChange(updatedDate);
   };
 
-  setTime: (?T, number, number, number) => T = (val, hours, minutes, seconds) => {
+  setTime = (val, hours, minutes, seconds) => {
     const { setSeconds, setMinutes, setHours } = this.dateHelpers;
     const date = this.props.adapter.startOfDay(this.props.adapter.date(val || undefined));
     return setSeconds(setMinutes(setHours(date, hours), minutes), seconds);
   };
 
-  getTimeWindowInSeconds = (step: number): { start: number, end: number } => {
+  getTimeWindowInSeconds = (step: number): { start: number; end: number } => {
     let { minTime: min, maxTime: max, ignoreMinMaxDateComponent } = this.props;
     const dayStart = this.setTime(this.props.value, 0, 0, 0);
     const dayEnd = this.setTime(this.props.value, 24, 0, 0);
 
-    if (
-      !min ||
-      (this.props.adapter.isBefore(min, dayStart) && !ignoreMinMaxDateComponent)
-    ) {
-      min = dayStart;
-    } else {
-      min = this.setTime(
-        this.props.value,
-        this.props.adapter.getHours(min),
-        this.props.adapter.getMinutes(min),
-        this.props.adapter.getSeconds(min)
-      );
-    }
+    min =
+      !min || (this.props.adapter.isBefore(min, dayStart) && !ignoreMinMaxDateComponent)
+        ? dayStart
+        : this.setTime(
+            this.props.value,
+            this.props.adapter.getHours(min),
+            this.props.adapter.getMinutes(min),
+            this.props.adapter.getSeconds(min)
+          );
 
     if (!max || (this.props.adapter.isAfter(max, dayEnd) && !ignoreMinMaxDateComponent)) {
       max = dayEnd;
@@ -265,13 +261,13 @@ class TimePicker<T = Date> extends React.Component<
     newProps
   ) => {
     const result = this.stringToOptions(filterValue, this.props.format);
-    if (result.length) {
+    if (result.length > 0) {
       return result;
     }
     return filterOptions(options, filterValue, excludeOptions, newProps);
   };
 
-  buildSelectedOption: (T, ?"12" | "24") => OptionT = (value, format = "12") => {
+  buildSelectedOption = (value, format = "12") => {
     const secs = this.dateHelpers.dateToSeconds(value);
     return {
       id: secs,
@@ -309,10 +305,12 @@ class TimePicker<T = Date> extends React.Component<
               positive={this.props.positive}
               size={this.props.size}
               placeholder={this.props.placeholder || "HH:mm"}
-              options={this.state.steps.map((n) => ({
-                id: n,
-                label: this.secondsToLabel(n, this.props.format),
-              }))}
+              options={this.state.steps.map((n) => {
+                return {
+                  id: n,
+                  label: this.secondsToLabel(n, this.props.format),
+                };
+              })}
               filterOptions={
                 this.props.creatable ? this.creatableFilterOptions : undefined
               }

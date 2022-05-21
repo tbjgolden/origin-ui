@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 import PinHead from "./pin-head";
 import { getOverrides } from "../helpers/overrides";
 import {

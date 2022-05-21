@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import TreeNode from "./tree-node";
@@ -49,10 +46,9 @@ export default function TreeView(props: TreeViewPropsT) {
   };
 
   const onKeyDown = (e: KeyboardEvent, node: TreeNodeT<>) => {
-    // flowlint-next-line unclear-type:off
-    const elementId = ((e.target: any): HTMLLIElement).getAttribute("data-nodeid");
+    const elementId = e.target.dataset.nodeid;
     // this check prevents bubbling
-    if (elementId !== getId(node) && parseInt(elementId) !== getId(node)) {
+    if (elementId !== getId(node) && Number.parseInt(elementId) !== getId(node)) {
       return;
     }
     switch (e.key) {
@@ -87,7 +83,7 @@ export default function TreeView(props: TreeViewPropsT) {
         break;
       case "Home":
         e.preventDefault();
-        if (data.length) {
+        if (data.length > 0) {
           focusTreeItem(getId(data[0]));
         }
         break;
@@ -97,9 +93,8 @@ export default function TreeView(props: TreeViewPropsT) {
         break;
       case "*":
         e.preventDefault();
-        getExpandableSiblings(data, selectedNodeId, getId).forEach(
-          (node) => onToggle && onToggle(node)
-        );
+        for (const node of getExpandableSiblings(data, selectedNodeId, getId))
+          onToggle && onToggle(node);
         break;
       default:
         if (timeOutRef.current !== null) {
@@ -121,7 +116,7 @@ export default function TreeView(props: TreeViewPropsT) {
     if (isFocusVisible(event)) {
       setFocusVisible(true);
     }
-    if (selectedNodeId === null && data.length) {
+    if (selectedNodeId === null && data.length > 0) {
       setSelectedNodeId(getId(data[0]));
     }
   };
@@ -134,31 +129,33 @@ export default function TreeView(props: TreeViewPropsT) {
 
   return (
     <Root role="tree" {...getOverrideProps(RootOverride)}>
-      {data.map((node) => (
-        <TreeNode
-          indentGuides={indentGuides}
-          key={getId(node)}
-          node={node}
-          getId={getId}
-          onToggle={(node) => {
-            onToggle && onToggle(node);
-            focusTreeItem(getId(node));
-          }}
-          overrides={overrides}
-          renderAll={renderAll}
-          selectedNodeId={selectedNodeId}
-          onKeyDown={onKeyDown}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          addRef={(id, ref) => {
-            treeItemRefs[id] = ref;
-          }}
-          removeRef={(id: TreeNodeIdT) => {
-            delete treeItemRefs[id];
-          }}
-          isFocusVisible={focusVisible}
-        />
-      ))}
+      {data.map((node) => {
+        return (
+          <TreeNode
+            indentGuides={indentGuides}
+            key={getId(node)}
+            node={node}
+            getId={getId}
+            onToggle={(node) => {
+              onToggle && onToggle(node);
+              focusTreeItem(getId(node));
+            }}
+            overrides={overrides}
+            renderAll={renderAll}
+            selectedNodeId={selectedNodeId}
+            onKeyDown={onKeyDown}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            addRef={(id, ref) => {
+              treeItemRefs[id] = ref;
+            }}
+            removeRef={(id: TreeNodeIdT) => {
+              delete treeItemRefs[id];
+            }}
+            isFocusVisible={focusVisible}
+          />
+        );
+      })}
     </Root>
   );
 }

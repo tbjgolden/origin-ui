@@ -1,4 +1,3 @@
-
 import * as React from "react";
 // Files
 import { STATE_CHANGE_TYPES, KEY_STRINGS } from "./constants";
@@ -22,24 +21,32 @@ const DEFAULT_PROPS = {
     isFocused: false,
   },
   typeAhead: true,
-  keyboardControlNode: ({ current: null }: { current: null | HTMLElement }),
-  stateReducer: ((changeType, changes) => changes: StateReducerFnT),
+  keyboardControlNode: { current: null },
+  stateReducer: (changeType, changes) => {
+    return changes;
+  },
   onItemSelect: () => {},
-  getRequiredItemProps: () => ({}),
-  children: () => null,
+  getRequiredItemProps: () => {
+    return {};
+  },
+  children: () => {
+    return null;
+  },
   // from nested-menus context
   addMenuToNesting: () => {},
   removeMenuFromNesting: () => {},
   getParentMenu: () => {},
   getChildMenu: () => {},
   nestedMenuHoverIndex: -1,
-  isNestedMenuVisible: () => false,
+  isNestedMenuVisible: () => {
+    return false;
+  },
   forceHighlight: false,
 };
 
 class MenuStatefulContainerInner extends React.Component<
   StatefulContainerPropsT & { uidSeed: (item: number) => string } & {
-    getRequiredItemProps: GetRequiredItemPropsFnT,
+    getRequiredItemProps: GetRequiredItemPropsFnT;
   },
   StatefulContainerStateT
 > {
@@ -52,7 +59,7 @@ class MenuStatefulContainerInner extends React.Component<
 
   // We need to have access to the root component user renders
   // to correctly facilitate keyboard scrolling behavior
-  rootRef = (React.createRef<HTMLElement>(): { current: null | HTMLElement });
+  rootRef = React.createRef<HTMLElement>();
   keyboardControlNode = this.props.keyboardControlNode.current;
   getItems() {
     if (Array.isArray(this.props.items)) {
@@ -82,10 +89,8 @@ class MenuStatefulContainerInner extends React.Component<
         );
       }
 
-      if (this.state.isFocused) {
-        if (this.keyboardControlNode) {
-          this.keyboardControlNode.addEventListener("keydown", this.onKeyDown);
-        }
+      if (this.state.isFocused && this.keyboardControlNode) {
+        this.keyboardControlNode.addEventListener("keydown", this.onKeyDown);
       }
     }
     this.props.addMenuToNesting && this.props.addMenuToNesting(rootRef);
@@ -94,10 +99,8 @@ class MenuStatefulContainerInner extends React.Component<
   componentWillUnmount() {
     const rootRef = this.props.rootRef ? this.props.rootRef : this.rootRef;
 
-    if (__BROWSER__) {
-      if (this.keyboardControlNode)
-        this.keyboardControlNode.removeEventListener("keydown", this.onKeyDown);
-    }
+    if (__BROWSER__ && this.keyboardControlNode)
+      this.keyboardControlNode.removeEventListener("keydown", this.onKeyDown);
 
     if (this.props.removeMenuFromNesting) {
       this.props.removeMenuFromNesting(rootRef);
@@ -112,12 +115,10 @@ class MenuStatefulContainerInner extends React.Component<
       if (!prevState.isFocused && this.state.isFocused) {
         if (this.keyboardControlNode)
           this.keyboardControlNode.addEventListener("keydown", this.onKeyDown);
-      } else if (prevState.isFocused && !this.state.isFocused) {
-        if (this.keyboardControlNode)
-          this.keyboardControlNode.removeEventListener("keydown", this.onKeyDown);
-      }
+      } else if (prevState.isFocused && !this.state.isFocused && this.keyboardControlNode)
+        this.keyboardControlNode.removeEventListener("keydown", this.onKeyDown);
     }
-    var range = this.getItems().length;
+    const range = this.getItems().length;
     if (this.props.forceHighlight && this.state.highlightedIndex === -1 && range > 0) {
       this.internalSetState(STATE_CHANGE_TYPES.enter, {
         highlightedIndex: 0,
@@ -148,7 +149,7 @@ class MenuStatefulContainerInner extends React.Component<
   // list of ids applied to list items. used to set aria-activedescendant
   optionIds: string[] = [];
   //characters input from keyboard, will automatically be clear after some time
-  typeAheadChars: string = "";
+  typeAheadChars = "";
   //count time for each continuous keyboard input
   typeAheadTimeOut: null | TimeoutID = null;
 
@@ -206,13 +207,13 @@ class MenuStatefulContainerInner extends React.Component<
       this.typeAheadChars = "";
     }, 500);
 
-    var nextIndex = prevIndex;
-    var list = this.getItems();
+    let nextIndex = prevIndex;
+    const list = this.getItems();
     if (list.length === 0 || !("label" in list[0])) return;
 
-    var notMatch = true;
-    for (let n = 0; n < list.length; n++) {
-      let label = list[n].label;
+    let notMatch = true;
+    for (const [n, element] of list.entries()) {
+      const label = element.label;
       if (
         label &&
         label.toUpperCase &&
@@ -225,8 +226,8 @@ class MenuStatefulContainerInner extends React.Component<
     }
 
     if (notMatch) {
-      for (let n = 0; n < list.length; n++) {
-        let label = list[n].label;
+      for (const [n, element] of list.entries()) {
+        const label = element.label;
         if (
           label &&
           label.toUpperCase &&
@@ -258,44 +259,64 @@ class MenuStatefulContainerInner extends React.Component<
     const prevIndex = this.state.highlightedIndex;
     let nextIndex = prevIndex;
 
-    if (event.key === KEY_STRINGS.ArrowUp) {
-      event.preventDefault();
-      nextIndex = Math.max(0, prevIndex - 1);
-      this.internalSetState(STATE_CHANGE_TYPES.moveUp, {
-        highlightedIndex: nextIndex,
-      });
-    } else if (event.key === KEY_STRINGS.ArrowDown) {
-      event.preventDefault();
-      nextIndex = Math.min(prevIndex + 1, this.getItems().length - 1);
-      this.internalSetState(STATE_CHANGE_TYPES.moveDown, {
-        highlightedIndex: nextIndex,
-      });
-    } else if (event.key === KEY_STRINGS.Home) {
-      event.preventDefault();
-      nextIndex = 0;
-      this.internalSetState(STATE_CHANGE_TYPES.moveUp, {
-        highlightedIndex: nextIndex,
-      });
-    } else if (event.key === KEY_STRINGS.End) {
-      event.preventDefault();
-      nextIndex = this.getItems().length - 1;
-      this.internalSetState(STATE_CHANGE_TYPES.moveDown, {
-        highlightedIndex: nextIndex,
-      });
-    } else if (event.key === KEY_STRINGS.ArrowLeft) {
-      if (this.props.getParentMenu) {
-        const parent = this.props.getParentMenu(rootRef);
-        if (parent && parent.current) {
-          parent.current.focus();
-        }
+    switch (event.key) {
+      case KEY_STRINGS.ArrowUp: {
+        event.preventDefault();
+        nextIndex = Math.max(0, prevIndex - 1);
+        this.internalSetState(STATE_CHANGE_TYPES.moveUp, {
+          highlightedIndex: nextIndex,
+        });
+
+        break;
       }
-    } else if (event.key === KEY_STRINGS.ArrowRight) {
-      if (this.props.getChildMenu) {
-        const child = this.props.getChildMenu(rootRef);
-        if (child && child.current) {
-          child.current.focus();
-        }
+      case KEY_STRINGS.ArrowDown: {
+        event.preventDefault();
+        nextIndex = Math.min(prevIndex + 1, this.getItems().length - 1);
+        this.internalSetState(STATE_CHANGE_TYPES.moveDown, {
+          highlightedIndex: nextIndex,
+        });
+
+        break;
       }
+      case KEY_STRINGS.Home: {
+        event.preventDefault();
+        nextIndex = 0;
+        this.internalSetState(STATE_CHANGE_TYPES.moveUp, {
+          highlightedIndex: nextIndex,
+        });
+
+        break;
+      }
+      case KEY_STRINGS.End: {
+        event.preventDefault();
+        nextIndex = this.getItems().length - 1;
+        this.internalSetState(STATE_CHANGE_TYPES.moveDown, {
+          highlightedIndex: nextIndex,
+        });
+
+        break;
+      }
+      case KEY_STRINGS.ArrowLeft: {
+        if (this.props.getParentMenu) {
+          const parent = this.props.getParentMenu(rootRef);
+          if (parent && parent.current) {
+            parent.current.focus();
+          }
+        }
+
+        break;
+      }
+      case KEY_STRINGS.ArrowRight: {
+        if (this.props.getChildMenu) {
+          const child = this.props.getChildMenu(rootRef);
+          if (child && child.current) {
+            child.current.focus();
+          }
+        }
+
+        break;
+      }
+      // No default
     }
 
     if (this.refList[nextIndex]) {
@@ -423,22 +444,22 @@ class MenuStatefulContainerInner extends React.Component<
       ...restProps
     } = this.props;
 
-    return this.props.children(
-      ({
-        ...restProps,
-        rootRef: this.props.rootRef ? this.props.rootRef : this.rootRef,
-        activedescendantId: this.optionIds[this.state.highlightedIndex],
-        getRequiredItemProps: (item, index) => this.getRequiredItemProps(item, index),
-        handleMouseLeave: this.handleMouseLeave,
-        highlightedIndex: this.state.highlightedIndex,
-        isFocused: this.state.isFocused,
-        handleKeyDown: this.props.keyboardControlNode.current
-          ? (event) => {}
-          : this.onKeyDown,
-        focusMenu: this.focusMenu,
-        unfocusMenu: this.unfocusMenu,
-      }: RenderPropsT)
-    );
+    return this.props.children({
+      ...restProps,
+      rootRef: this.props.rootRef ? this.props.rootRef : this.rootRef,
+      activedescendantId: this.optionIds[this.state.highlightedIndex],
+      getRequiredItemProps: (item, index) => {
+        return this.getRequiredItemProps(item, index);
+      },
+      handleMouseLeave: this.handleMouseLeave,
+      highlightedIndex: this.state.highlightedIndex,
+      isFocused: this.state.isFocused,
+      handleKeyDown: this.props.keyboardControlNode.current
+        ? (event) => {}
+        : this.onKeyDown,
+      focusMenu: this.focusMenu,
+      unfocusMenu: this.unfocusMenu,
+    });
   }
 }
 

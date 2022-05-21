@@ -8,7 +8,7 @@ import {
 } from "./styled-components";
 import type { PropsT, StateT } from "./types";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
-import { Input as DefaultInput } from "../input/index";
+import { Input as DefaultInput } from "../input";
 
 export default class PinCode extends React.Component<PropsT, StateT> {
   static defaultProps = defaultProps;

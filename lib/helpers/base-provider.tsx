@@ -1,7 +1,7 @@
 import * as React from "react";
 import { UIDReset } from "react-uid";
-import { LayersManager } from "../layer/index";
-import { ThemeProvider } from "../styles/index";
+import { LayersManager } from "../layer";
+import { ThemeProvider } from "../styles";
 import type { BaseProviderPropsT } from "./types";
 
 const BaseProvider = (props: BaseProviderPropsT) => {

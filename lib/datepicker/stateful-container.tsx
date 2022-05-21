@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { STATE_CHANGE_TYPE } from "./constants";
 import type {
@@ -17,17 +16,19 @@ type PropsT<T> = StatefulContainerPropsT<InputProps<T>, T>;
 class StatefulContainer<T = Date> extends React.Component<PropsT<T>, ContainerStateT<T>> {
   static defaultProps: { stateReducer: StateReducerT<T> } = {
     initialState: {},
-    stateReducer: (type, nextState) => nextState,
+    stateReducer: (type, nextState) => {
+      return nextState;
+    },
     onChange: () => {},
   };
 
   constructor(props: PropsT<T>) {
     super(props);
-    const value = props.range ? [] : (null: ?T);
+    const value = props.range ? [] : null;
     this.state = { value, ...props.initialState };
   }
 
-  onChange: ({ +date: ?T | Array<?T> }) => mixed = (data) => {
+  onChange = (data: { date: T | Array<T> }) => {
     const { date } = data;
     this.internalSetState(STATE_CHANGE_TYPE.change, { value: date });
 
@@ -35,8 +36,7 @@ class StatefulContainer<T = Date> extends React.Component<PropsT<T>, ContainerSt
     if (onChange) {
       if (Array.isArray(date)) {
         if (date.every(Boolean)) {
-          // flowlint-next-line unclear-type:off
-          onChange({ date: ((date: any): Array<T>) });
+          onChange({ date });
         }
       } else {
         onChange({ date });
@@ -51,7 +51,9 @@ class StatefulContainer<T = Date> extends React.Component<PropsT<T>, ContainerSt
 
   internalSetState(type: StateChangeTypeT, changes: ContainerStateT<T>) {
     const { stateReducer } = this.props;
-    this.setState((prevState) => stateReducer(type, changes, prevState));
+    this.setState((prevState) => {
+      return stateReducer(type, changes, prevState);
+    });
   }
 
   render() {

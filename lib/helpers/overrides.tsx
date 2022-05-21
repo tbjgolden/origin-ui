@@ -1,4 +1,3 @@
-
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import { isValidElementType } from "react-is";
@@ -14,23 +13,20 @@ export type ConfigurationOverrideT =
 export type StyleOverrideT = ConfigurationOverrideT;
 
 export type OverrideObjectT = {
-  // flowlint-next-line unclear-type:off
-  component?: ?React.ComponentType<any>,
-  props?: ?ConfigurationOverrideT,
-  style?: ?ConfigurationOverrideT,
+  component?: ?React.ComponentType<any>;
+  props?: ?ConfigurationOverrideT;
+  style?: ?ConfigurationOverrideT;
 };
 
-// flowlint-next-line unclear-type:off
 export type OverrideT = OverrideObjectT | React.ComponentType<any>;
 
 export type OverridesT = {
-  [string]: OverrideT,
+  [x: string]: OverrideT;
 };
 
 /**
  * Given an override argument, returns the component implementation override if it exists
  */
-// flowlint-next-line unclear-type:off
 export function getOverride(override: any): any {
   if (isValidElementType(override)) {
     return override;
@@ -40,8 +36,7 @@ export function getOverride(override: any): any {
   if (override && typeof override === "object") {
     // Remove this 'any' once this flow issue is fixed:
     // https://github.com/facebook/flow/issues/6666
-    // flowlint-next-line unclear-type:off
-    return (override: any).component;
+    return override.component;
   }
 
   // null/undefined
@@ -78,16 +73,14 @@ export function getOverrideProps<T>(override: ?OverrideT): T {
 export function toObjectOverride<T>(override: OverrideT): OverrideObjectT {
   if (isValidElementType(override)) {
     return {
-      // flowlint-next-line unclear-type:off
-      component: ((override: any): React.ComponentType<T>),
+      component: override as React.ComponentType<T>,
     };
   }
 
   // Flow can't figure out that typeof 'function' above will
   // catch React.StatelessFunctionalComponent
   // (probably related to https://github.com/facebook/flow/issues/6666)
-  // flowlint-next-line unclear-type:off
-  return ((override || {}: any): OverrideObjectT);
+  return override || {};
 }
 
 /**
@@ -195,21 +188,17 @@ export function mergeConfigurationOverrides(
 // Lil' hook for memoized unpacking of overrides
 export function useOverrides(
   defaults: {
-    // flowlint-next-line unclear-type:off
-    [string]: React.ComponentType<any>,
+    [string]: React.ComponentType<any>;
   },
   overrides?: OverridesT = {}
 ) {
-  return React.useMemo(
-    () =>
-      // flowlint-next-line unclear-type:off
-      Object.keys(defaults).reduce<{ [string]: [React.ComponentType<any>, {}] }>(
-        (obj, key) => {
-          obj[key] = getOverrides(overrides[key], defaults[key]);
-          return obj;
-        },
-        {}
-      ),
-    [overrides]
-  );
+  return React.useMemo(() => {
+    return Object.keys(defaults).reduce<{ [string]: [React.ComponentType<any>, {}] }>(
+      (obj, key) => {
+        obj[key] = getOverrides(overrides[key], defaults[key]);
+        return obj;
+      },
+      {}
+    );
+  }, [overrides]);
 }

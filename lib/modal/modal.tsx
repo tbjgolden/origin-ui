@@ -1,12 +1,11 @@
-
 /* global document */
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import FocusLock from "react-focus-lock";
 
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
-import { Layer } from "../layer/index";
+import { Layer } from "../layer";
 import { SIZE, ROLE, CLOSE_SOURCE } from "./constants";
 import {
   Root as StyledRoot,
@@ -53,13 +52,13 @@ class Modal extends React.Component<ModalPropsT, ModalStateT> {
 
   componentDidMount() {
     this.setState({ mounted: true });
-    if (__DEV__) {
-      // $FlowFixMe: flow complains that this prop doesn't exist
-      if (this.props.closable) {
-        console.warn(
-          "The property `closable` is not supported on the Modal. Did you mean `closeable`?"
-        );
-      }
+    if (
+      __DEV__ && // $FlowFixMe: flow complains that this prop doesn't exist
+      this.props.closable
+    ) {
+      console.warn(
+        "The property `closable` is not supported on the Modal. Did you mean `closeable`?"
+      );
     }
   }
 
@@ -209,9 +208,7 @@ class Modal extends React.Component<ModalPropsT, ModalStateT> {
     if (mountNode) {
       return mountNode;
     }
-    // Flow thinks body could be null (cast through any)
-    // flowlint-next-line unclear-type:off
-    return ((document.body: any): HTMLBodyElement);
+    return document.body;
   }
 
   getChildren() {
@@ -249,53 +246,53 @@ class Modal extends React.Component<ModalPropsT, ModalStateT> {
 
     return (
       <LocaleContext.Consumer>
-        {(locale) => (
-          <FocusLock
-            disabled={!focusLock}
-            // Allow focus to escape when UI is within an iframe
-            crossFrame={false}
-            returnFocus={returnFocus}
-            autoFocus={autoFocus}
-          >
-            <Root
-              data-baseweb="modal"
-              // flowlint-next-line unclear-type:off
-              ref={(this.rootRef: any)}
-              {...sharedProps}
-              {...rootProps}
+        {(locale) => {
+          return (
+            <FocusLock
+              disabled={!focusLock}
+              // Allow focus to escape when UI is within an iframe
+              crossFrame={false}
+              returnFocus={returnFocus}
+              autoFocus={autoFocus}
             >
-              <DialogContainer
-                // flowlint-next-line unclear-type:off
-                ref={(this.dialogContainerRef: any)}
+              <Root
+                data-baseweb="modal"
+                ref={this.rootRef}
                 {...sharedProps}
-                {...dialogContainerProps}
+                {...rootProps}
               >
-                <Dialog
-                  tabIndex={-1}
-                  aria-modal
-                  aria-label="dialog"
-                  role={role}
+                <DialogContainer
+                  ref={this.dialogContainerRef}
                   {...sharedProps}
-                  {...dialogProps}
+                  {...dialogContainerProps}
                 >
-                  {children}
-                  {closeable ? (
-                    <Close
-                      aria-label={locale.modal.close}
-                      onClick={this.onCloseClick}
-                      {...sharedProps}
-                      {...closeProps}
-                      onFocus={forkFocus(closeProps, this.handleFocus)}
-                      onBlur={forkBlur(closeProps, this.handleBlur)}
-                    >
-                      <CloseIcon />
-                    </Close>
-                  ) : null}
-                </Dialog>
-              </DialogContainer>
-            </Root>
-          </FocusLock>
-        )}
+                  <Dialog
+                    tabIndex={-1}
+                    aria-modal
+                    aria-label="dialog"
+                    role={role}
+                    {...sharedProps}
+                    {...dialogProps}
+                  >
+                    {children}
+                    {closeable ? (
+                      <Close
+                        aria-label={locale.modal.close}
+                        onClick={this.onCloseClick}
+                        {...sharedProps}
+                        {...closeProps}
+                        onFocus={forkFocus(closeProps, this.handleFocus)}
+                        onBlur={forkBlur(closeProps, this.handleBlur)}
+                      >
+                        <CloseIcon />
+                      </Close>
+                    ) : null}
+                  </Dialog>
+                </DialogContainer>
+              </Root>
+            </FocusLock>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useStyletron, type ThemeT } from "../styles/index";
+import { useStyletron, type ThemeT } from "../styles";
 import { getOverrides } from "../helpers/overrides";
 import {
   PINHEAD_TYPES,

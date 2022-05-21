@@ -1,4 +1,4 @@
-import { styled, expandBorderStyles } from "../styles/index";
+import { styled, expandBorderStyles } from "../styles";
 
 import type {
   StyledRootPropsT,

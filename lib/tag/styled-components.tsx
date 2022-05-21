@@ -1,11 +1,10 @@
-
 import tint from "polished/lib/color/tint";
 import shade from "polished/lib/color/shade";
 
-import { styled, type ThemeT } from "../styles/index";
+import { styled, type ThemeT } from "../styles";
 import { KIND, VARIANT, SIZE } from "./constants";
 import type { SharedPropsArgT } from "./types";
-import { colors as colorTokens } from "../tokens/index";
+import { colors as colorTokens } from "../tokens";
 
 export function customOnRamp(color?: string, unit?: string) {
   switch (unit) {
@@ -259,7 +258,7 @@ export const Action = styled<SharedPropsArgT>(
     const topRadiusDir: string =
       $theme.direction === "rtl" ? "borderTopLeftRadius" : "borderTopRightRadius";
     const marginDir: string = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
-    return ({
+    return {
       alignItems: "center",
       [bottomRadiusDir]: $theme.borders.useRoundedCorners ? $theme.borders.radius400 : 0,
       [topRadiusDir]: $theme.borders.useRoundedCorners ? $theme.borders.radius400 : 0,
@@ -274,7 +273,7 @@ export const Action = styled<SharedPropsArgT>(
       transitionProperty: "all",
       transitionDuration: "background-color",
       transitionTimingFunction: $theme.animation.easeOutCurve,
-    }: {});
+    };
   }
 );
 
@@ -338,7 +337,7 @@ export const Root = styled<SharedPropsArgT>(
     const { color, backgroundColor, borderColor } = colorMap[$kind][
       getColorStateFromProps(props)
     ]($theme, $color);
-    return ({
+    return {
       ...{
         [SIZE.small]: $theme.typography.LabelSmall,
         [SIZE.medium]: $theme.typography.LabelMedium,
@@ -401,6 +400,6 @@ export const Root = styled<SharedPropsArgT>(
                   }`
                 : "none",
             },
-    }: {});
+    };
   }
 );

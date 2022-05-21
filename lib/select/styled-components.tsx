@@ -1,9 +1,7 @@
-
-
-import { styled, withStyle } from "../styles/index";
+import { styled, withStyle } from "../styles";
 import { TYPE, SIZE } from "./constants";
-import { StyledList, StyledListItem } from "../menu/index";
-import { Spinner } from "../spinner/index";
+import { StyledList, StyledListItem } from "../menu";
+import { Spinner } from "../spinner";
 
 import type { SharedStylePropsArgT } from "./types";
 import { ellipsisText } from "../styles/util";
@@ -103,11 +101,11 @@ export const StyledDropdownListItem = StyledListItem;
 export const StyledOptionContent = styled<SharedStylePropsArgT>("div", (props) => {
   const { $isHighlighted, $selected, $disabled, $theme } = props;
 
-  return ({
+  return {
     cursor: $disabled ? "not-allowed" : "pointer",
     color: $selected && !$isHighlighted ? $theme.colors.menuFontSelected : null,
     fontWeight: $selected ? "bold" : "normal",
-  }: {});
+  };
 });
 
 export const StyledRoot = styled<SharedStylePropsArgT>("div", (props) => {

@@ -1,19 +1,17 @@
-
-
 import * as React from "react";
-import format from "date-fns/format/index";
-import getYear from "date-fns/getYear/index";
-import getMonth from "date-fns/getMonth/index";
-import getQuarter from "date-fns/getQuarter/index";
-import getDay from "date-fns/getDay/index";
-import isAfter from "date-fns/isAfter/index";
-import isBefore from "date-fns/isBefore/index";
-import isEqual from "date-fns/isEqual/index";
-import set from "date-fns/set/index";
+import format from "date-fns/format";
+import getYear from "date-fns/getYear";
+import getMonth from "date-fns/getMonth";
+import getQuarter from "date-fns/getQuarter";
+import getDay from "date-fns/getDay";
+import isAfter from "date-fns/isAfter";
+import isBefore from "date-fns/isBefore";
+import isEqual from "date-fns/isEqual";
+import set from "date-fns/set";
 
-import { Button, SIZE } from "../button/index";
-import { ButtonGroup, MODE } from "../button-group/index";
-import { Checkbox } from "../checkbox/index";
+import { Button, SIZE } from "../button";
+import { ButtonGroup, MODE } from "../button-group";
+import { Checkbox } from "../checkbox";
 import {
   applyDateToTime,
   applyTimeToDate,
@@ -22,23 +20,21 @@ import {
   getQuarterInLocale,
   getStartOfWeek,
   addDays,
-} from "../datepicker/utils/index";
-import { Datepicker } from "../datepicker/index";
-import { TimePicker } from "../timepicker/index";
-import { useStyletron } from "../styles/index";
-import { Select, type ValueT } from "../select/index";
+} from "../datepicker/utils";
+import { Datepicker } from "../datepicker";
+import { TimePicker } from "../timepicker";
+import { useStyletron } from "../styles";
+import { Select, type ValueT } from "../select";
 
 import Column from "./column";
 import { COLUMNS, DATETIME_OPERATIONS } from "./constants";
 import FilterShell from "./filter-shell";
 import type { ColumnT, SharedColumnOptionsT } from "./types";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 
-type OptionsT = {
-  ...SharedColumnOptionsT<Date>,
-  formatString?: string,
-  // flowlint-next-line unclear-type:off
-  locale?: any,
+type OptionsT = SharedColumnOptionsT<Date> & {
+  formatString?: string;
+  locale?: any;
 };
 
 type DatetimeOperationsT =
@@ -52,11 +48,11 @@ type DatetimeOperationsT =
   | typeof DATETIME_OPERATIONS.YEAR;
 
 type FilterParametersT = {
-  operation: DatetimeOperationsT,
-  range: Date[],
-  selection: number[],
-  description: string,
-  exclude: boolean,
+  operation: DatetimeOperationsT;
+  range: Date[];
+  selection: number[];
+  description: string;
+  exclude: boolean;
 };
 
 type DatetimeColumnT = ColumnT<Date, FilterParametersT>;
@@ -126,9 +122,15 @@ function Checks(props) {
               checked={checked}
               onChange={() => {
                 if (checked) {
-                  props.setValue((prev) => prev.filter((i) => i !== item.id));
+                  props.setValue((prev) => {
+                    return prev.filter((i) => {
+                      return i !== item.id;
+                    });
+                  });
                 } else {
-                  props.setValue((prev) => [...prev, item.id]);
+                  props.setValue((prev) => {
+                    return [...prev, item.id];
+                  });
                 }
               }}
             >
@@ -157,7 +159,7 @@ function filterParamsToInitialState(input) {
 
   if (input) {
     const op = input.operation;
-    if (input.range && input.range.length) {
+    if (input.range && input.range.length > 0) {
       if (op === DATETIME_OPERATIONS.RANGE_DATETIME) {
         output.rangeDates = input.range;
         output.rangeOperator = RANGE_OPERATIONS[0];
@@ -168,23 +170,40 @@ function filterParamsToInitialState(input) {
         output.rangeDates = input.range;
         output.rangeOperator = RANGE_OPERATIONS[2];
       }
-    } else if (input.selection && input.selection.length) {
+    } else if (input.selection && input.selection.length > 0) {
       output.comparatorIndex = 1;
-      if (op === DATETIME_OPERATIONS.YEAR) {
-        output.years = input.selection;
-        output.categoricalOperator = CATEGORICAL_OPERATIONS[4];
-      } else if (op === DATETIME_OPERATIONS.HALF) {
-        output.halves = input.selection;
-        output.categoricalOperator = CATEGORICAL_OPERATIONS[3];
-      } else if (op === DATETIME_OPERATIONS.QUARTER) {
-        output.quarters = input.selection;
-        output.categoricalOperator = CATEGORICAL_OPERATIONS[2];
-      } else if (op === DATETIME_OPERATIONS.MONTH) {
-        output.months = input.selection;
-        output.categoricalOperator = CATEGORICAL_OPERATIONS[1];
-      } else if (op === DATETIME_OPERATIONS.WEEKDAY) {
-        output.weekdays = input.selection;
-        output.categoricalOperator = CATEGORICAL_OPERATIONS[0];
+      switch (op) {
+        case DATETIME_OPERATIONS.YEAR: {
+          output.years = input.selection;
+          output.categoricalOperator = CATEGORICAL_OPERATIONS[4];
+
+          break;
+        }
+        case DATETIME_OPERATIONS.HALF: {
+          output.halves = input.selection;
+          output.categoricalOperator = CATEGORICAL_OPERATIONS[3];
+
+          break;
+        }
+        case DATETIME_OPERATIONS.QUARTER: {
+          output.quarters = input.selection;
+          output.categoricalOperator = CATEGORICAL_OPERATIONS[2];
+
+          break;
+        }
+        case DATETIME_OPERATIONS.MONTH: {
+          output.months = input.selection;
+          output.categoricalOperator = CATEGORICAL_OPERATIONS[1];
+
+          break;
+        }
+        case DATETIME_OPERATIONS.WEEKDAY: {
+          output.weekdays = input.selection;
+          output.categoricalOperator = CATEGORICAL_OPERATIONS[0];
+
+          break;
+        }
+        // No default
       }
     }
 
@@ -207,10 +226,12 @@ function DatetimeFilter(props) {
   }, [props.data]);
   const presentYears = React.useMemo(() => {
     const dict = {};
-    props.data.forEach((date) => {
+    for (const date of props.data) {
       dict[getYear(date)] = true;
+    }
+    return Object.keys(dict).map((n) => {
+      return Number.parseInt(n);
     });
-    return Object.keys(dict).map((n) => parseInt(n));
   }, [props.data]);
   const startOfWeek = React.useMemo(() => {
     return getStartOfWeek(new Date(), props.locale);
@@ -232,9 +253,8 @@ function DatetimeFilter(props) {
   const [categoricalOperator, setCategoricalOperator] = React.useState<ValueT>([
     initialState.categoricalOperator,
   ]);
-  // flowlint-next-line unclear-type:off
   const [rangeDates, setRangeDates] = React.useState<any>(
-    initialState.rangeDates.length
+    initialState.rangeDates.length > 0
       ? initialState.rangeDates
       : [new Date(datesSorted[0]), new Date(datesSorted[datesSorted.length - 1])]
   );
@@ -251,11 +271,12 @@ function DatetimeFilter(props) {
   return (
     <FilterShell
       exclude={exclude}
-      onExcludeChange={() => setExclude(!exclude)}
+      onExcludeChange={() => {
+        return setExclude(!exclude);
+      }}
       onApply={() => {
         if (isRange) {
-          // flowlint-next-line unclear-type:off
-          const op: DatetimeOperationsT = (rangeOperator[0].id: any);
+          const op: DatetimeOperationsT = rangeOperator[0].id;
 
           let description = "";
           if (op === DATETIME_OPERATIONS.RANGE_DATETIME) {
@@ -282,46 +303,68 @@ function DatetimeFilter(props) {
         }
 
         if (isCategorical) {
-          // flowlint-next-line unclear-type:off
-          const op: DatetimeOperationsT = (categoricalOperator[0].id: any);
+          const op: DatetimeOperationsT = categoricalOperator[0].id;
 
           let selection: number[] = [];
           let operatorLocaleLabelKey = "";
           let description = "";
-          if (op === DATETIME_OPERATIONS.WEEKDAY) {
-            selection = weekdays;
-            operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[0].localeLabelKey;
-            description = weekdays
-              .map((w) => {
-                const day = addDays(startOfWeek, localizedWeekdays.indexOf(w));
+          switch (op) {
+            case DATETIME_OPERATIONS.WEEKDAY: {
+              selection = weekdays;
+              operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[0].localeLabelKey;
+              description = weekdays
+                .map((w) => {
+                  const day = addDays(startOfWeek, localizedWeekdays.indexOf(w));
 
-                return getWeekdayInLocale(day, props.locale);
-              })
-              .join(", ");
-          } else if (op === DATETIME_OPERATIONS.MONTH) {
-            selection = months;
-            operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[1].localeLabelKey;
-            description = months.map((m) => getMonthInLocale(m, props.locale)).join(", ");
-          } else if (op === DATETIME_OPERATIONS.QUARTER) {
-            selection = quarters;
-            operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[2].localeLabelKey;
-            description = quarters
-              .map((q) => getQuarterInLocale(q, props.locale))
-              .join(", ");
-          } else if (op === DATETIME_OPERATIONS.HALF) {
-            selection = halves;
-            operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[3].localeLabelKey;
-            description = halves
-              .map((h) =>
-                h === 0
-                  ? locale.datatable.datetimeFilterCategoricalFirstHalf
-                  : locale.datatable.datetimeFilterCategoricalSecondHalf
-              )
-              .join(", ");
-          } else if (op === DATETIME_OPERATIONS.YEAR) {
-            selection = years;
-            operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[4].localeLabelKey;
-            description = years.join(", ");
+                  return getWeekdayInLocale(day, props.locale);
+                })
+                .join(", ");
+
+              break;
+            }
+            case DATETIME_OPERATIONS.MONTH: {
+              selection = months;
+              operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[1].localeLabelKey;
+              description = months
+                .map((m) => {
+                  return getMonthInLocale(m, props.locale);
+                })
+                .join(", ");
+
+              break;
+            }
+            case DATETIME_OPERATIONS.QUARTER: {
+              selection = quarters;
+              operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[2].localeLabelKey;
+              description = quarters
+                .map((q) => {
+                  return getQuarterInLocale(q, props.locale);
+                })
+                .join(", ");
+
+              break;
+            }
+            case DATETIME_OPERATIONS.HALF: {
+              selection = halves;
+              operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[3].localeLabelKey;
+              description = halves
+                .map((h) => {
+                  return h === 0
+                    ? locale.datatable.datetimeFilterCategoricalFirstHalf
+                    : locale.datatable.datetimeFilterCategoricalSecondHalf;
+                })
+                .join(", ");
+
+              break;
+            }
+            case DATETIME_OPERATIONS.YEAR: {
+              selection = years;
+              operatorLocaleLabelKey = CATEGORICAL_OPERATIONS[4].localeLabelKey;
+              description = years.join(", ");
+
+              break;
+            }
+            // No default
           }
 
           if (operatorLocaleLabelKey) {
@@ -345,10 +388,14 @@ function DatetimeFilter(props) {
           size={SIZE.compact}
           mode={MODE.radio}
           selected={comparatorIndex}
-          onClick={(_, index) => setComparatorIndex(index)}
+          onClick={(_, index) => {
+            return setComparatorIndex(index);
+          }}
           overrides={{
             Root: {
-              style: ({ $theme }) => ({ marginBottom: $theme.sizing.scale300 }),
+              style: ({ $theme }) => {
+                return { marginBottom: $theme.sizing.scale300 };
+              },
             },
           }}
         >
@@ -364,13 +411,16 @@ function DatetimeFilter(props) {
           <div>
             <Select
               value={rangeOperator}
-              onChange={(params) => setRangeOperator(params.value)}
-              // flowlint-next-line unclear-type:off
-              mountNode={(mountNode.current: any)}
-              options={RANGE_OPERATIONS.map((op) => ({
-                label: locale.datatable[op.localeLabelKey],
-                id: op.id,
-              }))}
+              onChange={(params) => {
+                return setRangeOperator(params.value);
+              }}
+              mountNode={mountNode.current}
+              options={RANGE_OPERATIONS.map((op) => {
+                return {
+                  label: locale.datatable[op.localeLabelKey],
+                  id: op.id,
+                };
+              })}
               size="compact"
               clearable={false}
             />
@@ -379,15 +429,14 @@ function DatetimeFilter(props) {
               {(rangeOperator[0].id === DATETIME_OPERATIONS.RANGE_DATETIME ||
                 rangeOperator[0].id === DATETIME_OPERATIONS.RANGE_DATE) && (
                 <Datepicker
-                  // flowlint-next-line unclear-type:off
-                  mountNode={(mountNode.current: any)}
+                  mountNode={mountNode.current}
                   value={rangeDates}
                   onChange={({ date }) => {
                     if (Array.isArray(date)) {
-                      if (!date.length) return;
-                      const nextDates = date.map((d, i) =>
-                        d ? applyDateToTime(rangeDates[i], d) : null
-                      );
+                      if (date.length === 0) return;
+                      const nextDates = date.map((d, i) => {
+                        return d ? applyDateToTime(rangeDates[i], d) : null;
+                      });
                       setRangeDates(nextDates);
                     }
                   }}
@@ -427,10 +476,15 @@ function DatetimeFilter(props) {
                   <TimePicker
                     format="24"
                     value={rangeDates[0]}
-                    onChange={(time) =>
-                      time &&
-                      setRangeDates([applyTimeToDate(rangeDates[0], time), rangeDates[1]])
-                    }
+                    onChange={(time) => {
+                      return (
+                        time &&
+                        setRangeDates([
+                          applyTimeToDate(rangeDates[0], time),
+                          rangeDates[1],
+                        ])
+                      );
+                    }}
                     creatable
                     size="compact"
                   />
@@ -444,10 +498,15 @@ function DatetimeFilter(props) {
                   <TimePicker
                     format="24"
                     value={rangeDates[1]}
-                    onChange={(time) =>
-                      time &&
-                      setRangeDates([rangeDates[0], applyTimeToDate(rangeDates[1], time)])
-                    }
+                    onChange={(time) => {
+                      return (
+                        time &&
+                        setRangeDates([
+                          rangeDates[0],
+                          applyTimeToDate(rangeDates[1], time),
+                        ])
+                      );
+                    }}
                     creatable
                     size="compact"
                   />
@@ -461,13 +520,16 @@ function DatetimeFilter(props) {
           <div>
             <Select
               value={categoricalOperator}
-              onChange={(params) => setCategoricalOperator(params.value)}
-              options={CATEGORICAL_OPERATIONS.map((op) => ({
-                label: locale.datatable[op.localeLabelKey],
-                id: op.id,
-              }))}
-              // flowlint-next-line unclear-type:off
-              mountNode={(mountNode.current: any)}
+              onChange={(params) => {
+                return setCategoricalOperator(params.value);
+              }}
+              options={CATEGORICAL_OPERATIONS.map((op) => {
+                return {
+                  label: locale.datatable[op.localeLabelKey],
+                  id: op.id,
+                };
+              })}
+              mountNode={mountNode.current}
               size="compact"
               clearable={false}
             />
@@ -497,10 +559,12 @@ function DatetimeFilter(props) {
                 <Checks
                   value={months}
                   setValue={setMonths}
-                  options={MONTHS.map((m) => ({
-                    label: getMonthInLocale(m, props.locale),
-                    id: m,
-                  }))}
+                  options={MONTHS.map((m) => {
+                    return {
+                      label: getMonthInLocale(m, props.locale),
+                      id: m,
+                    };
+                  })}
                 />
               )}
 
@@ -508,10 +572,12 @@ function DatetimeFilter(props) {
                 <Checks
                   value={quarters}
                   setValue={setQuarters}
-                  options={QUARTERS.map((q) => ({
-                    label: getQuarterInLocale(q, props.locale),
-                    id: q,
-                  }))}
+                  options={QUARTERS.map((q) => {
+                    return {
+                      label: getQuarterInLocale(q, props.locale),
+                      id: q,
+                    };
+                  })}
                 />
               )}
 
@@ -536,10 +602,12 @@ function DatetimeFilter(props) {
                 <Checks
                   value={years}
                   setValue={setYears}
-                  options={presentYears.map((year) => ({
-                    label: year,
-                    id: year,
-                  }))}
+                  options={presentYears.map((year) => {
+                    return {
+                      label: year,
+                      id: year,
+                    };
+                  })}
                 />
               )}
             </div>
@@ -585,20 +653,37 @@ function DatetimeColumn(options: OptionsT): DatetimeColumnT {
     buildFilter: function (params) {
       return function (data) {
         let included = true;
-        if (params.operation === DATETIME_OPERATIONS.YEAR) {
-          included = params.selection.includes(getYear(data));
-        } else if (params.operation === DATETIME_OPERATIONS.HALF) {
-          const month = getMonth(data);
-          const half = month < 6 ? 0 : 1;
-          included = params.selection.includes(half);
-        } else if (params.operation === DATETIME_OPERATIONS.QUARTER) {
-          // date-fns quarters are 1 indexed
-          const quarter = getQuarter(data) - 1;
-          included = params.selection.includes(quarter);
-        } else if (params.operation === DATETIME_OPERATIONS.MONTH) {
-          included = params.selection.includes(getMonth(data));
-        } else if (params.operation === DATETIME_OPERATIONS.WEEKDAY) {
-          included = params.selection.includes(getDay(data));
+        switch (params.operation) {
+          case DATETIME_OPERATIONS.YEAR: {
+            included = params.selection.includes(getYear(data));
+
+            break;
+          }
+          case DATETIME_OPERATIONS.HALF: {
+            const month = getMonth(data);
+            const half = month < 6 ? 0 : 1;
+            included = params.selection.includes(half);
+
+            break;
+          }
+          case DATETIME_OPERATIONS.QUARTER: {
+            // date-fns quarters are 1 indexed
+            const quarter = getQuarter(data) - 1;
+            included = params.selection.includes(quarter);
+
+            break;
+          }
+          case DATETIME_OPERATIONS.MONTH: {
+            included = params.selection.includes(getMonth(data));
+
+            break;
+          }
+          case DATETIME_OPERATIONS.WEEKDAY: {
+            included = params.selection.includes(getDay(data));
+
+            break;
+          }
+          // No default
         }
 
         if (

@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import {
   BADGE_ENHANCER_STYLES,
   FLOATING_MARKER_ANCHOR_POSITIONS,

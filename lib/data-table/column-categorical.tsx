@@ -1,30 +1,26 @@
-
-
 import * as React from "react";
 
-import { Button, SIZE, KIND } from "../button/index";
-import { ButtonGroup } from "../button-group/index";
-import { Checkbox, StyledLabel } from "../checkbox/index";
+import { Button, SIZE, KIND } from "../button";
+import { ButtonGroup } from "../button-group";
+import { Checkbox, StyledLabel } from "../checkbox";
 import Search from "../icon/search";
-import { Input, SIZE as INPUT_SIZE } from "../input/index";
-import { useStyletron, withStyle } from "../styles/index";
-import { LabelSmall } from "../typography/index";
+import { Input, SIZE as INPUT_SIZE } from "../input";
+import { useStyletron, withStyle } from "../styles";
+import { LabelSmall } from "../typography";
 
 import Column from "./column";
 import { COLUMNS } from "./constants";
 import type { ColumnT, SharedColumnOptionsT } from "./types";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import FilterShell from "./filter-shell";
 import { matchesQuery, splitByQuery, HighlightCellText } from "./text-search";
 
-type OptionsT = {
-  ...SharedColumnOptionsT<string>,
-};
+type OptionsT = SharedColumnOptionsT<string>;
 
 type FilterParametersT = {
-  description: string,
-  exclude: boolean,
-  selection: Set<string>,
+  description: string;
+  exclude: boolean;
+  selection: Set<string>;
 };
 
 type CategoricalColumnT = ColumnT<string, FilterParametersT>;
@@ -45,8 +41,8 @@ function InputBefore() {
 }
 
 function FilterQuickControls(props: {
-  onSelectAll: () => void,
-  onClearSelection: () => void,
+  onSelectAll: () => void;
+  onClearSelection: () => void;
 }) {
   const locale = React.useContext(LocaleContext);
 
@@ -102,10 +98,10 @@ function HighlightCheckboxLabel(props) {
 }
 
 type CategoricalFilterProps = {
-  data: string[],
-  close: () => void,
-  setFilter: (FilterParametersT) => void,
-  filterParams?: FilterParametersT,
+  data: string[];
+  close: () => void;
+  setFilter: (FilterParametersT) => void;
+  filterParams?: FilterParametersT;
 };
 
 export function CategoricalFilter(props: CategoricalFilterProps) {
@@ -119,23 +115,31 @@ export function CategoricalFilter(props: CategoricalFilterProps) {
   );
   const [query, setQuery] = React.useState("");
   const categories = React.useMemo(() => {
-    return props.data.reduce((set, category) => set.add(category), new Set());
+    return props.data.reduce((set, category) => {
+      return set.add(category);
+    }, new Set());
   }, [props.data]);
 
   const checkboxStyles = css({ marginBottom: theme.sizing.scale200 });
 
   const showQuery = Boolean(categories.size >= 10);
-  const filteredCategories = Array.from(categories, (c) => c).filter((c) =>
-    matchesQuery(c, query)
-  );
+  const filteredCategories = [...categories]
+    .map((c) => {
+      return c;
+    })
+    .filter((c) => {
+      return matchesQuery(c, query);
+    });
 
   return (
     <FilterShell
       exclude={exclude}
-      onExcludeChange={() => setExclude(!exclude)}
+      onExcludeChange={() => {
+        return setExclude(!exclude);
+      }}
       onApply={() => {
         props.setFilter({
-          description: Array.from(selection).join(", "),
+          description: [...selection].join(", "),
           exclude,
           selection,
         });
@@ -147,7 +151,9 @@ export function CategoricalFilter(props: CategoricalFilterProps) {
           size={INPUT_SIZE.compact}
           overrides={{ Before: InputBefore }}
           value={query}
-          onChange={(event) => setQuery(event.target.value)}
+          onChange={(event) => {
+            return setQuery(event.target.value);
+          }}
           clearable
         />
       )}
@@ -160,7 +166,7 @@ export function CategoricalFilter(props: CategoricalFilterProps) {
         >
           <FilterQuickControls
             onSelectAll={() => {
-              categories.forEach((c) => selection.add(c));
+              for (const c of categories) selection.add(c);
               setSelection(new Set(selection));
             }}
             onClearSelection={() => {
@@ -177,31 +183,33 @@ export function CategoricalFilter(props: CategoricalFilterProps) {
           marginTop: theme.sizing.scale600,
         })}
       >
-        {!filteredCategories.length && (
+        {filteredCategories.length === 0 && (
           <LabelSmall>{locale.datatable.categoricalFilterEmpty}</LabelSmall>
         )}
 
-        {Boolean(filteredCategories.length) &&
-          filteredCategories.map((category, i) => (
-            <div className={checkboxStyles} key={i}>
-              <Checkbox
-                checked={selection.has(category)}
-                onChange={() => {
-                  if (selection.has(category)) {
-                    selection.delete(category);
-                  } else {
-                    selection.add(category);
-                  }
-                  setSelection(new Set(selection));
-                }}
-                overrides={{
-                  Label: { component: HighlightCheckboxLabel, props: { query } },
-                }}
-              >
-                {category}
-              </Checkbox>
-            </div>
-          ))}
+        {filteredCategories.length > 0 &&
+          filteredCategories.map((category, i) => {
+            return (
+              <div className={checkboxStyles} key={i}>
+                <Checkbox
+                  checked={selection.has(category)}
+                  onChange={() => {
+                    if (selection.has(category)) {
+                      selection.delete(category);
+                    } else {
+                      selection.add(category);
+                    }
+                    setSelection(new Set(selection));
+                  }}
+                  overrides={{
+                    Label: { component: HighlightCheckboxLabel, props: { query } },
+                  }}
+                >
+                  {category}
+                </Checkbox>
+              </div>
+            );
+          })}
       </div>
     </FilterShell>
   );

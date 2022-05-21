@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 import type { EmoticonRatingPropsT, RatingStateT } from "./types";
 import { StyledRoot, StyledEmoticon } from "./styled-components";
@@ -55,8 +52,7 @@ class EmoticonRating extends React.Component<EmoticonRatingPropsT, RatingStateT>
         <Emoticon
           key={x}
           role="radio"
-          // flowlint-next-line unclear-type:off
-          ref={(starRef: any)}
+          ref={starRef}
           tabIndex={isFocusable ? "0" : "-1"}
           aria-setsize={5}
           aria-checked={x === value}

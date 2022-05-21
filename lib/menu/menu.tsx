@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 // Components
 import { StyledList, StyledEmptyState, StyledOptgroupHeader } from "./styled-components";
 import OptionList from "./option-list";

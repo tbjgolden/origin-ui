@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { StylePropsT } from "./types";
 
 export const Label = styled<StylePropsT>("label", (props) => {

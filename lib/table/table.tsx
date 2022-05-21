@@ -9,7 +9,7 @@ import {
   StyledCell,
 } from "./styled-components";
 
-import { ProgressBar } from "../progress-bar/index";
+import { ProgressBar } from "../progress-bar";
 
 import type { TablePropsT } from "./types";
 

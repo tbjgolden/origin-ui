@@ -1,4 +1,3 @@
-
 /* eslint-disable import/prefer-default-export */
 import { ARROW_SIZE, PLACEMENT } from "./constants";
 import type { OffsetT, PopoverPlacementT } from "./types";
@@ -53,10 +52,12 @@ export function fromPopperPlacement(placement: string): PopoverPlacementT | null
  */
 export function splitPlacement(placement: PopoverPlacementT): string[] {
   const matches = placement.match(/^([a-z]+)([A-Z][a-z]+)?/) || [];
-  return (matches: string[])
+  return matches
     .slice(1, 3)
     .filter(Boolean)
-    .map((s) => s.toLowerCase());
+    .map((s) => {
+      return s.toLowerCase();
+    });
 }
 
 /**

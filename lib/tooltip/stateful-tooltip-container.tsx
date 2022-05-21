@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StatefulContainer as StatefulPopoverContainer } from "../popover/index";
+import { StatefulContainer as StatefulPopoverContainer } from "../popover";
 import baseDefaultProps from "./default-props";
 import type { StatefulTooltipContainerPropsT } from "./types";
 

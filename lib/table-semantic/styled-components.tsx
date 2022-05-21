@@ -1,8 +1,7 @@
-
 import Blank from "../icon/blank";
 import ChevronDown from "../icon/chevron-down";
 import ChevronUp from "../icon/chevron-up";
-import { styled, withStyle, expandBorderStyles } from "../styles/index";
+import { styled, withStyle, expandBorderStyles } from "../styles";
 import { SIZE, DIVIDER } from "./constants";
 import type { SizeT, DividerT } from "./types";
 
@@ -16,7 +15,7 @@ function sizeToCellPadding($theme, $size) {
 }
 
 type StyledRootPropsT = {
-  $divider?: DividerT,
+  $divider?: DividerT;
 };
 
 export const StyledRoot = styled<StyledRootPropsT>("div", ({ $theme, $divider }) => {
@@ -45,7 +44,7 @@ export const StyledRoot = styled<StyledRootPropsT>("div", ({ $theme, $divider })
 });
 
 type StyledTablePropsT = {
-  $width?: ?string,
+  $width?: ?string;
 };
 
 export const StyledTable = styled<StyledTablePropsT>("table", ({ $theme, $width }) => {
@@ -66,11 +65,11 @@ export const StyledTableHeadRow = styled<{}>("tr", ({ $theme }) => {
 });
 
 type StyledTableHeadCellPropsT = {
-  $col?: {},
-  $colIndex?: ?number,
-  $divider?: DividerT,
-  $isNumeric?: ?boolean,
-  $size?: SizeT,
+  $col?: {};
+  $colIndex?: ?number;
+  $divider?: DividerT;
+  $isNumeric?: ?boolean;
+  $size?: SizeT;
 };
 
 export const StyledTableHeadCell = styled<StyledTableHeadCellPropsT>(
@@ -117,9 +116,8 @@ export const StyledTableHeadCell = styled<StyledTableHeadCellPropsT>(
   }
 );
 
-type StyledTableHeadCellSortablePropsT = {
-  ...StyledTableHeadCellPropsT,
-  $isFocusVisible: boolean,
+type StyledTableHeadCellSortablePropsT = StyledTableHeadCellPropsT & {
+  $isFocusVisible: boolean;
 };
 
 export const StyledTableHeadCellSortable = withStyle<
@@ -187,9 +185,9 @@ export const StyledTableBody = styled<{}>("tbody", ({ $theme }) => {
 });
 
 type StyledTableBodyRowPropsT = {
-  $col?: {},
-  $colIndex?: ?number,
-  $divider?: DividerT,
+  $col?: {};
+  $colIndex?: ?number;
+  $divider?: DividerT;
 };
 
 export const StyledTableBodyRow = styled<StyledTableBodyRowPropsT>("tr", ({ $theme }) => {
@@ -201,15 +199,15 @@ export const StyledTableBodyRow = styled<StyledTableBodyRowPropsT>("tr", ({ $the
 });
 
 type StyledTableBodyCellPropsT = {
-  $col?: {},
-  $colIndex?: ?number,
-  $divider?: DividerT,
-  $row?: {},
-  $rowIndex?: ?number,
-  $size?: SizeT,
-  $isNumeric?: ?boolean,
-  $isLastRow?: ?boolean,
-  $isSortable?: ?boolean,
+  $col?: {};
+  $colIndex?: ?number;
+  $divider?: DividerT;
+  $row?: {};
+  $rowIndex?: ?number;
+  $size?: SizeT;
+  $isNumeric?: ?boolean;
+  $isLastRow?: ?boolean;
+  $isSortable?: ?boolean;
 };
 
 export const StyledTableBodyCell = styled<StyledTableBodyCellPropsT>(

@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { SIZE } from "./constants";
 import type { SpinnerPropsT } from "./types";
 

@@ -1,4 +1,4 @@
-import { colors } from "../../tokens/index";
+import { colors } from "../../tokens";
 import type { ColorTokensT } from "../types";
 
 // color constants

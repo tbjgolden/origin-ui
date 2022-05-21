@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { ThemeT, Font } from "../styles/types";
 import type { StyleObject } from "styletron-standard";
 import { ADJOINED, SIZE } from "./constants";

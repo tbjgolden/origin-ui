@@ -1,12 +1,11 @@
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { SIZE, SIZE_WIDTHS } from "./constants";
 import type { SharedStylePropsArgT, SizePropT } from "./types";
 
 type SizeStyleT = {
-  maxWidth: string | number,
-  width?: ?(string | number),
-  alignSelf?: string,
+  maxWidth: string | number;
+  width?: ?(string | number);
+  alignSelf?: string;
 };
 function getSizeStyles($size: SizePropT): SizeStyleT {
   const styles: SizeStyleT = {
@@ -67,7 +66,7 @@ export const DialogContainer = styled<SharedStylePropsArgT>("div", (props) => {
 
 export const Dialog = styled<SharedStylePropsArgT>("div", (props) => {
   const { $animate, $isOpen, $isVisible, $size, $theme } = props;
-  return ({
+  return {
     position: "relative",
     backgroundColor: $theme.colors.backgroundPrimary,
     borderTopLeftRadius: $theme.borders.radius500,
@@ -98,7 +97,7 @@ export const Dialog = styled<SharedStylePropsArgT>("div", (props) => {
     ":focus": {
       outline: "none",
     },
-  }: {});
+  };
 });
 
 export const Close = styled<SharedStylePropsArgT>("button", (props) => {
@@ -165,21 +164,25 @@ export const ModalHeader = styled<{}>("div", ({ $theme }) => {
   };
 });
 
-export const ModalBody = styled<{}>("div", ({ $theme }) => ({
-  ...$theme.typography.font200,
-  color: $theme.colors.contentSecondary,
-  marginTop: $theme.sizing.scale600,
-  marginLeft: $theme.sizing.scale800,
-  marginRight: $theme.sizing.scale800,
-  marginBottom: $theme.sizing.scale700,
-}));
+export const ModalBody = styled<{}>("div", ({ $theme }) => {
+  return {
+    ...$theme.typography.font200,
+    color: $theme.colors.contentSecondary,
+    marginTop: $theme.sizing.scale600,
+    marginLeft: $theme.sizing.scale800,
+    marginRight: $theme.sizing.scale800,
+    marginBottom: $theme.sizing.scale700,
+  };
+});
 
-export const ModalFooter = styled<{}>("div", ({ $theme }) => ({
-  ...$theme.typography.font200,
-  marginTop: $theme.sizing.scale700,
-  marginLeft: $theme.sizing.scale800,
-  marginRight: $theme.sizing.scale800,
-  paddingTop: $theme.sizing.scale500,
-  paddingBottom: $theme.sizing.scale500,
-  textAlign: $theme.direction === "rtl" ? "left" : "right",
-}));
+export const ModalFooter = styled<{}>("div", ({ $theme }) => {
+  return {
+    ...$theme.typography.font200,
+    marginTop: $theme.sizing.scale700,
+    marginLeft: $theme.sizing.scale800,
+    marginRight: $theme.sizing.scale800,
+    paddingTop: $theme.sizing.scale500,
+    paddingBottom: $theme.sizing.scale500,
+    textAlign: $theme.direction === "rtl" ? "left" : "right",
+  };
+});

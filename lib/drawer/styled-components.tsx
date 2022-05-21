@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { SIZE, SIZE_DIMENSION, ANCHOR } from "./constants";
 import type { SharedStylePropsArgT, SizePropT, AnchorPropT } from "./types";
 

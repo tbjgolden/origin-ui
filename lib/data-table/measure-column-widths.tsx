@@ -1,8 +1,6 @@
-
-
 import * as React from "react";
 
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import HeaderCell from "./header-cell";
 import type { ColumnT, RowT } from "./types";
@@ -22,10 +20,8 @@ function MeasureColumn({
   const ref = useRef();
 
   React.useEffect(() => {
-    if (__BROWSER__) {
-      if (ref.current) {
-        onLayout(columnIndex, ref.current.getBoundingClientRect());
-      }
+    if (__BROWSER__ && ref.current) {
+      onLayout(columnIndex, ref.current.getBoundingClientRect());
     }
   }, []);
 
@@ -72,12 +68,12 @@ function MeasureColumn({
   );
 }
 type MeasureColumnWidthsPropsT = {
-  columns: ColumnT<>[],
+  columns: ColumnT[];
   // if selectable, measure the first column with checkbox included
-  isSelectable: boolean,
-  onWidthsChange: (number[]) => void,
-  rows: RowT[],
-  widths: number[],
+  isSelectable: boolean;
+  onWidthsChange: (x: number[]) => void;
+  rows: RowT[];
+  widths: number[];
 };
 
 const MAX_SAMPLE_SIZE = 50;
@@ -133,7 +129,7 @@ export default function MeasureColumnWidths({
           widthMap.get(columnIndex) || 0,
           dimensions.width + 1
         ),
-        columns[columnIndex].maxWidth || Infinity
+        columns[columnIndex].maxWidth || Number.POSITIVE_INFINITY
       );
 
       if (nextWidth !== widthMap.get(columnIndex)) {
@@ -147,7 +143,7 @@ export default function MeasureColumnWidths({
         // ...25%
         widthMap.size === Math.floor(columns.length / 4)
       ) {
-        onWidthsChange(Array.from(widthMap.values()));
+        onWidthsChange([...widthMap.values()]);
       }
     },
     [columns, finishedMeasurementCount, onWidthsChange]

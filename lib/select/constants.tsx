@@ -1,4 +1,4 @@
-export { SIZE } from "../input/index";
+export { SIZE } from "../input";
 
 export const TYPE = {
   select: "select",

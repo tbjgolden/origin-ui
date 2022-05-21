@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { getOverrides } from "../helpers/overrides";
 import type { LayersManagerPropsT, LayersManagerStateT, LayersContextT } from "./types";
 import { initFocusVisible } from "../utils/focusVisible";
@@ -31,12 +31,10 @@ export default class LayersManager extends React.Component<
   LayersManagerStateT
 > {
   host: {
-    // flowlint-next-line unclear-type:off
     current: React.ElementRef<any> | null;
   } = React.createRef();
 
   containerRef: {
-    // flowlint-next-line unclear-type:off
     current: React.ElementRef<any> | null;
   } = React.createRef();
 

@@ -1,5 +1,4 @@
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { SharedStylePropsArgT } from "./types";
 
 /**
@@ -13,18 +12,18 @@ export const Root = styled<SharedStylePropsArgT>("div", ({ $theme }) => {
 Root.displayName = "StyledRoot";
 
 export const List = styled<SharedStylePropsArgT>("ul", ({ $isDragged }) => {
-  return ({
+  return {
     paddingLeft: 0,
     cursor: $isDragged ? "grabbing" : null,
     pointerEvents: $isDragged ? "none" : "auto",
-  }: {});
+  };
 });
 List.displayName = "StyledList";
 
 export const Item = styled<SharedStylePropsArgT>(
   "li",
   ({ $isDragged, $isSelected, $theme, $isFocusVisible }) => {
-    return ({
+    return {
       ":hover":
         !$isDragged && !$isSelected
           ? {
@@ -74,7 +73,7 @@ export const Item = styled<SharedStylePropsArgT>(
         $isDragged || $isSelected ? $theme.colors.primary : "transparent",
       borderLeftColor: $isDragged || $isSelected ? $theme.colors.primary : "transparent",
       borderRightColor: $isDragged || $isSelected ? $theme.colors.primary : "transparent",
-    }: {});
+    };
   }
 );
 List.displayName = "StyledItem";
@@ -119,8 +118,10 @@ export const CloseHandle = styled<SharedStylePropsArgT>(
 );
 CloseHandle.displayName = "StyledCloseHandle";
 
-export const Label = styled<SharedStylePropsArgT>("div", ({ $theme }) => ({
-  flexGrow: 1,
-  ...$theme.typography.font300,
-}));
+export const Label = styled<SharedStylePropsArgT>("div", ({ $theme }) => {
+  return {
+    flexGrow: 1,
+    ...$theme.typography.font300,
+  };
+});
 Label.displayName = "StyledLabel";

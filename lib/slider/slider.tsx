@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import { Range } from "react-range";
 import type { PropsT } from "./types";
@@ -44,7 +42,9 @@ function Slider({
   max = 100,
   step = 1,
   persistentThumb = false,
-  valueToLabel = (label) => label,
+  valueToLabel = (label) => {
+    return label;
+  },
   value: providedValue,
 }: PropsT) {
   const theme = React.useContext(ThemeContext);
@@ -58,9 +58,7 @@ function Slider({
     if (focusVisible(event)) {
       setIsFocusVisible(true);
     }
-    const index =
-      // flowlint-next-line unclear-type:off
-      (event.target: any).parentNode.firstChild === event.target ? 0 : 1;
+    const index = event.target.parentNode.firstChild === event.target ? 0 : 1;
     setFocusedThumbIndex(index);
   }, []);
   const handleBlur = React.useCallback((event: SyntheticEvent<>) => {
@@ -114,27 +112,33 @@ function Slider({
         max={max}
         values={value}
         disabled={disabled}
-        onChange={(value) => onChange({ value })}
-        onFinalChange={(value) => onFinalChange({ value })}
+        onChange={(value) => {
+          return onChange({ value });
+        }}
+        onFinalChange={(value) => {
+          return onFinalChange({ value });
+        }}
         rtl={theme.direction === "rtl"}
-        renderTrack={({ props, children, isDragged }) => (
-          <Track
-            onMouseDown={props.onMouseDown}
-            onTouchStart={props.onTouchStart}
-            $isDragged={isDragged}
-            {...sharedProps}
-            {...trackProps}
-          >
-            <InnerTrack
+        renderTrack={({ props, children, isDragged }) => {
+          return (
+            <Track
+              onMouseDown={props.onMouseDown}
+              onTouchStart={props.onTouchStart}
               $isDragged={isDragged}
-              ref={props.ref}
               {...sharedProps}
-              {...innerTrackProps}
+              {...trackProps}
             >
-              {children}
-            </InnerTrack>
-          </Track>
-        )}
+              <InnerTrack
+                $isDragged={isDragged}
+                ref={props.ref}
+                {...sharedProps}
+                {...innerTrackProps}
+              >
+                {children}
+              </InnerTrack>
+            </Track>
+          );
+        }}
         renderThumb={({ props, index, isDragged }) => {
           const displayLabel = persistentThumb
             ? persistentThumb
@@ -190,9 +194,11 @@ function Slider({
         {...(marks
           ? {
               // eslint-disable-next-line react/display-name
-              renderMark: ({ props, index }) => (
-                <Mark $markIndex={index} {...props} {...sharedProps} {...markProps} />
-              ),
+              renderMark: ({ props, index }) => {
+                return (
+                  <Mark $markIndex={index} {...props} {...sharedProps} {...markProps} />
+                );
+              },
             }
           : {})}
       />

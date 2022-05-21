@@ -1,2 +1,2 @@
 export { default as Notification } from "./notification";
-export { KIND } from "../toast/index";
+export { KIND } from "../toast";

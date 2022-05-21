@@ -12,10 +12,7 @@ import {
 
 import type { ProgressBarPropsT } from "./types";
 
-class ProgressBar extends React.Component<
-  // flowlint-next-line unclear-type:off
-  ProgressBarPropsT & { forwardedRef: any }
-> {
+class ProgressBar extends React.Component<ProgressBarPropsT & { forwardedRef: any }> {
   static defaultProps = {
     getProgressLabel: (value: number, maxValue: number, minValue: number) => {
       return `${Math.round(((value - minValue) / (maxValue - minValue)) * 100)}% Loaded`;

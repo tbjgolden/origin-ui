@@ -1,4 +1,4 @@
-import { SIZE } from "../input/index";
+import { SIZE } from "../input";
 
 const defaultProps = {
   "aria-label": "Please enter your pin code",

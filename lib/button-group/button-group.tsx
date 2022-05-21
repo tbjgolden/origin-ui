@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import { KIND, SIZE, SHAPE } from "../button/index";
+import { KIND, SIZE, SHAPE } from "../button";
 import { MODE } from "./constants";
 import { getOverrides } from "../helpers/overrides";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 
 import { StyledRoot } from "./styled-components";
 import type { PropsT } from "./types";
@@ -21,8 +21,7 @@ function isIndexSelected(selected, index) {
 }
 
 export default class ButtonGroup extends React.Component<PropsT> {
-  childRefs: // flowlint-next-line unclear-type:off
-  { [key: number]: React.ElementRef<any> } = {};
+  childRefs: { [key: number]: React.ElementRef<any> } = {};
   static defaultProps = {
     disabled: false,
     onClick: () => {},

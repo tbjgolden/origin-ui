@@ -1,22 +1,19 @@
-
-
 import * as React from "react";
 
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import Column from "./column";
 import { COLUMNS } from "./constants";
 import { HighlightCellText } from "./text-search";
 import type { ColumnT, SharedColumnOptionsT } from "./types";
 
-type OptionsT = {
-  ...SharedColumnOptionsT<string>,
-  lineClamp?: number,
+type OptionsT = SharedColumnOptionsT<string> & {
+  lineClamp?: number;
 };
 
 type FilterParametersT = {
-  description: string,
-  exclude: boolean,
+  description: string;
+  exclude: boolean;
 };
 
 type StringColumnT = ColumnT<string, FilterParametersT>;

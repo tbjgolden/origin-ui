@@ -1,10 +1,10 @@
 import * as React from "react";
 import memoize from "memoize-one";
 // Files
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { ThemeContext } from "../styles/theme-provider";
-import { Select as BaseSelect } from "../select/index";
-import { Button, KIND } from "../button/index";
+import { Select as BaseSelect } from "../select";
+import { Button, KIND } from "../button";
 import { StyledRoot, StyledMaxLabel, StyledDropdownContainer } from "./styled-components";
 import ChevronLeft from "../icon/chevron-left";
 import ChevronRight from "../icon/chevron-right";

@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 import { getOverrides } from "../helpers/overrides";
@@ -49,8 +47,7 @@ const ListItem = React.forwardRef<PropsT, HTMLLIElement>((props: PropsT, ref) =>
 
   return (
     <Root
-      // flowlint-next-line unclear-type:off
-      ref={(ref: any)}
+      ref={ref}
       $shape={props.shape || SHAPE.DEFAULT}
       aria-label={props["aria-label"]}
       aria-selected={props["aria-selected"]}

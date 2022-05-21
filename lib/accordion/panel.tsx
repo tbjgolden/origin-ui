@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
 import {
   PanelContainer as StyledPanelContainer,
@@ -79,7 +79,6 @@ const Panel = (
     },
     [expanded, disabled, onChange, onKeyDown]
   );
-  // flowlint-next-line unclear-type:off
   const _animateRef = React.useRef<any>(null);
 
   React.useEffect(() => {

@@ -1,11 +1,9 @@
-
-
 import * as React from "react";
 
-import { Input, SIZE } from "../input/index";
+import { Input, SIZE } from "../input";
 import { scrollItemIntoView } from "../menu/utils";
 import { getOverrides } from "../helpers/overrides";
-import { Popover, PLACEMENT } from "../popover/index";
+import { Popover, PLACEMENT } from "../popover";
 import { useUIDSeed } from "react-uid";
 
 import {
@@ -76,7 +74,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
       setSelectionIndex(-1);
     } else {
       if (autocomplete) {
-        let selectedOption = options[selectionIndex];
+        const selectedOption = options[selectionIndex];
         if (selectedOption) {
           setTempValue(mapOptionToString(selectedOption));
         }
@@ -131,7 +129,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
       });
     }
     if (event.keyCode === ENTER) {
-      let clickedOption = options[selectionIndex];
+      const clickedOption = options[selectionIndex];
       if (clickedOption) {
         event.preventDefault();
         setIsOpen(false);
@@ -139,7 +137,12 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
         onChange(mapOptionToString(clickedOption), clickedOption);
       } else {
         if (onSubmit) {
-          onSubmit({ closeListbox: () => setIsOpen(false), value });
+          onSubmit({
+            closeListbox: () => {
+              return setIsOpen(false);
+            },
+            value,
+          });
         }
       }
     }
@@ -155,7 +158,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
   }
 
   function handleFocus(event) {
-    if (!isOpen && options.length) {
+    if (!isOpen && options.length > 0) {
       handleOpen();
     }
     if (onFocus) onFocus(event);
@@ -168,8 +171,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
       // NOTE(chase): Contains method expects a Node type, but relatedTarget is
       // EventTarget which is a super type of Node. Passing an EventTarget seems
       // to work fine, assuming the flow type is too strict.
-      // flowlint-next-line unclear-type:off
-      listboxRef.current.contains((event.relatedTarget: any))
+      listboxRef.current.contains(event.relatedTarget)
     ) {
       return;
     }
@@ -184,7 +186,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
       inputRef.current.focus();
     }
 
-    if (!isOpen && options.length) {
+    if (!isOpen && options.length > 0) {
       handleOpen();
     }
   }
@@ -208,7 +210,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
   }
 
   function handleOptionClick(index) {
-    let clickedOption = options[index];
+    const clickedOption = options[index];
     if (clickedOption) {
       const stringified = mapOptionToString(clickedOption);
       setIsOpen(false);
@@ -235,11 +237,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
     getOverrides(overrides.Popover, Popover);
 
   return (
-    <Root
-      // flowlint-next-line unclear-type:off
-      ref={(rootRef: any)}
-      {...rootProps}
-    >
+    <Root ref={rootRef} {...rootProps}>
       <OverriddenPopover
         // React-focus-lock used in Popover used to skip non-tabbable elements (`tabIndex=-1`) elements for focus, we had ListBox with tabIndex to disable focus on
         // the ListBox, but we can just disable autoFocus (as ListBox / ListItem should not be focusable) (and input is also not autoFocused).
@@ -254,8 +252,7 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
             // TabIndex attribute exists to exclude option clicks from triggering onBlur event actions.
             tabIndex="-1"
             id={listboxId}
-            // flowlint-next-line unclear-type:off
-            ref={(listboxRef: any)}
+            ref={listboxRef}
             role="listbox"
             aria-label={listBoxLabel}
             $width={listboxWidth}
@@ -272,9 +269,10 @@ function Combobox<OptionT>(props: PropsT<OptionT>) {
                   aria-selected={isSelected}
                   id={isSelected ? activeDescendantId : null}
                   key={index}
-                  onClick={() => handleOptionClick(index)}
-                  // flowlint-next-line unclear-type:off
-                  ref={isSelected ? (selectedOptionRef: any) : null}
+                  onClick={() => {
+                    return handleOptionClick(index);
+                  }}
+                  ref={isSelected ? selectedOptionRef : null}
                   role="option"
                   $isSelected={isSelected}
                   $size={size}

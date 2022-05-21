@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { getOverrides } from "../helpers/overrides";
 import {
@@ -121,8 +120,7 @@ const Tag = React.forwardRef<PropsT, HTMLSpanElement>((props, ref) => {
 
   return (
     <Root
-      // flowlint-next-line unclear-type:off
-      ref={(ref: any)}
+      ref={ref}
       data-baseweb="tag"
       aria-label={
         isButton && closeable

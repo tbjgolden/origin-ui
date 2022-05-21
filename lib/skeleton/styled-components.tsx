@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 
 function getAnimationColor(props) {
   const { $theme } = props;

@@ -1,6 +1,4 @@
-
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 
 import type { SharedStylePropsT } from "./types";
 
@@ -59,11 +57,7 @@ function getBackgroundColor(props) {
     props;
   const { colors } = $theme;
   if ($disabled) {
-    if ($checked || $isIndeterminate) {
-      return colors.tickFillDisabled;
-    } else {
-      return colors.tickFill;
-    }
+    return $checked || $isIndeterminate ? colors.tickFillDisabled : colors.tickFill;
   } else if ($error && ($isIndeterminate || $checked)) {
     if ($isActive) {
       return colors.tickFillErrorSelectedHoverActive;
@@ -144,7 +138,7 @@ export const Checkmark = styled<SharedStylePropsT>("span", (props) => {
   const borderRadius = $theme.borders.inputBorderRadius;
   const borderColor = getBorderColor(props);
 
-  return ({
+  return {
     flex: "0 0 auto",
     transitionDuration: animation.timing200,
     transitionTimingFunction: animation.easeOutCurve,
@@ -186,19 +180,19 @@ export const Checkmark = styled<SharedStylePropsT>("span", (props) => {
     marginBottom: $theme.sizing.scale0,
     marginLeft: $theme.sizing.scale0,
     marginRight: $theme.sizing.scale0,
-  }: {});
+  };
 });
 
 export const Label = styled<SharedStylePropsT>("div", (props) => {
   const { $theme } = props;
   const { typography } = $theme;
-  return ({
+  return {
     verticalAlign: "middle",
     ...getLabelPadding(props),
     color: getLabelColor(props),
     ...typography.LabelMedium,
     lineHeight: "24px",
-  }: {});
+  };
 });
 
 // tricky style for focus event cause display: none doesn't work

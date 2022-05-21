@@ -1,4 +1,4 @@
-import { styled, withStyle } from "../styles/index";
+import { styled, withStyle } from "../styles";
 import {
   Root as StyledInputRoot,
   Input as StyledInputInput,

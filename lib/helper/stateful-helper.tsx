@@ -5,7 +5,7 @@ import {
   ACCESSIBILITY_TYPE,
   PLACEMENT,
   TRIGGER_TYPE,
-} from "../popover/index";
+} from "../popover";
 import { POPOVER_MARGIN } from "../popover/constants";
 
 import { Helper } from "./helper";

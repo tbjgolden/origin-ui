@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { ORIENTATION, FILL } from "./constants";
 import { isHorizontal, isVertical, isRTL, isIntrinsic, isFixed } from "./utils";
 

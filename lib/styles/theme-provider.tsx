@@ -1,5 +1,5 @@
 import * as React from "react";
-import { LightTheme } from "../themes/index";
+import { LightTheme } from "../themes";
 
 import type { ThemeT } from "./types";
 

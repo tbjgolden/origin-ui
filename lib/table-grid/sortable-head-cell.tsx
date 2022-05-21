@@ -1,4 +1,4 @@
-import { SortableHeadCellFactory } from "../table/index";
+import { SortableHeadCellFactory } from "../table";
 import { StyledHeadCell } from "./styled-components";
 
 export const SortableHeadCell = SortableHeadCellFactory(StyledHeadCell);

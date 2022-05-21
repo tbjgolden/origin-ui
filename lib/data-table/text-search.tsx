@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 export function matchesQuery(text: string, query: string): boolean {
   return text.toLowerCase().includes(query.toLowerCase());

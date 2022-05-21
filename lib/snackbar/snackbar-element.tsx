@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Button, KIND, SHAPE } from "../button/index";
+import { Button, KIND, SHAPE } from "../button";
 import { getOverrides } from "../helpers/overrides";
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import {
   StyledRoot,
@@ -16,7 +16,6 @@ import {
 import type { SnackbarElementPropsT } from "./types";
 
 const ActionButton = React.forwardRef(
-  // flowlint-next-line unclear-type:off
   ({ onClick, message, overrides = {} }, ref: any) => {
     const [, theme] = useStyletron();
     const [ActionButtonContainer, actionButtonContainerProps] = getOverrides(

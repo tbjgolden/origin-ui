@@ -8,4 +8,4 @@ export { STATE_CHANGE_TYPE } from "./constants";
 // Flow
 export type * from "./types";
 
-export { SIZE } from "../input/index";
+export { SIZE } from "../input";

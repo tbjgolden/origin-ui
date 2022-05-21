@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { SharedStylePropsT } from "./types";
 
 // $FlowFixMe https://github.com/facebook/flow/issues/7745

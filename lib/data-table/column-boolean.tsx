@@ -1,30 +1,26 @@
-
-
 import * as React from "react";
 
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import { CategoricalFilter } from "./column-categorical";
 import Column from "./column";
 import { COLUMNS } from "./constants";
 import type { ColumnT, SharedColumnOptionsT } from "./types";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 
-type OptionsT = {
-  ...SharedColumnOptionsT<boolean>,
-};
+type OptionsT = SharedColumnOptionsT<boolean>;
 
 type FilterParametersT = {
-  selection: Set<boolean>,
-  description: string,
-  exclude: boolean,
+  selection: Set<boolean>;
+  description: string;
+  exclude: boolean;
 };
 
 type BooleanColumnT = ColumnT<boolean, FilterParametersT>;
 
 function mapSelection<X, Y>(selection: Set<X>, transform: (X) => Y): Set<Y> {
   const coercedSelection = new Set<Y>();
-  selection.forEach((item) => coercedSelection.add(transform(item)));
+  for (const item of selection) coercedSelection.add(transform(item));
   return coercedSelection;
 }
 
@@ -33,9 +29,9 @@ function BooleanFilter(props) {
 
   let selectionString = new Set();
   if (props.filterParams && props.filterParams.selection) {
-    selectionString = mapSelection(props.filterParams.selection, (i) =>
-      i ? locale.datatable.booleanFilterTrue : locale.datatable.booleanFilterFalse
-    );
+    selectionString = mapSelection(props.filterParams.selection, (i) => {
+      return i ? locale.datatable.booleanFilterTrue : locale.datatable.booleanFilterFalse;
+    });
   }
 
   return (
@@ -53,10 +49,9 @@ function BooleanFilter(props) {
       }
       setFilter={(params) => {
         props.setFilter({
-          selection: mapSelection(
-            params.selection,
-            (i) => i === locale.datatable.booleanFilterTrue
-          ),
+          selection: mapSelection(params.selection, (i) => {
+            return i === locale.datatable.booleanFilterTrue;
+          }),
           exclude: params.exclude,
           description: params.description,
         });

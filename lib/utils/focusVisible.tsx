@@ -74,14 +74,14 @@ function handlePointerDown() {
 }
 
 function handleVisibilityChange() {
-  if (this.visibilityState === "hidden") {
-    // If the tab becomes active again, the browser will handle calling focus
+  if (
+    this.visibilityState === "hidden" && // If the tab becomes active again, the browser will handle calling focus
     // on the element (Safari actually calls it twice).
     // If this tab change caused a blur on an element with focus-visible,
     // re-apply the class when the user switches back to the tab.
-    if (hadFocusVisibleRecently) {
-      hadKeyboardEvent = true;
-    }
+    hadFocusVisibleRecently
+  ) {
+    hadKeyboardEvent = true;
   }
 }
 
@@ -106,7 +106,7 @@ export function teardown(doc) {
 export function isFocusVisible(event) {
   try {
     return event.target.matches(":focus-visible");
-  } catch (error) {
+  } catch {
     // browsers not implementing :focus-visible will throw a SyntaxError
     // we use our own heuristic for those browsers
     // rethrow might be better if it's not the expected error but do we really
@@ -143,28 +143,20 @@ export function initFocusVisible(node) {
   }
 }
 
-export const forkFocus =
-  (
-    // flowlint-next-line unclear-type:off
-    rootProps: any,
-    handler: (e: SyntheticEvent<>) => void
-  ) =>
-  (e: SyntheticEvent<>) => {
+export const forkFocus = (rootProps: any, handler: (e: SyntheticEvent<>) => void) => {
+  return (e: SyntheticEvent<>) => {
     if (typeof rootProps.onFocus === "function") {
       rootProps.onFocus(e);
     }
     handler(e);
   };
+};
 
-export const forkBlur =
-  (
-    // flowlint-next-line unclear-type:off
-    rootProps: any,
-    handler: (e: SyntheticEvent<>) => void
-  ) =>
-  (e: SyntheticEvent<>) => {
+export const forkBlur = (rootProps: any, handler: (e: SyntheticEvent<>) => void) => {
+  return (e: SyntheticEvent<>) => {
     if (typeof rootProps.onBlur === "function") {
       rootProps.onBlur(e);
     }
     handler(e);
   };
+};

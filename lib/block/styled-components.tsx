@@ -1,5 +1,5 @@
 import { getMediaQueries } from "../helpers/responsive-helpers";
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import type { BreakpointsT } from "../styles/types";
 import type { StyledBlockPropsT } from "./types";
 
@@ -13,9 +13,7 @@ function constrainToNull(value) {
 
 type ApplyParams = {
   property: string;
-  // flowlint-next-line unclear-type:off
   value?: any | Array<any>;
-  // flowlint-next-line unclear-type:off
   transform?: Function;
 };
 

@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { getSvgStyles } from "../icon/styled-components";
 import { KIND, PLACEMENT, TYPE } from "./constants";
 import {
@@ -161,7 +161,6 @@ export const CloseIconSvg =
     $color,
     $isFocusVisible,
   }: SharedStylePropsArgT & {
-    // flowlint-next-line unclear-type:off
     $size: any;
     $color: string;
     $theme: ThemeT;

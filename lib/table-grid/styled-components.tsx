@@ -1,10 +1,10 @@
 import * as React from "react";
-import { withStyle, withWrapper } from "../styles/index";
+import { withStyle, withWrapper } from "../styles";
 import {
   StyledTable as FlexStyledTable,
   StyledHeadCell as FlexStyledHeadCell,
   StyledCell as FlexStyledBodyCell,
-} from "../table/index";
+} from "../table";
 
 const StyledTableElement = withStyle<
   typeof FlexStyledTable,

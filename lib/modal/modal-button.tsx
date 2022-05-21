@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "../button/index";
+import { Button } from "../button";
 import type { ButtonPropsT } from "../button/types";
 import { mergeOverrides } from "../helpers/overrides";
 

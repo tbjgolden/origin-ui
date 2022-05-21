@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 import type { BlockPropsT } from "./types";
 import { StyledBlock } from "./styled-components";
@@ -82,10 +79,7 @@ function Block({
 
   return (
     <BaseBlock
-      // coerced to any because because of how react components are typed.
-      // cannot guarantee an html element
-      // flowlint-next-line unclear-type:off
-      ref={(forwardedRef: any)}
+      ref={forwardedRef}
       $as={as}
       $color={color}
       $backgroundAttachment={backgroundAttachment}
@@ -162,7 +156,9 @@ function Block({
 }
 
 const BlockComponent = React.forwardRef<BlockPropsT, HTMLElement>(
-  (props: BlockPropsT, ref) => <Block {...props} forwardedRef={ref} />
+  (props: BlockPropsT, ref) => {
+    return <Block {...props} forwardedRef={ref} />;
+  }
 );
 BlockComponent.displayName = "Block";
 export default BlockComponent;

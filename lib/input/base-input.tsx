@@ -1,4 +1,3 @@
-
 /* global window */
 
 import * as React from "react";
@@ -19,12 +18,11 @@ import Show from "../icon/show";
 import createEvent from "../utils/create-event";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
-const NullComponent = () => null;
+const NullComponent = () => {
+  return null;
+};
 
-class BaseInput<T: HTMLInputElement | HTMLTextAreaElement> extends React.Component<
-  BaseInputPropsT<T>,
-  InternalStateT
-> {
+class BaseInput extends React.Component<BaseInputPropsT<T>, InternalStateT> {
   static defaultProps = {
     "aria-activedescendant": null,
     "aria-autocomplete": null,
@@ -184,7 +182,11 @@ class BaseInput<T: HTMLInputElement | HTMLTextAreaElement> extends React.Compone
         $size={this.props.size}
         $isFocusVisible={this.state.isFocusVisibleForMaskToggle}
         aria-label={label}
-        onClick={() => this.setState((state) => ({ isMasked: !state.isMasked }))}
+        onClick={() => {
+          return this.setState((state) => {
+            return { isMasked: !state.isMasked };
+          });
+        }}
         title={label}
         type="button"
         {...maskToggleButtonProps}

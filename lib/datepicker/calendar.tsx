@@ -1,8 +1,7 @@
-
 import * as React from "react";
-import { FormControl } from "../form-control/index";
-import { LocaleContext } from "../locale/index";
-import { Select } from "../select/index";
+import { FormControl } from "../form-control";
+import { LocaleContext } from "../locale";
+import { Select } from "../select";
 import CalendarHeader from "./calendar-header";
 import Month from "./month";
 import TimePicker from "../timepicker/timepicker";
@@ -131,7 +130,7 @@ export default class Calendar<T = Date> extends React.Component<
     return monthDelta >= 0 && monthDelta < (this.props.monthsShown || 1);
   }
 
-  getSingleDate(value: ?T | $ReadOnlyArray<?T>): ?T {
+  getSingleDate(value: ?(T | $ReadOnlyArray<?T>)): ?T {
     // need to check this.props.range but flow would complain
     // at the return value in the else clause
     if (Array.isArray(value)) {
@@ -173,11 +172,15 @@ export default class Calendar<T = Date> extends React.Component<
   };
 
   changeMonth: ({ date: T }) => mixed = ({ date }) => {
-    this.setState({ date: date }, () => this.handleMonthChange(this.state.date));
+    this.setState({ date: date }, () => {
+      return this.handleMonthChange(this.state.date);
+    });
   };
 
   changeYear: ({ date: T }) => mixed = ({ date }) => {
-    this.setState({ date: date }, () => this.handleYearChange(this.state.date));
+    this.setState({ date: date }, () => {
+      return this.handleYearChange(this.state.date);
+    });
   };
 
   renderCalendarHeader: (T, number) => React.Node = (date = this.state.date, order) => {
@@ -289,25 +292,23 @@ export default class Calendar<T = Date> extends React.Component<
   };
 
   handleTabbing = (event: KeyboardEvent) => {
-    if (__BROWSER__) {
-      if (event.keyCode === 9) {
-        const activeElm = document.activeElement;
-        // need to look for any tabindex >= 0 and ideally for not disabled
-        // focusable by default elements like input, button, etc.
-        const focusable = this.state.rootElement
-          ? this.state.rootElement.querySelectorAll('[tabindex="0"]')
-          : null;
-        const length = focusable ? focusable.length : 0;
-        if (event.shiftKey) {
-          if (focusable && activeElm === focusable[0]) {
-            event.preventDefault();
-            focusable[length - 1].focus();
-          }
-        } else {
-          if (focusable && activeElm === focusable[length - 1]) {
-            event.preventDefault();
-            focusable[0].focus();
-          }
+    if (__BROWSER__ && event.keyCode === 9) {
+      const activeElm = document.activeElement;
+      // need to look for any tabindex >= 0 and ideally for not disabled
+      // focusable by default elements like input, button, etc.
+      const focusable = this.state.rootElement
+        ? this.state.rootElement.querySelectorAll('[tabindex="0"]')
+        : null;
+      const length = focusable ? focusable.length : 0;
+      if (event.shiftKey) {
+        if (focusable && activeElm === focusable[0]) {
+          event.preventDefault();
+          focusable[length - 1].focus();
+        }
+      } else {
+        if (focusable && activeElm === focusable[length - 1]) {
+          event.preventDefault();
+          focusable[0].focus();
         }
       }
     }
@@ -336,8 +337,8 @@ export default class Calendar<T = Date> extends React.Component<
 
   /** Responsible for merging time values into date values. Note: the 'Day' component
    * determines how the days themselves change when a new day is selected. */
-  handleDateChange: ({ +date: ?T | Array<?T> }) => void = (data) => {
-    const { onChange = (params) => {} } = this.props;
+  handleDateChange = (data: { date: Partial<T> | Array<Partial<T>> }) => {
+    const onChange = this.props?.onChange ?? ((params) => {});
     let updatedDate = data.date;
     // Apply the currently selected time values (saved in state) to the updated date
     if (Array.isArray(data.date)) {
@@ -398,17 +399,14 @@ export default class Calendar<T = Date> extends React.Component<
     const { value } = this.props;
     const selected = this.getSingleDate(value);
     let nextState;
-    if (
+    nextState =
       selected &&
       this.dateHelpers.isSameMonth(selected, date) &&
       this.dateHelpers.isSameYear(selected, date)
-    ) {
-      nextState = { highlightedDate: selected };
-    } else {
-      nextState = {
-        highlightedDate: date,
-      };
-    }
+        ? { highlightedDate: selected }
+        : {
+            highlightedDate: date,
+          };
     this.setState(nextState);
   }
 
@@ -481,8 +479,7 @@ export default class Calendar<T = Date> extends React.Component<
     );
   };
 
-  // flowlint-next-line unclear-type:off
-  renderTimeSelect: (?T, Function, string) => React.Node = (value, onChange, label) => {
+  renderTimeSelect = (value: T, onChange: any, label: string): React.Node => {
     const { overrides = {} } = this.props;
     const [TimeSelectContainer, timeSelectContainerProps] = getOverrides(
       overrides.TimeSelectContainer,
@@ -537,84 +534,86 @@ export default class Calendar<T = Date> extends React.Component<
 
     return (
       <LocaleContext.Consumer>
-        {(locale) => (
-          <QuickSelectContainer {...quickSelectContainerProps}>
-            <QuickSelectFormControl
-              label={locale.datepicker.quickSelectLabel}
-              {...quickSelectFormControlProps}
-            >
-              <QuickSelect
-                aria-label={locale.datepicker.quickSelectAriaLabel}
-                labelKey="id"
-                onChange={(params) => {
-                  if (!params.option) {
-                    this.setState({ quickSelectId: null });
-                    this.props.onChange && this.props.onChange({ date: [] });
-                  } else {
-                    this.setState({
-                      quickSelectId: params.option.id,
-                    });
-                    if (this.props.onChange) {
-                      if (this.props.range) {
-                        this.props.onChange({
-                          date: [params.option.beginDate, params.option.endDate || NOW],
-                        });
-                      } else {
-                        this.props.onChange({
-                          date: params.option.beginDate,
-                        });
+        {(locale) => {
+          return (
+            <QuickSelectContainer {...quickSelectContainerProps}>
+              <QuickSelectFormControl
+                label={locale.datepicker.quickSelectLabel}
+                {...quickSelectFormControlProps}
+              >
+                <QuickSelect
+                  aria-label={locale.datepicker.quickSelectAriaLabel}
+                  labelKey="id"
+                  onChange={(params) => {
+                    if (!params.option) {
+                      this.setState({ quickSelectId: null });
+                      this.props.onChange && this.props.onChange({ date: [] });
+                    } else {
+                      this.setState({
+                        quickSelectId: params.option.id,
+                      });
+                      if (this.props.onChange) {
+                        if (this.props.range) {
+                          this.props.onChange({
+                            date: [params.option.beginDate, params.option.endDate || NOW],
+                          });
+                        } else {
+                          this.props.onChange({
+                            date: params.option.beginDate,
+                          });
+                        }
                       }
                     }
+                    if (this.props.onQuickSelectChange) {
+                      this.props.onQuickSelectChange(params.option);
+                    }
+                  }}
+                  options={
+                    this.props.quickSelectOptions || [
+                      {
+                        id: locale.datepicker.pastWeek,
+                        beginDate: this.dateHelpers.subWeeks(NOW, 1),
+                      },
+                      {
+                        id: locale.datepicker.pastMonth,
+                        beginDate: this.dateHelpers.subMonths(NOW, 1),
+                      },
+                      {
+                        id: locale.datepicker.pastThreeMonths,
+                        beginDate: this.dateHelpers.subMonths(NOW, 3),
+                      },
+                      {
+                        id: locale.datepicker.pastSixMonths,
+                        beginDate: this.dateHelpers.subMonths(NOW, 6),
+                      },
+                      {
+                        id: locale.datepicker.pastYear,
+                        beginDate: this.dateHelpers.subYears(NOW, 1),
+                      },
+                      {
+                        id: locale.datepicker.pastTwoYears,
+                        beginDate: this.dateHelpers.subYears(NOW, 2),
+                      },
+                    ]
                   }
-                  if (this.props.onQuickSelectChange) {
-                    this.props.onQuickSelectChange(params.option);
-                  }
-                }}
-                options={
-                  this.props.quickSelectOptions || [
+                  placeholder={locale.datepicker.quickSelectPlaceholder}
+                  value={this.state.quickSelectId && [{ id: this.state.quickSelectId }]}
+                  overrides={mergeOverrides(
                     {
-                      id: locale.datepicker.pastWeek,
-                      beginDate: this.dateHelpers.subWeeks(NOW, 1),
-                    },
-                    {
-                      id: locale.datepicker.pastMonth,
-                      beginDate: this.dateHelpers.subMonths(NOW, 1),
-                    },
-                    {
-                      id: locale.datepicker.pastThreeMonths,
-                      beginDate: this.dateHelpers.subMonths(NOW, 3),
-                    },
-                    {
-                      id: locale.datepicker.pastSixMonths,
-                      beginDate: this.dateHelpers.subMonths(NOW, 6),
-                    },
-                    {
-                      id: locale.datepicker.pastYear,
-                      beginDate: this.dateHelpers.subYears(NOW, 1),
-                    },
-                    {
-                      id: locale.datepicker.pastTwoYears,
-                      beginDate: this.dateHelpers.subYears(NOW, 2),
-                    },
-                  ]
-                }
-                placeholder={locale.datepicker.quickSelectPlaceholder}
-                value={this.state.quickSelectId && [{ id: this.state.quickSelectId }]}
-                overrides={mergeOverrides(
-                  {
-                    Dropdown: {
-                      style: {
-                        textAlign: "start",
+                      Dropdown: {
+                        style: {
+                          textAlign: "start",
+                        },
                       },
                     },
-                  },
-                  quickSelectOverrides
-                )}
-                {...restQuickSelectProps}
-              />
-            </QuickSelectFormControl>
-          </QuickSelectContainer>
-        )}
+                    quickSelectOverrides
+                  )}
+                  {...restQuickSelectProps}
+                />
+              </QuickSelectFormControl>
+            </QuickSelectContainer>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   };
@@ -622,46 +621,52 @@ export default class Calendar<T = Date> extends React.Component<
   render() {
     const { overrides = {} } = this.props;
     const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
-    const [startDate, endDate] = [].concat(this.props.value);
+    const [startDate, endDate] = [this.props.value].flat();
 
     return (
       <LocaleContext.Consumer>
-        {(locale) => (
-          <Root
-            $density={this.props.density}
-            data-baseweb="calendar"
-            role="application"
-            aria-roledescription="datepicker"
-            ref={(root) => {
-              if (root && root instanceof HTMLElement && !this.state.rootElement) {
-                this.setState({
-                  rootElement: (root: HTMLElement),
-                });
-              }
-            }}
-            aria-label={locale.datepicker.ariaLabelCalendar}
-            onKeyDown={this.props.trapTabbing ? this.handleTabbing : null}
-            {...rootProps}
-          >
-            {this.renderMonths({
-              ariaRoleDescCalMonth: locale.datepicker.ariaRoleDescriptionCalendarMonth,
-            })}
-            {this.props.timeSelectStart &&
-              this.renderTimeSelect(
-                startDate,
-                (time) => this.handleTimeChange(time, 0),
-                locale.datepicker.timeSelectStartLabel
-              )}
-            {this.props.timeSelectEnd &&
-              this.props.range &&
-              this.renderTimeSelect(
-                endDate,
-                (time) => this.handleTimeChange(time, 1),
-                locale.datepicker.timeSelectEndLabel
-              )}
-            {this.renderQuickSelect()}
-          </Root>
-        )}
+        {(locale) => {
+          return (
+            <Root
+              $density={this.props.density}
+              data-baseweb="calendar"
+              role="application"
+              aria-roledescription="datepicker"
+              ref={(root) => {
+                if (root && root instanceof HTMLElement && !this.state.rootElement) {
+                  this.setState({
+                    rootElement: root,
+                  });
+                }
+              }}
+              aria-label={locale.datepicker.ariaLabelCalendar}
+              onKeyDown={this.props.trapTabbing ? this.handleTabbing : null}
+              {...rootProps}
+            >
+              {this.renderMonths({
+                ariaRoleDescCalMonth: locale.datepicker.ariaRoleDescriptionCalendarMonth,
+              })}
+              {this.props.timeSelectStart &&
+                this.renderTimeSelect(
+                  startDate,
+                  (time) => {
+                    return this.handleTimeChange(time, 0);
+                  },
+                  locale.datepicker.timeSelectStartLabel
+                )}
+              {this.props.timeSelectEnd &&
+                this.props.range &&
+                this.renderTimeSelect(
+                  endDate,
+                  (time) => {
+                    return this.handleTimeChange(time, 1);
+                  },
+                  locale.datepicker.timeSelectEndLabel
+                )}
+              {this.renderQuickSelect()}
+            </Root>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }

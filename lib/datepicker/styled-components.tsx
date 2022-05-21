@@ -1,5 +1,4 @@
-
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import getDayStateCode from "./utils/day-state";
 import type { SharedStylePropsT, CalendarPropsT } from "./types";
 import { ORIENTATION, DENSITY, INPUT_ROLE } from "./constants";
@@ -7,10 +6,11 @@ import { ORIENTATION, DENSITY, INPUT_ROLE } from "./constants";
 /**
  * Main component container element
  */
-export const StyledInputWrapper = styled<{
-  ...SharedStylePropsT,
-  $separateRangeInputs: boolean,
-}>("div", (props) => {
+export const StyledInputWrapper = styled<
+  SharedStylePropsT & {
+    $separateRangeInputs: boolean;
+  }
+>("div", (props) => {
   const { $separateRangeInputs } = props;
 
   return {
@@ -19,19 +19,25 @@ export const StyledInputWrapper = styled<{
   };
 });
 
-export const StyledInputLabel = styled<{}>("div", ({ $theme }) => ({
-  ...$theme.typography.LabelMedium,
-  marginBottom: $theme.sizing.scale300,
-}));
+export const StyledInputLabel = styled<{}>("div", ({ $theme }) => {
+  return {
+    ...$theme.typography.LabelMedium,
+    marginBottom: $theme.sizing.scale300,
+  };
+});
 
-export const StyledStartDate = styled<{}>("div", ({ $theme }) => ({
-  width: "100%",
-  marginRight: $theme.sizing.scale300,
-}));
+export const StyledStartDate = styled<{}>("div", ({ $theme }) => {
+  return {
+    width: "100%",
+    marginRight: $theme.sizing.scale300,
+  };
+});
 
-export const StyledEndDate = styled<{}>("div", ({ $theme }) => ({
-  width: "100%",
-}));
+export const StyledEndDate = styled<{}>("div", ({ $theme }) => {
+  return {
+    width: "100%",
+  };
+});
 
 /**
  * Main component container element
@@ -54,7 +60,7 @@ export const StyledRoot = styled<SharedStylePropsT>("div", (props) => {
 });
 
 export const StyledMonthContainer = styled<{
-  $orientation: $PropertyType<CalendarPropsT<Date>, "orientation">,
+  $orientation: $PropertyType<CalendarPropsT<Date>, "orientation">;
 }>("div", (props) => {
   const { $orientation } = props;
   return {
@@ -212,8 +218,8 @@ export const StyledWeek = styled<SharedStylePropsT>("div", (props) => {
 });
 
 function generateDayStyles(defaultCode: string, defaultStyle) {
-  const codeForSM = defaultCode.substr(0, 12) + "1" + defaultCode.substr(12 + 1);
-  const codeForEM = defaultCode.substr(0, 13) + "1" + defaultCode.substr(13 + 1);
+  const codeForSM = defaultCode.slice(0, 12) + "1" + defaultCode.slice(12 + 1);
+  const codeForEM = defaultCode.slice(0, 13) + "1" + defaultCode.slice(13 + 1);
   return {
     [defaultCode]: defaultStyle,
     [codeForSM]: defaultStyle,
@@ -221,7 +227,6 @@ function generateDayStyles(defaultCode: string, defaultStyle) {
   };
 }
 
-// flowlint-next-line unclear-type:off
 function getDayStyles(code, { colors }): any {
   const undefinedDayStyle = {
     ":before": { content: null },
@@ -260,7 +265,7 @@ function getDayStyles(code, { colors }): any {
   if (code && code[CODE_DISABLED_INDEX] === "1") {
     defaultDayStyle = disabledDateStyle;
   }
-  // See the ./utils/day-state.js file for the description of all available states
+  // See the ./utils/day-state file for the description of all available states
   // rdhsrSsDeDpSrHpHrRrLsMeMoM
   // '000000000000000'
   const dayStateStyle = Object.assign(
@@ -420,17 +425,9 @@ export const StyledDay = styled<SharedStylePropsT>("div", (props) => {
 
   let height;
   if ($hasDateLabel) {
-    if ($density === DENSITY.high) {
-      height = "60px";
-    } else {
-      height = "70px";
-    }
+    height = $density === DENSITY.high ? "60px" : "70px";
   } else {
-    if ($density === DENSITY.high) {
-      height = "40px";
-    } else {
-      height = "48px";
-    }
+    height = $density === DENSITY.high ? "40px" : "48px";
   }
 
   const [startDate, endDate] = Array.isArray($value) ? $value : [$value, null];
@@ -441,7 +438,7 @@ export const StyledDay = styled<SharedStylePropsT>("div", (props) => {
   const shouldHighlightRange =
     $range && !($hasLockedBehavior && !oppositeInputIsPopulated);
 
-  return ({
+  return {
     ...($density === DENSITY.high
       ? typography.ParagraphSmall
       : typography.ParagraphMedium),
@@ -509,7 +506,7 @@ export const StyledDay = styled<SharedStylePropsT>("div", (props) => {
       borderTopRightRadius: $hasDateLabel ? sizing.scale800 : "100%",
       borderBottomLeftRadius: $hasDateLabel ? sizing.scale800 : "100%",
       borderBottomRightRadius: $hasDateLabel ? sizing.scale800 : "100%",
-      ...(getDayStyles(code, props.$theme)[":after"] || {}),
+      ...getDayStyles(code, props.$theme)[":after"],
       ...($outsideMonthWithinRange ? { content: null } : {}),
     },
     ...(shouldHighlightRange
@@ -539,7 +536,7 @@ export const StyledDay = styled<SharedStylePropsT>("div", (props) => {
             borderBottomColor: "transparent",
             borderLeftColor: "transparent",
             borderRightColor: "transparent",
-            ...(getDayStyles(code, props.$theme)[":before"] || {}),
+            ...getDayStyles(code, props.$theme)[":before"],
             ...($outsideMonthWithinRange
               ? {
                   backgroundColor: colors.mono300,
@@ -550,10 +547,8 @@ export const StyledDay = styled<SharedStylePropsT>("div", (props) => {
               : {}),
           },
         }
-      : // a hack to make flow happy, otherwise it complains about complexity
-        // flowlint-next-line unclear-type:off
-        ({}: any)),
-  }: {});
+      : {}),
+  };
 });
 
 export const StyledDayLabel = styled<SharedStylePropsT>("div", (props) => {
@@ -572,7 +567,7 @@ export const StyledWeekdayHeader = styled<SharedStylePropsT>("div", (props) => {
     $theme: { typography, colors, sizing },
     $density,
   } = props;
-  return ({
+  return {
     ...typography.LabelMedium,
     color: colors.contentTertiary,
     boxSizing: "border-box",
@@ -593,5 +588,5 @@ export const StyledWeekdayHeader = styled<SharedStylePropsT>("div", (props) => {
     marginLeft: 0,
     marginRight: 0,
     backgroundColor: "transparent",
-  }: {});
+  };
 });

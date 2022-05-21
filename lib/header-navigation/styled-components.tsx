@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { ALIGN } from "./constants";
 
 export const Root = styled<{}>("nav", (props) => {

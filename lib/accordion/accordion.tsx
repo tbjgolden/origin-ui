@@ -104,7 +104,6 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
   getItems() {
     const { expanded } = this.state;
     const { accordion, disabled, children, renderAll, overrides } = this.props;
-    // flowlint-next-line unclear-type:off
     return React.Children.map(children, (child: any, index) => {
       if (!child) return;
 

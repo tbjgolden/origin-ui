@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Layer } from "../layer/index";
+import { Layer } from "../layer";
 import { getOverrides } from "../helpers/overrides";
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 
 import { DURATION, PLACEMENT } from "./constants";
 import SnackbarElement from "./snackbar-element";

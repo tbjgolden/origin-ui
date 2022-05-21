@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { NestedMenuContext } from "./nested-menus";
-import { Popover } from "../popover/index";
+import { Popover } from "../popover";
 import type { OverrideT } from "../helpers/overrides";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import type { ItemT } from "./types";

@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 import type { StarRatingPropsT, RatingStateT } from "./types";
 import { StyledRoot, StyledStar } from "./styled-components";
@@ -62,8 +59,7 @@ class StarRating extends React.Component<StarRatingPropsT, RatingStateT> {
           key={x}
           role="radio"
           title="rating"
-          // flowlint-next-line unclear-type:off
-          ref={(starRef: any)}
+          ref={starRef}
           tabIndex={isFocusable ? "0" : "-1"}
           aria-setsize={numItems}
           aria-checked={x <= value}

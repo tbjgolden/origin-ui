@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import { VariableSizeGrid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
@@ -9,9 +7,9 @@ import {
   SHAPE as BUTTON_SHAPES,
   SIZE as BUTTON_SIZES,
   KIND as BUTTON_KINDS,
-} from "../button/index";
-import { useStyletron } from "../styles/index";
-import { Tooltip, PLACEMENT } from "../tooltip/index";
+} from "../button";
+import { useStyletron } from "../styles";
+import { Tooltip, PLACEMENT } from "../tooltip";
 
 import { SORT_DIRECTIONS } from "./constants";
 import HeaderCell from "./header-cell";
@@ -23,65 +21,69 @@ import type {
   SortDirectionsT,
   RowActionT,
 } from "./types";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 
 // consider pulling this out to a prop if useful.
 const HEADER_ROW_HEIGHT = 48;
 
 type HeaderContextT = {
-  columns: ColumnT<>[],
-  columnHighlightIndex: number,
-  emptyMessage: string | React.ComponentType<{}>,
-  filters: $PropertyType<DataTablePropsT, "filters">,
-  loading: boolean,
-  loadingMessage: string | React.ComponentType<{}>,
-  isScrollingX: boolean,
-  isSelectable: boolean,
-  isSelectedAll: boolean,
-  isSelectedIndeterminate: boolean,
-  measuredWidths: number[],
-  onMouseEnter: (number) => void,
-  onMouseLeave: () => void,
-  onResize: (columnIndex: number, delta: number) => void,
-  onSelectMany: () => void,
-  onSelectNone: () => void,
-  onSort: (number) => void,
-  resizableColumnWidths: boolean,
-  rowActions: RowActionT[] | ((RowT) => RowActionT[]),
-  rowHeight: number,
-  rowHighlightIndex: number,
-  rows: RowT[],
-  scrollLeft: number,
-  sortIndex: number,
-  sortDirection: SortDirectionsT,
-  tableHeight: number,
-  widths: number[],
+  columns: ColumnT<>[];
+  columnHighlightIndex: number;
+  emptyMessage: string | React.ComponentType<{}>;
+  filters: $PropertyType<DataTablePropsT, "filters">;
+  loading: boolean;
+  loadingMessage: string | React.ComponentType<{}>;
+  isScrollingX: boolean;
+  isSelectable: boolean;
+  isSelectedAll: boolean;
+  isSelectedIndeterminate: boolean;
+  measuredWidths: number[];
+  onMouseEnter: (number) => void;
+  onMouseLeave: () => void;
+  onResize: (columnIndex: number, delta: number) => void;
+  onSelectMany: () => void;
+  onSelectNone: () => void;
+  onSort: (number) => void;
+  resizableColumnWidths: boolean;
+  rowActions: RowActionT[] | ((RowT) => RowActionT[]);
+  rowHeight: number;
+  rowHighlightIndex: number;
+  rows: RowT[];
+  scrollLeft: number;
+  sortIndex: number;
+  sortDirection: SortDirectionsT;
+  tableHeight: number;
+  widths: number[];
 };
 
 type CellPlacementPropsT = {
-  columnIndex: number,
-  rowIndex: number,
+  columnIndex: number;
+  rowIndex: number;
   style: {
-    position: string,
-    height: number,
-    width: number,
-    top: number,
-    left: number,
-  },
+    position: string;
+    height: number;
+    width: number;
+    top: number;
+    left: number;
+  };
   data: {
-    columns: ColumnT<>[],
-    columnHighlightIndex: number,
-    isSelectable: boolean,
-    isRowSelected: (string | number) => boolean,
-    onRowMouseEnter: (number, RowT) => void,
-    onSelectOne: (RowT) => void,
-    rowHighlightIndex: number,
-    rows: RowT[],
-    textQuery: string,
-  },
+    columns: ColumnT<>[];
+    columnHighlightIndex: number;
+    isSelectable: boolean;
+    isRowSelected: (x: string | number) => boolean;
+    onRowMouseEnter: (number, RowT) => void;
+    onSelectOne: (RowT) => void;
+    rowHighlightIndex: number;
+    rows: RowT[];
+    textQuery: string;
+  };
 };
 
-const sum = (ns) => ns.reduce((s, n) => s + n, 0);
+const sum = (ns) => {
+  return ns.reduce((s, n) => {
+    return s + n;
+  }, 0);
+};
 
 function CellPlacement({ columnIndex, rowIndex, data, style }) {
   const [css, theme] = useStyletron();
@@ -117,13 +119,17 @@ function CellPlacement({ columnIndex, rowIndex, data, style }) {
         boxSizing: "border-box",
       })}
       style={style}
-      onMouseEnter={() => data.onRowMouseEnter(rowIndex, data.rows[rowIndex - 1])}
+      onMouseEnter={() => {
+        return data.onRowMouseEnter(rowIndex, data.rows[rowIndex - 1]);
+      }}
     >
       <Cell
         value={value}
         onSelect={
           data.isSelectable && columnIndex === 0
-            ? () => data.onSelectOne(data.rows[rowIndex - 1])
+            ? () => {
+                return data.onSelectOne(data.rows[rowIndex - 1]);
+              }
             : undefined
         }
         isSelected={data.isRowSelected(data.rows[rowIndex - 1].id)}
@@ -222,33 +228,32 @@ const HeaderContext = React.createContext<HeaderContextT>({
 HeaderContext.displayName = "HeaderContext";
 
 type HeaderProps = {
-  columnTitle: string,
-  hoverIndex: number,
-  index: number,
-  isSortable: boolean,
-  isSelectable: boolean,
-  isSelectedAll: boolean,
-  isSelectedIndeterminate: boolean,
-  onMouseEnter: (number) => void,
-  onMouseLeave: () => void,
-  onResize: (columnIndex: number, delta: number) => void,
-  onResizeIndexChange: (columnIndex: number) => void,
-  onSelectMany: () => void,
-  onSelectNone: () => void,
-  onSort: () => void,
-  resizableColumnWidths: boolean,
-  resizeIndex: number,
-  resizeMaxWidth: number,
-  resizeMinWidth: number,
-  sortIndex: number,
-  sortDirection: SortDirectionsT,
-  tableHeight: number,
+  columnTitle: string;
+  hoverIndex: number;
+  index: number;
+  isSortable: boolean;
+  isSelectable: boolean;
+  isSelectedAll: boolean;
+  isSelectedIndeterminate: boolean;
+  onMouseEnter: (number) => void;
+  onMouseLeave: () => void;
+  onResize: (columnIndex: number, delta: number) => void;
+  onResizeIndexChange: (columnIndex: number) => void;
+  onSelectMany: () => void;
+  onSelectNone: () => void;
+  onSort: () => void;
+  resizableColumnWidths: boolean;
+  resizeIndex: number;
+  resizeMaxWidth: number;
+  resizeMinWidth: number;
+  sortIndex: number;
+  sortDirection: SortDirectionsT;
+  tableHeight: number;
 };
 function Header(props: HeaderProps) {
   const [css, theme] = useStyletron();
   const [startResizePos, setStartResizePos] = React.useState(0);
   const [endResizePos, setEndResizePos] = React.useState(0);
-  // flowlint-next-line unclear-type:off
   const headerCellRef = React.useRef<any>(null);
 
   const RULER_OFFSET = 2;
@@ -298,11 +303,9 @@ function Header(props: HeaderProps) {
       setEndResizePos(0);
     }
 
-    if (__BROWSER__) {
-      if (isResizingThisColumn) {
-        document.addEventListener("mousemove", handleMouseMove);
-        document.addEventListener("mouseup", handleMouseUp);
-      }
+    if (__BROWSER__ && isResizingThisColumn) {
+      document.addEventListener("mousemove", handleMouseMove);
+      document.addEventListener("mouseup", handleMouseUp);
     }
     return () => {
       if (__BROWSER__) {
@@ -477,11 +480,13 @@ function Headers() {
                   onResizeIndexChange={setResizeIndex}
                   onSelectMany={ctx.onSelectMany}
                   onSelectNone={ctx.onSelectNone}
-                  onSort={() => ctx.onSort(columnIndex)}
+                  onSort={() => {
+                    return ctx.onSort(columnIndex);
+                  }}
                   resizableColumnWidths={ctx.resizableColumnWidths}
                   resizeIndex={resizeIndex}
                   resizeMinWidth={ctx.measuredWidths[columnIndex]}
-                  resizeMaxWidth={column.maxWidth || Infinity}
+                  resizeMaxWidth={column.maxWidth || Number.POSITIVE_INFINITY}
                   sortIndex={ctx.sortIndex}
                   sortDirection={ctx.sortDirection}
                   tableHeight={ctx.tableHeight}
@@ -513,14 +518,14 @@ function LoadingOrEmptyMessage(props) {
 // replaces the content of the virtualized window with contents. in this case,
 // we are prepending a table header row before the table rows (children to the fn).
 const InnerTableElement = React.forwardRef<
-  { children: React.Node, style: { [string]: mixed } },
+  { children: React.Node; style: { [string]: mixed } },
   HTMLDivElement
 >((props, ref) => {
   const [, theme] = useStyletron();
   const ctx = React.useContext(HeaderContext);
 
   // no need to render the cells until the columns have been measured
-  if (!ctx.widths.filter(Boolean).length) {
+  if (ctx.widths.filter(Boolean).length === 0) {
     return null;
   }
 
@@ -551,7 +556,7 @@ const InnerTableElement = React.forwardRef<
       {viewState === RENDERING && props.children}
 
       {ctx.rowActions &&
-        Boolean(ctx.rowActions.length) &&
+        ctx.rowActions.length > 0 &&
         ctx.rowHighlightIndex > 0 &&
         Boolean(highlightedRow) &&
         !ctx.isScrollingX && (
@@ -584,12 +589,12 @@ const InnerTableElement = React.forwardRef<
                 <Button
                   alt={rowAction.label}
                   key={rowAction.label}
-                  onClick={(event) =>
-                    rowAction.onClick({
+                  onClick={(event) => {
+                    return rowAction.onClick({
                       event,
                       row: ctx.rows[ctx.rowHighlightIndex - 1],
-                    })
-                  }
+                    });
+                  }}
                   size={BUTTON_SIZES.compact}
                   kind={BUTTON_KINDS.tertiary}
                   shape={BUTTON_SHAPES.round}
@@ -678,16 +683,27 @@ export function DataTable({
   );
 
   // We use state for our ref, to allow hooks to  update when the ref changes.
-  // flowlint-next-line unclear-type:off
   const [gridRef, setGridRef] = React.useState<?VariableSizeGrid<any>>(null);
-  const [measuredWidths, setMeasuredWidths] = React.useState(columns.map(() => 0));
-  const [resizeDeltas, setResizeDeltas] = React.useState(columns.map(() => 0));
+  const [measuredWidths, setMeasuredWidths] = React.useState(
+    columns.map(() => {
+      return 0;
+    })
+  );
+  const [resizeDeltas, setResizeDeltas] = React.useState(
+    columns.map(() => {
+      return 0;
+    })
+  );
   React.useEffect(() => {
     setMeasuredWidths((prev) => {
-      return columns.map((v, index) => prev[index] || 0);
+      return columns.map((v, index) => {
+        return prev[index] || 0;
+      });
     });
     setResizeDeltas((prev) => {
-      return columns.map((v, index) => prev[index] || 0);
+      return columns.map((v, index) => {
+        return prev[index] || 0;
+      });
     });
   }, [columns]);
 
@@ -730,7 +746,9 @@ export function DataTable({
       const timeout = setTimeout(() => {
         setRecentlyScrolledX(false);
       }, 200);
-      return () => clearTimeout(timeout);
+      return () => {
+        return clearTimeout(timeout);
+      };
     }
   }, [recentlyScrolledX]);
   const handleScroll = React.useCallback(
@@ -744,47 +762,65 @@ export function DataTable({
   );
 
   const sortedIndices = React.useMemo(() => {
-    let toSort = allRows.map((r, i) => [r, i]);
+    const toSort = allRows.map((r, i) => {
+      return [r, i];
+    });
     const index = sortIndex;
 
     if (index !== null && index !== undefined && index !== -1 && columns[index]) {
       const sortFn = columns[index].sortFn;
-      const getValue = (row) => columns[index].mapDataToValue(row.data);
+      const getValue = (row) => {
+        return columns[index].mapDataToValue(row.data);
+      };
       if (sortDirection === SORT_DIRECTIONS.ASC) {
-        toSort.sort((a, b) => sortFn(getValue(a[0]), getValue(b[0])));
+        toSort.sort((a, b) => {
+          return sortFn(getValue(a[0]), getValue(b[0]));
+        });
       } else if (sortDirection === SORT_DIRECTIONS.DESC) {
-        toSort.sort((a, b) => sortFn(getValue(b[0]), getValue(a[0])));
+        toSort.sort((a, b) => {
+          return sortFn(getValue(b[0]), getValue(a[0]));
+        });
       }
     }
 
-    return toSort.map((el) => el[1]);
+    return toSort.map((el) => {
+      return el[1];
+    });
   }, [sortIndex, sortDirection, columns, allRows]);
 
   const filteredIndices = React.useMemo(() => {
-    const set = new Set(allRows.map((_, idx) => idx));
-    Array.from(filters || new Set(), (f) => f).forEach(([title, filter]) => {
-      const columnIndex = columns.findIndex((c) => c.title === title);
+    const set = new Set(
+      allRows.map((_, idx) => {
+        return idx;
+      })
+    );
+    for (const [title, filter] of [...(filters || new Set())].map((f) => {
+      return f;
+    })) {
+      const columnIndex = columns.findIndex((c) => {
+        return c.title === title;
+      });
       const column = columns[columnIndex];
       if (!column) {
-        return;
+        continue;
       }
 
       const filterFn = column.buildFilter(filter);
-      Array.from(set).forEach((idx) => {
+      for (const idx of set) {
         if (!filterFn(column.mapDataToValue(allRows[idx].data))) {
           set.delete(idx);
         }
-      });
-    });
+      }
+    }
 
     if (textQuery) {
       const stringishColumnIndices = [];
-      for (let i = 0; i < columns.length; i++) {
-        if (columns[i].textQueryFilter) {
+      for (const [i, column] of columns.entries()) {
+        if (column.textQueryFilter) {
           stringishColumnIndices.push(i);
         }
       }
-      Array.from(set).forEach((idx) => {
+      for (const idx of set) {
         const matches = stringishColumnIndices.some((cdx) => {
           const column = columns[cdx];
           const textQueryFilter = column.textQueryFilter;
@@ -797,7 +833,7 @@ export function DataTable({
         if (!matches) {
           set.delete(idx);
         }
-      });
+      }
     }
 
     return set;
@@ -805,8 +841,12 @@ export function DataTable({
 
   const rows = React.useMemo(() => {
     const result = sortedIndices
-      .filter((idx) => filteredIndices.has(idx))
-      .map((idx) => allRows[idx]);
+      .filter((idx) => {
+        return filteredIndices.has(idx);
+      })
+      .map((idx) => {
+        return allRows[idx];
+      });
 
     if (onIncludedRowsChange) {
       onIncludedRowsChange(result);
@@ -814,13 +854,23 @@ export function DataTable({
     return result;
   }, [sortedIndices, filteredIndices, onIncludedRowsChange, allRows]);
 
-  React.useImperativeHandle(controlRef, () => ({ getRows: () => rows }), [rows]);
+  React.useImperativeHandle(
+    controlRef,
+    () => {
+      return {
+        getRows: () => {
+          return rows;
+        },
+      };
+    },
+    [rows]
+  );
 
   const [browserScrollbarWidth, setBrowserScrollbarWidth] = React.useState(0);
   const normalizedWidths = React.useMemo(() => {
-    const resizedWidths = measuredWidths.map(
-      (w, i) => Math.floor(w) + Math.floor(resizeDeltas[i])
-    );
+    const resizedWidths = measuredWidths.map((w, i) => {
+      return Math.floor(w) + Math.floor(resizeDeltas[i]);
+    });
     if (gridRef) {
       const gridProps = gridRef.props;
 
@@ -838,7 +888,10 @@ export function DataTable({
 
       const remainder = gridProps.width - sum(resizedWidths) - scrollbarWidth;
       const padding = Math.floor(
-        remainder / columns.filter((c) => (c ? c.fillWidth : true)).length
+        remainder /
+          columns.filter((c) => {
+            return c ? c.fillWidth : true;
+          }).length
       );
       if (padding > 0) {
         const result = [];
@@ -865,18 +918,18 @@ export function DataTable({
     columns,
   ]);
 
-  const isSelectable = batchActions ? !!batchActions.length : false;
+  const isSelectable = batchActions ? batchActions.length > 0 : false;
   const isSelectedAll = React.useMemo(() => {
     if (!selectedRowIds) {
       return false;
     }
-    return !!rows.length && selectedRowIds.size >= rows.length;
+    return rows.length > 0 && selectedRowIds.size >= rows.length;
   }, [selectedRowIds, rows.length]);
   const isSelectedIndeterminate = React.useMemo(() => {
     if (!selectedRowIds) {
       return false;
     }
-    return !!selectedRowIds.size && selectedRowIds.size < rows.length;
+    return selectedRowIds.size > 0 && selectedRowIds.size < rows.length;
   }, [selectedRowIds, rows.length]);
   const isRowSelected = React.useCallback(
     (id) => {
@@ -987,65 +1040,72 @@ export function DataTable({
         isSelectable={isSelectable}
         onWidthsChange={handleWidthsChange}
       />
-      <MeasureScrollbarWidth onWidthChange={(w) => setBrowserScrollbarWidth(w)} />
+      <MeasureScrollbarWidth
+        onWidthChange={(w) => {
+          return setBrowserScrollbarWidth(w);
+        }}
+      />
       <AutoSizer>
-        {({ height, width }) => (
-          <HeaderContext.Provider
-            value={{
-              columns: columns,
-              columnHighlightIndex,
-              emptyMessage: emptyMessage || locale.datatable.emptyState,
-              filters: filters,
-              loading: Boolean(loading),
-              loadingMessage: loadingMessage || locale.datatable.loadingState,
-              isScrollingX,
-              isSelectable,
-              isSelectedAll,
-              isSelectedIndeterminate,
-              measuredWidths,
-              onMouseEnter: handleColumnHeaderMouseEnter,
-              onMouseLeave: handleColumnHeaderMouseLeave,
-              onResize: handleColumnResize,
-              onSelectMany: handleSelectMany,
-              onSelectNone: handleSelectNone,
-              onSort: handleSort,
-              resizableColumnWidths,
-              rowActions,
-              rowHeight,
-              rowHighlightIndex,
-              rows,
-              scrollLeft,
-              sortDirection: sortDirection || null,
-              sortIndex: typeof sortIndex === "number" ? sortIndex : -1,
-              tableHeight: height,
-              widths: normalizedWidths,
-            }}
-          >
-            <VariableSizeGrid
-              // flowlint-next-line unclear-type:off
-              ref={(setGridRef: any)}
-              overscanRowCount={10}
-              overscanColumnCount={5}
-              innerElementType={InnerTableElement}
-              columnCount={columns.length}
-              columnWidth={(columnIndex) => normalizedWidths[columnIndex]}
-              height={height - 2}
-              // plus one to account for additional header row
-              rowCount={rows.length + 1}
-              rowHeight={rowHeightAtIndex}
-              width={width - 2}
-              itemData={itemData}
-              onScroll={handleScroll}
-              style={{
-                ...theme.borders.border200,
-                borderColor: theme.colors.borderOpaque,
+        {({ height, width }) => {
+          return (
+            <HeaderContext.Provider
+              value={{
+                columns: columns,
+                columnHighlightIndex,
+                emptyMessage: emptyMessage || locale.datatable.emptyState,
+                filters: filters,
+                loading: Boolean(loading),
+                loadingMessage: loadingMessage || locale.datatable.loadingState,
+                isScrollingX,
+                isSelectable,
+                isSelectedAll,
+                isSelectedIndeterminate,
+                measuredWidths,
+                onMouseEnter: handleColumnHeaderMouseEnter,
+                onMouseLeave: handleColumnHeaderMouseLeave,
+                onResize: handleColumnResize,
+                onSelectMany: handleSelectMany,
+                onSelectNone: handleSelectNone,
+                onSort: handleSort,
+                resizableColumnWidths,
+                rowActions,
+                rowHeight,
+                rowHighlightIndex,
+                rows,
+                scrollLeft,
+                sortDirection: sortDirection || null,
+                sortIndex: typeof sortIndex === "number" ? sortIndex : -1,
+                tableHeight: height,
+                widths: normalizedWidths,
               }}
-              direction={theme.direction === "rtl" ? "rtl" : "ltr"}
             >
-              {CellPlacementMemo}
-            </VariableSizeGrid>
-          </HeaderContext.Provider>
-        )}
+              <VariableSizeGrid
+                ref={setGridRef}
+                overscanRowCount={10}
+                overscanColumnCount={5}
+                innerElementType={InnerTableElement}
+                columnCount={columns.length}
+                columnWidth={(columnIndex) => {
+                  return normalizedWidths[columnIndex];
+                }}
+                height={height - 2}
+                // plus one to account for additional header row
+                rowCount={rows.length + 1}
+                rowHeight={rowHeightAtIndex}
+                width={width - 2}
+                itemData={itemData}
+                onScroll={handleScroll}
+                style={{
+                  ...theme.borders.border200,
+                  borderColor: theme.colors.borderOpaque,
+                }}
+                direction={theme.direction === "rtl" ? "rtl" : "ltr"}
+              >
+                {CellPlacementMemo}
+              </VariableSizeGrid>
+            </HeaderContext.Provider>
+          );
+        }}
       </AutoSizer>
     </React.Fragment>
   );

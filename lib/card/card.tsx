@@ -1,10 +1,8 @@
-
-
 /* @flow */
 
 import * as React from "react";
 import { getOverride, getOverrideProps } from "../helpers/overrides";
-import { LevelContext } from "../heading/index";
+import { LevelContext } from "../heading";
 import {
   Action as StyledAction,
   Body as StyledBody,
@@ -17,7 +15,7 @@ import {
 
 import type { CardsPropsT } from "./types";
 
-export function hasThumbnail(props: { +thumbnail?: string }) {
+export function hasThumbnail(props: { thumbnail?: string }) {
   return !!props.thumbnail;
 }
 
@@ -26,11 +24,13 @@ const SemanticTitle = ({ children, ...restProps }) => {
 
   return (
     <LevelContext.Consumer>
-      {(level) => (
-        <StyledTitle $as={levels[level]} {...restProps}>
-          {children}
-        </StyledTitle>
-      )}
+      {(level) => {
+        return (
+          <StyledTitle $as={levels[level]} {...restProps}>
+            {children}
+          </StyledTitle>
+        );
+      }}
     </LevelContext.Consumer>
   );
 };

@@ -1,6 +1,6 @@
 /* @flow */
 
-import { styled, expandBorderStyles } from "../styles/index";
+import { styled, expandBorderStyles } from "../styles";
 
 export const Action = styled<{}>("div", ({ $theme }) => {
   return {

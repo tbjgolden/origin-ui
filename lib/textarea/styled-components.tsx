@@ -1,4 +1,4 @@
-import { styled, type ThemeT } from "../styles/index";
+import { styled, type ThemeT } from "../styles";
 import {
   getInputStyles,
   getInputContainerStyles,

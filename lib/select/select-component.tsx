@@ -1,4 +1,3 @@
-
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 
@@ -6,9 +5,9 @@ import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import DeleteAlt from "../icon/delete-alt";
 import TriangleDownIcon from "../icon/triangle-down";
 import SearchIconComponent from "../icon/search";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import type { LocaleT } from "../locale/types";
-import { Popover, PLACEMENT } from "../popover/index";
+import { Popover, PLACEMENT } from "../popover";
 import { UIDConsumer } from "react-uid";
 
 import AutosizeInput from "./autosize-input";
@@ -33,20 +32,22 @@ import type {
   ChangeActionT,
   ReactRefT,
 } from "./types";
-import { expandValue, normalizeOptions } from "./utils/index";
+import { expandValue, normalizeOptions } from "./utils";
 
 function Noop() {
   return null;
 }
 
-const isClick = (event) => event.type === "click";
-const isLeftClick = (event) =>
-  event.button !== null && event.button !== undefined && event.button === 0;
+const isClick = (event) => {
+  return event.type === "click";
+};
+const isLeftClick = (event) => {
+  return event.button !== null && event.button !== undefined && event.button === 0;
+};
 
 const containsNode = (parent, child) => {
   if (__BROWSER__) {
-    // flowlint-next-line unclear-type:off
-    return child && parent && parent.contains((child: any));
+    return child && parent && parent.contains(child);
   }
 };
 
@@ -108,7 +109,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
     isPseudoFocused: false,
   };
 
-  isItMounted: boolean = false;
+  isItMounted = false;
 
   componentDidMount() {
     if (this.props.autoFocus) {
@@ -192,8 +193,12 @@ class Select extends React.Component<PropsT, SelectStateT> {
 
   // Track dragging state to filter false-positive actions where a user
   // intends to drag/scroll the page.
-  handleTouchMove = () => (this.dragging = true);
-  handleTouchStart = () => (this.dragging = false);
+  handleTouchMove = () => {
+    return (this.dragging = true);
+  };
+  handleTouchStart = () => {
+    return (this.dragging = false);
+  };
   handleTouchEnd = (event: TouchEvent) => {
     if (this.dragging) return;
     this.handleClick(event);
@@ -262,10 +267,12 @@ class Select extends React.Component<PropsT, SelectStateT> {
       // the provided text highlights rather than position's the cursor at the end of the input.
       if (this.input) this.input.value = "";
 
-      this.setState((prev) => ({
-        isOpen: !this.focusAfterClear && !prev.isOpen,
-        isPseudoFocused: false,
-      }));
+      this.setState((prev) => {
+        return {
+          isOpen: !this.focusAfterClear && !prev.isOpen,
+          isPseudoFocused: false,
+        };
+      });
 
       this.focusAfterClear = false;
     } else {
@@ -349,7 +356,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
   };
 
   handleInputChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    let newInputValue = event.target.value;
+    const newInputValue = event.target.value;
     this.setState({
       inputValue: newInputValue,
       isOpen: true,
@@ -370,15 +377,17 @@ class Select extends React.Component<PropsT, SelectStateT> {
         }
         break;
       case 9: // tab
-        this.setState((prevState) => ({
-          isPseudoFocused: false,
-          isFocused: false,
-          isOpen: false,
-          inputValue:
-            !this.props.onCloseResetsInput || !this.props.onBlurResetsInput
-              ? prevState.inputValue
-              : "",
-        }));
+        this.setState((prevState) => {
+          return {
+            isPseudoFocused: false,
+            isFocused: false,
+            isOpen: false,
+            inputValue:
+              !this.props.onCloseResetsInput || !this.props.onBlurResetsInput
+                ? prevState.inputValue
+                : "",
+          };
+        });
         break;
       case 27: // escape
         if (!this.state.isOpen && this.props.clearable && this.props.escapeClearsValue) {
@@ -451,17 +460,18 @@ class Select extends React.Component<PropsT, SelectStateT> {
     {
       option,
     }: {
-      option: OptionT,
+      option: OptionT;
       optionState: {
-        $selected: boolean,
-        $disabled: boolean,
-        $isHighlighted: boolean,
-      },
+        $selected: boolean;
+        $disabled: boolean;
+        $isHighlighted: boolean;
+      };
     }
-  ): React.Node =>
-    option.isCreatable
+  ): React.Node => {
+    return option.isCreatable
       ? `${locale.select.create} “${option[this.props.labelKey]}”`
       : option[this.props.labelKey];
+  };
 
   getValueLabel = ({ option }: { option: OptionT }): React.Node => {
     return option[this.props.labelKey];
@@ -475,7 +485,9 @@ class Select extends React.Component<PropsT, SelectStateT> {
       if (value === null || value === undefined) return [];
       value = [value];
     }
-    return value.map((value) => expandValue(value, this.props));
+    return value.map((value) => {
+      return expandValue(value, this.props);
+    });
   }
 
   setValue(value: ValueT, option: ?OptionT, type: ChangeActionT) {
@@ -528,7 +540,9 @@ class Select extends React.Component<PropsT, SelectStateT> {
         () => {
           const valueArray = this.props.value;
           if (
-            valueArray.some((i) => i[this.props.valueKey] === item[this.props.valueKey])
+            valueArray.some((i) => {
+              return i[this.props.valueKey] === item[this.props.valueKey];
+            })
           ) {
             this.removeValue(item);
           } else {
@@ -588,7 +602,9 @@ class Select extends React.Component<PropsT, SelectStateT> {
   removeValue = (item: OptionT) => {
     const valueArray = [...this.props.value];
     this.setValue(
-      valueArray.filter((i) => i[this.props.valueKey] !== item[this.props.valueKey]),
+      valueArray.filter((i) => {
+        return i[this.props.valueKey] !== item[this.props.valueKey];
+      }),
       item,
       STATE_CHANGE_TYPE.remove
     );
@@ -599,7 +615,9 @@ class Select extends React.Component<PropsT, SelectStateT> {
     if (isClick(event) && !isLeftClick(event)) return;
 
     if (this.props.value) {
-      const resetValue = this.props.value.filter((item) => item.clearableValue === false);
+      const resetValue = this.props.value.filter((item) => {
+        return item.clearableValue === false;
+      });
       this.setValue(resetValue, null, STATE_CHANGE_TYPE.clear);
     }
     this.setState({
@@ -612,7 +630,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
   };
 
   shouldShowPlaceholder = () => {
-    return !(this.state.inputValue || (this.props.value && this.props.value.length));
+    return !(this.state.inputValue || (this.props.value && this.props.value.length > 0));
   };
 
   shouldShowValue = () => {
@@ -655,12 +673,12 @@ class Select extends React.Component<PropsT, SelectStateT> {
     valueArray: ValueT,
     isOpen: boolean,
     locale: LocaleT
-  ): ?React.Node | Array<?React.Node> {
+  ): ?(React.Node | Array<?React.Node>) {
     const { overrides = {} } = this.props;
     const sharedProps = this.getSharedProps();
     const renderLabel = this.props.getValueLabel || this.getValueLabel;
     const Value = this.props.valueComponent || Noop;
-    if (!valueArray.length) {
+    if (valueArray.length === 0) {
       return null;
     }
     if (this.props.multi) {
@@ -670,7 +688,9 @@ class Select extends React.Component<PropsT, SelectStateT> {
           <Value
             value={value}
             key={`value-${i}-${value[this.props.valueKey]}`}
-            removeValue={() => this.removeValue(value)}
+            removeValue={() => {
+              return this.removeValue(value);
+            }}
             disabled={disabled}
             overrides={{ Tag: overrides.Tag, MultiValue: overrides.MultiValue }}
             {...sharedProps}
@@ -703,9 +723,11 @@ class Select extends React.Component<PropsT, SelectStateT> {
     const sharedProps = this.getSharedProps();
     const isOpen = this.state.isOpen;
     const selected = this.getValueArray(this.props.value)
-      .map((v) => v[this.props.labelKey])
+      .map((v) => {
+        return v[this.props.labelKey];
+      })
       .join(", ");
-    const selectedLabel = selected.length ? `Selected ${selected}. ` : "";
+    const selectedLabel = selected.length > 0 ? `Selected ${selected}. ` : "";
     const label = `${selectedLabel}${this.props["aria-label"] || ""}`;
 
     if (!this.props.searchable) {
@@ -770,7 +792,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
           onChange={this.handleInputChange}
           onFocus={this.handleInputFocus}
           overrides={{ Input: overrides.Input }}
-          required={(this.props.required && !this.props.value.length) || null}
+          required={(this.props.required && this.props.value.length === 0) || null}
           role="combobox"
           value={this.state.inputValue}
           tabIndex={0}
@@ -782,7 +804,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
 
   renderClear() {
     const isValueEntered = Boolean(
-      (this.props.value && this.props.value.length) || this.state.inputValue
+      (this.props.value && this.props.value.length > 0) || this.state.inputValue
     );
 
     if (
@@ -895,9 +917,14 @@ class Select extends React.Component<PropsT, SelectStateT> {
     }
     // can user create a new option + there's no exact match already
     const filterDoesNotMatchOption = this.props.ignoreCase
-      ? (opt) =>
-          opt[this.props.labelKey].toLowerCase() !== filterValue.toLowerCase().trim()
-      : (opt) => opt[this.props.labelKey] !== filterValue.trim();
+      ? (opt) => {
+          return (
+            opt[this.props.labelKey].toLowerCase() !== filterValue.toLowerCase().trim()
+          );
+        }
+      : (opt) => {
+          return opt[this.props.labelKey] !== filterValue.trim();
+        };
     if (
       filterValue &&
       this.props.creatable &&
@@ -945,7 +972,7 @@ class Select extends React.Component<PropsT, SelectStateT> {
       $searchable: searchable,
       $size: size,
       $type: type,
-      $isEmpty: !this.getValueArray(value).length,
+      $isEmpty: this.getValueArray(value).length === 0,
     };
   }
 
@@ -961,13 +988,14 @@ class Select extends React.Component<PropsT, SelectStateT> {
       filterOutSelected,
     } = this.props;
 
-    if (__DEV__) {
-      // value may be nullish, only warn if value is defined
-      if (value && !Array.isArray(value)) {
-        console.warn(
-          "The Select component expects an array as the value prop. For more information, please visit the docs at https://baseweb.design/components/select/"
-        );
-      }
+    if (
+      __DEV__ && // value may be nullish, only warn if value is defined
+      value &&
+      !Array.isArray(value)
+    ) {
+      console.warn(
+        "The Select component expects an array as the value prop. For more information, please visit the docs at https://baseweb.design/components/select/"
+      );
     }
 
     const [Root, rootProps] = getOverrides(overrides.Root, StyledRoot);
@@ -995,105 +1023,113 @@ class Select extends React.Component<PropsT, SelectStateT> {
     const isOpen = this.state.isOpen;
     sharedProps.$isOpen = isOpen;
 
-    if (__DEV__) {
-      if (this.props.error && this.props.positive) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `[Select] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
-        );
-      }
+    if (__DEV__ && this.props.error && this.props.positive) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[Select] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
+      );
     }
 
     return (
       <UIDConsumer>
-        {(listboxId) => (
-          <LocaleContext.Consumer>
-            {(locale) => (
-              <PopoverOverride
-                // Popover does not provide ability to forward refs through, and if we were to simply
-                // apply the ref to the Root component below it would be overwritten before the popover
-                // renders it. Using this strategy, we will get a ref to the popover, then reuse its
-                // anchorRef so we can check if clicks are on the select component or not.
-                // flowlint-next-line unclear-type:off
-                innerRef={(ref: any) => {
-                  if (!ref) return;
-                  this.anchor = ref.anchorRef;
-                }}
-                autoFocus={false}
-                focusLock={false}
-                mountNode={this.props.mountNode}
-                onEsc={() => this.closeMenu()}
-                isOpen={isOpen}
-                popoverMargin={0}
-                content={() => {
-                  const dropdownProps = {
-                    error: this.props.error,
-                    positive: this.props.positive,
-                    getOptionLabel:
-                      this.props.getOptionLabel || this.getOptionLabel.bind(this, locale),
-                    id: listboxId,
-                    isLoading: this.props.isLoading,
-                    labelKey: this.props.labelKey,
-                    maxDropdownHeight: this.props.maxDropdownHeight,
-                    multi,
-                    noResultsMsg,
-                    onActiveDescendantChange: this.handleActiveDescendantChange,
-                    onItemSelect: this.selectValue,
-                    options,
-                    overrides,
-                    required: this.props.required,
-                    searchable: this.props.searchable,
-                    size: this.props.size,
-                    type,
-                    value: valueArray,
-                    valueKey: this.props.valueKey,
-                    width: this.anchor.current ? this.anchor.current.clientWidth : null,
-                    keyboardControlNode: this.anchor,
-                  };
+        {(listboxId) => {
+          return (
+            <LocaleContext.Consumer>
+              {(locale) => {
+                return (
+                  <PopoverOverride
+                    // Popover does not provide ability to forward refs through, and if we were to simply
+                    // apply the ref to the Root component below it would be overwritten before the popover
+                    // renders it. Using this strategy, we will get a ref to the popover, then reuse its
+                    // anchorRef so we can check if clicks are on the select component or not.
+                    innerRef={(ref: any) => {
+                      if (!ref) return;
+                      this.anchor = ref.anchorRef;
+                    }}
+                    autoFocus={false}
+                    focusLock={false}
+                    mountNode={this.props.mountNode}
+                    onEsc={() => {
+                      return this.closeMenu();
+                    }}
+                    isOpen={isOpen}
+                    popoverMargin={0}
+                    content={() => {
+                      const dropdownProps = {
+                        error: this.props.error,
+                        positive: this.props.positive,
+                        getOptionLabel:
+                          this.props.getOptionLabel ||
+                          this.getOptionLabel.bind(this, locale),
+                        id: listboxId,
+                        isLoading: this.props.isLoading,
+                        labelKey: this.props.labelKey,
+                        maxDropdownHeight: this.props.maxDropdownHeight,
+                        multi,
+                        noResultsMsg,
+                        onActiveDescendantChange: this.handleActiveDescendantChange,
+                        onItemSelect: this.selectValue,
+                        options,
+                        overrides,
+                        required: this.props.required,
+                        searchable: this.props.searchable,
+                        size: this.props.size,
+                        type,
+                        value: valueArray,
+                        valueKey: this.props.valueKey,
+                        width: this.anchor.current
+                          ? this.anchor.current.clientWidth
+                          : null,
+                        keyboardControlNode: this.anchor,
+                      };
 
-                  return <SelectDropdown innerRef={this.dropdown} {...dropdownProps} />;
-                }}
-                placement={PLACEMENT.bottom}
-                {...popoverProps}
-              >
-                <Root
-                  onBlur={this.handleBlur}
-                  data-baseweb="select"
-                  {...sharedProps}
-                  {...rootProps}
-                >
-                  <ControlContainer
-                    onKeyDown={this.handleKeyDown}
-                    onClick={this.handleClick}
-                    onTouchEnd={this.handleTouchEnd}
-                    onTouchMove={this.handleTouchMove}
-                    onTouchStart={this.handleTouchStart}
-                    {...sharedProps}
-                    {...controlContainerProps}
+                      return (
+                        <SelectDropdown innerRef={this.dropdown} {...dropdownProps} />
+                      );
+                    }}
+                    placement={PLACEMENT.bottom}
+                    {...popoverProps}
                   >
-                    {type === TYPE.search ? this.renderSearch() : null}
-                    <ValueContainer {...sharedProps} {...valueContainerProps}>
-                      {this.renderValue(valueArray, isOpen, locale)}
-                      {this.renderInput(listboxId)}
-                      {this.shouldShowPlaceholder() ? (
-                        <Placeholder {...sharedProps} {...placeholderProps}>
-                          {typeof this.props.placeholder !== "undefined"
-                            ? this.props.placeholder
-                            : locale.select.placeholder}
-                        </Placeholder>
-                      ) : null}
-                    </ValueContainer>
-                    <IconsContainer {...sharedProps} {...iconsContainerProps}>
-                      {this.renderLoading()}
-                      {this.renderClear()}
-                      {type === TYPE.select ? this.renderArrow() : null}
-                    </IconsContainer>
-                  </ControlContainer>
-                </Root>
-              </PopoverOverride>
-            )}
-          </LocaleContext.Consumer>
-        )}
+                    <Root
+                      onBlur={this.handleBlur}
+                      data-baseweb="select"
+                      {...sharedProps}
+                      {...rootProps}
+                    >
+                      <ControlContainer
+                        onKeyDown={this.handleKeyDown}
+                        onClick={this.handleClick}
+                        onTouchEnd={this.handleTouchEnd}
+                        onTouchMove={this.handleTouchMove}
+                        onTouchStart={this.handleTouchStart}
+                        {...sharedProps}
+                        {...controlContainerProps}
+                      >
+                        {type === TYPE.search ? this.renderSearch() : null}
+                        <ValueContainer {...sharedProps} {...valueContainerProps}>
+                          {this.renderValue(valueArray, isOpen, locale)}
+                          {this.renderInput(listboxId)}
+                          {this.shouldShowPlaceholder() ? (
+                            <Placeholder {...sharedProps} {...placeholderProps}>
+                              {typeof this.props.placeholder !== "undefined"
+                                ? this.props.placeholder
+                                : locale.select.placeholder}
+                            </Placeholder>
+                          ) : null}
+                        </ValueContainer>
+                        <IconsContainer {...sharedProps} {...iconsContainerProps}>
+                          {this.renderLoading()}
+                          {this.renderClear()}
+                          {type === TYPE.select ? this.renderArrow() : null}
+                        </IconsContainer>
+                      </ControlContainer>
+                    </Root>
+                  </PopoverOverride>
+                );
+              }}
+            </LocaleContext.Consumer>
+          );
+        }}
       </UIDConsumer>
     );
   }

@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "./stateful-container";
 import Calendar from "./calendar";
@@ -9,20 +8,18 @@ type PropsT<T> = StatefulDatepickerPropsT<CalendarPropsT<T>>;
 class StatefulComponent<T = Date> extends React.Component<PropsT<T>> {
   static defaultProps: PropsT<T> = {
     initialState: {},
-    stateReducer: (type, nextState) => nextState,
+    stateReducer: (type, nextState) => {
+      return nextState;
+    },
     onSelect: () => {},
   };
 
   render() {
     return (
       <StatefulContainer {...this.props}>
-        {(extendedProps) => (
-          <Calendar
-            {...extendedProps}
-            // flowlint-next-line unclear-type:off
-            onChange={(extendedProps.onChange: any)}
-          />
-        )}
+        {(extendedProps) => {
+          return <Calendar {...extendedProps} onChange={extendedProps.onChange} />;
+        }}
       </StatefulContainer>
     );
   }

@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 
 import { PLACEMENT } from "../popover/constants";
 import type { OffsetT, PopoverPlacementT, SharedStylePropsArgT } from "../popover/types";

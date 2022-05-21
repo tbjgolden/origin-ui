@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { KIND, SIZE, SHAPE } from "./constants";
 import type { SharedStylePropsT } from "./types";
 import type { FontT } from "../themes/types";

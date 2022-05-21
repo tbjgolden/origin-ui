@@ -1,16 +1,13 @@
-
-
-
 import * as React from "react";
 
 import type { NestedMenuRefT, NestedMenuContextT } from "./types";
 
 type StateT = {
-  nestedMenuHoverIndex: number,
-  menus: NestedMenuRefT[],
+  nestedMenuHoverIndex: number;
+  menus: NestedMenuRefT[];
 };
 type PropsT = {
-  children: React.Node,
+  children: React.Node;
 };
 
 export const NestedMenuContext: React.Context<NestedMenuContextT> = React.createContext({
@@ -19,7 +16,9 @@ export const NestedMenuContext: React.Context<NestedMenuContextT> = React.create
   getParentMenu: () => {},
   getChildMenu: () => {},
   nestedMenuHoverIndex: -1,
-  isNestedMenuVisible: () => false,
+  isNestedMenuVisible: () => {
+    return false;
+  },
   mountRef: { current: null },
 });
 
@@ -33,7 +32,7 @@ function isSame(a: ?HTMLElement, b: ?HTMLElement) {
 
 export default class NestedMenus extends React.Component<PropsT, StateT> {
   state = { menus: [], nestedMenuHoverIndex: -1 };
-  mountRef = (React.createRef(): { current: HTMLElement | null });
+  mountRef = React.createRef();
   mouseLeaveTimeoueId = null;
 
   handleMenuMouseLeave = (event: MouseEvent) => {
@@ -91,7 +90,9 @@ export default class NestedMenus extends React.Component<PropsT, StateT> {
   };
 
   findMenuIndexByRef = (ref: NestedMenuRefT) => {
-    return this.state.menus.findIndex((r) => isSame(r.current, ref.current));
+    return this.state.menus.findIndex((r) => {
+      return isSame(r.current, ref.current);
+    });
   };
 
   getParentMenu = (ref: NestedMenuRefT): ?NestedMenuRefT => {

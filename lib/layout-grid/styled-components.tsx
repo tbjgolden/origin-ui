@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { getMediaQueries } from "../helpers/responsive-helpers";
 import { BEHAVIOR } from "./constants";
 import type {

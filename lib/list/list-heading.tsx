@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import * as ReactIs from "react-is";
 
@@ -78,11 +76,7 @@ const ListHeading = React.forwardRef<HeadingPropsT, HTMLLIElement>(
     }
 
     return (
-      <Root
-        // flowlint-next-line unclear-type:off
-        ref={(ref: any)}
-        {...rootProps}
-      >
+      <Root ref={ref} {...rootProps}>
         <Content {...contentProps}>
           {/* ----- Top Row -------------------------- */}
           <StyledHeadingContentRow>

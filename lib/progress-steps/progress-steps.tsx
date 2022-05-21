@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { StyledProgressSteps } from "./styled-components";
@@ -17,20 +14,17 @@ function ProgressSteps({ overrides = {}, current, children }: ProgressStepsProps
     const isActive =
       child.props.isActive !== undefined ? child.props.isActive : index === current;
 
-    return React.cloneElement(
-      child,
-      ({
-        isLast: index === numChildren - 1,
-        isCompleted: index < current,
-        isActive,
-        step: index + 1,
-        overrides: {
-          ...overrides,
-          Root: overrides.StepRoot,
-          ...childOverrides,
-        },
-      }: StepPropsT)
-    );
+    return React.cloneElement(child, {
+      isLast: index === numChildren - 1,
+      isCompleted: index < current,
+      isActive,
+      step: index + 1,
+      overrides: {
+        ...overrides,
+        Root: overrides.StepRoot,
+        ...childOverrides,
+      },
+    });
   });
 
   return (

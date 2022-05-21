@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useUID } from "react-uid";
-import { useStyletron } from "../styles/index";
+import { useStyletron } from "../styles";
 import { getOverrides } from "../helpers/overrides";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 import { ORIENTATION, FILL } from "./constants";

@@ -8,7 +8,7 @@ import {
   InnerContainer as StyledInnerContainer,
 } from "./styled-components";
 import { KIND, TYPE } from "./constants";
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 
 import type {
   ToastPropsT,
@@ -16,7 +16,7 @@ import type {
   ToastPrivateStateT,
   SharedStylePropsArgT,
 } from "./types";
-import type { OverridesT } from "../icon/index";
+import type { OverridesT } from "../icon";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 class Toast extends React.Component<ToastPropsT, ToastPrivateStateT> {

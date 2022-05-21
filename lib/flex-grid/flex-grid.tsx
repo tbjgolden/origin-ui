@@ -1,8 +1,6 @@
-
-
 import * as React from "react";
 
-import { Block } from "../block/index";
+import { Block } from "../block";
 import { flattenFragments } from "../helpers/react-helpers";
 import { getOverrides } from "../helpers/overrides";
 import type { BlockPropsT } from "../block/types";
@@ -40,8 +38,7 @@ const FlexGrid = ({
     <FlexGrid
       // coerced to any because of how react components are typed.
       // cannot guarantee an html element
-      // flowlint-next-line unclear-type:off
-      ref={(forwardedRef: any)}
+      ref={forwardedRef}
       as={as}
       {...restProps}
       {...flexGridProps}

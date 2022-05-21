@@ -1,4 +1,4 @@
-import { styled } from "../styles/index";
+import { styled } from "../styles";
 import { ARROW_SIZE, ARROW_WIDTH } from "./constants";
 import {
   getPopoverMarginStyles,

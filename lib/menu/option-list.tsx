@@ -1,8 +1,6 @@
-
-
 import * as React from "react";
 
-import { LocaleContext } from "../locale/index";
+import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
 
 import { OPTION_LIST_SIZE } from "./constants";
@@ -10,13 +8,12 @@ import MaybeChildMenu from "./maybe-child-menu";
 import { StyledListItem, StyledListItemAnchor } from "./styled-components";
 import type { OptionListPropsT } from "./types";
 
-function OptionList(
-  props: OptionListPropsT,
-  ref?: { current: null | HTMLElement, ... } | ((null | HTMLElement) => mixed)
-) {
+function OptionList(props: OptionListPropsT, ref) {
   const {
     getChildMenu,
-    getItemLabel = (item) => (item ? item.label : ""),
+    getItemLabel = (item) => {
+      return item ? item.label : "";
+    },
     item,
     onClick = () => {},
     onMouseEnter = () => {},
@@ -36,48 +33,48 @@ function OptionList(
   );
 
   const getItem = (item) => {
-    if (item.href && renderHrefAsAnchor) {
-      return (
-        <ListItemAnchor $item={item} href={item.href} {...listItemAnchorProps}>
-          {getItemLabel(item)}
-        </ListItemAnchor>
-      );
-    } else {
-      return <>{getItemLabel(item)}</>;
-    }
+    return item.href && renderHrefAsAnchor ? (
+      <ListItemAnchor $item={item} href={item.href} {...listItemAnchorProps}>
+        {getItemLabel(item)}
+      </ListItemAnchor>
+    ) : (
+      <>{getItemLabel(item)}</>
+    );
   };
 
   return (
     <LocaleContext.Consumer>
-      {(locale) => (
-        <MaybeChildMenu
-          getChildMenu={getChildMenu}
-          isOpen={!!$isHighlighted}
-          item={item}
-          resetParentMenu={resetMenu}
-          renderAll={renderAll}
-          onClick={onClick}
-          overrides={overrides}
-        >
-          <ListItem
-            ref={ref}
-            aria-label={
-              getChildMenu && getChildMenu(item)
-                ? locale.menu.parentMenuItemAriaLabel
-                : null
-            }
+      {(locale) => {
+        return (
+          <MaybeChildMenu
+            getChildMenu={getChildMenu}
+            isOpen={!!$isHighlighted}
             item={item}
+            resetParentMenu={resetMenu}
+            renderAll={renderAll}
             onClick={onClick}
-            onMouseEnter={onMouseEnter}
-            $size={size}
-            $isHighlighted={$isHighlighted}
-            {...restProps}
-            {...listItemProps}
+            overrides={overrides}
           >
-            {getItem({ isHighlighted: $isHighlighted, ...item })}
-          </ListItem>
-        </MaybeChildMenu>
-      )}
+            <ListItem
+              ref={ref}
+              aria-label={
+                getChildMenu && getChildMenu(item)
+                  ? locale.menu.parentMenuItemAriaLabel
+                  : null
+              }
+              item={item}
+              onClick={onClick}
+              onMouseEnter={onMouseEnter}
+              $size={size}
+              $isHighlighted={$isHighlighted}
+              {...restProps}
+              {...listItemProps}
+            >
+              {getItem({ isHighlighted: $isHighlighted, ...item })}
+            </ListItem>
+          </MaybeChildMenu>
+        );
+      }}
     </LocaleContext.Consumer>
   );
 }
@@ -85,7 +82,7 @@ function OptionList(
 function areEqualShallow(a, b) {
   if (!a || !b) return false;
 
-  for (var key in a) {
+  for (const key in a) {
     if (a[key] !== b[key]) {
       return false;
     }

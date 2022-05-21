@@ -1,4 +1,3 @@
-
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import { StyledInput, StyledInputSizer } from "./styled-components";
@@ -13,7 +12,7 @@ export default class AutosizeInput extends React.Component<
   sizer: ?HTMLElement;
 
   static defaultProps = {
-    inputRef: (React.createRef(): { current: HTMLInputElement | null }),
+    inputRef: React.createRef(),
     value: "",
     overrides: {},
   };
