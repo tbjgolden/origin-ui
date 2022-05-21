@@ -1,33 +1,20 @@
-import { styled, type ThemeT } from "../styles";
+import { styled } from "../styles";
 import {
   getInputStyles,
   getInputContainerStyles,
-  getRootStyles,
+  getRootStyles
 } from "../input/styled-components";
-import type { SharedStylePropsT } from "./types";
-
-export const StyledTextAreaRoot = styled<SharedStylePropsT>(
-  "div",
-  (props: SharedStylePropsT & { $theme: ThemeT }) => {
-    return getRootStyles({ $positive: false, ...props, $hasIconTrailing: false });
-  }
-);
-
-export const StyledTextareaContainer = styled<SharedStylePropsT>(
-  "div",
-  (props: SharedStylePropsT & { $theme: ThemeT }) => {
-    return {
-      ...getInputContainerStyles({ $positive: false, ...props }),
-    };
-  }
-);
-
-export const StyledTextarea = styled<SharedStylePropsT>(
-  "textarea",
-  (props: SharedStylePropsT & { $theme: ThemeT }) => {
-    return {
-      ...getInputStyles(props),
-      resize: "none",
-    };
-  }
-);
+export const StyledTextAreaRoot = styled("div", (props) => {
+  return getRootStyles({ $positive: false, ...props, $hasIconTrailing: false });
+});
+export const StyledTextareaContainer = styled("div", (props) => {
+  return {
+    ...getInputContainerStyles({ $positive: false, ...props })
+  };
+});
+export const StyledTextarea = styled("textarea", (props) => {
+  return {
+    ...getInputStyles(props),
+    resize: "none"
+  };
+});

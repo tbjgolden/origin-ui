@@ -1,18 +1,9 @@
 import * as React from "react";
 import extend from "just-extend";
-
-import type { LocaleT } from "./types";
 import en_US from "./en_US";
-
-export const LocaleContext: React.Context<LocaleT> = React.createContext(en_US);
-
-const LocaleProvider = (props: { locale: $Shape<LocaleT>; children: ?React.Node }) => {
+export const LocaleContext = React.createContext(en_US);
+const LocaleProvider = (props) => {
   const { locale, children } = props;
-  return (
-    <LocaleContext.Provider value={extend({}, en_US, locale)}>
-      {children}
-    </LocaleContext.Provider>
-  );
+  return <LocaleContext.Provider value={extend({}, en_US, locale)}>{children}</LocaleContext.Provider>;
 };
-
 export default LocaleProvider;

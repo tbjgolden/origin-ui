@@ -7,18 +7,17 @@ function walkDir(dir) {
     const x = dir + "/" + content.name;
     if (content.isDirectory()) {
       walkDir(x);
-    } else if (content.isFile() && x.endsWith(".js")) {
+    } else if (content.isFile() && x.endsWith(".tsx")) {
       files.push(x);
     }
   }
 }
 
 walkDir(__dirname + "/lib");
-console.log(files);
-for (const file of files) {
+// eslint-disable-next-line unicorn/no-for-loop
+for (let i = 0; i < files.length; i++) {
+  const file = files[i];
+  console.log(file);
   let text = fs.readFileSync(file, "utf8");
-  text = text.replace(/\/\*\s+copyright.*uber[\S\s]*?(\*\/)/gi, "");
-  text = text.replace("// @flow\n", "");
-  fs.writeFileSync(file.slice(0, -3) + ".tsx", text);
-  fs.unlinkSync(file);
+  fs.writeFileSync(file, text);
 }

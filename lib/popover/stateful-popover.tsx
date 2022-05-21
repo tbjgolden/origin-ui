@@ -1,20 +1,12 @@
-import * as React from "react";
 import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE, POPOVER_MARGIN } from "./constants";
 import StatefulContainer from "./stateful-container";
 import Popover from "./popover";
-import type { StatefulPopoverPropsT } from "./types";
-
-function StatefulPopover(props: StatefulPopoverPropsT) {
+function StatefulPopover(props) {
   const { children, ...restProps } = props;
-  return (
-    <StatefulContainer {...restProps}>
-      {(popoverProps) => {
-        return <Popover {...popoverProps}>{children}</Popover>;
-      }}
-    </StatefulContainer>
-  );
+  return <StatefulContainer {...restProps}>{(popoverProps) => {
+    return <Popover {...popoverProps}>{children}</Popover>;
+  }}</StatefulContainer>;
 }
-
 StatefulPopover.defaultProps = {
   accessibilityType: ACCESSIBILITY_TYPE.menu,
   ignoreBoundary: false,
@@ -29,7 +21,6 @@ StatefulPopover.defaultProps = {
   stateReducer: (_, nextState) => {
     return nextState;
   },
-  popoverMargin: POPOVER_MARGIN,
+  popoverMargin: POPOVER_MARGIN
 };
-
 export default StatefulPopover;

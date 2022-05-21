@@ -1,6 +1,4 @@
-import type { ColorTokensT } from "./types";
-
-const colors: ColorTokensT = {
+const colors = {
   white: "#FFFFFF",
   gray50: "#F6F6F6",
   gray100: "#EEEEEE",
@@ -13,7 +11,6 @@ const colors: ColorTokensT = {
   gray800: "#1F1F1F",
   gray900: "#141414",
   black: "#000000",
-
   platinum50: "#F4FAFB",
   platinum100: "#EBF5F7",
   platinum200: "#CCDFE5",
@@ -23,7 +20,6 @@ const colors: ColorTokensT = {
   platinum600: "#556268",
   platinum700: "#394145",
   platinum800: "#142328",
-
   red50: "#FFEFED",
   red100: "#FED7D2",
   red200: "#F1998E",
@@ -32,7 +28,6 @@ const colors: ColorTokensT = {
   red500: "#AB1300",
   red600: "#870F00",
   red700: "#5A0A00",
-
   orange50: "#FFF3EF",
   orange100: "#FFE1D6",
   orange200: "#FABDA5",
@@ -41,7 +36,6 @@ const colors: ColorTokensT = {
   orange500: "#C14F29",
   orange600: "#9A3F21",
   orange700: "#672A16",
-
   yellow50: "#FFFAF0",
   yellow100: "#FFF2D9",
   yellow200: "#FFE3AC",
@@ -50,7 +44,6 @@ const colors: ColorTokensT = {
   yellow500: "#BC8B2C",
   yellow600: "#996F00",
   yellow700: "#674D1B",
-
   green50: "#E6F2ED",
   green100: "#ADDEC9",
   green200: "#66D19E",
@@ -59,7 +52,6 @@ const colors: ColorTokensT = {
   green500: "#03703C",
   green600: "#03582F",
   green700: "#10462D",
-
   blue50: "#EFF3FE",
   blue100: "#D4E2FC",
   blue200: "#A0BFF8",
@@ -68,7 +60,6 @@ const colors: ColorTokensT = {
   blue500: "#1E54B7",
   blue600: "#174291",
   blue700: "#102C60",
-
   cobalt50: "#EBEDFA",
   cobalt100: "#D2D7F0",
   cobalt200: "#949CE3",
@@ -77,7 +68,6 @@ const colors: ColorTokensT = {
   cobalt500: "#0A1899",
   cobalt600: "#081270",
   cobalt700: "#050C4D",
-
   purple50: "#F3F1F9",
   purple100: "#E3DDF2",
   purple200: "#C1B4E2",
@@ -86,7 +76,6 @@ const colors: ColorTokensT = {
   purple500: "#574191",
   purple600: "#453473",
   purple700: "#2E224C",
-
   brown50: "#F6F0EA",
   brown100: "#EBE0DB",
   brown200: "#D2BBB0",
@@ -94,7 +83,6 @@ const colors: ColorTokensT = {
   brown400: "#99644C",
   brown500: "#744C3A",
   brown600: "#5C3C2E",
-  brown700: "#3D281E",
+  brown700: "#3D281E"
 };
-
 export default colors;

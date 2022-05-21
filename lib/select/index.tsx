@@ -7,7 +7,6 @@ export { default as AutosizeInput } from "./autosize-input";
 export { default as SelectDropdown } from "./dropdown";
 export { default as StatefulSelect } from "./stateful-select";
 export { default as StatefulSelectContainer } from "./stateful-select-container";
-// Styled elements
 export {
   StyledRoot,
   StyledControlContainer,
@@ -24,8 +23,7 @@ export {
   StyledDropdownContainer,
   StyledDropdown,
   StyledDropdownListItem,
-  StyledOptionContent,
+  StyledOptionContent
 } from "./styled-components";
 export { default as filterOptions } from "./utils/default-filter-options";
 export { SIZE, TYPE, STATE_CHANGE_TYPE } from "./constants";
-export type * from "./types";

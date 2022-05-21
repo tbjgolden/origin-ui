@@ -1,9 +1,5 @@
 import { colors } from "../../tokens";
-import type { ColorTokensT } from "../types";
-
-// color constants
-const lightColorTokens: ColorTokensT = {
-  // Primary Palette
+const lightColorTokens = {
   primaryA: colors.black,
   primaryB: colors.white,
   primary: colors.black,
@@ -15,7 +11,6 @@ const lightColorTokens: ColorTokensT = {
   primary500: colors.gray500,
   primary600: colors.gray600,
   primary700: colors.gray700,
-  // Accent Palette
   accent: colors.blue400,
   accent50: colors.blue50,
   accent100: colors.blue100,
@@ -25,7 +20,6 @@ const lightColorTokens: ColorTokensT = {
   accent500: colors.blue500,
   accent600: colors.blue600,
   accent700: colors.blue700,
-  // Negative Palette
   negative: colors.red400,
   negative50: colors.red50,
   negative100: colors.red100,
@@ -35,7 +29,6 @@ const lightColorTokens: ColorTokensT = {
   negative500: colors.red500,
   negative600: colors.red600,
   negative700: colors.red700,
-  // Warning Palette
   warning: colors.yellow400,
   warning50: colors.yellow50,
   warning100: colors.yellow100,
@@ -45,7 +38,6 @@ const lightColorTokens: ColorTokensT = {
   warning500: colors.yellow500,
   warning600: colors.yellow600,
   warning700: colors.yellow700,
-  // Positive Palette
   positive: colors.green500,
   positive50: colors.green50,
   positive100: colors.green100,
@@ -55,7 +47,6 @@ const lightColorTokens: ColorTokensT = {
   positive500: colors.green500,
   positive600: colors.green600,
   positive700: colors.green700,
-  // Monochrome Palette
   white: colors.white,
   black: colors.black,
   mono100: colors.white,
@@ -68,9 +59,7 @@ const lightColorTokens: ColorTokensT = {
   mono800: colors.gray600,
   mono900: colors.gray700,
   mono1000: colors.black,
-  // Rating Palette,
   ratingInactiveFill: colors.gray100,
-  ratingStroke: colors.gray300,
+  ratingStroke: colors.gray300
 };
-
 export default lightColorTokens;

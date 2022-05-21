@@ -4,19 +4,9 @@ import {
   getPopoverMarginStyles,
   getArrowPositionStyles,
   getStartPosition,
-  getEndPosition,
+  getEndPosition
 } from "./utils";
-import type {
-  ArrowStylePropsArgT,
-  BodyStylePropsArgT,
-  InnerStylePropsArgT,
-} from "./types";
-import type { ThemeT } from "../styles/types";
-
-/**
- * Main popover container element that gets positioned next to the anchor
- */
-export function getBodyStyles(props: BodyStylePropsArgT & { $theme: ThemeT }) {
+export function getBodyStyles(props) {
   const {
     $animationDuration,
     $isOpen,
@@ -26,9 +16,8 @@ export function getBodyStyles(props: BodyStylePropsArgT & { $theme: ThemeT }) {
     $showArrow,
     $theme,
     $popoverMargin,
-    $isHoverTrigger,
+    $isHoverTrigger
   } = props;
-
   return {
     position: "absolute",
     top: 0,
@@ -40,44 +29,23 @@ export function getBodyStyles(props: BodyStylePropsArgT & { $theme: ThemeT }) {
     borderBottomLeftRadius: $theme.borders.popoverBorderRadius,
     boxShadow: $theme.lighting.shadow600,
     transitionProperty: "opacity,transform",
-    transitionDuration: $isAnimating
-      ? $isOpen
-        ? "0.1s"
-        : `${$animationDuration}ms`
-      : "0s",
-    transitionTimingFunction: $isOpen
-      ? $theme.animation.easeOutCurve
-      : $theme.animation.easeInCurve,
+    transitionDuration: $isAnimating ? $isOpen ? "0.1s" : `${$animationDuration}ms` : "0s",
+    transitionTimingFunction: $isOpen ? $theme.animation.easeOutCurve : $theme.animation.easeInCurve,
     opacity: $isAnimating && $isOpen ? 1 : 0,
-    transform:
-      $isAnimating && $isOpen
-        ? getEndPosition($popoverOffset)
-        : getStartPosition(
-            $popoverOffset,
-            $placement,
-            $showArrow ? ARROW_SIZE : 0,
-            $popoverMargin
-          ),
+    transform: $isAnimating && $isOpen ? getEndPosition($popoverOffset) : getStartPosition($popoverOffset, $placement, $showArrow ? ARROW_SIZE : 0, $popoverMargin),
     ...getPopoverMarginStyles($showArrow ? ARROW_SIZE : 0, $placement, $popoverMargin),
-    ...($isHoverTrigger
-      ? {
-          animationDuration: ".1s",
-          animationName: {
-            "0%": { pointerEvents: "none" },
-            "99%": { pointerEvents: "none" },
-            "100%": { pointerEvents: "auto" },
-          },
-        }
-      : {}),
+    ...$isHoverTrigger ? {
+      animationDuration: ".1s",
+      animationName: {
+        "0%": { pointerEvents: "none" },
+        "99%": { pointerEvents: "none" },
+        "100%": { pointerEvents: "auto" }
+      }
+    } : {}
   };
 }
-
-export const Body = styled<BodyStylePropsArgT>("div", getBodyStyles);
-
-/**
- * Arrow shown between the popover and the anchor element
- */
-export function getArrowStyles(props: ArrowStylePropsArgT & { $theme: ThemeT }) {
+export const Body = styled("div", getBodyStyles);
+export function getArrowStyles(props) {
   const { $arrowOffset, $placement, $theme } = props;
   return {
     backgroundColor: $theme.colors.backgroundTertiary,
@@ -86,19 +54,11 @@ export function getArrowStyles(props: ArrowStylePropsArgT & { $theme: ThemeT }) 
     height: `${ARROW_WIDTH}px`,
     transform: "rotate(45deg)",
     position: "absolute",
-    ...getArrowPositionStyles($arrowOffset, $placement),
+    ...getArrowPositionStyles($arrowOffset, $placement)
   };
 }
-
-export const Arrow = styled<ArrowStylePropsArgT>("div", getArrowStyles);
-
-/**
- * Extra div that holds the popover content. This extra element
- * is needed for the arrow–the arrow is just a 45deg rotated div,
- * and rendering this extra element on top with a solid background
- * clips the part of the arrow that extends into the popover.
- */
-export function getInnerStyles({ $theme }: { $theme: ThemeT }) {
+export const Arrow = styled("div", getArrowStyles);
+export function getInnerStyles({ $theme }) {
   return {
     backgroundColor: $theme.colors.backgroundTertiary,
     borderTopLeftRadius: $theme.borders.popoverBorderRadius,
@@ -106,24 +66,16 @@ export function getInnerStyles({ $theme }: { $theme: ThemeT }) {
     borderBottomRightRadius: $theme.borders.popoverBorderRadius,
     borderBottomLeftRadius: $theme.borders.popoverBorderRadius,
     color: $theme.colors.contentPrimary,
-    position: "relative",
+    position: "relative"
   };
 }
-
-export const Inner = styled<InnerStylePropsArgT>("div", getInnerStyles);
-
-/**
- * A drop-in component that provides the recommended padding
- * for popovers. Mostly a convenience for users so they don't
- * have to define this themselves.
- */
+export const Inner = styled("div", getInnerStyles);
 export const Padding = styled("div", {
   paddingLeft: "12px",
   paddingTop: "12px",
   paddingRight: "12px",
-  paddingBottom: "12px",
+  paddingBottom: "12px"
 });
-
 export const Hidden = styled("div", {
-  display: "none",
+  display: "none"
 });

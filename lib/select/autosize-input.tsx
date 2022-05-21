@@ -1,76 +1,56 @@
-/* eslint-disable cup/no-undef */
 import * as React from "react";
 import { StyledInput, StyledInputSizer } from "./styled-components";
 import { getOverrides } from "../helpers/overrides";
-import type { AutosizeInputPropsT, AutosizeInputStateT } from "./types";
-
-export default class AutosizeInput extends React.Component<
-  AutosizeInputPropsT,
-  AutosizeInputStateT
-> {
-  mounted: boolean;
-  sizer: ?HTMLElement;
-
-  static defaultProps = {
-    inputRef: React.createRef(),
-    value: "",
-    overrides: {},
-  };
-  state = {
-    inputWidth: 5,
-  };
+export default class AutosizeInput extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      inputWidth: 5
+    };
+    this.sizerRef = (el) => {
+      this.sizer = el;
+    };
+  }
   componentDidMount() {
     this.mounted = true;
     this.updateInputWidth();
   }
-  componentDidUpdate(prevProps: AutosizeInputPropsT, prevState: AutosizeInputStateT) {
+  componentDidUpdate(prevProps, prevState) {
     this.updateInputWidth();
   }
   componentWillUnmount() {
     this.mounted = false;
   }
-  sizerRef = (el: ?HTMLElement) => {
-    this.sizer = el;
-  };
   updateInputWidth() {
     if (!this.mounted || !this.sizer || typeof this.sizer.scrollWidth === "undefined") {
       return;
     }
     const newInputWidth = this.sizer.scrollWidth + 2;
-    if (
-      newInputWidth !== this.state.inputWidth &&
-      this.sizer.scrollWidth !== this.state.inputWidth
-    ) {
+    if (newInputWidth !== this.state.inputWidth && this.sizer.scrollWidth !== this.state.inputWidth) {
       this.setState({ inputWidth: newInputWidth });
     }
   }
   render() {
     const { overrides = {}, inputRef, ...restProps } = this.props;
     const [Input, inputProps] = getOverrides(overrides.Input, StyledInput);
-    const sizerValue = [this.props.defaultValue, this.props.value, ""].reduce(
-      (previousValue, currentValue) => {
-        if (previousValue !== null && previousValue !== undefined) {
-          return previousValue;
-        }
-        return currentValue;
+    const sizerValue = [this.props.defaultValue, this.props.value, ""].reduce((previousValue, currentValue) => {
+      if (previousValue !== null && previousValue !== void 0) {
+        return previousValue;
       }
-    );
+      return currentValue;
+    });
     const componentInputProps = {
       ...restProps,
-      $width: `${this.state.inputWidth}px`,
+      $width: `${this.state.inputWidth}px`
     };
-    return (
-      <React.Fragment>
-        <Input {...componentInputProps} ref={inputRef} {...inputProps} />
-        {/* a hidden helper element to calculate the size of the input */}
-        <StyledInputSizer
-          $size={this.props.$size}
-          ref={this.sizerRef}
-          $style={inputProps.$style ? inputProps.$style : null}
-        >
-          {sizerValue}
-        </StyledInputSizer>
-      </React.Fragment>
-    );
+    return <React.Fragment>
+      <Input {...componentInputProps} ref={inputRef} {...inputProps} />
+      <StyledInputSizer $size={this.props.$size} ref={this.sizerRef} $style={inputProps.$style ? inputProps.$style : null}>{sizerValue}</StyledInputSizer>
+    </React.Fragment>;
   }
 }
+AutosizeInput.defaultProps = {
+  inputRef: React.createRef(),
+  value: "",
+  overrides: {}
+};

@@ -1,5 +1,4 @@
-/* flowlint unclear-type:off */
-export default function deepMerge(target?: ?{}, ...sources: Array<null | ?{}>): any {
+export default function deepMerge(target, ...sources) {
   target = target || {};
   const len = sources.length;
   let obj;
@@ -7,14 +6,10 @@ export default function deepMerge(target?: ?{}, ...sources: Array<null | ?{}>): 
   for (let i = 0; i < len; i++) {
     obj = sources[i] || {};
     for (let key in obj) {
-      if (typeof obj[key] !== undefined) {
+      if (typeof obj[key] !== void 0) {
         value = obj[key];
         if (isCloneable(value)) {
-          target[key] = deepMerge(
-            /* eslint-disable-next-line no-mixed-operators */
-            target[key] || (Array.isArray(value) && []) || {},
-            value
-          );
+          target[key] = deepMerge(target[key] || Array.isArray(value) && [] || {}, value);
         } else {
           target[key] = value;
         }
@@ -23,10 +18,6 @@ export default function deepMerge(target?: ?{}, ...sources: Array<null | ?{}>): 
   }
   return target;
 }
-/* flowlint unclear-type:error */
-
-/* eslint-disable-next-line flowtype/no-weak-types */
-function isCloneable(obj: mixed) {
-  /* eslint-disable-next-line eqeqeq */
+function isCloneable(obj) {
   return Array.isArray(obj) || {}.toString.call(obj) == "[object Object]";
 }

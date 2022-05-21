@@ -2,19 +2,15 @@ import { styled, withStyle } from "../styles";
 import { TYPE, SIZE } from "./constants";
 import { StyledList, StyledListItem } from "../menu";
 import { Spinner } from "../spinner";
-
-import type { SharedStylePropsArgT } from "./types";
 import { ellipsisText } from "../styles/util";
-
 function getFont(size = SIZE.default, typography) {
   return {
     [SIZE.mini]: typography.font100,
     [SIZE.compact]: typography.font200,
     [SIZE.default]: typography.font300,
-    [SIZE.large]: typography.font400,
+    [SIZE.large]: typography.font400
   }[size];
 }
-
 function getControlPadding(props) {
   const {
     $theme,
@@ -22,113 +18,67 @@ function getControlPadding(props) {
     $size = SIZE.default,
     $type,
     $multi,
-    $isEmpty,
+    $isEmpty
   } = props;
   const isSearch = $type === TYPE.search;
-  const paddingLeft = isSearch
-    ? `calc(${sizing.scale1000} - ${sizing.scale0})`
-    : sizing.scale400;
-
-  const paddingStartDir: string =
-    $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
-  const paddingEndDir: string =
-    $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
-
+  const paddingLeft = isSearch ? `calc(${sizing.scale1000} - ${sizing.scale0})` : sizing.scale400;
+  const paddingStartDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
+  const paddingEndDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     [SIZE.mini]: {
-      // `sizing.scale0` based on the multi value component (Tag) top and bottom margin
       paddingTop: $multi && !$isEmpty ? 0 : sizing.scale100,
       paddingBottom: $multi && !$isEmpty ? 0 : sizing.scale100,
-      [paddingStartDir]:
-        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0",
+      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: "0"
     },
     [SIZE.compact]: {
-      // `sizing.scale0` based on the multi value component (Tag) top and bottom margin
-      paddingTop:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale100} - ${sizing.scale0})`
-          : sizing.scale200,
-      paddingBottom:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale100} - ${sizing.scale0})`
-          : sizing.scale200,
-      [paddingStartDir]:
-        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0",
+      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale100} - ${sizing.scale0})` : sizing.scale200,
+      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale100} - ${sizing.scale0})` : sizing.scale200,
+      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: "0"
     },
     [SIZE.default]: {
-      // `sizing.scale0` based on the multi value component (Tag) top and bottom margin
-      paddingTop:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale400} - ${sizing.scale0})`
-          : sizing.scale400,
-      paddingBottom:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale400} - ${sizing.scale0})`
-          : sizing.scale400,
-      [paddingStartDir]:
-        $multi && !$isEmpty ? `calc(${paddingLeft} + ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0,
+      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale400} - ${sizing.scale0})` : sizing.scale400,
+      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale400} - ${sizing.scale0})` : sizing.scale400,
+      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} + ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: 0
     },
     [SIZE.large]: {
-      // `sizing.scale0` based on the multi value component (Tag) top and bottom margin
-      paddingTop:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale600} - ${sizing.scale0})`
-          : sizing.scale550,
-      paddingBottom:
-        $multi && !$isEmpty
-          ? `calc(${sizing.scale600} - ${sizing.scale0})`
-          : sizing.scale550,
-      [paddingStartDir]:
-        $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0,
-    },
+      paddingTop: $multi && !$isEmpty ? `calc(${sizing.scale600} - ${sizing.scale0})` : sizing.scale550,
+      paddingBottom: $multi && !$isEmpty ? `calc(${sizing.scale600} - ${sizing.scale0})` : sizing.scale550,
+      [paddingStartDir]: $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
+      [paddingEndDir]: 0
+    }
   }[$size];
 }
-
-export const StyledDropdownContainer = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledDropdownContainer = styled("div", (props) => {
   return {
-    width: `${String(props.$width)}px`,
+    width: `${String(props.$width)}px`
   };
 });
-
 export const StyledDropdown = StyledList;
-
 export const StyledDropdownListItem = StyledListItem;
-
-export const StyledOptionContent = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledOptionContent = styled("div", (props) => {
   const { $isHighlighted, $selected, $disabled, $theme } = props;
-
   return {
     cursor: $disabled ? "not-allowed" : "pointer",
     color: $selected && !$isHighlighted ? $theme.colors.menuFontSelected : null,
-    fontWeight: $selected ? "bold" : "normal",
+    fontWeight: $selected ? "bold" : "normal"
   };
 });
-
-export const StyledRoot = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledRoot = styled("div", (props) => {
   const {
     $theme: { typography },
-    $size,
+    $size
   } = props;
   return {
     ...getFont($size, typography),
     boxSizing: "border-box",
     position: "relative",
-    width: "100%",
+    width: "100%"
   };
 });
-
-function getControlContainerColors(
-  $disabled,
-  $isFocused,
-  $isPseudoFocused,
-  $positive,
-  $error,
-  colors
-) {
+function getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $positive, $error, colors) {
   if ($disabled) {
     return {
       color: colors.inputTextDisabled,
@@ -136,10 +86,9 @@ function getControlContainerColors(
       borderRightColor: colors.inputFillDisabled,
       borderTopColor: colors.inputFillDisabled,
       borderBottomColor: colors.inputFillDisabled,
-      backgroundColor: colors.inputFillDisabled,
+      backgroundColor: colors.inputFillDisabled
     };
   }
-
   if ($isFocused || $isPseudoFocused) {
     return {
       color: colors.contentPrimary,
@@ -147,10 +96,9 @@ function getControlContainerColors(
       borderRightColor: colors.borderSelected,
       borderTopColor: colors.borderSelected,
       borderBottomColor: colors.borderSelected,
-      backgroundColor: colors.inputFillActive,
+      backgroundColor: colors.inputFillActive
     };
   }
-
   if ($error) {
     return {
       color: colors.contentPrimary,
@@ -158,10 +106,9 @@ function getControlContainerColors(
       borderRightColor: colors.inputBorderError,
       borderTopColor: colors.inputBorderError,
       borderBottomColor: colors.inputBorderError,
-      backgroundColor: colors.inputFillError,
+      backgroundColor: colors.inputFillError
     };
   }
-
   if ($positive) {
     return {
       color: colors.contentPrimary,
@@ -169,21 +116,19 @@ function getControlContainerColors(
       borderRightColor: colors.inputBorderPositive,
       borderTopColor: colors.inputBorderPositive,
       borderBottomColor: colors.inputBorderPositive,
-      backgroundColor: colors.inputFillPositive,
+      backgroundColor: colors.inputFillPositive
     };
   }
-
   return {
     color: colors.contentPrimary,
     borderLeftColor: colors.inputBorder,
     borderRightColor: colors.inputBorder,
     borderTopColor: colors.inputBorder,
     borderBottomColor: colors.inputBorder,
-    backgroundColor: colors.inputFill,
+    backgroundColor: colors.inputFill
   };
 }
-
-export const StyledControlContainer = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledControlContainer = styled("div", (props) => {
   const {
     $disabled,
     $error,
@@ -192,7 +137,7 @@ export const StyledControlContainer = styled<SharedStylePropsArgT>("div", (props
     $isPseudoFocused,
     $type,
     $searchable,
-    $theme: { borders, colors, animation },
+    $theme: { borders, colors, animation }
   } = props;
   return {
     borderTopLeftRadius: borders.inputBorderRadius,
@@ -204,11 +149,7 @@ export const StyledControlContainer = styled<SharedStylePropsArgT>("div", (props
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    cursor: $disabled
-      ? "not-allowed"
-      : $searchable || $type === TYPE.search
-      ? "text"
-      : "pointer",
+    cursor: $disabled ? "not-allowed" : $searchable || $type === TYPE.search ? "text" : "pointer",
     borderLeftWidth: "2px",
     borderRightWidth: "2px",
     borderTopWidth: "2px",
@@ -220,18 +161,10 @@ export const StyledControlContainer = styled<SharedStylePropsArgT>("div", (props
     transitionProperty: "border, box-shadow, background-color",
     transitionDuration: animation.timing200,
     transitionTimingFunction: animation.easeOutCurve,
-    ...getControlContainerColors(
-      $disabled,
-      $isFocused,
-      $isPseudoFocused,
-      $positive,
-      $error,
-      colors
-    ),
+    ...getControlContainerColors($disabled, $isFocused, $isPseudoFocused, $positive, $error, colors)
   };
 });
-
-export const StyledValueContainer = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledValueContainer = styled("div", (props) => {
   const padding = getControlPadding(props);
   return {
     boxSizing: "border-box",
@@ -243,49 +176,46 @@ export const StyledValueContainer = styled<SharedStylePropsArgT>("div", (props) 
     alignItems: "center",
     flexWrap: props.$multi ? "wrap" : "nowrap",
     overflow: "hidden",
-    ...padding,
+    ...padding
   };
 });
-
-export const StyledPlaceholder = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledPlaceholder = styled("div", (props) => {
   const {
     $disabled,
-    $theme: { colors },
+    $theme: { colors }
   } = props;
   return {
     color: $disabled ? colors.inputPlaceholderDisabled : colors.inputPlaceholder,
     maxWidth: "100%",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
+    whiteSpace: "nowrap"
   };
 });
-
-export const StyledSingleValue = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledSingleValue = styled("div", (props) => {
   const {
     $searchable,
     $size,
     $theme,
-    $theme: { typography },
+    $theme: { typography }
   } = props;
   const font = getFont($size, typography);
-  const marginDir: string = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
+  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     lineHeight: !$searchable ? font.lineHeight : "inherit",
     boxSizing: "border-box",
     [marginDir]: $theme.sizing.scale0,
     height: "100%",
     maxWidth: "100%",
-    ...ellipsisText,
+    ...ellipsisText
   };
 });
-
-export const StyledInputContainer = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledInputContainer = styled("div", (props) => {
   const {
     $size,
     $searchable,
     $theme: { typography, sizing },
-    $isEmpty,
+    $isEmpty
   } = props;
   const font = getFont($size, typography);
   return {
@@ -309,16 +239,15 @@ export const StyledInputContainer = styled<SharedStylePropsArgT>("div", (props) 
     paddingLeft: 0,
     paddingRight: 0,
     height: String(!$searchable ? font.lineHeight : "auto"),
-    maxHeight: String(font.lineHeight),
+    maxHeight: String(font.lineHeight)
   };
 });
-
-export const StyledInput = styled<SharedStylePropsArgT>("input", (props) => {
+export const StyledInput = styled("input", (props) => {
   const {
     $theme: { colors, typography },
     $size,
     $searchable,
-    $width,
+    $width
   } = props;
   return {
     ...getFont($size, typography),
@@ -341,123 +270,102 @@ export const StyledInput = styled<SharedStylePropsArgT>("input", (props) => {
     paddingTop: "0",
     paddingBottom: "0",
     paddingLeft: "0",
-    paddingRight: "0",
+    paddingRight: "0"
   };
 });
-
-export const StyledInputSizer = styled<SharedStylePropsArgT>(
-  "div",
-  ({ $size, $theme, $theme: { typography } }) => {
-    const dir: string = $theme.direction === "rtl" ? "right" : "left";
-    return {
-      ...getFont($size, typography),
-      position: "absolute",
-      top: 0,
-      [dir]: 0,
-      visibility: "hidden",
-      height: 0,
-      overflow: "scroll",
-      whiteSpace: "pre",
-    };
-  }
-);
-
-export const StyledIconsContainer = styled<SharedStylePropsArgT>(
-  "div",
-  ({ $theme, $theme: { sizing } }) => {
-    const paddingDir: string =
-      $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
-    return {
-      boxSizing: "border-box",
-      position: "relative",
-      display: "flex",
-      flexShrink: 0,
-      alignItems: "center",
-      alignSelf: "stretch",
-      [paddingDir]: sizing.scale500,
-    };
-  }
-);
-
+export const StyledInputSizer = styled("div", ({ $size, $theme, $theme: { typography } }) => {
+  const dir = $theme.direction === "rtl" ? "right" : "left";
+  return {
+    ...getFont($size, typography),
+    position: "absolute",
+    top: 0,
+    [dir]: 0,
+    visibility: "hidden",
+    height: 0,
+    overflow: "scroll",
+    whiteSpace: "pre"
+  };
+});
+export const StyledIconsContainer = styled("div", ({ $theme, $theme: { sizing } }) => {
+  const paddingDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
+  return {
+    boxSizing: "border-box",
+    position: "relative",
+    display: "flex",
+    flexShrink: 0,
+    alignItems: "center",
+    alignSelf: "stretch",
+    [paddingDir]: sizing.scale500
+  };
+});
 function getSvgStyles({ $theme }) {
   return {
     display: "inline-block",
     fill: "currentColor",
     color: "currentColor",
     height: $theme.sizing.scale600,
-    width: $theme.sizing.scale600,
+    width: $theme.sizing.scale600
   };
 }
-
-export const StyledSelectArrow = styled<SharedStylePropsArgT>("svg", (props) => {
+export const StyledSelectArrow = styled("svg", (props) => {
   const { $theme, $disabled, $size } = props;
   const { colors } = $theme;
-
   const sizes = {
     [SIZE.mini]: 16,
     [SIZE.compact]: 16,
     [SIZE.default]: 20,
-    [SIZE.large]: 24,
+    [SIZE.large]: 24
   };
   let size = sizes[SIZE.default];
   if ($size) {
     size = sizes[$size];
   }
-
   return {
     ...getSvgStyles({ $theme }),
     color: $disabled ? colors.inputTextDisabled : colors.contentPrimary,
     cursor: $disabled ? "not-allowed" : "pointer",
     height: `${size}px`,
-    width: `${size}px`,
+    width: `${size}px`
   };
 });
-
-export const StyledClearIcon = styled<SharedStylePropsArgT>("svg", (props) => {
+export const StyledClearIcon = styled("svg", (props) => {
   const { $theme, $size } = props;
   const { colors } = $theme;
-
   const sizes = {
     [SIZE.mini]: 15,
     [SIZE.compact]: 15,
     [SIZE.default]: 18,
-    [SIZE.large]: 22,
+    [SIZE.large]: 22
   };
   let size = sizes[SIZE.default];
   if ($size) {
     size = sizes[$size];
   }
-
   return {
     ...getSvgStyles({ $theme }),
     color: colors.contentPrimary,
     cursor: "pointer",
     height: `${size}px`,
-    width: `${size}px`,
+    width: `${size}px`
   };
 });
-
-export const StyledLoadingIndicator = withStyle<typeof Spinner, {}>(
-  Spinner,
-  ({ $theme }) => {
-    return {
-      borderTopWidth: "2px",
-      borderRightWidth: "2px",
-      borderBottomWidth: "2px",
-      borderLeftWidth: "2px",
-      borderRightColor: $theme.colors.borderOpaque,
-      borderBottomColor: $theme.colors.borderOpaque,
-      borderLeftColor: $theme.colors.borderOpaque,
-      width: "16px",
-      height: "16px",
-    };
-  }
-);
-
-export const StyledSearchIconContainer = styled<SharedStylePropsArgT>("div", (props) => {
+export const StyledLoadingIndicator = withStyle(Spinner, ({ $theme }) => {
+  return {
+    borderTopWidth: "2px",
+    borderRightWidth: "2px",
+    borderBottomWidth: "2px",
+    borderLeftWidth: "2px",
+    borderRightColor: $theme.colors.borderOpaque,
+    borderBottomColor: $theme.colors.borderOpaque,
+    borderLeftColor: $theme.colors.borderOpaque,
+    width: "16px",
+    height: "16px"
+  };
+});
+export const StyledSearchIconContainer = styled("div", (props) => {
   const { $disabled, $theme } = props;
   const { colors, sizing } = $theme;
-  const dir: string = $theme.direction === "rtl" ? "right" : "left";
+  const dir = $theme.direction === "rtl" ? "right" : "left";
   return {
     ...getSvgStyles(props),
     color: $disabled ? colors.inputTextDisabled : colors.contentPrimary,
@@ -467,6 +375,6 @@ export const StyledSearchIconContainer = styled<SharedStylePropsArgT>("div", (pr
     [dir]: sizing.scale500,
     display: "flex",
     alignItems: "center",
-    height: "100%",
+    height: "100%"
   };
 });

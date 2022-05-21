@@ -1,57 +1,43 @@
 import * as React from "react";
 import { STATE_CHANGE_TYPE } from "./constants";
-import type {
-  PanelStateT,
-  StatefulPanelContainerPropsT,
-  PanelStateReducerT,
-  StateChangeTypeT,
-  OnChangeHandlerT,
-} from "./types";
-
-const defaultStateReducer: PanelStateReducerT = (type, nextState) => {
+const defaultStateReducer = (type, nextState) => {
   return nextState;
 };
-
-class StatefulPanelContainer extends React.Component<
-  StatefulPanelContainerPropsT,
-  PanelStateT
-> {
-  static defaultProps = {
-    initialState: { expanded: false },
-    stateReducer: defaultStateReducer,
-    onChange: () => {},
-  };
-
-  state = {
-    expanded: false,
-    ...this.props.initialState,
-  };
-
-  onChange: OnChangeHandlerT = () => {
-    if (typeof this.props.onChange === "function") {
-      this.props.onChange({ expanded: !this.state.expanded });
-    }
-    this.internalSetState(STATE_CHANGE_TYPE.expand, {
-      expanded: !this.state.expanded,
-    });
-  };
-
-  internalSetState(type: StateChangeTypeT, changes: PanelStateT) {
+class StatefulPanelContainer extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = {
+      expanded: false,
+      ...this.props.initialState
+    };
+    this.onChange = () => {
+      if (typeof this.props.onChange === "function") {
+        this.props.onChange({ expanded: !this.state.expanded });
+      }
+      this.internalSetState(STATE_CHANGE_TYPE.expand, {
+        expanded: !this.state.expanded
+      });
+    };
+  }
+  internalSetState(type, changes) {
     const { stateReducer } = this.props;
     this.setState((prevState) => {
       return stateReducer ? stateReducer(type, changes, prevState) : changes;
     });
   }
-
   render() {
     const { children, initialState, stateReducer, ...restProps } = this.props;
-
     return this.props.children({
       ...restProps,
       ...this.state,
-      onChange: this.onChange,
+      onChange: this.onChange
     });
   }
 }
-
+StatefulPanelContainer.defaultProps = {
+  initialState: { expanded: false },
+  stateReducer: defaultStateReducer,
+  onChange: () => {
+  }
+};
 export default StatefulPanelContainer;

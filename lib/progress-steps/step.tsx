@@ -1,4 +1,3 @@
-import * as React from "react";
 import { getOverrides } from "../helpers/overrides";
 import {
   StyledStep,
@@ -8,60 +7,39 @@ import {
   StyledContent,
   StyledContentTitle,
   StyledContentTail,
-  StyledContentDescription,
+  StyledContentDescription
 } from "./styled-components";
-
-import type { StepPropsT } from "./types";
-
 function Step({
   overrides = {},
   isCompleted,
   isActive,
   isLast,
   title,
-  children,
-}: StepPropsT) {
+  children
+}) {
   const [Root, rootProps] = getOverrides(overrides.Root, StyledStep);
-  const [IconContainer, iconContainerProps] = getOverrides(
-    overrides.IconContainer,
-    StyledIconContainer
-  );
+  const [IconContainer, iconContainerProps] = getOverrides(overrides.IconContainer, StyledIconContainer);
   const [Icon, iconProps] = getOverrides(overrides.Icon, StyledIcon);
   const [InnerIcon, innerIconProps] = getOverrides(overrides.InnerIcon, StyledInnerIcon);
   const [Tail, tailProps] = getOverrides(overrides.Tail, StyledContentTail);
   const [Content, contentProps] = getOverrides(overrides.Content, StyledContent);
   const [Title, titleProps] = getOverrides(overrides.Title, StyledContentTitle);
-  const [Description, descriptionProps] = getOverrides(
-    overrides.Description,
-    StyledContentDescription
-  );
-
+  const [Description, descriptionProps] = getOverrides(overrides.Description, StyledContentDescription);
   const sharedProps = {
     $isCompleted: isCompleted,
-    $isActive: isActive,
+    $isActive: isActive
   };
-
-  return (
-    <Root {...sharedProps} {...rootProps}>
-      <IconContainer {...sharedProps} {...iconContainerProps}>
-        <Icon {...sharedProps} {...iconProps}>
-          {isActive && <InnerIcon {...innerIconProps} />}
-        </Icon>
-      </IconContainer>
-      {!isLast && <Tail {...sharedProps} {...tailProps} />}
-      <Content {...sharedProps} {...contentProps}>
-        <Title {...sharedProps} {...titleProps}>
-          {title}
-        </Title>
-        <Description {...descriptionProps}>{isActive && children}</Description>
-      </Content>
-    </Root>
-  );
+  return <Root {...sharedProps} {...rootProps}>
+    <IconContainer {...sharedProps} {...iconContainerProps}><Icon {...sharedProps} {...iconProps}>{isActive && <InnerIcon {...innerIconProps} />}</Icon></IconContainer>
+    {!isLast && <Tail {...sharedProps} {...tailProps} />}
+    <Content {...sharedProps} {...contentProps}>
+      <Title {...sharedProps} {...titleProps}>{title}</Title>
+      <Description {...descriptionProps}>{isActive && children}</Description>
+    </Content>
+  </Root>;
 }
-
 Step.defaultProps = {
   isCompleted: false,
-  isLast: false,
+  isLast: false
 };
-
 export default Step;

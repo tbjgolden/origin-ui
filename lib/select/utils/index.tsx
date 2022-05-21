@@ -1,30 +1,23 @@
-import type { PropsT, OptionT, OptionsT, OptgroupsT, ValueT } from "../types";
-
-function groupedOptionsToArray(groupedOptions: OptgroupsT): ValueT {
+function groupedOptionsToArray(groupedOptions) {
   return Object.keys(groupedOptions).reduce((arr, optgroup) => {
     const optgroupOptions = groupedOptions[optgroup];
-    return arr.concat(
-      optgroupOptions.map((option) => {
-        return {
-          ...option,
-          __optgroup: optgroup,
-        };
-      })
-    );
+    return arr.concat(optgroupOptions.map((option) => {
+      return {
+        ...option,
+        __optgroup: optgroup
+      };
+    }));
   }, []);
 }
-
-export function normalizeOptions(options: OptionsT): ValueT {
+export function normalizeOptions(options) {
   if (options) {
     return Array.isArray(options) ? options : groupedOptionsToArray(options);
   }
-
   return [];
 }
-
-export const expandValue = (value: OptionT, props: $Shape<PropsT>): OptionT => {
-  if (!props.options) return value;
-
+export const expandValue = (value, props) => {
+  if (!props.options)
+    return value;
   const normalizedOptions = normalizeOptions(props.options);
   for (const normalizedOption of normalizedOptions) {
     if (String(normalizedOption[props.valueKey]) === String(value[props.valueKey])) {

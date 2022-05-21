@@ -1,3 +1,3 @@
-export function HamburgerIcon(stroke: string = "black") {
+export function HamburgerIcon(stroke = "black") {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="24" stroke="${stroke}"><g transform="translate(-250 -3)" ><g><g transform="translate(254 14)"><path id="npath0_fill" d="M0 1a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z" /></g><g transform="translate(254 8)"><path id="npath0_fill" d="M0 1a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z" /></g><g transform="translate(254 20)"><path id="npath0_fill" d="M0 1a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H1a1 1 0 0 1-1-1z" /></g></g></g></svg>`;
 }

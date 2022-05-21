@@ -1,27 +1,20 @@
 import * as React from "react";
-
 import { SORT_DIRECTIONS } from "./constants";
-import type { ColumnT, StatefulContainerPropsT } from "./types";
-
-function useDuplicateColumnTitleWarning(columns: ColumnT<>[]) {
+function useDuplicateColumnTitleWarning(columns) {
   React.useEffect(() => {
     if (__DEV__) {
       const titles = columns.reduce((set, column) => {
         return set.add(column.title);
-      }, new Set());
+      }, /* @__PURE__ */ new Set());
       if (titles.size < columns.length) {
-        console.warn(
-          "BaseWeb DataTable: Column titles must be unique else will result in non-deterministic filtering."
-        );
+        console.warn("BaseWeb DataTable: Column titles must be unique else will result in non-deterministic filtering.");
       }
     }
   }, [columns]);
 }
-
 function useSortParameters(initialSortIndex = -1, initialSortDirection = null) {
   const [sortIndex, setSortIndex] = React.useState(initialSortIndex);
   const [sortDirection, setSortDirection] = React.useState(initialSortDirection);
-
   function handleSort(columnIndex) {
     if (columnIndex === sortIndex) {
       if (sortDirection === SORT_DIRECTIONS.DESC) {
@@ -35,19 +28,13 @@ function useSortParameters(initialSortIndex = -1, initialSortDirection = null) {
       setSortDirection(SORT_DIRECTIONS.ASC);
     }
   }
-
   return [sortIndex, sortDirection, handleSort];
 }
-
-export function StatefulContainer(props: StatefulContainerPropsT) {
+export function StatefulContainer(props) {
   useDuplicateColumnTitleWarning(props.columns);
-  const [sortIndex, sortDirection, handleSort] = useSortParameters(
-    props.initialSortIndex,
-    props.initialSortDirection
-  );
-  const [filters, setFilters] = React.useState(props.initialFilters || new Map());
+  const [sortIndex, sortDirection, handleSort] = useSortParameters(props.initialSortIndex, props.initialSortDirection);
+  const [filters, setFilters] = React.useState(props.initialFilters || /* @__PURE__ */ new Map());
   const [textQuery, setTextQuery] = React.useState("");
-
   function handleFilterAdd(title, filterParams) {
     filters.set(title, filterParams);
     if (props.onFilterAdd) {
@@ -62,35 +49,26 @@ export function StatefulContainer(props: StatefulContainerPropsT) {
     }
     setFilters(new Map(filters));
   }
-
-  const [selectedRowIds, setSelectedRowIds] = React.useState(
-    props.initialSelectedRowIds || new Set()
-  );
+  const [selectedRowIds, setSelectedRowIds] = React.useState(props.initialSelectedRowIds || /* @__PURE__ */ new Set());
   function handleSelectChange(next) {
     setSelectedRowIds(next);
-
     const selectionCallback = props.onSelectionChange;
     if (selectionCallback) {
-      selectionCallback(
-        props.rows.filter((r) => {
-          return next.has(r.id);
-        })
-      );
+      selectionCallback(props.rows.filter((r) => {
+        return next.has(r.id);
+      }));
     }
   }
   function handleSelectMany(incomingRows) {
-    // only adds rows that are visible in the table
-    handleSelectChange(
-      new Set([
-        ...selectedRowIds,
-        ...incomingRows.map((r) => {
-          return r.id;
-        }),
-      ])
-    );
+    handleSelectChange(/* @__PURE__ */ new Set([
+      ...selectedRowIds,
+      ...incomingRows.map((r) => {
+        return r.id;
+      })
+    ]));
   }
   function handleSelectNone() {
-    handleSelectChange(new Set());
+    handleSelectChange(/* @__PURE__ */ new Set());
   }
   function handleSelectOne(row) {
     if (selectedRowIds.has(row.id)) {
@@ -100,25 +78,16 @@ export function StatefulContainer(props: StatefulContainerPropsT) {
     }
     handleSelectChange(new Set(selectedRowIds));
   }
-
-  const handleIncludedRowsChange = React.useCallback(
-    (rows) => {
-      if (props.onIncludedRowsChange) {
-        props.onIncludedRowsChange(rows);
-      }
-    },
-    [props.onIncludedRowsChange]
-  );
-
-  const handleRowHighlightChange = React.useCallback(
-    (rowIndex, row) => {
-      if (props.onRowHighlightChange) {
-        props.onRowHighlightChange(rowIndex, row);
-      }
-    },
-    [props.rowHighlightIndex]
-  );
-
+  const handleIncludedRowsChange = React.useCallback((rows) => {
+    if (props.onIncludedRowsChange) {
+      props.onIncludedRowsChange(rows);
+    }
+  }, [props.onIncludedRowsChange]);
+  const handleRowHighlightChange = React.useCallback((rowIndex, row) => {
+    if (props.onRowHighlightChange) {
+      props.onRowHighlightChange(rowIndex, row);
+    }
+  }, [props.rowHighlightIndex]);
   return props.children({
     filters,
     onFilterAdd: handleFilterAdd,
@@ -135,6 +104,6 @@ export function StatefulContainer(props: StatefulContainerPropsT) {
     selectedRowIds,
     sortIndex,
     sortDirection,
-    textQuery,
+    textQuery
   });
 }

@@ -1,8 +1,5 @@
-import * as React from "react";
-
 import { styled, withWrapper, expandBorderStyles } from "../styles";
-
-const StyledTableElement = styled<{}>("div", ({ $theme }) => {
+const StyledTableElement = styled("div", ({ $theme }) => {
   return {
     ...expandBorderStyles($theme.borders.border300),
     backgroundColor: $theme.colors.tableBackground,
@@ -13,76 +10,50 @@ const StyledTableElement = styled<{}>("div", ({ $theme }) => {
     display: "flex",
     flexDirection: "column",
     height: "100%",
-    overflowX: "auto",
+    overflowX: "auto"
   };
 });
-
-export const StyledTable = withWrapper(
-  StyledTableElement,
-  (StyledComponent) =>
-    function StyledTable(props) {
-      return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
-    }
-);
-
-type HorizontalStyleProps = {
-  $width?: string;
-  $cursor?: string;
-};
-
-const StyledHeadElement = styled<HorizontalStyleProps>("div", ({ $theme, $width }) => {
+export const StyledTable = withWrapper(StyledTableElement, (StyledComponent) => function StyledTable2(props) {
+  return <StyledComponent data-baseweb="table-custom" role="grid" {...props} />;
+});
+const StyledHeadElement = styled("div", ({ $theme, $width }) => {
   return {
     backgroundColor: $theme.colors.tableHeadBackgroundColor,
     boxShadow: $theme.lighting.shadow400,
     display: "flex",
     flexGrow: 0,
-    width: $width ? $width : "100%",
+    width: $width ? $width : "100%"
   };
 });
-
-export const StyledHead = withWrapper(
-  StyledHeadElement,
-  (StyledComponent) =>
-    function StyledHead(props) {
-      return <StyledComponent role="row" {...props} />;
+export const StyledHead = withWrapper(StyledHeadElement, (StyledComponent) => function StyledHead2(props) {
+  return <StyledComponent role="row" {...props} />;
+});
+const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
+  const borderDir = $theme.direction === "rtl" ? "borderLeft" : "borderRight";
+  return {
+    ...$theme.typography.font350,
+    ...expandBorderStyles($theme.borders.border300),
+    borderTopStyle: "none",
+    borderBottomStyle: "none",
+    borderLeftStyle: "none",
+    color: $theme.colors.contentPrimary,
+    display: "flex",
+    justifyContent: "space-between",
+    paddingTop: $theme.sizing.scale500,
+    paddingRight: $theme.sizing.scale600,
+    paddingBottom: $theme.sizing.scale500,
+    paddingLeft: $theme.sizing.scale600,
+    cursor: $cursor ? $cursor : "inherit",
+    width: "100%",
+    ":last-of-type": {
+      [borderDir]: "none"
     }
-);
-
-const StyledHeadCellElement = styled<HorizontalStyleProps>(
-  "div",
-  ({ $theme, $cursor }) => {
-    const borderDir: string = $theme.direction === "rtl" ? "borderLeft" : "borderRight";
-    return {
-      ...$theme.typography.font350,
-      ...expandBorderStyles($theme.borders.border300),
-      borderTopStyle: "none",
-      borderBottomStyle: "none",
-      borderLeftStyle: "none",
-      color: $theme.colors.contentPrimary,
-      display: "flex",
-      justifyContent: "space-between",
-      paddingTop: $theme.sizing.scale500,
-      paddingRight: $theme.sizing.scale600,
-      paddingBottom: $theme.sizing.scale500,
-      paddingLeft: $theme.sizing.scale600,
-      cursor: $cursor ? $cursor : "inherit",
-      width: "100%",
-      ":last-of-type": {
-        [borderDir]: "none",
-      },
-    };
-  }
-);
-
-export const StyledHeadCell = withWrapper(
-  StyledHeadCellElement,
-  (StyledComponent) =>
-    function StyledHeadCell(props) {
-      return <StyledComponent role="columnheader" {...props} />;
-    }
-);
-
-export const StyledSortableLabel = styled<{}>("button", ({ $theme }) => {
+  };
+});
+export const StyledHeadCell = withWrapper(StyledHeadCellElement, (StyledComponent) => function StyledHeadCell2(props) {
+  return <StyledComponent role="columnheader" {...props} />;
+});
+export const StyledSortableLabel = styled("button", ({ $theme }) => {
   return {
     ...$theme.typography.font250,
     alignItems: "center",
@@ -95,47 +66,32 @@ export const StyledSortableLabel = styled<{}>("button", ({ $theme }) => {
     display: "flex",
     padding: 0,
     ":hover:enabled": {
-      cursor: "pointer",
+      cursor: "pointer"
     },
     ":disabled": {
-      color: $theme.colors.mono500,
-    },
+      color: $theme.colors.mono500
+    }
   };
 });
-
-const StyledBodyElement = styled<HorizontalStyleProps>("div", ({ $width }) => {
+const StyledBodyElement = styled("div", ({ $width }) => {
   return {
     width: $width ? $width : "100%",
     overflowX: "hidden",
     overflowY: "overlay",
-    flex: 1,
+    flex: 1
   };
 });
-
-export const StyledBody = withWrapper(
-  StyledBodyElement,
-  (StyledComponent) =>
-    function StyledBody(props) {
-      return <StyledComponent role="rowgroup" {...props} />;
-    }
-);
-
+export const StyledBody = withWrapper(StyledBodyElement, (StyledComponent) => function StyledBody2(props) {
+  return <StyledComponent role="rowgroup" {...props} />;
+});
 const StyledRowElement = styled("div", {
   display: "flex",
-  alignItems: "center",
+  alignItems: "center"
 });
-
-export const StyledRow = withWrapper(
-  StyledRowElement,
-  (StyledComponent) =>
-    function StyledRow(props) {
-      return <StyledComponent role="row" {...props} />;
-    }
-);
-
-type CellStyledProps = { $striped?: boolean };
-
-const StyledCellElement = styled<CellStyledProps>("div", ({ $theme, $striped }) => {
+export const StyledRow = withWrapper(StyledRowElement, (StyledComponent) => function StyledRow2(props) {
+  return <StyledComponent role="row" {...props} />;
+});
+const StyledCellElement = styled("div", ({ $theme, $striped }) => {
   return {
     ...$theme.typography.font200,
     backgroundColor: $striped ? $theme.colors.tableStripedBackground : null,
@@ -145,42 +101,28 @@ const StyledCellElement = styled<CellStyledProps>("div", ({ $theme, $striped }) 
     paddingTop: $theme.sizing.scale300,
     paddingRight: $theme.sizing.scale600,
     paddingBottom: $theme.sizing.scale300,
-    paddingLeft: $theme.sizing.scale600,
+    paddingLeft: $theme.sizing.scale600
   };
 });
-
-export const StyledCell = withWrapper(
-  StyledCellElement,
-  (StyledComponent) =>
-    function StyledCell(props) {
-      return <StyledComponent role="gridcell" {...props} />;
-    }
-);
-
-export const StyledFilterButton = styled<{
-  $disabled?: boolean;
-  $active?: boolean;
-}>("button", (props) => {
+export const StyledCell = withWrapper(StyledCellElement, (StyledComponent) => function StyledCell2(props) {
+  return <StyledComponent role="gridcell" {...props} />;
+});
+export const StyledFilterButton = styled("button", (props) => {
   function getIconColor() {
     if (props.$disabled) {
       return props.$theme.colors.mono500;
     }
-
     if (props.$active) {
       return props.$theme.colors.contentPrimary;
     }
-
     return props.$theme.colors.tableFilter;
   }
-
   function getIconHoverColor() {
     if (props.$disabled || props.$active) {
       return null;
     }
-
     return props.$theme.colors.contentPrimary;
   }
-
   return {
     backgroundColor: "transparent",
     borderLeftStyle: "none",
@@ -194,12 +136,11 @@ export const StyledFilterButton = styled<{
     paddingBottom: "none",
     paddingLeft: "none",
     ":hover": {
-      color: getIconHoverColor(),
-    },
+      color: getIconHoverColor()
+    }
   };
 });
-
-export const StyledFilterContent = styled<{}>("div", ({ $theme }) => ({
+export const StyledFilterContent = styled("div", ({ $theme }) => ({
   ...expandBorderStyles($theme.borders.border300),
   backgroundColor: $theme.colors.tableFilterBackground,
   borderRightStyle: "none",
@@ -207,19 +148,17 @@ export const StyledFilterContent = styled<{}>("div", ({ $theme }) => ({
   maxHeight: "196px",
   paddingRight: $theme.sizing.scale600,
   paddingLeft: $theme.sizing.scale600,
-  overflow: "auto",
+  overflow: "auto"
 }));
-
-export const StyledFilterHeading = styled<{}>("div", ({ $theme }) => ({
+export const StyledFilterHeading = styled("div", ({ $theme }) => ({
   ...$theme.typography.font250,
   color: $theme.colors.tableFilterHeading,
   paddingTop: $theme.sizing.scale500,
   paddingRight: $theme.sizing.scale600,
   paddingBottom: $theme.sizing.scale500,
-  paddingLeft: $theme.sizing.scale600,
+  paddingLeft: $theme.sizing.scale600
 }));
-
-export const StyledFilterFooter = styled<{}>("div", ({ $theme }) => ({
+export const StyledFilterFooter = styled("div", ({ $theme }) => ({
   backgroundColor: $theme.colors.tableFilterFooterBackground,
   paddingTop: $theme.sizing.scale300,
   paddingRight: $theme.sizing.scale100,
@@ -227,10 +166,9 @@ export const StyledFilterFooter = styled<{}>("div", ({ $theme }) => ({
   paddingLeft: $theme.sizing.scale100,
   display: "flex",
   justifyContent: "space-between",
-  minWidth: "216px",
+  minWidth: "216px"
 }));
-
-export const StyledAction = styled<{}>("button", ({ $theme }) => {
+export const StyledAction = styled("button", ({ $theme }) => {
   return {
     backgroundColor: "transparent",
     borderLeftStyle: "none",
@@ -245,7 +183,7 @@ export const StyledAction = styled<{}>("button", ({ $theme }) => {
     marginRight: $theme.sizing.scale100,
     marginLeft: $theme.sizing.scale100,
     ":hover:enabled": {
-      cursor: "pointer",
-    },
+      cursor: "pointer"
+    }
   };
 });

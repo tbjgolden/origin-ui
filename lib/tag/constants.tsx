@@ -1,25 +1,21 @@
 export const SIZE = {
   small: "small",
   medium: "medium",
-  large: "large",
+  large: "large"
 };
-
 export const VARIANT = Object.freeze({
   solid: "solid",
   light: "light",
-  outlined: "outlined",
+  outlined: "outlined"
 });
-
 export const KIND = {
   custom: "custom",
-  // semantic
   neutral: "neutral",
   primary: "primary",
   accent: "accent",
   positive: "positive",
   warning: "warning",
   negative: "negative",
-  // primitive
   black: "black",
   blue: "blue",
   green: "green",
@@ -27,5 +23,5 @@ export const KIND = {
   yellow: "yellow",
   orange: "orange",
   purple: "purple",
-  brown: "brown",
+  brown: "brown"
 };

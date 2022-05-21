@@ -1,8 +1,6 @@
 import * as React from "react";
-import type { BlockPropsT } from "./types";
 import { StyledBlock } from "./styled-components";
 import { getOverrides } from "../helpers/overrides";
-
 function Block({
   forwardedRef,
   children,
@@ -76,89 +74,10 @@ function Block({
   ...restProps
 }) {
   const [BaseBlock, baseBlockProps] = getOverrides(overrides.Block, StyledBlock);
-
-  return (
-    <BaseBlock
-      ref={forwardedRef}
-      $as={as}
-      $color={color}
-      $backgroundAttachment={backgroundAttachment}
-      $backgroundClip={backgroundClip}
-      $backgroundColor={backgroundColor}
-      $backgroundImage={backgroundImage}
-      $backgroundOrigin={backgroundOrigin}
-      $backgroundPosition={backgroundPosition}
-      $backgroundRepeat={backgroundRepeat}
-      $backgroundSize={backgroundSize}
-      $font={font}
-      $alignContent={alignContent}
-      $alignItems={alignItems}
-      $alignSelf={alignSelf}
-      $flexDirection={flexDirection}
-      $display={display}
-      $flex={flex}
-      $grid={grid}
-      $gridArea={gridArea}
-      $gridAutoColumns={gridAutoColumns}
-      $gridAutoFlow={gridAutoFlow}
-      $gridAutoRows={gridAutoRows}
-      $gridColumn={gridColumn}
-      $gridColumnEnd={gridColumnEnd}
-      $gridColumnGap={gridColumnGap}
-      $gridColumnStart={gridColumnStart}
-      $gridGap={gridGap}
-      $gridRow={gridRow}
-      $gridRowEnd={gridRowEnd}
-      $gridRowGap={gridRowGap}
-      $gridRowStart={gridRowStart}
-      $gridTemplate={gridTemplate}
-      $gridTemplateAreas={gridTemplateAreas}
-      $gridTemplateColumns={gridTemplateColumns}
-      $gridTemplateRows={gridTemplateRows}
-      $justifyContent={justifyContent}
-      $justifyItems={justifyItems}
-      $justifySelf={justifySelf}
-      $position={position}
-      $width={width}
-      $minWidth={minWidth}
-      $maxWidth={maxWidth}
-      $height={height}
-      $minHeight={minHeight}
-      $maxHeight={maxHeight}
-      $overflow={overflow}
-      $margin={margin}
-      $marginTop={marginTop}
-      $marginRight={marginRight}
-      $marginBottom={marginBottom}
-      $marginLeft={marginLeft}
-      $padding={padding}
-      $paddingTop={paddingTop}
-      $paddingRight={paddingRight}
-      $paddingBottom={paddingBottom}
-      $paddingLeft={paddingLeft}
-      $placeContent={placeContent}
-      $placeItems={placeItems}
-      $placeSelf={placeSelf}
-      $flexWrap={flexWrap}
-      $left={left}
-      $top={top}
-      $right={right}
-      $bottom={bottom}
-      $textOverflow={textOverflow}
-      $whiteSpace={whiteSpace}
-      data-baseweb="block"
-      {...restProps}
-      {...baseBlockProps}
-    >
-      {children}
-    </BaseBlock>
-  );
+  return <BaseBlock ref={forwardedRef} $as={as} $color={color} $backgroundAttachment={backgroundAttachment} $backgroundClip={backgroundClip} $backgroundColor={backgroundColor} $backgroundImage={backgroundImage} $backgroundOrigin={backgroundOrigin} $backgroundPosition={backgroundPosition} $backgroundRepeat={backgroundRepeat} $backgroundSize={backgroundSize} $font={font} $alignContent={alignContent} $alignItems={alignItems} $alignSelf={alignSelf} $flexDirection={flexDirection} $display={display} $flex={flex} $grid={grid} $gridArea={gridArea} $gridAutoColumns={gridAutoColumns} $gridAutoFlow={gridAutoFlow} $gridAutoRows={gridAutoRows} $gridColumn={gridColumn} $gridColumnEnd={gridColumnEnd} $gridColumnGap={gridColumnGap} $gridColumnStart={gridColumnStart} $gridGap={gridGap} $gridRow={gridRow} $gridRowEnd={gridRowEnd} $gridRowGap={gridRowGap} $gridRowStart={gridRowStart} $gridTemplate={gridTemplate} $gridTemplateAreas={gridTemplateAreas} $gridTemplateColumns={gridTemplateColumns} $gridTemplateRows={gridTemplateRows} $justifyContent={justifyContent} $justifyItems={justifyItems} $justifySelf={justifySelf} $position={position} $width={width} $minWidth={minWidth} $maxWidth={maxWidth} $height={height} $minHeight={minHeight} $maxHeight={maxHeight} $overflow={overflow} $margin={margin} $marginTop={marginTop} $marginRight={marginRight} $marginBottom={marginBottom} $marginLeft={marginLeft} $padding={padding} $paddingTop={paddingTop} $paddingRight={paddingRight} $paddingBottom={paddingBottom} $paddingLeft={paddingLeft} $placeContent={placeContent} $placeItems={placeItems} $placeSelf={placeSelf} $flexWrap={flexWrap} $left={left} $top={top} $right={right} $bottom={bottom} $textOverflow={textOverflow} $whiteSpace={whiteSpace} data-baseweb="block" {...restProps} {...baseBlockProps}>{children}</BaseBlock>;
 }
-
-const BlockComponent = React.forwardRef<BlockPropsT, HTMLElement>(
-  (props: BlockPropsT, ref) => {
-    return <Block {...props} forwardedRef={ref} />;
-  }
-);
+const BlockComponent = React.forwardRef((props, ref) => {
+  return <Block {...props} forwardedRef={ref} />;
+});
 BlockComponent.displayName = "Block";
 export default BlockComponent;

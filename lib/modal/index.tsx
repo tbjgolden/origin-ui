@@ -9,6 +9,5 @@ export {
   Close as StyledClose,
   ModalHeader,
   ModalBody,
-  ModalFooter,
+  ModalFooter
 } from "./styled-components";
-export type * from "./types";

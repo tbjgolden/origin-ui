@@ -1,65 +1,32 @@
 import * as React from "react";
-
 import { Block } from "../block";
 import { mergeOverrides } from "../helpers/overrides";
 import { getMediaQueries, getMediaQuery } from "../helpers/responsive-helpers";
-import type { FlexGridItemPropsT } from "./types";
-import type { ResponsiveT, ScaleT } from "../block";
-import type { StyleOverrideT } from "../helpers/overrides";
-import type { ThemeT } from "../styles";
-
 export const flexGridItemMediaQueryStyle = ({
   $theme,
   flexGridColumnCount: colCount,
   flexGridColumnGap,
   flexGridRowGap,
   flexGridItemIndex: itemIndex,
-  flexGridItemCount: itemCount,
-}: {
-  $theme: ThemeT;
-  flexGridColumnCount: number;
-  flexGridColumnGap: ScaleT;
-  flexGridRowGap: ScaleT;
-  flexGridItemIndex: number;
-  flexGridItemCount: number;
+  flexGridItemCount: itemCount
 }) => {
-  // 0px needed for calc() to behave properly
   const colGap = $theme.sizing[flexGridColumnGap] || flexGridColumnGap || "0px";
   const colGapQuantity = Number.parseFloat(colGap);
   const colGapUnit = colGap.match(/[A-Za-z]+/)[0];
   const rowGap = $theme.sizing[flexGridRowGap] || flexGridRowGap || "0px";
   const rowGapQuantity = Number.parseFloat(rowGap);
-  const widthCalc = `(100% - ${
-    (colCount - 1) * colGapQuantity
-  }${colGapUnit}) / ${colCount}`;
-  const marginDirection: string =
-    $theme.direction === "rtl" ? "marginLeft" : "marginRight";
+  const widthCalc = `(100% - ${(colCount - 1) * colGapQuantity}${colGapUnit}) / ${colCount}`;
+  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return Object.freeze({
-    // Subtract .5px to avoid rounding issues on IE/Edge
-    // See https://github.com/uber/baseweb/pull/1748
     width: `calc(${widthCalc} - .5px)`,
-    // Add colGap except at end of row
-    [marginDirection]:
-      colGapQuantity && //flowlint-line sketchy-number-and:off
-      ((itemIndex + 1) % colCount !== 0 ? colGap : 0),
-    // Add rowGap except at end of column
-    marginBottom:
-      rowGapQuantity && //flowlint-line sketchy-number-and:off
-      (Math.trunc(itemIndex / colCount) !== Math.trunc((itemCount - 1) / colCount)
-        ? rowGap
-        : 0),
-    // Add space to make up for missing columns if last row ends early
-    ...(itemIndex === itemCount - 1 && (itemIndex + 1) % colCount !== 0
-      ? {
-          [marginDirection]: `calc(${
-            colCount - (itemIndex % colCount) - 1
-          } * (${colGap} + ${widthCalc}))`,
-        }
-      : {}),
+    [marginDirection]: colGapQuantity && ((itemIndex + 1) % colCount !== 0 ? colGap : 0),
+    marginBottom: rowGapQuantity && (Math.trunc(itemIndex / colCount) !== Math.trunc((itemCount - 1) / colCount) ? rowGap : 0),
+    ...itemIndex === itemCount - 1 && (itemIndex + 1) % colCount !== 0 ? {
+      [marginDirection]: `calc(${colCount - itemIndex % colCount - 1} * (${colGap} + ${widthCalc}))`
+    } : {}
   });
 };
-
-export const getResponsiveValue = <T,>(responsive?: ResponsiveT<T>, i: number): T => {
+export const getResponsiveValue = (responsive, i) => {
   if (!responsive) {
     return null;
   }
@@ -68,33 +35,19 @@ export const getResponsiveValue = <T,>(responsive?: ResponsiveT<T>, i: number): 
   }
   return responsive[i] || responsive[responsive.length - 1];
 };
-
 export const flexGridItemStyle = ({
   $flexGridColumnCount,
   $flexGridColumnGap,
   $flexGridRowGap,
   $flexGridItemIndex,
   $flexGridItemCount,
-  $theme,
-}: {
-  $flexGridColumnCount?: ResponsiveT<number>;
-  $flexGridColumnGap?: ResponsiveT<ScaleT>;
-  $flexGridRowGap?: ResponsiveT<ScaleT>;
-  $flexGridItemIndex?: number;
-  $flexGridItemCount?: number;
-  $theme: ThemeT;
-}): StyleOverrideT => {
+  $theme
+}) => {
   const baseFlexGridItemStyle = { flexGrow: 1 };
   const mediaQueries = getMediaQueries($theme.breakpoints);
-
-  // Get the length of the longest responsive array
-  const maxResponsiveLength = Math.max(
-    ...[$flexGridColumnCount, $flexGridColumnGap, $flexGridRowGap].map((r) => {
-      return Array.isArray(r) ? r.length : 0;
-    })
-  );
-
-  // No media queries for non-responsive FlexGrids
+  const maxResponsiveLength = Math.max(...[$flexGridColumnCount, $flexGridColumnGap, $flexGridRowGap].map((r) => {
+    return Array.isArray(r) ? r.length : 0;
+  }));
   if (maxResponsiveLength < 2) {
     return {
       ...baseFlexGridItemStyle,
@@ -104,30 +57,19 @@ export const flexGridItemStyle = ({
         flexGridColumnGap: getResponsiveValue($flexGridColumnGap, 0) || 0,
         flexGridRowGap: getResponsiveValue($flexGridRowGap, 0) || 0,
         flexGridItemIndex: $flexGridItemIndex || 0,
-        flexGridItemCount: $flexGridItemCount || 1,
-      }),
+        flexGridItemCount: $flexGridItemCount || 1
+      })
     };
   }
-
-  // Generate style by iterating up to maxResponsiveLength for each responsive
-  // breakpoint. Will end up with styles for one of the following media queries
-  // depending on maxResponsiveLength:
-  // - {mobile, small}
-  // - {mobile, small, medium}
-  // - {mobile, small, medium, large}
   return [...new Array(maxResponsiveLength).keys()].reduce((acc, i) => {
     const [flexGridColumnCountValue, flexGridColumnGapValue, flexGridRowGapValue] = [
       $flexGridColumnCount,
       $flexGridColumnGap,
-      $flexGridRowGap,
+      $flexGridRowGap
     ].map((r) => {
       return getResponsiveValue(r, i);
     });
-    const mediaQuery =
-      i === 0
-        ? // Custom media query needed so :nth-child styles don't conflict
-          getMediaQuery(0)
-        : mediaQueries[i - 1];
+    const mediaQuery = i === 0 ? getMediaQuery(0) : mediaQueries[i - 1];
     if (mediaQuery) {
       acc[mediaQuery] = flexGridItemMediaQueryStyle({
         $theme,
@@ -135,13 +77,12 @@ export const flexGridItemStyle = ({
         flexGridColumnGap: flexGridColumnGapValue || 0,
         flexGridRowGap: flexGridRowGapValue || 0,
         flexGridItemIndex: $flexGridItemIndex || 0,
-        flexGridItemCount: $flexGridItemCount || 1,
+        flexGridItemCount: $flexGridItemCount || 1
       });
     }
     return acc;
   }, baseFlexGridItemStyle);
 };
-
 const FlexGridItem = ({
   forwardedRef,
   children,
@@ -153,39 +94,17 @@ const FlexGridItem = ({
   flexGridItemIndex,
   flexGridItemCount,
   ...restProps
-}: FlexGridItemPropsT & { forwardedRef: any }): React.Node => {
+}) => {
   const flexGridItemOverrides = {
     Block: {
-      style: flexGridItemStyle,
-    },
+      style: flexGridItemStyle
+    }
   };
-  const blockOverrides = overrides
-    ? mergeOverrides(flexGridItemOverrides, overrides)
-    : flexGridItemOverrides;
-  return (
-    <Block
-      // coerced to any because of how react components are typed.
-      // cannot guarantee an html element
-      ref={forwardedRef}
-      as={as}
-      overrides={blockOverrides}
-      $flexGridColumnCount={flexGridColumnCount}
-      $flexGridColumnGap={flexGridColumnGap}
-      $flexGridRowGap={flexGridRowGap}
-      $flexGridItemIndex={flexGridItemIndex}
-      $flexGridItemCount={flexGridItemCount}
-      data-baseweb="flex-grid-item"
-      {...restProps}
-    >
-      {children}
-    </Block>
-  );
+  const blockOverrides = overrides ? mergeOverrides(flexGridItemOverrides, overrides) : flexGridItemOverrides;
+  return <Block ref={forwardedRef} as={as} overrides={blockOverrides} $flexGridColumnCount={flexGridColumnCount} $flexGridColumnGap={flexGridColumnGap} $flexGridRowGap={flexGridRowGap} $flexGridItemIndex={flexGridItemIndex} $flexGridItemCount={flexGridItemCount} data-baseweb="flex-grid-item" {...restProps}>{children}</Block>;
 };
-
-const FlexGridItemComponent = React.forwardRef<FlexGridItemPropsT, HTMLElement>(
-  (props: FlexGridItemPropsT, ref) => {
-    return <FlexGridItem {...props} forwardedRef={ref} />;
-  }
-);
+const FlexGridItemComponent = React.forwardRef((props, ref) => {
+  return <FlexGridItem {...props} forwardedRef={ref} />;
+});
 FlexGridItemComponent.displayName = "FlexGridItem";
 export default FlexGridItemComponent;

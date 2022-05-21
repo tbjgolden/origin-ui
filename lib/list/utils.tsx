@@ -1,7 +1,5 @@
 import { ARTWORK_SIZES } from "./constants";
-import type { ArtworkSizesT } from "./types";
-
-export function artworkSizeToValue(artworkSize: ArtworkSizesT, isSublist: boolean) {
+export function artworkSizeToValue(artworkSize, isSublist) {
   if (isSublist) {
     switch (artworkSize) {
       case ARTWORK_SIZES.LARGE:
@@ -11,7 +9,6 @@ export function artworkSizeToValue(artworkSize: ArtworkSizesT, isSublist: boolea
         return 16;
     }
   }
-
   switch (artworkSize) {
     case ARTWORK_SIZES.SMALL:
       return 16;

@@ -10,22 +10,11 @@ import grid from "../shared/grid";
 import lighting from "../shared/lighting";
 import mediaQuery from "../shared/media-query";
 import sizing from "../shared/sizing";
-
-import type { PrimitivesT, ColorTokensT } from "../types";
-import type { ThemeT } from "../../styles/types";
-
-export default function createDarkTheme(
-  // Used to derive typography and color theme properties
-  primitives?: $Shape<PrimitivesT> = {},
-  // Used to override default theme property values derived from primitives
-  overrides?: {}
-): ThemeT {
-  // Extract font tokens and color tokens from primitives
+export default function createDarkTheme(primitives = {}, overrides) {
   const { primaryFontFamily, ...customColorTokens } = primitives;
-  // Assemble color tokens by overriding defaults with custom color tokens
-  const colorTokens: ColorTokensT = {
+  const colorTokens = {
     ...defaultColorTokens,
-    ...customColorTokens,
+    ...customColorTokens
   };
   const theme = {
     animation,
@@ -34,23 +23,17 @@ export default function createDarkTheme(
     colors: {
       ...colorTokens,
       ...getComponentColorTokens(colorTokens),
-      ...getSemanticColorTokens(colorTokens),
+      ...getSemanticColorTokens(colorTokens)
     },
     direction: "auto",
     grid,
     lighting,
     mediaQuery,
     sizing,
-    // If primaryFontFamily is not provided, we use our default font tokens
-    typography: primaryFontFamily
-      ? getTypography({ primaryFontFamily })
-      : getTypography(),
-    // TODO(#2318) Remove in v11, the next major version.
-    // Do not use.
+    typography: primaryFontFamily ? getTypography({ primaryFontFamily }) : getTypography(),
     zIndex: {
-      modal: 2000,
-    },
+      modal: 2e3
+    }
   };
-
   return deepMerge(theme, overrides);
 }

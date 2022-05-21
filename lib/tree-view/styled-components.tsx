@@ -1,11 +1,6 @@
 import { styled } from "../styles";
-
-export const StyledTreeItemList = styled<{
-  $indentGuides?: boolean;
-  $isChildNode?: boolean;
-  $expanded?: boolean;
-}>("ul", ({ $theme, $indentGuides, $isChildNode, $expanded = true }) => {
-  const direction: string = $theme.direction === "rtl" ? "Right" : "Left";
+export const StyledTreeItemList = styled("ul", ({ $theme, $indentGuides, $isChildNode, $expanded = true }) => {
+  const direction = $theme.direction === "rtl" ? "Right" : "Left";
   return {
     marginTop: 0,
     marginBottom: 0,
@@ -17,35 +12,26 @@ export const StyledTreeItemList = styled<{
     position: "relative",
     outline: "none",
     display: $expanded ? "block" : "none",
-    [`border${direction}`]:
-      $indentGuides && $isChildNode ? `1px solid ${$theme.colors.borderOpaque}` : "none",
+    [`border${direction}`]: $indentGuides && $isChildNode ? `1px solid ${$theme.colors.borderOpaque}` : "none"
   };
 });
-
-export const StyledTreeItem = styled<{ $isLeafNode?: boolean }>(
-  "li",
-  ({ $theme, $isLeafNode }) => {
-    return {
-      cursor: $isLeafNode ? "auto" : "pointer",
-      marginTop: 0,
-      marginBottom: 0,
-      marginLeft: 0,
-      marginRight: 0,
-      overflow: "auto",
-      paddingTop: 0,
-      paddingBottom: 0,
-      paddingLeft: 0,
-      paddingRight: 0,
-      position: "relative",
-      outline: "none",
-    };
-  }
-);
-
-export const StyledItemContent = styled<{
-  $isSelected: boolean;
-  $isFocusVisible: boolean;
-}>("div", ({ $theme, $isSelected, $isFocusVisible }) => {
+export const StyledTreeItem = styled("li", ({ $theme, $isLeafNode }) => {
+  return {
+    cursor: $isLeafNode ? "auto" : "pointer",
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    overflow: "auto",
+    paddingTop: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    position: "relative",
+    outline: "none"
+  };
+});
+export const StyledItemContent = styled("div", ({ $theme, $isSelected, $isFocusVisible }) => {
   return {
     ...$theme.typography.font300,
     alignItems: "center",
@@ -60,31 +46,26 @@ export const StyledItemContent = styled<{
     paddingRight: $theme.sizing.scale200,
     paddingTop: $theme.sizing.scale100,
     paddingBottom: $theme.sizing.scale100,
-    outline:
-      $isSelected && $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+    outline: $isSelected && $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
     outlineOffset: "-3px",
     ":hover": {
-      backgroundColor: $theme.colors.mono300,
-    },
+      backgroundColor: $theme.colors.mono300
+    }
   };
 });
-
-export const StyledIconContainer = styled<{}>("div", ({ $theme }) => {
-  const marginDirection: string =
-    $theme.direction === "rtl" ? "marginLeft" : "marginRight";
+export const StyledIconContainer = styled("div", ({ $theme }) => {
+  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
     marginTop: 0,
     marginBottom: 0,
-    [marginDirection]: $theme.sizing.scale200,
+    [marginDirection]: $theme.sizing.scale200
   };
 });
-
-export const StyledNoIconContainer = styled<{}>("div", ({ $theme }) => {
-  const marginDirection: string =
-    $theme.direction === "rtl" ? "marginLeft" : "marginRight";
+export const StyledNoIconContainer = styled("div", ({ $theme }) => {
+  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     alignItems: "center",
     display: "flex",
@@ -93,12 +74,11 @@ export const StyledNoIconContainer = styled<{}>("div", ({ $theme }) => {
     marginBottom: 0,
     [marginDirection]: $theme.sizing.scale200,
     width: 0,
-    height: "1em",
+    height: "1em"
   };
 });
-
-export const StyledLabelInteractable = styled<{}>("div", () => {
+export const StyledLabelInteractable = styled("div", () => {
   return {
-    width: "100%",
+    width: "100%"
   };
 });

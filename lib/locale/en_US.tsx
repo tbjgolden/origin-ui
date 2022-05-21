@@ -10,7 +10,6 @@ import drawer from "../drawer/locale";
 import pagination from "../pagination/locale";
 import select from "../select/locale";
 import toast from "../toast/locale";
-
 const en_US = {
   accordion,
   breadcrumbs,
@@ -23,7 +22,6 @@ const en_US = {
   drawer,
   pagination,
   select,
-  toast,
+  toast
 };
-
 export default en_US;

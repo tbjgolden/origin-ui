@@ -1,44 +1,27 @@
-import type {
-  ColorTokensT,
-  CoreSemanticColorTokensT,
-  CoreExtensionSemanticColorTokensT,
-  SemanticColorTokensT,
-} from "../types";
 import colorTokens from "./color-tokens";
 import { hexToRgb as hexToRgba } from "../../styles/util";
 import colors from "../../tokens/colors";
-
-export default (
-  // themePrimitives or foundation colors
-  foundation: ColorTokensT = colorTokens
-): SemanticColorTokensT => {
-  const core: CoreSemanticColorTokensT = {
-    // Background
+export default (foundation = colorTokens) => {
+  const core = {
     backgroundPrimary: foundation.primaryB,
     backgroundSecondary: colors.gray800,
     backgroundTertiary: colors.gray700,
     backgroundInversePrimary: foundation.primaryA,
     backgroundInverseSecondary: colors.gray300,
-
-    // Content
     contentPrimary: colors.white,
     contentSecondary: colors.gray300,
     contentTertiary: colors.gray400,
     contentInversePrimary: colors.black,
     contentInverseSecondary: colors.gray700,
     contentInverseTertiary: colors.gray600,
-
-    // Border
     borderOpaque: colors.gray700,
     borderTransparent: hexToRgba(foundation.primaryA, "0.08"),
     borderSelected: foundation.primaryA,
     borderInverseOpaque: colors.gray400,
     borderInverseTransparent: hexToRgba(foundation.primaryB, "0.2"),
-    borderInverseSelected: foundation.primaryB,
+    borderInverseSelected: foundation.primaryB
   };
-
-  const coreExtensions: CoreExtensionSemanticColorTokensT = {
-    // Backgrounds
+  const coreExtensions = {
     backgroundStateDisabled: colors.gray800,
     backgroundOverlayDark: hexToRgba(colors.black, "0.3"),
     backgroundOverlayLight: hexToRgba(colors.black, "0.08"),
@@ -52,8 +35,6 @@ export default (
     backgroundLightWarning: colors.yellow700,
     backgroundAlwaysDark: colors.gray900,
     backgroundAlwaysLight: colors.gray100,
-
-    // Content
     contentStateDisabled: colors.gray600,
     contentAccent: colors.blue300,
     contentOnColor: colors.white,
@@ -61,16 +42,12 @@ export default (
     contentNegative: colors.red300,
     contentWarning: colors.yellow300,
     contentPositive: colors.green300,
-
-    // Border
     borderStateDisabled: colors.gray800,
     borderAccent: colors.blue400,
     borderAccentLight: colors.blue500,
     borderNegative: colors.red500,
     borderWarning: colors.yellow500,
     borderPositive: colors.green500,
-
-    // Programs
     safety: colors.blue400,
     eatsGreen400: colors.green400,
     freightBlue400: colors.cobalt400,
@@ -79,11 +56,10 @@ export default (
     rewardsTier2: colors.yellow400,
     rewardsTier3: colors.platinum400,
     rewardsTier4: colors.gray200,
-    membership: colors.yellow600,
+    membership: colors.yellow600
   };
-
   return {
     ...core,
-    ...coreExtensions,
+    ...coreExtensions
   };
 };

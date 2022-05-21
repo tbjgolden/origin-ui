@@ -1,56 +1,31 @@
 import React from "react";
-// needs to be removed from here
 import { COUNTRIES, STATE_CHANGE_TYPE } from "./constants";
-import type {
-  StatefulPhoneInputContainerPropsT,
-  StateT,
-  StateReducerT,
-  StateChangeT,
-} from "./types";
 import defaultProps from "./default-props";
-import type { OnChangeParamsT } from "../select/types";
-
-const defaultStateReducer: StateReducerT = (type, nextState) => {
+const defaultStateReducer = (type, nextState) => {
   return nextState;
 };
-
-export default class StatefulPhoneInputContainer extends React.Component<
-  StatefulPhoneInputContainerPropsT,
-  StateT
-> {
-  static defaultProps = {
-    initialState: {
-      text: defaultProps.text,
-      country: defaultProps.country,
-    },
-    onTextChange: defaultProps.onTextChange,
-    onCountryChange: defaultProps.onTextChange,
-    stateReducer: defaultStateReducer,
-    overrides: {},
-  };
-
-  state = { text: "", country: COUNTRIES.US, ...this.props.initialState };
-
-  internalSetState = (type: StateChangeT, nextState: $Shape<StateT>) => {
-    this.setState(this.props.stateReducer(type, nextState, this.state));
-  };
-
-  onTextChange = (event: SyntheticInputEvent<HTMLInputElement>) => {
-    this.props.onTextChange(event);
-    this.internalSetState(STATE_CHANGE_TYPE.textChange, {
-      text: event.target.value,
-    });
-  };
-
-  onCountryChange = (event: OnChangeParamsT) => {
-    this.props.onCountryChange(event);
-    if (event.option && event.option.id) {
-      this.internalSetState(STATE_CHANGE_TYPE.countryChange, {
-        country: COUNTRIES[event.option.id],
+export default class StatefulPhoneInputContainer extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = { text: "", country: COUNTRIES.US, ...this.props.initialState };
+    this.internalSetState = (type, nextState) => {
+      this.setState(this.props.stateReducer(type, nextState, this.state));
+    };
+    this.onTextChange = (event) => {
+      this.props.onTextChange(event);
+      this.internalSetState(STATE_CHANGE_TYPE.textChange, {
+        text: event.target.value
       });
-    }
-  };
-
+    };
+    this.onCountryChange = (event) => {
+      this.props.onCountryChange(event);
+      if (event.option && event.option.id) {
+        this.internalSetState(STATE_CHANGE_TYPE.countryChange, {
+          country: COUNTRIES[event.option.id]
+        });
+      }
+    };
+  }
   render() {
     return this.props.children({
       ...defaultProps,
@@ -73,7 +48,17 @@ export default class StatefulPhoneInputContainer extends React.Component<
       country: this.state.country,
       text: this.state.text,
       onTextChange: this.onTextChange,
-      onCountryChange: this.onCountryChange,
+      onCountryChange: this.onCountryChange
     });
   }
 }
+StatefulPhoneInputContainer.defaultProps = {
+  initialState: {
+    text: defaultProps.text,
+    country: defaultProps.country
+  },
+  onTextChange: defaultProps.onTextChange,
+  onCountryChange: defaultProps.onTextChange,
+  stateReducer: defaultStateReducer,
+  overrides: {}
+};

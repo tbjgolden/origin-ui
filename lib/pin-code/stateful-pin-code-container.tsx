@@ -1,40 +1,19 @@
 import React from "react";
-
-import type {
-  ChangeEventT,
-  StatefulPinCodeContainerPropsT,
-  StatefulPinCodeContainerStateT,
-  StateReducerT,
-} from "./types";
 import defaultProps from "./default-props";
 import { STATE_CHANGE_TYPE } from "../input";
-
-const stateReducer: StateReducerT = (type, nextState) => {
+const stateReducer = (type, nextState) => {
   return nextState;
 };
-
-export default class StatefulPinCodeContainer extends React.Component<
-  StatefulPinCodeContainerPropsT,
-  StatefulPinCodeContainerStateT
-> {
-  static defaultProps = {
-    initialState: { values: defaultProps.values },
-    stateReducer,
-    onChange: defaultProps.onChange,
-  };
-
-  state = this.props.initialState;
-
-  handleChange = ({ values, event }: ChangeEventT) => {
-    this.props.onChange({ values, event });
-    const nextState = this.props.stateReducer(
-      STATE_CHANGE_TYPE.change,
-      { values },
-      this.state
-    );
-    this.setState(nextState);
-  };
-
+export default class StatefulPinCodeContainer extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.state = this.props.initialState;
+    this.handleChange = ({ values, event }) => {
+      this.props.onChange({ values, event });
+      const nextState = this.props.stateReducer(STATE_CHANGE_TYPE.change, { values }, this.state);
+      this.setState(nextState);
+    };
+  }
   render() {
     return this.props.children({
       ...defaultProps,
@@ -55,7 +34,12 @@ export default class StatefulPinCodeContainer extends React.Component<
       manageFocus: this.props.manageFocus,
       values: this.state.values,
       onChange: this.handleChange,
-      mask: this.props.mask,
+      mask: this.props.mask
     });
   }
 }
+StatefulPinCodeContainer.defaultProps = {
+  initialState: { values: defaultProps.values },
+  stateReducer,
+  onChange: defaultProps.onChange
+};

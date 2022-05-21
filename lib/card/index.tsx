@@ -1,5 +1,3 @@
-/* @flow */
-
 export { default as Card, hasThumbnail } from "./card";
 export {
   Action as StyledAction,
@@ -9,6 +7,5 @@ export {
   Thumbnail as StyledThumbnail,
   Title as StyledTitle,
   Root as StyledRoot,
-  Root as StyledWrapper,
+  Root as StyledWrapper
 } from "./styled-components";
-export type * from "./types";

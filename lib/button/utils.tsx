@@ -1,5 +1,3 @@
-import type { ButtonPropsT, SharedStylePropsT } from "./types";
-
 export function getSharedProps({
   colors,
   disabled,
@@ -7,8 +5,8 @@ export function getSharedProps({
   isSelected,
   kind,
   shape,
-  size,
-}: ButtonPropsT): $Shape<SharedStylePropsT> {
+  size
+}) {
   return {
     $colors: colors,
     $disabled: disabled,
@@ -16,6 +14,6 @@ export function getSharedProps({
     $isSelected: isSelected,
     $kind: kind,
     $shape: shape,
-    $size: size,
+    $size: size
   };
 }

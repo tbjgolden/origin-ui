@@ -1,9 +1,4 @@
-export type ModalLocaleT = {
-  close: string;
-};
-
 const locale = {
-  close: "Close",
+  close: "Close"
 };
-
 export default locale;

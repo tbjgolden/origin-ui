@@ -1,15 +1,8 @@
 import { styled } from "../styles";
-
-export const Link = styled<{
-  $isAnimateUnderline: boolean;
-  $isFocusVisible: boolean;
-}>("a", ({ $theme, $isAnimateUnderline, $isFocusVisible }) => {
+export const Link = styled("a", ({ $theme, $isAnimateUnderline, $isFocusVisible }) => {
   const { colors, typography, animation, direction } = $theme;
-
   const underlineLTR = `linear-gradient(transparent calc(100% - 1px), ${colors.linkHover} 1px), linear-gradient(transparent calc(100% - 1px), ${colors.linkText} 1px)`;
-
   const underlineRTL = `linear-gradient(transparent calc(100% - 1px), ${colors.linkText} 1px), linear-gradient(transparent calc(100% - 1px), ${colors.linkHover} 1px)`;
-
   return {
     color: colors.linkText,
     ...typography.font350,
@@ -24,25 +17,21 @@ export const Link = styled<{
     willChange: "background-size",
     backgroundSize: direction === "rtl" ? "100% 100%, 100% 100%" : "0% 100%, 100% 100%",
     backgroundRepeat: "no-repeat",
-    backgroundImage: $isAnimateUnderline
-      ? direction === "rtl"
-        ? underlineRTL
-        : underlineLTR
-      : "none",
+    backgroundImage: $isAnimateUnderline ? direction === "rtl" ? underlineRTL : underlineLTR : "none",
     ":hover": {
       color: colors.linkHover,
-      backgroundSize: direction === "rtl" ? "0% 100%, 100% 100%" : "100% 100%, 100% 100%",
+      backgroundSize: direction === "rtl" ? "0% 100%, 100% 100%" : "100% 100%, 100% 100%"
     },
     ":focus": {
       outline: $isFocusVisible ? `3px solid ${colors.accent}` : "none",
       outlineOffset: "1px",
-      textDecoration: "none",
+      textDecoration: "none"
     },
     ":visited": {
-      color: colors.linkVisited,
+      color: colors.linkVisited
     },
     ":active": {
-      color: colors.linkActive,
-    },
+      color: colors.linkActive
+    }
   };
 });

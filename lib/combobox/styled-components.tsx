@@ -1,12 +1,8 @@
 import { SIZE } from "../input";
 import { styled } from "../styles";
-import type { FontT } from "../themes/types";
-
 export const StyledRoot = styled("div", {});
-
 export const StyledInputContainer = styled("div", {});
-
-export const StyledListBox = styled<{ $width: string }>("ul", ({ $theme, $width }) => {
+export const StyledListBox = styled("ul", ({ $theme, $width }) => {
   return {
     backgroundColor: $theme.colors.backgroundPrimary,
     marginBlockStart: "unset",
@@ -15,49 +11,40 @@ export const StyledListBox = styled<{ $width: string }>("ul", ({ $theme, $width 
     overflowY: "auto",
     outline: "none",
     paddingInlineStart: "unset",
-    width: $width,
+    width: $width
   };
 });
-
-function buildStylesForSize(
-  size,
-  theme
-): FontT &
-  ({ height: string; paddingLeft?: string } | { height: string; paddingRight?: string }) {
-  const paddingDir: string = theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
+function buildStylesForSize(size, theme) {
+  const paddingDir = theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   switch (size) {
     case SIZE.mini:
       return {
         ...theme.typography.ParagraphXSmall,
         height: "30px",
-        [paddingDir]: theme.sizing.scale200,
+        [paddingDir]: theme.sizing.scale200
       };
     case SIZE.compact:
       return {
         ...theme.typography.ParagraphSmall,
         height: "36px",
-        [paddingDir]: theme.sizing.scale400,
+        [paddingDir]: theme.sizing.scale400
       };
     case SIZE.large:
       return {
         ...theme.typography.ParagraphLarge,
         height: "56px",
-        [paddingDir]: theme.sizing.scale650,
+        [paddingDir]: theme.sizing.scale650
       };
     case SIZE.default:
     default:
       return {
         ...theme.typography.ParagraphMedium,
         height: "48px",
-        [paddingDir]: theme.sizing.scale550,
+        [paddingDir]: theme.sizing.scale550
       };
   }
 }
-
-export const StyledListItem = styled<{
-  $isSelected: boolean;
-  $size: $Keys<typeof SIZE>;
-}>("li", ({ $isSelected, $theme, $size }) => {
+export const StyledListItem = styled("li", ({ $isSelected, $theme, $size }) => {
   return {
     ...buildStylesForSize($size, $theme),
     alignItems: "center",
@@ -66,7 +53,7 @@ export const StyledListItem = styled<{
     display: "flex",
     listStyle: "none",
     ":hover": {
-      backgroundColor: $isSelected ? null : $theme.colors.comboboxListItemHover,
-    },
+      backgroundColor: $isSelected ? null : $theme.colors.comboboxListItemHover
+    }
   };
 });

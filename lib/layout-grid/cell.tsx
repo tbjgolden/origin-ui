@@ -2,8 +2,6 @@ import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { StyledCell as DefaultStyledCell } from "./styled-components";
 import { GridContext } from "./grid";
-import type { CellPropsT } from "./types";
-
 export default function Cell({
   align,
   children,
@@ -14,24 +12,9 @@ export default function Cell({
   order,
   skip,
   span,
-  overrides = {},
-}: CellPropsT) {
+  overrides = {}
+}) {
   const [StyledCell, overrideProps] = getOverrides(overrides.Cell, DefaultStyledCell);
   const gridContext = React.useContext(GridContext);
-  return (
-    <StyledCell
-      $align={align}
-      // TODO(v11): Remove the four grid props, get them solely from GridContext
-      $gridColumns={gridColumns || gridContext.gridColumns}
-      $gridGaps={gridGaps || gridContext.gridGaps}
-      $gridGutters={gridGutters || gridContext.gridGutters}
-      $gridUnit={gridUnit || gridContext.gridUnit}
-      $order={order}
-      $skip={skip}
-      $span={span}
-      {...overrideProps}
-    >
-      {children}
-    </StyledCell>
-  );
+  return <StyledCell $align={align} $gridColumns={gridColumns || gridContext.gridColumns} $gridGaps={gridGaps || gridContext.gridGaps} $gridGutters={gridGutters || gridContext.gridGutters} $gridUnit={gridUnit || gridContext.gridUnit} $order={order} $skip={skip} $span={span} {...overrideProps}>{children}</StyledCell>;
 }

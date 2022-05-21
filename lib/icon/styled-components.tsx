@@ -1,20 +1,9 @@
 import { styled } from "../styles";
-import type { ThemeT } from "../styles/types";
-import type { StyledComponentArgsT } from "./types";
-
 export function getSvgStyles({
   $theme,
   $size,
-  $color,
-}: StyledComponentArgsT & {
-  $theme: ThemeT;
-}): {
-  display: string;
-  fill: string;
-  color: string;
-  height: string;
-  width: string;
-} {
+  $color
+}) {
   let size = $theme.sizing.scale600;
   if ($size) {
     if ($theme.sizing[$size]) {
@@ -25,19 +14,16 @@ export function getSvgStyles({
       size = $size;
     }
   }
-
   let color = "currentColor";
   if ($color) {
     color = $theme.colors[$color] ? $theme.colors[$color] : $color;
   }
-
   return {
     display: "inline-block",
     fill: color,
-    color: color,
+    color,
     height: size,
-    width: size,
+    width: size
   };
 }
-
-export const Svg = styled<StyledComponentArgsT>("svg", getSvgStyles);
+export const Svg = styled("svg", getSvgStyles);

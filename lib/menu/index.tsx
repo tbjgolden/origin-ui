@@ -4,9 +4,7 @@ export { default as OptionList } from "./option-list";
 export { default as OptionProfile } from "./option-profile";
 export { default as Menu } from "./menu";
 export { default as NestedMenus, NestedMenuContext } from "./nested-menus";
-// Constants
 export { KEY_STRINGS, STATE_CHANGE_TYPES } from "./constants";
-// Styled elements
 export {
   StyledEmptyState,
   StyledList,
@@ -17,7 +15,5 @@ export {
   StyledProfileLabelsContainer,
   StyledProfileTitle,
   StyledProfileSubtitle,
-  StyledProfileBody,
+  StyledProfileBody
 } from "./styled-components";
-// Flow
-export type * from "./types";

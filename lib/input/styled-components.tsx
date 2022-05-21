@@ -1,23 +1,13 @@
 import { styled } from "../styles";
-import type { ThemeT, Font } from "../styles/types";
-import type { StyleObject } from "styletron-standard";
 import { ADJOINED, SIZE } from "./constants";
-import type { SharedPropsT, SizeT } from "./types";
-import type { SharedStylePropsT } from "../textarea/types";
 import DeleteAlt from "../icon/delete-alt";
-
-export const StyledMaskToggleButton = styled<{
-  $size: SizeT;
-  $isFocusVisible: boolean;
-  $theme: ThemeT;
-}>("button", ({ $theme, $size, $isFocusVisible }) => {
+export const StyledMaskToggleButton = styled("button", ({ $theme, $size, $isFocusVisible }) => {
   const pad = {
     [SIZE.mini]: $theme.sizing.scale400,
     [SIZE.compact]: $theme.sizing.scale400,
     [SIZE.default]: $theme.sizing.scale300,
-    [SIZE.large]: $theme.sizing.scale200,
+    [SIZE.large]: $theme.sizing.scale200
   }[$size];
-
   return {
     display: "flex",
     alignItems: "center",
@@ -29,197 +19,129 @@ export const StyledMaskToggleButton = styled<{
     paddingLeft: pad,
     paddingRight: pad,
     outline: $isFocusVisible ? `solid 3px ${$theme.colors.accent}` : "none",
-    color: $theme.colors.contentPrimary,
+    color: $theme.colors.contentPrimary
   };
 });
-
-export const StyledClearIconContainer = styled<{
-  $size: SizeT;
-  $alignTop: boolean;
-  $theme: ThemeT;
-}>("div", ({ $alignTop = false, $size, $theme }) => {
+export const StyledClearIconContainer = styled("div", ({ $alignTop = false, $size, $theme }) => {
   const pad = {
     [SIZE.mini]: $theme.sizing.scale200,
     [SIZE.compact]: $theme.sizing.scale200,
     [SIZE.default]: $theme.sizing.scale100,
-    [SIZE.large]: $theme.sizing.scale0,
+    [SIZE.large]: $theme.sizing.scale0
   }[$size];
-
   return {
     display: "flex",
     alignItems: $alignTop ? "flex-start" : "center",
     paddingLeft: pad,
     paddingRight: pad,
     paddingTop: $alignTop ? $theme.sizing.scale500 : "0px",
-    color: $theme.colors.contentPrimary,
+    color: $theme.colors.contentPrimary
   };
 });
-
-export const StyledClearIcon = styled<typeof DeleteAlt, { $isFocusVisible: boolean }>(
-  DeleteAlt,
-  ({ $theme, $isFocusVisible }) => {
-    return {
-      cursor: "pointer",
-      outline: $isFocusVisible ? `solid 3px ${$theme.colors.accent}` : "none",
-    };
-  }
-);
-
-function getInputPadding(
-  size,
-  sizing
-): {
-  paddingTop: string;
-  paddingBottom: string;
-  paddingLeft: string;
-  paddingRight: string;
-} {
+export const StyledClearIcon = styled(DeleteAlt, ({ $theme, $isFocusVisible }) => {
+  return {
+    cursor: "pointer",
+    outline: $isFocusVisible ? `solid 3px ${$theme.colors.accent}` : "none"
+  };
+});
+function getInputPadding(size, sizing) {
   return {
     [SIZE.mini]: {
       paddingTop: sizing.scale100,
       paddingBottom: sizing.scale100,
       paddingLeft: sizing.scale550,
-      paddingRight: sizing.scale550,
+      paddingRight: sizing.scale550
     },
     [SIZE.compact]: {
       paddingTop: sizing.scale200,
       paddingBottom: sizing.scale200,
       paddingLeft: sizing.scale550,
-      paddingRight: sizing.scale550,
+      paddingRight: sizing.scale550
     },
     [SIZE.default]: {
       paddingTop: sizing.scale400,
       paddingBottom: sizing.scale400,
       paddingLeft: sizing.scale550,
-      paddingRight: sizing.scale550,
+      paddingRight: sizing.scale550
     },
     [SIZE.large]: {
       paddingTop: sizing.scale550,
       paddingBottom: sizing.scale550,
       paddingLeft: sizing.scale550,
-      paddingRight: sizing.scale550,
-    },
+      paddingRight: sizing.scale550
+    }
   }[size];
 }
-
-function getRootPadding(
-  adjoined,
-  size,
-  sizing,
-  direction,
-  hasIconTrailing
-): { paddingLeft: string; paddingRight: string } {
-  const ifLeftPad =
-    adjoined === ADJOINED.both ||
-    (adjoined === ADJOINED.left && direction !== "rtl") ||
-    (adjoined === ADJOINED.right && direction === "rtl") ||
-    (hasIconTrailing && direction === "rtl");
-  const ifRightPad =
-    adjoined === ADJOINED.both ||
-    (adjoined === ADJOINED.right && direction !== "rtl") ||
-    (adjoined === ADJOINED.left && direction === "rtl") ||
-    (hasIconTrailing && direction !== "rtl");
+function getRootPadding(adjoined, size, sizing, direction, hasIconTrailing) {
+  const ifLeftPad = adjoined === ADJOINED.both || adjoined === ADJOINED.left && direction !== "rtl" || adjoined === ADJOINED.right && direction === "rtl" || hasIconTrailing && direction === "rtl";
+  const ifRightPad = adjoined === ADJOINED.both || adjoined === ADJOINED.right && direction !== "rtl" || adjoined === ADJOINED.left && direction === "rtl" || hasIconTrailing && direction !== "rtl";
   return {
     paddingLeft: ifLeftPad ? sizing.scale550 : "0px",
-    paddingRight: ifRightPad ? sizing.scale550 : "0px",
+    paddingRight: ifRightPad ? sizing.scale550 : "0px"
   };
 }
-
-function getFont(size, typography): Font {
+function getFont(size, typography) {
   return {
     [SIZE.mini]: typography.font100,
     [SIZE.compact]: typography.font200,
     [SIZE.default]: typography.font300,
-    [SIZE.large]: typography.font400,
+    [SIZE.large]: typography.font400
   }[size];
 }
-
-function getRootColors(
-  $disabled,
-  $isFocused,
-  $error,
-  $positive = false,
-  colors
-): {
-  borderLeftColor: string;
-  borderRightColor: string;
-  borderTopColor: string;
-  borderBottomColor: string;
-  backgroundColor: string;
-} {
+function getRootColors($disabled, $isFocused, $error, $positive = false, colors) {
   if ($disabled) {
     return {
       borderLeftColor: colors.inputFillDisabled,
       borderRightColor: colors.inputFillDisabled,
       borderTopColor: colors.inputFillDisabled,
       borderBottomColor: colors.inputFillDisabled,
-      backgroundColor: colors.inputFillDisabled,
+      backgroundColor: colors.inputFillDisabled
     };
   }
-
   if ($isFocused) {
     return {
       borderLeftColor: colors.borderSelected,
       borderRightColor: colors.borderSelected,
       borderTopColor: colors.borderSelected,
       borderBottomColor: colors.borderSelected,
-      backgroundColor: colors.inputFillActive,
+      backgroundColor: colors.inputFillActive
     };
   }
-
   if ($error) {
     return {
       borderLeftColor: colors.inputBorderError,
       borderRightColor: colors.inputBorderError,
       borderTopColor: colors.inputBorderError,
       borderBottomColor: colors.inputBorderError,
-      backgroundColor: colors.inputFillError,
+      backgroundColor: colors.inputFillError
     };
   }
-
   if ($positive) {
     return {
       borderLeftColor: colors.inputBorderPositive,
       borderRightColor: colors.inputBorderPositive,
       borderTopColor: colors.inputBorderPositive,
       borderBottomColor: colors.inputBorderPositive,
-      backgroundColor: colors.inputFillPositive,
+      backgroundColor: colors.inputFillPositive
     };
   }
-
   return {
     borderLeftColor: colors.inputBorder,
     borderRightColor: colors.inputBorder,
     borderTopColor: colors.inputBorder,
     borderBottomColor: colors.inputBorder,
-    backgroundColor: colors.inputFill,
+    backgroundColor: colors.inputFill
   };
 }
-
-function getRootBorderRadius(radius): {
-  borderTopLeftRadius: string;
-  borderBottomLeftRadius: string;
-  borderTopRightRadius: string;
-  borderBottomRightRadius: string;
-} {
+function getRootBorderRadius(radius) {
   return {
     borderTopLeftRadius: radius,
     borderBottomLeftRadius: radius,
     borderTopRightRadius: radius,
-    borderBottomRightRadius: radius,
+    borderBottomRightRadius: radius
   };
 }
-
-export const getRootStyles = (props: {
-  $adjoined: $Keys<typeof ADJOINED>;
-  $isFocused: boolean;
-  $error: boolean;
-  $disabled: boolean;
-  $positive: boolean;
-  $size: SizeT;
-  $theme: ThemeT;
-  $hasIconTrailing: boolean;
-}) => {
+export const getRootStyles = (props) => {
   const {
     $isFocused,
     $adjoined,
@@ -229,7 +151,7 @@ export const getRootStyles = (props: {
     $size,
     $theme,
     $theme: { borders, colors, sizing, typography, animation },
-    $hasIconTrailing,
+    $hasIconTrailing
   } = props;
   return {
     boxSizing: "border-box",
@@ -250,82 +172,68 @@ export const getRootStyles = (props: {
     ...getRootBorderRadius(borders.inputBorderRadius),
     ...getFont($size, typography),
     ...getRootColors($disabled, $isFocused, $error, $positive, colors),
-    ...getRootPadding($adjoined, $size, sizing, $theme.direction, $hasIconTrailing),
+    ...getRootPadding($adjoined, $size, sizing, $theme.direction, $hasIconTrailing)
   };
 };
-
-export const Root = styled<SharedPropsT>("div", getRootStyles);
-
-// InputEnhancer
-
-type InputEnhancerStyles = {
-  paddingRight: string;
-  paddingLeft: string;
-};
-function getInputEnhancerPadding($size, sizing): InputEnhancerStyles {
+export const Root = styled("div", getRootStyles);
+function getInputEnhancerPadding($size, sizing) {
   return {
     [SIZE.mini]: {
       paddingRight: sizing.scale400,
-      paddingLeft: sizing.scale400,
+      paddingLeft: sizing.scale400
     },
     [SIZE.compact]: {
       paddingRight: sizing.scale400,
-      paddingLeft: sizing.scale400,
+      paddingLeft: sizing.scale400
     },
     [SIZE.default]: {
       paddingRight: sizing.scale300,
-      paddingLeft: sizing.scale300,
+      paddingLeft: sizing.scale300
     },
     [SIZE.large]: {
       paddingRight: sizing.scale200,
-      paddingLeft: sizing.scale200,
-    },
+      paddingLeft: sizing.scale200
+    }
   }[$size];
 }
-
 function getInputEnhancerColors($disabled, $isFocused, $error, $positive, colors) {
   if ($disabled) {
     return {
       color: colors.inputEnhancerTextDisabled,
-      backgroundColor: colors.inputFillDisabled,
+      backgroundColor: colors.inputFillDisabled
     };
   }
-
   if ($isFocused) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillActive,
+      backgroundColor: colors.inputFillActive
     };
   }
-
   if ($error) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillError,
+      backgroundColor: colors.inputFillError
     };
   }
-
   if ($positive) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillPositive,
+      backgroundColor: colors.inputFillPositive
     };
   }
-
   return {
     color: colors.contentPrimary,
-    backgroundColor: colors.inputFill,
+    backgroundColor: colors.inputFill
   };
 }
-
-export const InputEnhancer = styled<SharedPropsT>("div", (props) => {
+export const InputEnhancer = styled("div", (props) => {
   const {
     $size,
     $disabled,
     $isFocused,
     $error,
     $positive,
-    $theme: { colors, sizing, typography, animation },
+    $theme: { colors, sizing, typography, animation }
   } = props;
   return {
     display: "flex",
@@ -336,62 +244,47 @@ export const InputEnhancer = styled<SharedPropsT>("div", (props) => {
     transitionTimingFunction: animation.easeOutCurve,
     ...getFont($size, typography),
     ...getInputEnhancerPadding($size, sizing),
-    ...getInputEnhancerColors($disabled, $isFocused, $error, $positive, colors),
+    ...getInputEnhancerColors($disabled, $isFocused, $error, $positive, colors)
   };
 });
-
-// InputContainer
-
 function getInputContainerColors($disabled, $isFocused, $error, $positive, colors) {
   if ($disabled) {
     return {
       color: colors.inputTextDisabled,
-      backgroundColor: colors.inputFillDisabled,
+      backgroundColor: colors.inputFillDisabled
     };
   }
-
   if ($isFocused) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillActive,
+      backgroundColor: colors.inputFillActive
     };
   }
-
   if ($error) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillError,
+      backgroundColor: colors.inputFillError
     };
   }
-
   if ($positive) {
     return {
       color: colors.contentPrimary,
-      backgroundColor: colors.inputFillPositive,
+      backgroundColor: colors.inputFillPositive
     };
   }
-
   return {
     color: colors.contentPrimary,
-    backgroundColor: colors.inputFill,
+    backgroundColor: colors.inputFill
   };
 }
-
-export const getInputContainerStyles = (props: {
-  $isFocused: boolean;
-  $error: boolean;
-  $disabled: boolean;
-  $positive: boolean;
-  $size: SizeT;
-  $theme: ThemeT;
-}) => {
+export const getInputContainerStyles = (props) => {
   const {
     $isFocused,
     $error,
     $disabled,
     $positive,
     $size,
-    $theme: { colors, typography, animation },
+    $theme: { colors, typography, animation }
   } = props;
   return {
     display: "flex",
@@ -400,54 +293,37 @@ export const getInputContainerStyles = (props: {
     transitionDuration: animation.timing200,
     transitionTimingFunction: animation.easeOutCurve,
     ...getFont($size, typography),
-    ...getInputContainerColors($disabled, $isFocused, $error, $positive, colors),
+    ...getInputContainerColors($disabled, $isFocused, $error, $positive, colors)
   };
 };
-
-export const InputContainer = styled<SharedPropsT>("div", getInputContainerStyles);
-
-function getInputColors(
-  $disabled,
-  $isFocused,
-  $error,
-  colors
-): {
-  color: string;
-  "-webkit-text-fill-color"?: string;
-  caretColor: string;
-  "::placeholder": { color: string };
-} {
+export const InputContainer = styled("div", getInputContainerStyles);
+function getInputColors($disabled, $isFocused, $error, colors) {
   if ($disabled) {
     return {
       color: colors.inputTextDisabled,
       "-webkit-text-fill-color": colors.inputTextDisabled,
       caretColor: colors.contentPrimary,
       "::placeholder": {
-        color: colors.inputPlaceholderDisabled,
-      },
+        color: colors.inputPlaceholderDisabled
+      }
     };
   }
-
   return {
     color: colors.contentPrimary,
     caretColor: colors.contentPrimary,
     "::placeholder": {
-      color: colors.inputPlaceholder,
-    },
+      color: colors.inputPlaceholder
+    }
   };
 }
-
-export const getInputStyles = (
-  props: (SharedPropsT & { $theme: ThemeT }) | (SharedStylePropsT & { $theme: ThemeT })
-): StyleObject => {
+export const getInputStyles = (props) => {
   const {
     $disabled,
     $isFocused,
     $error,
     $size,
-    $theme: { colors, sizing, typography },
+    $theme: { colors, sizing, typography }
   } = props;
-  //$FlowFixMe
   return {
     boxSizing: "border-box",
     backgroundColor: "transparent",
@@ -461,7 +337,6 @@ export const getInputStyles = (
     borderBottomStyle: "none",
     outline: "none",
     width: "100%",
-    // See https://stackoverflow.com/a/33811151
     minWidth: 0,
     maxWidth: "100%",
     cursor: $disabled ? "not-allowed" : "text",
@@ -472,8 +347,7 @@ export const getInputStyles = (
     paddingRight: "0",
     ...getFont($size, typography),
     ...getInputPadding($size, sizing),
-    ...getInputColors($disabled, $isFocused, $error, colors),
+    ...getInputColors($disabled, $isFocused, $error, colors)
   };
 };
-
-export const Input = styled<SharedPropsT>("input", getInputStyles);
+export const Input = styled("input", getInputStyles);

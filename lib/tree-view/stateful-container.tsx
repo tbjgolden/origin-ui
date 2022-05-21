@@ -1,11 +1,5 @@
 import * as React from "react";
-import type { StatefulContainerPropsT, TreeNodeT } from "./types";
-
-type StateType = {
-  data: TreeNodeT<>[];
-};
-
-const findSiblings = (node: TreeNodeT<>, children: TreeNodeT<>[]): ?TreeNodeT<>[] => {
+const findSiblings = (node, children) => {
   if (children.includes(node)) {
     return children;
   }
@@ -19,22 +13,12 @@ const findSiblings = (node: TreeNodeT<>, children: TreeNodeT<>[]): ?TreeNodeT<>[
   }
   return null;
 };
-
-export default class StatefulContainer extends React.Component<
-  StatefulContainerPropsT,
-  StateType
-> {
-  state: StateType;
-
-  constructor(props: StatefulContainerPropsT) {
+export default class StatefulContainer extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = { data: this.props.data };
-  }
-
-  onToggle = (node: TreeNodeT<>) => {
-    const { onToggle, singleExpanded } = this.props;
-    this.setState(
-      (prevState) => {
+    this.onToggle = (node) => {
+      const { onToggle, singleExpanded } = this.props;
+      this.setState((prevState) => {
         const shouldExpand = !node.isExpanded;
         if (singleExpanded && shouldExpand) {
           const siblings = findSiblings(node, prevState.data);
@@ -48,22 +32,19 @@ export default class StatefulContainer extends React.Component<
         }
         node.isExpanded = shouldExpand;
         return { data: prevState.data };
-      },
-      () => {
+      }, () => {
         onToggle && onToggle(node);
-      }
-    );
-  };
-
+      });
+    };
+    this.state = { data: this.props.data };
+  }
   render() {
     const { children, ...restProps } = this.props;
     const { onToggle } = this;
-    return children(
-      Object.freeze({
-        ...restProps,
-        ...this.state,
-        onToggle,
-      })
-    );
+    return children(Object.freeze({
+      ...restProps,
+      ...this.state,
+      onToggle
+    }));
   }
 }

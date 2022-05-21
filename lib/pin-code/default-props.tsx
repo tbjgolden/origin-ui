@@ -1,5 +1,4 @@
 import { SIZE } from "../input";
-
 const defaultProps = {
   "aria-label": "Please enter your pin code",
   "aria-labelledby": null,
@@ -10,15 +9,15 @@ const defaultProps = {
   error: false,
   id: null,
   name: null,
-  onChange: () => {},
+  onChange: () => {
+  },
   overrides: {},
-  placeholder: "○",
+  placeholder: "\u25CB",
   positive: false,
   required: false,
   size: SIZE.default,
   manageFocus: true,
   values: ["", "", "", ""],
-  mask: false,
+  mask: false
 };
-
 export default defaultProps;

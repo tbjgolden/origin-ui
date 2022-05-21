@@ -1,9 +1,3 @@
 import * as React from "react";
-
-import type { TableBuilderColumnPropsT } from "./types";
-
-export default class TableBuilderColumn<T> extends React.Component<
-  TableBuilderColumnPropsT<T>
-> {
-  // Renderless component. See TableBuilder.
+export default class TableBuilderColumn extends React.Component {
 }

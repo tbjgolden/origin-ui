@@ -11,5 +11,5 @@ export const TETHER_PLACEMENT = {
   bottomLeft: "bottomLeft",
   leftBottom: "leftBottom",
   left: "left",
-  leftTop: "leftTop",
+  leftTop: "leftTop"
 };

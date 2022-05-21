@@ -1,18 +1,10 @@
-import type { TreeNodeT, TreeNodeIdT } from "./types";
-
-const getLastLeafId = (node: TreeNodeT, getId: (TreeNodeT) => TreeNodeIdT) => {
+const getLastLeafId = (node, getId) => {
   if (node.isExpanded && node.children && node.children.length > 0) {
     return getLastLeafId(node.children[node.children.length - 1], getId);
   }
   return getId(node);
 };
-
-export const getParentId = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  parentId: TreeNodeIdT | null,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getParentId = (nodes, nodeId, parentId, getId) => {
   for (const node of nodes) {
     if (getId(node) === nodeId) {
       return parentId;
@@ -26,13 +18,7 @@ export const getParentId = (
   }
   return null;
 };
-
-export const getPrevId = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  parentId: TreeNodeIdT | null,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getPrevId = (nodes, nodeId, parentId, getId) => {
   for (let i = 0; i < nodes.length; i++) {
     if (getId(nodes[i]) === nodeId) {
       return i === 0 ? parentId : getLastLeafId(nodes[i - 1], getId);
@@ -46,19 +32,9 @@ export const getPrevId = (
   }
   return null;
 };
-
-export const getFirstChildId = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getFirstChildId = (nodes, nodeId, getId) => {
   for (const node of nodes) {
-    if (
-      getId(node) === nodeId &&
-      node.isExpanded &&
-      node.children &&
-      node.children.length > 0
-    ) {
+    if (getId(node) === nodeId && node.isExpanded && node.children && node.children.length > 0) {
       return getId(node.children[0]);
     }
     if (node.isExpanded && node.children && node.children.length > 0) {
@@ -70,13 +46,7 @@ export const getFirstChildId = (
   }
   return null;
 };
-
-export const getNextId = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  closestOmmer: TreeNodeIdT | null,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getNextId = (nodes, nodeId, closestOmmer, getId) => {
   for (let i = 0; i < nodes.length; i++) {
     if (getId(nodes[i]) === nodeId) {
       if (nodes[i].isExpanded && nodes[i].children && nodes[i].children.length > 0) {
@@ -88,12 +58,7 @@ export const getNextId = (
       }
     }
     if (nodes[i].isExpanded && nodes[i].children && nodes[i].children.length > 0) {
-      const foundId = getNextId(
-        nodes[i].children,
-        nodeId,
-        nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer,
-        getId
-      );
+      const foundId = getNextId(nodes[i].children, nodeId, nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer, getId);
       if (foundId) {
         return foundId;
       }
@@ -101,20 +66,14 @@ export const getNextId = (
   }
   return null;
 };
-
-export const getEndId = (nodes: TreeNodeT[], getId: (TreeNodeT) => TreeNodeIdT) => {
+export const getEndId = (nodes, getId) => {
   const endNode = nodes[nodes.length - 1];
   if (endNode.isExpanded && endNode.children && endNode.children.length > 0) {
     return getEndId(endNode.children, getId);
   }
   return getId(endNode);
 };
-
-export const getExpandableSiblings = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getExpandableSiblings = (nodes, nodeId, getId) => {
   for (let i = 0; i < nodes.length; i++) {
     if (getId(nodes[i]) === nodeId) {
       const expandableSiblings = [];
@@ -134,15 +93,10 @@ export const getExpandableSiblings = (
   }
   return [];
 };
-
-export const toggleIsExpanded = (
-  arr: TreeNodeT[],
-  toggledNode: TreeNodeT,
-  getId?: (node: TreeNodeT) => TreeNodeIdT = (node: TreeNodeT) => {
-    return node.id ? node.id : "";
-  }
-): TreeNodeT[] => {
-  return arr.map<TreeNodeT>((node) => {
+export const toggleIsExpanded = (arr, toggledNode, getId = (node) => {
+  return node.id ? node.id : "";
+}) => {
+  return arr.map((node) => {
     const newNode = { ...node };
     if (getId(newNode) === getId(toggledNode)) {
       newNode.isExpanded = !newNode.isExpanded;
@@ -153,47 +107,20 @@ export const toggleIsExpanded = (
     return newNode;
   });
 };
-export const getCharMatchId = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  chars: string,
-  closestOmmer: TreeNodeIdT | null,
-  getId: (TreeNodeT) => TreeNodeIdT
-) => {
+export const getCharMatchId = (nodes, nodeId, chars, closestOmmer, getId) => {
   let foundid = matchString(nodes, nodeId, chars, closestOmmer, getId, true);
-  if (foundid) return foundid;
+  if (foundid)
+    return foundid;
   foundid = matchString(nodes, nodeId, chars, closestOmmer, getId, false);
   return foundid;
 };
-
-export const matchString = (
-  nodes: TreeNodeT[],
-  nodeId: TreeNodeIdT,
-  chars: string,
-  closestOmmer: TreeNodeIdT | null,
-  getId: (TreeNodeT) => TreeNodeIdT,
-  //set true, match the prefix; set false, match full text
-  matchPrefix: boolean
-) => {
+export const matchString = (nodes, nodeId, chars, closestOmmer, getId, matchPrefix) => {
   for (let i = 0; i < nodes.length; i++) {
-    if (
-      nodes[i].label &&
-      typeof nodes[i].label === "string" &&
-      ((matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) === 0) ||
-        (!matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) > 0))
-    ) {
+    if (nodes[i].label && typeof nodes[i].label === "string" && (matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) === 0 || !matchPrefix && nodes[i].label.toUpperCase().indexOf(chars.toUpperCase()) > 0)) {
       return getId(nodes[i]);
     }
     if (nodes[i].isExpanded && nodes[i].children && nodes[i].children.length > 0) {
-      const foundId = matchString(
-        nodes[i].children,
-        nodeId,
-        chars,
-        nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer,
-        getId,
-        matchPrefix
-      );
-
+      const foundId = matchString(nodes[i].children, nodeId, chars, nodes[i + 1] ? getId(nodes[i + 1]) : closestOmmer, getId, matchPrefix);
       if (foundId) {
         return foundId;
       }
@@ -201,12 +128,9 @@ export const matchString = (
   }
   return null;
 };
-
-export const defaultGetId = (node: TreeNodeT): TreeNodeIdT => {
+export const defaultGetId = (node) => {
   if (!node.id) {
-    throw new Error(
-      "There needs to be an unique node.id. You can implement a custom mapping with getId."
-    );
+    throw new Error("There needs to be an unique node.id. You can implement a custom mapping with getId.");
   }
   return node.id;
 };

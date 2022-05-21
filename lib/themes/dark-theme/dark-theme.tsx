@@ -9,15 +9,12 @@ import breakpoints from "../shared/breakpoints";
 import grid from "../shared/grid";
 import mediaQuery from "../shared/media-query";
 import sizing from "../shared/sizing";
-
-import type { ThemeT } from "../../styles/types";
-
-export const DarkTheme: ThemeT = {
+export const DarkTheme = {
   name: "dark-theme",
   colors: {
     ...colorTokens,
     ...getComponentColorTokens(),
-    ...getSemanticColorTokens(),
+    ...getSemanticColorTokens()
   },
   animation,
   breakpoints,
@@ -28,9 +25,7 @@ export const DarkTheme: ThemeT = {
   mediaQuery,
   sizing,
   typography: getTypography(),
-  // TODO(#2318) Remove it in the next v11 major version.
-  // Do not use.
   zIndex: {
-    modal: 2000,
-  },
+    modal: 2e3
+  }
 };

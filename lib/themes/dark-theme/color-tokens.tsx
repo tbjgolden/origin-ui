@@ -1,9 +1,5 @@
 import { colors } from "../../tokens";
-import type { ColorTokensT } from "../types";
-
-// color constants
-export const darkColorTokens: ColorTokensT = {
-  // Primary Palette
+export const darkColorTokens = {
   primaryA: colors.gray200,
   primaryB: colors.gray900,
   primary: colors.white,
@@ -15,7 +11,6 @@ export const darkColorTokens: ColorTokensT = {
   primary500: colors.gray500,
   primary600: colors.gray600,
   primary700: colors.gray700,
-  // Accent Palette
   accent: colors.blue400,
   accent50: colors.blue50,
   accent100: colors.blue100,
@@ -25,7 +20,6 @@ export const darkColorTokens: ColorTokensT = {
   accent500: colors.blue500,
   accent600: colors.blue600,
   accent700: colors.blue700,
-  // Negative Palette
   negative: colors.red500,
   negative50: colors.red50,
   negative100: colors.red100,
@@ -35,7 +29,6 @@ export const darkColorTokens: ColorTokensT = {
   negative500: colors.red500,
   negative600: colors.red600,
   negative700: colors.red700,
-  // Warning Palette
   warning: colors.yellow500,
   warning50: colors.yellow50,
   warning100: colors.yellow100,
@@ -45,7 +38,6 @@ export const darkColorTokens: ColorTokensT = {
   warning500: colors.yellow500,
   warning600: colors.yellow600,
   warning700: colors.yellow700,
-  // Positive Palette
   positive: colors.green400,
   positive50: colors.green50,
   positive100: colors.green100,
@@ -55,7 +47,6 @@ export const darkColorTokens: ColorTokensT = {
   positive500: colors.green500,
   positive600: colors.green600,
   positive700: colors.green700,
-  // Monochrome Palette
   white: colors.white,
   black: colors.black,
   mono100: colors.gray300,
@@ -63,15 +54,12 @@ export const darkColorTokens: ColorTokensT = {
   mono300: colors.gray500,
   mono400: colors.gray600,
   mono500: colors.gray700,
-  // mono600 and mono900 are not in official brand tokens atm
   mono600: "#292929",
   mono700: "#1F1F1F",
   mono800: "#141414",
   mono900: "#111111",
   mono1000: colors.black,
-  // Rating Palette,
   ratingInactiveFill: colors.gray500,
-  ratingStroke: colors.gray700,
+  ratingStroke: colors.gray700
 };
-
 export default darkColorTokens;

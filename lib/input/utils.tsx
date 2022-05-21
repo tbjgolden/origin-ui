@@ -1,9 +1,4 @@
-import type { InputPropsT, BaseInputPropsT, InternalStateT, SharedPropsT } from "./types";
-
-export function getSharedProps<T>(
-  props: BaseInputPropsT<T> | InputPropsT,
-  state: InternalStateT
-): $Shape<SharedPropsT> {
+export function getSharedProps(props, state) {
   const { disabled, error, positive, adjoined, size, required } = props;
   const { isFocused } = state;
   return {
@@ -13,6 +8,6 @@ export function getSharedProps<T>(
     $positive: positive,
     $adjoined: adjoined,
     $size: size,
-    $required: required,
+    $required: required
   };
 }

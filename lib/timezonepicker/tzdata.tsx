@@ -336,5 +336,5 @@ export const zones = [
   "Pacific/Efate",
   "Pacific/Wallis",
   "Pacific/Apia",
-  "Africa/Johannesburg",
+  "Africa/Johannesburg"
 ];

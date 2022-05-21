@@ -1,5 +1,3 @@
-import type { TabPropsT } from "./types";
-
-export function Tab(props: TabPropsT) {
+export function Tab(props) {
   return null;
 }

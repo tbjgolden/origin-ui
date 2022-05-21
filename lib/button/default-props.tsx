@@ -1,5 +1,4 @@
 import { KIND, SHAPE, SIZE } from "./constants";
-
 export const defaultProps = {
   disabled: false,
   isLoading: false,
@@ -7,5 +6,5 @@ export const defaultProps = {
   kind: KIND.primary,
   overrides: {},
   shape: SHAPE.default,
-  size: SIZE.default,
+  size: SIZE.default
 };

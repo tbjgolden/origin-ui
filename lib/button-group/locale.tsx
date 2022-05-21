@@ -1,9 +1,4 @@
-export type ButtonGroupLocaleT = {
-  ariaLabel: string;
-};
-
 const locale = {
-  ariaLabel: "button group",
+  ariaLabel: "button group"
 };
-
 export default locale;

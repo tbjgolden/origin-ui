@@ -1,26 +1,22 @@
-import * as React from "react";
 import { ORIENTATION, FILL } from "./constants";
-
-import type { FillT, OrientationT } from "./types";
-
-export const getTabId = (uid: string, key: React.Key) => {
+export const getTabId = (uid, key) => {
   return `tabs-${uid}-tab-${key}`;
 };
-export const getTabPanelId = (uid: string, key: React.Key) => {
+export const getTabPanelId = (uid, key) => {
   return `tabs-${uid}-tabpanel-${key}`;
 };
-export const isHorizontal = (orientation: OrientationT) => {
+export const isHorizontal = (orientation) => {
   return orientation === ORIENTATION.horizontal;
 };
-export const isVertical = (orientation: OrientationT) => {
+export const isVertical = (orientation) => {
   return orientation === ORIENTATION.vertical;
 };
-export const isRTL = (direction: string) => {
+export const isRTL = (direction) => {
   return direction === "rtl";
 };
-export const isIntrinsic = (fill: FillT) => {
+export const isIntrinsic = (fill) => {
   return fill === FILL.intrinsic;
 };
-export const isFixed = (fill: FillT) => {
+export const isFixed = (fill) => {
   return fill === FILL.fixed;
 };

@@ -1,4 +1,4 @@
-export function starSVG(fillColor: string, strokeColor: string, size: number) {
+export function starSVG(fillColor, strokeColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -9,8 +9,7 @@ export function starSVG(fillColor: string, strokeColor: string, size: number) {
     </svg>
   `);
 }
-
-export function angryRatingSVG(fillColor: string, size: number) {
+export function angryRatingSVG(fillColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="22" cy="22" r="20" fill="${fillColor}"/>
@@ -19,8 +18,7 @@ export function angryRatingSVG(fillColor: string, size: number) {
     </svg>
   `);
 }
-
-export function sadRatingSVG(fillColor: string, size: number) {
+export function sadRatingSVG(fillColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="22" cy="22" r="20" fill="${fillColor}"/>
@@ -30,8 +28,7 @@ export function sadRatingSVG(fillColor: string, size: number) {
     </svg>
   `);
 }
-
-export function neutralRatingSVG(fillColor: string, size: number) {
+export function neutralRatingSVG(fillColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="22" cy="22" r="20" fill="${fillColor}"/>
@@ -41,8 +38,7 @@ export function neutralRatingSVG(fillColor: string, size: number) {
     </svg>
   `);
 }
-
-export function happyRatingSVG(fillColor: string, size: number) {
+export function happyRatingSVG(fillColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="22" cy="22" r="20" fill="${fillColor}"/>
@@ -52,8 +48,7 @@ export function happyRatingSVG(fillColor: string, size: number) {
     </svg>
   `);
 }
-
-export function veryHappyRatingSVG(fillColor: string, size: number) {
+export function veryHappyRatingSVG(fillColor, size) {
   return encodeURIComponent(`
     <svg width="${size}" height="${size}" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="22" cy="22" r="20" fill="${fillColor}"/>

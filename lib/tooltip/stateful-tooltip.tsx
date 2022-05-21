@@ -1,19 +1,10 @@
-import * as React from "react";
 import StatefulContainer from "./stateful-tooltip-container";
 import Tooltip from "./tooltip";
-import type { StatefulTooltipPropsT } from "./types";
-
-function StatefulTooltip(props: StatefulTooltipPropsT) {
+function StatefulTooltip(props) {
   const { children, ...restProps } = props;
-  return (
-    <StatefulContainer {...restProps}>
-      {(tooltipProps) => {
-        return <Tooltip {...tooltipProps}>{children}</Tooltip>;
-      }}
-    </StatefulContainer>
-  );
+  return <StatefulContainer {...restProps}>{(tooltipProps) => {
+    return <Tooltip {...tooltipProps}>{children}</Tooltip>;
+  }}</StatefulContainer>;
 }
-
 StatefulTooltip.defaultProps = StatefulContainer.defaultProps;
-
 export default StatefulTooltip;

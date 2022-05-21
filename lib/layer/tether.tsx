@@ -1,69 +1,50 @@
 import * as React from "react";
 import Popper from "popper";
-import type { Instance as PopperInstance } from "popper";
 import { toPopperPlacement, parsePopperOffset } from "./utils";
 import { TETHER_PLACEMENT } from "./constants";
-import type { TetherPropsT, TetherStateT, PopperDataObjectT } from "./types";
-
-class Tether extends React.Component<TetherPropsT, TetherStateT> {
-  static defaultProps = {
-    anchorRef: null,
-    onPopperUpdate: () => {
-      return null;
-    },
-    placement: TETHER_PLACEMENT.auto,
-    popperRef: null,
-    popperOptions: {},
-  };
-
-  popper: ?PopperInstance;
-  popperHeight = 0;
-  popperWidth = 0;
-  anchorHeight = 0;
-  anchorWidth = 0;
-
-  state = {
-    isMounted: false,
-  };
-
+class Tether extends React.Component {
+  constructor() {
+    super(...arguments);
+    this.popperHeight = 0;
+    this.popperWidth = 0;
+    this.anchorHeight = 0;
+    this.anchorWidth = 0;
+    this.state = {
+      isMounted: false
+    };
+    this.onPopperUpdate = (data) => {
+      const normalizedOffsets = {
+        popper: parsePopperOffset(data.offsets.popper),
+        arrow: data.offsets.arrow ? parsePopperOffset(data.offsets.arrow) : { top: 0, left: 0 }
+      };
+      this.props.onPopperUpdate(normalizedOffsets, data);
+    };
+  }
   componentDidMount() {
     this.setState({ isMounted: true });
   }
-
-  componentDidUpdate(prevProps: TetherPropsT, prevState: TetherStateT) {
-    // Handles the case where popover content changes size and creates a gap between the anchor and
-    // the popover. Popper.js only schedules updates on resize and scroll events. In the case of
-    // the Select component, when options were filtered in the dropdown menu it creates a gap
-    // between it and the input element.
-
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.anchorRef) {
       const { height, width } = this.props.anchorRef.getBoundingClientRect();
-
       if (this.anchorHeight !== height || this.anchorWidth !== width) {
         this.anchorHeight = height;
         this.anchorWidth = width;
         this.popper && this.popper.scheduleUpdate();
       }
     }
-
     if (this.props.popperRef) {
       const { height, width } = this.props.popperRef.getBoundingClientRect();
-
       if (this.popperHeight !== height || this.popperWidth !== width) {
         this.popperHeight = height;
         this.popperWidth = width;
         this.popper && this.popper.scheduleUpdate();
       }
-
       if (this.state.isMounted !== prevState.isMounted) {
         if (!this.props.anchorRef) {
           if (__DEV__) {
-            // eslint-disable-next-line no-console
-            console.warn(
-              `[baseui][TetherBehavior] ref has not been passed to the Popper's anchor element.
+            console.warn(`[baseui][TetherBehavior] ref has not been passed to the Popper's anchor element.
               See how to pass the ref to an anchor element in the Popover example
-              http://baseui.design/components/popover#anchor-ref-handling-example`
-            );
+              http://baseui.design/components/popover#anchor-ref-handling-example`);
           }
         } else {
           this.initializePopper();
@@ -71,67 +52,55 @@ class Tether extends React.Component<TetherPropsT, TetherStateT> {
       }
     }
   }
-
   componentWillUnmount() {
     this.destroyPopover();
   }
-
   initializePopper() {
     const { placement, popperOptions } = this.props;
     const { modifiers, ...restOptions } = popperOptions;
-
-    if (!this.props.anchorRef || !this.props.popperRef) return;
-
+    if (!this.props.anchorRef || !this.props.popperRef)
+      return;
     this.popper = new Popper(this.props.anchorRef, this.props.popperRef, {
-      // Recommended placement (popper may ignore if it causes a viewport overflow, etc)
       placement: toPopperPlacement(placement),
       modifiers: {
-        // Passing the arrow ref will measure the arrow when calculating styles
         arrow: {
           element: this.props.arrowRef,
-          enabled: !!this.props.arrowRef,
+          enabled: !!this.props.arrowRef
         },
         computeStyle: {
-          // Make popper use top/left instead of transform translate, this is because
-          // we use transform for animations and we dont want them to conflict
-          gpuAcceleration: false,
+          gpuAcceleration: false
         },
         applyStyle: {
-          // Disable default styling modifier, we'll apply styles on our own
-          enabled: false,
+          enabled: false
         },
         applyReactStyle: {
           enabled: true,
           fn: this.onPopperUpdate,
-          order: 900,
+          order: 900
         },
         preventOverflow: { enabled: true },
-        ...modifiers,
+        ...modifiers
       },
-      ...restOptions,
+      ...restOptions
     });
   }
-
-  onPopperUpdate = (data: PopperDataObjectT) => {
-    const normalizedOffsets = {
-      popper: parsePopperOffset(data.offsets.popper),
-      arrow: data.offsets.arrow
-        ? parsePopperOffset(data.offsets.arrow)
-        : { top: 0, left: 0 },
-    };
-    this.props.onPopperUpdate(normalizedOffsets, data);
-  };
-
   destroyPopover() {
     if (this.popper) {
       this.popper.destroy();
       delete this.popper;
     }
   }
-
   render() {
     return this.props.children || null;
   }
 }
-
+Tether.defaultProps = {
+  anchorRef: null,
+  onPopperUpdate: () => {
+    return null;
+  },
+  placement: TETHER_PLACEMENT.auto,
+  popperRef: null,
+  popperOptions: {}
+};
 export default Tether;

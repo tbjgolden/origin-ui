@@ -1,14 +1,7 @@
-import * as React from "react";
 import StatefulContainer from "./stateful-container";
 import Textarea from "./textarea";
-import type { StatefulTextareaPropsT, TextareaPropsT } from "./types";
-
-export default function StatefulTextarea(props: StatefulTextareaPropsT) {
-  return (
-    <StatefulContainer {...props}>
-      {(childrenProps: TextareaPropsT) => {
-        return <Textarea {...childrenProps} />;
-      }}
-    </StatefulContainer>
-  );
+export default function StatefulTextarea(props) {
+  return <StatefulContainer {...props}>{(childrenProps) => {
+    return <Textarea {...childrenProps} />;
+  }}</StatefulContainer>;
 }

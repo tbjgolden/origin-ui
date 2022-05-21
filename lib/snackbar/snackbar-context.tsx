@@ -1,35 +1,23 @@
 import * as React from "react";
-
 import { Layer } from "../layer";
 import { getOverrides } from "../helpers/overrides";
 import { useStyletron } from "../styles";
-
 import { DURATION, PLACEMENT } from "./constants";
 import SnackbarElement from "./snackbar-element";
 import { StyledPlacementContainer } from "./styled-components";
-import type { SnackbarElementPropsT, SnackbarProviderPropsT, DurationT } from "./types";
-
-type ContextT = {
-  enqueue: (elementProps: SnackbarElementPropsT, duration?: DurationT) => void;
-  dequeue: () => void;
-};
-
 function fallbackHandler() {
   if (__DEV__) {
     console.warn("Snackbar context not found.");
   }
 }
-
-export const SnackbarContext: React.Context<ContextT> = React.createContext({
+export const SnackbarContext = React.createContext({
   enqueue: fallbackHandler,
-  dequeue: fallbackHandler,
+  dequeue: fallbackHandler
 });
-
 export function useSnackbar() {
   const context = React.useContext(SnackbarContext);
   return { enqueue: context.enqueue, dequeue: context.dequeue };
 }
-
 function usePrevious(value) {
   const ref = React.useRef();
   React.useEffect(() => {
@@ -37,39 +25,31 @@ function usePrevious(value) {
   });
   return ref.current;
 }
-
 export default function SnackbarProvider({
   children,
   overrides = {},
   placement,
-  defaultDuration = DURATION.short,
-}: SnackbarProviderPropsT) {
+  defaultDuration = DURATION.short
+}) {
   const [css] = useStyletron();
-
   const [snackbars, setSnackbars] = React.useState([]);
   const [animating, setAnimating] = React.useState(false);
-
   const timeoutRef = React.useRef(null);
-
   const [containerHeight, setContainerHeight] = React.useState(0);
   const containerRef = React.useRef(null);
-
   function enqueue(elementProps, duration = defaultDuration) {
     setSnackbars((prev) => {
       return [...prev, { elementProps, duration }];
     });
   }
-
   const prevSnackbars = usePrevious(snackbars) || [];
   React.useEffect(() => {
     if (prevSnackbars.length === 0 && snackbars.length > 0) {
       enter(snackbars[0].duration);
     }
   }, [snackbars, prevSnackbars]);
-
   function dequeue() {
     setContainerHeight(0);
-
     setSnackbars((prev) => {
       const next = prev.slice(1);
       if (next.length > 0) {
@@ -78,7 +58,6 @@ export default function SnackbarProvider({
       return next;
     });
   }
-
   function enter(duration) {
     setAnimating(true);
     setTimeout(() => {
@@ -86,38 +65,31 @@ export default function SnackbarProvider({
       display(duration);
     }, 0);
   }
-
   function exit() {
     setAnimating(true);
     setTimeout(() => {
       setAnimating(false);
       dequeue();
-    }, 1000);
+    }, 1e3);
   }
-
   function display(duration) {
     if (duration === DURATION.infinite) {
       return;
     }
-
     timeoutRef.current = setTimeout(() => {
       exit();
     }, duration);
   }
-
   function handleMouseEnter() {
     clearTimeout(timeoutRef.current);
   }
-
   function handleMouseLeave(duration) {
     display(duration);
   }
-
   function handleActionClick() {
     clearTimeout(timeoutRef.current);
     exit();
   }
-
   React.useEffect(() => {
     if (__BROWSER__ && window.ResizeObserver) {
       const observer = new window.ResizeObserver(([entry]) => {
@@ -131,85 +103,36 @@ export default function SnackbarProvider({
       };
     }
   }, [snackbars.length, animating]);
-
   const translateHeight = React.useMemo(() => {
     const value = containerHeight * 2 + 24;
-    if (
-      !placement ||
-      placement === PLACEMENT.top ||
-      placement === PLACEMENT.topLeft ||
-      placement === PLACEMENT.topRight
-    ) {
+    if (!placement || placement === PLACEMENT.top || placement === PLACEMENT.topLeft || placement === PLACEMENT.topRight) {
       return -1 * value;
     }
     return value;
   }, [placement, containerHeight]);
-
-  const { PlacementContainer: PlacementContainerOverrides, ...snackbarOverrides } =
-    overrides;
-  const [PlacementContainer, placementContainerProps] = getOverrides(
-    PlacementContainerOverrides,
-    StyledPlacementContainer
-  );
-
-  return (
-    <SnackbarContext.Provider value={{ enqueue, dequeue: exit }}>
-      <div
-        className={css({
-          boxSizing: "border-box",
-          position: "absolute",
-          top: "-10000px",
-          left: "-10000px",
-        })}
-        ref={containerRef}
-      >
-        {snackbars[0] && (
-          <SnackbarElement
-            {...snackbars[0].elementProps}
-            overrides={{
-              ...snackbarOverrides,
-              ...snackbars[0].elementProps.overrides,
-            }}
-            focus={false}
-          />
-        )}
-      </div>
-
-      {snackbars.length > 0 && containerHeight !== 0 && (
-        <Layer>
-          <PlacementContainer
-            $animating={animating}
-            $placement={placement}
-            $translateHeight={translateHeight}
-            {...placementContainerProps}
-          >
-            <div
-              role="alert"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={() => {
-                return handleMouseLeave(snackbars[0].duration);
-              }}
-              className={css({ display: "inline", pointerEvents: "all" })}
-            >
-              <SnackbarElement
-                {...snackbars[0].elementProps}
-                actionOnClick={(event) => {
-                  if (snackbars[0].elementProps.actionOnClick) {
-                    snackbars[0].elementProps.actionOnClick(event);
-                  }
-                  handleActionClick();
-                }}
-                overrides={{
-                  ...snackbarOverrides,
-                  ...snackbars[0].elementProps.overrides,
-                }}
-              />
-            </div>
-          </PlacementContainer>
-        </Layer>
-      )}
-
-      {children}
-    </SnackbarContext.Provider>
-  );
+  const { PlacementContainer: PlacementContainerOverrides, ...snackbarOverrides } = overrides;
+  const [PlacementContainer, placementContainerProps] = getOverrides(PlacementContainerOverrides, StyledPlacementContainer);
+  return <SnackbarContext.Provider value={{ enqueue, dequeue: exit }}>
+    <div className={css({
+      boxSizing: "border-box",
+      position: "absolute",
+      top: "-10000px",
+      left: "-10000px"
+    })} ref={containerRef}>{snackbars[0] && <SnackbarElement {...snackbars[0].elementProps} overrides={{
+      ...snackbarOverrides,
+      ...snackbars[0].elementProps.overrides
+    }} focus={false} />}</div>
+    {snackbars.length > 0 && containerHeight !== 0 && <Layer><PlacementContainer $animating={animating} $placement={placement} $translateHeight={translateHeight} {...placementContainerProps}><div role="alert" onMouseEnter={handleMouseEnter} onMouseLeave={() => {
+      return handleMouseLeave(snackbars[0].duration);
+    }} className={css({ display: "inline", pointerEvents: "all" })}><SnackbarElement {...snackbars[0].elementProps} actionOnClick={(event) => {
+      if (snackbars[0].elementProps.actionOnClick) {
+        snackbars[0].elementProps.actionOnClick(event);
+      }
+      handleActionClick();
+    }} overrides={{
+      ...snackbarOverrides,
+      ...snackbars[0].elementProps.overrides
+    }} /></div></PlacementContainer></Layer>}
+    {children}
+  </SnackbarContext.Provider>;
 }

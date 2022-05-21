@@ -1,17 +1,8 @@
-// The `CountrySelect` component is not designed to be used
-// as a standalone component and we should deprecate it
-// in the next v11 major version in favor of `CountryPicker`.
-// The `DialCode` rendering should be a part of the composed
-// non-split phone input.
-import React from "react";
 import { StyledDialCode, StyledCountrySelectContainer } from "./styled-components";
 import BaseCountryPicker from "./base-country-picker";
 import { SingleSelect as DefaultSelect } from "../select";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import defaultProps from "./default-props";
-
-import type { CountrySelectPropsT } from "./types";
-
 CountrySelect.defaultProps = {
   disabled: defaultProps.disabled,
   inputRef: { current: null },
@@ -21,63 +12,48 @@ CountrySelect.defaultProps = {
   size: defaultProps.size,
   error: defaultProps.error,
   positive: defaultProps.positive,
-  required: defaultProps.required,
+  required: defaultProps.required
 };
-
-export default function CountrySelect(props: CountrySelectPropsT) {
+export default function CountrySelect(props) {
   const { country, disabled, error, overrides, positive, required, size } = props;
   const sharedProps = {
     $disabled: disabled,
     $error: error,
     $positive: positive,
     $required: required,
-    $size: size,
+    $size: size
   };
   const baseSelectOverrides = {
     ControlContainer: {
-      style: (props) => {
-        if (!props.$isFocused && !props.$isPseudoFocused) {
+      style: (props2) => {
+        if (!props2.$isFocused && !props2.$isPseudoFocused) {
           return {
             backgroundColor: "transparent",
             borderLeftColor: "transparent",
             borderRightColor: "transparent",
             borderTopColor: "transparent",
-            borderBottomColor: "transparent",
+            borderBottomColor: "transparent"
           };
         }
-      },
-    },
+      }
+    }
   };
-
   const [Select, selectProps] = getOverrides(overrides.CountrySelect, DefaultSelect);
   const selectOverrides = mergeOverrides(baseSelectOverrides, {
     Dropdown: overrides.CountrySelectDropdown || {},
-    DropdownListItem: overrides.CountrySelectDropdownListItem || {},
+    DropdownListItem: overrides.CountrySelectDropdownListItem || {}
   });
   selectProps.overrides = mergeOverrides(selectOverrides, selectProps.overrides);
-
-  const [CountrySelectContainer, countrySelectContainerProps] = getOverrides(
-    overrides.CountrySelectContainer,
-    StyledCountrySelectContainer
-  );
-
+  const [CountrySelectContainer, countrySelectContainerProps] = getOverrides(overrides.CountrySelectContainer, StyledCountrySelectContainer);
   const [DialCode, dialCodeProps] = getOverrides(overrides.DialCode, StyledDialCode);
-
-  return (
-    <CountrySelectContainer {...countrySelectContainerProps}>
-      <BaseCountryPicker
-        {...props}
-        overrides={{
-          ...overrides,
-          CountrySelect: {
-            component: Select,
-            props: selectProps,
-          },
-        }}
-      />
-      <DialCode {...sharedProps} {...dialCodeProps}>
-        {country.dialCode}
-      </DialCode>
-    </CountrySelectContainer>
-  );
+  return <CountrySelectContainer {...countrySelectContainerProps}>
+    <BaseCountryPicker {...props} overrides={{
+      ...overrides,
+      CountrySelect: {
+        component: Select,
+        props: selectProps
+      }
+    }} />
+    <DialCode {...sharedProps} {...dialCodeProps}>{country.dialCode}</DialCode>
+  </CountrySelectContainer>;
 }

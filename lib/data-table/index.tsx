@@ -12,12 +12,9 @@ export { default as DatetimeColumn } from "./column-datetime";
 export { default as NumericalColumn } from "./column-numerical";
 export { default as RowIndexColumn } from "./column-row-index";
 export { default as StringColumn } from "./column-string";
-
 export {
   COLUMNS,
   DATETIME_OPERATIONS,
   NUMERICAL_FORMATS,
-  SORT_DIRECTIONS,
+  SORT_DIRECTIONS
 } from "./constants";
-
-export type * from "./types";

@@ -1,14 +1,7 @@
 import * as React from "react";
 import { Tabs } from "./tabs";
 import { STATE_CHANGE_TYPE } from "./constants";
-
-import type {
-  StatefulTabsPropsT,
-  StatefulTabsStateT,
-  StatefulTabsReducerT,
-} from "./types";
-
-const getInitialState = (children: React.Node, initialState?: StatefulTabsStateT) => {
+const getInitialState = (children, initialState) => {
   if (initialState && initialState.activeKey) {
     return initialState;
   } else {
@@ -18,15 +11,13 @@ const getInitialState = (children: React.Node, initialState?: StatefulTabsStateT
     return { activeKey: firstKey };
   }
 };
-
-const defaultStateReducer: StatefulTabsReducerT = (state, action) => {
+const defaultStateReducer = (state, action) => {
   if (action.type === STATE_CHANGE_TYPE.change) {
     return { activeKey: action.payload };
   }
   return state;
 };
-
-export function StatefulTabs(props: StatefulTabsPropsT) {
+export function StatefulTabs(props) {
   const {
     children,
     initialState,
@@ -34,18 +25,12 @@ export function StatefulTabs(props: StatefulTabsPropsT) {
     onChange,
     ...restProps
   } = props;
-  const [state, dispatch] = React.useReducer(
-    stateReducer,
-    getInitialState(children, initialState)
-  );
+  const [state, dispatch] = React.useReducer(stateReducer, getInitialState(children, initialState));
   const handleChange = React.useCallback((params) => {
     const { activeKey } = params;
     dispatch({ type: STATE_CHANGE_TYPE.change, payload: activeKey });
-    if (typeof onChange === "function") onChange(params);
+    if (typeof onChange === "function")
+      onChange(params);
   }, []);
-  return (
-    <Tabs {...restProps} activeKey={state.activeKey} onChange={handleChange}>
-      {children}
-    </Tabs>
-  );
+  return <Tabs {...restProps} activeKey={state.activeKey} onChange={handleChange}>{children}</Tabs>;
 }

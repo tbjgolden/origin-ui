@@ -1,7 +1,5 @@
 import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants";
-import type { BaseTooltipPropsT } from "./types";
-
-const baseDefaultProps: $Shape<BaseTooltipPropsT> = {
+const baseDefaultProps = {
   accessibilityType: ACCESSIBILITY_TYPE.tooltip,
   focusLock: false,
   autoFocus: false,
@@ -13,7 +11,6 @@ const baseDefaultProps: $Shape<BaseTooltipPropsT> = {
   popoverMargin: 0,
   showArrow: false,
   triggerType: TRIGGER_TYPE.hover,
-  renderAll: false,
+  renderAll: false
 };
-
 export default baseDefaultProps;

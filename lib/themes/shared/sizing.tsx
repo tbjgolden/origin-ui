@@ -1,6 +1,4 @@
-import type { SizingT } from "../types";
-
-const sizing: SizingT = {
+const sizing = {
   scale0: "2px",
   scale100: "4px",
   scale200: "6px",
@@ -22,7 +20,6 @@ const sizing: SizingT = {
   scale1600: "64px",
   scale2400: "96px",
   scale3200: "128px",
-  scale4800: "192px",
+  scale4800: "192px"
 };
-
 export default sizing;

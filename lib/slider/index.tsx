@@ -1,7 +1,6 @@
 export { default as Slider } from "./slider";
 export { default as StatefulSlider } from "./stateful-slider";
 export { default as StatefulContainer } from "./stateful-slider-container";
-// Styled elements
 export {
   Root as StyledRoot,
   Track as StyledTrack,
@@ -11,7 +10,5 @@ export {
   Tick as StyledTick,
   TickBar as StyledTickBar,
   ThumbValue as StyledThumbValue,
-  Mark as StyledMark,
+  Mark as StyledMark
 } from "./styled-components";
-
-export type * from "./types";

@@ -1,10 +1,6 @@
 import { styled } from "../styles";
-
-import type { SharedStylePropsT } from "./types";
-
 function getBorderColor(props) {
-  const { $disabled, $checked, $error, $isIndeterminate, $theme, $isFocusVisible } =
-    props;
+  const { $disabled, $checked, $error, $isIndeterminate, $theme, $isFocusVisible } = props;
   const { colors } = $theme;
   if ($disabled) {
     return colors.tickFillDisabled;
@@ -18,13 +14,11 @@ function getBorderColor(props) {
     return colors.tickBorder;
   }
 }
-
 function getLabelPadding(props) {
   const { $labelPlacement = "", $theme } = props;
   const { sizing } = $theme;
   const { scale300 } = sizing;
   let paddingDirection;
-
   switch ($labelPlacement) {
     case "top":
       paddingDirection = "Bottom";
@@ -40,21 +34,17 @@ function getLabelPadding(props) {
       paddingDirection = "Left";
       break;
   }
-
   if ($theme.direction === "rtl" && paddingDirection === "Left") {
     paddingDirection = "Right";
   } else if ($theme.direction === "rtl" && paddingDirection === "Right") {
     paddingDirection = "Left";
   }
-
   return {
-    [`padding${paddingDirection}`]: scale300,
+    [`padding${paddingDirection}`]: scale300
   };
 }
-
 function getBackgroundColor(props) {
-  const { $disabled, $checked, $isIndeterminate, $error, $isHovered, $isActive, $theme } =
-    props;
+  const { $disabled, $checked, $isIndeterminate, $error, $isHovered, $isActive, $theme } = props;
   const { colors } = $theme;
   if ($disabled) {
     return $checked || $isIndeterminate ? colors.tickFillDisabled : colors.tickFill;
@@ -92,52 +82,37 @@ function getBackgroundColor(props) {
     }
   }
 }
-
 function getLabelColor(props) {
   const { $disabled, $theme } = props;
   const { colors } = $theme;
   return $disabled ? colors.contentSecondary : colors.contentPrimary;
 }
-
-export const Root = styled<SharedStylePropsT>("label", (props) => {
+export const Root = styled("label", (props) => {
   const { $disabled, $labelPlacement } = props;
   return {
-    flexDirection:
-      $labelPlacement === "top" || $labelPlacement === "bottom" ? "column" : "row",
+    flexDirection: $labelPlacement === "top" || $labelPlacement === "bottom" ? "column" : "row",
     display: "flex",
-    alignItems:
-      $labelPlacement === "top" || $labelPlacement === "bottom" ? "center" : "flex-start",
+    alignItems: $labelPlacement === "top" || $labelPlacement === "bottom" ? "center" : "flex-start",
     cursor: $disabled ? "not-allowed" : "pointer",
-    userSelect: "none",
+    userSelect: "none"
   };
 });
-
-export const Checkmark = styled<SharedStylePropsT>("span", (props) => {
-  const { $checked, $disabled, $error, $isIndeterminate, $theme, $isFocusVisible } =
-    props;
+export const Checkmark = styled("span", (props) => {
+  const { $checked, $disabled, $error, $isIndeterminate, $theme, $isFocusVisible } = props;
   const { sizing, animation } = $theme;
-
-  const tickColor = $disabled
-    ? $theme.colors.tickMarkFillDisabled
-    : $error
-    ? $theme.colors.tickMarkFillError
-    : $theme.colors.tickMarkFill;
-
+  const tickColor = $disabled ? $theme.colors.tickMarkFillDisabled : $error ? $theme.colors.tickMarkFillError : $theme.colors.tickMarkFill;
   const indeterminate = encodeURIComponent(`
     <svg width="14" height="4" viewBox="0 0 14 4" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M14 0.5H0V3.5H14V0.5Z" fill="${tickColor}"/>
     </svg>
   `);
-
   const check = encodeURIComponent(`
     <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M6.50002 12.6L0.400024 6.60002L2.60002 4.40002L6.50002 8.40002L13.9 0.900024L16.1 3.10002L6.50002 12.6Z" fill="${tickColor}"/>
     </svg>
   `);
-
   const borderRadius = $theme.borders.inputBorderRadius;
   const borderColor = getBorderColor(props);
-
   return {
     flex: "0 0 auto",
     transitionDuration: animation.timing200,
@@ -167,11 +142,7 @@ export const Checkmark = styled<SharedStylePropsT>("span", (props) => {
     outline: $isFocusVisible && $checked ? `3px solid ${$theme.colors.accent}` : "none",
     display: "inline-block",
     verticalAlign: "middle",
-    backgroundImage: $isIndeterminate
-      ? `url('data:image/svg+xml,${indeterminate}');`
-      : $checked
-      ? `url('data:image/svg+xml,${check}');`
-      : null,
+    backgroundImage: $isIndeterminate ? `url('data:image/svg+xml,${indeterminate}');` : $checked ? `url('data:image/svg+xml,${check}');` : null,
     backgroundColor: getBackgroundColor(props),
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -179,11 +150,10 @@ export const Checkmark = styled<SharedStylePropsT>("span", (props) => {
     marginTop: $theme.sizing.scale0,
     marginBottom: $theme.sizing.scale0,
     marginLeft: $theme.sizing.scale0,
-    marginRight: $theme.sizing.scale0,
+    marginRight: $theme.sizing.scale0
   };
 });
-
-export const Label = styled<SharedStylePropsT>("div", (props) => {
+export const Label = styled("div", (props) => {
   const { $theme } = props;
   const { typography } = $theme;
   return {
@@ -191,11 +161,9 @@ export const Label = styled<SharedStylePropsT>("div", (props) => {
     ...getLabelPadding(props),
     color: getLabelColor(props),
     ...typography.LabelMedium,
-    lineHeight: "24px",
+    lineHeight: "24px"
   };
 });
-
-// tricky style for focus event cause display: none doesn't work
 export const Input = styled("input", {
   opacity: 0,
   width: 0,
@@ -203,10 +171,9 @@ export const Input = styled("input", {
   overflow: "hidden",
   margin: 0,
   padding: 0,
-  position: "absolute",
+  position: "absolute"
 });
-
-export const Toggle = styled<SharedStylePropsT>("div", (props) => {
+export const Toggle = styled("div", (props) => {
   let backgroundColor = props.$theme.colors.toggleFill;
   if (props.$disabled) {
     backgroundColor = props.$theme.colors.toggleFillDisabled;
@@ -215,29 +182,21 @@ export const Toggle = styled<SharedStylePropsT>("div", (props) => {
   } else if (props.$checked) {
     backgroundColor = props.$theme.colors.toggleFillChecked;
   }
-
   return {
     backgroundColor,
     borderTopLeftRadius: "50%",
     borderTopRightRadius: "50%",
     borderBottomRightRadius: "50%",
     borderBottomLeftRadius: "50%",
-    boxShadow: props.$isFocusVisible
-      ? `0 0 0 3px ${props.$theme.colors.accent}`
-      : props.$isHovered && !props.$disabled
-      ? props.$theme.lighting.shadow500
-      : props.$theme.lighting.shadow400,
+    boxShadow: props.$isFocusVisible ? `0 0 0 3px ${props.$theme.colors.accent}` : props.$isHovered && !props.$disabled ? props.$theme.lighting.shadow500 : props.$theme.lighting.shadow400,
     outline: "none",
     height: props.$theme.sizing.scale700,
     width: props.$theme.sizing.scale700,
-    transform: props.$checked
-      ? `translateX(${props.$theme.direction === "rtl" ? "-100%" : "100%"})`
-      : null,
-    transition: `transform ${props.$theme.animation.timing200}`,
+    transform: props.$checked ? `translateX(${props.$theme.direction === "rtl" ? "-100%" : "100%"})` : null,
+    transition: `transform ${props.$theme.animation.timing200}`
   };
 });
-
-export const ToggleTrack = styled<SharedStylePropsT>("div", (props) => {
+export const ToggleTrack = styled("div", (props) => {
   let backgroundColor = props.$theme.colors.toggleTrackFill;
   if (props.$disabled) {
     backgroundColor = props.$theme.colors.toggleTrackFillDisabled;
@@ -257,6 +216,6 @@ export const ToggleTrack = styled<SharedStylePropsT>("div", (props) => {
     marginBottom: props.$theme.sizing.scale100,
     marginLeft: props.$theme.sizing.scale200,
     marginRight: props.$theme.sizing.scale100,
-    width: props.$theme.sizing.scale1000,
+    width: props.$theme.sizing.scale1000
   };
 });

@@ -1,24 +1,19 @@
 import { styled } from "../styles";
 import { ORIENTATION } from "./constants";
-import type { SharedStylePropsArgT } from "./types";
-
-// $FlowFixMe https://github.com/facebook/flow/issues/7745
-export const Root = styled<SharedStylePropsArgT>("div", (props) => {
+export const Root = styled("div", (props) => {
   const { $orientation } = props;
   return {
     display: "flex",
-    flexDirection: $orientation === ORIENTATION.vertical ? "row" : "column",
+    flexDirection: $orientation === ORIENTATION.vertical ? "row" : "column"
   };
 });
-
-// $FlowFixMe https://github.com/facebook/flow/issues/7745
-export const Tab = styled<SharedStylePropsArgT>("div", (props) => {
+export const Tab = styled("div", (props) => {
   const {
     $disabled,
     $active,
     $orientation,
     $isFocusVisible,
-    $theme: { colors, sizing, typography },
+    $theme: { colors, sizing, typography }
   } = props;
   let style = {
     ...typography.font200,
@@ -33,46 +28,39 @@ export const Tab = styled<SharedStylePropsArgT>("div", (props) => {
     marginRight: sizing.scale200,
     outline: $isFocusVisible ? `3px solid ${colors.accent}` : "none",
     outlineOffset: "-3px",
-    borderBottom:
-      $orientation === ORIENTATION.horizontal && $active && !$isFocusVisible
-        ? `2px solid ${colors.primary}`
-        : "2px solid transparent",
-    display: "inline-block",
+    borderBottom: $orientation === ORIENTATION.horizontal && $active && !$isFocusVisible ? `2px solid ${colors.primary}` : "2px solid transparent",
+    display: "inline-block"
   };
   if (!$disabled && !$active) {
     style = {
       ...style,
       ":focus": {
-        color: colors.primary,
+        color: colors.primary
       },
       ":hover": {
-        color: colors.primary,
-      },
+        color: colors.primary
+      }
     };
   }
   return style;
 });
-
-// $FlowFixMe https://github.com/facebook/flow/issues/7745
-export const TabBar = styled<SharedStylePropsArgT>("div", (props) => {
+export const TabBar = styled("div", (props) => {
   const {
     $orientation,
-    $theme: { colors, sizing },
+    $theme: { colors, sizing }
   } = props;
   return {
     display: "flex",
     flexDirection: $orientation === ORIENTATION.vertical ? "column" : "row",
     paddingLeft: sizing.scale400,
     paddingRight: sizing.scale400,
-    backgroundColor: colors.tabBarFill,
+    backgroundColor: colors.tabBarFill
   };
 });
-
-// $FlowFixMe https://github.com/facebook/flow/issues/7745
-export const TabContent = styled<SharedStylePropsArgT>("div", (props) => {
+export const TabContent = styled("div", (props) => {
   const {
     $active,
-    $theme: { sizing, typography },
+    $theme: { sizing, typography }
   } = props;
   return {
     ...typography.font300,
@@ -80,6 +68,6 @@ export const TabContent = styled<SharedStylePropsArgT>("div", (props) => {
     paddingLeft: sizing.scale800,
     paddingRight: sizing.scale800,
     paddingTop: sizing.scale500,
-    paddingBottom: sizing.scale500,
+    paddingBottom: sizing.scale500
   };
 });

@@ -1,19 +1,16 @@
 export const BEHAVIOR = Object.freeze({
   fluid: "fluid",
-  fixed: "fixed",
+  fixed: "fixed"
 });
-
 export const ALIGNMENT = Object.freeze({
   start: "flex-start",
   center: "center",
-  end: "flex-end",
+  end: "flex-end"
 });
-
 export const STYLE = Object.freeze({
   default: "default",
-  compact: "compact",
+  compact: "compact"
 });
-
 export const STYLE_VALUES = Object.freeze({
   [STYLE.default]: null,
   [STYLE.compact]: {
@@ -22,6 +19,6 @@ export const STYLE_VALUES = Object.freeze({
     margins: [16, 24, 24],
     gaps: 0,
     unit: "px",
-    maxWidth: 1280,
-  },
+    maxWidth: 1280
+  }
 });
