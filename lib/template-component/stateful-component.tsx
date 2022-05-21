@@ -1,13 +1,15 @@
 import * as React from "react";
-import StatefulContainer from "./stateful-container.js";
-import Component from "./component.js";
-import type { StatefulComponentPropsT } from "./types.js";
+import StatefulContainer from "./stateful-container";
+import Component from "./component";
+import type { StatefulComponentPropsT } from "./types";
 
 function StatefulComponent(props: StatefulComponentPropsT) {
   const { children, ...restProps } = props;
   return (
     <StatefulContainer {...restProps}>
-      {(componentProps) => <Component {...componentProps}>{children}</Component>}
+      {(componentProps) => {
+        return <Component {...componentProps}>{children}</Component>;
+      }}
     </StatefulContainer>
   );
 }

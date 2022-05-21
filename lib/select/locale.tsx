@@ -1,11 +1,9 @@
-
-
-export type SelectLocaleT = {|
+export type SelectLocaleT = {
   // Remove noResultsMsg prop in the next major version
-  noResultsMsg: string,
-  placeholder: string,
-  create: string,
-|};
+  noResultsMsg: string;
+  placeholder: string;
+  create: string;
+};
 
 const locale = {
   // Remove noResultsMsg prop in the next major version

@@ -1,3 +1,1 @@
-import StatefulContainer from "../input/stateful-container.js";
-
-export default StatefulContainer;
+export { default } from "../input/stateful-container";

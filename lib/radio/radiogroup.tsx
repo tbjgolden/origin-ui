@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
-import { RadioGroupRoot as StyledRadioGroupRoot } from "./styled-components.js";
-import type { PropsT, DefaultPropsT, StatelessStateT } from "./types.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
+import { RadioGroupRoot as StyledRadioGroupRoot } from "./styled-components";
+import type { PropsT, DefaultPropsT, StatelessStateT } from "./types";
+import { isFocusVisible } from "../utils/focusVisible";
 
 class StatelessRadioGroup extends React.Component<PropsT, StatelessStateT> {
   static defaultProps: DefaultPropsT = {
@@ -80,10 +80,12 @@ class StatelessRadioGroup extends React.Component<PropsT, StatelessStateT> {
             tabIndex: (index === 0 && !this.props.value) || checked ? "0" : "-1",
             labelPlacement: this.props.labelPlacement,
             name: this.props.name,
-            onBlur: (e: SyntheticInputEvent<HTMLInputElement>) =>
-              this.handleBlur(e, index),
-            onFocus: (e: SyntheticInputEvent<HTMLInputElement>) =>
-              this.handleFocus(e, index),
+            onBlur: (e: SyntheticInputEvent<HTMLInputElement>) => {
+              return this.handleBlur(e, index);
+            },
+            onFocus: (e: SyntheticInputEvent<HTMLInputElement>) => {
+              return this.handleFocus(e, index);
+            },
             onChange: this.props.onChange,
             onMouseEnter: this.props.onMouseEnter,
             onMouseLeave: this.props.onMouseLeave,

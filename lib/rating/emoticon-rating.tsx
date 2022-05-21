@@ -2,11 +2,11 @@
 
 
 import * as React from "react";
-import type { EmoticonRatingPropsT, RatingStateT } from "./types.js";
-import { StyledRoot, StyledEmoticon } from "./styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT } from "./utils.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+import type { EmoticonRatingPropsT, RatingStateT } from "./types";
+import { StyledRoot, StyledEmoticon } from "./styled-components";
+import { getOverrides } from "../helpers/overrides";
+import { ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT } from "./utils";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 class EmoticonRating extends React.Component<EmoticonRatingPropsT, RatingStateT> {
   static defaultProps = {

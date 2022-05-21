@@ -1,7 +1,7 @@
-export { default as Modal } from "./modal.js";
-export { default as ModalButton } from "./modal-button.js";
-export { default as FocusOnce } from "./focus-once.js";
-export { SIZE, ROLE, CLOSE_SOURCE } from "./constants.js";
+export { default as Modal } from "./modal";
+export { default as ModalButton } from "./modal-button";
+export { default as FocusOnce } from "./focus-once";
+export { SIZE, ROLE, CLOSE_SOURCE } from "./constants";
 export {
   Root as StyledRoot,
   Dialog as StyledDialog,
@@ -10,5 +10,5 @@ export {
   ModalHeader,
   ModalBody,
   ModalFooter,
-} from "./styled-components.js";
-export type * from "./types.js";
+} from "./styled-components";
+export type * from "./types";

@@ -2,24 +2,24 @@
 
 import * as React from "react";
 
-import { StyledLink } from "../link/index.js";
-import { useStyletron } from "../styles/index.js";
+import { StyledLink } from "../link/index";
+import { useStyletron } from "../styles/index";
 
-import Column from "./column.js";
-import { COLUMNS } from "./constants.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
+import Column from "./column";
+import { COLUMNS } from "./constants";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
 
 type ValueT = { content: string, href: string };
 
-type ReplacementElementAs = React.AbstractComponent<{|
+type ReplacementElementAs = React.AbstractComponent<{
   href: string,
   children: string,
-|}>;
+}>;
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<ValueT>,
   elementAs?: ReplacementElementAs | string,
-|};
+};
 
 type FilterParametersT = {};
 

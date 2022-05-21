@@ -2,9 +2,9 @@
 
 
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { StyledProgressSteps } from "./styled-components.js";
-import type { ProgressStepsPropsT, StepPropsT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { StyledProgressSteps } from "./styled-components";
+import type { ProgressStepsPropsT, StepPropsT } from "./types";
 
 function ProgressSteps({ overrides = {}, current, children }: ProgressStepsPropsT) {
   const [Root, rootProps] = getOverrides(overrides.Root, StyledProgressSteps);

@@ -1,13 +1,15 @@
 import * as React from "react";
-import { STATE_TYPE } from "./constants.js";
+import { STATE_TYPE } from "./constants";
 import type {
   StatefulContainerPropsT,
   StateReducerT,
   DefaultStatefulPropsT,
   StateT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulRadioGroupContainer extends React.Component<
   StatefulContainerPropsT,
@@ -47,7 +49,9 @@ class StatefulRadioGroupContainer extends React.Component<
 
   render() {
     const {
-      children = (childProps: {}) => null, // eslint-disable-line no-unused-vars
+      children = (childProps: {}) => {
+        return null;
+      }, // eslint-disable-line no-unused-vars
       initialState, // eslint-disable-line no-unused-vars
       stateReducer, // eslint-disable-line no-unused-vars
       ...restProps

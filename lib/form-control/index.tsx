@@ -1,7 +1,7 @@
-export { default as FormControl } from "./form-control.js";
+export { default as FormControl } from "./form-control";
 export {
   Label as StyledLabel,
   Caption as StyledCaption,
   ControlContainer as StyledControlContainer,
-} from "./styled-components.js";
-export type * from "./types.js";
+} from "./styled-components";
+export type * from "./types";

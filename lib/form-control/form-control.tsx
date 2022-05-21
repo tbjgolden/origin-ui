@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
 import { UIDConsumer } from "react-uid";
 import {
   Label as StyledLabel,
@@ -7,8 +7,8 @@ import {
   LabelContainer as StyledLabelContainer,
   Caption as StyledCaption,
   ControlContainer as StyledControlContainer,
-} from "./styled-components.js";
-import type { FormControlPropsT, FormControlStateT, StylePropsT } from "./types.js";
+} from "./styled-components";
+import type { FormControlPropsT, FormControlStateT, StylePropsT } from "./types";
 
 function chooseRenderedHint(caption, error, positive, sharedProps) {
   if (!!error && typeof error !== "boolean") {
@@ -75,13 +75,11 @@ export default class FormControl extends React.Component<
 
     const hint = chooseRenderedHint(caption, error, positive, sharedProps);
 
-    if (__DEV__) {
-      if (error && positive) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `[FormControl] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
-        );
-      }
+    if (__DEV__ && error && positive) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[FormControl] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
+      );
     }
 
     let labelEndEnhancer = this.props.labelEndEnhancer;
@@ -152,43 +150,45 @@ export default class FormControl extends React.Component<
           </LabelContainer>
         )}
         <UIDConsumer>
-          {(captionId) => (
-            <ControlContainer
-              data-baseweb="form-control-container"
-              {...sharedProps}
-              {...getOverrideProps(ControlContainerOverride)}
-            >
-              {React.Children.map(children, (child, index) => {
-                if (!child) return;
+          {(captionId) => {
+            return (
+              <ControlContainer
+                data-baseweb="form-control-container"
+                {...sharedProps}
+                {...getOverrideProps(ControlContainerOverride)}
+              >
+                {React.Children.map(children, (child, index) => {
+                  if (!child) return;
 
-                const key = child.key || String(index);
-                return React.cloneElement(child, {
-                  key,
-                  "aria-errormessage": error ? captionId : null,
-                  "aria-describedby": caption || positive ? captionId : null,
-                  disabled: onlyChildProps.disabled || disabled,
-                  error:
-                    typeof onlyChildProps.error !== "undefined"
-                      ? onlyChildProps.error
-                      : sharedProps.$error,
-                  positive:
-                    typeof onlyChildProps.positive !== "undefined"
-                      ? onlyChildProps.positive
-                      : sharedProps.$positive,
-                });
-              })}
-              {(!!caption || !!error || positive) && (
-                <Caption
-                  data-baseweb="form-control-caption"
-                  id={captionId}
-                  {...sharedProps}
-                  {...getOverrideProps(CaptionOverride)}
-                >
-                  {hint}
-                </Caption>
-              )}
-            </ControlContainer>
-          )}
+                  const key = child.key || String(index);
+                  return React.cloneElement(child, {
+                    key,
+                    "aria-errormessage": error ? captionId : null,
+                    "aria-describedby": caption || positive ? captionId : null,
+                    disabled: onlyChildProps.disabled || disabled,
+                    error:
+                      typeof onlyChildProps.error !== "undefined"
+                        ? onlyChildProps.error
+                        : sharedProps.$error,
+                    positive:
+                      typeof onlyChildProps.positive !== "undefined"
+                        ? onlyChildProps.positive
+                        : sharedProps.$positive,
+                  });
+                })}
+                {(!!caption || !!error || positive) && (
+                  <Caption
+                    data-baseweb="form-control-caption"
+                    id={captionId}
+                    {...sharedProps}
+                    {...getOverrideProps(CaptionOverride)}
+                  >
+                    {hint}
+                  </Caption>
+                )}
+              </ControlContainer>
+            );
+          }}
         </UIDConsumer>
       </React.Fragment>
     );

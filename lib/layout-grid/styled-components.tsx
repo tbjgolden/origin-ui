@@ -1,12 +1,12 @@
-import { styled } from "../styles/index.js";
-import { getMediaQueries } from "../helpers/responsive-helpers.js";
-import { BEHAVIOR } from "./constants.js";
+import { styled } from "../styles/index";
+import { getMediaQueries } from "../helpers/responsive-helpers";
+import { BEHAVIOR } from "./constants";
 import type {
   ResponsiveT,
   StyledGridPropsT,
   StyledGridWrapperPropsT,
   StyledCellPropsT,
-} from "./types.js";
+} from "./types";
 
 export const StyledGridWrapper = styled<StyledGridWrapperPropsT>(
   "div",
@@ -16,15 +16,19 @@ export const StyledGridWrapper = styled<StyledGridWrapperPropsT>(
     $gridMargins = $theme.grid.margins,
     $gridMaxWidth = $theme.grid.maxWidth,
     $gridUnit = $theme.grid.unit,
-  }) => ({
-    margin: "auto",
-    maxWidth:
-      $behavior === BEHAVIOR.fixed
-        ? `${
-            $gridMaxWidth + 2 * getResponsiveNumber($gridMargins, Infinity) - 1
-          }${$gridUnit}`
-        : null,
-  })
+  }) => {
+    return {
+      margin: "auto",
+      maxWidth:
+        $behavior === BEHAVIOR.fixed
+          ? `${
+              $gridMaxWidth +
+              2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) -
+              1
+            }${$gridUnit}`
+          : null,
+    };
+  }
 );
 
 export const StyledGrid = styled<StyledGridPropsT>(
@@ -67,7 +71,9 @@ export const StyledGrid = styled<StyledGridPropsT>(
       maxWidth:
         $behavior === BEHAVIOR.fixed
           ? `${
-              $gridMaxWidth + 2 * getResponsiveNumber($gridMargins, Infinity) - 1
+              $gridMaxWidth +
+              2 * getResponsiveNumber($gridMargins, Number.POSITIVE_INFINITY) -
+              1
             }${$gridUnit}`
           : null,
       ...gridStyles,

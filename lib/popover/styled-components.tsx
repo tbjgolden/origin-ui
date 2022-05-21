@@ -1,17 +1,17 @@
-import { styled } from "../styles/index.js";
-import { ARROW_SIZE, ARROW_WIDTH } from "./constants.js";
+import { styled } from "../styles/index";
+import { ARROW_SIZE, ARROW_WIDTH } from "./constants";
 import {
   getPopoverMarginStyles,
   getArrowPositionStyles,
   getStartPosition,
   getEndPosition,
-} from "./utils.js";
+} from "./utils";
 import type {
   ArrowStylePropsArgT,
   BodyStylePropsArgT,
   InnerStylePropsArgT,
-} from "./types.js";
-import type { ThemeT } from "../styles/types.js";
+} from "./types";
+import type { ThemeT } from "../styles/types";
 
 /**
  * Main popover container element that gets positioned next to the anchor

@@ -1,13 +1,13 @@
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
-import { Cell, Grid } from "../layout-grid/index.js";
-import { useStyletron } from "../styles/index.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
+import { getOverrides } from "../helpers/overrides";
+import { Cell, Grid } from "../layout-grid/index";
+import { useStyletron } from "../styles/index";
+import { isFocusVisible } from "../utils/focusVisible";
 
-import { KIND, POSITION } from "./constants.js";
-import MobileNav from "./mobile-menu.js";
-import UserMenu from "./user-menu.js";
+import { KIND, POSITION } from "./constants";
+import MobileNav from "./mobile-menu";
+import UserMenu from "./user-menu";
 import {
   StyledRoot,
   StyledSpacing,
@@ -16,9 +16,9 @@ import {
   StyledSecondaryMenuContainer,
   StyledAppName,
   StyledMainMenuItem,
-} from "./styled-components.js";
-import type { AppNavBarPropsT } from "./types.js";
-import { defaultMapItemToNode, mapItemsActive } from "./utils.js";
+} from "./styled-components";
+import type { AppNavBarPropsT } from "./types";
+import { defaultMapItemToNode, mapItemsActive } from "./utils";
 
 function MainMenuItem(props) {
   const { item, kind = KIND.primary, mapItemToNode, onSelect, overrides = {} } = props;
@@ -92,17 +92,19 @@ function SecondaryMenu(props) {
             aria-label="Secondary navigation"
             {...secondaryMenuContainerProps}
           >
-            {items.map((item, index) => (
-              // Replace with a menu item renderer
-              <MainMenuItem
-                mapItemToNode={mapItemToNode}
-                item={item}
-                kind={KIND.secondary}
-                key={index}
-                onSelect={onSelect}
-                overrides={overrides}
-              />
-            ))}
+            {items.map((item, index) => {
+              return (
+                // Replace with a menu item renderer
+                <MainMenuItem
+                  mapItemToNode={mapItemToNode}
+                  item={item}
+                  kind={KIND.secondary}
+                  key={index}
+                  onSelect={onSelect}
+                  overrides={overrides}
+                />
+              );
+            })}
           </SecondaryMenuContainer>
         </Cell>
       </Grid>
@@ -156,7 +158,9 @@ export default function AppNavBar(props: AppNavBarPropsT) {
         <Grid>
           <Cell span={[4, 8, 0]}>
             <Spacing {...spacingProps}>
-              {mainItems.length || userItems.length ? <MobileNav {...props} /> : null}
+              {mainItems.length > 0 || userItems.length > 0 ? (
+                <MobileNav {...props} />
+              ) : null}
               <AppName {...appNameProps}>{title}</AppName>
             </Spacing>
           </Cell>
@@ -187,7 +191,7 @@ export default function AppNavBar(props: AppNavBarPropsT) {
               <AppName {...appNameProps}>{title}</AppName>
             </Spacing>
           </Cell>
-          <Cell span={userItems.length ? [0, 4, 8] : [0, 5, 9]}>
+          <Cell span={userItems.length > 0 ? [0, 4, 8] : [0, 5, 9]}>
             <PrimaryMenuContainer
               role="navigation"
               aria-label="Main navigation"
@@ -195,7 +199,7 @@ export default function AppNavBar(props: AppNavBarPropsT) {
             >
               {mainItems.map((item, index) => {
                 // For an active top level menu get the secondary navigation and its positioning
-                if (item.active && item.children && item.children.length) {
+                if (item.active && item.children && item.children.length > 0) {
                   secondaryMenu = item.children;
                   if (item.navPosition) {
                     desktopSubNavPosition =
@@ -217,7 +221,7 @@ export default function AppNavBar(props: AppNavBarPropsT) {
             </PrimaryMenuContainer>
           </Cell>
 
-          {userItems.length ? (
+          {userItems.length > 0 ? (
             <Cell span={[0, 1, 1]}>
               <Spacing {...spacingProps}>
                 <UserMenu

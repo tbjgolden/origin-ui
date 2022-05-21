@@ -1,3 +1,3 @@
-export { default as Breadcrumbs } from "./breadcrumbs.js";
-export * from "./styled-components.js";
-export type * from "./types.js";
+export { default as Breadcrumbs } from "./breadcrumbs";
+export * from "./styled-components";
+export type * from "./types";

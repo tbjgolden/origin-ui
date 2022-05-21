@@ -1,10 +1,10 @@
-import { styled, type ThemeT } from "../styles/index.js";
+import { styled, type ThemeT } from "../styles/index";
 import {
   getInputStyles,
   getInputContainerStyles,
   getRootStyles,
-} from "../input/styled-components.js";
-import type { SharedStylePropsT } from "./types.js";
+} from "../input/styled-components";
+import type { SharedStylePropsT } from "./types";
 
 export const StyledTextAreaRoot = styled<SharedStylePropsT>(
   "div",
@@ -15,15 +15,19 @@ export const StyledTextAreaRoot = styled<SharedStylePropsT>(
 
 export const StyledTextareaContainer = styled<SharedStylePropsT>(
   "div",
-  (props: SharedStylePropsT & { $theme: ThemeT }) => ({
-    ...getInputContainerStyles({ $positive: false, ...props }),
-  })
+  (props: SharedStylePropsT & { $theme: ThemeT }) => {
+    return {
+      ...getInputContainerStyles({ $positive: false, ...props }),
+    };
+  }
 );
 
 export const StyledTextarea = styled<SharedStylePropsT>(
   "textarea",
-  (props: SharedStylePropsT & { $theme: ThemeT }) => ({
-    ...getInputStyles(props),
-    resize: "none",
-  })
+  (props: SharedStylePropsT & { $theme: ThemeT }) => {
+    return {
+      ...getInputStyles(props),
+      resize: "none",
+    };
+  }
 );

@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { MODE, STATE_CHANGE_TYPE } from "./constants.js";
+import { MODE, STATE_CHANGE_TYPE } from "./constants";
 
-import type { StatefulContainerPropsT, StateT } from "./types.js";
+import type { StatefulContainerPropsT, StateT } from "./types";
 
 // handles the case where selected = 0
 function isSelectedDefined(selected) {
@@ -33,7 +33,7 @@ export default class StatefulContainer extends React.Component<
     const { selected = [] } = initialState;
 
     this.state = {
-      selected: isSelectedDefined(selected) ? [].concat(selected) : [],
+      selected: isSelectedDefined(selected) ? [selected].flat() : [],
     };
   }
 
@@ -61,7 +61,9 @@ export default class StatefulContainer extends React.Component<
         this.changeState({ selected: [...this.state.selected, index] });
       } else {
         this.changeState({
-          selected: this.state.selected.filter((value) => value !== index),
+          selected: this.state.selected.filter((value) => {
+            return value !== index;
+          }),
         });
       }
     }

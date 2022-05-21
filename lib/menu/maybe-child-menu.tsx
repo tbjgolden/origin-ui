@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { NestedMenuContext } from "./nested-menus.js";
-import { Popover } from "../popover/index.js";
-import type { OverrideT } from "../helpers/overrides.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import type { ItemT } from "./types.js";
+import { NestedMenuContext } from "./nested-menus";
+import { Popover } from "../popover/index";
+import type { OverrideT } from "../helpers/overrides";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import type { ItemT } from "./types";
 
 type PropsT = {
   children: React.Node;

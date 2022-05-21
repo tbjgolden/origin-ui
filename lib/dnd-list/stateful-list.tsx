@@ -1,14 +1,18 @@
 import * as React from "react";
-import StatefulListContainer from "./stateful-list-container.js";
-import List from "./list.js";
-import type { StatefulListPropsT, StateReducerT } from "./types.js";
+import StatefulListContainer from "./stateful-list-container";
+import List from "./list";
+import type { StatefulListPropsT, StateReducerT } from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 function StatefulList(props: StatefulListPropsT) {
   return (
     <StatefulListContainer {...props}>
-      {(componentProps) => <List {...componentProps} />}
+      {(componentProps) => {
+        return <List {...componentProps} />;
+      }}
     </StatefulListContainer>
   );
 }

@@ -1,8 +1,7 @@
-
-import { styled } from "../styles/index.js";
-import { KIND, SIZE, SHAPE } from "./constants.js";
-import type { SharedStylePropsT } from "./types.js";
-import type { FontT } from "../themes/types.js";
+import { styled } from "../styles/index";
+import { KIND, SIZE, SHAPE } from "./constants";
+import type { SharedStylePropsT } from "./types";
+import type { FontT } from "../themes/types";
 
 export const BaseButton = styled<SharedStylePropsT>(
   "button",
@@ -17,49 +16,51 @@ export const BaseButton = styled<SharedStylePropsT>(
     $disabled,
     $isFocusVisible,
     //$FlowFixMe
-  }) => ({
-    display: "inline-flex",
-    // need to maintain button width while showing loading spinner
-    flexDirection: $isLoading ? "column" : "row",
-    alignItems: "center",
-    justifyContent: "center",
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderLeftStyle: "none",
-    borderTopStyle: "none",
-    borderRightStyle: "none",
-    borderBottomStyle: "none",
-    outline: "none",
-    boxShadow: $isFocusVisible ? `inset 0 0 0 3px ${$theme.colors.accent}` : "none",
-    textDecoration: "none",
-    WebkitAppearance: "none",
-    transitionProperty: "background",
-    transitionDuration: $theme.animation.timing200,
-    transitionTimingFunction: $theme.animation.linearCurve,
-    cursor: "pointer",
-    ":disabled": {
-      cursor: "not-allowed",
-      ...getDisabledStyles({ $theme, $kind, $disabled, $isSelected }),
-    },
-    marginLeft: 0,
-    marginTop: 0,
-    marginRight: 0,
-    marginBottom: 0,
-    ...getFontStyles({ $theme, $size }),
-    ...getBorderRadiiStyles({ $theme, $size, $shape }),
-    ...getPaddingStyles({ $theme, $size, $shape }),
-    ...getColorStyles({
-      $theme,
-      $colors,
-      $kind,
-      $isLoading,
-      $isSelected,
-      $disabled,
-    }),
-    ...getShapeStyles({ $shape, $size }),
-  })
+  }) => {
+    return {
+      display: "inline-flex",
+      // need to maintain button width while showing loading spinner
+      flexDirection: $isLoading ? "column" : "row",
+      alignItems: "center",
+      justifyContent: "center",
+      borderLeftWidth: 0,
+      borderTopWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 0,
+      borderLeftStyle: "none",
+      borderTopStyle: "none",
+      borderRightStyle: "none",
+      borderBottomStyle: "none",
+      outline: "none",
+      boxShadow: $isFocusVisible ? `inset 0 0 0 3px ${$theme.colors.accent}` : "none",
+      textDecoration: "none",
+      WebkitAppearance: "none",
+      transitionProperty: "background",
+      transitionDuration: $theme.animation.timing200,
+      transitionTimingFunction: $theme.animation.linearCurve,
+      cursor: "pointer",
+      ":disabled": {
+        cursor: "not-allowed",
+        ...getDisabledStyles({ $theme, $kind, $disabled, $isSelected }),
+      },
+      marginLeft: 0,
+      marginTop: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      ...getFontStyles({ $theme, $size }),
+      ...getBorderRadiiStyles({ $theme, $size, $shape }),
+      ...getPaddingStyles({ $theme, $size, $shape }),
+      ...getColorStyles({
+        $theme,
+        $colors,
+        $kind,
+        $isLoading,
+        $isSelected,
+        $disabled,
+      }),
+      ...getShapeStyles({ $shape, $size }),
+    };
+  }
 );
 
 export const EndEnhancer = styled<SharedStylePropsT>("div", ({ $theme }) => {
@@ -277,22 +278,22 @@ function getPaddingStyles({ $theme, $size, $shape }) {
   }
 }
 
-type ColorStylesT = {|
-  color?: string,
-  backgroundColor?: string,
+type ColorStylesT = {
+  color?: string;
+  backgroundColor?: string;
   ":hover"?: {
-    boxShadow?: string,
-    backgroundColor?: string,
-  },
+    boxShadow?: string;
+    backgroundColor?: string;
+  };
   ":focus"?: {
-    boxShadow?: string,
-    backgroundColor?: string,
-  },
+    boxShadow?: string;
+    backgroundColor?: string;
+  };
   ":active"?: {
-    boxShadow?: string,
-    backgroundColor?: string,
-  },
-|};
+    boxShadow?: string;
+    backgroundColor?: string;
+  };
+};
 function getColorStyles({
   $theme,
   $colors,
@@ -381,12 +382,12 @@ function getColorStyles({
 }
 
 function getShapeStyles({ $shape, $size }): {
-  height?: string,
-  width?: string,
-  paddingTop?: number,
-  paddingBottom?: number,
-  paddingLeft?: number,
-  paddingRight?: number,
+  height?: string;
+  width?: string;
+  paddingTop?: number;
+  paddingBottom?: number;
+  paddingLeft?: number;
+  paddingRight?: number;
 } {
   if ($shape === SHAPE.circle || $shape === SHAPE.square) {
     let height, width;

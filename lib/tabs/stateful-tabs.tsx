@@ -1,11 +1,7 @@
 import * as React from "react";
-import Tabs from "./tabs.js";
-import { STATE_CHANGE_TYPE } from "./constants.js";
-import type {
-  StatefulTabsPropsT,
-  StatefulTabsStateT,
-  StateChangeTypeT,
-} from "./types.js";
+import Tabs from "./tabs";
+import { STATE_CHANGE_TYPE } from "./constants";
+import type { StatefulTabsPropsT, StatefulTabsStateT, StateChangeTypeT } from "./types";
 
 export default class StatefulTabs extends React.Component<
   StatefulTabsPropsT,
@@ -15,7 +11,9 @@ export default class StatefulTabs extends React.Component<
     disabled: false,
     onChange: () => {},
     overrides: {},
-    stateReducer: (type, newState) => newState,
+    stateReducer: (type, newState) => {
+      return newState;
+    },
   };
 
   state = {
@@ -35,14 +33,11 @@ export default class StatefulTabs extends React.Component<
 
   getInitialKey() {
     const { initialState, children } = this.props;
-    if (initialState && initialState.activeKey) {
-      return initialState.activeKey;
-    } else {
-      return React.Children.map(
-        children,
-        (child, index) => child.key || String(index)
-      )[0];
-    }
+    return initialState && initialState.activeKey
+      ? initialState.activeKey
+      : React.Children.map(children, (child, index) => {
+          return child.key || String(index);
+        })[0];
   }
 
   render() {

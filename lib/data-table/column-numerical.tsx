@@ -2,43 +2,43 @@
 
 import * as React from "react";
 
-import { Button, SIZE } from "../button/index.js";
-import { ButtonGroup, MODE } from "../button-group/index.js";
-import { Input, SIZE as INPUT_SIZE } from "../input/index.js";
-import { useStyletron } from "../styles/index.js";
+import { Button, SIZE } from "../button/index";
+import { ButtonGroup, MODE } from "../button-group/index";
+import { Input, SIZE as INPUT_SIZE } from "../input/index";
+import { useStyletron } from "../styles/index";
 
-import Column from "./column.js";
+import Column from "./column";
 import {
   COLUMNS,
   NUMERICAL_FORMATS,
   MAX_BIN_COUNT,
   HISTOGRAM_SIZE,
-} from "./constants.js";
-import FilterShell, { type ExcludeKind } from "./filter-shell.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
+} from "./constants";
+import FilterShell, { type ExcludeKind } from "./filter-shell";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
+import { LocaleContext } from "../locale/index";
 import { bin, max as maxFunc, extent, scaleLinear, median, bisector } from "d3";
-import { Slider } from "../slider/index.js";
+import { Slider } from "../slider/index";
 
 type NumericalFormats =
   | typeof NUMERICAL_FORMATS.DEFAULT
   | typeof NUMERICAL_FORMATS.ACCOUNTING
   | typeof NUMERICAL_FORMATS.PERCENTAGE;
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<number>,
   format?: NumericalFormats | ((value: number) => string),
   highlight?: (number) => boolean,
   precision?: number,
-|};
+};
 
-type FilterParametersT = {|
+type FilterParametersT = {
   lowerValue: number,
   upperValue: number,
   description: string,
   exclude: boolean,
   excludeKind: ExcludeKind,
-|};
+};
 
 type NumericalColumnT = ColumnT<number, FilterParametersT>;
 

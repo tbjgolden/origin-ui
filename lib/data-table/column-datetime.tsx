@@ -1,19 +1,19 @@
 
 
 import * as React from "react";
-import format from "date-fns/format/index.js";
-import getYear from "date-fns/getYear/index.js";
-import getMonth from "date-fns/getMonth/index.js";
-import getQuarter from "date-fns/getQuarter/index.js";
-import getDay from "date-fns/getDay/index.js";
-import isAfter from "date-fns/isAfter/index.js";
-import isBefore from "date-fns/isBefore/index.js";
-import isEqual from "date-fns/isEqual/index.js";
-import set from "date-fns/set/index.js";
+import format from "date-fns/format/index";
+import getYear from "date-fns/getYear/index";
+import getMonth from "date-fns/getMonth/index";
+import getQuarter from "date-fns/getQuarter/index";
+import getDay from "date-fns/getDay/index";
+import isAfter from "date-fns/isAfter/index";
+import isBefore from "date-fns/isBefore/index";
+import isEqual from "date-fns/isEqual/index";
+import set from "date-fns/set/index";
 
-import { Button, SIZE } from "../button/index.js";
-import { ButtonGroup, MODE } from "../button-group/index.js";
-import { Checkbox } from "../checkbox/index.js";
+import { Button, SIZE } from "../button/index";
+import { ButtonGroup, MODE } from "../button-group/index";
+import { Checkbox } from "../checkbox/index";
 import {
   applyDateToTime,
   applyTimeToDate,
@@ -22,24 +22,24 @@ import {
   getQuarterInLocale,
   getStartOfWeek,
   addDays,
-} from "../datepicker/utils/index.js";
-import { Datepicker } from "../datepicker/index.js";
-import { TimePicker } from "../timepicker/index.js";
-import { useStyletron } from "../styles/index.js";
-import { Select, type ValueT } from "../select/index.js";
+} from "../datepicker/utils/index";
+import { Datepicker } from "../datepicker/index";
+import { TimePicker } from "../timepicker/index";
+import { useStyletron } from "../styles/index";
+import { Select, type ValueT } from "../select/index";
 
-import Column from "./column.js";
-import { COLUMNS, DATETIME_OPERATIONS } from "./constants.js";
-import FilterShell from "./filter-shell.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
+import Column from "./column";
+import { COLUMNS, DATETIME_OPERATIONS } from "./constants";
+import FilterShell from "./filter-shell";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
+import { LocaleContext } from "../locale/index";
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<Date>,
   formatString?: string,
   // flowlint-next-line unclear-type:off
   locale?: any,
-|};
+};
 
 type DatetimeOperationsT =
   | typeof DATETIME_OPERATIONS.RANGE_DATETIME
@@ -51,13 +51,13 @@ type DatetimeOperationsT =
   | typeof DATETIME_OPERATIONS.HALF
   | typeof DATETIME_OPERATIONS.YEAR;
 
-type FilterParametersT = {|
+type FilterParametersT = {
   operation: DatetimeOperationsT,
   range: Date[],
   selection: number[],
   description: string,
   exclude: boolean,
-|};
+};
 
 type DatetimeColumnT = ColumnT<Date, FilterParametersT>;
 

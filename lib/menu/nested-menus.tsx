@@ -3,7 +3,7 @@
 
 import * as React from "react";
 
-import type { NestedMenuRefT, NestedMenuContextT } from "./types.js";
+import type { NestedMenuRefT, NestedMenuContextT } from "./types";
 
 type StateT = {
   nestedMenuHoverIndex: number,

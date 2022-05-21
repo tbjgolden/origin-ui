@@ -1,7 +1,7 @@
 
 import * as React from "react";
 
-import { styled, withWrapper, expandBorderStyles } from "../styles/index.js";
+import { styled, withWrapper, expandBorderStyles } from "../styles/index";
 
 const StyledTableElement = styled<{}>("div", ({ $theme }) => {
   return {

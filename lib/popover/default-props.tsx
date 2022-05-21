@@ -1,5 +1,5 @@
-import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants.js";
-import type { BasePopoverPropsT } from "./types.js";
+import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants";
+import type { BasePopoverPropsT } from "./types";
 
 const baseDefaultProps: $Shape<BasePopoverPropsT> = {
   accessibilityType: ACCESSIBILITY_TYPE.menu,

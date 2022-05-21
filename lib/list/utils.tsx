@@ -1,5 +1,5 @@
-import { ARTWORK_SIZES } from "./constants.js";
-import type { ArtworkSizesT } from "./types.js";
+import { ARTWORK_SIZES } from "./constants";
+import type { ArtworkSizesT } from "./types";
 
 export function artworkSizeToValue(artworkSize: ArtworkSizesT, isSublist: boolean) {
   if (isSublist) {

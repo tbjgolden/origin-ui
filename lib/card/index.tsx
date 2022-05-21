@@ -1,6 +1,6 @@
 /* @flow */
 
-export { default as Card, hasThumbnail } from "./card.js";
+export { default as Card, hasThumbnail } from "./card";
 export {
   Action as StyledAction,
   Body as StyledBody,
@@ -10,5 +10,5 @@ export {
   Title as StyledTitle,
   Root as StyledRoot,
   Root as StyledWrapper,
-} from "./styled-components.js";
-export type * from "./types.js";
+} from "./styled-components";
+export type * from "./types";

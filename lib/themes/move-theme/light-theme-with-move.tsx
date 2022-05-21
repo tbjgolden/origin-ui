@@ -1,12 +1,9 @@
-import deepMerge from "../../utils/deep-merge.js";
-import { LightTheme } from "../light-theme/light-theme.js";
-import {
-  typography as moveTypography,
-  fontTokens as moveFontTokens,
-} from "./typography.js";
-import getTypography from "../shared/typography.js";
+import deepMerge from "../../utils/deep-merge";
+import { LightTheme } from "../light-theme/light-theme";
+import { typography as moveTypography, fontTokens as moveFontTokens } from "./typography";
+import getTypography from "../shared/typography";
 
-import type { ThemeT } from "../../styles/types.js";
+import type { ThemeT } from "../../styles/types";
 
 export const LightThemeMove: ThemeT = deepMerge({}, LightTheme, {
   name: "light-theme-with-move",

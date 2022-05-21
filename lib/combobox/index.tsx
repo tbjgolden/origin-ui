@@ -1,10 +1,10 @@
-export { SIZE } from "../input/constants.js";
+export { SIZE } from "../input/constants";
 
-export { default as Combobox } from "./combobox.js";
+export { default as Combobox } from "./combobox";
 export {
   StyledRoot,
   StyledInputContainer,
   StyledListBox,
   StyledListItem,
-} from "./styled-components.js";
-export type * from "./types.js";
+} from "./styled-components";
+export type * from "./types";

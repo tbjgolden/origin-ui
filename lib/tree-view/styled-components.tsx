@@ -1,4 +1,4 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 
 export const StyledTreeItemList = styled<{
   $indentGuides?: boolean;
@@ -97,6 +97,8 @@ export const StyledNoIconContainer = styled<{}>("div", ({ $theme }) => {
   };
 });
 
-export const StyledLabelInteractable = styled<{}>("div", () => ({
-  width: "100%",
-}));
+export const StyledLabelInteractable = styled<{}>("div", () => {
+  return {
+    width: "100%",
+  };
+});

@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import { StyledTreeItemList, StyledTreeItem } from "./styled-components.js";
-import type { TreeNodePropsT } from "./types.js";
+import { StyledTreeItemList, StyledTreeItem } from "./styled-components";
+import type { TreeNodePropsT } from "./types";
 
-import StyledTreeLabel from "./tree-label.js";
+import StyledTreeLabel from "./tree-label";
 
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
 
 export default class TreeNode extends React.Component<TreeNodePropsT> {
   treeItemRef = React.createRef<HTMLLIElement>();
@@ -50,7 +50,7 @@ export default class TreeNode extends React.Component<TreeNodePropsT> {
       isFocusVisible,
     } = this.props;
     const { children, isExpanded, label } = node;
-    const hasChildren = children && children.length !== 0;
+    const hasChildren = children && children.length > 0;
     const {
       TreeItemList: TreeItemListOverride,
       TreeItem: TreeItemOverride,
@@ -65,7 +65,9 @@ export default class TreeNode extends React.Component<TreeNodePropsT> {
         ref={this.treeItemRef}
         data-nodeid={getId(node)}
         tabIndex={selectedNodeId === getId(node) ? 0 : -1}
-        onKeyDown={(e: KeyboardEvent) => onKeyDown && onKeyDown(e, node)}
+        onKeyDown={(e: KeyboardEvent) => {
+          return onKeyDown && onKeyDown(e, node);
+        }}
         onBlur={onBlur}
         onFocus={this.onFocus}
         aria-expanded={isExpanded}
@@ -91,24 +93,26 @@ export default class TreeNode extends React.Component<TreeNodePropsT> {
             $expanded={!!isExpanded}
             {...getOverrideProps(TreeItemListOverride)}
           >
-            {children.map((node, index) => (
-              <TreeNode
-                indentGuides={!!indentGuides}
-                renderAll={renderAll}
-                key={index}
-                node={node}
-                getId={getId}
-                onToggle={onToggle}
-                overrides={overrides}
-                selectedNodeId={selectedNodeId}
-                onKeyDown={onKeyDown}
-                onFocus={onFocus}
-                onBlur={onBlur}
-                addRef={addRef}
-                removeRef={removeRef}
-                isFocusVisible={isFocusVisible}
-              />
-            ))}
+            {children.map((node, index) => {
+              return (
+                <TreeNode
+                  indentGuides={!!indentGuides}
+                  renderAll={renderAll}
+                  key={index}
+                  node={node}
+                  getId={getId}
+                  onToggle={onToggle}
+                  overrides={overrides}
+                  selectedNodeId={selectedNodeId}
+                  onKeyDown={onKeyDown}
+                  onFocus={onFocus}
+                  onBlur={onBlur}
+                  addRef={addRef}
+                  removeRef={removeRef}
+                  isFocusVisible={isFocusVisible}
+                />
+              );
+            })}
           </TreeItemList>
         )}
       </TreeItem>

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { Button, SIZE as BUTTON_SIZE } from "../button/index.js";
-import { Checkbox, STYLE_TYPE } from "../checkbox/index.js";
-import { useStyletron } from "../styles/index.js";
-import { LocaleContext } from "../locale/index.js";
-import { FILTER_SHELL_WIDTH } from "./constants.js";
+import { Button, SIZE as BUTTON_SIZE } from "../button/index";
+import { Checkbox, STYLE_TYPE } from "../checkbox/index";
+import { useStyletron } from "../styles/index";
+import { LocaleContext } from "../locale/index";
+import { FILTER_SHELL_WIDTH } from "./constants";
 
 export type ExcludeKind = "value" | "range";
 

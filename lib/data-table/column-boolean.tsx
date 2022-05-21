@@ -2,23 +2,23 @@
 
 import * as React from "react";
 
-import { useStyletron } from "../styles/index.js";
+import { useStyletron } from "../styles/index";
 
-import { CategoricalFilter } from "./column-categorical.js";
-import Column from "./column.js";
-import { COLUMNS } from "./constants.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
+import { CategoricalFilter } from "./column-categorical";
+import Column from "./column";
+import { COLUMNS } from "./constants";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
+import { LocaleContext } from "../locale/index";
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<boolean>,
-|};
+};
 
-type FilterParametersT = {|
+type FilterParametersT = {
   selection: Set<boolean>,
   description: string,
   exclude: boolean,
-|};
+};
 
 type BooleanColumnT = ColumnT<boolean, FilterParametersT>;
 

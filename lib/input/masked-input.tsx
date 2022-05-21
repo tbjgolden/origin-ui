@@ -1,9 +1,9 @@
 import * as React from "react";
 import InputMask from "react-input-mask";
 
-import Input from "./input.js";
-import { Input as StyledInput } from "./styled-components.js";
-import type { MaskedInputPropsT } from "./types.js";
+import Input from "./input";
+import { Input as StyledInput } from "./styled-components";
+import type { MaskedInputPropsT } from "./types";
 
 const MaskOverride = React.forwardRef<MaskedInputPropsT, HTMLInputElement>(
   (
@@ -33,17 +33,19 @@ const MaskOverride = React.forwardRef<MaskedInputPropsT, HTMLInputElement>(
         disabled={disabled}
         {...restProps}
       >
-        {(props) => (
-          <StyledInput
-            ref={ref}
-            onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            value={value}
-            disabled={disabled}
-            {...props}
-          />
-        )}
+        {(props) => {
+          return (
+            <StyledInput
+              ref={ref}
+              onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              value={value}
+              disabled={disabled}
+              {...props}
+            />
+          );
+        }}
       </InputMask>
     );
   }

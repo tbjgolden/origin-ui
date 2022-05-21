@@ -1,8 +1,8 @@
 
 
-import { styled } from "../styles/index.js";
-import type { ThemeT } from "../styles/types.js";
-import type { StyledComponentArgsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { ThemeT } from "../styles/types";
+import type { StyledComponentArgsT } from "./types";
 
 export function getSvgStyles({
   $theme,
@@ -11,13 +11,13 @@ export function getSvgStyles({
 }: {
   ...StyledComponentArgsT,
   $theme: ThemeT,
-}): {|
+}): {
   display: string,
   fill: string,
   color: string,
   height: string,
   width: string,
-|} {
+} {
   let size = $theme.sizing.scale600;
   if ($size) {
     if ($theme.sizing[$size]) {

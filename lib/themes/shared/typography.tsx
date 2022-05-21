@@ -1,4 +1,4 @@
-import type { TypographyT, FontTokensT } from "../types.js";
+import type { TypographyT, FontTokensT } from "../types";
 
 export const defaultFontTokens: FontTokensT = {
   primaryFontFamily: 'system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif',

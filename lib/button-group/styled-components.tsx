@@ -1,5 +1,5 @@
-import { styled } from "../styles/index.js";
-import { SHAPE } from "../button/index.js";
+import { styled } from "../styles/index";
+import { SHAPE } from "../button/index";
 
 export const StyledRoot = styled<{ $shape: string; $length: number }>(
   "div",

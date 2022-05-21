@@ -1,16 +1,22 @@
 import * as React from "react";
 
-import { Checkbox } from "../checkbox/index.js";
-import { useStyletron } from "../styles/index.js";
+import { Checkbox } from "../checkbox/index";
+import { useStyletron } from "../styles/index";
 
-import type { ColumnT } from "./types.js";
+import type { ColumnT } from "./types";
 
 function Column<ValueT, FilterParamsT>(
   options: ColumnT<ValueT, FilterParamsT>
 ): ColumnT<ValueT, FilterParamsT> {
   return {
     kind: options.kind,
-    buildFilter: options.buildFilter || (() => () => true),
+    buildFilter:
+      options.buildFilter ||
+      (() => {
+        return () => {
+          return true;
+        };
+      }),
     textQueryFilter: options.textQueryFilter,
     fillWidth: options.fillWidth === undefined ? true : options.fillWidth,
     filterable:
@@ -71,9 +77,17 @@ function Column<ValueT, FilterParamsT>(
         </div>
       );
     }),
-    renderFilter: options.renderFilter || (() => null),
+    renderFilter:
+      options.renderFilter ||
+      (() => {
+        return null;
+      }),
     sortable: Boolean(options.sortable) && Boolean(options.sortFn),
-    sortFn: options.sortFn || (() => 0),
+    sortFn:
+      options.sortFn ||
+      (() => {
+        return 0;
+      }),
     title: options.title,
   };
 }

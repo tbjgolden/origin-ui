@@ -1,17 +1,19 @@
 /* global document */
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { styled } from "../styles/index.js";
-import { LayersContext, Consumer } from "./layers-manager.js";
-import type { LayerPropsT, LayerComponentPropsT, LayerStateT } from "./types.js";
+import { styled } from "../styles/index";
+import { LayersContext, Consumer } from "./layers-manager";
+import type { LayerPropsT, LayerComponentPropsT, LayerStateT } from "./types";
 
-const Container = styled<{ $zIndex?: number }>("div", ({ $zIndex }) => ({
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: $zIndex || null,
-}));
+const Container = styled<{ $zIndex?: number }>("div", ({ $zIndex }) => {
+  return {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: $zIndex || null,
+  };
+});
 
 class LayerComponent extends React.Component<LayerComponentPropsT, LayerStateT> {
   static contextType: typeof LayersContext = LayersContext;
@@ -33,12 +35,10 @@ class LayerComponent extends React.Component<LayerComponentPropsT, LayerStateT> 
     // There was no LayersManager added if this.props.host === undefined.
     // Use document.body is the case no LayersManager is used.
     const hasLayersManager = layersManagerHost !== undefined;
-    if (__DEV__) {
-      if (!hasLayersManager) {
-        console.warn(
-          "`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information"
-        );
-      }
+    if (__DEV__ && !hasLayersManager) {
+      console.warn(
+        "`LayersManager` was not found. This occurs if you are attempting to use a component requiring `Layer` without using the `BaseProvider` at the root of your app. Please visit https://baseweb.design/components/base-provider/ for more information"
+      );
     }
     const host = hasLayersManager ? layersManagerHost : document.body;
     if (host) {
@@ -75,10 +75,8 @@ class LayerComponent extends React.Component<LayerComponentPropsT, LayerStateT> 
 
     const host = this.props.host;
     const container = this.state.container;
-    if (host && container) {
-      if (host.contains(container)) {
-        host.removeChild(container);
-      }
+    if (host && container && host.contains(container)) {
+      container.remove();
     }
   }
 
@@ -135,7 +133,9 @@ class LayerComponent extends React.Component<LayerComponentPropsT, LayerStateT> 
 export default function Layer(props: LayerPropsT) {
   return (
     <Consumer>
-      {({ host, zIndex }) => <LayerComponent {...props} host={host} zIndex={zIndex} />}
+      {({ host, zIndex }) => {
+        return <LayerComponent {...props} host={host} zIndex={zIndex} />;
+      }}
     </Consumer>
   );
 }

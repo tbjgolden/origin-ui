@@ -4,13 +4,13 @@
 // The `DialCode` rendering should be a part of the composed
 // non-split phone input.
 import React from "react";
-import { StyledDialCode, StyledCountrySelectContainer } from "./styled-components.js";
-import BaseCountryPicker from "./base-country-picker.js";
-import { SingleSelect as DefaultSelect } from "../select/index.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import defaultProps from "./default-props.js";
+import { StyledDialCode, StyledCountrySelectContainer } from "./styled-components";
+import BaseCountryPicker from "./base-country-picker";
+import { SingleSelect as DefaultSelect } from "../select/index";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import defaultProps from "./default-props";
 
-import type { CountrySelectPropsT } from "./types.js";
+import type { CountrySelectPropsT } from "./types";
 
 CountrySelect.defaultProps = {
   disabled: defaultProps.disabled,

@@ -1,9 +1,9 @@
 import React from "react";
 
-import * as flags from "./flags/index.js";
-import { styled } from "../styles/index.js";
-import { SIZE } from "./constants.js";
-import type { CountryIsoT, SizeT } from "./types.js";
+import * as flags from "./flags/index";
+import { styled } from "../styles/index";
+import { SIZE } from "./constants";
+import type { CountryIsoT, SizeT } from "./types";
 
 type SizeStyleProps = {
   $size?: SizeT;

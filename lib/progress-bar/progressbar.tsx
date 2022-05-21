@@ -1,6 +1,6 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { SIZE } from "./constants.js";
+import { getOverrides } from "../helpers/overrides";
+import { SIZE } from "./constants";
 import {
   StyledRoot,
   StyledBarContainer,
@@ -8,17 +8,18 @@ import {
   StyledLabel,
   StyledBarProgress,
   StyledInfiniteBar,
-} from "./styled-components.js";
+} from "./styled-components";
 
-import type { ProgressBarPropsT } from "./types.js";
+import type { ProgressBarPropsT } from "./types";
 
 class ProgressBar extends React.Component<
   // flowlint-next-line unclear-type:off
   ProgressBarPropsT & { forwardedRef: any }
 > {
   static defaultProps = {
-    getProgressLabel: (value: number, maxValue: number, minValue: number) =>
-      `${Math.round(((value - minValue) / (maxValue - minValue)) * 100)}% Loaded`,
+    getProgressLabel: (value: number, maxValue: number, minValue: number) => {
+      return `${Math.round(((value - minValue) / (maxValue - minValue)) * 100)}% Loaded`;
+    },
     infinite: false,
     overrides: {},
     showLabel: false,
@@ -32,12 +33,10 @@ class ProgressBar extends React.Component<
 
   componentDidMount() {
     // TODO(v11): remove warning when switching default Spinner
-    if (__DEV__) {
-      if (this.props.errorMessage) {
-        console.warn(
-          "baseui:ProgressBar The `errorMessage` prop is deprecated in WAI-ARIA v1.2."
-        );
-      }
+    if (__DEV__ && this.props.errorMessage) {
+      console.warn(
+        "baseui:ProgressBar The `errorMessage` prop is deprecated in WAI-ARIA v1.2."
+      );
     }
   }
 
@@ -136,10 +135,12 @@ class ProgressBar extends React.Component<
 }
 
 const ForwardedProgressBar = React.forwardRef<$Shape<ProgressBarPropsT>, HTMLDivElement>(
-  (props: ProgressBarPropsT, ref) => (
-    //$FlowExpectedError[cannot-spread-inexact]
-    <ProgressBar forwardedRef={ref} {...props} />
-  )
+  (props: ProgressBarPropsT, ref) => {
+    return (
+      //$FlowExpectedError[cannot-spread-inexact]
+      <ProgressBar forwardedRef={ref} {...props} />
+    );
+  }
 );
 ForwardedProgressBar.displayName = "ProgressBar";
 export default ForwardedProgressBar;

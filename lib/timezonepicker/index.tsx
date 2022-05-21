@@ -1,3 +1,3 @@
-export { default as TimezonePicker } from "./timezone-picker.js";
+export { default as TimezonePicker } from "./timezone-picker";
 
-export type * from "./types.js";
+export type * from "./types";

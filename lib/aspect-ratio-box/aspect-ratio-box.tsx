@@ -2,9 +2,9 @@
 
 import * as React from "react";
 
-import { Block } from "../block/index.js";
-import { mergeOverrides } from "../helpers/overrides.js";
-import type { AspectRatioBoxPropsT } from "./types.js";
+import { Block } from "../block/index";
+import { mergeOverrides } from "../helpers/overrides";
+import type { AspectRatioBoxPropsT } from "./types";
 
 const aspectRatioBoxStyle = ({ $aspectRatio }) => ({
   position: "relative",

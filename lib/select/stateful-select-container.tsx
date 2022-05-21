@@ -4,9 +4,11 @@ import type {
   StateReducerT,
   StateT,
   OnChangeParamsT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulSelectContainer extends React.Component<StatefulContainerPropsT, StateT> {
   static defaultProps = {

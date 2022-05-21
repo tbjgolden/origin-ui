@@ -1,13 +1,13 @@
 
-import { styled } from "../styles/index.js";
-import { SIZE, SIZE_WIDTHS } from "./constants.js";
-import type { SharedStylePropsArgT, SizePropT } from "./types.js";
+import { styled } from "../styles/index";
+import { SIZE, SIZE_WIDTHS } from "./constants";
+import type { SharedStylePropsArgT, SizePropT } from "./types";
 
-type SizeStyleT = {|
+type SizeStyleT = {
   maxWidth: string | number,
   width?: ?(string | number),
   alignSelf?: string,
-|};
+};
 function getSizeStyles($size: SizePropT): SizeStyleT {
   const styles: SizeStyleT = {
     maxWidth: "100%",

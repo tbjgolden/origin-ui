@@ -1,5 +1,5 @@
-import defaultFilterOptions from "./utils/default-filter-options.js";
-import { TYPE, SIZE } from "./constants.js";
+import defaultFilterOptions from "./utils/default-filter-options";
+import { TYPE, SIZE } from "./constants";
 
 const defaultProps = {
   "aria-label": null,

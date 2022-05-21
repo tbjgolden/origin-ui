@@ -1,11 +1,11 @@
 import * as React from "react";
-import Week from "./week.js";
-import { StyledMonth } from "./styled-components.js";
-import dateFnsAdapter from "./utils/date-fns-adapter.js";
-import DateHelpers from "./utils/date-helpers.js";
-import { getOverrides } from "../helpers/overrides.js";
-import type { MonthPropsT } from "./types.js";
-import { DENSITY } from "./constants.js";
+import Week from "./week";
+import { StyledMonth } from "./styled-components";
+import dateFnsAdapter from "./utils/date-fns-adapter";
+import DateHelpers from "./utils/date-helpers";
+import { getOverrides } from "../helpers/overrides";
+import type { MonthPropsT } from "./types";
+import { DENSITY } from "./constants";
 
 const defaultProps = {
   dateLabel: null,

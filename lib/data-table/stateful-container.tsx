@@ -1,12 +1,14 @@
 import * as React from "react";
 
-import { SORT_DIRECTIONS } from "./constants.js";
-import type { ColumnT, StatefulContainerPropsT } from "./types.js";
+import { SORT_DIRECTIONS } from "./constants";
+import type { ColumnT, StatefulContainerPropsT } from "./types";
 
 function useDuplicateColumnTitleWarning(columns: ColumnT<>[]) {
   React.useEffect(() => {
     if (__DEV__) {
-      const titles = columns.reduce((set, column) => set.add(column.title), new Set());
+      const titles = columns.reduce((set, column) => {
+        return set.add(column.title);
+      }, new Set());
       if (titles.size < columns.length) {
         console.warn(
           "BaseWeb DataTable: Column titles must be unique else will result in non-deterministic filtering."
@@ -69,12 +71,23 @@ export function StatefulContainer(props: StatefulContainerPropsT) {
 
     const selectionCallback = props.onSelectionChange;
     if (selectionCallback) {
-      selectionCallback(props.rows.filter((r) => next.has(r.id)));
+      selectionCallback(
+        props.rows.filter((r) => {
+          return next.has(r.id);
+        })
+      );
     }
   }
   function handleSelectMany(incomingRows) {
     // only adds rows that are visible in the table
-    handleSelectChange(new Set([...selectedRowIds, ...incomingRows.map((r) => r.id)]));
+    handleSelectChange(
+      new Set([
+        ...selectedRowIds,
+        ...incomingRows.map((r) => {
+          return r.id;
+        }),
+      ])
+    );
   }
   function handleSelectNone() {
     handleSelectChange(new Set());

@@ -8,9 +8,9 @@ import {
 } from "styletron-react";
 import { driver, getInitialStyle } from "styletron-standard";
 import type { StyleObject } from "styletron-standard";
-import type { ThemeT } from "./types.js";
+import type { ThemeT } from "./types";
 
-import { ThemeContext } from "./theme-provider.js";
+import { ThemeContext } from "./theme-provider";
 
 const wrapper = (StyledComponent) => {
   // eslint-disable-next-line react/display-name

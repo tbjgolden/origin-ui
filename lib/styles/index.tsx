@@ -1,4 +1,4 @@
-import { ThemeContext } from "./theme-provider.js";
+import { ThemeContext } from "./theme-provider";
 
 export {
   createThemedStyled,
@@ -8,8 +8,8 @@ export {
   withStyle,
   useStyletron,
   withWrapper,
-} from "./styled.js";
-export { hexToRgb, expandBorderStyles } from "./util.js";
-export { default as ThemeProvider } from "./theme-provider.js";
+} from "./styled";
+export { hexToRgb, expandBorderStyles } from "./util";
+export { default as ThemeProvider } from "./theme-provider";
 export const ThemeConsumer = ThemeContext.Consumer;
-export type * from "./types.js";
+export type * from "./types";

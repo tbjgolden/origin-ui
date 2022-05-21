@@ -1,14 +1,16 @@
 import * as React from "react";
-import { STATE_CHANGE_TYPE } from "./constants.js";
+import { STATE_CHANGE_TYPE } from "./constants";
 import type {
   StatefulContainerPropsT,
   StateT,
   StateReducerT,
   StateTypeT,
   Item,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulContainer extends React.Component<StatefulContainerPropsT, StateT> {
   static defaultProps = {

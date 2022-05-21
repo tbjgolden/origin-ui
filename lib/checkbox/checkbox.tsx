@@ -1,6 +1,6 @@
 import * as React from "react";
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
-import type { PropsT, DefaultPropsT, StatelessStateT } from "./types.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
+import type { PropsT, DefaultPropsT, StatelessStateT } from "./types";
 import {
   Checkmark as StyledCheckmark,
   Input as StyledInput,
@@ -8,11 +8,13 @@ import {
   Root as StyledRoot,
   Toggle as StyledToggle,
   ToggleTrack as StyledToggleTrack,
-} from "./styled-components.js";
-import { STYLE_TYPE } from "./constants.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
+} from "./styled-components";
+import { STYLE_TYPE } from "./constants";
+import { isFocusVisible } from "../utils/focusVisible";
 
-const stopPropagation = (e) => e.stopPropagation();
+const stopPropagation = (e) => {
+  return e.stopPropagation();
+};
 
 class StatelessCheckbox extends React.Component<PropsT, StatelessStateT> {
   static defaultProps: DefaultPropsT = {
@@ -152,7 +154,13 @@ class StatelessCheckbox extends React.Component<PropsT, StatelessStateT> {
         {this.props.containsInteractiveElement ? (
           // Prevents the event from bubbling up to the label and moving focus to the radio button
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <div onClick={(e) => e.preventDefault()}>{children}</div>
+          <div
+            onClick={(e) => {
+              return e.preventDefault();
+            }}
+          >
+            {children}
+          </div>
         ) : (
           children
         )}

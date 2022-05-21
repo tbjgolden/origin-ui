@@ -1,10 +1,10 @@
-import { styled, withStyle } from "../styles/index.js";
+import { styled, withStyle } from "../styles/index";
 import {
   Root as StyledInputRoot,
   Input as StyledInputInput,
-} from "../input/styled-components.js";
-import type { SizeT } from "../input/types.js";
-import { SIZE } from "../input/constants.js";
+} from "../input/styled-components";
+import type { SizeT } from "../input/types";
+import { SIZE } from "../input/constants";
 
 export const StyledRoot = styled("div", {
   display: "flex",

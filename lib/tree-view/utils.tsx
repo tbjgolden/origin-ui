@@ -1,6 +1,6 @@
 
 
-import type { TreeNodeT, TreeNodeIdT } from "./types.js";
+import type { TreeNodeT, TreeNodeIdT } from "./types";
 
 const getLastLeafId = (node: TreeNodeT<>, getId: (TreeNodeT<>) => TreeNodeIdT) => {
   if (node.isExpanded && node.children && node.children.length) {

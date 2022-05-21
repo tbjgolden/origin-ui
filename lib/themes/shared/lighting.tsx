@@ -1,4 +1,4 @@
-import type { LightingT } from "../types.js";
+import type { LightingT } from "../types";
 
 const lighting: LightingT = {
   shadow400: "0 1px 4px hsla(0, 0%, 0%, 0.16)",

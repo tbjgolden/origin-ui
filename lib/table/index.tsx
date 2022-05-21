@@ -1,11 +1,11 @@
 export {
   default as SortableHeadCell,
   SortableHeadCellFactory,
-} from "./sortable-head-cell.js";
-export { default as Table } from "./table.js";
-export { default as Filter } from "./filter.js";
+} from "./sortable-head-cell";
+export { default as Table } from "./table";
+export { default as Filter } from "./filter";
 // Constants
-export { SORT_DIRECTION } from "./constants.js";
+export { SORT_DIRECTION } from "./constants";
 // Styled elements
 export {
   StyledTable,
@@ -20,6 +20,6 @@ export {
   StyledCell,
   StyledAction,
   StyledSortableLabel,
-} from "./styled-components.js";
+} from "./styled-components";
 // Flow
-export type * from "./types.js";
+export type * from "./types";

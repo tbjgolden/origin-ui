@@ -6,7 +6,7 @@ export const STATE_CHANGE_TYPE = {
   countryChange: "countryChange",
 };
 
-export { SIZE } from "../input/constants.js";
+export { SIZE } from "../input/constants";
 
 // List originally from [jackocnr/intl-tel-input](https://github.com/jackocnr/intl-tel-input)
 export const COUNTRIES = {

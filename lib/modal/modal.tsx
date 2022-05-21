@@ -4,25 +4,25 @@
 import * as React from "react";
 import FocusLock from "react-focus-lock";
 
-import { LocaleContext } from "../locale/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { Layer } from "../layer/index.js";
-import { SIZE, ROLE, CLOSE_SOURCE } from "./constants.js";
+import { LocaleContext } from "../locale/index";
+import { getOverrides } from "../helpers/overrides";
+import { Layer } from "../layer/index";
+import { SIZE, ROLE, CLOSE_SOURCE } from "./constants";
 import {
   Root as StyledRoot,
   Dialog as StyledDialog,
   DialogContainer as StyledDialogContainer,
   Close as StyledClose,
-} from "./styled-components.js";
-import { CloseIcon } from "./close-icon.js";
+} from "./styled-components";
+import { CloseIcon } from "./close-icon";
 
 import type {
   ModalPropsT,
   ModalStateT,
   SharedStylePropsArgT,
   CloseSourceT,
-} from "./types.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./types";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 class Modal extends React.Component<ModalPropsT, ModalStateT> {
   static defaultProps: $Shape<ModalPropsT> = {

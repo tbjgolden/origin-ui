@@ -1,6 +1,6 @@
-import { styled } from "../styles/index.js";
-import { getSvgStyles } from "../icon/styled-components.js";
-import type { SharedStylePropsArgT } from "./types.js";
+import { styled } from "../styles/index";
+import { getSvgStyles } from "../icon/styled-components";
+import type { SharedStylePropsArgT } from "./types";
 
 /**
  * Main component container element

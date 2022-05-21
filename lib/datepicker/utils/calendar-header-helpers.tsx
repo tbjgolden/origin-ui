@@ -1,4 +1,4 @@
-import { DEFAULT_MONTHS } from "../constants.js";
+import { DEFAULT_MONTHS } from "../constants";
 
 export type OptionT = {
   id: string;
@@ -11,14 +11,17 @@ type GetMonthItemsArgsT = {
   formatMonthLabel: (number) => string;
 };
 
-const getDefaultMonthItems = (formatMonthLabel: (number) => string) =>
-  DEFAULT_MONTHS.map<OptionT>((month) => ({
-    id: month.toString(),
-    label: formatMonthLabel(month),
-  }));
+const getDefaultMonthItems = (formatMonthLabel: (number) => string) => {
+  return DEFAULT_MONTHS.map<OptionT>((month) => {
+    return {
+      id: month.toString(),
+      label: formatMonthLabel(month),
+    };
+  });
+};
 
-export const filterMonthItems = (monthItems: OptionT[], filterList: number[]) =>
-  monthItems.map<OptionT>((month) => {
+export const filterMonthItems = (monthItems: OptionT[], filterList: number[]) => {
+  return monthItems.map<OptionT>((month) => {
     if (!filterList.includes(Number(month.id))) {
       return {
         ...month,
@@ -27,6 +30,7 @@ export const filterMonthItems = (monthItems: OptionT[], filterList: number[]) =>
     }
     return month;
   });
+};
 
 export const getFilteredMonthItems = ({
   filterMonthsList,

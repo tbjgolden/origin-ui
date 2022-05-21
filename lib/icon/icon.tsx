@@ -1,8 +1,8 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { Svg as StyledSvg } from "./styled-components.js";
-import omitDollarPrefixedKeys from "./omit-dollar-prefixed-keys.js";
-import type { IconPropsT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { Svg as StyledSvg } from "./styled-components";
+import omitDollarPrefixedKeys from "./omit-dollar-prefixed-keys";
+import type { IconPropsT } from "./types";
 
 function Icon(props: IconPropsT, ref) {
   const { children, title, size, color, overrides = {}, ...restProps } = props;

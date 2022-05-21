@@ -1,12 +1,10 @@
-
-
-export type FileUploaderLocaleT = {|
-  dropFilesToUpload: string,
-  or: string,
-  browseFiles: string,
-  retry: string,
-  cancel: string,
-|};
+export type FileUploaderLocaleT = {
+  dropFilesToUpload: string;
+  or: string;
+  browseFiles: string;
+  retry: string;
+  cancel: string;
+};
 
 const locale = {
   dropFilesToUpload: "Drop files here to upload...",

@@ -1,5 +1,5 @@
-import { colors } from "../../tokens/index.js";
-import type { ColorTokensT } from "../types.js";
+import { colors } from "../../tokens/index";
+import type { ColorTokensT } from "../types";
 
 // color constants
 export const darkColorTokens: ColorTokensT = {

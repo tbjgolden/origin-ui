@@ -2,22 +2,22 @@
 
 import * as React from "react";
 
-import { useStyletron } from "../styles/index.js";
+import { useStyletron } from "../styles/index";
 
-import Column from "./column.js";
-import { COLUMNS } from "./constants.js";
-import { HighlightCellText } from "./text-search.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
+import Column from "./column";
+import { COLUMNS } from "./constants";
+import { HighlightCellText } from "./text-search";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<string>,
   lineClamp?: number,
-|};
+};
 
-type FilterParametersT = {|
+type FilterParametersT = {
   description: string,
   exclude: boolean,
-|};
+};
 
 type StringColumnT = ColumnT<string, FilterParametersT>;
 

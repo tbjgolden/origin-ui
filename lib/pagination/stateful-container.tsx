@@ -1,9 +1,9 @@
 import * as React from "react";
 // Files
-import { STATE_CHANGE_TYPE } from "./constants.js";
-import { clamp } from "./utils.js";
+import { STATE_CHANGE_TYPE } from "./constants";
+import { clamp } from "./utils";
 // Types
-import type { StatefulContainerPropsT, StatefulContainerStateT } from "./types.js";
+import type { StatefulContainerPropsT, StatefulContainerStateT } from "./types";
 
 const initialState = {
   currentPage: 1,
@@ -15,7 +15,9 @@ export default class PaginationStatefulContainer extends React.Component<
 > {
   static defaultProps = {
     initialState, //flowlint-next-line unclear-type:off
-    stateReducer: (changeType: any, changes: any) => changes,
+    stateReducer: (changeType: any, changes: any) => {
+      return changes;
+    },
   };
 
   state = this.props.initialState || initialState;

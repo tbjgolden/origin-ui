@@ -1,4 +1,4 @@
-export { default as FileUploader } from "./file-uploader.js";
+export { default as FileUploader } from "./file-uploader";
 
 // Styled elements
 export {
@@ -8,7 +8,7 @@ export {
   StyledContentSeparator,
   StyledErrorMessage,
   StyledHiddenInput,
-} from "./styled-components.js";
+} from "./styled-components";
 
 // Flow
-export type * from "./types.js";
+export type * from "./types";

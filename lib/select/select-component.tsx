@@ -2,19 +2,19 @@
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import DeleteAlt from "../icon/delete-alt.js";
-import TriangleDownIcon from "../icon/triangle-down.js";
-import SearchIconComponent from "../icon/search.js";
-import { LocaleContext } from "../locale/index.js";
-import type { LocaleT } from "../locale/types.js";
-import { Popover, PLACEMENT } from "../popover/index.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import DeleteAlt from "../icon/delete-alt";
+import TriangleDownIcon from "../icon/triangle-down";
+import SearchIconComponent from "../icon/search";
+import { LocaleContext } from "../locale/index";
+import type { LocaleT } from "../locale/types";
+import { Popover, PLACEMENT } from "../popover/index";
 import { UIDConsumer } from "react-uid";
 
-import AutosizeInput from "./autosize-input.js";
-import { TYPE, STATE_CHANGE_TYPE, SIZE } from "./constants.js";
-import defaultProps from "./default-props.js";
-import SelectDropdown from "./dropdown.js";
+import AutosizeInput from "./autosize-input";
+import { TYPE, STATE_CHANGE_TYPE, SIZE } from "./constants";
+import defaultProps from "./default-props";
+import SelectDropdown from "./dropdown";
 import {
   StyledRoot,
   StyledControlContainer,
@@ -24,7 +24,7 @@ import {
   StyledIconsContainer,
   StyledSearchIconContainer,
   StyledLoadingIndicator,
-} from "./styled-components.js";
+} from "./styled-components";
 import type {
   PropsT,
   SelectStateT,
@@ -32,8 +32,8 @@ import type {
   OptionT,
   ChangeActionT,
   ReactRefT,
-} from "./types.js";
-import { expandValue, normalizeOptions } from "./utils/index.js";
+} from "./types";
+import { expandValue, normalizeOptions } from "./utils/index";
 
 function Noop() {
   return null;

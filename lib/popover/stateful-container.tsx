@@ -5,16 +5,18 @@ import {
   STATE_CHANGE_TYPE,
   TRIGGER_TYPE,
   POPOVER_MARGIN,
-} from "./constants.js";
+} from "./constants";
 import type {
   PopoverPropsWithoutChildrenT,
   StateT,
   StatefulPopoverContainerPropsT,
   StateChangeTypeT,
   StateReducerT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulContainer extends React.Component<StatefulPopoverContainerPropsT, StateT> {
   static defaultProps: $Shape<StatefulPopoverContainerPropsT> = {
@@ -116,7 +118,9 @@ class StatefulContainer extends React.Component<StatefulPopoverContainerPropsT, 
       this.setState(changes);
       return;
     }
-    this.setState((prevState) => stateReducer(type, changes, prevState));
+    this.setState((prevState) => {
+      return stateReducer(type, changes, prevState);
+    });
   }
 
   /**

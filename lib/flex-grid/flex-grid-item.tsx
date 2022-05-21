@@ -2,13 +2,13 @@
 
 import * as React from "react";
 
-import { Block } from "../block/index.js";
-import { mergeOverrides } from "../helpers/overrides.js";
-import { getMediaQueries, getMediaQuery } from "../helpers/responsive-helpers.js";
-import type { FlexGridItemPropsT } from "./types.js";
-import type { ResponsiveT, ScaleT } from "../block/index.js";
-import type { StyleOverrideT } from "../helpers/overrides.js";
-import type { ThemeT } from "../styles/index.js";
+import { Block } from "../block/index";
+import { mergeOverrides } from "../helpers/overrides";
+import { getMediaQueries, getMediaQuery } from "../helpers/responsive-helpers";
+import type { FlexGridItemPropsT } from "./types";
+import type { ResponsiveT, ScaleT } from "../block/index";
+import type { StyleOverrideT } from "../helpers/overrides";
+import type { ThemeT } from "../styles/index";
 
 export const flexGridItemMediaQueryStyle = ({
   $theme,

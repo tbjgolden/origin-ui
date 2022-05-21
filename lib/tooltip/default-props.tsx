@@ -1,5 +1,5 @@
-import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants.js";
-import type { BaseTooltipPropsT } from "./types.js";
+import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants";
+import type { BaseTooltipPropsT } from "./types";
 
 const baseDefaultProps: $Shape<BaseTooltipPropsT> = {
   accessibilityType: ACCESSIBILITY_TYPE.tooltip,

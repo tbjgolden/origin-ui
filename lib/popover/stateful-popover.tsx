@@ -1,19 +1,16 @@
 import * as React from "react";
-import {
-  ACCESSIBILITY_TYPE,
-  PLACEMENT,
-  TRIGGER_TYPE,
-  POPOVER_MARGIN,
-} from "./constants.js";
-import StatefulContainer from "./stateful-container.js";
-import Popover from "./popover.js";
-import type { StatefulPopoverPropsT } from "./types.js";
+import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE, POPOVER_MARGIN } from "./constants";
+import StatefulContainer from "./stateful-container";
+import Popover from "./popover";
+import type { StatefulPopoverPropsT } from "./types";
 
 function StatefulPopover(props: StatefulPopoverPropsT) {
   const { children, ...restProps } = props;
   return (
     <StatefulContainer {...restProps}>
-      {(popoverProps) => <Popover {...popoverProps}>{children}</Popover>}
+      {(popoverProps) => {
+        return <Popover {...popoverProps}>{children}</Popover>;
+      }}
     </StatefulContainer>
   );
 }
@@ -29,7 +26,9 @@ StatefulPopover.defaultProps = {
   triggerType: TRIGGER_TYPE.click,
   dismissOnClickOutside: true,
   dismissOnEsc: true,
-  stateReducer: (_, nextState) => nextState,
+  stateReducer: (_, nextState) => {
+    return nextState;
+  },
   popoverMargin: POPOVER_MARGIN,
 };
 

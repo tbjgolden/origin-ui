@@ -1,10 +1,10 @@
 import * as React from "react";
-import { withStyle, withWrapper } from "../styles/index.js";
+import { withStyle, withWrapper } from "../styles/index";
 import {
   StyledTable as FlexStyledTable,
   StyledHeadCell as FlexStyledHeadCell,
   StyledCell as FlexStyledBodyCell,
-} from "../table/index.js";
+} from "../table/index";
 
 const StyledTableElement = withStyle<
   typeof FlexStyledTable,
@@ -20,13 +20,11 @@ const StyledTableElement = withStyle<
   };
 });
 
-export const StyledTable = withWrapper(
-  StyledTableElement,
-  (StyledComponent) =>
-    function StyledTable(props) {
-      return <StyledComponent data-baseweb="table-grid" {...props} />;
-    }
-);
+export const StyledTable = withWrapper(StyledTableElement, (StyledComponent) => {
+  return function StyledTable(props) {
+    return <StyledComponent data-baseweb="table-grid" {...props} />;
+  };
+});
 
 export const StyledHeadCell = withStyle<
   typeof FlexStyledHeadCell,

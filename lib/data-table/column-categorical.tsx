@@ -2,30 +2,30 @@
 
 import * as React from "react";
 
-import { Button, SIZE, KIND } from "../button/index.js";
-import { ButtonGroup } from "../button-group/index.js";
-import { Checkbox, StyledLabel } from "../checkbox/index.js";
-import Search from "../icon/search.js";
-import { Input, SIZE as INPUT_SIZE } from "../input/index.js";
-import { useStyletron, withStyle } from "../styles/index.js";
-import { LabelSmall } from "../typography/index.js";
+import { Button, SIZE, KIND } from "../button/index";
+import { ButtonGroup } from "../button-group/index";
+import { Checkbox, StyledLabel } from "../checkbox/index";
+import Search from "../icon/search";
+import { Input, SIZE as INPUT_SIZE } from "../input/index";
+import { useStyletron, withStyle } from "../styles/index";
+import { LabelSmall } from "../typography/index";
 
-import Column from "./column.js";
-import { COLUMNS } from "./constants.js";
-import type { ColumnT, SharedColumnOptionsT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
-import FilterShell from "./filter-shell.js";
-import { matchesQuery, splitByQuery, HighlightCellText } from "./text-search.js";
+import Column from "./column";
+import { COLUMNS } from "./constants";
+import type { ColumnT, SharedColumnOptionsT } from "./types";
+import { LocaleContext } from "../locale/index";
+import FilterShell from "./filter-shell";
+import { matchesQuery, splitByQuery, HighlightCellText } from "./text-search";
 
-type OptionsT = {|
+type OptionsT = {
   ...SharedColumnOptionsT<string>,
-|};
+};
 
-type FilterParametersT = {|
+type FilterParametersT = {
   description: string,
   exclude: boolean,
   selection: Set<string>,
-|};
+};
 
 type CategoricalColumnT = ColumnT<string, FilterParametersT>;
 

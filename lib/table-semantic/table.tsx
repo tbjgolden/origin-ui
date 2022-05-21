@@ -11,10 +11,10 @@ import {
   StyledTableBodyCell,
   StyledTableLoadingMessage,
   StyledTableEmptyMessage,
-} from "./styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
+} from "./styled-components";
+import { getOverrides } from "../helpers/overrides";
 
-import type { TablePropsT } from "./types.js";
+import type { TablePropsT } from "./types";
 
 export default class Table extends React.Component<TablePropsT> {
   static defaultProps = {
@@ -89,18 +89,20 @@ export default class Table extends React.Component<TablePropsT> {
         <Table $width={horizontalScrollWidth} {...tableProps}>
           <TableHead {...tableHeadProps}>
             <TableHeadRow {...tableHeadRowProps}>
-              {columns.map((col, colIndex) => (
-                <TableHeadCell
-                  key={colIndex}
-                  $col={col}
-                  $colIndex={colIndex}
-                  $divider={divider}
-                  $size={size}
-                  {...tableHeadCellProps}
-                >
-                  {col}
-                </TableHeadCell>
-              ))}
+              {columns.map((col, colIndex) => {
+                return (
+                  <TableHeadCell
+                    key={colIndex}
+                    $col={col}
+                    $colIndex={colIndex}
+                    $divider={divider}
+                    $size={size}
+                    {...tableHeadCellProps}
+                  >
+                    {col}
+                  </TableHeadCell>
+                );
+              })}
             </TableHeadRow>
           </TableHead>
           <TableBody {...tableBodyProps}>
@@ -125,31 +127,35 @@ export default class Table extends React.Component<TablePropsT> {
               </tr>
             )}
             {isRendered &&
-              data.map((row, rowIndex) => (
-                <TableBodyRow
-                  key={rowIndex}
-                  $divider={divider}
-                  $row={row}
-                  $rowIndex={rowIndex}
-                  {...tableBodyRowProps}
-                >
-                  {columns.map((col, colIndex) => (
-                    <TableBodyCell
-                      key={colIndex}
-                      $col={col}
-                      $colIndex={colIndex}
-                      $divider={divider}
-                      $row={row}
-                      $rowIndex={rowIndex}
-                      $isLastRow={rowIndex === data.length - 1}
-                      $size={size}
-                      {...tableBodyCellProps}
-                    >
-                      {row[colIndex]}
-                    </TableBodyCell>
-                  ))}
-                </TableBodyRow>
-              ))}
+              data.map((row, rowIndex) => {
+                return (
+                  <TableBodyRow
+                    key={rowIndex}
+                    $divider={divider}
+                    $row={row}
+                    $rowIndex={rowIndex}
+                    {...tableBodyRowProps}
+                  >
+                    {columns.map((col, colIndex) => {
+                      return (
+                        <TableBodyCell
+                          key={colIndex}
+                          $col={col}
+                          $colIndex={colIndex}
+                          $divider={divider}
+                          $row={row}
+                          $rowIndex={rowIndex}
+                          $isLastRow={rowIndex === data.length - 1}
+                          $size={size}
+                          {...tableBodyCellProps}
+                        >
+                          {row[colIndex]}
+                        </TableBodyCell>
+                      );
+                    })}
+                  </TableBodyRow>
+                );
+              })}
           </TableBody>
         </Table>
       </Root>

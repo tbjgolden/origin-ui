@@ -1,18 +1,14 @@
 import * as React from "react";
-import { LocaleContext } from "../locale/index.js";
+import { LocaleContext } from "../locale/index";
 // Components
-import {
-  StyledList,
-  StyledEmptyState,
-  StyledOptgroupHeader,
-} from "./styled-components.js";
-import OptionList from "./option-list.js";
-import { getOverrides } from "../helpers/overrides.js";
+import { StyledList, StyledEmptyState, StyledOptgroupHeader } from "./styled-components";
+import OptionList from "./option-list";
+import { getOverrides } from "../helpers/overrides";
 // Types
-import type { StatelessMenuPropsT } from "./types.js";
-import type { LocaleT } from "../locale/types.js";
+import type { StatelessMenuPropsT } from "./types";
+import type { LocaleT } from "../locale/types";
 
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 export default function Menu(props: StatelessMenuPropsT) {
   const {
@@ -65,7 +61,11 @@ export default function Menu(props: StatelessMenuPropsT) {
       }
       const groupItems = groupedItems[optgroup].map((item, index) => {
         itemIndex = itemIndex + 1;
-        const { getRequiredItemProps = (item, index) => ({}) } = props;
+        const {
+          getRequiredItemProps = (item, index) => {
+            return {};
+          },
+        } = props;
 
         const {
           disabled,
@@ -98,40 +98,44 @@ export default function Menu(props: StatelessMenuPropsT) {
     [[], -1]
   );
 
-  const isEmpty = optgroups.every((optgroup) => !groupedItems[optgroup].length);
+  const isEmpty = optgroups.every((optgroup) => {
+    return groupedItems[optgroup].length === 0;
+  });
 
   return (
     <LocaleContext.Consumer>
-      {(locale: LocaleT) => (
-        <List
-          aria-activedescendant={props.activedescendantId || null}
-          role="listbox"
-          aria-label={ariaLabel}
-          ref={rootRef}
-          onMouseEnter={focusMenu}
-          onMouseLeave={handleMouseLeave}
-          onMouseOver={focusMenu}
-          onFocus={forkFocus({ onFocus: focusMenu }, handleFocus)}
-          onBlur={forkBlur({ onBlur: unfocusMenu }, handleBlur)}
-          onKeyDown={(event) => {
-            if (props.isFocused) {
-              handleKeyDown(event);
-            }
-          }}
-          tabIndex={0}
-          data-baseweb="menu"
-          $isFocusVisible={focusVisible}
-          {...listProps}
-        >
-          {isEmpty ? (
-            <EmptyState aria-live="polite" aria-atomic {...emptyStateProps}>
-              {props.noResultsMsg || locale.menu.noResultsMsg}
-            </EmptyState>
-          ) : (
-            elements
-          )}
-        </List>
-      )}
+      {(locale: LocaleT) => {
+        return (
+          <List
+            aria-activedescendant={props.activedescendantId || null}
+            role="listbox"
+            aria-label={ariaLabel}
+            ref={rootRef}
+            onMouseEnter={focusMenu}
+            onMouseLeave={handleMouseLeave}
+            onMouseOver={focusMenu}
+            onFocus={forkFocus({ onFocus: focusMenu }, handleFocus)}
+            onBlur={forkBlur({ onBlur: unfocusMenu }, handleBlur)}
+            onKeyDown={(event) => {
+              if (props.isFocused) {
+                handleKeyDown(event);
+              }
+            }}
+            tabIndex={0}
+            data-baseweb="menu"
+            $isFocusVisible={focusVisible}
+            {...listProps}
+          >
+            {isEmpty ? (
+              <EmptyState aria-live="polite" aria-atomic {...emptyStateProps}>
+                {props.noResultsMsg || locale.menu.noResultsMsg}
+              </EmptyState>
+            ) : (
+              elements
+            )}
+          </List>
+        );
+      }}
     </LocaleContext.Consumer>
   );
 }

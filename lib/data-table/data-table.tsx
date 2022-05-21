@@ -9,32 +9,32 @@ import {
   SHAPE as BUTTON_SHAPES,
   SIZE as BUTTON_SIZES,
   KIND as BUTTON_KINDS,
-} from "../button/index.js";
-import { useStyletron } from "../styles/index.js";
-import { Tooltip, PLACEMENT } from "../tooltip/index.js";
+} from "../button/index";
+import { useStyletron } from "../styles/index";
+import { Tooltip, PLACEMENT } from "../tooltip/index";
 
-import { SORT_DIRECTIONS } from "./constants.js";
-import HeaderCell from "./header-cell.js";
-import MeasureColumnWidths from "./measure-column-widths.js";
+import { SORT_DIRECTIONS } from "./constants";
+import HeaderCell from "./header-cell";
+import MeasureColumnWidths from "./measure-column-widths";
 import type {
   ColumnT,
   DataTablePropsT,
   RowT,
   SortDirectionsT,
   RowActionT,
-} from "./types.js";
-import { LocaleContext } from "../locale/index.js";
+} from "./types";
+import { LocaleContext } from "../locale/index";
 
 // consider pulling this out to a prop if useful.
 const HEADER_ROW_HEIGHT = 48;
 
-type HeaderContextT = {|
+type HeaderContextT = {
   columns: ColumnT<>[],
   columnHighlightIndex: number,
-  emptyMessage: string | React.ComponentType<{||}>,
+  emptyMessage: string | React.ComponentType<{}>,
   filters: $PropertyType<DataTablePropsT, "filters">,
   loading: boolean,
-  loadingMessage: string | React.ComponentType<{||}>,
+  loadingMessage: string | React.ComponentType<{}>,
   isScrollingX: boolean,
   isSelectable: boolean,
   isSelectedAll: boolean,
@@ -56,7 +56,7 @@ type HeaderContextT = {|
   sortDirection: SortDirectionsT,
   tableHeight: number,
   widths: number[],
-|};
+};
 
 type CellPlacementPropsT = {
   columnIndex: number,
@@ -221,7 +221,7 @@ const HeaderContext = React.createContext<HeaderContextT>({
 });
 HeaderContext.displayName = "HeaderContext";
 
-type HeaderProps = {|
+type HeaderProps = {
   columnTitle: string,
   hoverIndex: number,
   index: number,
@@ -243,7 +243,7 @@ type HeaderProps = {|
   sortIndex: number,
   sortDirection: SortDirectionsT,
   tableHeight: number,
-|};
+};
 function Header(props: HeaderProps) {
   const [css, theme] = useStyletron();
   const [startResizePos, setStartResizePos] = React.useState(0);
@@ -513,7 +513,7 @@ function LoadingOrEmptyMessage(props) {
 // replaces the content of the virtualized window with contents. in this case,
 // we are prepending a table header row before the table rows (children to the fn).
 const InnerTableElement = React.forwardRef<
-  {| children: React.Node, style: { [string]: mixed } |},
+  { children: React.Node, style: { [string]: mixed } },
   HTMLDivElement
 >((props, ref) => {
   const [, theme] = useStyletron();

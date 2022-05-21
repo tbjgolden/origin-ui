@@ -3,7 +3,7 @@
 import React from "react";
 import * as ReactIs from "react-is";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
 import {
   StyledHeadingRoot,
@@ -13,8 +13,8 @@ import {
   StyledHeadingEndEnhancerDescriptionContainer,
   StyledHeadingMainHeading,
   StyledHeadingSubHeading,
-} from "./styled-components.js";
-import type { HeadingPropsT } from "./types.js";
+} from "./styled-components";
+import type { HeadingPropsT } from "./types";
 
 function RenderNode(props) {
   const { component, ...restProps } = props;

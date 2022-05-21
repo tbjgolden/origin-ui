@@ -1,7 +1,7 @@
 
 
-import { styled } from "../styles/index.js";
-import type { AvatarStylePropsT, RootStylePropsT, InitialsStylePropsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { AvatarStylePropsT, RootStylePropsT, InitialsStylePropsT } from "./types";
 
 function getSize(props) {
   const { $size, $theme } = props;

@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { Input, SIZE } from "../input/index.js";
-import { scrollItemIntoView } from "../menu/utils.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { Popover, PLACEMENT } from "../popover/index.js";
+import { Input, SIZE } from "../input/index";
+import { scrollItemIntoView } from "../menu/utils";
+import { getOverrides } from "../helpers/overrides";
+import { Popover, PLACEMENT } from "../popover/index";
 import { useUIDSeed } from "react-uid";
 
 import {
@@ -13,8 +13,8 @@ import {
   StyledInputContainer,
   StyledListBox,
   StyledListItem,
-} from "./styled-components.js";
-import type { PropsT } from "./types.js";
+} from "./styled-components";
+import type { PropsT } from "./types";
 
 const ENTER = 13;
 const ESCAPE = 27;

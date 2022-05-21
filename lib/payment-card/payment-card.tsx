@@ -1,26 +1,26 @@
 import * as React from "react";
 import * as valid from "card-validator";
 
-import { addGaps, getCaretPosition } from "./utils.js";
+import { addGaps, getCaretPosition } from "./utils";
 
-import { getOverrides } from "../helpers/overrides.js";
-import { Input, SIZE } from "../input/index.js";
-import { ThemeContext } from "../styles/theme-provider.js";
+import { getOverrides } from "../helpers/overrides";
+import { Input, SIZE } from "../input/index";
+import { ThemeContext } from "../styles/theme-provider";
 
-import AmexIcon from "./icons/amex.js";
-import DinersClubIcon from "./icons/dinersclub.js";
-import DiscoverIcon from "./icons/discover.js";
-import EloIcon from "./icons/elo.js";
-import GenericIcon from "./icons/generic.js";
-import JcbIcon from "./icons/jcb.js";
-import MaestroIcon from "./icons/maestro.js";
-import MastercardIcon from "./icons/mastercard.js";
-import UnionPayIcon from "./icons/unionpay.js";
-import VisaIcon from "./icons/visa.js";
+import AmexIcon from "./icons/amex";
+import DinersClubIcon from "./icons/dinersclub";
+import DiscoverIcon from "./icons/discover";
+import EloIcon from "./icons/elo";
+import GenericIcon from "./icons/generic";
+import JcbIcon from "./icons/jcb";
+import MaestroIcon from "./icons/maestro";
+import MastercardIcon from "./icons/mastercard";
+import UnionPayIcon from "./icons/unionpay";
+import VisaIcon from "./icons/visa";
 
-import { IconWrapper as StyledIconWrapper } from "./styled-components.js";
+import { IconWrapper as StyledIconWrapper } from "./styled-components";
 
-import type { PaymentCardPropsT } from "./types.js";
+import type { PaymentCardPropsT } from "./types";
 
 const CardTypeToComponent = {
   visa: VisaIcon,
@@ -77,7 +77,7 @@ class PaymentCard extends React.Component<PaymentCardPropsT> {
 
     const validatedValue = valid.number(value);
     let gaps: number[] = [];
-    let type: ?string = undefined;
+    let type: ?string;
     if (validatedValue.card) {
       gaps = validatedValue.card.gaps || [];
       type = validatedValue.card.type;
@@ -90,43 +90,47 @@ class PaymentCard extends React.Component<PaymentCardPropsT> {
         [SIZE.default]: theme.sizing.scale900,
         [SIZE.large]: theme.sizing.scale1000,
       };
-      return () => (
-        <IconWrapper $size={size} {...iconWrapperProps}>
-          {React.createElement(CardTypeToComponent[type || "generic"] || GenericIcon, {
-            size: iconSize[size],
-          })}
-        </IconWrapper>
-      );
+      return () => {
+        return (
+          <IconWrapper $size={size} {...iconWrapperProps}>
+            {React.createElement(CardTypeToComponent[type || "generic"] || GenericIcon, {
+              size: iconSize[size],
+            })}
+          </IconWrapper>
+        );
+      };
     };
 
     return (
       <ThemeContext.Consumer>
-        {(theme) => (
-          //$FlowExpectedError[cannot-spread-inexact]
-          <Input
-            size={size}
-            aria-label={ariaLabel}
-            data-baseweb="payment-card-input"
-            inputMode="numeric"
-            overrides={Object.freeze({
-              ...restOverrides,
-              Before: getBeforeComponent(theme),
-            })}
-            onChange={(e) => {
-              const [position, value] = getCaretPosition(
-                e.target.value,
-                this.props.value ? String(this.props.value) : "",
-                e.target.selectionStart
-              );
-              this.caretPosition = position;
-              this.inRef = e.target;
-              e.target.value = value;
-              onChange && onChange(e);
-            }}
-            value={addGaps(gaps, String(value) || "")}
-            {...restProps}
-          />
-        )}
+        {(theme) => {
+          return (
+            //$FlowExpectedError[cannot-spread-inexact]
+            <Input
+              size={size}
+              aria-label={ariaLabel}
+              data-baseweb="payment-card-input"
+              inputMode="numeric"
+              overrides={Object.freeze({
+                ...restOverrides,
+                Before: getBeforeComponent(theme),
+              })}
+              onChange={(e) => {
+                const [position, value] = getCaretPosition(
+                  e.target.value,
+                  this.props.value ? String(this.props.value) : "",
+                  e.target.selectionStart
+                );
+                this.caretPosition = position;
+                this.inRef = e.target;
+                e.target.value = value;
+                onChange && onChange(e);
+              }}
+              value={addGaps(gaps, String(value) || "")}
+              {...restProps}
+            />
+          );
+        }}
       </ThemeContext.Consumer>
     );
   }

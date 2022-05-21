@@ -1,4 +1,4 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 
 export const Link = styled<{
   $isAnimateUnderline: boolean;

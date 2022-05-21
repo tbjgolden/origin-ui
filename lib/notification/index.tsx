@@ -1,2 +1,2 @@
-export { default as Notification } from "./notification.js";
-export { KIND } from "../toast/index.js";
+export { default as Notification } from "./notification";
+export { KIND } from "../toast/index";

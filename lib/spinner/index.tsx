@@ -1,6 +1,5 @@
-import { StyledSpinner } from "./styled-components.js";
-
-export { StyledSpinner as Spinner };
-export { SIZE } from "./constants.js";
+export { SIZE } from "./constants";
 // Flow
-export type * from "./types.js";
+export type * from "./types";
+
+export { StyledSpinner as Spinner } from "./styled-components";

@@ -1,8 +1,6 @@
-
-
-export type DrawerLocaleT = {|
-  close: string,
-|};
+export type DrawerLocaleT = {
+  close: string;
+};
 
 const locale = {
   close: "Close",

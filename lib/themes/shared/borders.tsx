@@ -1,4 +1,4 @@
-import type { BordersT } from "../types.js";
+import type { BordersT } from "../types";
 
 // borderColor is defaulted to the light theme values.
 // Dark theme overrides the border colors.

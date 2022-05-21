@@ -1,8 +1,8 @@
 
 import * as React from "react";
 // Files
-import { STATE_CHANGE_TYPES, KEY_STRINGS } from "./constants.js";
-import { scrollItemIntoView } from "./utils.js";
+import { STATE_CHANGE_TYPES, KEY_STRINGS } from "./constants";
+import { scrollItemIntoView } from "./utils";
 // Types
 import type {
   StatefulContainerPropsT,
@@ -11,7 +11,7 @@ import type {
   RenderPropsT,
   StateReducerFnT,
   ItemT,
-} from "./types.js";
+} from "./types";
 import { useUIDSeed } from "react-uid";
 
 const DEFAULT_PROPS = {

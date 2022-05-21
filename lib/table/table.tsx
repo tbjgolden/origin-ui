@@ -7,11 +7,11 @@ import {
   StyledBody,
   StyledRow,
   StyledCell,
-} from "./styled-components.js";
+} from "./styled-components";
 
-import { ProgressBar } from "../progress-bar/index.js";
+import { ProgressBar } from "../progress-bar/index";
 
-import type { TablePropsT } from "./types.js";
+import type { TablePropsT } from "./types";
 
 export default class Table extends React.Component<TablePropsT> {
   static defaultProps = {
@@ -43,18 +43,20 @@ export default class Table extends React.Component<TablePropsT> {
           />
         )}
         <StyledHead $width={this.props.horizontalScrollWidth}>
-          {this.props.columns.map((column, index) => (
-            <StyledHeadCell key={index}>{column}</StyledHeadCell>
-          ))}
+          {this.props.columns.map((column, index) => {
+            return <StyledHeadCell key={index}>{column}</StyledHeadCell>;
+          })}
         </StyledHead>
         <StyledBody $width={this.props.horizontalScrollWidth}>
-          {this.props.data.map((row, index) => (
-            <StyledRow key={index}>
-              {row.map((cell, cellIndex) => (
-                <StyledCell key={cellIndex}>{cell}</StyledCell>
-              ))}
-            </StyledRow>
-          ))}
+          {this.props.data.map((row, index) => {
+            return (
+              <StyledRow key={index}>
+                {row.map((cell, cellIndex) => {
+                  return <StyledCell key={cellIndex}>{cell}</StyledCell>;
+                })}
+              </StyledRow>
+            );
+          })}
         </StyledBody>
       </StyledTable>
     );

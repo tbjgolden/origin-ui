@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { useUID } from "react-uid";
-import { useStyletron } from "../styles/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
-import { ORIENTATION, FILL } from "./constants.js";
+import { useStyletron } from "../styles/index";
+import { getOverrides } from "../helpers/overrides";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
+import { ORIENTATION, FILL } from "./constants";
 import {
   StyledRoot,
   StyledTabList,
@@ -14,10 +14,10 @@ import {
   StyledTabHighlight,
   StyledTabBorder,
   StyledTabPanel,
-} from "./styled-components.js";
-import { getTabId, getTabPanelId, isVertical, isHorizontal, isRTL } from "./utils.js";
+} from "./styled-components";
+import { getTabId, getTabPanelId, isVertical, isHorizontal, isRTL } from "./utils";
 
-import type { TabsPropsT } from "./types.js";
+import type { TabsPropsT } from "./types";
 
 const KEYBOARD_ACTION = {
   next: "next",
@@ -37,17 +37,15 @@ const getLayoutParams = (el, orientation) => {
   // through overrides. In that case you would use getBoundingClientRect
   // which includes borders, but because it returns a fractional value the
   // highlight is slightly misaligned every so often.
-  if (isVertical(orientation)) {
-    return {
-      length: el.clientHeight,
-      distance: el.offsetTop,
-    };
-  } else {
-    return {
-      length: el.clientWidth,
-      distance: el.offsetLeft,
-    };
-  }
+  return isVertical(orientation)
+    ? {
+        length: el.clientHeight,
+        distance: el.offsetTop,
+      }
+    : {
+        length: el.clientWidth,
+        distance: el.offsetLeft,
+      };
 };
 
 const scrollParentToCentreTarget = (targetNode) => {
@@ -142,23 +140,22 @@ export function Tabs({
   // TODO: replace with custom scrolling logic.
   React.useEffect(() => {
     // Flow needs this condition pulled out.
-    if (activeTabRef.current) {
-      if (
-        isHorizontal(orientation)
-          ? activeTabRef.current.parentNode.scrollWidth >
-            activeTabRef.current.parentNode.clientWidth
-          : activeTabRef.current.parentNode.scrollHeight >
-            activeTabRef.current.parentNode.clientHeight
-      ) {
-        if (keyUpdated > 1) {
-          activeTabRef.current.scrollIntoView({
-            behavior: "smooth",
-            block: "nearest",
-            inline: "nearest",
-          });
-        } else {
-          scrollParentToCentreTarget(activeTabRef.current);
-        }
+    if (
+      activeTabRef.current &&
+      (isHorizontal(orientation)
+        ? activeTabRef.current.parentNode.scrollWidth >
+          activeTabRef.current.parentNode.clientWidth
+        : activeTabRef.current.parentNode.scrollHeight >
+          activeTabRef.current.parentNode.clientHeight)
+    ) {
+      if (keyUpdated > 1) {
+        activeTabRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
+      } else {
+        scrollParentToCentreTarget(activeTabRef.current);
       }
     }
   }, [activeTabRef.current]);
@@ -374,9 +371,9 @@ function InternalTab({
     // We use directional keys to iterate focus through Tabs.
 
     // Find all tabs eligible for focus
-    const availableTabs = [...event.target.parentNode.childNodes].filter(
-      (node) => !node.disabled && node.getAttribute("role") === "tab"
-    );
+    const availableTabs = [...event.target.parentNode.childNodes].filter((node) => {
+      return !node.disabled && node.getAttribute("role") === "tab";
+    });
 
     // Exit early if there are no other tabs available
     if (availableTabs.length === 1) return;
@@ -387,17 +384,13 @@ function InternalTab({
     if (action) {
       let nextTab: ?HTMLButtonElement;
       if (action === KEYBOARD_ACTION.previous) {
-        if (availableTabs[currentTabIndex - 1]) {
-          nextTab = availableTabs[currentTabIndex - 1];
-        } else {
-          nextTab = availableTabs[availableTabs.length - 1];
-        }
+        nextTab = availableTabs[currentTabIndex - 1]
+          ? availableTabs[currentTabIndex - 1]
+          : availableTabs[availableTabs.length - 1];
       } else if (action === KEYBOARD_ACTION.next) {
-        if (availableTabs[currentTabIndex + 1]) {
-          nextTab = availableTabs[currentTabIndex + 1];
-        } else {
-          nextTab = availableTabs[0];
-        }
+        nextTab = availableTabs[currentTabIndex + 1]
+          ? availableTabs[currentTabIndex + 1]
+          : availableTabs[0];
       }
       if (nextTab) {
         // Focus the tab

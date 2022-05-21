@@ -1,8 +1,6 @@
-
-
-export type ToastLocaleT = {|
-  close: string,
-|};
+export type ToastLocaleT = {
+  close: string;
+};
 
 const locale = {
   close: "Close",

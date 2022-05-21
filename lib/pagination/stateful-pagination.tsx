@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Pagination from "./pagination.js";
-import StatefulContainer from "./stateful-container.js";
-import type { StatefulPaginationPropsT } from "./types.js";
+import Pagination from "./pagination";
+import StatefulContainer from "./stateful-container";
+import type { StatefulPaginationPropsT } from "./types";
 
 export default function StatefulPagination({
   numPages,
@@ -18,7 +18,9 @@ export default function StatefulPagination({
       stateReducer={stateReducer}
       onPageChange={onPageChange}
     >
-      {(renderProps) => <Pagination numPages={numPages} {...renderProps} {...props} />}
+      {(renderProps) => {
+        return <Pagination numPages={numPages} {...renderProps} {...props} />;
+      }}
     </StatefulContainer>
   );
 }
@@ -27,6 +29,8 @@ StatefulPagination.defaultProps = {
   initialState: {
     currentPage: 1,
   }, //flowlint-next-line unclear-type:off
-  stateReducer: (changeType: any, changes: any) => changes,
+  stateReducer: (changeType: any, changes: any) => {
+    return changes;
+  },
   overrides: {},
 };

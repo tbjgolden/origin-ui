@@ -1,4 +1,4 @@
-import { KIND, SHAPE, SIZE } from "./constants.js";
+import { KIND, SHAPE, SIZE } from "./constants";
 
 export const defaultProps = {
   disabled: false,

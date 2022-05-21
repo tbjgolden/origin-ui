@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { useStyletron } from "../styles/index.js";
+import { useStyletron } from "../styles/index";
 
-import Column from "./column.js";
-import { COLUMNS } from "./constants.js";
-import type { ColumnT } from "./types.js";
+import Column from "./column";
+import { COLUMNS } from "./constants";
+import type { ColumnT } from "./types";
 
 type ValueT = null;
 type FilterParametersT = {};
@@ -33,15 +33,23 @@ function RowIndexCell(props) {
 function RowIndexColumn(): RowIndexColumnT {
   return Column({
     kind: COLUMNS.ROW_INDEX,
-    buildFilter: () => () => true,
+    buildFilter: () => {
+      return () => {
+        return true;
+      };
+    },
     cellBlockAlign: "start", // how to configure?
     fillWidth: false,
     filterable: false,
-    mapDataToValue: () => null,
+    mapDataToValue: () => {
+      return null;
+    },
     renderCell: RowIndexCell,
     renderFilter: RowIndexFilter,
     sortable: false,
-    sortFn: () => 0,
+    sortFn: () => {
+      return 0;
+    },
     title: "",
   });
 }

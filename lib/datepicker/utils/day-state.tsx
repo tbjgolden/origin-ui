@@ -1,4 +1,4 @@
-import type { SharedStylePropsT } from "../types.js";
+import type { SharedStylePropsT } from "../types";
 
 /**
   r == range - date range can be selected

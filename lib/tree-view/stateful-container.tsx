@@ -1,16 +1,15 @@
-
 import * as React from "react";
-import type { StatefulContainerPropsT, TreeNodeT } from "./types.js";
+import type { StatefulContainerPropsT, TreeNodeT } from "./types";
 
-type StateType = {|
-  data: TreeNodeT<>[],
-|};
+type StateType = {
+  data: TreeNodeT<>[];
+};
 
-const findSiblings = (node: TreeNodeT<>, children: TreeNodeT<>[]): ?(TreeNodeT<>[]) => {
-  if (children.indexOf(node) !== -1) {
+const findSiblings = (node: TreeNodeT<>, children: TreeNodeT<>[]): ?TreeNodeT<>[] => {
+  if (children.includes(node)) {
     return children;
   }
-  for (let child of children) {
+  for (const child of children) {
     if (child.children) {
       const siblings = findSiblings(node, child.children);
       if (siblings != null) {
@@ -40,11 +39,11 @@ export default class StatefulContainer extends React.Component<
         if (singleExpanded && shouldExpand) {
           const siblings = findSiblings(node, prevState.data);
           if (siblings != null) {
-            siblings.forEach((sibling) => {
+            for (const sibling of siblings) {
               if (sibling !== node) {
                 sibling.isExpanded = false;
               }
-            });
+            }
           }
         }
         node.isExpanded = shouldExpand;

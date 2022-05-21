@@ -1,12 +1,12 @@
 
 
-import { styled, withStyle } from "../styles/index.js";
-import { TYPE, SIZE } from "./constants.js";
-import { StyledList, StyledListItem } from "../menu/index.js";
-import { Spinner } from "../spinner/index.js";
+import { styled, withStyle } from "../styles/index";
+import { TYPE, SIZE } from "./constants";
+import { StyledList, StyledListItem } from "../menu/index";
+import { Spinner } from "../spinner/index";
 
-import type { SharedStylePropsArgT } from "./types.js";
-import { ellipsisText } from "../styles/util.js";
+import type { SharedStylePropsArgT } from "./types";
+import { ellipsisText } from "../styles/util";
 
 function getFont(size = SIZE.default, typography) {
   return {

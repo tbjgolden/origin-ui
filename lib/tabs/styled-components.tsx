@@ -1,6 +1,6 @@
-import { styled } from "../styles/index.js";
-import { ORIENTATION } from "./constants.js";
-import type { SharedStylePropsArgT } from "./types.js";
+import { styled } from "../styles/index";
+import { ORIENTATION } from "./constants";
+import type { SharedStylePropsArgT } from "./types";
 
 // $FlowFixMe https://github.com/facebook/flow/issues/7745
 export const Root = styled<SharedStylePropsArgT>("div", (props) => {

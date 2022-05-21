@@ -1,8 +1,8 @@
-import { Spinner } from "../spinner/index.js";
-import { styled, withStyle } from "../styles/index.js";
+import { Spinner } from "../spinner/index";
+import { styled, withStyle } from "../styles/index";
 
-import { PLACEMENT } from "./constants.js";
-import type { PlacementT } from "./types.js";
+import { PLACEMENT } from "./constants";
+import type { PlacementT } from "./types";
 
 export const StyledRoot = styled<{}>("div", ({ $theme }) => {
   return {

@@ -1,4 +1,4 @@
-import type { ButtonPropsT, SharedStylePropsT } from "./types.js";
+import type { ButtonPropsT, SharedStylePropsT } from "./types";
 
 export function getSharedProps({
   colors,

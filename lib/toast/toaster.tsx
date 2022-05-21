@@ -1,21 +1,21 @@
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import ReactDOM from "react-dom";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import { KIND, PLACEMENT } from "./constants.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import { KIND, PLACEMENT } from "./constants";
 import {
   Root as StyledRoot,
   Body as StyledBody,
   CloseIconSvg as StyledCloseIcon,
   InnerContainer as StyledInnerContainer,
-} from "./styled-components.js";
-import Toast from "./toast.js";
+} from "./styled-components";
+import Toast from "./toast";
 import type {
   ToasterPropsT,
   ToastPropsShapeT,
   ToasterContainerStateT,
   ToastPropsT,
-} from "./types.js";
+} from "./types";
 
 let toasterRef: ?React.ElementRef<typeof ToasterContainer> = null;
 
@@ -47,7 +47,7 @@ export class ToasterContainer extends React.Component<
 
   dismissHandlers = {};
 
-  toastId: number = 0;
+  toastId = 0;
 
   componentDidMount() {
     this.setState({ isMounted: true });
@@ -60,7 +60,13 @@ export class ToasterContainer extends React.Component<
   };
 
   show = (props: ToastPropsT = {}): React.Key => {
-    if (this.state.toasts.map((t) => t.key).includes(props.key)) {
+    if (
+      this.state.toasts
+        .map((t) => {
+          return t.key;
+        })
+        .includes(props.key)
+    ) {
       this.update(props.key, props);
       return props.key;
     }
@@ -83,7 +89,7 @@ export class ToasterContainer extends React.Component<
             }),
             key,
             ...(this.props.resetAutoHideTimerOnUpdate
-              ? { __updated: (parseInt(toast.__updated) || 0) + 1 }
+              ? { __updated: (Number.parseInt(toast.__updated) || 0) + 1 }
               : {}),
           };
           return updatedToastProps;
@@ -103,9 +109,9 @@ export class ToasterContainer extends React.Component<
   };
 
   clearAll = () => {
-    Object.keys(this.dismissHandlers).forEach((key) => {
+    for (const key of Object.keys(this.dismissHandlers)) {
       this.dismissHandlers[key]();
-    });
+    }
   };
 
   clear = (key?: React.Key) => {
@@ -114,11 +120,13 @@ export class ToasterContainer extends React.Component<
 
   internalOnClose = (key: React.Key) => {
     delete this.dismissHandlers[key];
-    this.setState(({ toasts }) => ({
-      toasts: toasts.filter((t) => {
-        return !(t.key === key);
-      }),
-    }));
+    this.setState(({ toasts }) => {
+      return {
+        toasts: toasts.filter((t) => {
+          return !(t.key === key);
+        }),
+      };
+    });
   };
 
   getOnCloseHandler = (key: React.Key, onClose: ?(() => mixed)) => {
@@ -195,18 +203,16 @@ export class ToasterContainer extends React.Component<
     );
 
     //Only render the portal in the browser, otherwise render the toasts and children
-    if (this.state.isMounted) {
-      return (
-        <>
-          {this.props.usePortal && __BROWSER__ && document.body
-            ? ReactDOM.createPortal(root, document.body)
-            : root}
-          {this.props.children}
-        </>
-      );
-    } else {
-      return <>{this.props.children}</>;
-    }
+    return this.state.isMounted ? (
+      <>
+        {this.props.usePortal && __BROWSER__ && document.body
+          ? ReactDOM.createPortal(root, document.body)
+          : root}
+        {this.props.children}
+      </>
+    ) : (
+      <>{this.props.children}</>
+    );
   }
 }
 

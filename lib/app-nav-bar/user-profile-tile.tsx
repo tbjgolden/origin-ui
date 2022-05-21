@@ -1,21 +1,16 @@
-
-
 import * as React from "react";
-import { Avatar } from "../avatar/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { LabelMedium, ParagraphSmall } from "../typography/index.js";
+import { Avatar } from "../avatar";
+import { getOverrides } from "../helpers/overrides";
+import { LabelMedium, ParagraphSmall } from "../typography";
 
 import {
   StyledUserProfileTileContainer,
   StyledUserProfilePictureContainer,
   StyledUserProfileInfoContainer,
-} from "./styled-components.js";
-import type { OverridesT, UserMenuPropsT } from "./types.js";
+} from "./styled-components";
+import type { OverridesT, UserMenuPropsT } from "./types";
 
-export default function UserProfileTile(props: {|
-  ...UserMenuPropsT,
-  overrides: OverridesT,
-|}) {
+export default function UserProfileTile(props) {
   const { overrides = {}, username, usernameSubtitle, userImgUrl } = props;
 
   const [UserProfileTileContainer, userProfileTileContainerProps] = getOverrides(

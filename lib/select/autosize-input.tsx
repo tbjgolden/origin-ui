@@ -1,9 +1,9 @@
 
 /* eslint-disable cup/no-undef */
 import * as React from "react";
-import { StyledInput, StyledInputSizer } from "./styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
-import type { AutosizeInputPropsT, AutosizeInputStateT } from "./types.js";
+import { StyledInput, StyledInputSizer } from "./styled-components";
+import { getOverrides } from "../helpers/overrides";
+import type { AutosizeInputPropsT, AutosizeInputStateT } from "./types";
 
 export default class AutosizeInput extends React.Component<
   AutosizeInputPropsT,

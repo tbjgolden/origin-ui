@@ -1,4 +1,4 @@
-import type { TabPropsT } from "./types.js";
+import type { TabPropsT } from "./types";
 
 export function Tab(props: TabPropsT) {
   return null;

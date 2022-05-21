@@ -1,14 +1,16 @@
 import * as React from "react";
-import { STATE_CHANGE_TYPE } from "./constants.js";
+import { STATE_CHANGE_TYPE } from "./constants";
 import type {
   PanelStateT,
   StatefulPanelContainerPropsT,
   PanelStateReducerT,
   StateChangeTypeT,
   OnChangeHandlerT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: PanelStateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: PanelStateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulPanelContainer extends React.Component<
   StatefulPanelContainerPropsT,
@@ -36,9 +38,9 @@ class StatefulPanelContainer extends React.Component<
 
   internalSetState(type: StateChangeTypeT, changes: PanelStateT) {
     const { stateReducer } = this.props;
-    this.setState((prevState) =>
-      stateReducer ? stateReducer(type, changes, prevState) : changes
-    );
+    this.setState((prevState) => {
+      return stateReducer ? stateReducer(type, changes, prevState) : changes;
+    });
   }
 
   render() {

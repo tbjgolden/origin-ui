@@ -1,3 +1,3 @@
-export { default as HeadingLevel, LevelContext } from "./heading-level.js";
-export { default as Heading } from "./heading.js";
-export type * from "./types.js";
+export { default as HeadingLevel, LevelContext } from "./heading-level";
+export { default as Heading } from "./heading";
+export type * from "./types";

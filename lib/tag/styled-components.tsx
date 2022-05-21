@@ -1,11 +1,11 @@
 
-import tint from "polished/lib/color/tint.js";
-import shade from "polished/lib/color/shade.js";
+import tint from "polished/lib/color/tint";
+import shade from "polished/lib/color/shade";
 
-import { styled, type ThemeT } from "../styles/index.js";
-import { KIND, VARIANT, SIZE } from "./constants.js";
-import type { SharedPropsArgT } from "./types.js";
-import { colors as colorTokens } from "../tokens/index.js";
+import { styled, type ThemeT } from "../styles/index";
+import { KIND, VARIANT, SIZE } from "./constants";
+import type { SharedPropsArgT } from "./types";
+import { colors as colorTokens } from "../tokens/index";
 
 export function customOnRamp(color?: string, unit?: string) {
   switch (unit) {

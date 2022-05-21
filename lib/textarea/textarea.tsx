@@ -1,12 +1,12 @@
 import * as React from "react";
-import type { TextareaPropsT } from "./types.js";
-import { mergeOverrides, getOverrides } from "../helpers/overrides.js";
-import { BaseInput, SIZE, CUSTOM_INPUT_TYPE } from "../input/index.js";
+import type { TextareaPropsT } from "./types";
+import { mergeOverrides, getOverrides } from "../helpers/overrides";
+import { BaseInput, SIZE, CUSTOM_INPUT_TYPE } from "../input/index";
 import {
   StyledTextAreaRoot,
   StyledTextarea,
   StyledTextareaContainer,
-} from "./styled-components.js";
+} from "./styled-components";
 
 class Textarea extends React.Component<TextareaPropsT, { isFocused: boolean }> {
   static defaultProps = {

@@ -1,13 +1,13 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import type { InputPropsT, InternalStateT, AdjoinedT } from "./types.js";
-import { getSharedProps } from "./utils.js";
-import BaseInput from "./base-input.js";
+import { getOverrides } from "../helpers/overrides";
+import type { InputPropsT, InternalStateT, AdjoinedT } from "./types";
+import { getSharedProps } from "./utils";
+import BaseInput from "./base-input";
 import {
   Root as StyledRoot,
   InputEnhancer as StyledInputEnhancer,
-} from "./styled-components.js";
-import { SIZE, ADJOINED, ENHANCER_POSITION } from "./constants.js";
+} from "./styled-components";
+import { SIZE, ADJOINED, ENHANCER_POSITION } from "./constants";
 
 class Input extends React.Component<InputPropsT, InternalStateT> {
   static defaultProps = {
@@ -69,13 +69,11 @@ class Input extends React.Component<InputPropsT, InternalStateT> {
 
     const sharedProps = getSharedProps(this.props, this.state);
 
-    if (__DEV__) {
-      if (this.props.error && this.props.positive) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `[Input] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
-        );
-      }
+    if (__DEV__ && this.props.error && this.props.positive) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[Input] \`error\` and \`positive\` are both set to \`true\`. \`error\` will take precedence but this may not be what you want.`
+      );
     }
 
     return (

@@ -7,14 +7,14 @@ import {
   StyledCountrySelectDropdownFlagColumn as DefaultFlagColumn,
   StyledCountrySelectDropdownNameColumn as DefaultNameColumn,
   StyledCountrySelectDropdownDialcodeColumn as DefaultDialcodeColumn,
-} from "./styled-components.js";
-import { SingleSelect as DefaultSelect } from "../select/index.js";
-import { PLACEMENT } from "../popover/index.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import defaultProps from "./default-props.js";
-import { iso2FlagEmoji } from "./utils.js";
+} from "./styled-components";
+import { SingleSelect as DefaultSelect } from "../select/index";
+import { PLACEMENT } from "../popover/index";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import defaultProps from "./default-props";
+import { iso2FlagEmoji } from "./utils";
 
-import type { CountryT, CountrySelectPropsT } from "./types.js";
+import type { CountryT, CountrySelectPropsT } from "./types";
 
 CountryPicker.defaultProps = {
   disabled: defaultProps.disabled,
@@ -67,7 +67,9 @@ export default function CountryPicker(props: CountrySelectPropsT) {
   };
   const options = Object.values(props.countries);
   // $FlowFixMe
-  const scrollIndex = options.findIndex((opt) => opt.id === country.id);
+  const scrollIndex = options.findIndex((opt) => {
+    return opt.id === country.id;
+  });
   const baseSelectOverrides = {
     Root: {
       component: StyledRoot,

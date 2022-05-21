@@ -1,13 +1,13 @@
 import React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
 import {
   StyledLabelContent,
   StyledLabelDescription,
   StyledLabelSublistContent,
-} from "./styled-components.js";
-import type { LabelPropsT } from "./types.js";
+} from "./styled-components";
+import type { LabelPropsT } from "./types";
 
 function ListItemLabel(props: LabelPropsT) {
   const { overrides = {} } = props;

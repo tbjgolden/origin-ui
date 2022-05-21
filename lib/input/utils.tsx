@@ -1,9 +1,4 @@
-import type {
-  InputPropsT,
-  BaseInputPropsT,
-  InternalStateT,
-  SharedPropsT,
-} from "./types.js";
+import type { InputPropsT, BaseInputPropsT, InternalStateT, SharedPropsT } from "./types";
 
 export function getSharedProps<T>(
   props: BaseInputPropsT<T> | InputPropsT,

@@ -1,8 +1,6 @@
-
-
-export type ModalLocaleT = {|
-  close: string,
-|};
+export type ModalLocaleT = {
+  close: string;
+};
 
 const locale = {
   close: "Close",

@@ -1,6 +1,6 @@
-import sharedBorders from "../shared/borders.js";
-import deepMerge from "../../utils/deep-merge.js";
-import type { BordersT } from "../types.js";
+import sharedBorders from "../shared/borders";
+import deepMerge from "../../utils/deep-merge";
+import type { BordersT } from "../types";
 
 // Override border colors for the dark theme
 const borders: BordersT = deepMerge({}, sharedBorders, {

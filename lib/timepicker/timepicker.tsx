@@ -2,17 +2,17 @@
 
 import * as React from "react";
 
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import { LocaleContext } from "../locale/index.js";
-import type { OnChangeParamsT, OptionT } from "../select/index.js";
-import { filterOptions, Select } from "../select/index.js";
-import DateHelpers from "../datepicker/utils/date-helpers.js";
-import dateFnsAdapter from "../datepicker/utils/date-fns-adapter.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import { LocaleContext } from "../locale/index";
+import type { OnChangeParamsT, OptionT } from "../select/index";
+import { filterOptions, Select } from "../select/index";
+import DateHelpers from "../datepicker/utils/date-helpers";
+import dateFnsAdapter from "../datepicker/utils/date-fns-adapter";
 import type {
   TimePickerDefaultPropsT,
   TimePickerPropsT,
   TimePickerStateT,
-} from "./types.js";
+} from "./types";
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;

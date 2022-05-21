@@ -1,6 +1,6 @@
 
 import * as React from "react";
-import { STATE_CHANGE_TYPE } from "./constants.js";
+import { STATE_CHANGE_TYPE } from "./constants";
 import type {
   CalendarPropsT,
   ContainerStateT,
@@ -8,7 +8,7 @@ import type {
   StatefulContainerPropsT,
   StateChangeTypeT,
   StateReducerT,
-} from "./types.js";
+} from "./types";
 
 type InputProps<T> = CalendarPropsT<T> | DatepickerPropsT<T>;
 

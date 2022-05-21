@@ -13,13 +13,13 @@ import {
   StyledTableLoadingMessage,
   StyledTableEmptyMessage,
   StyledSortIconContainer,
-} from "./styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
-import Blank from "../icon/blank.js";
-import ChevronDown from "../icon/chevron-down.js";
-import ChevronUp from "../icon/chevron-up.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
-import type { TableBuilderPropsT } from "./types.js";
+} from "./styled-components";
+import { getOverrides } from "../helpers/overrides";
+import Blank from "../icon/blank";
+import ChevronDown from "../icon/chevron-down";
+import ChevronUp from "../icon/chevron-up";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
+import type { TableBuilderPropsT } from "./types";
 
 export default class TableBuilder<T> extends React.Component<
   TableBuilderPropsT<T>,
@@ -131,7 +131,9 @@ export default class TableBuilder<T> extends React.Component<
 
     const columns = React.Children.toArray(children)
       .filter(Boolean)
-      .map((child) => child.props);
+      .map((child) => {
+        return child.props;
+      });
 
     function renderHeader(col, colIndex, isFocusVisible) {
       const colOverrides = col.overrides || {};
@@ -212,7 +214,9 @@ export default class TableBuilder<T> extends React.Component<
           tabIndex="0"
           aria-label={`${col.tableHeadAriaLabel || col.header}, ${sortLabel}`}
           $isFocusVisible={isFocusVisible}
-          onClick={() => onSort && onSort(col.id)}
+          onClick={() => {
+            return onSort && onSort(col.id);
+          }}
           onKeyDown={(e: KeyboardEvent) => {
             if (e.key === "Enter" || e.key === " ") {
               e.preventDefault();
@@ -274,9 +278,9 @@ export default class TableBuilder<T> extends React.Component<
         >
           <TableHead {...tableHeadProps}>
             <TableHeadRow {...tableHeadRowProps}>
-              {columns.map((col, colIndex) =>
-                renderHeader(col, colIndex, this.state.isFocusVisible)
-              )}
+              {columns.map((col, colIndex) => {
+                return renderHeader(col, colIndex, this.state.isFocusVisible);
+              })}
             </TableHeadRow>
           </TableHead>
           <TableBody {...tableBodyProps}>
@@ -301,19 +305,21 @@ export default class TableBuilder<T> extends React.Component<
               </tr>
             )}
             {isRendered &&
-              data.map((row, rowIndex) => (
-                <TableBodyRow
-                  key={rowIndex}
-                  $divider={divider}
-                  $row={row}
-                  $rowIndex={rowIndex}
-                  {...tableBodyRowProps}
-                >
-                  {columns.map((col, colIndex) =>
-                    renderCell(col, colIndex, row, rowIndex, data.length - 1)
-                  )}
-                </TableBodyRow>
-              ))}
+              data.map((row, rowIndex) => {
+                return (
+                  <TableBodyRow
+                    key={rowIndex}
+                    $divider={divider}
+                    $row={row}
+                    $rowIndex={rowIndex}
+                    {...tableBodyRowProps}
+                  >
+                    {columns.map((col, colIndex) => {
+                      return renderCell(col, colIndex, row, rowIndex, data.length - 1);
+                    })}
+                  </TableBodyRow>
+                );
+              })}
           </TableBody>
         </Table>
       </Root>

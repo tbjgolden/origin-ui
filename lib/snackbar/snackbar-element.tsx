@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Button, KIND, SHAPE } from "../button/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { useStyletron } from "../styles/index.js";
+import { Button, KIND, SHAPE } from "../button/index";
+import { getOverrides } from "../helpers/overrides";
+import { useStyletron } from "../styles/index";
 
 import {
   StyledRoot,
@@ -12,8 +12,8 @@ import {
   StyledMessage,
   StyledWrapActionButtonContainer,
   StyledActionButtonContainer,
-} from "./styled-components.js";
-import type { SnackbarElementPropsT } from "./types.js";
+} from "./styled-components";
+import type { SnackbarElementPropsT } from "./types";
 
 const ActionButton = React.forwardRef(
   // flowlint-next-line unclear-type:off
@@ -70,32 +70,32 @@ export default function SnackbarElement({
   const rootRef = React.useRef(null);
   const [rootWidth, setRootWidth] = React.useState(0);
   React.useEffect(() => {
-    if (__BROWSER__) {
-      if (window.ResizeObserver) {
-        const observer = new window.ResizeObserver(([entry]) =>
-          setRootWidth(entry.contentRect.width)
-        );
-        if (rootRef.current) {
-          observer.observe(rootRef.current);
-        }
-        return () => observer.disconnect();
+    if (__BROWSER__ && window.ResizeObserver) {
+      const observer = new window.ResizeObserver(([entry]) => {
+        return setRootWidth(entry.contentRect.width);
+      });
+      if (rootRef.current) {
+        observer.observe(rootRef.current);
       }
+      return () => {
+        return observer.disconnect();
+      };
     }
   }, []);
 
   const actionMeasureRef = React.useRef(null);
   const [actionMeasureWidth, setActionMeasureWidth] = React.useState(0);
   React.useEffect(() => {
-    if (__BROWSER__) {
-      if (window.ResizeObserver) {
-        const observer = new window.ResizeObserver(([entry]) =>
-          setActionMeasureWidth(entry.contentRect.width)
-        );
-        if (actionMeasureRef.current) {
-          observer.observe(actionMeasureRef.current);
-        }
-        return () => observer.disconnect();
+    if (__BROWSER__ && window.ResizeObserver) {
+      const observer = new window.ResizeObserver(([entry]) => {
+        return setActionMeasureWidth(entry.contentRect.width);
+      });
+      if (actionMeasureRef.current) {
+        observer.observe(actionMeasureRef.current);
       }
+      return () => {
+        return observer.disconnect();
+      };
     }
   }, [actionMeasureRef.current]);
 

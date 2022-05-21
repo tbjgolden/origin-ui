@@ -1,11 +1,11 @@
-export { default as StatefulMenu } from "./stateful-menu.js";
-export { default as StatefulContainer } from "./stateful-container.js";
-export { default as OptionList } from "./option-list.js";
-export { default as OptionProfile } from "./option-profile.js";
-export { default as Menu } from "./menu.js";
-export { default as NestedMenus, NestedMenuContext } from "./nested-menus.js";
+export { default as StatefulMenu } from "./stateful-menu";
+export { default as StatefulContainer } from "./stateful-container";
+export { default as OptionList } from "./option-list";
+export { default as OptionProfile } from "./option-profile";
+export { default as Menu } from "./menu";
+export { default as NestedMenus, NestedMenuContext } from "./nested-menus";
 // Constants
-export { KEY_STRINGS, STATE_CHANGE_TYPES } from "./constants.js";
+export { KEY_STRINGS, STATE_CHANGE_TYPES } from "./constants";
 // Styled elements
 export {
   StyledEmptyState,
@@ -18,6 +18,6 @@ export {
   StyledProfileTitle,
   StyledProfileSubtitle,
   StyledProfileBody,
-} from "./styled-components.js";
+} from "./styled-components";
 // Flow
-export type * from "./types.js";
+export type * from "./types";

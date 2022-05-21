@@ -1,13 +1,9 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 
-import { PLACEMENT } from "../popover/constants.js";
-import type {
-  OffsetT,
-  PopoverPlacementT,
-  SharedStylePropsArgT,
-} from "../popover/types.js";
-import { getBodyStyles } from "../popover/styled-components.js";
-import { getPopoverMarginStyles, splitPlacement } from "../popover/utils.js";
+import { PLACEMENT } from "../popover/constants";
+import type { OffsetT, PopoverPlacementT, SharedStylePropsArgT } from "../popover/types";
+import { getBodyStyles } from "../popover/styled-components";
+import { getPopoverMarginStyles, splitPlacement } from "../popover/utils";
 
 const CLAMP_ARROW_SIZE = 16;
 
@@ -59,62 +55,76 @@ function conicGradientDegStart(placement) {
 }
 
 function position(offsets, placement, width, height) {
-  if (placement === PLACEMENT.top) {
-    return {
-      bottom: `-${height}px`,
-      left: `${offsets.left}px`,
-    };
-  } else if (placement === PLACEMENT.bottom) {
-    return {
-      top: `-${height}px`,
-      left: `${offsets.left}px`,
-    };
-  } else if (placement === PLACEMENT.left) {
-    return {
-      top: `${offsets.top}px`,
-      right: `-${width}px`,
-    };
-  } else if (placement === PLACEMENT.right) {
-    return {
-      top: `${offsets.top}px`,
-      left: `-${width}px`,
-    };
-  } else if (placement === PLACEMENT.topLeft) {
-    return {
-      bottom: `-${height}px`,
-    };
-  } else if (placement === PLACEMENT.topRight) {
-    return {
-      bottom: `-${height}px`,
-      right: "0px",
-    };
-  } else if (placement === PLACEMENT.rightTop) {
-    return {
-      left: `-${width}px`,
-    };
-  } else if (placement === PLACEMENT.rightBottom) {
-    return {
-      bottom: "0px",
-      left: `-${width}px`,
-    };
-  } else if (placement === PLACEMENT.bottomRight) {
-    return {
-      top: `-${height}px`,
-      right: "0px",
-    };
-  } else if (placement === PLACEMENT.bottomLeft) {
-    return {
-      top: `-${height}px`,
-    };
-  } else if (placement === PLACEMENT.leftBottom) {
-    return {
-      right: `-${width}px`,
-      bottom: "0px",
-    };
-  } else if (placement === PLACEMENT.leftTop) {
-    return {
-      right: `-${width}px`,
-    };
+  switch (placement) {
+    case PLACEMENT.top: {
+      return {
+        bottom: `-${height}px`,
+        left: `${offsets.left}px`,
+      };
+    }
+    case PLACEMENT.bottom: {
+      return {
+        top: `-${height}px`,
+        left: `${offsets.left}px`,
+      };
+    }
+    case PLACEMENT.left: {
+      return {
+        top: `${offsets.top}px`,
+        right: `-${width}px`,
+      };
+    }
+    case PLACEMENT.right: {
+      return {
+        top: `${offsets.top}px`,
+        left: `-${width}px`,
+      };
+    }
+    case PLACEMENT.topLeft: {
+      return {
+        bottom: `-${height}px`,
+      };
+    }
+    case PLACEMENT.topRight: {
+      return {
+        bottom: `-${height}px`,
+        right: "0px",
+      };
+    }
+    case PLACEMENT.rightTop: {
+      return {
+        left: `-${width}px`,
+      };
+    }
+    case PLACEMENT.rightBottom: {
+      return {
+        bottom: "0px",
+        left: `-${width}px`,
+      };
+    }
+    case PLACEMENT.bottomRight: {
+      return {
+        top: `-${height}px`,
+        right: "0px",
+      };
+    }
+    case PLACEMENT.bottomLeft: {
+      return {
+        top: `-${height}px`,
+      };
+    }
+    case PLACEMENT.leftBottom: {
+      return {
+        right: `-${width}px`,
+        bottom: "0px",
+      };
+    }
+    case PLACEMENT.leftTop: {
+      return {
+        right: `-${width}px`,
+      };
+    }
+    // No default
   }
   return {};
 }

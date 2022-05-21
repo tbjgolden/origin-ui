@@ -1,6 +1,6 @@
-export { default as Navigation } from "./nav.js";
-export { default as NavItem } from "./nav-item.js";
+export { default as Navigation } from "./nav";
+export { default as NavItem } from "./nav-item";
 // Styled elements
-export * from "./styled-components.js";
+export * from "./styled-components";
 // Types
-export type * from "./types.js";
+export type * from "./types";

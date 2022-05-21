@@ -1,4 +1,4 @@
-import type { GridT } from "../types.js";
+import type { GridT } from "../types";
 
 const grid: GridT = {
   columns: [4, 8, 12],

@@ -1,3 +1,3 @@
-export { default as TimePicker } from "./timepicker.js";
+export { default as TimePicker } from "./timepicker";
 // Flow
-export type * from "./types.js";
+export type * from "./types";

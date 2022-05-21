@@ -3,14 +3,14 @@ import {
   BaseButton as StyledBaseButton,
   LoadingSpinner as StyledLoadingSpinner,
   LoadingSpinnerContainer as StyledLoadingSpinnerContainer,
-} from "./styled-components.js";
-import { getSharedProps } from "./utils.js";
-import ButtonInternals from "./button-internals.js";
-import { defaultProps } from "./default-props.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./styled-components";
+import { getSharedProps } from "./utils";
+import ButtonInternals from "./button-internals";
+import { defaultProps } from "./default-props";
+import { getOverrides } from "../helpers/overrides";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
-import type { ButtonPropsT, SharedStylePropsT, ReactRefT } from "./types.js";
+import type { ButtonPropsT, SharedStylePropsT, ReactRefT } from "./types";
 
 class Button extends React.Component<
   ButtonPropsT & { forwardedRef: ReactRefT<HTMLElement> },
@@ -118,7 +118,9 @@ class Button extends React.Component<
 
 const ForwardedButton = React.forwardRef<ButtonPropsT, HTMLButtonElement>(
   //$FlowFixMe
-  (props: ButtonPropsT, ref) => <Button forwardedRef={ref} {...props} />
+  (props: ButtonPropsT, ref) => {
+    return <Button forwardedRef={ref} {...props} />;
+  }
 );
 ForwardedButton.displayName = "Button";
 export default ForwardedButton;

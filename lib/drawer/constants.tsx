@@ -1,4 +1,4 @@
-import type { AnchorT, AnchorPropT, SizeT, SizePropT } from "./types.js";
+import type { AnchorT, AnchorPropT, SizeT, SizePropT } from "./types";
 
 export const SIZE: { [key: SizeT]: SizePropT } = {
   default: "default",

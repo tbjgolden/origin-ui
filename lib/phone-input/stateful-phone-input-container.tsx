@@ -1,16 +1,18 @@
 import React from "react";
 // needs to be removed from here
-import { COUNTRIES, STATE_CHANGE_TYPE } from "./constants.js";
+import { COUNTRIES, STATE_CHANGE_TYPE } from "./constants";
 import type {
   StatefulPhoneInputContainerPropsT,
   StateT,
   StateReducerT,
   StateChangeT,
-} from "./types.js";
-import defaultProps from "./default-props.js";
-import type { OnChangeParamsT } from "../select/types.js";
+} from "./types";
+import defaultProps from "./default-props";
+import type { OnChangeParamsT } from "../select/types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 export default class StatefulPhoneInputContainer extends React.Component<
   StatefulPhoneInputContainerPropsT,

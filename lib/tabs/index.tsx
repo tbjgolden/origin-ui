@@ -1,14 +1,14 @@
-export { default as Tabs } from "./tabs.js";
-export { default as StatefulTabs } from "./stateful-tabs.js";
-export { default as Tab } from "./tab.js";
+export { default as Tabs } from "./tabs";
+export { default as StatefulTabs } from "./stateful-tabs";
+export { default as Tab } from "./tab";
 // Constants
-export { ORIENTATION, STATE_CHANGE_TYPE } from "./constants.js";
+export { ORIENTATION, STATE_CHANGE_TYPE } from "./constants";
 // Styled elements
 export {
   Root as StyledRoot,
   Tab as StyledTab,
   TabBar as StyledTabBar,
   TabContent as StyledTabContent,
-} from "./styled-components.js";
+} from "./styled-components";
 // Flow
-export type * from "./types.js";
+export type * from "./types";

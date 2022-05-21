@@ -8,17 +8,17 @@ import {
   SHAPE as BUTTON_SHAPES,
   SIZE as BUTTON_SIZES,
   KIND as BUTTON_KINDS,
-} from "../button/index.js";
-import Search from "../icon/search.js";
-import { Input, SIZE as INPUT_SIZES } from "../input/index.js";
-import { Popover } from "../popover/index.js";
-import { useStyletron } from "../styles/index.js";
-import { Tag } from "../tag/index.js";
-import FilterMenu from "./filter-menu.js";
-import { DataTable } from "./data-table.js";
-import { StatefulContainer } from "./stateful-container.js";
-import type { StatefulDataTablePropsT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
+} from "../button/index";
+import Search from "../icon/search";
+import { Input, SIZE as INPUT_SIZES } from "../input/index";
+import { Popover } from "../popover/index";
+import { useStyletron } from "../styles/index";
+import { Tag } from "../tag/index";
+import FilterMenu from "./filter-menu";
+import { DataTable } from "./data-table";
+import { StatefulContainer } from "./stateful-container";
+import type { StatefulDataTablePropsT } from "./types";
+import { LocaleContext } from "../locale/index";
 
 function useResizeObserver(
   ref: { current: HTMLElement | null },

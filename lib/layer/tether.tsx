@@ -1,14 +1,16 @@
 import * as React from "react";
-import Popper from "popper.js";
-import type { Instance as PopperInstance } from "popper.js";
-import { toPopperPlacement, parsePopperOffset } from "./utils.js";
-import { TETHER_PLACEMENT } from "./constants.js";
-import type { TetherPropsT, TetherStateT, PopperDataObjectT } from "./types.js";
+import Popper from "popper";
+import type { Instance as PopperInstance } from "popper";
+import { toPopperPlacement, parsePopperOffset } from "./utils";
+import { TETHER_PLACEMENT } from "./constants";
+import type { TetherPropsT, TetherStateT, PopperDataObjectT } from "./types";
 
 class Tether extends React.Component<TetherPropsT, TetherStateT> {
   static defaultProps = {
     anchorRef: null,
-    onPopperUpdate: () => null,
+    onPopperUpdate: () => {
+      return null;
+    },
     placement: TETHER_PLACEMENT.auto,
     popperRef: null,
     popperOptions: {},

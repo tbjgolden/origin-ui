@@ -1,4 +1,4 @@
-import type { SizingT } from "../types.js";
+import type { SizingT } from "../types";
 
 const sizing: SizingT = {
   scale0: "2px",

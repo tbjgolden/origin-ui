@@ -1,7 +1,7 @@
 import { getTrackBackground } from "react-range";
 
-import { styled } from "../styles/index.js";
-import type { StylePropsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { StylePropsT } from "./types";
 
 export const Root = styled("div", { position: "relative", width: "100%" });
 Root.displayName = "StyledRoot";

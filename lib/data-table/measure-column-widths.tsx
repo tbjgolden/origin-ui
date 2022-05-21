@@ -2,10 +2,10 @@
 
 import * as React from "react";
 
-import { useStyletron } from "../styles/index.js";
+import { useStyletron } from "../styles/index";
 
-import HeaderCell from "./header-cell.js";
-import type { ColumnT, RowT } from "./types.js";
+import HeaderCell from "./header-cell";
+import type { ColumnT, RowT } from "./types";
 import { useRef } from "react";
 
 // Measures the column header + sampled data

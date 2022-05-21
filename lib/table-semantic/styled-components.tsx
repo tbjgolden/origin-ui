@@ -1,10 +1,10 @@
 
-import Blank from "../icon/blank.js";
-import ChevronDown from "../icon/chevron-down.js";
-import ChevronUp from "../icon/chevron-up.js";
-import { styled, withStyle, expandBorderStyles } from "../styles/index.js";
-import { SIZE, DIVIDER } from "./constants.js";
-import type { SizeT, DividerT } from "./types.js";
+import Blank from "../icon/blank";
+import ChevronDown from "../icon/chevron-down";
+import ChevronUp from "../icon/chevron-up";
+import { styled, withStyle, expandBorderStyles } from "../styles/index";
+import { SIZE, DIVIDER } from "./constants";
+import type { SizeT, DividerT } from "./types";
 
 function sizeToCellPadding($theme, $size) {
   if ($size === SIZE.compact) {

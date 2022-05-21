@@ -1,7 +1,7 @@
 
 /* eslint-disable import/prefer-default-export */
-import { ARROW_SIZE, PLACEMENT } from "./constants.js";
-import type { OffsetT, PopoverPlacementT } from "./types.js";
+import { ARROW_SIZE, PLACEMENT } from "./constants";
+import type { OffsetT, PopoverPlacementT } from "./types";
 
 const OPPOSITE_POSITIONS = {
   top: "bottom",

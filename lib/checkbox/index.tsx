@@ -1,6 +1,6 @@
-export { default as StatefulCheckbox } from "./stateful-checkbox.js";
-export { default as StatefulContainer } from "./stateful-checkbox-container.js";
-export { default as Checkbox } from "./checkbox.js";
+export { default as StatefulCheckbox } from "./stateful-checkbox";
+export { default as StatefulContainer } from "./stateful-checkbox-container";
+export { default as Checkbox } from "./checkbox";
 // Styled elements
 export {
   Root as StyledRoot,
@@ -9,9 +9,9 @@ export {
   Input as StyledInput,
   Toggle as StyledToggle,
   ToggleTrack as StyledToggleTrack,
-} from "./styled-components.js";
+} from "./styled-components";
 
-export { STATE_TYPE, STYLE_TYPE, LABEL_PLACEMENT } from "./constants.js";
+export { STATE_TYPE, STYLE_TYPE, LABEL_PLACEMENT } from "./constants";
 
 // Flow
-export type * from "./types.js";
+export type * from "./types";

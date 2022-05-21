@@ -1,23 +1,23 @@
 
 import * as React from "react";
-import { FormControl } from "../form-control/index.js";
-import { LocaleContext } from "../locale/index.js";
-import { Select } from "../select/index.js";
-import CalendarHeader from "./calendar-header.js";
-import Month from "./month.js";
-import TimePicker from "../timepicker/timepicker.js";
-import type { DateIOAdapter } from "./utils/types.js";
+import { FormControl } from "../form-control/index";
+import { LocaleContext } from "../locale/index";
+import { Select } from "../select/index";
+import CalendarHeader from "./calendar-header";
+import Month from "./month";
+import TimePicker from "../timepicker/timepicker";
+import type { DateIOAdapter } from "./utils/types";
 import {
   StyledCalendarContainer,
   StyledMonthContainer,
   StyledRoot,
   StyledSelectorContainer,
-} from "./styled-components.js";
-import dateFnsAdapter from "./utils/date-fns-adapter.js";
-import DateHelpers from "./utils/date-helpers.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import type { CalendarPropsT, CalendarInternalState } from "./types.js";
-import { DENSITY, ORIENTATION } from "./constants.js";
+} from "./styled-components";
+import dateFnsAdapter from "./utils/date-fns-adapter";
+import DateHelpers from "./utils/date-helpers";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import type { CalendarPropsT, CalendarInternalState } from "./types";
+import { DENSITY, ORIENTATION } from "./constants";
 
 export default class Calendar<T = Date> extends React.Component<
   CalendarPropsT<T>,

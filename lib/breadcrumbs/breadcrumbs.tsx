@@ -1,17 +1,17 @@
 import React, { Children } from "react";
 
-import { LocaleContext } from "../locale/index.js";
-import { ThemeContext } from "../styles/theme-provider.js";
-import ChevronRight from "../icon/chevron-right.js";
-import ChevronLeft from "../icon/chevron-left.js";
-import type { BreadcrumbsPropsT } from "./types.js";
+import { LocaleContext } from "../locale/index";
+import { ThemeContext } from "../styles/theme-provider";
+import ChevronRight from "../icon/chevron-right";
+import ChevronLeft from "../icon/chevron-left";
+import type { BreadcrumbsPropsT } from "./types";
 import {
   StyledList,
   StyledListItem,
   StyledRoot,
   StyledSeparator,
-} from "./styled-components.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
+} from "./styled-components";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
 
 export function Breadcrumbs(props: BreadcrumbsPropsT) {
   const { overrides = {}, showTrailingSeparator = false } = props;
@@ -33,7 +33,7 @@ export function Breadcrumbs(props: BreadcrumbsPropsT) {
     baseIconProps && baseIconProps.overrides
   );
 
-  childrenArray.forEach((child, index) => {
+  for (const [index, child] of childrenArray.entries()) {
     childrenWithSeparators.push(
       <ListItem
         key={`breadcrumb-item-${index}`}
@@ -44,33 +44,35 @@ export function Breadcrumbs(props: BreadcrumbsPropsT) {
         {(showTrailingSeparator || index !== childrenArray.length - 1) && (
           <Separator {...baseSeparatorProps} key={`separator-${index}`}>
             <ThemeContext.Consumer>
-              {(theme) =>
-                theme.direction === "rtl" ? (
+              {(theme) => {
+                return theme.direction === "rtl" ? (
                   <Left size={16} {...baseIconProps} />
                 ) : (
                   <Right size={16} {...baseIconProps} />
-                )
-              }
+                );
+              }}
             </ThemeContext.Consumer>
           </Separator>
         )}
       </ListItem>
     );
-  });
+  }
 
   return (
     <LocaleContext.Consumer>
-      {(locale) => (
-        <Root
-          aria-label={
-            props["aria-label"] || props.ariaLabel || locale.breadcrumbs.ariaLabel
-          }
-          data-baseweb="breadcrumbs"
-          {...baseRootProps}
-        >
-          <List {...baseListProps}>{childrenWithSeparators}</List>
-        </Root>
-      )}
+      {(locale) => {
+        return (
+          <Root
+            aria-label={
+              props["aria-label"] || props.ariaLabel || locale.breadcrumbs.ariaLabel
+            }
+            data-baseweb="breadcrumbs"
+            {...baseRootProps}
+          >
+            <List {...baseListProps}>{childrenWithSeparators}</List>
+          </Root>
+        );
+      }}
     </LocaleContext.Consumer>
   );
 }

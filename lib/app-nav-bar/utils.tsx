@@ -1,40 +1,36 @@
-import type { NavItemT } from "./types.js";
+import type { NavItemT } from "./types";
 
 type GetUniqueIdentifierT = (NavItemT) => string | number;
 
 export function defaultMapItemToNode(item: NavItemT) {
-  if (__DEV__) {
-    if (!item.label) {
-      throw Error(
-        "There needs to be an unique item.label. You can implement a custom mapping with the mapItemToNode prop."
-      );
-    }
+  if (__DEV__ && !item.label) {
+    throw new Error(
+      "There needs to be an unique item.label. You can implement a custom mapping with the mapItemToNode prop."
+    );
   }
   return item.label;
 }
 
 function defaultGetUniqueIdentifier(item: NavItemT) {
-  if (__DEV__) {
-    if (!item.label) {
-      throw Error(
-        "There needs to be an unique item.label. You can implement a custom mapping with the getUniqueIdentifier argument to setItemActive."
-      );
-    }
+  if (__DEV__ && !item.label) {
+    throw new Error(
+      "There needs to be an unique item.label. You can implement a custom mapping with the getUniqueIdentifier argument to setItemActive."
+    );
   }
   return item.label;
 }
 
 export function mapItemsActive(items: NavItemT[], predicate: (NavItemT) => boolean) {
   return items.map<NavItemT>((current) => {
-    if (predicate(current)) {
-      current.active = true;
-    } else {
-      current.active = false;
-    }
+    current.active = predicate(current) ? true : false;
 
     if (current.children) {
       current.children = mapItemsActive(current.children, predicate);
-      if (current.children.some((child) => child.active)) {
+      if (
+        current.children.some((child) => {
+          return child.active;
+        })
+      ) {
         current.active = true;
       }
     }
@@ -48,8 +44,7 @@ export function setItemActive(
   item: NavItemT,
   getUniqueIdentifier?: GetUniqueIdentifierT = defaultGetUniqueIdentifier
 ) {
-  return mapItemsActive(
-    items,
-    (current) => getUniqueIdentifier(current) === getUniqueIdentifier(item)
-  );
+  return mapItemsActive(items, (current) => {
+    return getUniqueIdentifier(current) === getUniqueIdentifier(item);
+  });
 }

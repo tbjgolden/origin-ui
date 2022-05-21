@@ -1,6 +1,6 @@
-export { DURATION, PLACEMENT } from "./constants.js";
-export { default as SnackbarElement } from "./snackbar-element.js";
-export { default as SnackbarProvider, useSnackbar } from "./snackbar-context.js";
+export { DURATION, PLACEMENT } from "./constants";
+export { default as SnackbarElement } from "./snackbar-element";
+export { default as SnackbarProvider, useSnackbar } from "./snackbar-context";
 export {
   StyledRoot,
   StyledContent,
@@ -10,5 +10,5 @@ export {
   StyledWrapActionButtonContainer,
   StyledActionButtonContainer,
   StyledPlacementContainer,
-} from "./styled-components.js";
-export type * from "./types.js";
+} from "./styled-components";
+export type * from "./types";

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { List, AutoSizer } from "react-virtualized";
-import defaultProps from "./default-props.js";
+import defaultProps from "./default-props";
 import {
   StyledFlagContainer,
   StyledCountrySelectDropdownContainer as DefaultContainer,
@@ -10,14 +10,14 @@ import {
   StyledCountrySelectDropdownFlagColumn as DefaultFlagColumn,
   StyledCountrySelectDropdownNameColumn as DefaultNameColumn,
   StyledCountrySelectDropdownDialcodeColumn as DefaultDialcodeColumn,
-} from "./styled-components.js";
-import { LocaleContext } from "../locale/index.js";
-import { StyledEmptyState } from "../menu/styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { iso2FlagEmoji } from "./utils.js";
+} from "./styled-components";
+import { LocaleContext } from "../locale/index";
+import { StyledEmptyState } from "../menu/styled-components";
+import { getOverrides } from "../helpers/overrides";
+import { iso2FlagEmoji } from "./utils";
 
-import type { CountrySelectDropdownPropsT, ReactRefT } from "./types.js";
-import type { LocaleT } from "../locale/types.js";
+import type { CountrySelectDropdownPropsT, ReactRefT } from "./types";
+import type { LocaleT } from "../locale/types";
 
 CountrySelectDropdown.defaultProps = {
   maxDropdownHeight: defaultProps.maxDropdownHeight,

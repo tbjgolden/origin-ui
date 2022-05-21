@@ -2,7 +2,7 @@
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import { isValidElementType } from "react-is";
-import deepMerge from "../utils/deep-merge.js";
+import deepMerge from "../utils/deep-merge";
 
 export type ConfigurationOverrideFunctionT = ({}) => ?{};
 export type ConfigurationOverrideObjectT = {};
@@ -13,12 +13,12 @@ export type ConfigurationOverrideT =
 
 export type StyleOverrideT = ConfigurationOverrideT;
 
-export type OverrideObjectT = {|
+export type OverrideObjectT = {
   // flowlint-next-line unclear-type:off
   component?: ?React.ComponentType<any>,
   props?: ?ConfigurationOverrideT,
   style?: ?ConfigurationOverrideT,
-|};
+};
 
 // flowlint-next-line unclear-type:off
 export type OverrideT = OverrideObjectT | React.ComponentType<any>;

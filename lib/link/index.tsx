@@ -1,8 +1,8 @@
 // Styled elements
 import * as React from "react";
-import { Link } from "./styled-components.js";
-import { withWrapper } from "../styles/index.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+import { Link } from "./styled-components";
+import { withWrapper } from "../styles/index";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 function LinkFocus(props) {
   const [focusVisible, setFocusVisible] = React.useState(false);
@@ -19,13 +19,12 @@ function LinkFocus(props) {
   return props.children({ focusVisible, handleFocus, handleBlur });
 }
 
-export const StyledLink = withWrapper(
-  Link,
-  (Styled) =>
-    function StyledLink({ animateUnderline, ...restProps }) {
-      return (
-        <LinkFocus>
-          {(focusProps) => (
+export const StyledLink = withWrapper(Link, (Styled) => {
+  return function StyledLink({ animateUnderline, ...restProps }) {
+    return (
+      <LinkFocus>
+        {(focusProps) => {
+          return (
             <Styled
               data-baseweb="link"
               $isAnimateUnderline={animateUnderline}
@@ -34,8 +33,9 @@ export const StyledLink = withWrapper(
               onBlur={forkBlur(restProps, focusProps.handleBlur)}
               {...restProps}
             />
-          )}
-        </LinkFocus>
-      );
-    }
-);
+          );
+        }}
+      </LinkFocus>
+    );
+  };
+});

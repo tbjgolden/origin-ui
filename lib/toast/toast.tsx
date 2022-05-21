@@ -1,23 +1,23 @@
 /* global document */
 import * as React from "react";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import DeleteIcon from "../icon/delete.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import DeleteIcon from "../icon/delete";
 import {
   Body as StyledBody,
   CloseIconSvg as StyledCloseIcon,
   InnerContainer as StyledInnerContainer,
-} from "./styled-components.js";
-import { KIND, TYPE } from "./constants.js";
-import { LocaleContext } from "../locale/index.js";
+} from "./styled-components";
+import { KIND, TYPE } from "./constants";
+import { LocaleContext } from "../locale/index";
 
 import type {
   ToastPropsT,
   ToastPropsShapeT,
   ToastPrivateStateT,
   SharedStylePropsArgT,
-} from "./types.js";
-import type { OverridesT } from "../icon/index.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./types";
+import type { OverridesT } from "../icon/index";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 class Toast extends React.Component<ToastPropsT, ToastPrivateStateT> {
   static defaultProps: ToastPropsShapeT = {
@@ -107,13 +107,15 @@ class Toast extends React.Component<ToastPropsT, ToastPrivateStateT> {
   }
 
   clearTimeout() {
-    [this.autoHideTimeout, this.animateInTimer, this.animateOutCompleteTimer].forEach(
-      (timerId) => {
-        if (timerId) {
-          clearTimeout(timerId);
-        }
+    for (const timerId of [
+      this.autoHideTimeout,
+      this.animateInTimer,
+      this.animateOutCompleteTimer,
+    ]) {
+      if (timerId) {
+        clearTimeout(timerId);
       }
-    );
+    }
   }
 
   animateIn = () => {
@@ -206,45 +208,47 @@ class Toast extends React.Component<ToastPropsT, ToastPrivateStateT> {
     }
     return (
       <LocaleContext.Consumer>
-        {(locale) => (
-          <Body
-            role="alert"
-            data-baseweb={this.props["data-baseweb"] || "toast"}
-            {...sharedProps}
-            {...bodyProps}
-            // the properties below have to go after overrides
-            onBlur={this.onBlur}
-            onFocus={this.onFocus}
-            onMouseEnter={this.onMouseEnter}
-            onMouseLeave={this.onMouseLeave}
-          >
-            <InnerContainer {...sharedProps} {...innerContainerProps}>
-              {typeof children === "function"
-                ? children({ dismiss: this.dismiss })
-                : children}
-            </InnerContainer>
-            {closeable ? (
-              <DeleteIcon
-                ref={this.closeRef}
-                role="button"
-                tabIndex={0}
-                $isFocusVisible={this.state.isFocusVisible}
-                onClick={this.dismiss}
-                onKeyPress={(event) => {
-                  if (event.key === "Enter") {
-                    this.dismiss();
-                  }
-                }}
-                title={locale.toast.close}
-                {...sharedProps}
-                {...closeIconProps}
-                onFocus={forkFocus(closeIconProps, this.handleFocus)}
-                onBlur={forkBlur(closeIconProps, this.handleBlur)}
-                overrides={closeIconOverrides}
-              />
-            ) : null}
-          </Body>
-        )}
+        {(locale) => {
+          return (
+            <Body
+              role="alert"
+              data-baseweb={this.props["data-baseweb"] || "toast"}
+              {...sharedProps}
+              {...bodyProps}
+              // the properties below have to go after overrides
+              onBlur={this.onBlur}
+              onFocus={this.onFocus}
+              onMouseEnter={this.onMouseEnter}
+              onMouseLeave={this.onMouseLeave}
+            >
+              <InnerContainer {...sharedProps} {...innerContainerProps}>
+                {typeof children === "function"
+                  ? children({ dismiss: this.dismiss })
+                  : children}
+              </InnerContainer>
+              {closeable ? (
+                <DeleteIcon
+                  ref={this.closeRef}
+                  role="button"
+                  tabIndex={0}
+                  $isFocusVisible={this.state.isFocusVisible}
+                  onClick={this.dismiss}
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter") {
+                      this.dismiss();
+                    }
+                  }}
+                  title={locale.toast.close}
+                  {...sharedProps}
+                  {...closeIconProps}
+                  onFocus={forkFocus(closeIconProps, this.handleFocus)}
+                  onBlur={forkBlur(closeIconProps, this.handleBlur)}
+                  overrides={closeIconOverrides}
+                />
+              ) : null}
+            </Body>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }

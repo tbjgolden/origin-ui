@@ -1,8 +1,8 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { dragShadowWidth } from "./constants.js";
-import { StyledDragShadow, StyledDragShadowContainer } from "./styled-components.js";
-import type { DragShadowPropsT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { dragShadowWidth } from "./constants";
+import { StyledDragShadow, StyledDragShadowContainer } from "./styled-components";
+import type { DragShadowPropsT } from "./types";
 
 const DragShadow = ({
   background,

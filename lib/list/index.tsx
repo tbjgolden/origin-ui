@@ -1,8 +1,8 @@
-export { default as ListItem } from "./list-item.js";
-export { default as ListItemLabel } from "./list-item-label.js";
-export { default as ListHeading } from "./list-heading.js";
-export { default as MenuAdapter } from "./menu-adapter.js";
+export { default as ListItem } from "./list-item";
+export { default as ListItemLabel } from "./list-item-label";
+export { default as ListHeading } from "./list-heading";
+export { default as MenuAdapter } from "./menu-adapter";
 
-export { ARTWORK_SIZES, SHAPE } from "./constants.js";
-export * from "./styled-components.js";
-export type * from "./types.js";
+export { ARTWORK_SIZES, SHAPE } from "./constants";
+export * from "./styled-components";
+export type * from "./types";

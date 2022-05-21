@@ -1,7 +1,7 @@
 
 import * as React from "react";
-import { styled, hexToRgb, withWrapper } from "../styles/index.js";
-import type { SharedPropsT } from "./types.js";
+import { styled, hexToRgb, withWrapper } from "../styles/index";
+import type { SharedPropsT } from "./types";
 
 export const StyledRoot = styled<SharedPropsT>("nav", (props) => {
   const {

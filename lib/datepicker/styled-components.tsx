@@ -1,8 +1,8 @@
 
-import { styled } from "../styles/index.js";
-import getDayStateCode from "./utils/day-state.js";
-import type { SharedStylePropsT, CalendarPropsT } from "./types.js";
-import { ORIENTATION, DENSITY, INPUT_ROLE } from "./constants.js";
+import { styled } from "../styles/index";
+import getDayStateCode from "./utils/day-state";
+import type { SharedStylePropsT, CalendarPropsT } from "./types";
+import { ORIENTATION, DENSITY, INPUT_ROLE } from "./constants";
 
 /**
  * Main component container element

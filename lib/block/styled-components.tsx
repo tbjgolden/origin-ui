@@ -1,7 +1,7 @@
-import { getMediaQueries } from "../helpers/responsive-helpers.js";
-import { styled } from "../styles/index.js";
-import type { BreakpointsT } from "../styles/types.js";
-import type { StyledBlockPropsT } from "./types.js";
+import { getMediaQueries } from "../helpers/responsive-helpers";
+import { styled } from "../styles/index";
+import type { BreakpointsT } from "../styles/types";
+import type { StyledBlockPropsT } from "./types";
 
 // styletron will throw when value is undefined. if so, replace with null
 function constrainToNull(value) {
@@ -24,17 +24,23 @@ function build(breakpoints: BreakpointsT) {
   const mediaQueries = getMediaQueries(breakpoints);
 
   return {
-    apply: ({ property, transform = (x) => x, value }: ApplyParams) => {
+    apply: ({
+      property,
+      transform = (x) => {
+        return x;
+      },
+      value,
+    }: ApplyParams) => {
       if (value === null || value === undefined) {
         return;
       }
 
       if (Array.isArray(value)) {
-        value.forEach((v, index) => {
+        for (const [index, v] of value.entries()) {
           // Do not create a media query for the smallest breakpoint.
           if (index === 0) {
             styles[property] = constrainToNull(transform(v));
-            return;
+            continue;
           }
 
           const mediaQuery = mediaQueries[index - 1];
@@ -43,12 +49,14 @@ function build(breakpoints: BreakpointsT) {
           }
 
           styles[mediaQuery][property] = constrainToNull(transform(v));
-        });
+        }
       } else {
         styles[property] = constrainToNull(transform(value));
       }
     },
-    value: () => styles,
+    value: () => {
+      return styles;
+    },
   };
 }
 
@@ -60,14 +68,20 @@ function getFontValue(obj, key) {
 export const StyledBlock = styled<StyledBlockPropsT>("div", (props) => {
   const { breakpoints, colors, typography, sizing } = props.$theme;
 
-  const get = (obj, key) => obj[key];
-  const getScale = (size) => sizing[size] || size;
+  const get = (obj, key) => {
+    return obj[key];
+  };
+  const getScale = (size) => {
+    return sizing[size] || size;
+  };
 
   const styles = build(breakpoints);
   styles.apply({
     property: "color",
     value: get(props, "$color"),
-    transform: (color) => colors[color] || color,
+    transform: (color) => {
+      return colors[color] || color;
+    },
   });
   styles.apply({
     property: "backgroundAttachment",
@@ -80,7 +94,9 @@ export const StyledBlock = styled<StyledBlockPropsT>("div", (props) => {
   styles.apply({
     property: "backgroundColor",
     value: get(props, "$backgroundColor"),
-    transform: (backgroundColor) => colors[backgroundColor] || backgroundColor,
+    transform: (backgroundColor) => {
+      return colors[backgroundColor] || backgroundColor;
+    },
   });
   styles.apply({
     property: "backgroundImage",
@@ -105,22 +121,30 @@ export const StyledBlock = styled<StyledBlockPropsT>("div", (props) => {
   styles.apply({
     property: "fontFamily",
     value: get(props, "$font"),
-    transform: (font) => getFontValue(typography[font], "fontFamily"),
+    transform: (font) => {
+      return getFontValue(typography[font], "fontFamily");
+    },
   });
   styles.apply({
     property: "fontWeight",
     value: get(props, "$font"),
-    transform: (font) => getFontValue(typography[font], "fontWeight"),
+    transform: (font) => {
+      return getFontValue(typography[font], "fontWeight");
+    },
   });
   styles.apply({
     property: "fontSize",
     value: get(props, "$font"),
-    transform: (font) => getFontValue(typography[font], "fontSize"),
+    transform: (font) => {
+      return getFontValue(typography[font], "fontSize");
+    },
   });
   styles.apply({
     property: "lineHeight",
     value: get(props, "$font"),
-    transform: (font) => getFontValue(typography[font], "lineHeight"),
+    transform: (font) => {
+      return getFontValue(typography[font], "lineHeight");
+    },
   });
 
   styles.apply({
@@ -321,7 +345,9 @@ export const StyledBlock = styled<StyledBlockPropsT>("div", (props) => {
   styles.apply({
     property: "flexWrap",
     value: get(props, "$flexWrap"),
-    transform: () => "wrap",
+    transform: () => {
+      return "wrap";
+    },
   });
 
   styles.apply({

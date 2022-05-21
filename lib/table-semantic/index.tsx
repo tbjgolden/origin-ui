@@ -1,7 +1,7 @@
-export { default as Table } from "./table.js";
-export { default as TableBuilder } from "./table-builder.js";
-export { default as TableBuilderColumn } from "./table-builder-column.js";
-export { DIVIDER, SIZE } from "./constants.js";
+export { default as Table } from "./table";
+export { default as TableBuilder } from "./table-builder";
+export { default as TableBuilderColumn } from "./table-builder-column";
+export { DIVIDER, SIZE } from "./constants";
 // Styled elements
 export {
   StyledRoot,
@@ -18,6 +18,6 @@ export {
   StyledSortAscIcon,
   StyledSortDescIcon,
   StyledSortNoneIcon,
-} from "./styled-components.js";
+} from "./styled-components";
 // Flow
-export type * from "./types.js";
+export type * from "./types";

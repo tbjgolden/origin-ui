@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   StyledInnerXXSmallAnchor,
   StyledOuterXXSmallAnchor,
@@ -8,17 +8,17 @@ import {
   StyledPinHead,
   RelativeContainer,
   StyledContentItem,
-} from "./styled-components.js";
+} from "./styled-components";
 import {
   PINHEAD_DIMENSIONS,
   PINHEAD_TYPES,
   PINHEAD_SIZES_SHAPES,
   NEEDLE_HEIGHTS,
   NEEDLE_SIZES,
-} from "./constants.js";
-import BadgeEnhancer from "./badge-enhancer.js";
-import LabelEnhancer from "./label-enhancer.js";
-import type { PinHeadPropsT } from "./types.js";
+} from "./constants";
+import BadgeEnhancer from "./badge-enhancer";
+import LabelEnhancer from "./label-enhancer";
+import type { PinHeadPropsT } from "./types";
 
 const PinHead = ({
   size = PINHEAD_SIZES_SHAPES.medium,
@@ -37,8 +37,12 @@ const PinHead = ({
 
   overrides = {},
 }: PinHeadPropsT) => {
-  const activeElements = [label, StartEnhancer, EndEnhancer].filter((x) => x);
-  const gridTemplateColumns = activeElements.map(() => "auto").join(" ");
+  const activeElements = [label, StartEnhancer, EndEnhancer].filter(Boolean);
+  const gridTemplateColumns = activeElements
+    .map(() => {
+      return "auto";
+    })
+    .join(" ");
   const forceCircle = activeElements.length === 1 && !label;
   const { height, icon } = PINHEAD_DIMENSIONS[size];
 

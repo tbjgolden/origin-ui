@@ -3,8 +3,8 @@
 
 import * as React from "react";
 
-import TreeNode from "./tree-node.js";
-import { StyledTreeItemList } from "./styled-components.js";
+import TreeNode from "./tree-node";
+import { StyledTreeItemList } from "./styled-components";
 import {
   getPrevId,
   getNextId,
@@ -14,11 +14,11 @@ import {
   getExpandableSiblings,
   defaultGetId,
   getCharMatchId,
-} from "./utils.js";
-import type { TreeViewPropsT, TreeNodeT, TreeNodeIdT, ReactRefT } from "./types.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
+} from "./utils";
+import type { TreeViewPropsT, TreeNodeT, TreeNodeIdT, ReactRefT } from "./types";
+import { isFocusVisible } from "../utils/focusVisible";
 
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
 
 export default function TreeView(props: TreeViewPropsT) {
   const {

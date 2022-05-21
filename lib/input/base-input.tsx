@@ -3,21 +3,21 @@
 
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
-import { ADJOINED, SIZE, CUSTOM_INPUT_TYPE } from "./constants.js";
+import { getOverrides } from "../helpers/overrides";
+import { ADJOINED, SIZE, CUSTOM_INPUT_TYPE } from "./constants";
 import {
   InputContainer as StyledInputContainer,
   Input as StyledInput,
   StyledClearIcon,
   StyledClearIconContainer,
   StyledMaskToggleButton,
-} from "./styled-components.js";
-import type { BaseInputPropsT, InternalStateT } from "./types.js";
-import { getSharedProps } from "./utils.js";
-import Hide from "../icon/hide.js";
-import Show from "../icon/show.js";
-import createEvent from "../utils/create-event.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./styled-components";
+import type { BaseInputPropsT, InternalStateT } from "./types";
+import { getSharedProps } from "./utils";
+import Hide from "../icon/hide";
+import Show from "../icon/show";
+import createEvent from "../utils/create-event";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 const NullComponent = () => null;
 

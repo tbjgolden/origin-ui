@@ -1,17 +1,17 @@
 
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   Action as StyledAction,
   Root as StyledRoot,
   StartEnhancerContainer as StyledStartEnhancerContainer,
   Text as StyledText,
-} from "./styled-components.js";
-import { KIND, VARIANT, SIZE } from "./constants.js";
-import { getTextFromChildren } from "./utils.js";
-import type { PropsT, SharedPropsArgT } from "./types.js";
-import DeleteIcon from "../icon/delete.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./styled-components";
+import { KIND, VARIANT, SIZE } from "./constants";
+import { getTextFromChildren } from "./utils";
+import type { PropsT, SharedPropsArgT } from "./types";
+import DeleteIcon from "../icon/delete";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 // Previously, Tag used a hardcoded SVG as its 'close' icon. Replacing it with
 // Delete requires modifying Delete's viewbox to prevent visual regressions.

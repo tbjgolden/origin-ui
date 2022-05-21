@@ -1,17 +1,19 @@
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
 import {
   Avatar as StyledAvatar,
   Initials as StyledInitials,
   Root as StyledRoot,
-} from "./styled-components.js";
-import type { PropsT } from "./types.js";
+} from "./styled-components";
+import type { PropsT } from "./types";
 
 function getInitials(name) {
   const words = name.split(" ");
-  const initials = words.map((word) => word[0]);
+  const initials = words.map((word) => {
+    return word[0];
+  });
   return initials.slice(0, 2).join("").toUpperCase();
 }
 
@@ -37,12 +39,10 @@ export default function Avatar({
   React.useEffect(() => {
     setImageLoaded(false);
 
-    if (imageRef.current) {
-      if (typeof src === "string") {
-        imageRef.current.src = src;
-        imageRef.current.onload = handleLoad;
-        imageRef.current.onerror = handleError;
-      }
+    if (imageRef.current && typeof src === "string") {
+      imageRef.current.src = src;
+      imageRef.current.addEventListener("load", handleLoad);
+      imageRef.current.onerror = handleError;
     }
 
     return () => {

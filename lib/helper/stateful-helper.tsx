@@ -5,17 +5,19 @@ import {
   ACCESSIBILITY_TYPE,
   PLACEMENT,
   TRIGGER_TYPE,
-} from "../popover/index.js";
-import { POPOVER_MARGIN } from "../popover/constants.js";
+} from "../popover/index";
+import { POPOVER_MARGIN } from "../popover/constants";
 
-import { Helper } from "./helper.js";
-import type { StatefulPropsT } from "./types.js";
+import { Helper } from "./helper";
+import type { StatefulPropsT } from "./types";
 
 export function StatefulHelper(props: StatefulPropsT) {
   const { children, ...restProps } = props;
   return (
     <StatefulContainer {...restProps}>
-      {(helperProps) => <Helper {...helperProps}>{children}</Helper>}
+      {(helperProps) => {
+        return <Helper {...helperProps}>{children}</Helper>;
+      }}
     </StatefulContainer>
   );
 }
@@ -31,6 +33,8 @@ StatefulHelper.defaultProps = {
   triggerType: TRIGGER_TYPE.click,
   dismissOnClickOutside: true,
   dismissOnEsc: true,
-  stateReducer: (_, nextState) => nextState,
+  stateReducer: (_, nextState) => {
+    return nextState;
+  },
   popoverMargin: POPOVER_MARGIN,
 };

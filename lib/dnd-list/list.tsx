@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   Root as StyledRoot,
   List as StyledList,
@@ -7,14 +7,14 @@ import {
   DragHandle as StyledDragHandle,
   CloseHandle as StyledCloseHandle,
   Label as StyledLabel,
-} from "./styled-components.js";
+} from "./styled-components";
 import { List as MovableList } from "react-movable";
-import Grab from "../icon/grab.js";
-import Delete from "../icon/delete.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
-import { Layer } from "../layer/index.js";
+import Grab from "../icon/grab";
+import Delete from "../icon/delete";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
+import { Layer } from "../layer/index";
 
-import type { ListPropsT, SharedStylePropsArgT } from "./types.js";
+import type { ListPropsT, SharedStylePropsArgT } from "./types";
 
 const ItemLayer = ({ children, dragged }: { children: React.Node; dragged: boolean }) => {
   if (!dragged) {
@@ -79,16 +79,18 @@ class StatelessList extends React.Component<ListPropsT, { isFocusVisible: boolea
           removableByMove={isRemovableByMove}
           values={items}
           onChange={onChange}
-          renderList={({ children, props, isDragged }) => (
-            <List
-              $isRemovable={isRemovable}
-              $isDragged={isDragged}
-              ref={props.ref}
-              {...listProps}
-            >
-              {children}
-            </List>
-          )}
+          renderList={({ children, props, isDragged }) => {
+            return (
+              <List
+                $isRemovable={isRemovable}
+                $isDragged={isDragged}
+                ref={props.ref}
+                {...listProps}
+              >
+                {children}
+              </List>
+            );
+          }}
           renderItem={({ value, props, isDragged, isSelected, isOutOfBounds, index }) => {
             const sharedProps: SharedStylePropsArgT = {
               $isRemovable: isRemovable,

@@ -1,9 +1,7 @@
-
-
-export type AccordionLocaleT = {|
-  collapse: string,
-  expand: string,
-|};
+export type AccordionLocaleT = {
+  collapse: string;
+  expand: string;
+};
 
 const locale = {
   collapse: "Collapse",

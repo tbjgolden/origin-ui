@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { Range } from "react-range";
-import type { PropsT } from "./types.js";
+import type { PropsT } from "./types";
 import {
   isFocusVisible as focusVisible,
   forkFocus,
   forkBlur,
-} from "../utils/focusVisible.js";
+} from "../utils/focusVisible";
 import {
   Root as StyledRoot,
   Track as StyledTrack,
@@ -18,9 +18,9 @@ import {
   InnerThumb as StyledInnerThumb,
   ThumbValue as StyledThumbValue,
   Mark as StyledMark,
-} from "./styled-components.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { ThemeContext } from "../styles/theme-provider.js";
+} from "./styled-components";
+import { getOverrides } from "../helpers/overrides";
+import { ThemeContext } from "../styles/theme-provider";
 
 // value.length should not be bigger than two
 // because our design doesn't support more than

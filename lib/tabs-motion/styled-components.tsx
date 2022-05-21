@@ -1,9 +1,9 @@
-import { styled } from "../styles/index.js";
-import { ORIENTATION, FILL } from "./constants.js";
-import { isHorizontal, isVertical, isRTL, isIntrinsic, isFixed } from "./utils.js";
+import { styled } from "../styles/index";
+import { ORIENTATION, FILL } from "./constants";
+import { isHorizontal, isVertical, isRTL, isIntrinsic, isFixed } from "./utils";
 
 import type { StyleObject } from "styletron-standard";
-import type { OrientationT, FillT } from "./types.js";
+import type { OrientationT, FillT } from "./types";
 
 export const StyledRoot = styled<{ $orientation?: OrientationT }>(
   "div",
@@ -119,11 +119,7 @@ export const StyledTab = styled<{
       style.flexGrow = 1;
       style.flexBasis = 0;
     }
-    if (isHorizontal($orientation)) {
-      style.justifyContent = "center";
-    } else {
-      style.justifyContent = "flex-end";
-    }
+    style.justifyContent = isHorizontal($orientation) ? "center" : "flex-end";
     return style;
   }
 );

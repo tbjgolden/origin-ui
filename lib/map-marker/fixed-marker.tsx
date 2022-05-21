@@ -1,6 +1,6 @@
 import * as React from "react";
-import { useStyletron, type ThemeT } from "../styles/index.js";
-import { getOverrides } from "../helpers/overrides.js";
+import { useStyletron, type ThemeT } from "../styles/index";
+import { getOverrides } from "../helpers/overrides";
 import {
   PINHEAD_TYPES,
   NEEDLE_SIZES,
@@ -9,15 +9,15 @@ import {
   KIND,
   dragShadowHeight,
   dragShadowMarginTop,
-} from "./constants.js";
-import PinHead from "./pin-head.js";
-import Needle from "./needle.js";
-import DragShadow from "./drag-shadow.js";
+} from "./constants";
+import PinHead from "./pin-head";
+import Needle from "./needle";
+import DragShadow from "./drag-shadow";
 import {
   StyledFixedMarkerDragContainer,
   StyledFixedMarkerRoot,
-} from "./styled-components.js";
-import type { FixedMarkerPropsT, KindT } from "./types.js";
+} from "./styled-components";
+import type { FixedMarkerPropsT, KindT } from "./types";
 
 type Colors = {
   color: string;
@@ -78,17 +78,16 @@ const FixedMarker = ({
       size
     );
 
-  if (__DEV__) {
-    if (
-      needle !== NEEDLE_SIZES.none &&
-      [PINHEAD_SIZES_SHAPES.xxSmallCircle, PINHEAD_SIZES_SHAPES.xxSmallSquare].includes(
-        size
-      )
-    ) {
-      console.warn(
-        `Needles cannot be rendered with ${PINHEAD_SIZES_SHAPES.xxSmallCircle} or ${PINHEAD_SIZES_SHAPES.xxSmallSquare} pin heads`
-      );
-    }
+  if (
+    __DEV__ &&
+    needle !== NEEDLE_SIZES.none &&
+    [PINHEAD_SIZES_SHAPES.xxSmallCircle, PINHEAD_SIZES_SHAPES.xxSmallSquare].includes(
+      size
+    )
+  ) {
+    console.warn(
+      `Needles cannot be rendered with ${PINHEAD_SIZES_SHAPES.xxSmallCircle} or ${PINHEAD_SIZES_SHAPES.xxSmallSquare} pin heads`
+    );
   }
   const enhancers = {};
   if (startEnhancer) {

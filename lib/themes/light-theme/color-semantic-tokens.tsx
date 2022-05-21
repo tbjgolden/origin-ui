@@ -3,10 +3,10 @@ import type {
   CoreSemanticColorTokensT,
   CoreExtensionSemanticColorTokensT,
   SemanticColorTokensT,
-} from "../types.js";
-import colorTokens from "./color-tokens.js";
-import { hexToRgb as hexToRgba } from "../../styles/util.js";
-import colors from "../../tokens/colors.js";
+} from "../types";
+import colorTokens from "./color-tokens";
+import { hexToRgb as hexToRgba } from "../../styles/util";
+import colors from "../../tokens/colors";
 
 export default (
   // themePrimitives or foundation colors

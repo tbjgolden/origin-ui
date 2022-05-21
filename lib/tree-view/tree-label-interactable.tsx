@@ -1,7 +1,7 @@
 import React from "react";
-import { StyledLabelInteractable } from "./styled-components.js";
-import { getOverride } from "../helpers/overrides.js";
-import type { OverrideT } from "../helpers/overrides.js";
+import { StyledLabelInteractable } from "./styled-components";
+import { getOverride } from "../helpers/overrides";
+import type { OverrideT } from "../helpers/overrides";
 
 const TreeLabelInteractable: React$ComponentType<{
   overrides?: { LabelInteractable: OverrideT };
@@ -11,8 +11,12 @@ const TreeLabelInteractable: React$ComponentType<{
   return (
     // $FlowExpectedError[cannot-spread-inexact]
     <LabelInteractable
-      onClick={(e) => e.stopPropagation()}
-      onKeyDown={(e) => e.stopPropagation()}
+      onClick={(e) => {
+        return e.stopPropagation();
+      }}
+      onKeyDown={(e) => {
+        return e.stopPropagation();
+      }}
       {...props}
     />
   );

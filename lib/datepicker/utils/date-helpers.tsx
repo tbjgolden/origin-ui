@@ -1,5 +1,5 @@
 
-import type { DateIOAdapter, DateInput, AdapterOptions } from "./types.js";
+import type { DateIOAdapter, DateInput, AdapterOptions } from "./types";
 
 const MINUTE = 60;
 const HOUR = MINUTE * 60;

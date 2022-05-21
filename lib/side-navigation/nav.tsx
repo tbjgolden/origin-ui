@@ -1,13 +1,13 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import NavItem from "./nav-item.js";
+import { getOverrides } from "../helpers/overrides";
+import NavItem from "./nav-item";
 import {
   StyledRoot,
   StyledNavItemContainer,
   StyledSubNavContainer,
-} from "./styled-components.js";
-import type { NavPropsT, Item } from "./types.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./styled-components";
+import type { NavPropsT, Item } from "./types";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
 export default class SideNav extends React.Component<
   NavPropsT,
@@ -34,7 +34,9 @@ export default class SideNav extends React.Component<
     }
   };
 
-  activePredicate = (item: Item) => item.itemId === this.props.activeItemId;
+  activePredicate = (item: Item) => {
+    return item.itemId === this.props.activeItemId;
+  };
 
   render() {
     const { activeItemId, activePredicate, items, onChange, overrides, mapItem } =

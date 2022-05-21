@@ -1,13 +1,15 @@
 import * as React from "react";
-import { STATE_TYPE } from "./constants.js";
+import { STATE_TYPE } from "./constants";
 import type {
   StatefulContainerPropsT,
   StateReducerT,
   DefaultStatefulPropsT,
   StateT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulCheckboxContainer extends React.Component<StatefulContainerPropsT, StateT> {
   static defaultProps: DefaultStatefulPropsT = {
@@ -71,7 +73,9 @@ class StatefulCheckboxContainer extends React.Component<StatefulContainerPropsT,
 
   render() {
     const {
-      children = (childProps: {}) => null,
+      children = (childProps: {}) => {
+        return null;
+      },
       initialState,
       stateReducer,
       ...restProps

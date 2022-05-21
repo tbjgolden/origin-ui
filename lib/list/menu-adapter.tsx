@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import ListItem from "./list-item.js";
-import type { MenuAdapterPropsT } from "./types.js";
-import { mergeOverrides } from "../helpers/overrides.js";
+import ListItem from "./list-item";
+import type { MenuAdapterPropsT } from "./types";
+import { mergeOverrides } from "../helpers/overrides";
 
 const MenuAdapter = React.forwardRef<MenuAdapterPropsT, HTMLLIElement>((props, ref) => {
   return (
@@ -23,10 +23,14 @@ const MenuAdapter = React.forwardRef<MenuAdapterPropsT, HTMLLIElement>((props, r
               onMouseEnter: props.onMouseEnter,
               onClick: props.onClick,
             },
-            style: ({ $theme }) => ({
-              backgroundColor: props.$isHighlighted ? $theme.colors.menuFillHover : null,
-              cursor: props.$disabled ? "not-allowed" : "pointer",
-            }),
+            style: ({ $theme }) => {
+              return {
+                backgroundColor: props.$isHighlighted
+                  ? $theme.colors.menuFillHover
+                  : null,
+                cursor: props.$disabled ? "not-allowed" : "pointer",
+              };
+            },
           },
         },
         props.overrides

@@ -1,9 +1,9 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 import {
   BADGE_ENHANCER_STYLES,
   FLOATING_MARKER_ANCHOR_POSITIONS,
   LABEL_SIZES,
-} from "./constants.js";
+} from "./constants";
 
 import type {
   AnchorPositionsT,
@@ -11,79 +11,94 @@ import type {
   BadgeEnhancerSizeT,
   BadgePositionT,
   PinHeadSizeT,
-} from "./types.js";
+} from "./types";
 
-export const getAnchorTransform = (anchor: AnchorPositionsT, anchorSize: number) =>
-  ({
+export const getAnchorTransform = (anchor: AnchorPositionsT, anchorSize: number) => {
+  return {
     [FLOATING_MARKER_ANCHOR_POSITIONS.none]: ``,
     [FLOATING_MARKER_ANCHOR_POSITIONS.topLeft]: `translate(${anchorSize}px, ${anchorSize}px)`,
     [FLOATING_MARKER_ANCHOR_POSITIONS.topRight]: `translate(-100%, ${anchorSize}px)`,
     [FLOATING_MARKER_ANCHOR_POSITIONS.bottomLeft]: `translate(${anchorSize}px, -100%)`,
     [FLOATING_MARKER_ANCHOR_POSITIONS.bottomRight]: `translate(-100%, -100%)`,
-  }[anchor]);
+  }[anchor];
+};
 
 export const StyledDragShadowContainer = styled<{
   $height: number;
   $width: number;
   $dragging: boolean;
-}>("div", ({ $theme, $height, $width, $dragging }) => ({
-  width: `${$width}px`,
-  height: `${$height}px`,
-  opacity: $dragging ? 1 : 0,
-  visibility: $dragging ? "visible" : "hidden",
-  transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-  position: "relative",
-  boxShadow: $theme.lighting.shadow600,
-}));
+}>("div", ({ $theme, $height, $width, $dragging }) => {
+  return {
+    width: `${$width}px`,
+    height: `${$height}px`,
+    opacity: $dragging ? 1 : 0,
+    visibility: $dragging ? "visible" : "hidden",
+    transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
+    position: "relative",
+    boxShadow: $theme.lighting.shadow600,
+  };
+});
 
 export const StyledDragShadow = styled<{
   $background: string;
   $width: number;
-}>("div", ({ $theme, $background, $width }) => ({
-  backgroundColor: $background,
-  borderRadius: "50%",
-  width: `${$width}px`,
-  height: "4px",
-  position: "absolute",
-  bottom: 0,
-}));
+}>("div", ({ $theme, $background, $width }) => {
+  return {
+    backgroundColor: $background,
+    borderRadius: "50%",
+    width: `${$width}px`,
+    height: "4px",
+    position: "absolute",
+    bottom: 0,
+  };
+});
 
 export const StyledNeedle = styled<{
   $background?: string;
   $height: number;
-}>("div", ({ $theme, $background, $height }) => ({
-  backgroundColor: $background,
-  width: "4px",
-  height: `${$height}px`,
-  boxShadow: $theme.lighting.shadow600,
-}));
+}>("div", ({ $theme, $background, $height }) => {
+  return {
+    backgroundColor: $background,
+    width: "4px",
+    height: `${$height}px`,
+    boxShadow: $theme.lighting.shadow600,
+  };
+});
 
 export const StyledFloatingMarkerRoot = styled<{
   $size: number;
-}>("div", ({ $size }) => ({
-  position: "relative",
-  height: `${$size}px`,
-  width: `${$size}px`,
-}));
+}>("div", ({ $size }) => {
+  return {
+    position: "relative",
+    height: `${$size}px`,
+    width: `${$size}px`,
+  };
+});
 
 export const StyledFloatingMarkerPinHeadContainer = styled<{
   $anchor: AnchorPositionsT;
   $anchorSize: number;
-}>("div", ({ $theme, $anchor, $anchorSize }) => ({
-  position: "absolute",
-  transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
-  transform: getAnchorTransform($anchor, $anchorSize),
-}));
+}>("div", ({ $theme, $anchor, $anchorSize }) => {
+  return {
+    position: "absolute",
+    transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
+    transform: getAnchorTransform($anchor, $anchorSize),
+  };
+});
 
-export const StyledFloatingMarkerAnchorContainer = styled<{}>("div", () => ({
-  position: "absolute",
-}));
+export const StyledFloatingMarkerAnchorContainer = styled<{}>("div", () => {
+  return {
+    position: "absolute",
+  };
+});
 
-export const StyledFixedMarkerRoot = styled<{}>("div", () => ({
-  display: "flex",
-  alignItems: "center",
-  flexDirection: "column",
-}));
+export const StyledFixedMarkerRoot = styled<{}>("div", () => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column",
+  };
+});
 
 export const StyledFixedMarkerDragContainer = styled<{
   $translateAmount: number;
@@ -102,53 +117,61 @@ export const StyledOuterXXSmallAnchor = styled<{
   $round: boolean;
   $background: string;
   $size: number;
-}>("div", ({ $theme, $round, $background, $size }) => ({
-  backgroundColor: $background,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: `${$size}px`,
-  width: `${$size}px`,
-  borderRadius: $round ? "50%" : 0,
-  boxShadow: $theme.lighting.shadow600,
-}));
+}>("div", ({ $theme, $round, $background, $size }) => {
+  return {
+    backgroundColor: $background,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: `${$size}px`,
+    width: `${$size}px`,
+    borderRadius: $round ? "50%" : 0,
+    boxShadow: $theme.lighting.shadow600,
+  };
+});
 
 export const StyledInnerXXSmallAnchor = styled<{
   $round: boolean;
   $color: string;
   $size: number;
-}>("div", ({ $round, $color, $size }) => ({
-  backgroundColor: $color,
-  height: `${$size}px`,
-  width: `${$size}px`,
-  borderRadius: $round ? "50%" : 0,
-}));
+}>("div", ({ $round, $color, $size }) => {
+  return {
+    backgroundColor: $color,
+    height: `${$size}px`,
+    width: `${$size}px`,
+    borderRadius: $round ? "50%" : 0,
+  };
+});
 
 export const StyledOuterXSmallAnchor = styled<{
   $round: boolean;
   $background: string;
   $size: number;
-}>("div", ({ $theme, $round, $background, $size }) => ({
-  backgroundColor: $background,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  height: `${$size}px`,
-  width: `${$size}px`,
-  borderRadius: $round ? "50%" : 0,
-  boxShadow: $theme.lighting.shadow600,
-}));
+}>("div", ({ $theme, $round, $background, $size }) => {
+  return {
+    backgroundColor: $background,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: `${$size}px`,
+    width: `${$size}px`,
+    borderRadius: $round ? "50%" : 0,
+    boxShadow: $theme.lighting.shadow600,
+  };
+});
 
 export const StyledInnerXSmallAnchor = styled<{
   $round: boolean;
   $color: string;
   $size: number;
-}>("div", ({ $round, $color, $size }) => ({
-  backgroundColor: $color,
-  height: `${$size}px`,
-  width: `${$size}px`,
-  borderRadius: $round ? "50%" : 0,
-}));
+}>("div", ({ $round, $color, $size }) => {
+  return {
+    backgroundColor: $color,
+    height: `${$size}px`,
+    width: `${$size}px`,
+    borderRadius: $round ? "50%" : 0,
+  };
+});
 
 export const StyledPinHead = styled<{
   $height: number;

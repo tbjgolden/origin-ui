@@ -1,6 +1,6 @@
 
-import { styled } from "../styles/index.js";
-import type { StylePropsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { StylePropsT } from "./types";
 
 const DEFAULT = 0;
 const HOVERED = 1;

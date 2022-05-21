@@ -1,4 +1,4 @@
-import type { BreakpointsT } from "../types.js";
+import type { BreakpointsT } from "../types";
 
 const breakpoints: BreakpointsT = {
   small: 320,

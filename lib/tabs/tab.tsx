@@ -1,9 +1,9 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { Tab as StyledTab } from "./styled-components.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+import { getOverrides } from "../helpers/overrides";
+import { Tab as StyledTab } from "./styled-components";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
-import type { TabPropsT, SharedStylePropsArgT } from "./types.js";
+import type { TabPropsT, SharedStylePropsArgT } from "./types";
 
 class TabComponent extends React.Component<TabPropsT, { isFocusVisible: boolean }> {
   static defaultProps = {

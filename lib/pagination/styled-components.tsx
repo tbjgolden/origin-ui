@@ -1,11 +1,13 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 
-export const StyledRoot = styled<{}>("div", ({ $theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  color: $theme.colors.backgroundInversePrimary,
-  ...$theme.typography.font350,
-}));
+export const StyledRoot = styled<{}>("div", ({ $theme }) => {
+  return {
+    display: "flex",
+    alignItems: "center",
+    color: $theme.colors.backgroundInversePrimary,
+    ...$theme.typography.font350,
+  };
+});
 
 export const StyledMaxLabel = styled<{}>("span", ({ $theme }) => {
   const marginStartDir: string =

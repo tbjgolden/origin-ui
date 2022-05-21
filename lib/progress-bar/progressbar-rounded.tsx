@@ -1,15 +1,15 @@
 /* global window */
 import * as React from "react";
-import { SIZE } from "./constants.js";
+import { SIZE } from "./constants";
 import {
   StyledProgressBarRoundedRoot,
   StyledProgressBarRoundedSvg,
   StyledProgressBarRoundedTrackBackground,
   StyledProgressBarRoundedTrackForeground,
   StyledProgressBarRoundedText,
-} from "./styled-components.js";
-import { useOverrides } from "../helpers/overrides.js";
-import type { ProgressBarRoundedPropsT } from "./types.js";
+} from "./styled-components";
+import { useOverrides } from "../helpers/overrides";
+import type { ProgressBarRoundedPropsT } from "./types";
 
 const defaults = {
   Root: StyledProgressBarRoundedRoot,
@@ -24,7 +24,7 @@ function roundTo(n, digits) {
     digits = 0;
   }
   const multiplicator = Math.pow(10, digits);
-  n = parseFloat((n * multiplicator).toFixed(11));
+  n = Number.parseFloat((n * multiplicator).toFixed(11));
   const test = Math.round(n) / multiplicator;
   return +test.toFixed(digits);
 }
@@ -65,13 +65,13 @@ function ProgressBarRounded({
     if (window && animationFrameRef.current) {
       window.cancelAnimationFrame(animationFrameRef.current);
     }
-    let animationDuration = Math.max(1000 * (progress - pathProgress), 250);
+    const animationDuration = Math.max(1000 * (progress - pathProgress), 250);
     let animationTimeStarted;
     function loop(now = 0) {
       if (!animationTimeStarted) {
         animationTimeStarted = now;
       }
-      let animationTimeElapsed = now - animationTimeStarted;
+      const animationTimeElapsed = now - animationTimeStarted;
       // Move out of state - might need to reverse calculate the path progress for interruped animations
       let currentPathProgress = Math.min(
         (progress - pathProgress) * (animationTimeElapsed / animationDuration) +

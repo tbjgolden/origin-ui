@@ -2,11 +2,11 @@
 
 import * as React from "react";
 
-import { Block } from "../block/index.js";
-import { flattenFragments } from "../helpers/react-helpers.js";
-import { getOverrides } from "../helpers/overrides.js";
-import type { BlockPropsT } from "../block/types.js";
-import type { FlexGridPropsT } from "./types.js";
+import { Block } from "../block/index";
+import { flattenFragments } from "../helpers/react-helpers";
+import { getOverrides } from "../helpers/overrides";
+import type { BlockPropsT } from "../block/types";
+import type { FlexGridPropsT } from "./types";
 
 export const BaseFlexGrid = React.forwardRef<BlockPropsT, HTMLElement>(
   ({ display, flexWrap, ...restProps }, ref) => (

@@ -1,7 +1,7 @@
 import * as React from "react";
-import { LightTheme } from "../themes/index.js";
+import { LightTheme } from "../themes/index";
 
-import type { ThemeT } from "./types.js";
+import type { ThemeT } from "./types";
 
 export const ThemeContext: React.Context<ThemeT> = React.createContext(LightTheme);
 

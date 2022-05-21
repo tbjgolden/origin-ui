@@ -1,9 +1,7 @@
-
-
-export type MenuLocaleT = {|
-  noResultsMsg: string,
-  parentMenuItemAriaLabel: string,
-|};
+export type MenuLocaleT = {
+  noResultsMsg: string;
+  parentMenuItemAriaLabel: string;
+};
 
 const locale: MenuLocaleT = {
   noResultsMsg: "No results",

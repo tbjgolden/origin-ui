@@ -1,5 +1,5 @@
-import { styled } from "../styles/index.js";
-import type { StylePropsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { StylePropsT } from "./types";
 
 export const StyledProgressSteps = styled<{}>("ol", ({ $theme }) => {
   return {
@@ -24,12 +24,12 @@ export const StyledStep = styled<StylePropsT>("li", ({ $theme }) => {
 export const StyledIconContainer = styled<StylePropsT>(
   "div",
   ({ $theme, $isActive, $isCompleted, $disabled }) => {
-    let currentColor = $theme.colors.backgroundPrimary;
+    const currentColor = $theme.colors.backgroundPrimary;
     let size = $theme.sizing.scale500;
     let marginLeft = "26px";
     let marginRight = "26px";
-    let font = $theme.typography.LabelMedium;
-    let titlePad = $theme.sizing.scale800;
+    const font = $theme.typography.LabelMedium;
+    const titlePad = $theme.sizing.scale800;
 
     if ($isActive) {
       size = $theme.sizing.scale700;
@@ -123,7 +123,7 @@ export const StyledContentTitle = styled<StylePropsT>(
     } else if ($isActive) {
       color = $theme.colors.contentPrimary;
     }
-    let font = $theme.typography.LabelMedium;
+    const font = $theme.typography.LabelMedium;
 
     return {
       ...font,
@@ -139,8 +139,8 @@ export const StyledContentTail = styled<StylePropsT>(
   ({ $theme, $isCompleted, $isActive }) => {
     let currentColor = $theme.colors.mono400;
     let size = $theme.sizing.scale500;
-    let font = $theme.typography.LabelMedium;
-    let titlePad = $theme.sizing.scale800;
+    const font = $theme.typography.LabelMedium;
+    const titlePad = $theme.sizing.scale800;
 
     if ($isActive) {
       size = $theme.sizing.scale700;
@@ -185,12 +185,12 @@ export const StyledNumberIcon = styled<StylePropsT>(
   ({ $theme, $isActive, $isCompleted, $disabled }) => {
     let backgroundColor = $theme.colors.mono400;
     let color = $theme.colors.contentStateDisabled;
-    let size = $theme.sizing.scale950;
-    let font = $theme.typography.ParagraphMedium;
-    let marginLeft = $theme.sizing.scale550;
-    let marginRight = $theme.sizing.scale550;
-    let titlePad = $theme.sizing.scale800;
-    let titleFont = $theme.typography.LabelMedium;
+    const size = $theme.sizing.scale950;
+    const font = $theme.typography.ParagraphMedium;
+    const marginLeft = $theme.sizing.scale550;
+    const marginRight = $theme.sizing.scale550;
+    const titlePad = $theme.sizing.scale800;
+    const titleFont = $theme.typography.LabelMedium;
 
     if ($isCompleted) {
       color = $theme.colors.progressStepsCompletedText;
@@ -228,9 +228,9 @@ export const StyledNumberContentTail = styled<StylePropsT>(
   "div",
   ({ $theme, $isActive, $isCompleted, $disabled }) => {
     let currentColor = $theme.colors.mono300;
-    let size = $theme.sizing.scale950;
-    let titleFont = $theme.typography.LabelMedium;
-    let titlePad = $theme.sizing.scale800;
+    const size = $theme.sizing.scale950;
+    const titleFont = $theme.typography.LabelMedium;
+    const titlePad = $theme.sizing.scale800;
 
     if ($isCompleted) {
       currentColor = $theme.colors.primary;

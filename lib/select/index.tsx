@@ -1,12 +1,12 @@
-export { default as Select } from "./select.js";
-export { default as SingleSelect } from "./single-select.js";
-export { default as MultiSelect } from "./multi-select.js";
-export { default as SingleValue } from "./value.js";
-export { default as MultiValue } from "./multi-value.js";
-export { default as AutosizeInput } from "./autosize-input.js";
-export { default as SelectDropdown } from "./dropdown.js";
-export { default as StatefulSelect } from "./stateful-select.js";
-export { default as StatefulSelectContainer } from "./stateful-select-container.js";
+export { default as Select } from "./select";
+export { default as SingleSelect } from "./single-select";
+export { default as MultiSelect } from "./multi-select";
+export { default as SingleValue } from "./value";
+export { default as MultiValue } from "./multi-value";
+export { default as AutosizeInput } from "./autosize-input";
+export { default as SelectDropdown } from "./dropdown";
+export { default as StatefulSelect } from "./stateful-select";
+export { default as StatefulSelectContainer } from "./stateful-select-container";
 // Styled elements
 export {
   StyledRoot,
@@ -25,7 +25,7 @@ export {
   StyledDropdown,
   StyledDropdownListItem,
   StyledOptionContent,
-} from "./styled-components.js";
-export { default as filterOptions } from "./utils/default-filter-options.js";
-export { SIZE, TYPE, STATE_CHANGE_TYPE } from "./constants.js";
-export type * from "./types.js";
+} from "./styled-components";
+export { default as filterOptions } from "./utils/default-filter-options";
+export { SIZE, TYPE, STATE_CHANGE_TYPE } from "./constants";
+export type * from "./types";

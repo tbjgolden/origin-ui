@@ -1,5 +1,5 @@
-import { styled } from "../styles/index.js";
-import type { StyledRootPropsT, StyledRatingItemPropsT } from "./types.js";
+import { styled } from "../styles/index";
+import type { StyledRootPropsT, StyledRatingItemPropsT } from "./types";
 import {
   starSVG,
   angryRatingSVG,
@@ -7,7 +7,7 @@ import {
   neutralRatingSVG,
   happyRatingSVG,
   veryHappyRatingSVG,
-} from "./svg-icons.js";
+} from "./svg-icons";
 
 export const StyledRoot = styled<StyledRootPropsT>("ul", ({ $theme }) => {
   return {

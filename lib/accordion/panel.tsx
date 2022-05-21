@@ -1,6 +1,6 @@
 import * as React from "react";
-import { LocaleContext } from "../locale/index.js";
-import { getOverrides } from "../helpers/overrides.js";
+import { LocaleContext } from "../locale/index";
+import { getOverrides } from "../helpers/overrides";
 import {
   PanelContainer as StyledPanelContainer,
   Header as StyledHeader,
@@ -8,10 +8,10 @@ import {
   ToggleIcon as StyledToggleIcon,
   ToggleIconGroup as StyledToggleIconGroup,
   ContentAnimationContainer as StyledContentAnimationContainer,
-} from "./styled-components.js";
-import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
+} from "./styled-components";
+import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";
 
-import type { PanelPropsT } from "./types.js";
+import type { PanelPropsT } from "./types";
 
 const Panel = (
   {
@@ -93,7 +93,7 @@ const Panel = (
           expanded,
           animationInProgress: true,
         });
-      } else if (parseInt(localState.elementHeight) !== height) {
+      } else if (Number.parseInt(localState.elementHeight) !== height) {
         // After the second render (where child elements were added to the Content)
         //the Content height now reflects the true height. This kicks off the actual
         //animation.
@@ -171,69 +171,73 @@ const Panel = (
 
   return (
     <LocaleContext.Consumer>
-      {(locale) => (
-        <PanelContainer {...sharedProps} {...panelContainerProps}>
-          <Header
-            tabIndex={0}
-            role="button"
-            aria-expanded={expanded}
-            aria-disabled={disabled || null}
-            {...sharedProps}
-            {...headerProps}
-            {...(ariaControls ? { "aria-controls": ariaControls } : {})}
-            onClick={handleClick}
-            onKeyDown={handleKeyDown}
-            onFocus={forkFocus(headerProps, handleFocus)}
-            onBlur={forkBlur(headerProps, handleBlur)}
-            ref={ref}
-          >
-            {title}
-            <ToggleIcon
-              viewBox="0 0 24 24"
-              title={
-                localState.expanded ? locale.accordion.collapse : locale.accordion.expand
-              }
-              size={16}
-              {...toggleIconProps}
+      {(locale) => {
+        return (
+          <PanelContainer {...sharedProps} {...panelContainerProps}>
+            <Header
+              tabIndex={0}
+              role="button"
+              aria-expanded={expanded}
+              aria-disabled={disabled || null}
               {...sharedProps}
+              {...headerProps}
+              {...(ariaControls ? { "aria-controls": ariaControls } : {})}
+              onClick={handleClick}
+              onKeyDown={handleKeyDown}
+              onFocus={forkFocus(headerProps, handleFocus)}
+              onBlur={forkBlur(headerProps, handleBlur)}
+              ref={ref}
             >
-              <ToggleIconGroup {...sharedProps} {...toggleIconGroupProps}>
+              {title}
+              <ToggleIcon
+                viewBox="0 0 24 24"
+                title={
+                  localState.expanded
+                    ? locale.accordion.collapse
+                    : locale.accordion.expand
+                }
+                size={16}
+                {...toggleIconProps}
+                {...sharedProps}
+              >
+                <ToggleIconGroup {...sharedProps} {...toggleIconGroupProps}>
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M6 12C6 11.4477 6.44772 11 7 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H7C6.44772 13 6 12.5523 6 12Z"
+                  />
+                </ToggleIconGroup>
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
                   d="M6 12C6 11.4477 6.44772 11 7 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H7C6.44772 13 6 12.5523 6 12Z"
                 />
-              </ToggleIconGroup>
-              <path
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M6 12C6 11.4477 6.44772 11 7 11H17C17.5523 11 18 11.4477 18 12C18 12.5523 17.5523 13 17 13H7C6.44772 13 6 12.5523 6 12Z"
-              />
-            </ToggleIcon>
-          </Header>
-          <ContentAnimationContainer
-            {...sharedProps}
-            {...contentAnimationProps}
-            $height={contentHeight}
-            onTransitionEnd={() => {
-              if (localState.animationInProgress) {
-                setLocalState({ ...localState, animationInProgress: false });
-              }
-            }}
-          >
-            <Content
-              ref={_animateRef}
+              </ToggleIcon>
+            </Header>
+            <ContentAnimationContainer
               {...sharedProps}
-              {...contentProps}
-              {...(ariaControls ? { id: ariaControls } : {})}
+              {...contentAnimationProps}
+              $height={contentHeight}
+              onTransitionEnd={() => {
+                if (localState.animationInProgress) {
+                  setLocalState({ ...localState, animationInProgress: false });
+                }
+              }}
             >
-              {localState.expanded || renderAll || localState.animationInProgress
-                ? children
-                : null}
-            </Content>
-          </ContentAnimationContainer>
-        </PanelContainer>
-      )}
+              <Content
+                ref={_animateRef}
+                {...sharedProps}
+                {...contentProps}
+                {...(ariaControls ? { id: ariaControls } : {})}
+              >
+                {localState.expanded || renderAll || localState.animationInProgress
+                  ? children
+                  : null}
+              </Content>
+            </ContentAnimationContainer>
+          </PanelContainer>
+        );
+      }}
     </LocaleContext.Consumer>
   );
 };

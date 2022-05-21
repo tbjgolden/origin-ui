@@ -1,7 +1,7 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { Root as StyledRoot } from "./styled-components.js";
-import type { StatelessAccordionPropsT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { Root as StyledRoot } from "./styled-components";
+import type { StatelessAccordionPropsT } from "./types";
 
 function StatelessAccordion({
   accordion = true,
@@ -28,17 +28,13 @@ function StatelessAccordion({
               ? () => {
                   let next;
                   if (accordion) {
-                    if (expanded.includes(key)) {
-                      next = [];
-                    } else {
-                      next = [key];
-                    }
+                    next = expanded.includes(key) ? [] : [key];
                   } else {
-                    if (expanded.includes(key)) {
-                      next = expanded.filter((k) => k !== key);
-                    } else {
-                      next = [...expanded, key];
-                    }
+                    next = expanded.includes(key)
+                      ? expanded.filter((k) => {
+                          return k !== key;
+                        })
+                      : [...expanded, key];
                   }
                   onChange({ key, expanded: next });
                 }

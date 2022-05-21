@@ -5,11 +5,13 @@ import type {
   StatefulPinCodeContainerPropsT,
   StatefulPinCodeContainerStateT,
   StateReducerT,
-} from "./types.js";
-import defaultProps from "./default-props.js";
-import { STATE_CHANGE_TYPE } from "../input/index.js";
+} from "./types";
+import defaultProps from "./default-props";
+import { STATE_CHANGE_TYPE } from "../input/index";
 
-const stateReducer: StateReducerT = (type, nextState) => nextState;
+const stateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 export default class StatefulPinCodeContainer extends React.Component<
   StatefulPinCodeContainerPropsT,

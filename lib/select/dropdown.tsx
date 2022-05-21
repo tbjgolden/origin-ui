@@ -4,10 +4,10 @@ import {
   StyledDropdown,
   StyledDropdownListItem,
   StyledOptionContent,
-} from "./styled-components.js";
-import { StatefulMenu } from "../menu/index.js";
-import type { DropdownPropsT, OptionT, ValueT } from "./types.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
+} from "./styled-components";
+import { StatefulMenu } from "../menu/index";
+import type { DropdownPropsT, OptionT, ValueT } from "./types";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
 
 function groupOptions(options: ValueT) {
   return options.reduce(
@@ -51,13 +51,11 @@ export default class SelectDropdown extends React.Component<DropdownPropsT> {
     );
 
     let $selected;
-    if (Array.isArray(value)) {
-      $selected = !!value.find(
-        (selected) => selected && selected[valueKey] === option[valueKey]
-      );
-    } else {
-      $selected = value[valueKey] === option[valueKey];
-    }
+    $selected = Array.isArray(value)
+      ? !!value.find((selected) => {
+          return selected && selected[valueKey] === option[valueKey];
+        })
+      : value[valueKey] === option[valueKey];
 
     const optionSharedProps = {
       $selected,
@@ -89,14 +87,14 @@ export default class SelectDropdown extends React.Component<DropdownPropsT> {
 
     if (Array.isArray(value) && value.length > 0) {
       firstValue = value[0];
-    } else if (!(value instanceof Array)) {
+    } else if (!Array.isArray(value)) {
       firstValue = value;
     }
 
     if (Object.keys(firstValue).length > 0) {
-      const a = options.findIndex(
-        (option) => option && option[valueKey] === firstValue[valueKey]
-      );
+      const a = options.findIndex((option) => {
+        return option && option[valueKey] === firstValue[valueKey];
+      });
       return a === -1 ? 0 : a;
     }
     return 0;
@@ -155,9 +153,11 @@ export default class SelectDropdown extends React.Component<DropdownPropsT> {
             {
               List: {
                 component: StyledDropdown,
-                style: (p) => ({
-                  maxHeight: p.$maxHeight || null,
-                }),
+                style: (p) => {
+                  return {
+                    maxHeight: p.$maxHeight || null,
+                  };
+                },
                 props: {
                   id: this.props.id ? this.props.id : null,
                   $maxHeight: maxDropdownHeight,

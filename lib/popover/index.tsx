@@ -1,6 +1,6 @@
-export { default as StatefulPopover } from "./stateful-popover.js";
-export { default as StatefulContainer } from "./stateful-container.js";
-export { default as Popover } from "./popover.js";
+export { default as StatefulPopover } from "./stateful-popover";
+export { default as StatefulContainer } from "./stateful-container";
+export { default as Popover } from "./popover";
 // Constants
 export {
   ACCESSIBILITY_TYPE,
@@ -9,14 +9,14 @@ export {
   STATE_CHANGE_TYPE,
   ANIMATE_IN_TIME,
   ANIMATE_OUT_TIME,
-} from "./constants.js";
+} from "./constants";
 // Styled elements
 export {
   Arrow as StyledArrow,
   Body as StyledBody,
   Inner as StyledInner,
   Padding as StyledPadding,
-} from "./styled-components.js";
+} from "./styled-components";
 
 // Flow
-export type * from "./types.js";
+export type * from "./types";

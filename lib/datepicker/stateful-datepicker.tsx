@@ -1,8 +1,8 @@
 
 import * as React from "react";
-import StatefulContainer from "./stateful-container.js";
-import Datepicker from "./datepicker.js";
-import type { StatefulDatepickerPropsT, DatepickerPropsT } from "./types.js";
+import StatefulContainer from "./stateful-container";
+import Datepicker from "./datepicker";
+import type { StatefulDatepickerPropsT, DatepickerPropsT } from "./types";
 
 type PropsT<T> = StatefulDatepickerPropsT<DatepickerPropsT<T>, T>;
 

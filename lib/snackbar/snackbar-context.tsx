@@ -1,25 +1,18 @@
-
-
-
 import * as React from "react";
 
-import { Layer } from "../layer/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { useStyletron } from "../styles/index.js";
+import { Layer } from "../layer/index";
+import { getOverrides } from "../helpers/overrides";
+import { useStyletron } from "../styles/index";
 
-import { DURATION, PLACEMENT } from "./constants.js";
-import SnackbarElement from "./snackbar-element.js";
-import { StyledPlacementContainer } from "./styled-components.js";
-import type {
-  SnackbarElementPropsT,
-  SnackbarProviderPropsT,
-  DurationT,
-} from "./types.js";
+import { DURATION, PLACEMENT } from "./constants";
+import SnackbarElement from "./snackbar-element";
+import { StyledPlacementContainer } from "./styled-components";
+import type { SnackbarElementPropsT, SnackbarProviderPropsT, DurationT } from "./types";
 
-type ContextT = {|
-  enqueue: (elementProps: SnackbarElementPropsT, duration?: DurationT) => void,
-  dequeue: () => void,
-|};
+type ContextT = {
+  enqueue: (elementProps: SnackbarElementPropsT, duration?: DurationT) => void;
+  dequeue: () => void;
+};
 
 function fallbackHandler() {
   if (__DEV__) {
@@ -69,7 +62,7 @@ export default function SnackbarProvider({
 
   const prevSnackbars = usePrevious(snackbars) || [];
   React.useEffect(() => {
-    if (prevSnackbars.length === 0 && snackbars.length >= 1) {
+    if (prevSnackbars.length === 0 && snackbars.length > 0) {
       enter(snackbars[0].duration);
     }
   }, [snackbars, prevSnackbars]);
@@ -126,16 +119,16 @@ export default function SnackbarProvider({
   }
 
   React.useEffect(() => {
-    if (__BROWSER__) {
-      if (window.ResizeObserver) {
-        const observer = new window.ResizeObserver(([entry]) =>
-          setContainerHeight(entry.contentRect.height)
-        );
-        if (containerRef.current) {
-          observer.observe(containerRef.current);
-        }
-        return () => observer.disconnect();
+    if (__BROWSER__ && window.ResizeObserver) {
+      const observer = new window.ResizeObserver(([entry]) => {
+        return setContainerHeight(entry.contentRect.height);
+      });
+      if (containerRef.current) {
+        observer.observe(containerRef.current);
       }
+      return () => {
+        return observer.disconnect();
+      };
     }
   }, [snackbars.length, animating]);
 
@@ -193,7 +186,9 @@ export default function SnackbarProvider({
             <div
               role="alert"
               onMouseEnter={handleMouseEnter}
-              onMouseLeave={() => handleMouseLeave(snackbars[0].duration)}
+              onMouseLeave={() => {
+                return handleMouseLeave(snackbars[0].duration);
+              }}
               className={css({ display: "inline", pointerEvents: "all" })}
             >
               <SnackbarElement

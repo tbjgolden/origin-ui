@@ -1,8 +1,8 @@
 
 
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 
-import type { SharedStylePropsT } from "./types.js";
+import type { SharedStylePropsT } from "./types";
 
 function getBorderColor(props) {
   const { $disabled, $checked, $error, $isIndeterminate, $theme, $isFocusVisible } =

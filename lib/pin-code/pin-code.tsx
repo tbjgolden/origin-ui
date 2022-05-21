@@ -1,14 +1,14 @@
 import React from "react";
 import MultiRef from "react-multi-ref";
-import defaultProps from "./default-props.js";
+import defaultProps from "./default-props";
 import {
   StyledRoot,
   StyledInputOverrideRoot,
   StyledInputOverrideInput,
-} from "./styled-components.js";
-import type { PropsT, StateT } from "./types.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import { Input as DefaultInput } from "../input/index.js";
+} from "./styled-components";
+import type { PropsT, StateT } from "./types";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import { Input as DefaultInput } from "../input/index";
 
 export default class PinCode extends React.Component<PropsT, StateT> {
   static defaultProps = defaultProps;
@@ -27,11 +27,9 @@ export default class PinCode extends React.Component<PropsT, StateT> {
   }
 
   getMaskStyle(i: number) {
-    if (this.props.values[i] !== "" && typeof this.props.mask === "string") {
-      return this.props.mask;
-    } else {
-      return this.props.values[i];
-    }
+    return this.props.values[i] !== "" && typeof this.props.mask === "string"
+      ? this.props.mask
+      : this.props.values[i];
   }
 
   render() {
@@ -64,8 +62,12 @@ export default class PinCode extends React.Component<PropsT, StateT> {
               inputRef={this._inputRefs.ref(i)}
               key={i}
               name={this.props.name}
-              onBlur={() => this.setState({ hasFocus: false })}
-              onFocus={() => this.setState({ hasFocus: true })}
+              onBlur={() => {
+                return this.setState({ hasFocus: false });
+              }}
+              onFocus={() => {
+                return this.setState({ hasFocus: true });
+              }}
               onChange={(event) => {
                 const eventValue = event.target.value;
                 // in the case of an autocomplete or copy and paste
@@ -73,7 +75,7 @@ export default class PinCode extends React.Component<PropsT, StateT> {
                   // see if we can use the string to fill out our values
                   if (
                     eventValue.length === this.props.values.length &&
-                    eventValue.match(/^[0-9]+$/)
+                    /^\d+$/.test(eventValue)
                   ) {
                     this.props.onChange({ values: eventValue.split(""), event });
                   }
@@ -81,7 +83,7 @@ export default class PinCode extends React.Component<PropsT, StateT> {
                 }
                 // digit was deleted
                 if (eventValue === "") {
-                  const newValues = this.props.values.slice();
+                  const newValues = [...this.props.values];
                   newValues[i] = "";
                   this.props.onChange({ values: newValues, event });
                   return;
@@ -95,8 +97,8 @@ export default class PinCode extends React.Component<PropsT, StateT> {
                   newValue = eventValue[0];
                 }
                 // only fire a change event if the new value is a digit
-                if (newValue.match(/^[0-9]$/)) {
-                  const newValues = this.props.values.slice();
+                if (/^\d$/.test(newValue)) {
+                  const newValues = [...this.props.values];
                   newValues[i] = newValue;
                   this.props.onChange({ values: newValues, event });
                   // tab to next pin code input if we aren't at end already

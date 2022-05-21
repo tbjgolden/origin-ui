@@ -1,1 +1,1 @@
-export { SIZE, ADJOINED, STATE_CHANGE_TYPE } from "../input/constants.js";
+export { SIZE, ADJOINED, STATE_CHANGE_TYPE } from "../input/constants";

@@ -1,17 +1,17 @@
 import * as React from "react";
 // eslint-disable-next-line import/no-named-default
-import { default as StatefulContainer } from "./stateful-checkbox-container.js";
+import { default as StatefulContainer } from "./stateful-checkbox-container";
 // eslint-disable-next-line import/no-named-default
-import { default as Checkbox } from "./checkbox.js";
-import type { StatefulContainerChildPropsT, StatefulCheckboxPropsT } from "./types.js";
+import { default as Checkbox } from "./checkbox";
+import type { StatefulContainerChildPropsT, StatefulCheckboxPropsT } from "./types";
 // Styled elements
 
 const StatefulCheckbox = function (props: StatefulCheckboxPropsT) {
   return (
     <StatefulContainer {...props}>
-      {(childrenProps: StatefulContainerChildPropsT) => (
-        <Checkbox {...childrenProps}>{props.children}</Checkbox>
-      )}
+      {(childrenProps: StatefulContainerChildPropsT) => {
+        return <Checkbox {...childrenProps}>{props.children}</Checkbox>;
+      }}
     </StatefulContainer>
   );
 };

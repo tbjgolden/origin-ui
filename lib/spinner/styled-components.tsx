@@ -1,6 +1,6 @@
-import { styled } from "../styles/index.js";
-import { SIZE } from "./constants.js";
-import type { SpinnerPropsT } from "./types.js";
+import { styled } from "../styles/index";
+import { SIZE } from "./constants";
+import type { SpinnerPropsT } from "./types";
 
 const spin = {
   from: {
@@ -36,13 +36,13 @@ export const StyledSpinner = styled<SpinnerPropsT>(
     if (!borderSize) {
       borderSize = $theme.sizing[$borderWidth];
       if (!borderSize) {
-        borderSize = `${parseInt($borderWidth)}px`;
+        borderSize = `${Number.parseInt($borderWidth)}px`;
       }
     }
     if (!boxSize) {
       boxSize = $theme.sizing[$size];
       if (!boxSize) {
-        boxSize = `${parseInt($size)}px`;
+        boxSize = `${Number.parseInt($size)}px`;
       }
     }
 

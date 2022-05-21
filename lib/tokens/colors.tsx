@@ -1,4 +1,4 @@
-import type { ColorTokensT } from "./types.js";
+import type { ColorTokensT } from "./types";
 
 const colors: ColorTokensT = {
   white: "#FFFFFF",

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
 import {
   Root as StyledRoot,
@@ -9,8 +9,8 @@ import {
   RadioMarkInner as StyledRadioMarkInner,
   RadioMarkOuter as StyledRadioMarkOuter,
   Description as StyledDescription,
-} from "./styled-components.js";
-import type { RadioPropsT, RadioStateT } from "./types.js";
+} from "./styled-components";
+import type { RadioPropsT, RadioStateT } from "./types";
 
 function isLabelTopLeft(labelPlacement) {
   return labelPlacement === "top" || labelPlacement === "left";
@@ -20,7 +20,9 @@ function isLabelBottomRight(labelPlacement) {
   return labelPlacement === "bottom" || labelPlacement === "right";
 }
 
-const stopPropagation = (e) => e.stopPropagation();
+const stopPropagation = (e) => {
+  return e.stopPropagation();
+};
 
 class Radio extends React.Component<RadioPropsT, RadioStateT> {
   static defaultProps = {
@@ -110,7 +112,13 @@ class Radio extends React.Component<RadioPropsT, RadioStateT> {
         {this.props.containsInteractiveElement ? (
           // Prevents the event from bubbling up to the label and moving focus to the radio button
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
-          <div onClick={(e) => e.preventDefault()}>{this.props.children}</div>
+          <div
+            onClick={(e) => {
+              return e.preventDefault();
+            }}
+          >
+            {this.props.children}
+          </div>
         ) : (
           this.props.children
         )}

@@ -1,8 +1,8 @@
 
-import { styled, hexToRgb, withWrapper } from "../styles/index.js";
-import { SIZE } from "./constants.js";
+import { styled, hexToRgb, withWrapper } from "../styles/index";
+import { SIZE } from "./constants";
 
-import type { StylePropsT, SizeT } from "./types.js";
+import type { StylePropsT, SizeT } from "./types";
 import React from "react";
 
 function getBarHeight(size) {

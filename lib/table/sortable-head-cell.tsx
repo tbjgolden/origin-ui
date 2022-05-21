@@ -1,12 +1,12 @@
 import * as React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
-import TriangleUp from "../icon/triangle-up.js";
-import TriangleDown from "../icon/triangle-down.js";
+import { getOverrides } from "../helpers/overrides";
+import TriangleUp from "../icon/triangle-up";
+import TriangleDown from "../icon/triangle-down";
 
-import { SORT_DIRECTION } from "./constants.js";
-import { StyledHeadCell, StyledSortableLabel } from "./styled-components.js";
-import type { SortDirectionT, HeadCellPropsT } from "./types.js";
+import { SORT_DIRECTION } from "./constants";
+import { StyledHeadCell, StyledSortableLabel } from "./styled-components";
+import type { SortDirectionT, HeadCellPropsT } from "./types";
 
 function SortDirectionIcon({ direction }: { direction: SortDirectionT }) {
   switch (direction) {
@@ -38,11 +38,10 @@ export const SortableHeadCellFactory = (
 
     let ariaLabel = props["aria-label"] || props.ariaLabel;
     if (!ariaLabel) {
-      if (typeof props.title === "string") {
-        ariaLabel = `sorts table by ${props.title} column`;
-      } else {
-        ariaLabel = "sort table by column";
-      }
+      ariaLabel =
+        typeof props.title === "string"
+          ? `sorts table by ${props.title} column`
+          : "sort table by column";
     }
 
     return (

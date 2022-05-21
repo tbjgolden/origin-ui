@@ -1,9 +1,9 @@
 /* eslint-disable cup/no-undef */
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { Root as StyledRoot } from "./styled-components.js";
-import { STATE_CHANGE_TYPE } from "./constants.js";
-import type { AccordionPropsT, AccordionStateT, StateChangeTypeT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { Root as StyledRoot } from "./styled-components";
+import { STATE_CHANGE_TYPE } from "./constants";
+import type { AccordionPropsT, AccordionStateT, StateChangeTypeT } from "./types";
 
 export default class Accordion extends React.Component<AccordionPropsT, AccordionStateT> {
   static defaultProps: $Shape<AccordionPropsT> = {
@@ -15,7 +15,9 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
     onChange: () => {},
     overrides: {},
     renderAll: false,
-    stateReducer: (type, newState) => newState,
+    stateReducer: (type, newState) => {
+      return newState;
+    },
   };
 
   state = {
@@ -79,9 +81,9 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
     }
     if (e.keyCode === ARROW_UP) {
       e.preventDefault();
-      const activeItemIdx = itemRefs.findIndex(
-        (item) => item.current === document.activeElement
-      );
+      const activeItemIdx = itemRefs.findIndex((item) => {
+        return item.current === document.activeElement;
+      });
       if (activeItemIdx > 0) {
         const prevItem = itemRefs[activeItemIdx - 1];
         prevItem.current && prevItem.current.focus();
@@ -89,9 +91,9 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
     }
     if (e.keyCode === ARROW_DOWN) {
       e.preventDefault();
-      const activeItemIdx = itemRefs.findIndex(
-        (item) => item.current === document.activeElement
-      );
+      const activeItemIdx = itemRefs.findIndex((item) => {
+        return item.current === document.activeElement;
+      });
       if (activeItemIdx < itemRefs.length - 1) {
         const nextItem = itemRefs[activeItemIdx + 1];
         nextItem.current && nextItem.current.focus();
@@ -112,11 +114,7 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
       // If there is no key provided use the panel order as a default key
       const key = child.key || String(index);
       let isExpanded = false;
-      if (accordion) {
-        isExpanded = expanded[0] === key;
-      } else {
-        isExpanded = expanded.includes(key);
-      }
+      isExpanded = accordion ? expanded[0] === key : expanded.includes(key);
 
       const props = {
         key,
@@ -126,7 +124,9 @@ export default class Accordion extends React.Component<AccordionPropsT, Accordio
         renderAll,
         overrides: child.props.overrides || overrides,
         disabled: child.props.disabled || disabled,
-        onChange: (...args) => this.onPanelChange(key, child.props.onChange, ...args),
+        onChange: (...args) => {
+          return this.onPanelChange(key, child.props.onChange, ...args);
+        },
       };
       return React.cloneElement(child, props);
     });

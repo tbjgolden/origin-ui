@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import { Toast, TYPE } from "../toast/index.js";
-import type { ToastPropsT, ToastPropsShapeT } from "../toast/types.js";
-import { mergeOverrides } from "../helpers/overrides.js";
+import { Toast, TYPE } from "../toast/index";
+import type { ToastPropsT, ToastPropsShapeT } from "../toast/types";
+import { mergeOverrides } from "../helpers/overrides";
 
 export default class Notification extends React.Component<ToastPropsT> {
   static defaultProps: ToastPropsShapeT = {
@@ -14,12 +14,14 @@ export default class Notification extends React.Component<ToastPropsT> {
     const overrides = mergeOverrides(
       {
         Body: {
-          style: ({ $theme }) => ({
-            marginTop: $theme.sizing.scale600,
-            marginRight: $theme.sizing.scale600,
-            marginBottom: $theme.sizing.scale600,
-            marginLeft: $theme.sizing.scale600,
-          }),
+          style: ({ $theme }) => {
+            return {
+              marginTop: $theme.sizing.scale600,
+              marginRight: $theme.sizing.scale600,
+              marginBottom: $theme.sizing.scale600,
+              marginLeft: $theme.sizing.scale600,
+            };
+          },
         },
       },
       this.props.overrides

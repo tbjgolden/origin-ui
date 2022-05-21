@@ -1,13 +1,13 @@
 import * as React from "react";
-import { StyledDay, StyledDayLabel } from "./styled-components.js";
-import dateFnsAdapter from "./utils/date-fns-adapter.js";
-import DateHelpers from "./utils/date-helpers.js";
-import { getOverrides } from "../helpers/overrides.js";
-import type { DayPropsT, DayStateT } from "./types.js";
-import { LocaleContext } from "../locale/index.js";
-import type { LocaleT } from "../locale/types.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
-import { INPUT_ROLE } from "./constants.js";
+import { StyledDay, StyledDayLabel } from "./styled-components";
+import dateFnsAdapter from "./utils/date-fns-adapter";
+import DateHelpers from "./utils/date-helpers";
+import { getOverrides } from "../helpers/overrides";
+import type { DayPropsT, DayStateT } from "./types";
+import { LocaleContext } from "../locale/index";
+import type { LocaleT } from "../locale/types";
+import { isFocusVisible } from "../utils/focusVisible";
+import { INPUT_ROLE } from "./constants";
 
 export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStateT> {
   static defaultProps = {
@@ -41,18 +41,22 @@ export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStat
   }
 
   componentDidMount() {
-    if (this.dayElm && this.props.focusedCalendar) {
-      if (this.props.highlighted || (!this.props.highlightedDate && this.isSelected())) {
-        this.dayElm.focus();
-      }
+    if (
+      this.dayElm &&
+      this.props.focusedCalendar &&
+      (this.props.highlighted || (!this.props.highlightedDate && this.isSelected()))
+    ) {
+      this.dayElm.focus();
     }
   }
 
   componentDidUpdate(prevProps: DayPropsT<T>) {
-    if (this.dayElm && this.props.focusedCalendar) {
-      if (this.props.highlighted || (!this.props.highlightedDate && this.isSelected())) {
-        this.dayElm.focus();
-      }
+    if (
+      this.dayElm &&
+      this.props.focusedCalendar &&
+      (this.props.highlighted || (!this.props.highlightedDate && this.isSelected()))
+    ) {
+      this.dayElm.focus();
     }
   }
 
@@ -224,14 +228,10 @@ export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStat
   isSelected() {
     const date = this.getDateProp();
     const { value } = this.props;
-    if (Array.isArray(value)) {
-      return (
-        this.dateHelpers.isSameDay(date, value[0]) ||
-        this.dateHelpers.isSameDay(date, value[1])
-      );
-    } else {
-      return this.dateHelpers.isSameDay(date, value);
-    }
+    return Array.isArray(value)
+      ? this.dateHelpers.isSameDay(date, value[0]) ||
+          this.dateHelpers.isSameDay(date, value[1])
+      : this.dateHelpers.isSameDay(date, value);
   }
 
   clampToDayStart: (T) => T = (dt) => {
@@ -274,35 +274,31 @@ export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStat
       }
 
       if (highlightedDate && start && !end) {
-        if (this.dateHelpers.isAfter(highlightedDate, start)) {
-          return this.dateHelpers.isDayInRange(
-            this.clampToDayStart(date),
-            this.clampToDayStart(start),
-            this.clampToDayStart(highlightedDate)
-          );
-        } else {
-          return this.dateHelpers.isDayInRange(
-            this.clampToDayStart(date),
-            this.clampToDayStart(highlightedDate),
-            this.clampToDayStart(start)
-          );
-        }
+        return this.dateHelpers.isAfter(highlightedDate, start)
+          ? this.dateHelpers.isDayInRange(
+              this.clampToDayStart(date),
+              this.clampToDayStart(start),
+              this.clampToDayStart(highlightedDate)
+            )
+          : this.dateHelpers.isDayInRange(
+              this.clampToDayStart(date),
+              this.clampToDayStart(highlightedDate),
+              this.clampToDayStart(start)
+            );
       }
 
       if (highlightedDate && !start && end) {
-        if (this.dateHelpers.isAfter(highlightedDate, end)) {
-          return this.dateHelpers.isDayInRange(
-            this.clampToDayStart(date),
-            this.clampToDayStart(end),
-            this.clampToDayStart(highlightedDate)
-          );
-        } else {
-          return this.dateHelpers.isDayInRange(
-            this.clampToDayStart(date),
-            this.clampToDayStart(highlightedDate),
-            this.clampToDayStart(end)
-          );
-        }
+        return this.dateHelpers.isAfter(highlightedDate, end)
+          ? this.dateHelpers.isDayInRange(
+              this.clampToDayStart(date),
+              this.clampToDayStart(end),
+              this.clampToDayStart(highlightedDate)
+            )
+          : this.dateHelpers.isDayInRange(
+              this.clampToDayStart(date),
+              this.clampToDayStart(highlightedDate),
+              this.clampToDayStart(end)
+            );
       }
     }
   }
@@ -418,40 +414,43 @@ export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStat
     ) : (
       // eslint-disable-next-line jsx-a11y/mouse-events-have-key-events
       <LocaleContext.Consumer>
-        {(locale: LocaleT) => (
-          <Day
-            aria-label={this.getAriaLabel(sharedProps, locale)}
-            ref={(dayElm) => {
-              this.dayElm = dayElm;
-            }}
-            role="gridcell"
-            aria-roledescription="button"
-            tabIndex={
-              this.props.highlighted || (!this.props.highlightedDate && this.isSelected())
-                ? 0
-                : -1
-            }
-            {...sharedProps}
-            {...dayProps}
-            // Adding event handlers after customers overrides in order to
-            // make sure the components functions as expected
-            // We can extract the handlers from props overrides
-            // and call it along with internal handlers by creating an inline handler
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            onClick={this.onClick}
-            onKeyDown={this.onKeyDown}
-            onMouseOver={this.onMouseOver}
-            onMouseLeave={this.onMouseLeave}
-          >
-            <div>{this.dateHelpers.getDate(date)}</div>
-            {dateLabel ? (
-              <DayLabel {...sharedProps} {...dayLabelProps}>
-                {dateLabel}
-              </DayLabel>
-            ) : null}
-          </Day>
-        )}
+        {(locale: LocaleT) => {
+          return (
+            <Day
+              aria-label={this.getAriaLabel(sharedProps, locale)}
+              ref={(dayElm) => {
+                this.dayElm = dayElm;
+              }}
+              role="gridcell"
+              aria-roledescription="button"
+              tabIndex={
+                this.props.highlighted ||
+                (!this.props.highlightedDate && this.isSelected())
+                  ? 0
+                  : -1
+              }
+              {...sharedProps}
+              {...dayProps}
+              // Adding event handlers after customers overrides in order to
+              // make sure the components functions as expected
+              // We can extract the handlers from props overrides
+              // and call it along with internal handlers by creating an inline handler
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
+              onClick={this.onClick}
+              onKeyDown={this.onKeyDown}
+              onMouseOver={this.onMouseOver}
+              onMouseLeave={this.onMouseLeave}
+            >
+              <div>{this.dateHelpers.getDate(date)}</div>
+              {dateLabel ? (
+                <DayLabel {...sharedProps} {...dayLabelProps}>
+                  {dateLabel}
+                </DayLabel>
+              ) : null}
+            </Day>
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }

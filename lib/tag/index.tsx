@@ -1,9 +1,9 @@
-export { default as Tag } from "./tag.js";
+export { default as Tag } from "./tag";
 // Styled elements
 export {
   Root as StyledRoot,
   Action as StyledAction,
   Text as StyledText,
-} from "./styled-components.js";
-export { KIND, VARIANT, SIZE } from "./constants.js";
-export type * from "./types.js";
+} from "./styled-components";
+export { KIND, VARIANT, SIZE } from "./constants";
+export type * from "./types";

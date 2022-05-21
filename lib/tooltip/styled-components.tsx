@@ -1,11 +1,11 @@
-import { styled } from "../styles/index.js";
+import { styled } from "../styles/index";
 import {
   getBodyStyles,
   getArrowStyles,
   getInnerStyles,
-} from "../popover/styled-components.js";
-import { getEndPosition } from "../popover/utils.js";
-import type { SharedStylePropsArgT } from "../popover/types.js";
+} from "../popover/styled-components";
+import { getEndPosition } from "../popover/utils";
+import type { SharedStylePropsArgT } from "../popover/types";
 
 /**
  * We want to reuse the default Popover styles and add our overrides
@@ -18,36 +18,42 @@ import type { SharedStylePropsArgT } from "../popover/types.js";
  * We could create our own withStyleDeep that also takes the $style
  * prop into account
  */
-export const Body = styled<SharedStylePropsArgT>("div", (props) => ({
-  ...getBodyStyles(props),
-  backgroundColor: props.$theme.colors.tooltipBackground,
-  borderTopLeftRadius: props.$theme.borders.radius300,
-  borderTopRightRadius: props.$theme.borders.radius300,
-  borderBottomRightRadius: props.$theme.borders.radius300,
-  borderBottomLeftRadius: props.$theme.borders.radius300,
-  boxShadow: props.$theme.lighting.shadow400,
-  color: props.$theme.colors.tooltipText,
-  // Reset transition property to opacity only, and static transform
-  transitionProperty: "opacity",
-  transform: getEndPosition(props.$popoverOffset),
-}));
+export const Body = styled<SharedStylePropsArgT>("div", (props) => {
+  return {
+    ...getBodyStyles(props),
+    backgroundColor: props.$theme.colors.tooltipBackground,
+    borderTopLeftRadius: props.$theme.borders.radius300,
+    borderTopRightRadius: props.$theme.borders.radius300,
+    borderBottomRightRadius: props.$theme.borders.radius300,
+    borderBottomLeftRadius: props.$theme.borders.radius300,
+    boxShadow: props.$theme.lighting.shadow400,
+    color: props.$theme.colors.tooltipText,
+    // Reset transition property to opacity only, and static transform
+    transitionProperty: "opacity",
+    transform: getEndPosition(props.$popoverOffset),
+  };
+});
 
-export const Inner = styled<SharedStylePropsArgT>("div", (props) => ({
-  ...getInnerStyles(props),
-  backgroundColor: props.$theme.colors.tooltipBackground,
-  borderTopLeftRadius: props.$theme.borders.radius300,
-  borderTopRightRadius: props.$theme.borders.radius300,
-  borderBottomRightRadius: props.$theme.borders.radius300,
-  borderBottomLeftRadius: props.$theme.borders.radius300,
-  paddingTop: props.$theme.sizing.scale300,
-  paddingBottom: props.$theme.sizing.scale300,
-  paddingLeft: props.$theme.sizing.scale600,
-  paddingRight: props.$theme.sizing.scale600,
-  ...props.$theme.typography.font150,
-  color: props.$theme.colors.tooltipText,
-}));
+export const Inner = styled<SharedStylePropsArgT>("div", (props) => {
+  return {
+    ...getInnerStyles(props),
+    backgroundColor: props.$theme.colors.tooltipBackground,
+    borderTopLeftRadius: props.$theme.borders.radius300,
+    borderTopRightRadius: props.$theme.borders.radius300,
+    borderBottomRightRadius: props.$theme.borders.radius300,
+    borderBottomLeftRadius: props.$theme.borders.radius300,
+    paddingTop: props.$theme.sizing.scale300,
+    paddingBottom: props.$theme.sizing.scale300,
+    paddingLeft: props.$theme.sizing.scale600,
+    paddingRight: props.$theme.sizing.scale600,
+    ...props.$theme.typography.font150,
+    color: props.$theme.colors.tooltipText,
+  };
+});
 
-export const Arrow = styled<SharedStylePropsArgT>("div", (props) => ({
-  ...getArrowStyles(props),
-  backgroundColor: props.$theme.colors.tooltipBackground,
-}));
+export const Arrow = styled<SharedStylePropsArgT>("div", (props) => {
+  return {
+    ...getArrowStyles(props),
+    backgroundColor: props.$theme.colors.tooltipBackground,
+  };
+});

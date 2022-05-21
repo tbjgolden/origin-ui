@@ -2,17 +2,17 @@
 
 import React from "react";
 
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 
-import { ARTWORK_SIZES, SHAPE } from "./constants.js";
+import { ARTWORK_SIZES, SHAPE } from "./constants";
 import {
   StyledRoot,
   StyledContent,
   StyledEndEnhancerContainer,
   StyledArtworkContainer,
-} from "./styled-components.js";
-import type { PropsT } from "./types.js";
-import { artworkSizeToValue } from "./utils.js";
+} from "./styled-components";
+import type { PropsT } from "./types";
+import { artworkSizeToValue } from "./utils";
 
 const ListItem = React.forwardRef<PropsT, HTMLLIElement>((props: PropsT, ref) => {
   const { overrides = {} } = props;

@@ -1,9 +1,9 @@
 /* eslint-disable cup/no-undef */
 import * as React from "react";
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
-import { Root as StyledRoot } from "./styled-components.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
+import { Root as StyledRoot } from "./styled-components";
 
-import type { ComponentPropsT, SharedStylePropsT } from "./types.js";
+import type { ComponentPropsT, SharedStylePropsT } from "./types";
 
 class Component extends React.Component<ComponentPropsT> {
   static defaultProps: $Shape<ComponentPropsT> = {

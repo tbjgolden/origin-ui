@@ -1,7 +1,7 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import { StyledNavLink, StyledNavItem } from "./styled-components.js";
-import type { NavItemPropsT } from "./types.js";
+import { getOverrides } from "../helpers/overrides";
+import { StyledNavLink, StyledNavItem } from "./styled-components";
+import type { NavItemPropsT } from "./types";
 
 class NavItem extends React.Component<NavItemPropsT> {
   static defaultProps = {
@@ -18,10 +18,8 @@ class NavItem extends React.Component<NavItemPropsT> {
 
   handleKeyDown = (event: KeyboardEvent) => {
     const { item, onSelect } = this.props;
-    if (event.key === "Enter") {
-      if (typeof onSelect === "function") {
-        onSelect({ item, event });
-      }
+    if (event.key === "Enter" && typeof onSelect === "function") {
+      onSelect({ item, event });
     }
   };
 

@@ -1,12 +1,12 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   RelativeContainer,
   StyledStrokedLabel,
   StyledStrokedLabelContainer,
-} from "./styled-components.js";
-import { LABEL_ENHANCER_POSITIONS } from "./constants.js";
-import type { LabelEhancerComponentT } from "./types.js";
+} from "./styled-components";
+import { LABEL_ENHANCER_POSITIONS } from "./constants";
+import type { LabelEhancerComponentT } from "./types";
 
 const LabelEnhancer = ({
   labelEnhancerContent,

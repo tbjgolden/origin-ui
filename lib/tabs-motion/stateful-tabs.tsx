@@ -1,21 +1,20 @@
 import * as React from "react";
-import { Tabs } from "./tabs.js";
-import { STATE_CHANGE_TYPE } from "./constants.js";
+import { Tabs } from "./tabs";
+import { STATE_CHANGE_TYPE } from "./constants";
 
 import type {
   StatefulTabsPropsT,
   StatefulTabsStateT,
   StatefulTabsReducerT,
-} from "./types.js";
+} from "./types";
 
 const getInitialState = (children: React.Node, initialState?: StatefulTabsStateT) => {
   if (initialState && initialState.activeKey) {
     return initialState;
   } else {
-    const firstKey = React.Children.map(
-      children,
-      (child, index) => child.key || String(index)
-    )[0];
+    const firstKey = React.Children.map(children, (child, index) => {
+      return child.key || String(index);
+    })[0];
     return { activeKey: firstKey };
   }
 };

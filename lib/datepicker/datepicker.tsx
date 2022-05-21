@@ -1,23 +1,23 @@
 
 import * as React from "react";
 
-import { MaskedInput } from "../input/index.js";
-import { Popover, PLACEMENT } from "../popover/index.js";
-import Calendar from "./calendar.js";
-import { getOverrides } from "../helpers/overrides.js";
-import getInterpolatedString from "../helpers/i18n-interpolation.js";
-import { LocaleContext } from "../locale/index.js";
+import { MaskedInput } from "../input/index";
+import { Popover, PLACEMENT } from "../popover/index";
+import Calendar from "./calendar";
+import { getOverrides } from "../helpers/overrides";
+import getInterpolatedString from "../helpers/i18n-interpolation";
+import { LocaleContext } from "../locale/index";
 import {
   StyledInputWrapper,
   StyledInputLabel,
   StyledStartDate,
   StyledEndDate,
-} from "./styled-components.js";
-import type { DatepickerPropsT, InputRoleT } from "./types.js";
-import DateHelpers from "./utils/date-helpers.js";
-import dateFnsAdapter from "./utils/date-fns-adapter.js";
-import type { LocaleT } from "../locale/types.js";
-import { INPUT_ROLE, RANGED_CALENDAR_BEHAVIOR } from "./constants.js";
+} from "./styled-components";
+import type { DatepickerPropsT, InputRoleT } from "./types";
+import DateHelpers from "./utils/date-helpers";
+import dateFnsAdapter from "./utils/date-fns-adapter";
+import type { LocaleT } from "../locale/types";
+import { INPUT_ROLE, RANGED_CALENDAR_BEHAVIOR } from "./constants";
 
 export const DEFAULT_DATE_FORMAT = "yyyy/MM/dd";
 
@@ -41,14 +41,14 @@ const combineSeparatedInputs = (
   return inputValue;
 };
 
-type StateT = {|
+type StateT = {
   calendarFocused: boolean,
   isOpen: boolean,
   selectedInput: ?InputRoleT,
   isPseudoFocused: boolean,
   lastActiveElm: ?HTMLElement,
   inputValue?: string,
-|};
+};
 
 export default class Datepicker<T = Date> extends React.Component<
   DatepickerPropsT<T>,

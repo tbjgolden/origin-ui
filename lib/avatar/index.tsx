@@ -1,11 +1,11 @@
-export { default as Avatar } from "./avatar.js";
+export { default as Avatar } from "./avatar";
 
 // Styled elements
 export {
   Avatar as StyledAvatar,
   Initials as StyledInitials,
   Root as StyledRoot,
-} from "./styled-components.js";
+} from "./styled-components";
 
 // Flow
-export type * from "./types.js";
+export type * from "./types";

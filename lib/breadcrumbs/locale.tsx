@@ -1,8 +1,6 @@
-
-
-export type BreadcrumbLocaleT = {|
-  ariaLabel: string,
-|};
+export type BreadcrumbLocaleT = {
+  ariaLabel: string;
+};
 
 const locale = {
   ariaLabel: "Breadcrumbs navigation",

@@ -1,6 +1,6 @@
-import { styled } from "../styles/index.js";
-import { SIZE, SIZE_DIMENSION, ANCHOR } from "./constants.js";
-import type { SharedStylePropsArgT, SizePropT, AnchorPropT } from "./types.js";
+import { styled } from "../styles/index";
+import { SIZE, SIZE_DIMENSION, ANCHOR } from "./constants";
+import type { SharedStylePropsArgT, SizePropT, AnchorPropT } from "./types";
 
 function getSizeStyles($size: SizePropT, $anchor: AnchorPropT) {
   const styles = {

@@ -1,12 +1,8 @@
 import * as React from "react";
-import { styled } from "../styles/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import type {
-  LayersManagerPropsT,
-  LayersManagerStateT,
-  LayersContextT,
-} from "./types.js";
-import { initFocusVisible } from "../utils/focusVisible.js";
+import { styled } from "../styles/index";
+import { getOverrides } from "../helpers/overrides";
+import type { LayersManagerPropsT, LayersManagerStateT, LayersContextT } from "./types";
+import { initFocusVisible } from "../utils/focusVisible";
 
 const StyledAppContainer = styled("div", {});
 const StyledLayersContainer = styled("div", {});
@@ -94,9 +90,9 @@ export default class LayersManager extends React.Component<
   onRemoveEscapeHandler = (escapeKeyHandler: () => mixed) => {
     this.setState((prev) => {
       return {
-        escapeKeyHandlers: prev.escapeKeyHandlers.filter(
-          (handler) => handler !== escapeKeyHandler
-        ),
+        escapeKeyHandlers: prev.escapeKeyHandlers.filter((handler) => {
+          return handler !== escapeKeyHandler;
+        }),
       };
     });
   };
@@ -110,9 +106,9 @@ export default class LayersManager extends React.Component<
   onRemoveDocClickHandler = (docClickHandler: (event: MouseEvent) => mixed) => {
     this.setState((prev) => {
       return {
-        docClickHandlers: prev.docClickHandlers.filter(
-          (handler) => handler !== docClickHandler
-        ),
+        docClickHandlers: prev.docClickHandlers.filter((handler) => {
+          return handler !== docClickHandler;
+        }),
       };
     });
   };
@@ -130,13 +126,11 @@ export default class LayersManager extends React.Component<
     return (
       <Consumer>
         {({ host }) => {
-          if (__DEV__) {
-            if (host !== undefined) {
-              // eslint-disable-next-line no-console
-              console.warn(
-                "There is a LayersManager already exists in your application. It is not recommended to have more than one LayersManager in an application."
-              );
-            }
+          if (__DEV__ && host !== undefined) {
+            // eslint-disable-next-line no-console
+            console.warn(
+              "There is a LayersManager already exists in your application. It is not recommended to have more than one LayersManager in an application."
+            );
           }
           return (
             <Provider

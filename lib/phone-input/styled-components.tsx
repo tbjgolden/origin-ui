@@ -1,13 +1,10 @@
 import * as React from "react";
-import { SIZE } from "./constants.js";
-import { styled, withStyle, withWrapper } from "../styles/index.js";
-import { StyledList } from "../menu/index.js";
-import {
-  StyledDropdownListItem,
-  StyledRoot as SelectStyledRoot,
-} from "../select/index.js";
-import defaultProps from "../select/default-props.js";
-import type { SizeT } from "./types.js";
+import { SIZE } from "./constants";
+import { styled, withStyle, withWrapper } from "../styles/index";
+import { StyledList } from "../menu/index";
+import { StyledDropdownListItem, StyledRoot as SelectStyledRoot } from "../select/index";
+import defaultProps from "../select/default-props";
+import type { SizeT } from "./types";
 
 type SizeStyleProps = {
   $size?: SizeT;
@@ -91,10 +88,11 @@ export const StyledCountrySelectDropdownListItemElement = withStyle<
 
 export const StyledCountrySelectDropdownListItem = withWrapper(
   StyledCountrySelectDropdownListItemElement,
-  (Styled) =>
-    function StyledCountrySelectDropdownListItem({ item, ...restProps }) {
+  (Styled) => {
+    return function StyledCountrySelectDropdownListItem({ item, ...restProps }) {
       return <Styled {...restProps} />;
-    }
+    };
+  }
 );
 
 export const StyledCountrySelectDropdownFlagColumn = styled<{}>(

@@ -4,10 +4,12 @@ import type {
   StatefulComponentContainerPropsT,
   StateChangeTypeT,
   StateReducerT,
-} from "./types.js";
+} from "./types";
 import { arrayMove, arrayRemove } from "react-movable";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulListContainer extends React.Component<
   StatefulComponentContainerPropsT,
@@ -48,7 +50,9 @@ class StatefulListContainer extends React.Component<
 
   internalSetState(type: StateChangeTypeT, changes: StateT) {
     const { stateReducer } = this.props;
-    this.setState((prevState) => stateReducer(type, changes, prevState));
+    this.setState((prevState) => {
+      return stateReducer(type, changes, prevState);
+    });
   }
 
   render() {

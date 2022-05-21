@@ -8,7 +8,7 @@ export {
   createThemedUseStyletron,
   ThemeProvider,
   ThemeConsumer,
-} from "./styles/index.js";
+} from "./styles";
 export {
   createTheme,
   createDarkTheme,
@@ -20,9 +20,9 @@ export {
   DarkThemeMove,
   LightTheme,
   LightThemeMove,
-} from "./themes/index.js";
-export { default as LocaleProvider } from "./locale/index.js";
-export { default as BaseProvider } from "./helpers/base-provider.js";
-export { getOverrides, mergeOverrides } from "./helpers/overrides.js";
-export type { PrimitivesT } from "./themes/types.js";
-export type { ThemeT } from "./styles/types.js";
+} from "./themes";
+export { default as LocaleProvider } from "./locale";
+export { default as BaseProvider } from "./helpers/base-provider";
+export { getOverrides, mergeOverrides } from "./helpers/overrides";
+export type { PrimitivesT } from "./themes/types";
+export type { ThemeT } from "./styles/types";

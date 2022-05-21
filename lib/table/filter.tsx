@@ -1,18 +1,18 @@
 import * as React from "react";
 import FocusLock from "react-focus-lock";
 
-import { Button, KIND, SIZE } from "../button/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import FilterIcon from "../icon/filter.js";
-import { StatefulPopover, PLACEMENT } from "../popover/index.js";
+import { Button, KIND, SIZE } from "../button/index";
+import { getOverrides } from "../helpers/overrides";
+import FilterIcon from "../icon/filter";
+import { StatefulPopover, PLACEMENT } from "../popover/index";
 
 import {
   StyledFilterButton,
   StyledFilterContent,
   StyledFilterHeading,
   StyledFilterFooter,
-} from "./styled-components.js";
-import type { FilterProps } from "./types.js";
+} from "./styled-components";
+import type { FilterProps } from "./types";
 
 export default function Filter(props: FilterProps) {
   const { onSelectAll = () => {}, onReset = () => {}, overrides = {} } = props;
@@ -39,43 +39,45 @@ export default function Filter(props: FilterProps) {
         }
         return nextState;
       }}
-      content={({ close }) => (
-        <FocusLock
-          autoFocus={false}
-          // Allow focus to escape when UI is within an iframe
-          crossFrame={false}
-        >
-          <Heading {...headingProps}>Filter Column</Heading>
-          <Content {...contentProps}>{props.children}</Content>
-          <Footer {...footerProps}>
-            <Button
-              kind={KIND.tertiary}
-              size={SIZE.compact}
-              onClick={() => {
-                onSelectAll();
-              }}
-            >
-              Select All
-            </Button>
-
-            <Button
-              kind={KIND.tertiary}
-              size={SIZE.compact}
-              onClick={() => {
-                onReset();
-              }}
-            >
-              Reset
-            </Button>
-
-            {props.hasCloseButton && (
-              <Button kind={KIND.tertiary} size={SIZE.compact} onClick={close}>
-                Close
+      content={({ close }) => {
+        return (
+          <FocusLock
+            autoFocus={false}
+            // Allow focus to escape when UI is within an iframe
+            crossFrame={false}
+          >
+            <Heading {...headingProps}>Filter Column</Heading>
+            <Content {...contentProps}>{props.children}</Content>
+            <Footer {...footerProps}>
+              <Button
+                kind={KIND.tertiary}
+                size={SIZE.compact}
+                onClick={() => {
+                  onSelectAll();
+                }}
+              >
+                Select All
               </Button>
-            )}
-          </Footer>
-        </FocusLock>
-      )}
+
+              <Button
+                kind={KIND.tertiary}
+                size={SIZE.compact}
+                onClick={() => {
+                  onReset();
+                }}
+              >
+                Reset
+              </Button>
+
+              {props.hasCloseButton && (
+                <Button kind={KIND.tertiary} size={SIZE.compact} onClick={close}>
+                  Close
+                </Button>
+              )}
+            </Footer>
+          </FocusLock>
+        );
+      }}
       returnFocus={props.returnFocus}
     >
       <MenuButton $active={props.active} $disabled={props.disabled} {...menuButtonProps}>

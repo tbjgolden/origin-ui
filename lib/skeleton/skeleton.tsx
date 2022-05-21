@@ -1,7 +1,7 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
-import type { SkeletonPropsT } from "./types.js";
-import { StyledRoot, StyledRow } from "./styled-components.js";
+import { getOverrides } from "../helpers/overrides";
+import type { SkeletonPropsT } from "./types";
+import { StyledRoot, StyledRow } from "./styled-components";
 
 class Skeleton extends React.Component<SkeletonPropsT> {
   static defaultProps: SkeletonPropsT = {
@@ -23,16 +23,16 @@ class Skeleton extends React.Component<SkeletonPropsT> {
           testid={"loader"}
           {...rootProps}
         >
-          {Array(this.props.rows)
-            .fill()
-            .map((item, index) => (
+          {new Array(this.props.rows).fill().map((item, index) => {
+            return (
               <Row
                 $animation={this.props.animation}
                 key={index}
                 $isLastRow={index === this.props.rows - 1}
                 {...rowProps}
               ></Row>
-            ))}
+            );
+          })}
         </Root>
       );
     }

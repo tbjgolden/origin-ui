@@ -1,14 +1,14 @@
-import { styled } from "../styles/index.js";
-import { getSvgStyles } from "../icon/styled-components.js";
-import { KIND, PLACEMENT, TYPE } from "./constants.js";
+import { styled } from "../styles/index";
+import { getSvgStyles } from "../icon/styled-components";
+import { KIND, PLACEMENT, TYPE } from "./constants";
 import {
   type SharedStylePropsArgT,
   type ToasterSharedStylePropsArgT,
   type KindTypeT,
   type NotificationTypeT,
   type PlacementTypeT,
-} from "./types.js";
-import type { ThemeT } from "../styles/types.js";
+} from "./types";
+import type { ThemeT } from "../styles/types";
 import type { StyleObject } from "styletron-standard";
 
 function getBackgroundColor(kind: KindTypeT, type: NotificationTypeT, theme: ThemeT) {
@@ -110,7 +110,9 @@ export const Root = styled<ToasterSharedStylePropsArgT>(
 export const InnerContainer = styled<SharedStylePropsArgT>(
   "div",
   // eslint-disable-next-line no-empty-pattern
-  ({}: SharedStylePropsArgT & { $theme: ThemeT }) => ({})
+  ({}: SharedStylePropsArgT & { $theme: ThemeT }) => {
+    return {};
+  }
 );
 
 export const Body = styled<SharedStylePropsArgT>(
@@ -163,10 +165,12 @@ export const CloseIconSvg =
     $size: any;
     $color: string;
     $theme: ThemeT;
-  }): StyleObject => ({
-    ...getSvgStyles({ $theme, $size, $color }),
-    cursor: "pointer",
-    width: $size || "16px",
-    flexShrink: 0,
-    outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
-  }));
+  }): StyleObject => {
+    return {
+      ...getSvgStyles({ $theme, $size, $color }),
+      cursor: "pointer",
+      width: $size || "16px",
+      flexShrink: 0,
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+    };
+  });

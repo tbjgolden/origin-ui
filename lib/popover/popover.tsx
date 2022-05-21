@@ -1,7 +1,7 @@
 import * as React from "react";
 import FocusLock, { MoveFocusInside } from "react-focus-lock";
 
-import { getOverride, getOverrideProps } from "../helpers/overrides.js";
+import { getOverride, getOverrideProps } from "../helpers/overrides";
 import {
   ACCESSIBILITY_TYPE,
   PLACEMENT,
@@ -9,16 +9,16 @@ import {
   ANIMATE_OUT_TIME,
   ANIMATE_IN_TIME,
   POPOVER_MARGIN,
-} from "./constants.js";
-import { Layer, TetherBehavior } from "../layer/index.js";
+} from "./constants";
+import { Layer, TetherBehavior } from "../layer/index";
 import {
   Arrow as StyledArrow,
   Body as StyledBody,
   Inner as StyledInner,
   Hidden,
-} from "./styled-components.js";
-import { fromPopperPlacement } from "./utils.js";
-import defaultProps from "./default-props.js";
+} from "./styled-components";
+import { fromPopperPlacement } from "./utils";
+import defaultProps from "./default-props";
 import { useUID } from "react-uid";
 
 import type {
@@ -27,8 +27,8 @@ import type {
   PopoverPrivateStateT,
   SharedStylePropsArgT,
   ReactRefT,
-} from "./types.js";
-import type { PopperDataObjectT, NormalizedOffsetsT } from "../layer/types.js";
+} from "./types";
+import type { PopperDataObjectT, NormalizedOffsetsT } from "../layer/types";
 
 class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> {
   static defaultProps: $Shape<PopoverPropsT> = defaultProps;
@@ -66,15 +66,13 @@ class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> 
       this.setState({ autoFocusAfterPositioning: true });
     }
 
-    if (__DEV__) {
-      if (!this.anchorRef.current) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          `[baseui][Popover] ref has not been passed to the Popper's anchor element.
+    if (__DEV__ && !this.anchorRef.current) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `[baseui][Popover] ref has not been passed to the Popper's anchor element.
               See how to pass the ref to an anchor element in the Popover example
               http://baseui.design/components/popover#anchor-ref-handling-example`
-        );
-      }
+      );
     }
   }
 
@@ -136,17 +134,17 @@ class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> 
   };
 
   clearTimers() {
-    [
+    for (const timerId of [
       this.animateInTimer,
       this.animateOutTimer,
       this.animateOutCompleteTimer,
       this.onMouseEnterTimer,
       this.onMouseLeaveTimer,
-    ].forEach((timerId) => {
+    ]) {
       if (timerId) {
         clearTimeout(timerId);
       }
-    });
+    }
   }
 
   onAnchorClick = (e: Event) => {
@@ -200,10 +198,9 @@ class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> 
   triggerOnMouseLeaveWithDelay(e: Event) {
     const { onMouseLeaveDelay } = this.props;
     if (onMouseLeaveDelay) {
-      this.onMouseLeaveTimer = setTimeout(
-        () => this.triggerOnMouseLeave(e),
-        onMouseLeaveDelay
-      );
+      this.onMouseLeaveTimer = setTimeout(() => {
+        return this.triggerOnMouseLeave(e);
+      }, onMouseLeaveDelay);
       return;
     }
     this.triggerOnMouseLeave(e);
@@ -218,10 +215,9 @@ class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> 
   triggerOnMouseEnterWithDelay(e: Event) {
     const { onMouseEnterDelay } = this.props;
     if (onMouseEnterDelay) {
-      this.onMouseEnterTimer = setTimeout(
-        () => this.triggerOnMouseEnter(e),
-        onMouseEnterDelay
-      );
+      this.onMouseEnterTimer = setTimeout(() => {
+        return this.triggerOnMouseEnter(e);
+      }, onMouseEnterDelay);
       return;
     }
     this.triggerOnMouseEnter(e);
@@ -441,8 +437,12 @@ class PopoverInner extends React.Component<PopoverPropsT, PopoverPrivateStateT> 
             onEscape={this.props.onEsc}
             onDocumentClick={this.isHoverTrigger() ? undefined : this.onDocumentClick}
             isHoverLayer={this.isHoverTrigger()}
-            onMount={() => this.setState({ isLayerMounted: true })}
-            onUnmount={() => this.setState({ isLayerMounted: false })}
+            onMount={() => {
+              return this.setState({ isLayerMounted: true });
+            }}
+            onUnmount={() => {
+              return this.setState({ isLayerMounted: false });
+            }}
           >
             <TetherBehavior
               anchorRef={this.anchorRef.current}

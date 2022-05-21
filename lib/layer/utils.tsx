@@ -1,4 +1,4 @@
-import type { TetherPlacementT, PopperOffsetT, NormalizedOffsetT } from "./types.js";
+import type { TetherPlacementT, PopperOffsetT, NormalizedOffsetT } from "./types";
 
 export function toPopperPlacement(placement: TetherPlacementT): string {
   return placement.replace(/(Top|Left)$/, "-start").replace(/(Right|Bottom)$/, "-end");

@@ -3,12 +3,12 @@
 import * as React from "react";
 import Dropzone from "react-dropzone";
 
-import { LocaleContext } from "../locale/index.js";
-import { useStyletron } from "../styles/index.js";
-import { Button, KIND, SHAPE, SIZE as BUTTON_SIZE } from "../button/index.js";
-import { getOverrides } from "../helpers/overrides.js";
-import { ProgressBar } from "../progress-bar/index.js";
-import { Spinner, SIZE as SPINNER_SIZE } from "../spinner/index.js";
+import { LocaleContext } from "../locale/index";
+import { useStyletron } from "../styles/index";
+import { Button, KIND, SHAPE, SIZE as BUTTON_SIZE } from "../button/index";
+import { getOverrides } from "../helpers/overrides";
+import { ProgressBar } from "../progress-bar/index";
+import { Spinner, SIZE as SPINNER_SIZE } from "../spinner/index";
 
 import {
   StyledRoot,
@@ -17,8 +17,8 @@ import {
   StyledContentSeparator,
   StyledErrorMessage,
   StyledHiddenInput,
-} from "./styled-components.js";
-import type { PropsT } from "./types.js";
+} from "./styled-components";
+import type { PropsT } from "./types";
 
 function prependStyleProps(styleProps) {
   return Object.keys(styleProps).reduce((nextStyleProps, currentKey) => {

@@ -1,10 +1,8 @@
-
-
-export type PaginationLocaleT = {|
-  prev: string,
-  next: string,
-  preposition: string,
-|};
+export type PaginationLocaleT = {
+  prev: string;
+  next: string;
+  preposition: string;
+};
 
 const locale = {
   prev: "Prev",

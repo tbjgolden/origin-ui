@@ -1,4 +1,4 @@
-import type { FontTokensT } from "../types.js";
+import type { FontTokensT } from "../types";
 
 export const fontTokens: FontTokensT = {
   primaryFontFamily:

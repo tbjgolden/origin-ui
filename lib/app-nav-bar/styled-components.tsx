@@ -1,35 +1,37 @@
-import { styled, withStyle } from "../styles/index.js";
-import { StyledListItem } from "../menu/index.js";
-import { KIND } from "./constants.js";
+import { styled, withStyle } from "../styles/index";
+import { StyledListItem } from "../menu/index";
+import { KIND } from "./constants";
 
 const StyledButton = styled<{ $isFocusVisible: boolean }>(
   "button",
-  ({ $theme, $isFocusVisible }) => ({
-    boxSizing: "border-box",
-    display: "flex",
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "transparent",
-    color: $theme.colors.contentPrimary,
-    borderLeftWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    paddingTop: "0",
-    paddingBottom: "0",
-    paddingLeft: "0",
-    paddingRight: "0",
-    marginLeft: 0,
-    marginTop: 0,
-    marginRight: 0,
-    marginBottom: 0,
-    outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
-    outlineOffset: "-3px",
-    WebkitAppearance: "none",
-    cursor: "pointer",
-  })
+  ({ $theme, $isFocusVisible }) => {
+    return {
+      boxSizing: "border-box",
+      display: "flex",
+      flexDirection: "row",
+      flexWrap: "nowrap",
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: "transparent",
+      color: $theme.colors.contentPrimary,
+      borderLeftWidth: 0,
+      borderTopWidth: 0,
+      borderRightWidth: 0,
+      borderBottomWidth: 0,
+      paddingTop: "0",
+      paddingBottom: "0",
+      paddingLeft: "0",
+      paddingRight: "0",
+      marginLeft: 0,
+      marginTop: 0,
+      marginRight: 0,
+      marginBottom: 0,
+      outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
+      outlineOffset: "-3px",
+      WebkitAppearance: "none",
+      cursor: "pointer",
+    };
+  }
 );
 
 export const StyledRoot = styled<{}>("div", (props) => {
@@ -66,26 +68,30 @@ export const StyledSpacing = styled<{}>("div", (props) => {
   };
 });
 
-export const StyledAppName = styled<{}>("div", ({ $theme }) => ({
-  ...$theme.typography.font550,
-  color: $theme.colors.primary,
-  textDecoration: "none",
-  [$theme.mediaQuery.medium]: {
-    ...$theme.typography.font650,
-  },
-}));
+export const StyledAppName = styled<{}>("div", ({ $theme }) => {
+  return {
+    ...$theme.typography.font550,
+    color: $theme.colors.primary,
+    textDecoration: "none",
+    [$theme.mediaQuery.medium]: {
+      ...$theme.typography.font650,
+    },
+  };
+});
 
 export const StyledSideMenuButton = withStyle<typeof StyledButton, {}>(
   StyledButton,
-  ({ $theme }) => ({
-    ...($theme.direction === "rtl"
-      ? { marginLeft: $theme.sizing.scale600 }
-      : { marginRight: $theme.sizing.scale600 }),
-    paddingTop: $theme.sizing.scale100,
-    paddingBottom: $theme.sizing.scale100,
-    paddingLeft: $theme.sizing.scale100,
-    paddingRight: $theme.sizing.scale100,
-  })
+  ({ $theme }) => {
+    return {
+      ...($theme.direction === "rtl"
+        ? { marginLeft: $theme.sizing.scale600 }
+        : { marginRight: $theme.sizing.scale600 }),
+      paddingTop: $theme.sizing.scale100,
+      paddingBottom: $theme.sizing.scale100,
+      paddingLeft: $theme.sizing.scale100,
+      paddingRight: $theme.sizing.scale100,
+    };
+  }
 );
 
 export const StyledPrimaryMenuContainer = styled<{}>("div", ({ $theme }) => {
@@ -156,11 +162,13 @@ export const StyledUserMenuButton = StyledButton;
 
 export const StyledUserMenuProfileListItem = withStyle<typeof StyledListItem, {}>(
   StyledListItem,
-  ({ $theme }) => ({
-    paddingTop: "0",
-    paddingBottom: "0",
-    ...($theme.direction === "rtl" ? { paddingLeft: "0" } : { paddingRight: "0" }),
-  })
+  ({ $theme }) => {
+    return {
+      paddingTop: "0",
+      paddingBottom: "0",
+      ...($theme.direction === "rtl" ? { paddingLeft: "0" } : { paddingRight: "0" }),
+    };
+  }
 );
 
 export const StyledUserProfileTileContainer = styled<{}>("div", ({ $theme }) => {

@@ -4,9 +4,11 @@ import type {
   StatefulComponentContainerPropsT,
   StateChangeTypeT,
   StateReducerT,
-} from "./types.js";
+} from "./types";
 
-const defaultStateReducer: StateReducerT = (type, nextState) => nextState;
+const defaultStateReducer: StateReducerT = (type, nextState) => {
+  return nextState;
+};
 
 class StatefulContainer extends React.Component<
   StatefulComponentContainerPropsT,
@@ -35,7 +37,9 @@ class StatefulContainer extends React.Component<
       this.setState(changes);
       return;
     }
-    this.setState((prevState) => stateReducer(type, changes, prevState));
+    this.setState((prevState) => {
+      return stateReducer(type, changes, prevState);
+    });
   }
 
   render() {

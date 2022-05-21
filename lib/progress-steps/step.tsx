@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   StyledStep,
   StyledIconContainer,
@@ -9,9 +9,9 @@ import {
   StyledContentTitle,
   StyledContentTail,
   StyledContentDescription,
-} from "./styled-components.js";
+} from "./styled-components";
 
-import type { StepPropsT } from "./types.js";
+import type { StepPropsT } from "./types";
 
 function Step({
   overrides = {},

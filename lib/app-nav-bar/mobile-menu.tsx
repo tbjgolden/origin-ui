@@ -1,20 +1,17 @@
 import * as React from "react";
 
-import { Button } from "../button/index.js";
-import { Drawer, ANCHOR } from "../drawer/index.js";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import ArrowLeft from "../icon/arrow-left.js";
-import MenuIcon from "../icon/menu.js";
-import { MenuAdapter, ListItemLabel, ARTWORK_SIZES } from "../list/index.js";
-import { StatefulMenu } from "../menu/index.js";
+import { Button } from "../button/index";
+import { Drawer, ANCHOR } from "../drawer/index";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import ArrowLeft from "../icon/arrow-left";
+import MenuIcon from "../icon/menu";
+import { MenuAdapter, ListItemLabel, ARTWORK_SIZES } from "../list/index";
+import { StatefulMenu } from "../menu/index";
 
-import {
-  StyledSideMenuButton,
-  StyledUserMenuProfileListItem,
-} from "./styled-components.js";
-import type { AppNavBarPropsT } from "./types.js";
-import UserProfileTile from "./user-profile-tile.js";
-import { defaultMapItemToNode } from "./utils.js";
+import { StyledSideMenuButton, StyledUserMenuProfileListItem } from "./styled-components";
+import type { AppNavBarPropsT } from "./types";
+import UserProfileTile from "./user-profile-tile";
+import { defaultMapItemToNode } from "./utils";
 
 const USER_TITLE_ITEM = "USER_TITLE_ITEM";
 const USER_MENU_ITEM = "USER_MENU_ITEM";
@@ -77,7 +74,7 @@ export default function MobileMenu(props: AppNavBarPropsT) {
   } = props;
 
   const items = [
-    ...(userItems.length
+    ...(userItems.length > 0
       ? [
           {
             item: { ...rest },
@@ -126,7 +123,9 @@ export default function MobileMenu(props: AppNavBarPropsT) {
         },
       },
       // Removes the close icon from the drawer
-      Close: () => null,
+      Close: () => {
+        return null;
+      },
     },
     drawerProps.overrides
   );
@@ -175,11 +174,8 @@ export default function MobileMenu(props: AppNavBarPropsT) {
             if (item.PARENT_MENU_ITEM) {
               // Remove current parent item selected to return to
               // from the ancestors list (`ancestorNavItems[ancestorArrLength - 1]`)
-              const updatedAncestorNavItems = ancestorNavItems.slice(
-                0,
-                ancestorNavItems.length - 1
-              );
-              const isTopLevel = !updatedAncestorNavItems.length;
+              const updatedAncestorNavItems = ancestorNavItems.slice(0, -1);
+              const isTopLevel = updatedAncestorNavItems.length === 0;
               if (isTopLevel) {
                 // Set to the initial `navItems` value
                 setCurrentNavItems(items);
@@ -200,7 +196,7 @@ export default function MobileMenu(props: AppNavBarPropsT) {
               props.onMainItemSelect(item);
             }
 
-            if (item.children && item.children.length) {
+            if (item.children && item.children.length > 0) {
               const parentItem = { ...item, [PARENT_MENU_ITEM]: true };
               setAncestorNavItems([...ancestorNavItems, item]);
               setCurrentNavItems([parentItem, ...item.children]);

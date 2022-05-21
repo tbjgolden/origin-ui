@@ -1,18 +1,16 @@
+import type { BorderT, Globals, LineStyle } from "../themes/types";
 
-
-import type { BorderT, Globals, LineStyle } from "../themes/types.js";
-
-export function hexToRgb(hex: string = "", alpha: string = "1") {
-  const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+export function hexToRgb(hex = "", alpha = "1") {
+  const shorthandRegex = /^#?([\da-f])([\da-f])([\da-f])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   });
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  const result = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(hex);
   return result
-    ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(
-        result[3],
+    ? `rgba(${Number.parseInt(result[1], 16)}, ${Number.parseInt(
+        result[2],
         16
-      )}, ${alpha})`
+      )}, ${Number.parseInt(result[3], 16)}, ${alpha})`
     : null;
 }
 
@@ -23,20 +21,20 @@ export const ellipsisText = {
   wordWrap: "normal",
 };
 
-export function expandBorderStyles(borderStyles: BorderT): {|
-  borderTopStyle: Globals | LineStyle,
-  borderTopWidth: string,
-  borderTopColor: string,
-  borderBottomWidth: string,
-  borderBottomStyle: Globals | LineStyle,
-  borderBottomColor: string,
-  borderLeftWidth: string,
-  borderLeftStyle: Globals | LineStyle,
-  borderLeftColor: string,
-  borderRightWidth: string,
-  borderRightStyle: Globals | LineStyle,
-  borderRightColor: string,
-|} {
+export function expandBorderStyles(borderStyles: BorderT): {
+  borderTopStyle: Globals | LineStyle;
+  borderTopWidth: string;
+  borderTopColor: string;
+  borderBottomWidth: string;
+  borderBottomStyle: Globals | LineStyle;
+  borderBottomColor: string;
+  borderLeftWidth: string;
+  borderLeftStyle: Globals | LineStyle;
+  borderLeftColor: string;
+  borderRightWidth: string;
+  borderRightStyle: Globals | LineStyle;
+  borderRightColor: string;
+} {
   return {
     borderTopWidth: borderStyles.borderWidth,
     borderTopStyle: borderStyles.borderStyle,

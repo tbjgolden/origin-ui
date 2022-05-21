@@ -1,6 +1,8 @@
-import type { OptionT, ValueT } from "../types.js";
+import type { OptionT, ValueT } from "../types";
 
-const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+const escapeRegExp = (str) => {
+  return str.replace(/[$()*+.?[\\\]^{|}]/g, "\\$&");
+};
 
 const isValid = (value) => {
   return typeof value !== "undefined" && value !== null && value !== "";

@@ -1,6 +1,6 @@
-export { default as Button } from "./button.js";
+export { default as Button } from "./button";
 // Constants
-export { KIND, SIZE, SHAPE } from "./constants.js";
+export { KIND, SIZE, SHAPE } from "./constants";
 // Styled elements
 export {
   BaseButton as StyledBaseButton,
@@ -8,6 +8,6 @@ export {
   EndEnhancer as StyledEndEnhancer,
   LoadingSpinner as StyledLoadingSpinner,
   LoadingSpinnerContainer as StyledLoadingSpinnerContainer,
-} from "./styled-components.js";
+} from "./styled-components";
 // Types
-export type * from "./types.js";
+export type * from "./types";

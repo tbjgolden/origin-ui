@@ -1,20 +1,20 @@
 import * as React from "react";
-import { useStyletron } from "../styles/index.js";
-import PinHead from "./pin-head.js";
-import { getOverrides } from "../helpers/overrides.js";
+import { useStyletron } from "../styles/index";
+import PinHead from "./pin-head";
+import { getOverrides } from "../helpers/overrides";
 import {
   StyledFloatingMarkerRoot,
   StyledFloatingMarkerAnchorContainer,
   StyledFloatingMarkerPinHeadContainer,
-} from "./styled-components.js";
-import type { FloatingMarkerPropsT } from "./types.js";
+} from "./styled-components";
+import type { FloatingMarkerPropsT } from "./types";
 import {
   FLOATING_MARKER_ANCHOR_POSITIONS,
   PINHEAD_SIZES_SHAPES,
   PINHEAD_TYPES,
   FLOATING_MARKER_ANCHOR_TYPES,
   PINHEAD_DIMENSIONS,
-} from "./constants.js";
+} from "./constants";
 
 function getAnchorPinHeadSize(anchorType) {
   if (anchorType === FLOATING_MARKER_ANCHOR_TYPES.circle) {

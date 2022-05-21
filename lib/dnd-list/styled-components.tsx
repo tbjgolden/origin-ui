@@ -1,6 +1,6 @@
 
-import { styled } from "../styles/index.js";
-import type { SharedStylePropsArgT } from "./types.js";
+import { styled } from "../styles/index";
+import type { SharedStylePropsArgT } from "./types";
 
 /**
  * Main component container element

@@ -1,4 +1,4 @@
-import type { AnimationT } from "../types.js";
+import type { AnimationT } from "../types";
 
 const animation: AnimationT = {
   timing100: "100ms",

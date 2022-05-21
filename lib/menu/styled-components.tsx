@@ -1,6 +1,6 @@
 import * as React from "react";
-import { styled, withWrapper } from "../styles/index.js";
-import { OPTION_LIST_SIZE } from "./constants.js";
+import { styled, withWrapper } from "../styles/index";
+import { OPTION_LIST_SIZE } from "./constants";
 
 type StyledPropsT = {
   $disabled?: boolean;
@@ -137,30 +137,30 @@ export const StyledListItemElement = styled<StyledPropsT>("li", (props) => {
   };
 });
 
-export const StyledListItem = withWrapper(
-  StyledListItemElement,
-  (Styled) =>
-    function StyledListItem({ item, ...restProps }) {
-      return <Styled {...restProps} />;
-    }
-);
+export const StyledListItem = withWrapper(StyledListItemElement, (Styled) => {
+  return function StyledListItem({ item, ...restProps }) {
+    return <Styled {...restProps} />;
+  };
+});
 
-export const StyledListItemProfile = styled<StyledPropsT>("li", ({ $theme }) => ({
-  position: "relative",
-  display: "flex",
-  alignItems: "center",
-  cursor: "pointer",
-  paddingTop: $theme.sizing.scale300,
-  paddingBottom: $theme.sizing.scale300,
-  paddingRight: $theme.sizing.scale800,
-  paddingLeft: $theme.sizing.scale800,
-  transitionProperty: "color, background-color",
-  transitionDuration: $theme.animation.timing200,
-  transitionTimingFunction: $theme.animation.easeOutCurve,
-  ":hover": {
-    backgroundColor: $theme.colors.menuFillHover,
-  },
-}));
+export const StyledListItemProfile = styled<StyledPropsT>("li", ({ $theme }) => {
+  return {
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
+    paddingTop: $theme.sizing.scale300,
+    paddingBottom: $theme.sizing.scale300,
+    paddingRight: $theme.sizing.scale800,
+    paddingLeft: $theme.sizing.scale800,
+    transitionProperty: "color, background-color",
+    transitionDuration: $theme.animation.timing200,
+    transitionTimingFunction: $theme.animation.easeOutCurve,
+    ":hover": {
+      backgroundColor: $theme.colors.menuFillHover,
+    },
+  };
+});
 
 export const StyledProfileImgContainer = styled("div", {
   width: "60px",
@@ -181,39 +181,47 @@ export const StyledProfileImg = styled("img", {
 
 export const StyledProfileLabelsContainer = styled<StyledPropsT>(
   "div",
-  ({ $theme: { direction, sizing } }) => ({
-    alignSelf: direction === "rtl" ? "flex-end" : "flex-start",
-    display: "flex",
-    flexDirection: "column",
-    ...(direction === "rtl"
-      ? { marginRight: sizing.scale600 }
-      : { marginLeft: sizing.scale600 }),
-  })
+  ({ $theme: { direction, sizing } }) => {
+    return {
+      alignSelf: direction === "rtl" ? "flex-end" : "flex-start",
+      display: "flex",
+      flexDirection: "column",
+      ...(direction === "rtl"
+        ? { marginRight: sizing.scale600 }
+        : { marginLeft: sizing.scale600 }),
+    };
+  }
 );
 
-export const StyledProfileTitle = styled<StyledPropsT>("h6", ({ $theme }) => ({
-  ...$theme.typography.font350,
-  color: $theme.colors.contentPrimary,
-  marginTop: 0,
-  marginBottom: 0,
-  marginLeft: 0,
-  marginRight: 0,
-}));
+export const StyledProfileTitle = styled<StyledPropsT>("h6", ({ $theme }) => {
+  return {
+    ...$theme.typography.font350,
+    color: $theme.colors.contentPrimary,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  };
+});
 
-export const StyledProfileSubtitle = styled<StyledPropsT>("p", ({ $theme }) => ({
-  ...$theme.typography.font200,
-  color: $theme.colors.contentPrimary,
-  marginTop: 0,
-  marginBottom: 0,
-  marginLeft: 0,
-  marginRight: 0,
-}));
+export const StyledProfileSubtitle = styled<StyledPropsT>("p", ({ $theme }) => {
+  return {
+    ...$theme.typography.font200,
+    color: $theme.colors.contentPrimary,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  };
+});
 
-export const StyledProfileBody = styled<StyledPropsT>("p", ({ $theme }) => ({
-  ...$theme.typography.font100,
-  color: $theme.colors.contentPrimary,
-  marginTop: 0,
-  marginBottom: 0,
-  marginLeft: 0,
-  marginRight: 0,
-}));
+export const StyledProfileBody = styled<StyledPropsT>("p", ({ $theme }) => {
+  return {
+    ...$theme.typography.font100,
+    color: $theme.colors.contentPrimary,
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+  };
+});

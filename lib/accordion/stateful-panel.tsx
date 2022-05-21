@@ -1,13 +1,15 @@
 import * as React from "react";
-import StatefulContainer from "./stateful-panel-container.js";
-import Panel from "./panel.js";
-import type { StatefulPanelPropsT } from "./types.js";
+import StatefulContainer from "./stateful-panel-container";
+import Panel from "./panel";
+import type { StatefulPanelPropsT } from "./types";
 
 export default function StatefulPanel(props: StatefulPanelPropsT) {
   const { children, ...restProps } = props;
   return (
     <StatefulContainer {...restProps}>
-      {(componentProps) => <Panel {...componentProps}>{children}</Panel>}
+      {(componentProps) => {
+        return <Panel {...componentProps}>{children}</Panel>;
+      }}
     </StatefulContainer>
   );
 }

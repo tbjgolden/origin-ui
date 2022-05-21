@@ -1,5 +1,5 @@
 import * as React from "react";
-import { getOverrides } from "../helpers/overrides.js";
+import { getOverrides } from "../helpers/overrides";
 import {
   StyledNumberStep,
   StyledNumberIcon,
@@ -7,10 +7,10 @@ import {
   StyledContentTitle,
   StyledNumberContentTail,
   StyledContentDescription,
-} from "./styled-components.js";
-import Check from "../icon/check.js";
+} from "./styled-components";
+import Check from "../icon/check";
 
-import type { NumberedStepPropsT } from "./types.js";
+import type { NumberedStepPropsT } from "./types";
 
 function NumberedStep({
   overrides = {},

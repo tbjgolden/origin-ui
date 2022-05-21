@@ -1,6 +1,6 @@
 
-import { styled } from "../styles/index.js";
-import { SIZE, type SizeT } from "../input/index.js";
+import { styled } from "../styles/index";
+import { SIZE, type SizeT } from "../input/index";
 
 export const IconWrapper = styled<{ $size: SizeT }>("div", (props) => {
   const { $size, $theme } = props;

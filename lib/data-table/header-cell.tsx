@@ -1,32 +1,30 @@
-
-
 import * as React from "react";
 
-import { Checkbox } from "../checkbox/index.js";
-import { useStyletron } from "../styles/index.js";
-import ChevronDown from "../icon/chevron-down.js";
-import ChevronUp from "../icon/chevron-up.js";
+import { Checkbox } from "../checkbox/index";
+import { useStyletron } from "../styles/index";
+import ChevronDown from "../icon/chevron-down";
+import ChevronUp from "../icon/chevron-up";
 
-import { SORT_DIRECTIONS } from "./constants.js";
-import type { SortDirectionsT } from "./types.js";
-import { isFocusVisible } from "../utils/focusVisible.js";
+import { SORT_DIRECTIONS } from "./constants";
+import type { SortDirectionsT } from "./types";
+import { isFocusVisible } from "../utils/focusVisible";
 
-type HeaderCellPropsT = {|
-  index: number,
-  isHovered: boolean,
-  isMeasured?: boolean,
-  isSelectable: boolean,
-  isSelectedAll: boolean,
-  isSelectedIndeterminate: boolean,
-  onMouseEnter: (number) => void,
-  onMouseLeave: (number) => void,
-  onSelectAll: () => void,
-  onSelectNone: () => void,
-  onSort: (number) => void,
-  sortable: boolean,
-  sortDirection: SortDirectionsT,
-  title: string,
-|};
+type HeaderCellPropsT = {
+  index: number;
+  isHovered: boolean;
+  isMeasured?: boolean;
+  isSelectable: boolean;
+  isSelectedAll: boolean;
+  isSelectedIndeterminate: boolean;
+  onMouseEnter: (number) => void;
+  onMouseLeave: (number) => void;
+  onSelectAll: () => void;
+  onSelectNone: () => void;
+  onSort: (number) => void;
+  sortable: boolean;
+  sortDirection: SortDirectionsT;
+  title: string;
+};
 
 const HeaderCell = React.forwardRef<HeaderCellPropsT, HTMLDivElement>((props, ref) => {
   const [css, theme] = useStyletron();

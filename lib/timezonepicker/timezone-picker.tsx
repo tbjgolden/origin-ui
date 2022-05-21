@@ -3,12 +3,12 @@
 import * as React from "react";
 import { format, getTimezoneOffset } from "date-fns-tz";
 
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
-import { LocaleContext } from "../locale/index.js";
-import { Select } from "../select/index.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
+import { LocaleContext } from "../locale/index";
+import { Select } from "../select/index";
 
-import type { TimezonePickerPropsT, TimezonePickerStateT, TimezoneT } from "./types.js";
-import { zones } from "./tzdata.js";
+import type { TimezonePickerPropsT, TimezonePickerStateT, TimezoneT } from "./types";
+import { zones } from "./tzdata";
 
 class TimezonePicker extends React.Component<TimezonePickerPropsT, TimezonePickerStateT> {
   state = { timezones: [], value: null };
@@ -21,7 +21,9 @@ class TimezonePicker extends React.Component<TimezonePickerPropsT, TimezonePicke
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         this.setState({ timezones, value: tz });
 
-        const option = timezones.find((o) => o.id === tz);
+        const option = timezones.find((o) => {
+          return o.id === tz;
+        });
         option && this.props.onChange && this.props.onChange(option);
       } else {
         this.setState({ timezones });
@@ -38,7 +40,9 @@ class TimezonePicker extends React.Component<TimezonePickerPropsT, TimezonePicke
       const timezones = this.buildTimezones(this.props.date || new Date());
       this.setState({ timezones });
 
-      const option = timezones.find((o) => o.id === this.state.value);
+      const option = timezones.find((o) => {
+        return o.id === this.state.value;
+      });
       option && this.props.onChange && this.props.onChange(option);
     }
   }
@@ -67,7 +71,7 @@ class TimezonePicker extends React.Component<TimezonePickerPropsT, TimezonePicke
           // offset output is in minutes, difference of UTC and this zone (negative for hours ahead of UTC, positive for hours behind)
           offset: offsetMinutes === 0 ? 0 : offsetMinutes * -1,
         });
-      } catch (error) {
+      } catch {
         // Ignores timezones that are not available within a user's browser/operating system
         console.error(`failed to format zone name ${zoneName}`);
       }
@@ -107,32 +111,34 @@ class TimezonePicker extends React.Component<TimezonePickerPropsT, TimezonePicke
 
     return (
       <LocaleContext.Consumer>
-        {(locale) => (
-          <OverriddenSelect
-            aria-label={locale.datepicker.timezonePickerAriaLabel}
-            options={options}
-            clearable={false}
-            disabled={this.props.disabled}
-            error={this.props.error}
-            positive={this.props.positive}
-            size={this.props.size}
-            onChange={(params) => {
-              if (params.type === "clear") {
-                this.setState({ value: "" });
-                this.props.onChange && this.props.onChange(null);
-              } else {
-                this.setState({ value: params.option.id });
-                this.props.onChange && this.props.onChange(params.option);
+        {(locale) => {
+          return (
+            <OverriddenSelect
+              aria-label={locale.datepicker.timezonePickerAriaLabel}
+              options={options}
+              clearable={false}
+              disabled={this.props.disabled}
+              error={this.props.error}
+              positive={this.props.positive}
+              size={this.props.size}
+              onChange={(params) => {
+                if (params.type === "clear") {
+                  this.setState({ value: "" });
+                  this.props.onChange && this.props.onChange(null);
+                } else {
+                  this.setState({ value: params.option.id });
+                  this.props.onChange && this.props.onChange(params.option);
+                }
+              }}
+              value={
+                this.props.value || this.state.value
+                  ? [{ id: this.props.value || this.state.value }]
+                  : null
               }
-            }}
-            value={
-              this.props.value || this.state.value
-                ? [{ id: this.props.value || this.state.value }]
-                : null
-            }
-            {...selectProps}
-          />
-        )}
+              {...selectProps}
+            />
+          );
+        }}
       </LocaleContext.Consumer>
     );
   }

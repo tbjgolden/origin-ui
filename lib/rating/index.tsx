@@ -1,4 +1,4 @@
-export { default as StarRating } from "./star-rating.js";
-export { default as EmoticonRating } from "./emoticon-rating.js";
-export * from "./styled-components.js";
-export type * from "./types.js";
+export { default as StarRating } from "./star-rating";
+export { default as EmoticonRating } from "./emoticon-rating";
+export * from "./styled-components";
+export type * from "./types";

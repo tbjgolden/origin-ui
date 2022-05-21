@@ -1,12 +1,12 @@
 import * as React from "react";
-import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
+import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import {
   Root as StyledRoot,
   TabBar as StyledTabBar,
   TabContent as StyledTabContent,
-} from "./styled-components.js";
-import type { TabsPropsT, SharedStylePropsArgT } from "./types.js";
-import { ORIENTATION } from "./constants.js";
+} from "./styled-components";
+import type { TabsPropsT, SharedStylePropsArgT } from "./types";
+import { ORIENTATION } from "./constants";
 
 export default class Tabs extends React.Component<TabsPropsT> {
   static defaultProps: $Shape<TabsPropsT> = {
@@ -35,7 +35,9 @@ export default class Tabs extends React.Component<TabsPropsT> {
         active: key === activeKey,
         disabled: disabled || child.props.disabled,
         $orientation: orientation,
-        onSelect: () => this.onChange({ activeKey: key }),
+        onSelect: () => {
+          return this.onChange({ activeKey: key });
+        },
         children: child.props.title,
         overrides: mergeOverrides(overrides, child.props.overrides || {}),
       });

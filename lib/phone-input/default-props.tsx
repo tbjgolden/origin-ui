@@ -2,7 +2,7 @@ import {
   SIZE,
   DEFAULT_MAX_DROPDOWN_HEIGHT,
   DEFAULT_MAX_DROPDOWN_WIDTH,
-} from "./constants.js";
+} from "./constants";
 
 const defaultProps = {
   "aria-label": "Please enter a phone number without the country dial code.",
