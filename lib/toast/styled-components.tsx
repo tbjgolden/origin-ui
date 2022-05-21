@@ -1,5 +1,3 @@
-
-
 import { styled } from "../styles/index.js";
 import { getSvgStyles } from "../icon/styled-components.js";
 import { KIND, PLACEMENT, TYPE } from "./constants.js";
@@ -147,12 +145,14 @@ export const Body = styled<SharedStylePropsArgT>(
   }
 );
 
-export const CloseIconSvg = styled<{
-  ...SharedStylePropsArgT,
-  $size: number | string,
-  $color: string,
-}>(
-  "svg",
+export const CloseIconSvg =
+  styled <
+  {
+    ...SharedStylePropsArgT,
+    $size: number | string,
+    $color: string,
+  } >
+  ("svg",
   ({
     $theme,
     $size,
@@ -160,14 +160,13 @@ export const CloseIconSvg = styled<{
     $isFocusVisible,
   }: SharedStylePropsArgT & {
     // flowlint-next-line unclear-type:off
-    $size: any,
-    $color: string,
-    $theme: ThemeT,
+    $size: any;
+    $color: string;
+    $theme: ThemeT;
   }): StyleObject => ({
     ...getSvgStyles({ $theme, $size, $color }),
     cursor: "pointer",
     width: $size || "16px",
     flexShrink: 0,
     outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
-  })
-);
+  }));

@@ -1,5 +1,3 @@
-
-
 import deepMerge from "../../utils/deep-merge.js";
 import { LightTheme } from "../light-theme/light-theme.js";
 import {

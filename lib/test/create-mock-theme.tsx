@@ -1,5 +1,3 @@
-
-
 /**
  * Given a real theme, creates a mock theme object where the values are
  * just strings representing the theme value. These mock objects are

@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import { StyledTreeItemList, StyledTreeItem } from "./styled-components.js";

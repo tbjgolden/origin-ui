@@ -1,5 +1,3 @@
-
-
 export const NEEDLE_SIZES = Object.freeze({
   none: "none",
   short: "short",

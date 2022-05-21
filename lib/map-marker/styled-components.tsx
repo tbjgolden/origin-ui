@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import {
   BADGE_ENHANCER_STYLES,
@@ -24,9 +23,9 @@ export const getAnchorTransform = (anchor: AnchorPositionsT, anchorSize: number)
   }[anchor]);
 
 export const StyledDragShadowContainer = styled<{
-  $height: number,
-  $width: number,
-  $dragging: boolean,
+  $height: number;
+  $width: number;
+  $dragging: boolean;
 }>("div", ({ $theme, $height, $width, $dragging }) => ({
   width: `${$width}px`,
   height: `${$height}px`,
@@ -38,8 +37,8 @@ export const StyledDragShadowContainer = styled<{
 }));
 
 export const StyledDragShadow = styled<{
-  $background: string,
-  $width: number,
+  $background: string;
+  $width: number;
 }>("div", ({ $theme, $background, $width }) => ({
   backgroundColor: $background,
   borderRadius: "50%",
@@ -50,8 +49,8 @@ export const StyledDragShadow = styled<{
 }));
 
 export const StyledNeedle = styled<{
-  $background?: string,
-  $height: number,
+  $background?: string;
+  $height: number;
 }>("div", ({ $theme, $background, $height }) => ({
   backgroundColor: $background,
   width: "4px",
@@ -60,7 +59,7 @@ export const StyledNeedle = styled<{
 }));
 
 export const StyledFloatingMarkerRoot = styled<{
-  $size: number,
+  $size: number;
 }>("div", ({ $size }) => ({
   position: "relative",
   height: `${$size}px`,
@@ -68,8 +67,8 @@ export const StyledFloatingMarkerRoot = styled<{
 }));
 
 export const StyledFloatingMarkerPinHeadContainer = styled<{
-  $anchor: AnchorPositionsT,
-  $anchorSize: number,
+  $anchor: AnchorPositionsT;
+  $anchorSize: number;
 }>("div", ({ $theme, $anchor, $anchorSize }) => ({
   position: "absolute",
   transition: `${$theme.animation.timing300} ${$theme.animation.easeOutCurve} all`,
@@ -87,8 +86,8 @@ export const StyledFixedMarkerRoot = styled<{}>("div", () => ({
 }));
 
 export const StyledFixedMarkerDragContainer = styled<{
-  $translateAmount: number,
-  $performTranslate: boolean,
+  $translateAmount: number;
+  $performTranslate: boolean;
 }>("div", ({ $theme, $translateAmount, $performTranslate }) => {
   return {
     transform: `translateY(${$performTranslate ? `${$translateAmount}px` : "0px"})`,
@@ -100,9 +99,9 @@ export const StyledFixedMarkerDragContainer = styled<{
 });
 
 export const StyledOuterXXSmallAnchor = styled<{
-  $round: boolean,
-  $background: string,
-  $size: number,
+  $round: boolean;
+  $background: string;
+  $size: number;
 }>("div", ({ $theme, $round, $background, $size }) => ({
   backgroundColor: $background,
   display: "flex",
@@ -115,9 +114,9 @@ export const StyledOuterXXSmallAnchor = styled<{
 }));
 
 export const StyledInnerXXSmallAnchor = styled<{
-  $round: boolean,
-  $color: string,
-  $size: number,
+  $round: boolean;
+  $color: string;
+  $size: number;
 }>("div", ({ $round, $color, $size }) => ({
   backgroundColor: $color,
   height: `${$size}px`,
@@ -126,9 +125,9 @@ export const StyledInnerXXSmallAnchor = styled<{
 }));
 
 export const StyledOuterXSmallAnchor = styled<{
-  $round: boolean,
-  $background: string,
-  $size: number,
+  $round: boolean;
+  $background: string;
+  $size: number;
 }>("div", ({ $theme, $round, $background, $size }) => ({
   backgroundColor: $background,
   display: "flex",
@@ -141,9 +140,9 @@ export const StyledOuterXSmallAnchor = styled<{
 }));
 
 export const StyledInnerXSmallAnchor = styled<{
-  $round: boolean,
-  $color: string,
-  $size: number,
+  $round: boolean;
+  $color: string;
+  $size: number;
 }>("div", ({ $round, $color, $size }) => ({
   backgroundColor: $color,
   height: `${$size}px`,
@@ -152,11 +151,11 @@ export const StyledInnerXSmallAnchor = styled<{
 }));
 
 export const StyledPinHead = styled<{
-  $height: number,
-  $background: string,
-  $gridTemplateColumns: string,
-  $type: string,
-  $forceCircle: boolean,
+  $height: number;
+  $background: string;
+  $gridTemplateColumns: string;
+  $type: string;
+  $forceCircle: boolean;
 }>(
   "div",
   ({ $theme, $height, $background, $gridTemplateColumns, $type, $forceCircle }) => {
@@ -190,8 +189,8 @@ export const StyledPinHead = styled<{
 );
 
 export const StyledStrokedLabelContainer = styled<{
-  $position: LabelEnhancerPositionT,
-  $labelOffset: number,
+  $position: LabelEnhancerPositionT;
+  $labelOffset: number;
 }>("div", ({ $position, $theme, $labelOffset }) => {
   const staticLabelOffset = 4;
   const positions = {
@@ -235,9 +234,9 @@ export const StyledStrokedLabelContainer = styled<{
 });
 
 export const StyledStrokedLabel = styled<{
-  $stroked: boolean,
-  $position: LabelEnhancerPositionT,
-  $size: PinHeadSizeT,
+  $stroked: boolean;
+  $position: LabelEnhancerPositionT;
+  $size: PinHeadSizeT;
 }>("div", ({ $theme, $size }) => {
   const strokeWidth = 1.5;
   const strokeColor = $theme.colors.backgroundPrimary;
@@ -264,8 +263,8 @@ export const StyledStrokedLabel = styled<{
 });
 
 export const StyledBadgeEnhancerRoot = styled<{
-  $size: BadgeEnhancerSizeT,
-  $position: BadgePositionT,
+  $size: BadgeEnhancerSizeT;
+  $position: BadgePositionT;
 }>("div", ({ $theme, $size, $position }) => {
   const { x, y } = $position;
   return {
@@ -289,9 +288,9 @@ export const RelativeContainer = styled<{}>("div", () => {
 });
 
 export const StyledContentItem = styled<{
-  $color: string,
-  $height: number,
-  $size: PinHeadSizeT,
+  $color: string;
+  $height: number;
+  $size: PinHeadSizeT;
 }>("div", ({ $theme, $color, $height, $size }) => {
   return {
     ...$theme.typography[LABEL_SIZES[$size]],

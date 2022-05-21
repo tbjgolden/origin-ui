@@ -1,4 +1,3 @@
-
 export { default as Button } from "./button.js";
 // Constants
 export { KIND, SIZE, SHAPE } from "./constants.js";

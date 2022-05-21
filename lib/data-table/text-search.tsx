@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 import { useStyletron } from "../styles/index.js";
@@ -39,7 +37,7 @@ export function splitByQuery(text: string, query: string): string[] {
   return substrings;
 }
 
-export function HighlightCellText(props: { text: string, query: string }) {
+export function HighlightCellText(props: { text: string; query: string }) {
   const [css, theme] = useStyletron();
 
   if (!props.query) {

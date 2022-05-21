@@ -1,4 +1,3 @@
-
 import { StyledSpinner } from "./styled-components.js";
 
 export { StyledSpinner as Spinner };

@@ -1,5 +1,3 @@
-
-
 // The `CountrySelect` component is not designed to be used
 // as a standalone component and we should deprecate it
 // in the next v11 major version in favor of `CountryPicker`.

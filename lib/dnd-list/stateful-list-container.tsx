@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import type {
   StateT,
@@ -30,9 +29,9 @@ class StatefulListContainer extends React.Component<
     newIndex,
     targetRect,
   }: {
-    oldIndex: number,
-    newIndex: number,
-    targetRect: ClientRect,
+    oldIndex: number;
+    newIndex: number;
+    targetRect: ClientRect;
   }) => {
     const newItemsState =
       newIndex === -1

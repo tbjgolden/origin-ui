@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { Button } from "../button/index.js";
 import type { ButtonPropsT } from "../button/types.js";

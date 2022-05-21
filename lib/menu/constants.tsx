@@ -1,5 +1,3 @@
-
-
 export const STATE_CHANGE_TYPES = {
   click: "click",
   moveUp: "moveUp",

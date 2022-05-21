@@ -1,6 +1,3 @@
-
-
-
 export { DURATION, PLACEMENT } from "./constants.js";
 export { default as SnackbarElement } from "./snackbar-element.js";
 export { default as SnackbarProvider, useSnackbar } from "./snackbar-context.js";

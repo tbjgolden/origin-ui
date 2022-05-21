@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 // Components
 import MaybeChildMenu from "./maybe-child-menu.js";

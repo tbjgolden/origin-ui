@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { getOverrides } from "../helpers/overrides.js";
 import { StyledCell as DefaultStyledCell } from "./styled-components.js";

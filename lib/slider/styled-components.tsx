@@ -1,4 +1,3 @@
-
 import { getTrackBackground } from "react-range";
 
 import { styled } from "../styles/index.js";

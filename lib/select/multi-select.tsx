@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import SelectComponent from "./select-component.js";
 import MultiValue from "./multi-value.js";

@@ -1,6 +1,3 @@
-
-
-
 import { Spinner } from "../spinner/index.js";
 import { styled, withStyle } from "../styles/index.js";
 
@@ -39,7 +36,7 @@ export const StyledStartEnhancerContainer = styled<{}>("span", ({ $theme }) => {
 
 export const StyledSpinner = withStyle<
   typeof Spinner,
-  { $height: number, $width: number }
+  { $height: number; $width: number }
 >(Spinner, ({ $height, $width }) => {
   return {
     boxSizing: "border-box",
@@ -125,9 +122,9 @@ function placementRules(placement) {
 }
 
 export const StyledPlacementContainer = styled<{
-  $animating: boolean,
-  $placement: PlacementT,
-  $translateHeight: number,
+  $animating: boolean;
+  $placement: PlacementT;
+  $translateHeight: number;
 }>("div", ({ $animating, $placement, $translateHeight, $theme }) => {
   return {
     ...placementRules($placement),

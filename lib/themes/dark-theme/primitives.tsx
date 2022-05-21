@@ -1,4 +1,3 @@
-
 import colorTokens from "./color-tokens.js";
 import { defaultFontTokens } from "../shared/typography.js";
 import type { PrimitivesT } from "../types.js";

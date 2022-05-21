@@ -1,5 +1,3 @@
-
-
 /* flowlint unclear-type:off */
 export default function deepMerge(target?: ?{}, ...sources: Array<null | ?{}>): any {
   target = target || {};

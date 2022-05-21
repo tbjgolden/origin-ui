@@ -1,4 +1,3 @@
-
 import type { FontTokensT } from "../types.js";
 
 export const fontTokens: FontTokensT = {

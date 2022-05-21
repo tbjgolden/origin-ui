@@ -1,4 +1,3 @@
-
 export { default as StatefulPaymentCard } from "./stateful-payment-card.js";
 export { default as StatefulContainer } from "../input/stateful-container.js";
 export { default as PaymentCard } from "./payment-card.js";

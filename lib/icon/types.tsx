@@ -1,27 +1,26 @@
-
 /* eslint-disable flowtype/generic-spacing */
 import * as React from "react";
 import type { OverrideT } from "../helpers/overrides.js";
 
 export type OverridesT = {
-  Svg?: OverrideT,
+  Svg?: OverrideT;
 };
 
 export type SizeT = number | string;
 export type ColorT = string;
 
 export type StyledComponentArgsT = {
-  $size?: SizeT,
-  $color?: ColorT,
+  $size?: SizeT;
+  $color?: ColorT;
 };
 
 export type IconPropsT = {
-  children?: React.Node,
+  children?: React.Node;
   /** Size of element, will be passed to the svg width/height style. Can also be a value included in */
-  size?: SizeT,
+  size?: SizeT;
   /** Color of icon, will be used as svg fill */
-  color?: ColorT,
+  color?: ColorT;
   /** Allows you to set the SVG `<title>` label, which is used for accessibility */
-  title?: string,
-  overrides?: OverridesT,
+  title?: string;
+  overrides?: OverridesT;
 };

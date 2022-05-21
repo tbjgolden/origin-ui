@@ -1,6 +1,3 @@
-
-
-
 /* global window */
 
 import * as React from "react";

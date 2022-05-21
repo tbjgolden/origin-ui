@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { UIDReset } from "react-uid";
 import { LayersManager } from "../layer/index.js";

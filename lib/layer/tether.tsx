@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Popper from "popper.js";
 import type { Instance as PopperInstance } from "popper.js";

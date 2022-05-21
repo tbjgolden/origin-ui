@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 import { SORT_DIRECTIONS } from "./constants.js";

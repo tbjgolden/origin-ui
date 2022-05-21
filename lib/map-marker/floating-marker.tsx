@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { useStyletron } from "../styles/index.js";
 import PinHead from "./pin-head.js";

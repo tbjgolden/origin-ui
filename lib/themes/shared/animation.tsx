@@ -1,4 +1,3 @@
-
 import type { AnimationT } from "../types.js";
 
 const animation: AnimationT = {

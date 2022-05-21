@@ -1,4 +1,3 @@
-
 export { default as toaster, ToasterContainer } from "./toaster.js";
 export { default as Toast } from "./toast.js";
 // Constants

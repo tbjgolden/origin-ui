@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import Block from "../block/block.js";
 import { LevelContext } from "./heading-level.js";

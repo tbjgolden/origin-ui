@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import { Popover, PLACEMENT } from "../popover/index.js";

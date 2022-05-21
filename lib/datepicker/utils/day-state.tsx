@@ -1,4 +1,3 @@
-
 import type { SharedStylePropsT } from "../types.js";
 
 /**

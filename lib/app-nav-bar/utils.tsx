@@ -1,6 +1,3 @@
-
-
-
 import type { NavItemT } from "./types.js";
 
 type GetUniqueIdentifierT = (NavItemT) => string | number;

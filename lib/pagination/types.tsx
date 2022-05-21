@@ -1,12 +1,11 @@
-
 import type { OverrideT } from "../helpers/overrides.js";
 import { STATE_CHANGE_TYPE } from "./constants.js";
 import { SIZE } from "../input/constants.js";
 
 export type LabelsT = {
-  prevButton?: string,
-  nextButton?: string,
-  preposition?: string,
+  prevButton?: string;
+  nextButton?: string;
+  preposition?: string;
 };
 
 export type SizeT = $Keys<typeof SIZE>;
@@ -14,13 +13,13 @@ export type SizeT = $Keys<typeof SIZE>;
 export type CallbacksT = {
   /** Callback for prev button click. */
   //flowlint-next-line unclear-type:off
-  onPrevClick?: ({ event: any }) => any,
+  onPrevClick?: ({ event: any }) => any;
   /** Callback for next button click. */
   //flowlint-next-line unclear-type:off
-  onNextClick?: ({ event: any }) => any,
+  onNextClick?: ({ event: any }) => any;
   /** Callback for when page changes. */
   //flowlint-next-line unclear-type:off
-  onPageChange?: ({ nextPage: number, prevPage: number }) => any,
+  onPageChange?: ({ nextPage: number, prevPage: number }) => any;
 };
 
 export type StateReducerFnT = (
@@ -30,49 +29,49 @@ export type StateReducerFnT = (
 ) => StatefulContainerStateT;
 
 export type OverridesT = {
-  Root?: OverrideT,
-  PrevButton?: OverrideT,
-  NextButton?: OverrideT,
-  MaxLabel?: OverrideT,
-  DropdownContainer?: OverrideT,
-  Select?: OverrideT,
+  Root?: OverrideT;
+  PrevButton?: OverrideT;
+  NextButton?: OverrideT;
+  MaxLabel?: OverrideT;
+  DropdownContainer?: OverrideT;
+  Select?: OverrideT;
 };
 
 export type PaginationPropsT = CallbacksT & {
   /** Max number of pages. */
-  numPages: number,
+  numPages: number;
   /** The current page. */
-  currentPage: number,
+  currentPage: number;
   /** Set of labels to use for the buttons and preposition. */
-  labels?: LabelsT,
-  overrides?: OverridesT,
-  size?: SizeT,
+  labels?: LabelsT;
+  overrides?: OverridesT;
+  size?: SizeT;
 };
 
 export type StatefulPaginationPropsT = CallbacksT & {
   /** Max number of pages. */
-  numPages: number,
+  numPages: number;
   /** Set of labels to use for the buttons and preposition. */
-  labels?: LabelsT,
+  labels?: LabelsT;
   /** Reducer function to manipulate internal state updates. */
-  stateReducer?: StateReducerFnT,
+  stateReducer?: StateReducerFnT;
   /** Initial state populated into the component */
-  initialState?: StatefulContainerStateT,
-  overrides?: OverridesT,
+  initialState?: StatefulContainerStateT;
+  overrides?: OverridesT;
 };
 
 export type StatefulContainerPropsT = {
   //flowlint-next-line unclear-type:off
-  children: any,
-  numPages: number,
+  children: any;
+  numPages: number;
   /** Reducer function to manipulate internal state updates. */
-  stateReducer?: StateReducerFnT,
+  stateReducer?: StateReducerFnT;
   /** Initial state populated into the component */
-  initialState?: StatefulContainerStateT,
+  initialState?: StatefulContainerStateT;
   /** Callback for when page changes. */
-  onPageChange?: $PropertyType<CallbacksT, "onPageChange">,
+  onPageChange?: $PropertyType<CallbacksT, "onPageChange">;
 };
 
 export type StatefulContainerStateT = {
-  currentPage: number,
+  currentPage: number;
 };

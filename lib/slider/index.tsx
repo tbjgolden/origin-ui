@@ -1,4 +1,3 @@
-
 export { default as Slider } from "./slider.js";
 export { default as StatefulSlider } from "./stateful-slider.js";
 export { default as StatefulContainer } from "./stateful-slider-container.js";

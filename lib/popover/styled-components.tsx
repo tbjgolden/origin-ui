@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import { ARROW_SIZE, ARROW_WIDTH } from "./constants.js";
 import {

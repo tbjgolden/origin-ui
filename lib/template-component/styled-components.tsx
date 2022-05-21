@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import type { SharedStylePropsT } from "./types.js";
 

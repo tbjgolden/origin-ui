@@ -1,5 +1,3 @@
-
-
 export const POSITION = {
   horizontal: "horizontal",
   vertical: "vertical",

@@ -1,5 +1,3 @@
-
-
 // country code regex
 const ISO_REGEX = /^[a-z]{2}$/i;
 // offset between uppercase ascii and regional indicator symbols

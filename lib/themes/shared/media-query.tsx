@@ -1,5 +1,3 @@
-
-
 import { getMediaQuery } from "../../helpers/responsive-helpers.js";
 import breakpoints from "./breakpoints.js";
 import type { MediaQueryT } from "../types.js";

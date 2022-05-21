@@ -1,5 +1,3 @@
-
-
 export { default as ListItem } from "./list-item.js";
 export { default as ListItemLabel } from "./list-item-label.js";
 export { default as ListHeading } from "./list-heading.js";

@@ -1,5 +1,3 @@
-
-
 import type { TetherPlacementT, PopperOffsetT, NormalizedOffsetT } from "./types.js";
 
 export function toPopperPlacement(placement: TetherPlacementT): string {

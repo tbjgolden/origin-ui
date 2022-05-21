@@ -1,4 +1,3 @@
-
 import React from "react";
 // needs to be removed from here
 import { COUNTRIES, STATE_CHANGE_TYPE } from "./constants.js";

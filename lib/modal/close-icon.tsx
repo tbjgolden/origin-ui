@@ -1,4 +1,3 @@
-
 import * as React from "react";
 
 // TODO Switch to using Icon component once it exists

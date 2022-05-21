@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import { SIZE, SIZE_DIMENSION, ANCHOR } from "./constants.js";
 import type { SharedStylePropsArgT, SizePropT, AnchorPropT } from "./types.js";

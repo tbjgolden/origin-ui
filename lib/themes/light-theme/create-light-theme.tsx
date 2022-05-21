@@ -1,5 +1,3 @@
-
-
 import animation from "../shared/animation.js";
 import borders from "../shared/borders.js";
 import breakpoints from "../shared/breakpoints.js";

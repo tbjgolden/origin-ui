@@ -1,4 +1,3 @@
-
 export { default as HeaderNavigation } from "./header-navigation.js";
 // Styled elements
 export {

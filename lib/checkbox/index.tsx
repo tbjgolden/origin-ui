@@ -1,5 +1,3 @@
-
-
 export { default as StatefulCheckbox } from "./stateful-checkbox.js";
 export { default as StatefulContainer } from "./stateful-checkbox-container.js";
 export { default as Checkbox } from "./checkbox.js";

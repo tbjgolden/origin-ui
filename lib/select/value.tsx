@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { StyledSingleValue } from "./styled-components.js";
 import { getOverrides } from "../helpers/overrides.js";

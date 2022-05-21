@@ -1,4 +1,3 @@
-
 import { arrayMove, arrayRemove } from "react-movable";
 
 export { arrayMove, arrayRemove };

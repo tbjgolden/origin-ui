@@ -1,6 +1,3 @@
-
-
-
 import { getMediaQueries } from "../helpers/responsive-helpers.js";
 import { styled } from "../styles/index.js";
 import type { BreakpointsT } from "../styles/types.js";
@@ -15,11 +12,11 @@ function constrainToNull(value) {
 }
 
 type ApplyParams = {
-  property: string,
+  property: string;
   // flowlint-next-line unclear-type:off
-  value?: any | Array<any>,
+  value?: any | Array<any>;
   // flowlint-next-line unclear-type:off
-  transform?: Function,
+  transform?: Function;
 };
 
 function build(breakpoints: BreakpointsT) {

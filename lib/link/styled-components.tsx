@@ -1,10 +1,8 @@
-
-
 import { styled } from "../styles/index.js";
 
 export const Link = styled<{
-  $isAnimateUnderline: boolean,
-  $isFocusVisible: boolean,
+  $isAnimateUnderline: boolean;
+  $isFocusVisible: boolean;
 }>("a", ({ $theme, $isAnimateUnderline, $isFocusVisible }) => {
   const { colors, typography, animation, direction } = $theme;
 

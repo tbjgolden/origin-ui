@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import memoize from "memoize-one";
 // Files
@@ -19,7 +18,7 @@ import type { LocaleT } from "../locale/types.js";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible.js";
 
 type PageOptionT = {
-  label: number,
+  label: number;
 };
 
 export default class Pagination extends React.PureComponent<

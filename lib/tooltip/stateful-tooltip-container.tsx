@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { StatefulContainer as StatefulPopoverContainer } from "../popover/index.js";
 import baseDefaultProps from "./default-props.js";

@@ -1,5 +1,3 @@
-
-
 // At some point baseui published with errors in unit-tests that caused problems for users.
 // The assertions below will fail unit-tests if any errors or warnings are logs so that we
 // can have greater certainty that fewer bugs are published.

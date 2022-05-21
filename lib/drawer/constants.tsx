@@ -1,4 +1,3 @@
-
 import type { AnchorT, AnchorPropT, SizeT, SizePropT } from "./types.js";
 
 export const SIZE: { [key: SizeT]: SizePropT } = {

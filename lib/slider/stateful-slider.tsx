@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulSliderContainer from "./stateful-slider-container.js";
 import Slider from "./slider.js";

@@ -1,5 +1,3 @@
-
-
 import { styled, withStyle } from "../styles/index.js";
 import {
   Root as StyledInputRoot,

@@ -1,5 +1,3 @@
-
-
 export { default as FileUploader } from "./file-uploader.js";
 
 // Styled elements

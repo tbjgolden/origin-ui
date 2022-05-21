@@ -1,4 +1,3 @@
-
 /* eslint-disable flowtype/generic-spacing */
 import type {
   AccessibilityTypeT,

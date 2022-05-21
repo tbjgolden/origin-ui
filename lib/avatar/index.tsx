@@ -1,5 +1,3 @@
-
-
 export { default as Avatar } from "./avatar.js";
 
 // Styled elements

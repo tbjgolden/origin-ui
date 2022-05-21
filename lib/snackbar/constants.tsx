@@ -1,6 +1,3 @@
-
-
-
 export const DURATION = {
   infinite: 0,
   short: 3000,

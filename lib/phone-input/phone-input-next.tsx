@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import { COUNTRIES } from "./constants.js";
 import CountryPicker from "./country-picker.js";

@@ -1,5 +1,3 @@
-
-
 import { SortableHeadCellFactory } from "../table/index.js";
 import { StyledHeadCell } from "./styled-components.js";
 

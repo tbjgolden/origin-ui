@@ -1,4 +1,3 @@
-
 export const TETHER_PLACEMENT = {
   auto: "auto",
   topLeft: "topLeft",

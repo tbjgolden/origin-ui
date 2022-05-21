@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "./stateful-select-container.js";
 import Select from "./select.js";

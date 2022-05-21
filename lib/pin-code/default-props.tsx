@@ -1,5 +1,3 @@
-
-
 import { SIZE } from "../input/index.js";
 
 const defaultProps = {

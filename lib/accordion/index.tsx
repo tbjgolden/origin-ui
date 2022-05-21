@@ -1,4 +1,3 @@
-
 export { default as Accordion } from "./accordion.js";
 export { default as Panel } from "./panel.js";
 export { default as StatefulPanel } from "./stateful-panel.js";

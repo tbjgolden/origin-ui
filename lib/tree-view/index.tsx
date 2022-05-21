@@ -1,5 +1,3 @@
-
-
 export { default as TreeView } from "./tree-view.js";
 export { default as StatefulTreeView } from "./stateful-tree-view.js";
 

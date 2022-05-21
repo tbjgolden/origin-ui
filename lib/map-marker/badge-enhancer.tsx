@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import type { BadgeEnhancerComponentT } from "./types.js";
 import { getOverrides } from "../helpers/overrides.js";

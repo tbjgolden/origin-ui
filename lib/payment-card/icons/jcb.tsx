@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const Jcb = ({ size }: { size: string }) => (

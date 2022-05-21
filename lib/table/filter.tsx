@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import FocusLock from "react-focus-lock";
 

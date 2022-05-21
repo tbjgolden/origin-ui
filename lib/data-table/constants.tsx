@@ -1,5 +1,3 @@
-
-
 export const COLUMNS = Object.freeze({
   ANCHOR: "ANCHOR",
   BOOLEAN: "BOOLEAN",

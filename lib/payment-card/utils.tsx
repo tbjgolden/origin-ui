@@ -1,5 +1,3 @@
-
-
 import * as valid from "card-validator";
 
 export const addGaps = (gaps: number[], value: string) =>

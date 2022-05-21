@@ -1,4 +1,3 @@
-
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import { getOverrides } from "../helpers/overrides.js";

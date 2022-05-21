@@ -1,4 +1,3 @@
-
 import { ACCESSIBILITY_TYPE, PLACEMENT, TRIGGER_TYPE } from "./constants.js";
 import type { BaseTooltipPropsT } from "./types.js";
 

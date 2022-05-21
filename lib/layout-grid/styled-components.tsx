@@ -1,5 +1,3 @@
-
-
 import { styled } from "../styles/index.js";
 import { getMediaQueries } from "../helpers/responsive-helpers.js";
 import { BEHAVIOR } from "./constants.js";

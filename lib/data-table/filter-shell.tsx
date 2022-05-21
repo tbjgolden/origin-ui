@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 import { Button, SIZE as BUTTON_SIZE } from "../button/index.js";
@@ -11,11 +9,11 @@ import { FILTER_SHELL_WIDTH } from "./constants.js";
 export type ExcludeKind = "value" | "range";
 
 type PropsT = {
-  children: React.Node,
-  exclude: boolean,
-  excludeKind?: ExcludeKind,
-  onExcludeChange: () => void,
-  onApply: () => void,
+  children: React.Node;
+  exclude: boolean;
+  excludeKind?: ExcludeKind;
+  onExcludeChange: () => void;
+  onApply: () => void;
 };
 
 function FilterShell(props: PropsT) {

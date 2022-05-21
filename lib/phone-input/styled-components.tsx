@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { SIZE } from "./constants.js";
 import { styled, withStyle, withWrapper } from "../styles/index.js";
@@ -11,7 +10,7 @@ import defaultProps from "../select/default-props.js";
 import type { SizeT } from "./types.js";
 
 type SizeStyleProps = {
-  $size?: SizeT,
+  $size?: SizeT;
 };
 type HeightStyleProps = { $height: string };
 

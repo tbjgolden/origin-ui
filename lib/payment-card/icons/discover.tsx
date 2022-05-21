@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const Discover = ({ size }: { size: string }) => (

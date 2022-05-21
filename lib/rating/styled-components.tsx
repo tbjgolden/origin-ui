@@ -1,6 +1,3 @@
-
-
-
 import { styled } from "../styles/index.js";
 import type { StyledRootPropsT, StyledRatingItemPropsT } from "./types.js";
 import {

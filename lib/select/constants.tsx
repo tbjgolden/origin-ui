@@ -1,5 +1,3 @@
-
-
 export { SIZE } from "../input/index.js";
 
 export const TYPE = {

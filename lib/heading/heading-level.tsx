@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import type { HeadingLevelPropsT } from "./types.js";
 

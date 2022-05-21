@@ -1,4 +1,3 @@
-
 export { default as ProgressBar } from "./progressbar.js";
 export { default as ProgressBarRounded } from "./progressbar-rounded.js";
 export { SIZE } from "./constants.js";

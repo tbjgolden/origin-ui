@@ -1,4 +1,3 @@
-
 import {
   SIZE,
   DEFAULT_MAX_DROPDOWN_HEIGHT,

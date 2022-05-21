@@ -1,4 +1,3 @@
-
 export { default as Modal } from "./modal.js";
 export { default as ModalButton } from "./modal-button.js";
 export { default as FocusOnce } from "./focus-once.js";

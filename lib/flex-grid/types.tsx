@@ -1,19 +1,17 @@
-
-
 import type { BlockPropsT, ResponsiveT, ScaleT } from "../block/types.js";
 
 export type FlexGridPropsT = {
   /** Number of equal-width columns to allow for */
-  flexGridColumnCount?: ResponsiveT<number>,
+  flexGridColumnCount?: ResponsiveT<number>;
   /** Grid gap between columns */
-  flexGridColumnGap?: ResponsiveT<ScaleT>,
+  flexGridColumnGap?: ResponsiveT<ScaleT>;
   /** Grid gap between rows */
-  flexGridRowGap?: ResponsiveT<ScaleT>,
+  flexGridRowGap?: ResponsiveT<ScaleT>;
 } & BlockPropsT;
 
 export type FlexGridItemPropsT = {
   /** Index of item in FlexGrid, used to determine gaps **/
-  flexGridItemIndex?: number,
+  flexGridItemIndex?: number;
   /** Total count of items in FlexGrid, used to determine gaps **/
-  flexGridItemCount?: number,
+  flexGridItemCount?: number;
 } & FlexGridPropsT;

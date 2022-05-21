@@ -1,4 +1,3 @@
-
 import type { ButtonPropsT, SharedStylePropsT } from "./types.js";
 
 export function getSharedProps({

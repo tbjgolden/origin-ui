@@ -1,5 +1,3 @@
-
-
 import { styled } from "../styles/index.js";
 
 function getAnimationColor(props) {
@@ -36,10 +34,10 @@ const animationStyle = {
 };
 
 export const StyledRoot = styled<{
-  $rows?: number,
-  $animation?: boolean,
-  $height?: string,
-  $width?: string,
+  $rows?: number;
+  $animation?: boolean;
+  $height?: string;
+  $width?: string;
 }>("div", (props) => {
   if (typeof props.$rows === "number" && props.$rows !== 0) {
     return {
@@ -59,7 +57,7 @@ export const StyledRoot = styled<{
   };
 });
 
-export const StyledRow = styled<{ $animation?: boolean, $isLastRow: boolean }>(
+export const StyledRow = styled<{ $animation?: boolean; $isLastRow: boolean }>(
   "div",
   (props) => {
     return {

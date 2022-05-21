@@ -1,51 +1,49 @@
-
-
 import type { ThemeT } from "../styles/types.js";
 import type { OverrideT } from "../helpers/overrides.js";
 
 export type RatingOverridesT = {
-  Root?: OverrideT,
-  Item?: OverrideT,
+  Root?: OverrideT;
+  Item?: OverrideT;
 };
 
 export type StarRatingPropsT = {
-  overrides?: RatingOverridesT,
+  overrides?: RatingOverridesT;
   /** The current rating value. */
-  value?: number,
+  value?: number;
   /** The total number of items to display. */
-  numItems: number,
-  readOnly?: boolean,
+  numItems: number;
+  readOnly?: boolean;
   /** Callback that's called with the newly selected value. */
-  onChange?: ({ value: number }) => mixed,
-  size?: number,
+  onChange?: ({ value: number }) => mixed;
+  size?: number;
 };
 
 export type EmoticonRatingPropsT = {
-  overrides?: RatingOverridesT,
+  overrides?: RatingOverridesT;
   /** The current rating value. */
-  value?: number,
-  readOnly?: boolean,
+  value?: number;
+  readOnly?: boolean;
   /** Callback that's called with the newly selected value. */
-  onChange?: ({ value: number }) => mixed,
-  size?: number,
+  onChange?: ({ value: number }) => mixed;
+  size?: number;
 };
 
 export type RatingStateT = {
-  previewIndex?: number,
-  isFocusVisible?: boolean,
+  previewIndex?: number;
+  isFocusVisible?: boolean;
 };
 
 export type StyledRootPropsT = {
-  $theme: ThemeT,
+  $theme: ThemeT;
 };
 
 export type StyledRatingItemPropsT = {
-  $theme: ThemeT,
-  $isActive: boolean,
-  $isPartialActive: boolean,
-  $isSelected: boolean,
-  $isFocusVisible: boolean,
-  $isReadOnly: boolean,
-  $index: number,
-  $size: number,
+  $theme: ThemeT;
+  $isActive: boolean;
+  $isPartialActive: boolean;
+  $isSelected: boolean;
+  $isFocusVisible: boolean;
+  $isReadOnly: boolean;
+  $index: number;
+  $size: number;
 };

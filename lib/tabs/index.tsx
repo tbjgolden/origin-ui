@@ -1,4 +1,3 @@
-
 export { default as Tabs } from "./tabs.js";
 export { default as StatefulTabs } from "./stateful-tabs.js";
 export { default as Tab } from "./tab.js";

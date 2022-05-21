@@ -1,4 +1,3 @@
-
 import type { SizingT } from "../types.js";
 
 const sizing: SizingT = {

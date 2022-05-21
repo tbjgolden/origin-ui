@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const Amex = ({ size }: { size: string }) => (

@@ -1,4 +1,3 @@
-
 import * as React from "react";
 // eslint-disable-next-line import/no-named-default
 import { default as StatefulContainer } from "./stateful-checkbox-container.js";

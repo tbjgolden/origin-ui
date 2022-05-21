@@ -1,4 +1,3 @@
-
 import React from "react";
 import { COUNTRIES } from "./constants.js";
 import PhoneInputLite from "./phone-input-lite.js";

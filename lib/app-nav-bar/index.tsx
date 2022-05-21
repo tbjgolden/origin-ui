@@ -1,5 +1,3 @@
-
-
 export { default as AppNavBar } from "./app-nav-bar.js";
 export { POSITION } from "./constants.js";
 export * from "./styled-components.js";

@@ -1,14 +1,13 @@
-
 import * as React from "react";
 import { styled, withWrapper } from "../styles/index.js";
 import { OPTION_LIST_SIZE } from "./constants.js";
 
 type StyledPropsT = {
-  $disabled?: boolean,
-  $isFocused?: boolean,
-  $isFocusVisible?: boolean,
-  $isHighlighted?: boolean,
-  $size?: $Keys<typeof OPTION_LIST_SIZE>,
+  $disabled?: boolean;
+  $isFocused?: boolean;
+  $isFocusVisible?: boolean;
+  $isHighlighted?: boolean;
+  $size?: $Keys<typeof OPTION_LIST_SIZE>;
 };
 
 export const StyledList = styled<StyledPropsT>("ul", ({ $theme, $isFocusVisible }) => {

@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const Elo = ({ size }: { size: string }) => (

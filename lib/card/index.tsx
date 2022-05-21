@@ -1,5 +1,3 @@
-
-
 /* @flow */
 
 export { default as Card, hasThumbnail } from "./card.js";

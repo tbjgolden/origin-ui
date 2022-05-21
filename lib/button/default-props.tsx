@@ -1,5 +1,3 @@
-
-
 import { KIND, SHAPE, SIZE } from "./constants.js";
 
 export const defaultProps = {

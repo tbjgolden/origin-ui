@@ -1,4 +1,3 @@
-
 import * as React from "react";
 // eslint-disable-next-line import/no-named-default
 import StatefulContainer from "./stateful-radiogroup-container.js";

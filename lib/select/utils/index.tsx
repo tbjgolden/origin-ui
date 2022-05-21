@@ -1,4 +1,3 @@
-
 import type { PropsT, OptionT, OptionsT, OptgroupsT, ValueT } from "../types.js";
 
 function groupedOptionsToArray(groupedOptions: OptgroupsT): ValueT {

@@ -1,5 +1,3 @@
-
-
 export { default as StatefulRadioGroup } from "./stateful-radiogroup.js";
 export { default as StatefulContainer } from "./stateful-radiogroup-container.js";
 export { default as RadioGroup } from "./radiogroup.js";

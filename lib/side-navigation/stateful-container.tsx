@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { STATE_CHANGE_TYPE } from "./constants.js";
 import type {
@@ -23,7 +22,7 @@ class StatefulContainer extends React.Component<StatefulContainerPropsT, StateT>
     ...this.props.initialState,
   };
 
-  onChange = (params: { item: Item, event: Event | KeyboardEvent }) => {
+  onChange = (params: { item: Item; event: Event | KeyboardEvent }) => {
     const { onChange } = this.props;
     this.internalSetState(STATE_CHANGE_TYPE.change, params.item);
     if (typeof onChange === "function") {

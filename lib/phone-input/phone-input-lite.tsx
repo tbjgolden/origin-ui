@@ -1,4 +1,3 @@
-
 import React, { useRef } from "react";
 import CountryPicker from "./country-picker.js";
 import defaultProps from "./default-props.js";

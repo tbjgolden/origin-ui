@@ -1,4 +1,3 @@
-
 import { StyledGrid, StyledCell } from "./styled-components.js";
 import Grid from "./grid.js";
 import Cell from "./cell.js";

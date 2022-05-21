@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { useStyletron, type ThemeT } from "../styles/index.js";
 import { getOverrides } from "../helpers/overrides.js";
@@ -21,8 +20,8 @@ import {
 import type { FixedMarkerPropsT, KindT } from "./types.js";
 
 type Colors = {
-  color: string,
-  backgroundColor: string,
+  color: string;
+  backgroundColor: string;
 };
 
 function getColors(kind: KindT, theme: ThemeT): Colors {

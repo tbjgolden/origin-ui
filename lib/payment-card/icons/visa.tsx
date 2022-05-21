@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const Visa = ({ size }: { size: string }) => (

@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import ArrowLeft from "../icon/arrow-left.js";

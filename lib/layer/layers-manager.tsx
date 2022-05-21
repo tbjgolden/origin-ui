@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { styled } from "../styles/index.js";
 import { getOverrides } from "../helpers/overrides.js";
@@ -37,12 +36,12 @@ export default class LayersManager extends React.Component<
 > {
   host: {
     // flowlint-next-line unclear-type:off
-    current: React.ElementRef<any> | null,
+    current: React.ElementRef<any> | null;
   } = React.createRef();
 
   containerRef: {
     // flowlint-next-line unclear-type:off
-    current: React.ElementRef<any> | null,
+    current: React.ElementRef<any> | null;
   } = React.createRef();
 
   constructor(props: LayersManagerPropsT) {

@@ -1,4 +1,3 @@
-
 import * as React from "react";
 // Files
 import { STATE_CHANGE_TYPE } from "./constants.js";

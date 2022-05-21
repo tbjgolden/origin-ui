@@ -1,4 +1,3 @@
-
 import type { ColorTokensT } from "./types.js";
 
 const colors: ColorTokensT = {

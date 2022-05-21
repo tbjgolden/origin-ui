@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import { withStyle, withWrapper } from "../styles/index.js";
 import {
@@ -32,7 +30,7 @@ export const StyledTable = withWrapper(
 
 export const StyledHeadCell = withStyle<
   typeof FlexStyledHeadCell,
-  { $sticky?: boolean, $isFocusVisible?: boolean }
+  { $sticky?: boolean; $isFocusVisible?: boolean }
 >(FlexStyledHeadCell, ({ $sticky = true, $isFocusVisible, $theme }) => {
   return {
     backgroundColor: $theme.colors.tableHeadBackgroundColor,
@@ -50,7 +48,7 @@ export const StyledHeadCell = withStyle<
 
 export const StyledBodyCell = withStyle<
   typeof FlexStyledBodyCell,
-  { $gridColumn?: string, $gridRow?: string, $isFocusVisible?: boolean }
+  { $gridColumn?: string; $gridRow?: string; $isFocusVisible?: boolean }
 >(FlexStyledBodyCell, (props) => {
   return {
     display: "block",

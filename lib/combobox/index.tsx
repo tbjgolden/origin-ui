@@ -1,5 +1,3 @@
-
-
 export { SIZE } from "../input/constants.js";
 
 export { default as Combobox } from "./combobox.js";

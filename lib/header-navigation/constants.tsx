@@ -1,5 +1,3 @@
-
-
 export const ALIGN = {
   right: "flex-end",
   left: "flex-start",

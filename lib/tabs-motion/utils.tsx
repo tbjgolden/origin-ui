@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 import { ORIENTATION, FILL } from "./constants.js";
 

@@ -1,4 +1,3 @@
-
 import type { BreakpointsT } from "../types.js";
 
 const breakpoints: BreakpointsT = {

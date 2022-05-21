@@ -1,5 +1,3 @@
-
-
 import type { BreakpointsT } from "../styles/types.js";
 
 /**

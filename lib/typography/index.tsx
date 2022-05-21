@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 import Block from "../block/block.js";
 import type { BlockPropsT } from "../block/types.js";

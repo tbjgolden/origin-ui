@@ -1,6 +1,3 @@
-
-
-
 import React, { Children } from "react";
 
 import { LocaleContext } from "../locale/index.js";

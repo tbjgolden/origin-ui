@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import type { TextareaPropsT } from "./types.js";
 import { mergeOverrides, getOverrides } from "../helpers/overrides.js";

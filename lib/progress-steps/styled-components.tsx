@@ -1,6 +1,3 @@
-
-
-
 import { styled } from "../styles/index.js";
 import type { StylePropsT } from "./types.js";
 

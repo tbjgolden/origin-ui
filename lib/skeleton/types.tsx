@@ -1,20 +1,18 @@
-
-
 import type { OverrideT } from "../helpers/overrides.js";
 
 export type OverridesT = {
-  Row?: OverrideT,
-  Root?: OverrideT,
+  Row?: OverrideT;
+  Root?: OverrideT;
 };
 
 export type SkeletonPropsT = {
-  overrides?: OverridesT,
+  overrides?: OverridesT;
   /** Defines the number of row element in a skeleton */
-  rows: number,
+  rows: number;
   /** Defines if the skeleton has an animation default is false*/
-  animation: boolean,
+  animation: boolean;
   /** Defines the height of the skeleton container*/
-  height?: string,
+  height?: string;
   /** Defines the width of the skeleton container*/
-  width?: string,
+  width?: string;
 };

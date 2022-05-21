@@ -1,5 +1,3 @@
-
-
 import accordion from "../accordion/locale.js";
 import breadcrumbs from "../breadcrumbs/locale.js";
 import datepicker from "../datepicker/locale.js";

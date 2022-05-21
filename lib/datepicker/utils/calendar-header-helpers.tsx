@@ -1,15 +1,14 @@
-
 import { DEFAULT_MONTHS } from "../constants.js";
 
 export type OptionT = {
-  id: string,
-  label: string,
-  disabled?: boolean,
+  id: string;
+  label: string;
+  disabled?: boolean;
 };
 
 type GetMonthItemsArgsT = {
-  filterMonthsList: number[] | null,
-  formatMonthLabel: (number) => string,
+  filterMonthsList: number[] | null;
+  formatMonthLabel: (number) => string;
 };
 
 const getDefaultMonthItems = (formatMonthLabel: (number) => string) =>

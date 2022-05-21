@@ -1,4 +1,3 @@
-
 import type { LightingT } from "../types.js";
 
 const lighting: LightingT = {

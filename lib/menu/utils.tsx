@@ -1,4 +1,3 @@
-
 /* eslint-disable import/prefer-default-export */
 
 // Helps scroll a list item into view when cycling through list via

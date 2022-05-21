@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "../input/stateful-container.js";
 import PaymentCard from "./payment-card.js";

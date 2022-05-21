@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import ChevronRight from "../icon/chevron-right.js";
 import ChevronLeft from "../icon/chevron-left.js";
@@ -47,9 +46,9 @@ function idToYearMonth(id) {
 export default class CalendarHeader<T = Date> extends React.Component<
   HeaderPropsT<T>,
   {
-    isMonthDropdownOpen: boolean,
-    isYearDropdownOpen: boolean,
-    isFocusVisible: boolean,
+    isMonthDropdownOpen: boolean;
+    isYearDropdownOpen: boolean;
+    isFocusVisible: boolean;
   }
 > {
   static defaultProps = {
@@ -62,8 +61,8 @@ export default class CalendarHeader<T = Date> extends React.Component<
   };
 
   dateHelpers: DateHelpers<T>;
-  monthItems: Array<{ id: string, label: string, disabled?: boolean }>;
-  yearItems: Array<{ id: string, label: string, disabled?: boolean }>;
+  monthItems: Array<{ id: string; label: string; disabled?: boolean }>;
+  yearItems: Array<{ id: string; label: string; disabled?: boolean }>;
 
   constructor(props: HeaderPropsT<T>) {
     super(props);
@@ -245,7 +244,7 @@ export default class CalendarHeader<T = Date> extends React.Component<
     }
   };
 
-  renderPreviousMonthButton = ({ locale, theme }: { locale: LocaleT, theme: ThemeT }) => {
+  renderPreviousMonthButton = ({ locale, theme }: { locale: LocaleT; theme: ThemeT }) => {
     const date = this.getDateProp();
     const { overrides = {}, density } = this.props;
     const allPrevDaysDisabled = this.dateHelpers.monthDisabledBefore(date, this.props);
@@ -302,7 +301,7 @@ export default class CalendarHeader<T = Date> extends React.Component<
     );
   };
 
-  renderNextMonthButton = ({ locale, theme }: { locale: LocaleT, theme: ThemeT }) => {
+  renderNextMonthButton = ({ locale, theme }: { locale: LocaleT; theme: ThemeT }) => {
     const date = this.getDateProp();
     const { overrides = {}, density } = this.props;
     const allNextDaysDisabled = this.dateHelpers.monthDisabledAfter(date, this.props);

@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { STATE_TYPE } from "./constants.js";
 import type {

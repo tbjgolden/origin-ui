@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { LocaleContext } from "../locale/index.js";
 // Components

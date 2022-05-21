@@ -1,4 +1,3 @@
-
 export { default as FixedMarker } from "./fixed-marker.js";
 export { default as FloatingMarker } from "./floating-marker.js";
 

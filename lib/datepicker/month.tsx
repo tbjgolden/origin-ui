@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Week from "./week.js";
 import { StyledMonth } from "./styled-components.js";

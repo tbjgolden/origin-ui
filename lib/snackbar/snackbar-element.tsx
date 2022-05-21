@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import { Button, KIND, SHAPE } from "../button/index.js";

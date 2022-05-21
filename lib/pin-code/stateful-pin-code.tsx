@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import defaultProps from "./default-props.js";
 import PinCode from "./pin-code.js";

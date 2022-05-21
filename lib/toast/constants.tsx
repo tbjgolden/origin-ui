@@ -1,4 +1,3 @@
-
 export const KIND = Object.freeze({
   info: "info",
   positive: "positive",

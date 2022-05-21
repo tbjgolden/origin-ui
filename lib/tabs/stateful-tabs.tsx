@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Tabs from "./tabs.js";
 import { STATE_CHANGE_TYPE } from "./constants.js";

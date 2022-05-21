@@ -1,6 +1,3 @@
-
-
-
 import { styled } from "../styles/index.js";
 
 export const StyledRoot = styled<{}>("nav", ({ $theme }) => {

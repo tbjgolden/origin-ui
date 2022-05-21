@@ -1,5 +1,3 @@
-
-
 export const zones = [
   "Europe/Andorra",
   "Asia/Dubai",

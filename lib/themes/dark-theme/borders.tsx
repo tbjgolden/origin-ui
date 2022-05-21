@@ -1,4 +1,3 @@
-
 import sharedBorders from "../shared/borders.js";
 import deepMerge from "../../utils/deep-merge.js";
 import type { BordersT } from "../types.js";

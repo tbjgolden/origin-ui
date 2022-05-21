@@ -1,4 +1,3 @@
-
 export { default as Table } from "./table.js";
 export { default as TableBuilder } from "./table-builder.js";
 export { default as TableBuilderColumn } from "./table-builder-column.js";

@@ -1,4 +1,3 @@
-
 import type { GridT } from "../types.js";
 
 const grid: GridT = {

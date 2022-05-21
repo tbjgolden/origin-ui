@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-
-
 /* eslint-disable flowtype/require-valid-file-annotation */
 /* eslint-env node*/
 const fs = require("fs");

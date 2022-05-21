@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import { getSvgStyles } from "../icon/styled-components.js";
 import type { SharedStylePropsArgT } from "./types.js";

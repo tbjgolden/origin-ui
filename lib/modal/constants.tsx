@@ -1,5 +1,3 @@
-
-
 export const SIZE = {
   default: "default",
   full: "full",

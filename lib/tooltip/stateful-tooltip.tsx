@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "./stateful-tooltip-container.js";
 import Tooltip from "./tooltip.js";

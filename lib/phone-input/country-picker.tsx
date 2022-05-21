@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import BaseCountryPicker from "./base-country-picker.js";
 import { SIZE } from "./constants.js";

@@ -1,9 +1,7 @@
-
-
 import { styled } from "../styles/index.js";
 import { SHAPE } from "../button/index.js";
 
-export const StyledRoot = styled<{ $shape: string, $length: number }>(
+export const StyledRoot = styled<{ $shape: string; $length: number }>(
   "div",
   ({ $shape, $length, $theme }) => {
     const margin =

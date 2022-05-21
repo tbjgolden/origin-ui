@@ -1,4 +1,3 @@
-
 import type { OptionT, ValueT } from "../types.js";
 
 const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -8,13 +7,13 @@ const isValid = (value) => {
 };
 
 type defaultPropsT = {
-  filterOption: ?(option: OptionT, filterValue: string) => boolean,
-  ignoreCase: boolean,
-  labelKey: string,
-  matchPos: "any" | "start",
-  matchProp: "any" | "label" | "value",
-  trimFilter: boolean,
-  valueKey: string,
+  filterOption: ?((option: OptionT, filterValue: string) => boolean);
+  ignoreCase: boolean;
+  labelKey: string;
+  matchPos: "any" | "start";
+  matchProp: "any" | "label" | "value";
+  trimFilter: boolean;
+  valueKey: string;
 };
 
 const defaultProps: defaultPropsT = {

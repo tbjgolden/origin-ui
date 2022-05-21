@@ -1,5 +1,3 @@
-
-
 import React from "react";
 
 import * as flags from "./flags/index.js";
@@ -8,14 +6,14 @@ import { SIZE } from "./constants.js";
 import type { CountryIsoT, SizeT } from "./types.js";
 
 type SizeStyleProps = {
-  $size?: SizeT,
+  $size?: SizeT;
 };
 
 export default function Flag(props: {
-  $iso: CountryIsoT,
+  $iso: CountryIsoT;
   // remove `iso` prop in the next major version
-  iso?: CountryIsoT,
-  width?: string,
+  iso?: CountryIsoT;
+  width?: string;
 }) {
   const { $iso, iso: oldIsoProp, width = "16px", ...restProps } = props;
   const iso: CountryIsoT = oldIsoProp || $iso;

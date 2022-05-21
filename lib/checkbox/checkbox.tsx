@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { getOverride, getOverrideProps } from "../helpers/overrides.js";
 import type { PropsT, DefaultPropsT, StatelessStateT } from "./types.js";

@@ -1,4 +1,3 @@
-
 /* global window */
 import * as React from "react";
 import { SIZE } from "./constants.js";

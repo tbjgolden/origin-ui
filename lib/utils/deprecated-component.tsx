@@ -1,4 +1,3 @@
-
 import * as React from "react";
 
 // flowlint-next-line unclear-type:off

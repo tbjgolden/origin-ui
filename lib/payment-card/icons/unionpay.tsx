@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 const UnionPay = ({ size }: { size: string }) => (

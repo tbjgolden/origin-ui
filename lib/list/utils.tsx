@@ -1,5 +1,3 @@
-
-
 import { ARTWORK_SIZES } from "./constants.js";
 import type { ArtworkSizesT } from "./types.js";
 

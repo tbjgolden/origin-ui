@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import * as valid from "card-validator";
 

@@ -1,4 +1,3 @@
-
 /* eslint-disable import/extensions */
 
 import defaultAdapter from "./date-fns-adapter";

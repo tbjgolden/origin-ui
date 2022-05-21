@@ -1,6 +1,3 @@
-
-
-
 import { styled } from "../styles/index.js";
 import { ORIENTATION, FILL } from "./constants.js";
 import { isHorizontal, isVertical, isRTL, isIntrinsic, isFixed } from "./utils.js";
@@ -24,8 +21,8 @@ export const StyledRoot = styled<{ $orientation?: OrientationT }>(
 );
 
 export const StyledTabList = styled<{
-  $orientation?: OrientationT,
-  $fill?: FillT,
+  $orientation?: OrientationT;
+  $fill?: FillT;
 }>("div", ({ $theme, $fill = FILL.intrinsic, $orientation = ORIENTATION.horizontal }) => {
   const style: StyleObject = {
     position: "relative",
@@ -61,10 +58,10 @@ export const StyledTabList = styled<{
 });
 
 export const StyledTab = styled<{
-  $orientation?: OrientationT,
-  $fill?: FillT,
-  $focusVisible?: boolean,
-  $isActive?: boolean,
+  $orientation?: OrientationT;
+  $fill?: FillT;
+  $focusVisible?: boolean;
+  $isActive?: boolean;
 }>(
   "button",
   ({
@@ -163,10 +160,10 @@ export const StyledTabBorder = styled<{ $orientation?: OrientationT }>(
 );
 
 export const StyledTabHighlight = styled<{
-  $orientation?: OrientationT,
-  $length?: number,
-  $distance?: number,
-  $animate?: boolean,
+  $orientation?: OrientationT;
+  $length?: number;
+  $distance?: number;
+  $animate?: boolean;
 }>(
   "div",
   ({

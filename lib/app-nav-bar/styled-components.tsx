@@ -1,5 +1,3 @@
-
-
 import { styled, withStyle } from "../styles/index.js";
 import { StyledListItem } from "../menu/index.js";
 import { KIND } from "./constants.js";
@@ -103,9 +101,9 @@ export const StyledPrimaryMenuContainer = styled<{}>("div", ({ $theme }) => {
 });
 
 export const StyledMainMenuItem = styled<{
-  $active?: boolean,
-  $isFocusVisible: boolean,
-  $kind: $Values<typeof KIND>,
+  $active?: boolean;
+  $isFocusVisible: boolean;
+  $kind: $Values<typeof KIND>;
 }>("div", (props) => {
   const {
     $active,

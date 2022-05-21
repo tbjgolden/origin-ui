@@ -1,4 +1,3 @@
-
 import colorTokens from "./color-tokens.js";
 import type { ColorTokensT, ComponentColorTokensT } from "../types.js";
 

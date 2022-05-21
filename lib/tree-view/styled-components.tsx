@@ -1,12 +1,9 @@
-
-
-
 import { styled } from "../styles/index.js";
 
 export const StyledTreeItemList = styled<{
-  $indentGuides?: boolean,
-  $isChildNode?: boolean,
-  $expanded?: boolean,
+  $indentGuides?: boolean;
+  $isChildNode?: boolean;
+  $expanded?: boolean;
 }>("ul", ({ $theme, $indentGuides, $isChildNode, $expanded = true }) => {
   const direction: string = $theme.direction === "rtl" ? "Right" : "Left";
   return {
@@ -46,8 +43,8 @@ export const StyledTreeItem = styled<{ $isLeafNode?: boolean }>(
 );
 
 export const StyledItemContent = styled<{
-  $isSelected: boolean,
-  $isFocusVisible: boolean,
+  $isSelected: boolean;
+  $isFocusVisible: boolean;
 }>("div", ({ $theme, $isSelected, $isFocusVisible }) => {
   return {
     ...$theme.typography.font300,

@@ -1,4 +1,3 @@
-
 import { styled } from "../styles/index.js";
 import { SIZE } from "./constants.js";
 import type { SpinnerPropsT } from "./types.js";

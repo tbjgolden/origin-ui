@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { getOverrides } from "../helpers/overrides.js";
 import {
@@ -17,7 +16,7 @@ import { Layer } from "../layer/index.js";
 
 import type { ListPropsT, SharedStylePropsArgT } from "./types.js";
 
-const ItemLayer = ({ children, dragged }: { children: React.Node, dragged: boolean }) => {
+const ItemLayer = ({ children, dragged }: { children: React.Node; dragged: boolean }) => {
   if (!dragged) {
     return children;
   }

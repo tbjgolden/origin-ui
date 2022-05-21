@@ -1,4 +1,3 @@
-
 import defaultFilterOptions from "./utils/default-filter-options.js";
 import { TYPE, SIZE } from "./constants.js";
 

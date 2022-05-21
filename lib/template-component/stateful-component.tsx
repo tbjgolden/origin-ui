@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "./stateful-container.js";
 import Component from "./component.js";

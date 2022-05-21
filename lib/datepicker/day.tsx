@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import { StyledDay, StyledDayLabel } from "./styled-components.js";
 import dateFnsAdapter from "./utils/date-fns-adapter.js";
@@ -377,11 +376,11 @@ export default class Day<T = Date> extends React.Component<DayPropsT<T>, DayStat
 
   getAriaLabel(
     sharedProps: {
-      $disabled: boolean,
-      $range: boolean,
-      $selected: boolean,
-      $startDate: boolean,
-      $endDate: boolean,
+      $disabled: boolean;
+      $range: boolean;
+      $selected: boolean;
+      $startDate: boolean;
+      $endDate: boolean;
     },
     localeContext: LocaleT
   ) {

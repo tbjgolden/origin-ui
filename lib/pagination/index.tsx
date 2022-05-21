@@ -1,4 +1,3 @@
-
 import { SIZE } from "../input/index.js";
 
 export { default as Pagination } from "./pagination.js";

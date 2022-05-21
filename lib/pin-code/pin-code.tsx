@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import MultiRef from "react-multi-ref";
 import defaultProps from "./default-props.js";

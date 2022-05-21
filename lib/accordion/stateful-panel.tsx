@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import StatefulContainer from "./stateful-panel-container.js";
 import Panel from "./panel.js";

@@ -1,6 +1,3 @@
-
-
-
 import * as React from "react";
 
 import { NestedMenuContext } from "./nested-menus.js";
@@ -10,16 +7,16 @@ import { getOverrides, mergeOverrides } from "../helpers/overrides.js";
 import type { ItemT } from "./types.js";
 
 type PropsT = {
-  children: React.Node,
-  getChildMenu: ?(item: ItemT) => React.Node,
-  isOpen: boolean,
-  item: ItemT,
-  resetParentMenu: () => void,
-  renderAll?: boolean,
-  onClick?: (event: MouseEvent) => mixed,
+  children: React.Node;
+  getChildMenu: ?((item: ItemT) => React.Node);
+  isOpen: boolean;
+  item: ItemT;
+  resetParentMenu: () => void;
+  renderAll?: boolean;
+  onClick?: (event: MouseEvent) => mixed;
   overrides?: {
-    ChildMenuPopover?: OverrideT,
-  },
+    ChildMenuPopover?: OverrideT;
+  };
 };
 
 export default function MaybeChildMenu(props: PropsT) {

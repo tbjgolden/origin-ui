@@ -1,5 +1,3 @@
-
-
 export const DIVIDER = Object.freeze({
   horizontal: "horizontal",
   vertical: "vertical",

@@ -1,5 +1,3 @@
-
-
 // Example:
 // getInterpolatedString('Selected date is ${date}', 'Jan 1, 2020') => 'Selected date is Jan 1, 2020'
 export default function getInterpolatedString(

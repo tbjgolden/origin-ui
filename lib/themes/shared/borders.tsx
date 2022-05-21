@@ -1,4 +1,3 @@
-
 import type { BordersT } from "../types.js";
 
 // borderColor is defaulted to the light theme values.

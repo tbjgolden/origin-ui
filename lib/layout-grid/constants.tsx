@@ -1,5 +1,3 @@
-
-
 export const BEHAVIOR = Object.freeze({
   fluid: "fluid",
   fixed: "fixed",

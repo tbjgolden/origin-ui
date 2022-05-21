@@ -1,4 +1,3 @@
-
 import type { TypographyT, FontTokensT } from "../types.js";
 
 export const defaultFontTokens: FontTokensT = {

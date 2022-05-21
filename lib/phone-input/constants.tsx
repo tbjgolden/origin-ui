@@ -1,4 +1,3 @@
-
 export const DEFAULT_MAX_DROPDOWN_WIDTH = "400px";
 export const DEFAULT_MAX_DROPDOWN_HEIGHT = "400px";
 

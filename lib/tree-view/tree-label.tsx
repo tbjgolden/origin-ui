@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ThemeContext } from "../styles/theme-provider.js";
 import type { TreeLabelT, SharedStylePropsT } from "./types.js";

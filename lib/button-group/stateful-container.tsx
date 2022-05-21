@@ -1,5 +1,3 @@
-
-
 import * as React from "react";
 
 import { MODE, STATE_CHANGE_TYPE } from "./constants.js";

@@ -1,5 +1,3 @@
-
-
 export const MODE = Object.freeze({
   radio: "radio",
   checkbox: "checkbox",

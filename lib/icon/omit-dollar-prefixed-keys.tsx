@@ -1,6 +1,3 @@
-
-
-
 // flowlint-next-line unclear-type:off
 export default function omitDollarPrefixedKeys(source: { [string]: any }) {
   const result = {};

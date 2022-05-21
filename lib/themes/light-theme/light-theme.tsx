@@ -1,4 +1,3 @@
-
 import colorTokens from "./color-tokens.js";
 import getSemanticColorTokens from "./color-semantic-tokens.js";
 import getComponentColorTokens from "./color-component-tokens.js";

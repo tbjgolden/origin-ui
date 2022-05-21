@@ -1,4 +1,3 @@
-
 /* global window document */
 
 /** A safe way to create event objects down to IE11 */

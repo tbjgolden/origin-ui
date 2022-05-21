@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import FocusLock, { MoveFocusInside } from "react-focus-lock";
 

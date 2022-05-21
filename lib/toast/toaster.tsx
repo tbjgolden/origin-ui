@@ -1,5 +1,3 @@
-
-
 /* eslint-disable cup/no-undef */
 import * as React from "react";
 import ReactDOM from "react-dom";
@@ -123,7 +121,7 @@ export class ToasterContainer extends React.Component<
     }));
   };
 
-  getOnCloseHandler = (key: React.Key, onClose: ?() => mixed) => {
+  getOnCloseHandler = (key: React.Key, onClose: ?(() => mixed)) => {
     return () => {
       this.internalOnClose(key);
       typeof onClose === "function" && onClose();

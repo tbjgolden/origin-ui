@@ -1,4 +1,3 @@
-
 import * as React from "react";
 
 // transforms props for native styled components adding $ symbol to avoid to supported warning
