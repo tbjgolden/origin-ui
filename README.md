@@ -1,3 +1,15 @@
+<!--
+
+Next steps:
+
+- Make some assumptions to trim the fat:
+  - [x] Light theme always, not customisable
+    - [ ] Inline styles
+  - [ ] Remove controlled components
+  - [ ] No RTL
+  - [ ] No SSR logic
+-->
+
 # Use case
 
 **OSS lib development**
