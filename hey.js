@@ -17,15 +17,7 @@ walkDir(__dirname + "/lib");
 console.log(files);
 for (const file of files) {
   let text = fs.readFileSync(file, "utf8");
-  text = text.replace(
-    "/*\
-  Copyright (c) Uber Technologies, Inc.\
-  \
-  This source code is licensed under the MIT license found in the\
-  LICENSE file in the root directory of this source tree.\
-  */\n",
-    ""
-  );
+  text = text.replace(/\/\*\s+copyright.*uber[\S\s]*?(\*\/)/gi, "");
   text = text.replace("// @flow\n", "");
   fs.writeFileSync(file.slice(0, -3) + ".tsx", text);
   fs.unlinkSync(file);

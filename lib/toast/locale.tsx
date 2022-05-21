@@ -1,0 +1,11 @@
+
+
+export type ToastLocaleT = {|
+  close: string,
+|};
+
+const locale = {
+  close: "Close",
+};
+
+export default locale;
