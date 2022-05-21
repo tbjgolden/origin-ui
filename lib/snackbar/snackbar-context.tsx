@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Layer } from "../layer";
 import { getOverrides } from "../helpers/overrides";
 import { useStyletron } from "../styles";

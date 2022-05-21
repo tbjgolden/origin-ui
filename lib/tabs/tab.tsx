@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { Tab as StyledTab } from "./styled-components";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";

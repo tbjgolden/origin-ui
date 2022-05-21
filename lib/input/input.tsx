@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { getSharedProps } from "./utils";
 import BaseInput from "./base-input";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import InputMask from "react-input-mask";
 import Input from "./input";
 import { Input as StyledInput } from "./styled-components";

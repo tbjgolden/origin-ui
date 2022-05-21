@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyledBlock } from "./styled-components";
 import { getOverrides } from "../helpers/overrides";
 function Block({

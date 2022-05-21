@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import DeleteIcon from "../icon/delete";
 import {

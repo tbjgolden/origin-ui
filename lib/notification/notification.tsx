@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Toast, TYPE } from "../toast";
 import { mergeOverrides } from "../helpers/overrides";
 export default class Notification extends React.Component {

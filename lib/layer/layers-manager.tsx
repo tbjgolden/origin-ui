@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { styled } from "../styles";
 import { getOverrides } from "../helpers/overrides";
 import { initFocusVisible } from "../utils/focusVisible";

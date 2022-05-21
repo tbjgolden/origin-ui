@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ListItem from "./list-item";
 import { mergeOverrides } from "../helpers/overrides";
 const MenuAdapter = React.forwardRef((props, ref) => {

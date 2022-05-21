@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
 import {
@@ -48,29 +48,29 @@ const Panel = (
     [localState]
   );
   const handleClick = React.useCallback(
-    (e) => {
+    (event) => {
       if (disabled) {
         return;
       }
       typeof onChange === "function" && onChange({ expanded: !expanded });
-      typeof onClick === "function" && onClick(e);
+      typeof onClick === "function" && onClick(event);
     },
     [expanded, disabled, onChange, onClick]
   );
   const handleKeyDown = React.useCallback(
-    (e) => {
+    (event) => {
       if (disabled) {
         return;
       }
       const ENTER = 13;
       const SPACE = 32;
-      if (e.keyCode === ENTER || e.keyCode === SPACE) {
+      if (event.keyCode === ENTER || event.keyCode === SPACE) {
         typeof onChange === "function" && onChange({ expanded: !expanded });
-        if (e.keyCode === SPACE) {
-          e.preventDefault();
+        if (event.keyCode === SPACE) {
+          event.preventDefault();
         }
       }
-      typeof onKeyDown === "function" && onKeyDown(e);
+      typeof onKeyDown === "function" && onKeyDown(event);
     },
     [expanded, disabled, onChange, onKeyDown]
   );

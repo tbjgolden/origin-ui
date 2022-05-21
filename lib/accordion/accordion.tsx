@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { Root as StyledRoot } from "./styled-components";
 import { STATE_CHANGE_TYPE } from "./constants";
@@ -36,7 +36,7 @@ export default class Accordion extends React.Component {
     this.setState(newState);
     typeof onChange === "function" && onChange(newState);
   }
-  handleKeyDown(e) {
+  handleKeyDown(event) {
     if (this.props.disabled) {
       return;
     }
@@ -45,18 +45,18 @@ export default class Accordion extends React.Component {
     const END = 35;
     const ARROW_UP = 38;
     const ARROW_DOWN = 40;
-    if (e.keyCode === HOME) {
-      e.preventDefault();
+    if (event.keyCode === HOME) {
+      event.preventDefault();
       const firstItem = itemRefs[0];
       firstItem.current && firstItem.current.focus();
     }
-    if (e.keyCode === END) {
-      e.preventDefault();
+    if (event.keyCode === END) {
+      event.preventDefault();
       const lastItem = itemRefs[itemRefs.length - 1];
       lastItem.current && lastItem.current.focus();
     }
-    if (e.keyCode === ARROW_UP) {
-      e.preventDefault();
+    if (event.keyCode === ARROW_UP) {
+      event.preventDefault();
       const activeItemIdx = itemRefs.findIndex((item) => {
         return item.current === document.activeElement;
       });
@@ -65,8 +65,8 @@ export default class Accordion extends React.Component {
         prevItem.current && prevItem.current.focus();
       }
     }
-    if (e.keyCode === ARROW_DOWN) {
-      e.preventDefault();
+    if (event.keyCode === ARROW_DOWN) {
+      event.preventDefault();
       const activeItemIdx = itemRefs.findIndex((item) => {
         return item.current === document.activeElement;
       });

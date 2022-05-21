@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { STATE_CHANGE_TYPE } from "./constants";
 import { clamp } from "./utils";
 const initialState = {

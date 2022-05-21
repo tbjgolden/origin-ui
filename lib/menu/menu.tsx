@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { LocaleContext } from "../locale";
 import { StyledList, StyledEmptyState, StyledOptgroupHeader } from "./styled-components";
 import OptionList from "./option-list";

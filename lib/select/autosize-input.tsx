@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyledInput, StyledInputSizer } from "./styled-components";
 import { getOverrides } from "../helpers/overrides";
 export default class AutosizeInput extends React.Component {

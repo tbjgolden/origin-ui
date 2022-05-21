@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { arrayMove, arrayRemove } from "react-movable";
 const defaultStateReducer = (type, nextState) => {
   return nextState;

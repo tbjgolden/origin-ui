@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { ADJOINED, SIZE, CUSTOM_INPUT_TYPE } from "./constants";
 import {

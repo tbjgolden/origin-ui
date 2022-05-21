@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button, SIZE, KIND } from "../button";
 import { ButtonGroup } from "../button-group";
 import { Checkbox, StyledLabel } from "../checkbox";

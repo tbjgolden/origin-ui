@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as ReactIs from "react-is";
 import {
   StartEnhancer as StyledStartEnhancer,

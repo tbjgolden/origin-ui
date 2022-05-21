@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { mergeOverrides, getOverrides } from "../helpers/overrides";
 import { BaseInput, SIZE, CUSTOM_INPUT_TYPE } from "../input";
 import {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { SIZE } from "./constants";
 import {
   StyledProgressBarRoundedRoot,

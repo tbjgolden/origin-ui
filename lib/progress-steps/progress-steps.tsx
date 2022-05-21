@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { StyledProgressSteps } from "./styled-components";
 function ProgressSteps({ overrides = {}, current, children }) {

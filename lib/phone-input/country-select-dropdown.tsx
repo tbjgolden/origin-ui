@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { List, AutoSizer } from "react-virtualized";
 import defaultProps from "./default-props";
 import {

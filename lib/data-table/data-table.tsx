@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { VariableSizeGrid } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
 import {

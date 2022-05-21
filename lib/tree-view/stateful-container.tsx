@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 const findSiblings = (node, children) => {
   if (children.includes(node)) {
     return children;

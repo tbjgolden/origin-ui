@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Popper from "popper";
 import { toPopperPlacement, parsePopperOffset } from "./utils";
 import { TETHER_PLACEMENT } from "./constants";

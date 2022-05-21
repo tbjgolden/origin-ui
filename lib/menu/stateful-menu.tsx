@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Menu from "./menu";
 import { NestedMenuContext } from "./nested-menus";
 import StatefulContainer from "./stateful-container";

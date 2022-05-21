@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { isFragment } from "react-is";
 export const flattenFragments = (children, ChildWrapper, depth = 0) => {
   return React.Children.toArray(children).reduce((acc, child, i) => {

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button, SIZE as BUTTON_SIZE } from "../button";
 import { Checkbox, STYLE_TYPE } from "../checkbox";
 import { useStyletron } from "../styles";

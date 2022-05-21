@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import StatefulContainer from "./stateful-container";
 import Calendar from "./calendar";
 class StatefulComponent extends React.Component {

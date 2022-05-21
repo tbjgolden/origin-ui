@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import { LocaleContext } from "../locale/index";
 import { filterOptions, Select } from "../select/index";

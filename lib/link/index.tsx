@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Link } from "./styled-components";
 import { withWrapper } from "../styles";
 import { isFocusVisible, forkFocus, forkBlur } from "../utils/focusVisible";

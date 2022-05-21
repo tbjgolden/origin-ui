@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { FormControl } from "../form-control";
 import { LocaleContext } from "../locale";
 import { Select } from "../select";

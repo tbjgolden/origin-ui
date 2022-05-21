@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button, SIZE } from "../button";
 import { ButtonGroup, MODE } from "../button-group";
 import { Input, SIZE as INPUT_SIZE } from "../input";

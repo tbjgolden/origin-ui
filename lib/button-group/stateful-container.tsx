@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { MODE, STATE_CHANGE_TYPE } from "./constants";
 function isSelectedDefined(selected) {
   return Array.isArray(selected) || typeof selected === "number";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyletronComponent } from "styletron-react";
 import { BaseInputProps, SIZE as INPUT_SIZE, StatefulContainerProps } from "../input";
 

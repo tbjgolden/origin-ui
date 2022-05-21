@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Popover } from "../popover";
 import { mergeOverrides } from "../helpers/overrides";
 import baseDefaultProps from "./default-props";

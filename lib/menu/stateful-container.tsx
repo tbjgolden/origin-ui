@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { STATE_CHANGE_TYPES, KEY_STRINGS } from "./constants";
 import { scrollItemIntoView } from "./utils";
 import { useUIDSeed } from "react-uid";

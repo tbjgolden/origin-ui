@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { SORT_DIRECTIONS } from "./constants";
 function useDuplicateColumnTitleWarning(columns) {
   React.useEffect(() => {

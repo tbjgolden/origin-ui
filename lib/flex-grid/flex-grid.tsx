@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Block } from "../block";
 import { flattenFragments } from "../helpers/react-helpers";
 import { getOverrides } from "../helpers/overrides";

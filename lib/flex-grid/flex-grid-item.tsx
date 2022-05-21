@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Block } from "../block";
 import { mergeOverrides } from "../helpers/overrides";
 import { getMediaQueries, getMediaQuery } from "../helpers/responsive-helpers";

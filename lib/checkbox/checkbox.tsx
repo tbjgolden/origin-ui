@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverride, getOverrideProps } from "../helpers/overrides";
 import {
   Checkmark as StyledCheckmark,
@@ -10,8 +10,8 @@ import {
 } from "./styled-components";
 import { STYLE_TYPE } from "./constants";
 import { isFocusVisible } from "../utils/focusVisible";
-const stopPropagation = (e) => {
-  return e.stopPropagation();
+const stopPropagation = (event) => {
+  return event.stopPropagation();
 };
 class StatelessCheckbox extends React.Component {
   constructor() {

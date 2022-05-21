@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyledDay, StyledDayLabel } from "./styled-components";
 import dateFnsAdapter from "./utils/date-fns-adapter";
 import DateHelpers from "./utils/date-helpers";

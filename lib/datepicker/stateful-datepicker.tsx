@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import StatefulContainer from "./stateful-container";
 import Datepicker from "./datepicker";
 class StatefulComponent extends React.Component {

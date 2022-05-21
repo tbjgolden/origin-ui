@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 export const LevelContext = React.createContext(0);
 export const HeadingLevel = ({ children }) => {
   return (

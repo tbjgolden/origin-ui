@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { StyledRoot, StyledRow } from "./styled-components";
 class Skeleton extends React.Component {

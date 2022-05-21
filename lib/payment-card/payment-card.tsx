@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import * as valid from "card-validator";
 import { addGaps, getCaretPosition } from "./utils";
 import { getOverrides } from "../helpers/overrides";

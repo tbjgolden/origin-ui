@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyledRoot, StyledEmoticon } from "./styled-components";
 import { getOverrides } from "../helpers/overrides";
 import { ARROW_UP, ARROW_DOWN, ARROW_LEFT, ARROW_RIGHT } from "./utils";

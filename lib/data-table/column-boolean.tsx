@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useStyletron } from "../styles";
 import { CategoricalFilter } from "./column-categorical";
 import Column from "./column";

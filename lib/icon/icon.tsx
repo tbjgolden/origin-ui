@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { Svg as StyledSvg } from "./styled-components";
 import omitDollarPrefixedKeys from "./omit-dollar-prefixed-keys";

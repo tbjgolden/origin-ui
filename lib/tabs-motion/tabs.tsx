@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useUID } from "react-uid";
 import { useStyletron } from "../styles";
 import { getOverrides } from "../helpers/overrides";

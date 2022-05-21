@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { STATE_TYPE } from "./constants";
 const defaultStateReducer = (type, nextState) => {
   return nextState;

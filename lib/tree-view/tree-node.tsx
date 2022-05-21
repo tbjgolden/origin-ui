@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StyledTreeItemList, StyledTreeItem } from "./styled-components";
 import StyledTreeLabel from "./tree-label";
 import { getOverride, getOverrideProps } from "../helpers/overrides";

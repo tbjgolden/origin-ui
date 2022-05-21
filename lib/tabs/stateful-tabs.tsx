@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Tabs from "./tabs";
 import { STATE_CHANGE_TYPE } from "./constants";
 export default class StatefulTabs extends React.Component {

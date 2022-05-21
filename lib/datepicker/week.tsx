@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Day from "./day";
 import { StyledWeek } from "./styled-components";
 import { WEEKDAYS } from "./constants";

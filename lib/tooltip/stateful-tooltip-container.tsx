@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { StatefulContainer as StatefulPopoverContainer } from "../popover";
 import baseDefaultProps from "./default-props";
 class StatefulContainer extends React.Component {

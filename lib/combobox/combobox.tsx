@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Input, SIZE } from "../input";
 import { scrollItemIntoView } from "../menu/utils";
 import { getOverrides } from "../helpers/overrides";

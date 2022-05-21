@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Button, KIND, SHAPE } from "../button";
 import { getOverrides } from "../helpers/overrides";
 import { useStyletron } from "../styles";

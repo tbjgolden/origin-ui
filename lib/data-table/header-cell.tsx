@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { Checkbox } from "../checkbox";
 import { useStyletron } from "../styles";
 import ChevronDown from "../icon/chevron-down";

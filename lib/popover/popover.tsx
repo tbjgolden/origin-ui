@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import FocusLock, { MoveFocusInside } from "react-focus-lock";
 import { getOverride, getOverrideProps } from "../helpers/overrides";
 import {

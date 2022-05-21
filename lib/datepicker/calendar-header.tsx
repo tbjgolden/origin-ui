@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import ChevronRight from "../icon/chevron-right";
 import ChevronLeft from "../icon/chevron-left";
 import ChevronDown from "../icon/chevron-down";

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { format, getTimezoneOffset } from "date-fns-tz";
 import { getOverrides, mergeOverrides } from "../helpers/overrides";
 import { LocaleContext } from "../locale";

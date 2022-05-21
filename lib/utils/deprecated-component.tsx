@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 export default function (Component, displayName) {
   const DeprecatedComponent = React.forwardRef((props, ref) => {
     if (__DEV__) {

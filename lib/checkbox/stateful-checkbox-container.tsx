@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { STATE_TYPE } from "./constants";
 const defaultStateReducer = (type, nextState) => {
   return nextState;
@@ -6,36 +6,36 @@ const defaultStateReducer = (type, nextState) => {
 class StatefulCheckboxContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.onChange = (e) => {
-      this.stateReducer(STATE_TYPE.change, e);
+    this.onChange = (event) => {
+      this.stateReducer(STATE_TYPE.change, event);
       const { onChange } = this.props;
-      onChange && onChange(e);
+      onChange && onChange(event);
     };
-    this.onMouseEnter = (e) => {
+    this.onMouseEnter = (event) => {
       const { onMouseEnter } = this.props;
-      onMouseEnter && onMouseEnter(e);
+      onMouseEnter && onMouseEnter(event);
     };
-    this.onMouseLeave = (e) => {
+    this.onMouseLeave = (event) => {
       const { onMouseLeave } = this.props;
-      onMouseLeave && onMouseLeave(e);
+      onMouseLeave && onMouseLeave(event);
     };
-    this.onFocus = (e) => {
+    this.onFocus = (event) => {
       const { onFocus } = this.props;
-      onFocus && onFocus(e);
+      onFocus && onFocus(event);
     };
-    this.onBlur = (e) => {
+    this.onBlur = (event) => {
       const { onBlur } = this.props;
-      onBlur && onBlur(e);
+      onBlur && onBlur(event);
     };
-    this.stateReducer = (type, e) => {
+    this.stateReducer = (type, event) => {
       let nextState = {};
       const { stateReducer } = this.props;
       switch (type) {
         case STATE_TYPE.change:
-          nextState = { checked: e.target.checked };
+          nextState = { checked: event.target.checked };
           break;
       }
-      const newState = stateReducer(type, nextState, this.state, e);
+      const newState = stateReducer(type, nextState, this.state, event);
       this.setState(newState);
     };
     const { initialState } = this.props;

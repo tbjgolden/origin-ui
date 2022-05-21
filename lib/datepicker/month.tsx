@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import Week from "./week";
 import { StyledMonth } from "./styled-components";
 import dateFnsAdapter from "./utils/date-fns-adapter";

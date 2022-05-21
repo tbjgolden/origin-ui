@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { LocaleContext } from "../locale";
 import { getOverrides } from "../helpers/overrides";
 import { OPTION_LIST_SIZE } from "./constants";

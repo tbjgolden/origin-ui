@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverride, getOverrideProps } from "../helpers/overrides";
 import { UIDConsumer } from "react-uid";
 import {

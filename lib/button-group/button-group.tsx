@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { KIND, SIZE, SHAPE } from "../button";
 import { MODE } from "./constants";
 import { getOverrides } from "../helpers/overrides";
@@ -66,20 +66,20 @@ export default class ButtonGroup extends React.Component {
                     (isRadio && (!selected || selected === -1) && index === 0)
                       ? 0
                       : -1,
-                  onKeyDown: (e) => {
+                  onKeyDown: (event) => {
                     if (!isRadio) return;
                     const value = Number(selected) ? Number(selected) : 0;
-                    if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
-                      e.preventDefault && e.preventDefault();
+                    if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+                      event.preventDefault && event.preventDefault();
                       const prevIndex = value - 1 < 0 ? numItems - 1 : value - 1;
-                      onClick && onClick(e, prevIndex);
+                      onClick && onClick(event, prevIndex);
                       this.childRefs[prevIndex].current &&
                         this.childRefs[prevIndex].current.focus();
                     }
-                    if (e.key === "ArrowDown" || e.key === "ArrowRight") {
-                      e.preventDefault && e.preventDefault();
+                    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+                      event.preventDefault && event.preventDefault();
                       const nextIndex = value + 1 > numItems - 1 ? 0 : value + 1;
-                      onClick && onClick(e, nextIndex);
+                      onClick && onClick(event, nextIndex);
                       this.childRefs[nextIndex].current &&
                         this.childRefs[nextIndex].current.focus();
                     }

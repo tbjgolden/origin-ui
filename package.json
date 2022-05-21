@@ -56,5 +56,9 @@
     "branches": [
       "main"
     ]
+  },
+  "dependencies": {
+    "dependency-tree": "^8.1.2",
+    "print-tree": "^0.1.5"
   }
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { useStyletron } from "../styles";
 import HeaderCell from "./header-cell";
 import { useRef } from "react";

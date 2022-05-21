@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { MaskedInput } from "../input";
 import { Popover, PLACEMENT } from "../popover";
 import Calendar from "./calendar";

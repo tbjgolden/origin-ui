@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { getOverrides } from "../helpers/overrides";
 import { StyledNavLink, StyledNavItem } from "./styled-components";
 class NavItem extends React.Component {
