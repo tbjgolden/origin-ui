@@ -129,24 +129,13 @@ export function Tabs({
   const parseKeyDown = React.useCallback(
     (event) => {
       if (isHorizontal(orientation)) {
-        if (isRTL(theme.direction)) {
-          switch (event.keyCode) {
-            case 39:
-              return KEYBOARD_ACTION.previous;
-            case 37:
-              return KEYBOARD_ACTION.next;
-            default:
-              return null;
-          }
-        } else {
-          switch (event.keyCode) {
-            case 37:
-              return KEYBOARD_ACTION.previous;
-            case 39:
-              return KEYBOARD_ACTION.next;
-            default:
-              return null;
-          }
+        switch (event.keyCode) {
+          case 37:
+            return KEYBOARD_ACTION.previous;
+          case 39:
+            return KEYBOARD_ACTION.next;
+          default:
+            return null;
         }
       } else {
         switch (event.keyCode) {

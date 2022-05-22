@@ -19,9 +19,8 @@ export default function CountryPicker(props) {
   const baseSelectOverrides = {
     Root: {
       style: ({ $theme: { direction, sizing } }) => {
-        const marginDir = direction === "rtl" ? "marginLeft" : "marginRight";
         return {
-          [marginDir]: sizing.scale300,
+          marginRight: sizing.scale300,
           width: "auto",
         };
       },
@@ -40,11 +39,9 @@ export default function CountryPicker(props) {
           [SIZE.default]: sizing.scale600,
           [SIZE.large]: sizing.scale700,
         };
-        const padStartDir = direction === "rtl" ? "paddingRight" : "paddingLeft";
-        const padEndDir = direction === "rtl" ? "paddingLeft" : "paddingRight";
         const styleOverride = {
-          [padStartDir]: sizeToLeftPadding[props2.$size || SIZE.default],
-          [padEndDir]: sizeToRightPadding[props2.$size || SIZE.default],
+          paddingLeft: sizeToLeftPadding[props2.$size || SIZE.default],
+          paddingRight: sizeToRightPadding[props2.$size || SIZE.default],
         };
         if (!props2.$isFocused && !props2.$isPseudoFocused) {
           return {
@@ -74,17 +71,15 @@ export default function CountryPicker(props) {
           [SIZE.default]: sizing.scale400,
           [SIZE.large]: sizing.scale500,
         };
-        const marginDir = direction === "rtl" ? "marginLeft" : "marginRight";
         return {
-          [marginDir]: sizeToMargin[props2.$size || SIZE.default],
+          marginRight: sizeToMargin[props2.$size || SIZE.default],
         };
       },
     },
     DialCode: {
       style: ({ $theme: { direction, sizing } }) => {
-        const marginDir = direction === "rtl" ? "marginRight" : "marginLeft";
         return {
-          [marginDir]: sizing.scale600,
+          marginLeft: sizing.scale600,
         };
       },
     },

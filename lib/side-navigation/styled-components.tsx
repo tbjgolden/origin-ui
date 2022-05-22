@@ -41,18 +41,9 @@ export const StyledNavItemElement = styled("div", (props) => {
     $selectable,
     $level,
     $disabled,
-    $theme,
     $theme: { colors, sizing },
   } = props;
   const bgImgGradient = hexToRgb(colors.backgroundPrimary, "0.92") || "";
-  const borderWidthDir =
-    $theme.direction === "rtl" ? "borderRightWidth" : "borderLeftWidth";
-  const borderStyleDir =
-    $theme.direction === "rtl" ? "borderRightStyle" : "borderLeftStyle";
-  const borderColorDir =
-    $theme.direction === "rtl" ? "borderRightColor" : "borderLeftColor";
-  const paddingPrefixDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
-  const paddingSuffixDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   let cursor = $selectable ? "pointer" : "default";
   let color = $active ? colors.primary : null;
   let hoverColor = $selectable ? colors.primary : null;
@@ -67,15 +58,15 @@ export const StyledNavItemElement = styled("div", (props) => {
       ? `linear-gradient(0deg, ${bgImgGradient}, ${bgImgGradient})`
       : null,
     boxSizing: "border-box",
-    [borderWidthDir]: "4px",
-    [borderStyleDir]: "solid",
-    [borderColorDir]: $active ? colors.primary : "transparent",
+    borderLeftWidth: "4px",
+    borderLeftStyle: "solid",
+    borderLeftColor: $active ? colors.primary : "transparent",
     color,
     cursor,
     paddingTop: sizing.scale500,
     paddingBottom: sizing.scale500,
-    [paddingPrefixDir]: `calc(${sizing.scale800} * ${$level})`,
-    [paddingSuffixDir]: sizing.scale500,
+    paddingLeft: `calc(${sizing.scale800} * ${$level})`,
+    paddingRight: sizing.scale500,
     ":hover": {
       color: hoverColor,
     },

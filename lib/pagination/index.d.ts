@@ -1,7 +1,7 @@
 import React from "react";
 import { StyletronComponent } from "styletron-react";
 import { Override } from "../overrides";
-import { Locale } from "../locale";
+import { Locale } from "../locale-types";
 import { SIZE } from "../input";
 
 export interface STATE_CHANGE_TYPE {

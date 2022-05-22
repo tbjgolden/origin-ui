@@ -26,7 +26,6 @@ export const isHorizontal: (orientation: ORIENTATION) => boolean;
 export const isVertical: (orientation: ORIENTATION) => boolean;
 export const isIntrinsic: (fill: FILL) => boolean;
 export const isFixed: (fill: FILL) => boolean;
-export const isRTL: (direction: string) => boolean;
 
 // styled-components
 

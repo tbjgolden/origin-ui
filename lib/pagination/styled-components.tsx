@@ -8,20 +8,16 @@ export const StyledRoot = styled("div", ({ $theme }) => {
   };
 });
 export const StyledMaxLabel = styled("span", ({ $theme }) => {
-  const marginStartDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
-  const marginEndDir = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
-    [marginStartDir]: $theme.sizing.scale300,
-    [marginEndDir]: $theme.sizing.scale600,
+    marginLeft: $theme.sizing.scale300,
+    marginRight: $theme.sizing.scale600,
   };
 });
 export const StyledDropdownContainer = styled("div", ({ $theme, $isFocusVisible }) => {
-  const marginStartDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
-  const marginEndDir = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     position: "relative",
     outline: $isFocusVisible ? `3px solid ${$theme.colors.accent}` : "none",
-    [marginStartDir]: $theme.sizing.scale600,
-    [marginEndDir]: $theme.sizing.scale300,
+    marginLeft: $theme.sizing.scale600,
+    marginRight: $theme.sizing.scale300,
   };
 });

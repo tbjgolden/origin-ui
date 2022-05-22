@@ -3,7 +3,7 @@ import { StyletronComponent } from "styletron-react";
 import { Option } from "../select";
 import { SIZE } from "../input";
 import { Override } from "../overrides";
-import { Locale } from "../locale";
+import { Locale } from "../locale-types";
 import { any } from "prop-types";
 
 export interface STATE_CHANGE_TYPE {

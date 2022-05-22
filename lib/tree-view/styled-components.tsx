@@ -2,19 +2,18 @@ import { styled } from "../styles";
 export const StyledTreeItemList = styled(
   "ul",
   ({ $theme, $indentGuides, $isChildNode, $expanded = true }) => {
-    const direction = $theme.direction === "rtl" ? "Right" : "Left";
     return {
       marginTop: 0,
       marginBottom: 0,
-      [`margin${direction}`]: $isChildNode ? $theme.sizing.scale550 : 0,
+      marginLeft: $isChildNode ? $theme.sizing.scale550 : 0,
       overflow: "auto",
       paddingTop: 0,
       paddingBottom: 0,
-      [`padding${direction}`]: $isChildNode ? $theme.sizing.scale200 : 0,
+      paddingLeft: $isChildNode ? $theme.sizing.scale200 : 0,
       position: "relative",
       outline: "none",
       display: $expanded ? "block" : "none",
-      [`border${direction}`]:
+      borderLeft:
         $indentGuides && $isChildNode
           ? `1px solid ${$theme.colors.borderOpaque}`
           : "none",
@@ -64,25 +63,23 @@ export const StyledItemContent = styled(
   }
 );
 export const StyledIconContainer = styled("div", ({ $theme }) => {
-  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
     marginTop: 0,
     marginBottom: 0,
-    [marginDirection]: $theme.sizing.scale200,
+    marginRight: $theme.sizing.scale200,
   };
 });
 export const StyledNoIconContainer = styled("div", ({ $theme }) => {
-  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     alignItems: "center",
     display: "flex",
     justifyContent: "center",
     marginTop: 0,
     marginBottom: 0,
-    [marginDirection]: $theme.sizing.scale200,
+    marginRight: $theme.sizing.scale200,
     width: 0,
     height: "1em",
   };

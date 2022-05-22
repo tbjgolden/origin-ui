@@ -95,11 +95,7 @@ export default class Pagination extends React.PureComponent {
                       disabled={currentPage <= 1}
                       onClick={this.onPrevClick}
                       startEnhancer={() => {
-                        return theme.direction === "rtl" ? (
-                          <ChevronRight title="" size={24} />
-                        ) : (
-                          <ChevronLeft title="" size={24} />
-                        );
+                        return <ChevronLeft title="" size={24} />;
                       }}
                       kind={KIND.tertiary}
                       overrides={{
@@ -200,11 +196,7 @@ export default class Pagination extends React.PureComponent {
                       disabled={currentPage >= numPages}
                       onClick={this.onNextClick}
                       endEnhancer={() => {
-                        return theme.direction === "rtl" ? (
-                          <ChevronLeft title="" size={24} />
-                        ) : (
-                          <ChevronRight title="" size={24} />
-                        );
+                        return <ChevronRight title="" size={24} />;
                       }}
                       kind={KIND.tertiary}
                       overrides={{

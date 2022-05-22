@@ -58,17 +58,15 @@ export const BaseButton = styled(
   }
 );
 export const EndEnhancer = styled("div", ({ $theme }) => {
-  const marginDirection = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     display: "flex",
-    [marginDirection]: $theme.sizing.scale500,
+    marginLeft: $theme.sizing.scale500,
   };
 });
 export const StartEnhancer = styled("div", ({ $theme }) => {
-  const marginDirection = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     display: "flex",
-    [marginDirection]: $theme.sizing.scale500,
+    marginRight: $theme.sizing.scale500,
   };
 });
 export const LoadingSpinnerContainer = styled("div", ({ $theme, $size }) => {

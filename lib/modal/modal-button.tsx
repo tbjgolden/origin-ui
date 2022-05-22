@@ -4,10 +4,9 @@ import { mergeOverrides } from "../helpers/overrides";
 const overrides = {
   BaseButton: {
     style: ({ $theme }) => {
-      const marginInlineEnd = $theme.direction !== "rtl" ? "marginRight" : "marginLeft";
       return {
         ":not(:last-child)": {
-          [marginInlineEnd]: $theme.sizing.scale500,
+          marginRight: $theme.sizing.scale500,
         },
       };
     },

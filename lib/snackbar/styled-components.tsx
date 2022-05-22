@@ -21,11 +21,10 @@ export const StyledContent = styled("div", {
   width: "100%",
 });
 export const StyledStartEnhancerContainer = styled("span", ({ $theme }) => {
-  const paddingDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
   return {
     alignItems: "center",
     display: "flex",
-    [paddingDir]: $theme.sizing.scale600,
+    paddingLeft: $theme.sizing.scale600,
   };
 });
 export const StyledSpinner = withStyle(Spinner, ({ $height, $width }) => {
@@ -36,8 +35,6 @@ export const StyledSpinner = withStyle(Spinner, ({ $height, $width }) => {
   };
 });
 export const StyledMessage = styled("p", ({ $theme, $hasSuffix }) => {
-  const prefixPadding = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
-  const suffixPadding = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     ...$theme.typography.ParagraphMedium,
     "-webkit-box-orient": "vertical",
@@ -46,8 +43,8 @@ export const StyledMessage = styled("p", ({ $theme, $hasSuffix }) => {
     marginTop: $theme.sizing.scale600,
     marginBottom: $theme.sizing.scale600,
     overflow: "hidden",
-    [prefixPadding]: $theme.sizing.scale600,
-    [suffixPadding]: $hasSuffix ? $theme.sizing.scale300 : $theme.sizing.scale600,
+    paddingLeft: $theme.sizing.scale600,
+    paddingRight: $hasSuffix ? $theme.sizing.scale300 : $theme.sizing.scale600,
   };
 });
 export const StyledWrapActionButtonContainer = styled("div", {
@@ -55,9 +52,8 @@ export const StyledWrapActionButtonContainer = styled("div", {
   justifyContent: "flex-end",
 });
 export const StyledActionButtonContainer = styled("div", ({ $theme }) => {
-  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
-    [marginDir]: "auto",
+    marginLeft: "auto",
   };
 });
 function placementRules(placement) {
@@ -92,7 +88,6 @@ function placementRules(placement) {
         justifyContent: "flex-end",
         bottom: 0,
       };
-    case PLACEMENT.top:
     default:
       return {
         alignItems: "center",

@@ -366,7 +366,7 @@ function NumericalCell(props) {
       className={css({
         ...theme.typography.MonoParagraphXSmall,
         display: "flex",
-        justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
+        justifyContent: "flex-start",
         color: props.highlight(props.value) ? theme.colors.contentNegative : null,
         width: "100%",
       })}

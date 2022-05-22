@@ -26,15 +26,8 @@ export const StyledContent = styled("div", ({ $mLeft, $sublist, $theme }) => {
     flexGrow: 1,
     minHeight: $sublist ? "initial" : $theme.sizing.scale1600,
     justifyContent: "space-between",
-    ...($theme.direction === "rtl"
-      ? {
-          paddingLeft: $theme.sizing.scale600,
-          marginRight: $mLeft ? $theme.sizing.scale600 : null,
-        }
-      : {
-          paddingRight: $theme.sizing.scale600,
-          marginLeft: $mLeft ? $theme.sizing.scale600 : null,
-        }),
+    paddingRight: $theme.sizing.scale600,
+    marginLeft: $mLeft ? $theme.sizing.scale600 : null,
   };
 });
 export const StyledEndEnhancerContainer = styled("div", {
@@ -105,15 +98,8 @@ export const StyledHeadingContent = styled("div", ({ $theme }) => {
     minWidth: 0,
     paddingTop: $theme.sizing.scale600,
     paddingBottom: $theme.sizing.scale300,
-    ...($theme.direction === "rtl"
-      ? {
-          paddingLeft: $theme.sizing.scale600,
-          marginRight: $theme.sizing.scale600,
-        }
-      : {
-          paddingRight: $theme.sizing.scale600,
-          marginLeft: $theme.sizing.scale600,
-        }),
+    paddingRight: $theme.sizing.scale600,
+    marginLeft: $theme.sizing.scale600,
   };
 });
 export const StyledHeadingContentRow = styled("div", {

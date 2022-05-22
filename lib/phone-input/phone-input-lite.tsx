@@ -34,9 +34,8 @@ export default function PhoneInputLite(props) {
   const baseDialCodeOverride = {
     component: StyledDialCode,
     style: ({ $theme: { direction, sizing } }) => {
-      const marginDir = direction === "rtl" ? "marginRight" : "marginLeft";
       return {
-        [marginDir]: sizing.scale600,
+        marginLeft: sizing.scale600,
       };
     },
     props: { children: country.dialCode },
@@ -48,9 +47,8 @@ export default function PhoneInputLite(props) {
   const baseOverrides = {
     Input: {
       style: ({ $theme: { direction, sizing } }) => {
-        const paddingDir = direction === "rtl" ? "paddingRight" : "paddingLeft";
         return {
-          [paddingDir]: sizing.scale100,
+          paddingLeft: sizing.scale100,
         };
       },
     },

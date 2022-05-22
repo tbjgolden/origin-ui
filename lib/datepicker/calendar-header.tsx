@@ -179,7 +179,7 @@ export default class CalendarHeader extends React.Component {
       );
       const [PrevButtonIcon, prevButtonIconProps] = getOverrides(
         overrides.PrevButtonIcon,
-        theme.direction === "rtl" ? ChevronRight : ChevronLeft
+        ChevronLeft
       );
       let clickHandler = this.decreaseMonth;
       if (allPrevDaysDisabled) {
@@ -232,7 +232,7 @@ export default class CalendarHeader extends React.Component {
       );
       const [NextButtonIcon, nextButtonIconProps] = getOverrides(
         overrides.NextButtonIcon,
-        theme.direction === "rtl" ? ChevronLeft : ChevronRight
+        ChevronRight
       );
       let clickHandler = this.increaseMonth;
       if (allNextDaysDisabled) {

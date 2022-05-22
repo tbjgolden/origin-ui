@@ -27,13 +27,8 @@ export const StyledTabList = styled(
       style.marginBottom = "-5px";
     } else {
       style.flexDirection = "column";
-      if (isRTL($theme.direction)) {
-        style.paddingLeft = "5px";
-        style.marginLeft = "-5px";
-      } else {
-        style.paddingRight = "5px";
-        style.marginRight = "-5px";
-      }
+      style.paddingRight = "5px";
+      style.marginRight = "-5px";
     }
     if (isIntrinsic($fill)) {
       style["::-webkit-scrollbar"] = { display: "none" };
@@ -115,11 +110,7 @@ export const StyledArtworkContainer = styled(
     const style = {
       display: "flex",
     };
-    if (isRTL($theme.direction)) {
-      style.marginLeft = $theme.sizing.scale300;
-    } else {
-      style.marginRight = $theme.sizing.scale300;
-    }
+    style.marginRight = $theme.sizing.scale300;
     return style;
   }
 );
@@ -162,11 +153,7 @@ export const StyledTabHighlight = styled(
       style.transform = `translateY(${$distance}px)`;
       style.width = "5px";
       style.height = `${$length}px`;
-      if (isRTL($theme.direction)) {
-        style.left = "0px";
-      } else {
-        style.right = "0px";
-      }
+      style.right = "0px";
     }
     if ($animate) {
       style.transitionProperty = "all";

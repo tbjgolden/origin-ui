@@ -293,18 +293,15 @@ const getColorStateFromProps = (props) => {
 };
 export const Action = styled("span", (props) => {
   const { $theme, $disabled, $size = SIZE.small } = props;
-  const bottomRadiusDir =
-    $theme.direction === "rtl" ? "borderBottomLeftRadius" : "borderBottomRightRadius";
-  const topRadiusDir =
-    $theme.direction === "rtl" ? "borderTopLeftRadius" : "borderTopRightRadius";
-  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     alignItems: "center",
-    [bottomRadiusDir]: $theme.borders.useRoundedCorners ? $theme.borders.radius400 : 0,
-    [topRadiusDir]: $theme.borders.useRoundedCorners ? $theme.borders.radius400 : 0,
+    borderBottomRightRadius: $theme.borders.useRoundedCorners
+      ? $theme.borders.radius400
+      : 0,
+    borderTopRightRadius: $theme.borders.useRoundedCorners ? $theme.borders.radius400 : 0,
     cursor: $disabled ? "not-allowed" : "pointer",
     display: "flex",
-    [marginDir]: {
+    marginLeft: {
       [SIZE.small]: "8px",
       [SIZE.medium]: "12px",
       [SIZE.large]: "16px",
@@ -322,11 +319,10 @@ export const StartEnhancerContainer = styled("div", ({ $theme, $size = SIZE.smal
   } else if ($size === SIZE.large) {
     paddingMagnitude = $theme.sizing.scale600;
   }
-  const paddingDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     alignItems: "center",
     display: "flex",
-    [paddingDir]: paddingMagnitude,
+    paddingRight: paddingMagnitude,
   };
 });
 export const Text = styled("span", (props) => {
@@ -336,7 +332,7 @@ export const Text = styled("span", (props) => {
     whiteSpace: "nowrap",
     textOverflow: "ellipsis",
     maxWidth: props.$theme.sizing.scale3200,
-    order: $theme.direction === "rtl" ? 1 : 0,
+    order: 0,
   };
 });
 export const Root = styled("span", (props) => {

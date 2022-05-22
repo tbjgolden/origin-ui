@@ -32,9 +32,7 @@ export const StyledIconContainer = styled(
       marginRight = $theme.sizing.scale750;
     }
     const marginTop = `calc(${titlePad} + (${font.lineHeight} - ${size}) / 2)`;
-    if ($theme.direction === "rtl") {
-      [marginLeft, marginRight] = [marginRight, marginLeft];
-    }
+
     return {
       marginRight,
       marginLeft,
@@ -43,7 +41,7 @@ export const StyledIconContainer = styled(
       height: size,
       lineHeight: size,
       backgroundColor: currentColor,
-      float: $theme.direction === "rtl" ? "right" : "left",
+      float: "left",
       textAlign: "center",
       display: "flex",
       justifyContent: "center",
@@ -73,7 +71,7 @@ export const StyledIcon = styled(
       borderBottomRightRadius: size,
       borderBottomLeftRadius: size,
       backgroundColor: currentColor,
-      float: $theme.direction === "rtl" ? "right" : "left",
+      float: "left",
       textAlign: "center",
       display: "flex",
       justifyContent: "center",
@@ -95,9 +93,8 @@ export const StyledInnerIcon = styled("div", ({ $theme }) => {
   };
 });
 export const StyledContent = styled("div", ({ $theme }) => {
-  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
-    [marginDir]: $theme.sizing.scale1600,
+    marginLeft: $theme.sizing.scale1600,
   };
 });
 export const StyledContentTitle = styled("div", ({ $theme, $isActive, $isCompleted }) => {
@@ -126,10 +123,9 @@ export const StyledContentTail = styled("div", ({ $theme, $isCompleted, $isActiv
   if ($isCompleted) {
     currentColor = $theme.colors.primary;
   }
-  const dir = $theme.direction === "rtl" ? "right" : "left";
   return {
     position: "absolute",
-    [dir]: "31px",
+    left: "31px",
     top: 0,
     height: `calc(100% + ${$theme.sizing.scale500})`,
     marginBottom: 0,
@@ -182,7 +178,7 @@ export const StyledNumberIcon = styled(
       borderBottomLeftRadius: size,
       backgroundColor,
       color,
-      float: $theme.direction === "rtl" ? "right" : "left",
+      float: "left",
       textAlign: "center",
       display: "flex",
       justifyContent: "center",
@@ -202,10 +198,9 @@ export const StyledNumberContentTail = styled(
       currentColor = $theme.colors.primary;
     }
     const marginTop = `calc(${titlePad} + ${size} + (${titleFont.lineHeight} - ${size}) / 2)`;
-    const dir = $theme.direction === "rtl" ? "right" : "left";
     return {
       position: "absolute",
-      [dir]: "31px",
+      left: "31px",
       top: 0,
       height: `calc(100% - ${$theme.sizing.scale500})`,
       paddingBottom: 0,

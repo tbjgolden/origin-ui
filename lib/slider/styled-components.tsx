@@ -48,7 +48,7 @@ export const InnerTrack = styled("div", (props) => {
             ],
       min: $min || 0,
       max: $max || 0,
-      rtl: direction === "rtl",
+      rtl: false,
     }),
     height: "2px",
     width: "100%",
@@ -87,13 +87,7 @@ export const TickBar = styled("div", (props) => {
 });
 TickBar.displayName = "StyledTickBar";
 export const Thumb = styled("div", (props) => {
-  const { $theme, $value = [], $thumbIndex, $disabled } = props;
-  let isLeft = $value.length === 2 && $thumbIndex === 0;
-  let isRight = $value.length === 2 && $thumbIndex === 1;
-  if ($theme.direction === "rtl" && (isRight || isLeft)) {
-    isLeft = !isLeft;
-    isRight = !isRight;
-  }
+  const { $theme, $disabled } = props;
   return {
     height: "24px",
     width: "24px",

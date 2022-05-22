@@ -82,7 +82,6 @@ export const Dialog = styled("div", (props) => {
 });
 export const Close = styled("button", (props) => {
   const { $theme, $isFocusVisible } = props;
-  const dir = $theme.direction === "rtl" ? "left" : "right";
   return {
     background: "transparent",
     outline: 0,
@@ -113,7 +112,7 @@ export const Close = styled("button", (props) => {
     },
     position: "absolute",
     top: $theme.sizing.scale500,
-    [dir]: $theme.sizing.scale500,
+    right: $theme.sizing.scale500,
     width: $theme.sizing.scale800,
     height: $theme.sizing.scale800,
     display: "flex",
@@ -123,15 +122,13 @@ export const Close = styled("button", (props) => {
   };
 });
 export const ModalHeader = styled("div", ({ $theme }) => {
-  const marginStartDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
-  const marginEndDir = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
     ...$theme.typography.font550,
     color: $theme.colors.contentPrimary,
     marginTop: $theme.sizing.scale900,
     marginBottom: $theme.sizing.scale600,
-    [marginStartDir]: $theme.sizing.scale800,
-    [marginEndDir]: $theme.sizing.scale900,
+    marginLeft: $theme.sizing.scale800,
+    marginRight: $theme.sizing.scale900,
   };
 });
 export const ModalBody = styled("div", ({ $theme }) => {
@@ -152,6 +149,6 @@ export const ModalFooter = styled("div", ({ $theme }) => {
     marginRight: $theme.sizing.scale800,
     paddingTop: $theme.sizing.scale500,
     paddingBottom: $theme.sizing.scale500,
-    textAlign: $theme.direction === "rtl" ? "left" : "right",
+    textAlign: "right",
   };
 });

@@ -49,7 +49,6 @@ export const StyledTableHeadRow = styled("tr", ({ $theme }) => {
 export const StyledTableHeadCell = styled(
   "th",
   ({ $theme, $size, $divider, $isNumeric }) => {
-    const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
     const borderVertical = $divider === DIVIDER.grid || $divider === DIVIDER.vertical;
     const padding = sizeToCellPadding($theme, $size);
     return {
@@ -62,7 +61,7 @@ export const StyledTableHeadCell = styled(
       paddingLeft: padding,
       backgroundColor: $theme.colors.tableHeadBackgroundColor,
       color: $theme.colors.contentPrimary,
-      textAlign: $theme.direction === "rtl" || $isNumeric ? "right" : "left",
+      textAlign: "left",
       verticalAlign: "top",
       whiteSpace: "nowrap",
       zIndex: 1,
@@ -74,15 +73,9 @@ export const StyledTableHeadCell = styled(
             borderBottomWidth: $theme.borders.border300.borderWidth,
           }),
       ":not(:last-child)": {
-        [`border${borderDir}Color`]: borderVertical
-          ? $theme.borders.border300.borderColor
-          : null,
-        [`border${borderDir}Style`]: borderVertical
-          ? $theme.borders.border300.borderStyle
-          : null,
-        [`border${borderDir}Width`]: borderVertical
-          ? $theme.borders.border300.borderWidth
-          : null,
+        borderRightColor: borderVertical ? $theme.borders.border300.borderColor : null,
+        borderRightStyle: borderVertical ? $theme.borders.border300.borderStyle : null,
+        borderRightWidth: borderVertical ? $theme.borders.border300.borderWidth : null,
       },
     };
   }
@@ -151,7 +144,6 @@ export const StyledTableBodyRow = styled("tr", ({ $theme }) => {
 export const StyledTableBodyCell = styled(
   "td",
   ({ $theme, $size, $divider, $isNumeric, $isLastRow, $isSortable }) => {
-    const borderDir = $theme.direction === "rtl" ? "Left" : "Right";
     const borderVertical = $divider === DIVIDER.vertical || $divider === DIVIDER.grid;
     const borderHorizontal =
       $divider === void 0 || $divider === DIVIDER.horizontal || $divider === DIVIDER.grid;
@@ -172,15 +164,9 @@ export const StyledTableBodyCell = styled(
       borderBottomWidth:
         !$isLastRow && borderHorizontal ? $theme.borders.border300.borderWidth : null,
       ":not(:last-child)": {
-        [`border${borderDir}Color`]: borderVertical
-          ? $theme.borders.border300.borderColor
-          : null,
-        [`border${borderDir}Style`]: borderVertical
-          ? $theme.borders.border300.borderStyle
-          : null,
-        [`border${borderDir}Width`]: borderVertical
-          ? $theme.borders.border300.borderWidth
-          : null,
+        borderRightColor: borderVertical ? $theme.borders.border300.borderColor : null,
+        borderRightStyle: borderVertical ? $theme.borders.border300.borderStyle : null,
+        borderRightWidth: borderVertical ? $theme.borders.border300.borderWidth : null,
       },
     };
   }

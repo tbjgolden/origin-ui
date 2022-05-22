@@ -61,12 +61,11 @@ export const StyledCalendarContainer = styled("div", (props) => {
   };
 });
 export const StyledSelectorContainer = styled("div", ({ $theme }) => {
-  const textAlign = $theme.direction === "rtl" ? "right" : "left";
   return {
     marginBottom: $theme.sizing.scale600,
     paddingLeft: $theme.sizing.scale600,
     paddingRight: $theme.sizing.scale600,
-    textAlign,
+    textAlign: "left",
   };
 });
 export const StyledCalendarHeader = styled("div", (props) => {
@@ -126,11 +125,10 @@ export const StyledMonthYearSelectButton = styled("button", (props) => {
   };
 });
 export const StyledMonthYearSelectIconContainer = styled("span", (props) => {
-  const marginDirection = props.$theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     alignItems: "center",
     display: "flex",
-    [marginDirection]: props.$theme.sizing.scale500,
+    marginLeft: props.$theme.sizing.scale500,
   };
 });
 function getArrowBtnStyle({ $theme, $disabled, $isFocusVisible }) {

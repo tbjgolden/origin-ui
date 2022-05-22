@@ -10,7 +10,7 @@ function RowIndexCell(props) {
     <div
       className={css({
         display: "flex",
-        justifyContent: theme.direction !== "rtl" ? "flex-end" : "flex-start",
+        justifyContent: "flex-end",
         width: "100%",
       })}
     >

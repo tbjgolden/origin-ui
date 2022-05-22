@@ -24,15 +24,13 @@ function getControlPadding(props) {
   const paddingLeft = isSearch
     ? `calc(${sizing.scale1000} - ${sizing.scale0})`
     : sizing.scale400;
-  const paddingStartDir = $theme.direction === "rtl" ? "paddingRight" : "paddingLeft";
-  const paddingEndDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     [SIZE.mini]: {
       paddingTop: $multi && !$isEmpty ? 0 : sizing.scale100,
       paddingBottom: $multi && !$isEmpty ? 0 : sizing.scale100,
-      [paddingStartDir]:
+      paddingLeft:
         $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0",
+      paddingRight: "0",
     },
     [SIZE.compact]: {
       paddingTop:
@@ -43,9 +41,9 @@ function getControlPadding(props) {
         $multi && !$isEmpty
           ? `calc(${sizing.scale100} - ${sizing.scale0})`
           : sizing.scale200,
-      [paddingStartDir]:
+      paddingLeft:
         $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: "0",
+      paddingRight: "0",
     },
     [SIZE.default]: {
       paddingTop:
@@ -56,9 +54,9 @@ function getControlPadding(props) {
         $multi && !$isEmpty
           ? `calc(${sizing.scale400} - ${sizing.scale0})`
           : sizing.scale400,
-      [paddingStartDir]:
+      paddingLeft:
         $multi && !$isEmpty ? `calc(${paddingLeft} + ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0,
+      paddingRight: 0,
     },
     [SIZE.large]: {
       paddingTop:
@@ -69,9 +67,9 @@ function getControlPadding(props) {
         $multi && !$isEmpty
           ? `calc(${sizing.scale600} - ${sizing.scale0})`
           : sizing.scale550,
-      [paddingStartDir]:
+      paddingLeft:
         $multi && !$isEmpty ? `calc(${paddingLeft} - ${sizing.scale0})` : paddingLeft,
-      [paddingEndDir]: 0,
+      paddingRight: 0,
     },
   }[$size];
 }
@@ -241,11 +239,10 @@ export const StyledSingleValue = styled("div", (props) => {
     $theme: { typography },
   } = props;
   const font = getFont($size, typography);
-  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     lineHeight: !$searchable ? font.lineHeight : "inherit",
     boxSizing: "border-box",
-    [marginDir]: $theme.sizing.scale0,
+    marginLeft: $theme.sizing.scale0,
     height: "100%",
     maxWidth: "100%",
     ...ellipsisText,
@@ -279,7 +276,7 @@ export const StyledInputContainer = styled("div", (props) => {
     paddingBottom: 0,
     paddingLeft: 0,
     paddingRight: 0,
-    height: String(!$searchable ? font.lineHeight : "auto"),
+    height: String($searchable ? "auto" : font.lineHeight),
     maxHeight: String(font.lineHeight),
   };
 });
@@ -317,12 +314,11 @@ export const StyledInput = styled("input", (props) => {
 export const StyledInputSizer = styled(
   "div",
   ({ $size, $theme, $theme: { typography } }) => {
-    const dir = $theme.direction === "rtl" ? "right" : "left";
     return {
       ...getFont($size, typography),
       position: "absolute",
       top: 0,
-      [dir]: 0,
+      left: 0,
       visibility: "hidden",
       height: 0,
       overflow: "scroll",
@@ -331,7 +327,6 @@ export const StyledInputSizer = styled(
   }
 );
 export const StyledIconsContainer = styled("div", ({ $theme, $theme: { sizing } }) => {
-  const paddingDir = $theme.direction === "rtl" ? "paddingLeft" : "paddingRight";
   return {
     boxSizing: "border-box",
     position: "relative",
@@ -339,7 +334,7 @@ export const StyledIconsContainer = styled("div", ({ $theme, $theme: { sizing } 
     flexShrink: 0,
     alignItems: "center",
     alignSelf: "stretch",
-    [paddingDir]: sizing.scale500,
+    paddingRight: sizing.scale500,
   };
 });
 function getSvgStyles({ $theme }) {
@@ -409,14 +404,13 @@ export const StyledLoadingIndicator = withStyle(Spinner, ({ $theme }) => {
 export const StyledSearchIconContainer = styled("div", (props) => {
   const { $disabled, $theme } = props;
   const { colors, sizing } = $theme;
-  const dir = $theme.direction === "rtl" ? "right" : "left";
   return {
     ...getSvgStyles(props),
     color: $disabled ? colors.inputTextDisabled : colors.contentPrimary,
     cursor: $disabled ? "not-allowed" : "pointer",
     position: "absolute",
     top: 0,
-    [dir]: sizing.scale500,
+    left: sizing.scale500,
     display: "flex",
     alignItems: "center",
     height: "100%",

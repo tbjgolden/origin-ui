@@ -2,7 +2,7 @@ import React from "react";
 import extend from "just-extend";
 import en_US from "./en_US";
 export const LocaleContext = React.createContext(en_US);
-const LocaleProvider = (props) => {
+export const LocaleProvider = (props) => {
   const { locale, children } = props;
   return (
     <LocaleContext.Provider value={extend({}, en_US, locale)}>
@@ -10,4 +10,3 @@ const LocaleProvider = (props) => {
     </LocaleContext.Provider>
   );
 };
-export default LocaleProvider;

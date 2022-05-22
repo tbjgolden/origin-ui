@@ -9,7 +9,7 @@ export const IconWrapper = styled("div", (props) => {
     [SIZE.large]: $theme.sizing.scale700,
   };
   return {
-    [$theme.direction === "rtl" ? "marginRight" : "marginLeft"]: margin[$size],
+    marginLeft: margin[$size],
     height: "100%",
     display: "flex",
     alignItems: "center",

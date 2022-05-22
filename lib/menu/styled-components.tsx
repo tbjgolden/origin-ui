@@ -159,12 +159,10 @@ export const StyledProfileLabelsContainer = styled(
   "div",
   ({ $theme: { direction, sizing } }) => {
     return {
-      alignSelf: direction === "rtl" ? "flex-end" : "flex-start",
+      alignSelf: "flex-start",
       display: "flex",
       flexDirection: "column",
-      ...(direction === "rtl"
-        ? { marginRight: sizing.scale600 }
-        : { marginLeft: sizing.scale600 }),
+      marginLeft: sizing.scale600,
     };
   }
 );

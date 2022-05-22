@@ -33,7 +33,6 @@ export const StyledHead = withWrapper(StyledHeadElement, (StyledComponent) => {
   };
 });
 const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
-  const borderDir = $theme.direction === "rtl" ? "borderLeft" : "borderRight";
   return {
     ...$theme.typography.font350,
     ...expandBorderStyles($theme.borders.border300),
@@ -50,7 +49,7 @@ const StyledHeadCellElement = styled("div", ({ $theme, $cursor }) => {
     cursor: $cursor ? $cursor : "inherit",
     width: "100%",
     ":last-of-type": {
-      [borderDir]: "none",
+      borderRight: "none",
     },
   };
 });

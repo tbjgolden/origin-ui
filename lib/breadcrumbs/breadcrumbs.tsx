@@ -39,11 +39,7 @@ export function Breadcrumbs(props) {
           <Separator {...baseSeparatorProps} key={`separator-${index}`}>
             <ThemeContext.Consumer>
               {(theme) => {
-                return theme.direction === "rtl" ? (
-                  <Left size={16} {...baseIconProps} />
-                ) : (
-                  <Right size={16} {...baseIconProps} />
-                );
+                return <Right size={16} {...baseIconProps} />;
               }}
             </ThemeContext.Consumer>
           </Separator>

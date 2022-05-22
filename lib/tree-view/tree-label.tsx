@@ -42,12 +42,8 @@ const TreeLabel = ({
         <IconContainer {...sharedProps} {...getOverrideProps(IconContainerOverride)}>
           {!isExpanded ? (
             <ThemeContext.Consumer>
-              {(theme) => {
-                return theme.direction === "rtl" ? (
-                  <Left size={16} {...sharedProps} {...LeftProps} />
-                ) : (
-                  <Right size={16} {...sharedProps} {...RightProps} />
-                );
+              {() => {
+                return <Right size={16} {...sharedProps} {...RightProps} />;
               }}
             </ThemeContext.Consumer>
           ) : (

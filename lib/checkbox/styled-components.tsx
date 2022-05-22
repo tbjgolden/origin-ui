@@ -35,11 +35,6 @@ function getLabelPadding(props) {
       paddingDirection = "Left";
       break;
   }
-  if ($theme.direction === "rtl" && paddingDirection === "Left") {
-    paddingDirection = "Right";
-  } else if ($theme.direction === "rtl" && paddingDirection === "Right") {
-    paddingDirection = "Left";
-  }
   return {
     [`padding${paddingDirection}`]: scale300,
   };
@@ -209,9 +204,7 @@ export const Toggle = styled("div", (props) => {
     outline: "none",
     height: props.$theme.sizing.scale700,
     width: props.$theme.sizing.scale700,
-    transform: props.$checked
-      ? `translateX(${props.$theme.direction === "rtl" ? "-100%" : "100%"})`
-      : null,
+    transform: props.$checked ? `translateX(100%)` : null,
     transition: `transform ${props.$theme.animation.timing200}`,
   };
 });

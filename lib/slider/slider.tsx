@@ -107,7 +107,7 @@ function Slider({
         onFinalChange={(value2) => {
           return onFinalChange({ value: value2 });
         }}
-        rtl={theme.direction === "rtl"}
+        rtl={false}
         renderTrack={({ props, children, isDragged }) => {
           return (
             <Track

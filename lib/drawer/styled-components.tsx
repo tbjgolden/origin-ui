@@ -129,7 +129,6 @@ export const StyledDrawerBody = styled("div", (props) => {
 });
 export const StyledClose = styled("button", (props) => {
   const { $theme, $isFocusVisible } = props;
-  const dir = $theme.direction === "rtl" ? "left" : "right";
   return {
     background: "transparent",
     outline: 0,
@@ -160,7 +159,7 @@ export const StyledClose = styled("button", (props) => {
     },
     position: "absolute",
     top: $theme.sizing.scale500,
-    [dir]: $theme.sizing.scale500,
+    right: $theme.sizing.scale500,
     width: $theme.sizing.scale800,
     height: $theme.sizing.scale800,
     display: "flex",

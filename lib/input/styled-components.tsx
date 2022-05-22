@@ -79,16 +79,9 @@ function getInputPadding(size, sizing) {
   }[size];
 }
 function getRootPadding(adjoined, size, sizing, direction, hasIconTrailing) {
-  const ifLeftPad =
-    adjoined === ADJOINED.both ||
-    (adjoined === ADJOINED.left && direction !== "rtl") ||
-    (adjoined === ADJOINED.right && direction === "rtl") ||
-    (hasIconTrailing && direction === "rtl");
+  const ifLeftPad = adjoined === ADJOINED.both || adjoined === ADJOINED.left;
   const ifRightPad =
-    adjoined === ADJOINED.both ||
-    (adjoined === ADJOINED.right && direction !== "rtl") ||
-    (adjoined === ADJOINED.left && direction === "rtl") ||
-    (hasIconTrailing && direction !== "rtl");
+    adjoined === ADJOINED.both || adjoined === ADJOINED.right || hasIconTrailing;
   return {
     paddingLeft: ifLeftPad ? sizing.scale550 : "0px",
     paddingRight: ifRightPad ? sizing.scale550 : "0px",

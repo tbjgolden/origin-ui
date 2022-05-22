@@ -31,9 +31,8 @@ export const StyledRoot = withStyle(SelectStyledRoot, (props) => {
   };
 });
 export const StyledDialCode = styled("div", ({ $theme: { direction, sizing } }) => {
-  const marginDir = direction === "rtl" ? "marginRight" : "marginLeft";
   return {
-    [marginDir]: sizing.scale100,
+    marginLeft: sizing.scale100,
     display: "flex",
     alignItems: "center",
   };
@@ -73,9 +72,8 @@ export const StyledCountrySelectDropdownListItem = withWrapper(
 export const StyledCountrySelectDropdownFlagColumn = styled(
   "div",
   ({ $theme: { direction, sizing } }) => {
-    const paddingDir = direction === "rtl" ? "paddingRight" : "paddingLeft";
     return {
-      [paddingDir]: sizing.scale600,
+      paddingLeft: sizing.scale600,
       display: "flex",
       alignItems: "center",
     };
@@ -84,20 +82,17 @@ export const StyledCountrySelectDropdownFlagColumn = styled(
 export const StyledCountrySelectDropdownNameColumn = styled(
   "div",
   ({ $theme: { direction, sizing } }) => {
-    const paddingDir = direction === "rtl" ? "paddingRight" : "paddingLeft";
     return {
-      [paddingDir]: sizing.scale600,
+      paddingLeft: sizing.scale600,
     };
   }
 );
 export const StyledCountrySelectDropdownDialcodeColumn = styled(
   "div",
   ({ $theme: { direction, sizing } }) => {
-    const paddingDir = direction === "rtl" ? "paddingLeft" : "paddingRight";
-    const marginDir = direction === "rtl" ? "marginRight" : "marginLeft";
     return {
-      [paddingDir]: sizing.scale600,
-      [marginDir]: "auto",
+      paddingRight: sizing.scale600,
+      marginLeft: "auto",
     };
   }
 );

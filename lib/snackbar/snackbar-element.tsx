@@ -25,8 +25,8 @@ const ActionButton = React.forwardRef(({ onClick, message, overrides = {} }, ref
           BaseButton: {
             style: {
               color: theme.colors.contentInversePrimary,
-              marginRight: theme.direction === "rtl" ? null : theme.sizing.scale100,
-              marginLeft: theme.direction === "rtl" ? theme.sizing.scale100 : null,
+              marginRight: theme.sizing.scale100,
+              marginLeft: null,
               width: "100%",
               whiteSpace: "nowrap",
               ":hover": {

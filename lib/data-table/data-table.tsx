@@ -428,8 +428,8 @@ const InnerTableElement = React.forwardRef((props, ref) => {
               paddingLeft: theme.sizing.scale300,
               paddingRight: theme.sizing.scale300,
               position: "absolute",
-              right: theme.direction !== "rtl" ? 0 - ctx.scrollLeft : "initial",
-              left: theme.direction === "rtl" ? 0 : "initial",
+              right: 0 - ctx.scrollLeft,
+              left: "initial",
               top: (ctx.rowHighlightIndex - 1) * ctx.rowHeight + HEADER_ROW_HEIGHT,
             }}
           >
@@ -921,7 +921,7 @@ export function DataTable({
                   ...theme.borders.border200,
                   borderColor: theme.colors.borderOpaque,
                 }}
-                direction={theme.direction === "rtl" ? "rtl" : "ltr"}
+                direction="ltr"
               >
                 {CellPlacementMemo}
               </VariableSizeGrid>

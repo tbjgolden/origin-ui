@@ -83,11 +83,11 @@ function getLabelPadding(props) {
       paddingDirection = "Top";
       break;
     case "left":
-      paddingDirection = $theme.direction === "rtl" ? "Left" : "Right";
+      paddingDirection = "Right";
       break;
     default:
     case "right":
-      paddingDirection = $theme.direction === "rtl" ? "Right" : "Left";
+      paddingDirection = "Left";
       break;
   }
   const { sizing } = $theme;
@@ -116,7 +116,7 @@ export const Root = styled("label", (props) => {
   const { $disabled, $hasDescription, $labelPlacement, $theme, $align } = props;
   const { sizing } = $theme;
   const isHorizontal = $align === "horizontal";
-  const marginAfter = $theme.direction === "rtl" ? "Left" : "Right";
+  const marginAfter = "Right";
   return {
     flexDirection:
       $labelPlacement === "top" || $labelPlacement === "bottom" ? "column" : "row",
@@ -198,14 +198,12 @@ export const Input = styled("input", {
 export const Description = styled("div", (props) => {
   const { $theme, $align } = props;
   const isHorizontal = $align === "horizontal";
-  const marginBefore = $theme.direction === "rtl" ? "Right" : "Left";
-  const marginAfter = $theme.direction === "rtl" ? "Left" : "Right";
   return {
     ...$theme.typography.ParagraphSmall,
     color: $theme.colors.contentSecondary,
     cursor: "auto",
-    [`margin${marginBefore}`]: $align === "horizontal" ? null : $theme.sizing.scale900,
-    [`margin${marginAfter}`]: isHorizontal ? $theme.sizing.scale200 : null,
+    marginLeft: $align === "horizontal" ? null : $theme.sizing.scale900,
+    marginRight: isHorizontal ? $theme.sizing.scale200 : null,
     maxWidth: "240px",
   };
 });

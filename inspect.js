@@ -105,62 +105,112 @@ const entryPoints = [
   "lib/typography/index.tsx",
 ];
 
-const filter = "accordion";
+const filter = null && "card";
 
 if (filter) {
   console.log("Filtering for: " + JSON.stringify(filter) + "\n");
 }
 
+const deps = new Map();
+const invDeps = new Map();
+
 for (const file of entryPoints) {
-  // Returns a dependency tree object for the given file
-  const tree = shortenPathsOfObj(
-    dependencyTree({
-      filename: __dirname + "/" + file,
-      directory: path.join(__dirname + "/" + file, ".."),
-      tsConfig: __dirname + "/tsconfig.json",
-      filter: (path) => {
-        return (
-          !path.startsWith(libDir + "/themes/") &&
-          !path.startsWith(__dirname + "/node_modules/react-is/cjs/")
-        );
-      },
-      nodeModulesConfig: {
-        entry: "module",
-      },
-      nonExistent: [],
-      noTypeDefinitions: false,
-    })
-  );
+  let exists = false;
+  try {
+    exists = fs.existsSync(__dirname + "/" + file);
+  } catch {}
 
-  const x = file.slice(4, -10);
+  if (exists) {
+    // Returns a dependency tree object for the given file
+    const tree = shortenPathsOfObj(
+      dependencyTree({
+        filename: __dirname + "/" + file,
+        directory: path.join(__dirname + "/" + file, ".."),
+        tsConfig: __dirname + "/tsconfig.json",
+        filter: (path) => {
+          return (
+            !path.startsWith(libDir + "/themes/") &&
+            !path.startsWith(__dirname + "/node_modules/react-is/cjs/")
+          );
+        },
+        nodeModulesConfig: {
+          entry: "module",
+        },
+        nonExistent: [],
+        noTypeDefinitions: false,
+      })
+    );
 
-  const xs = [];
-  for (const subfile of entryPoints.filter((e) => {
-    return e !== "lib/index.ts";
-  })) {
-    if (search(tree, "./" + subfile)) {
-      const y = subfile.slice(4, -10);
-      if (y !== x) xs.push(y);
+    const x = file.slice(4, -10);
+    deps.set(x, []);
+    invDeps.set(x, invDeps.get(x) ?? []);
+
+    const xs = [];
+    for (const subfile of entryPoints.filter((e) => {
+      return e !== "lib/index.ts";
+    })) {
+      if (search(tree, "./" + subfile)) {
+        const y = subfile.slice(4, -10);
+        if (y !== x) xs.push(y);
+      }
+    }
+
+    if (!filter || x === filter || xs.includes(filter)) {
+      const filtered = xs.filter((y) => {
+        return true || !["locale", "styles"].includes(y);
+      });
+
+      for (const y of filtered) {
+        deps.set(x, [...(deps.get(x) ?? []), y]);
+        invDeps.set(y, [...(invDeps.get(y) ?? []), x]);
+      }
+
+      if (filtered.length === 0) {
+        // console.log(chalk.cyan(x));
+        // console.log("  " + filtered.join("  "));
+        // console.log(" ");
+        // printTree(
+        //   Object.entries(tree)[0],
+        //   (node) => {
+        //     const name = node[0];
+        //     return name.includes("/node_modules/")
+        //       ? chalk.cyan("ext:" + name.slice(15))
+        //       : name.slice(6);
+        //   },
+        //   (node) => {
+        //     return Object.entries(node[1]);
+        //   }
+        // );
+        // console.log("\n");
+      }
     }
   }
+}
 
-  if (!filter || x === filter || xs.includes(filter)) {
-    console.log(chalk.cyan(x));
-    console.log("  " + xs.join("  "));
-
-    console.log(" ");
-    printTree(
-      Object.entries(tree)[0],
-      (node) => {
-        const name = node[0];
-        return name.includes("/node_modules/")
-          ? chalk.cyan("ext:" + name.slice(15))
-          : name.slice(6);
-      },
-      (node) => {
-        return Object.entries(node[1]);
-      }
-    );
-    console.log("\n\n");
-  }
+if (false) {
+  console.log(deps);
+  console.log("\nburied:\n");
+  console.log(
+    [...deps.entries()]
+      .filter((pair) => {
+        return pair[1].length === 0;
+      })
+      .map((pair) => {
+        return pair[0];
+      })
+      .join("\n")
+  );
+} else {
+  console.log(invDeps);
+  console.log("\nsafe to remove:\n");
+  console.log(
+    [...invDeps.entries()]
+      .filter((pair) => {
+        return pair[1].length === 0;
+      })
+      .map((pair) => {
+        return pair[0];
+      })
+      .join("\n")
+  );
 }

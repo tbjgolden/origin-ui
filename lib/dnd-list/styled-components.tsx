@@ -71,9 +71,8 @@ export const Item = styled(
 );
 List.displayName = "StyledItem";
 export const DragHandle = styled("div", ({ $theme }) => {
-  const marginDir = $theme.direction === "rtl" ? "marginLeft" : "marginRight";
   return {
-    [marginDir]: $theme.sizing.scale600,
+    marginRight: $theme.sizing.scale600,
     width: $theme.sizing.scale800,
     color: "#CCC",
     display: "flex",
@@ -82,7 +81,6 @@ export const DragHandle = styled("div", ({ $theme }) => {
 });
 DragHandle.displayName = "StyledDragHandle";
 export const CloseHandle = styled("button", ({ $theme, $isFocusVisible }) => {
-  const marginDir = $theme.direction === "rtl" ? "marginRight" : "marginLeft";
   return {
     borderLeftStyle: "none",
     borderTopStyle: "none",
@@ -95,7 +93,7 @@ export const CloseHandle = styled("button", ({ $theme, $isFocusVisible }) => {
     overflow: "visible",
     cursor: "pointer",
     backgroundColor: "transparent",
-    [marginDir]: $theme.sizing.scale600,
+    marginLeft: $theme.sizing.scale600,
     width: $theme.sizing.scale800,
     display: "flex",
     alignItems: "center",

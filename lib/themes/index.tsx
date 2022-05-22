@@ -1,3 +1,5 @@
+import { Theme as ThemeType } from "./types";
+
 const PRIMARY_FAMILY = 'system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif';
 const MONO_FAMILY = '"Lucida Console", Monaco, monospace';
 const FONT_SCALE = {
@@ -113,7 +115,7 @@ const FONT_SCALE = {
   },
 } as const;
 
-export const LightTheme = {
+export const Theme: ThemeType = {
   name: "light-theme",
   colors: {
     // colorTokens
@@ -345,7 +347,7 @@ export const LightTheme = {
     tagNeutralLightFontHover: "#333",
     tagNeutralOutlinedActive: "#333",
     tagNeutralOutlinedFontHover: "#545454",
-    tagNeutralOutlinedHover: hexToRgba("#000", "0.08"),
+    tagNeutralOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tagPrimaryFontDisabled: "#AFAFAF",
     tagPrimaryOutlinedDisabled: "#E2E2E2",
     tagPrimarySolidFont: "#FFF",
@@ -363,7 +365,7 @@ export const LightTheme = {
     tagPrimaryLightFont: "#6B6B6B",
     tagPrimaryLightFontHover: "#6B6B6B",
     tagPrimaryOutlinedActive: "#545454",
-    tagPrimaryOutlinedHover: hexToRgba("#000", "0.08"),
+    tagPrimaryOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tagPrimaryOutlinedBackground: "#AFAFAF",
     tagAccentFontDisabled: "#A0BFF8",
     tagAccentOutlinedDisabled: "#A0BFF8",
@@ -383,7 +385,7 @@ export const LightTheme = {
     tagAccentLightFontHover: "#1E54B7",
     tagAccentOutlinedActive: "#174291",
     tagAccentOutlinedFontHover: "#276EF1",
-    tagAccentOutlinedHover: hexToRgba("#000", "0.08"),
+    tagAccentOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tagPositiveFontDisabled: "#66D19E",
     tagPositiveOutlinedDisabled: "#66D19E",
     tagPositiveSolidFont: "#FFF",
@@ -402,7 +404,7 @@ export const LightTheme = {
     tagPositiveLightFontHover: "#03703C",
     tagPositiveOutlinedActive: "#03582F",
     tagPositiveOutlinedFontHover: "#048848",
-    tagPositiveOutlinedHover: hexToRgba("#000", "0.08"),
+    tagPositiveOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tagWarningFontDisabled: "#FFCF70",
     tagWarningOutlinedDisabled: "#FFCF70",
     tagWarningSolidFont: "#674D1B",
@@ -421,7 +423,7 @@ export const LightTheme = {
     tagWarningLightFontHover: "#BC8B2C",
     tagWarningOutlinedActive: "#996F00",
     tagWarningOutlinedFontHover: "#996F00",
-    tagWarningOutlinedHover: hexToRgba("#000", "0.08"),
+    tagWarningOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tagNegativeFontDisabled: "#F1998E",
     tagNegativeOutlinedDisabled: "#F1998E",
     tagNegativeSolidFont: "#FFF",
@@ -440,7 +442,7 @@ export const LightTheme = {
     tagNegativeLightFontHover: "#AB1300",
     tagNegativeOutlinedActive: "#870F00",
     tagNegativeOutlinedFontHover: "#E11900",
-    tagNegativeOutlinedHover: hexToRgba("#000", "0.08"),
+    tagNegativeOutlinedHover: "rgba(0, 0, 0, 0.08)",
     tableHeadBackgroundColor: "#FFF",
     tableBackground: "#FFF",
     tableStripedBackground: "#F6F6F6",
@@ -462,7 +464,6 @@ export const LightTheme = {
     progressbarTrackFill: "#333",
     tooltipBackground: "#333",
     tooltipText: "#FFF",
-
     // core
     backgroundPrimary: "#FFF",
     backgroundSecondary: "#F6F6F6",
@@ -476,15 +477,15 @@ export const LightTheme = {
     contentInverseSecondary: "#CBCBCB",
     contentInverseTertiary: "#AFAFAF",
     borderOpaque: "#E2E2E2",
-    borderTransparent: hexToRgba("#000", "0.08"),
+    borderTransparent: "rgba(0, 0, 0, 0.08)",
     borderSelected: "#000",
     borderInverseOpaque: "#333",
-    borderInverseTransparent: hexToRgba("#FFF", "0.2"),
+    borderInverseTransparent: "rgba(255, 255, 255, 0.2)",
     borderInverseSelected: "#FFF",
     // core extensions
     backgroundStateDisabled: "#F6F6F6",
-    backgroundOverlayDark: hexToRgba("#000", "0.3"),
-    backgroundOverlayLight: hexToRgba("#000", "0.08"),
+    backgroundOverlayDark: "rgba(0, 0, 0, 0.3)",
+    backgroundOverlayLight: "rgba(0, 0, 0, 0.08)",
     backgroundAccent: "#276EF1",
     backgroundNegative: "#E11900",
     backgroundWarning: "#FFC043",
@@ -582,30 +583,10 @@ export const LightTheme = {
     tagBorderRadius: "24px",
   },
   direction: "auto",
-  grid: {
-    columns: [4, 8, 12],
-    gutters: [16, 36, 36],
-    margins: [16, 36, 64],
-    gaps: 0,
-    unit: "px",
-    maxWidth: 1280,
-  },
   lighting: {
     shadow400: "0 1px 4px rgba(0, 0, 0, 0.16)",
     shadow500: "0 2px 8px rgba(0, 0, 0, 0.16)",
     shadow600: "0 4px 16px rgba(0, 0, 0, 0.16)",
-    shadow700: "0 8px 24px rgba(0, 0, 0, 0.16)",
-    overlay0: "inset 0 0 0 1000px rgba(0, 0, 0, 0)",
-    overlay100: "inset 0 0 0 1000px rgba(0, 0, 0, 0.04)",
-    overlay200: "inset 0 0 0 1000px rgba(0, 0, 0, 0.08)",
-    overlay300: "inset 0 0 0 1000px rgba(0, 0, 0, 0.12)",
-    overlay400: "inset 0 0 0 1000px rgba(0, 0, 0, 0.16)",
-    overlay500: "inset 0 0 0 1000px rgba(0, 0, 0, 0.2)",
-    overlay600: "inset 0 0 0 1000px rgba(0, 0, 0, 0.24)",
-    shallowAbove: "0px -4px 16px rgba(0, 0, 0, 0.12)",
-    shallowBelow: "0px 4px 16px rgba(0, 0, 0, 0.12)",
-    deepAbove: "0px -16px 48px rgba(0, 0, 0, 0.22)",
-    deepBelow: "0px 16px 48px rgba(0, 0, 0, 0.22)",
   },
   sizing: {
     scale0: "2px",
