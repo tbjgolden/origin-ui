@@ -1,8 +1,6 @@
 import React from "react";
-import { LightTheme } from "../themes";
-export const ThemeContext = React.createContext(LightTheme);
+export const ThemeContext = React.createContext(Theme);
 const ThemeProvider = (props) => {
-  const { theme, children } = props;
-  return <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>;
+  return <ThemeContext.Provider value={Theme}>{props.children}</ThemeContext.Provider>;
 };
 export default ThemeProvider;
