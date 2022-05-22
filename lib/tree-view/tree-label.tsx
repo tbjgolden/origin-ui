@@ -1,8 +1,6 @@
-import { ThemeContext } from "../styles/theme-provider";
 import { StyledIconContainer, StyledItemContent } from "./styled-components";
 import ChevronRight from "../icon/chevron-right";
 import ChevronDown from "../icon/chevron-down";
-import ChevronLeft from "../icon/chevron-left";
 import BlankIcon from "../icon/blank";
 import { getOverride, getOverrideProps, getOverrides } from "../helpers/overrides";
 const TreeLabel = ({
@@ -30,7 +28,6 @@ const TreeLabel = ({
     TreeItemContent: TreeItemContentOverride,
   } = overrides;
   const IconContainer = getOverride(IconContainerOverride) || StyledIconContainer;
-  const [Left, LeftProps] = getOverrides(ExpandIconOverride, ChevronLeft);
   const [Right, RightProps] = getOverrides(ExpandIconOverride, ChevronRight);
   const CollapseIcon = getOverride(CollapseIconOverride) || ChevronDown;
   const LeafIconContainer = getOverride(LeafIconContainerOverride) || StyledIconContainer;
@@ -40,18 +37,14 @@ const TreeLabel = ({
     <TreeItemContent {...sharedProps} {...props}>
       {hasChildren && (
         <IconContainer {...sharedProps} {...getOverrideProps(IconContainerOverride)}>
-          {!isExpanded ? (
-            <ThemeContext.Consumer>
-              {() => {
-                return <Right size={16} {...sharedProps} {...RightProps} />;
-              }}
-            </ThemeContext.Consumer>
-          ) : (
+          {isExpanded ? (
             <CollapseIcon
               size={16}
               {...sharedProps}
               {...getOverrideProps(CollapseIconOverride)}
             />
+          ) : (
+            <Right size={16} {...sharedProps} {...RightProps} />
           )}
         </IconContainer>
       )}

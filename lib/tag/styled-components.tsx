@@ -2,7 +2,6 @@ import tint from "polished/lib/color/tint";
 import shade from "polished/lib/color/shade";
 import { styled } from "../styles";
 import { KIND, VARIANT, SIZE } from "./constants";
-import { colors as colorTokens } from "../tokens";
 export function customOnRamp(color, unit) {
   switch (unit) {
     case "0":
@@ -35,9 +34,6 @@ const COLOR_STATE = {
   disabled: "disabled",
   solid: "solid",
   outline: "outline",
-};
-const pick = (theme, light, dark) => {
-  return theme.name && theme.name.includes("dark") ? dark : light;
 };
 const neutralColorStates = {
   [COLOR_STATE.disabled]: (theme, color) => {
@@ -180,69 +176,69 @@ const negativeColorStates = {
 const orangeColorStates = {
   [COLOR_STATE.disabled]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.orange200, colorTokens.orange600),
+      color: "#FABDA5",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.orange200, colorTokens.orange700),
+      borderColor: "#FABDA5",
     };
   },
   [COLOR_STATE.solid]: (theme, color) => {
     return {
-      color: colorTokens.white,
-      backgroundColor: pick(theme, colorTokens.orange400, colorTokens.orange500),
+      color: "#FFF",
+      backgroundColor: "#FF6937",
       borderColor: null,
     };
   },
   [COLOR_STATE.outline]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.orange400, colorTokens.orange300),
+      color: "#FF6937",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.orange200, colorTokens.orange500),
+      borderColor: "#FABDA5",
     };
   },
 };
 const purpleColorStates = {
   [COLOR_STATE.disabled]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.purple200, colorTokens.purple600),
+      color: "#C1B4E2",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.purple200, colorTokens.purple700),
+      borderColor: "#C1B4E2",
     };
   },
   [COLOR_STATE.solid]: (theme, color) => {
     return {
-      color: colorTokens.white,
-      backgroundColor: pick(theme, colorTokens.purple400, colorTokens.purple500),
+      color: "#FFF",
+      backgroundColor: "#7356BF",
       borderColor: null,
     };
   },
   [COLOR_STATE.outline]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.purple400, colorTokens.purple300),
+      color: "#7356BF",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.purple200, colorTokens.purple500),
+      borderColor: "#C1B4E2",
     };
   },
 };
 const brownColorStates = {
   [COLOR_STATE.disabled]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.brown200, colorTokens.brown600),
+      color: "#D2BBB0",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.brown200, colorTokens.brown700),
+      borderColor: "#D2BBB0",
     };
   },
   [COLOR_STATE.solid]: (theme, color) => {
     return {
-      color: colorTokens.white,
-      backgroundColor: pick(theme, colorTokens.brown400, colorTokens.brown500),
+      color: "#FFF",
+      backgroundColor: "#99644C",
       borderColor: null,
     };
   },
   [COLOR_STATE.outline]: (theme, color) => {
     return {
-      color: pick(theme, colorTokens.brown400, colorTokens.brown300),
+      color: "#99644C",
       backgroundColor: null,
-      borderColor: pick(theme, colorTokens.brown200, colorTokens.brown500),
+      borderColor: "#D2BBB0",
     };
   },
 };
@@ -404,11 +400,7 @@ export const Root = styled("span", (props) => {
       $disabled || !$clickable
         ? {}
         : {
-            boxShadow: `inset 0px 0px 100px ${pick(
-              $theme,
-              `rgba(0, 0, 0, 0.08)`,
-              `rgba(255, 255, 255, 0.2)`
-            )}`,
+            boxShadow: `inset 0px 0px 100px rgba(0, 0, 0, 0.08)`,
           },
     ":focus":
       $disabled || (!$clickable && !$closeable)
